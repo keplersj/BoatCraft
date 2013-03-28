@@ -52,7 +52,7 @@ public class SeaCraft
 		kayak = new ItemBoatKayak(9001);
 		
 		// registrations
-		GameRegistry.registerItem(kayak, "SeaCRaft_Kayak", MODID);
+		GameRegistry.registerItem(kayak, "SeaCraft_Kayak", MODID);
 		
 		
 		// localizations

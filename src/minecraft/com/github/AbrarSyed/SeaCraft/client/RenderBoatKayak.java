@@ -3,19 +3,21 @@ package com.github.AbrarSyed.SeaCraft.client;
 import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
 import com.github.AbrarSyed.SeaCraft.EntityBoatKayak;
+import com.github.AbrarSyed.SeaCraft.client.models.ModelBoatKayak;
 
 public class RenderBoatKayak extends Render
 {
-	private ModelBoat	model;
+	private ModelBoatKayak	model;
 
 	public RenderBoatKayak()
 	{
 		this.shadowSize = 0.5F;
-		model = new ModelBoat();
+		model = new ModelBoatKayak();
 	}
 
 	/**
@@ -23,18 +25,30 @@ public class RenderBoatKayak extends Render
 	 */
 	public void render(EntityBoatKayak entity, double x, double y, double z, float par8, float par9)
 	{
-		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x, (float) y, (float) z);
-		GL11.glRotatef(180.0F - par8, 0.0F, 1.0F, 0.0F);
+        GL11.glPushMatrix();
+        GL11.glTranslatef((float)x, (float)y, (float)z);
+        GL11.glRotatef(180.0F - par8, 0.0F, 1.0F, 0.0F);
+        float f2 = (float)entity.getTimeSinceHit() - par9;
+        float f3 = (float)entity.getDamageTaken() - par9;
 
-		this.loadTexture("/terrain.png");
-		float f4 = 0.75F;
-		GL11.glScalef(f4, f4, f4);
-		GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
-		this.loadTexture("/item/boat.png");
-		GL11.glScalef(-1.0F, -1.0F, 1.0F);
-		this.model.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-		GL11.glPopMatrix();
+        if (f3 < 0.0F)
+        {
+            f3 = 0.0F;
+        }
+
+        if (f2 > 0.0F)
+        {
+            GL11.glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * (float)entity.getForwardDirection(), 1.0F, 0.0F, 0.0F);
+        }
+
+        this.loadTexture("/terrain.png");
+        float f4 = 0.75F;
+        GL11.glScalef(f4, f4, f4);
+        GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
+        this.loadTexture("/item/boat.png");
+        GL11.glScalef(-1.0F, -1.0F, 1.0F);
+        this.model.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        GL11.glPopMatrix();
 	}
 
 	/**

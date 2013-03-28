@@ -1,4 +1,4 @@
-package com.github.AbrarSyed.SeaCraft;
+package com.github.AbrarSyed.SeaCraft.Boats;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,7 +14,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityBoatKayak extends Entity
+public abstract class EntityBoatBase extends Entity
 {
 	private double	speedMultiplier;
 	private int		boatPosRotationIncrements;
@@ -31,7 +31,7 @@ public class EntityBoatKayak extends Entity
 	@SideOnly(Side.CLIENT)
 	private double	velocityZ;
 
-	public EntityBoatKayak(World par1World)
+	public EntityBoatBase(World par1World)
 	{
 		super(par1World);
 		this.speedMultiplier = 0.07D;
@@ -81,7 +81,7 @@ public class EntityBoatKayak extends Entity
 		return true;
 	}
 
-	public EntityBoatKayak(World par1World, double par2, double par4, double par6)
+	public EntityBoatBase(World par1World, double par2, double par4, double par6)
 	{
 		this(par1World);
 		this.setPosition(par2, par4 + (double) this.yOffset, par6);
@@ -127,7 +127,7 @@ public class EntityBoatKayak extends Entity
 
 				if (!flag)
 				{
-					this.dropItemWithOffset(SeaCraft.kayak.itemID, 1, 0.0F);
+					this.dropItemsOnBreak();
 				}
 
 				this.setDead();
@@ -378,19 +378,7 @@ public class EntityBoatKayak extends Entity
 				if (!this.worldObj.isRemote)
 				{
 					this.setDead();
-					this.dropItemWithOffset(SeaCraft.kayak.itemID, 1, 0.0f);
-
-					/*
-					 * int k;
-					 * for (k = 0; k < 3; ++k)
-					 * {
-					 * this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F);
-					 * }
-					 * for (k = 0; k < 2; ++k)
-					 * {
-					 * this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F);
-					 * }
-					 */
+					this.dropItemsOnCrash();
 				}
 			}
 			else
@@ -436,7 +424,7 @@ public class EntityBoatKayak extends Entity
 					{
 						Entity entity = (Entity) list.get(l);
 
-						if (entity != this.riddenByEntity && entity.canBePushed() && entity instanceof EntityBoatKayak)
+						if (entity != this.riddenByEntity && entity.canBePushed() && entity instanceof EntityBoatBase)
 						{
 							entity.applyEntityCollision(this);
 						}
@@ -485,16 +473,12 @@ public class EntityBoatKayak extends Entity
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
-	protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-	{
-	}
+	protected abstract void writeEntityToNBT(NBTTagCompound par1NBTTagCompound);
 
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
-	protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-	{
-	}
+	protected abstract void readEntityFromNBT(NBTTagCompound par1NBTTagCompound);
 
 	@SideOnly(Side.CLIENT)
 	public float getShadowSize()
@@ -507,22 +491,26 @@ public class EntityBoatKayak extends Entity
 	 */
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		// if player cannot mount...
-		if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != par1EntityPlayer)
+		// already has something riding? DENIED
+		if (this.riddenByEntity != null &&
+				// ridden by player.
+				this.riddenByEntity instanceof EntityPlayer &&
+				// ridden by player thats not this player
+				this.riddenByEntity != par1EntityPlayer)
 		{
-			// return true.
 			return true;
 		}
-		else
+		else if (this.isMountableByPlayer())
 		{
 			if (!this.worldObj.isRemote)
 			{
 				par1EntityPlayer.mountEntity(this);
 			}
 
-			// if they can mount.. return true.
 			return true;
 		}
+		
+		return true;
 	}
 
 	/**
@@ -572,4 +560,27 @@ public class EntityBoatKayak extends Entity
 	{
 		return this.dataWatcher.getWatchableObjectInt(18);
 	}
+	
+	public abstract void dropItemsOnBreak();
+	
+	public abstract void dropItemsOnCrash();
+	
+	public abstract boolean isMountableByPlayer();
+	
+	/**
+	 * all things on boat + the boats weight.
+	 * @return
+	 */
+	public abstract int getCurrentWeight();
+	
+	/**
+	 * The weight of the boat empty.
+	 * @return
+	 */
+	public abstract int getBaseWeight();
+	
+	
+	public abstract int getMaxDamage();
+	
+	public abstract int getRegenRate();
 }

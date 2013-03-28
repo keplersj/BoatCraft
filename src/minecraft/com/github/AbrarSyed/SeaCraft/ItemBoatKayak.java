@@ -1,15 +1,21 @@
 package com.github.AbrarSyed.SeaCraft;
 
+import java.util.List;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class ItemBoatKayak extends Item
@@ -24,38 +30,89 @@ public class ItemBoatKayak extends Item
 		this.setCreativeTab(SeaCraft.tab);
 	}
 
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
-		MovingObjectPosition trace = SeaCraft.getPlayerLookingSpot(player, true);
 
+		// get looking spot.
+		float f = 1.0F;
+		float f1 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * f;
+		float f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f;
+		double d0 = player.prevPosX + (player.posX - player.prevPosX) * (double) f;
+		double d1 = player.prevPosY + (player.posY - player.prevPosY) * (double) f + 1.62D - (double) player.yOffset;
+		double d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * (double) f;
+		Vec3 vec3 = world.getWorldVec3Pool().getVecFromPool(d0, d1, d2);
+		float f3 = MathHelper.cos(-f2 * 0.017453292F - (float) Math.PI);
+		float f4 = MathHelper.sin(-f2 * 0.017453292F - (float) Math.PI);
+		float f5 = -MathHelper.cos(-f1 * 0.017453292F);
+		float f6 = MathHelper.sin(-f1 * 0.017453292F);
+		float f7 = f4 * f5;
+		float f8 = f3 * f5;
+		double d3 = 5.0D;
+		Vec3 vec31 = vec3.addVector((double) f7 * d3, (double) f6 * d3, (double) f8 * d3);
+		MovingObjectPosition trace = world.rayTraceBlocks_do(vec3, vec31, true);
+
+		// looking at nothing? RETURN!
 		if (trace == null)
 			return stack;
 
-		double spawnX, spawnY, spawnZ;
+		// check spawning area for other entities
+		Vec3 vec32 = player.getLook(1f);
+		boolean shouldPlace = true;
+		List list = world.getEntitiesWithinAABBExcludingEntity(player, player.boundingBox.addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3).expand(1d, 1d, 1d));
+		int i;
 
-		if (trace.typeOfHit.equals(EnumMovingObjectType.ENTITY))
+		for (i = 0; i < list.size(); ++i)
 		{
-			if (trace.entityHit instanceof EntityBoatKayak)
+			Entity entity = (Entity) list.get(i);
+
+			if (entity.canBeCollidedWith())
+			{
+				float f10 = entity.getCollisionBorderSize();
+				AxisAlignedBB axisalignedbb = entity.boundingBox.expand((double) f10, (double) f10, (double) f10);
+
+				if (axisalignedbb.isVecInside(vec3))
+				{
+					shouldPlace = false;
+				}
+			}
+		}
+
+		if (!shouldPlace)
+			return stack;
+
+		// actually get spawn points.
+		if (trace.typeOfHit == EnumMovingObjectType.TILE)
+		{
+			i = trace.blockX;
+			int j = trace.blockY;
+			int k = trace.blockZ;
+
+			if (world.getBlockId(i, j, k) == Block.snow.blockID)
+			{
+				--j;
+			}
+
+			// create boat.
+			EntityBoat entityboat = new EntityBoat(world, (double) ((float) i + 0.5F), (double) ((float) j + 1.0F), (double) ((float) k + 0.5F));
+			entityboat.rotationYaw = (float) (((MathHelper.floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
+
+			// ensure no 2 boats in same place
+			if (!world.getCollidingBoundingBoxes(entityboat, entityboat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
+			{
 				return stack;
+			}
 
-			spawnX = trace.entityHit.posX;
-			spawnY = trace.entityHit.posY + trace.entityHit.height + 1;
-			spawnZ = trace.entityHit.posZ;
-		}
-		else
-		{
-			spawnX = trace.blockX;
-			spawnY = trace.blockY + 1;
-			spawnZ = trace.blockZ;
-		}
+			// no spawn on client
+			if (!world.isRemote)
+			{
+				world.spawnEntityInWorld(entityboat);
+			}
 
-		if (!world.isRemote)
-		{
-			EntityBoatKayak entity = new EntityBoatKayak(world, spawnX, spawnY, spawnZ);
-			world.spawnEntityInWorld(entity);
-
+			// no remove in creative
 			if (!player.capabilities.isCreativeMode)
-				stack.stackSize--;
+			{
+				--stack.stackSize;
+			}
 		}
 
 		return stack;
