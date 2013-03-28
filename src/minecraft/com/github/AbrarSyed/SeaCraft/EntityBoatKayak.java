@@ -102,6 +102,8 @@ public class EntityBoatKayak extends Entity
 		{
 			return false;
 		}
+		
+		// TODO: make it have health.
 
 		if (!worldObj.isRemote)
 		{
@@ -121,6 +123,32 @@ public class EntityBoatKayak extends Entity
 			double d1 = Math.sin((double) this.rotationYaw * Math.PI / 180.0D) * 0.4D;
 			this.riddenByEntity.setPosition(this.posX + d0, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ + d1);
 		}
+	}
+	
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+		
+        this.prevPosX = this.posX;
+        this.prevPosY = this.posY;
+        this.prevPosZ = this.posZ;
+        
+        if (onGround)
+        {
+        	motionX = motionZ = 0;
+        	motionY = 5;
+        }
+        else
+        {
+        	motionY = -.2;
+        }
+        
+        
+        // using the motion.
+        posX += motionX;
+        posY += motionY;
+        posZ += motionZ;
 	}
 
 	@Override
