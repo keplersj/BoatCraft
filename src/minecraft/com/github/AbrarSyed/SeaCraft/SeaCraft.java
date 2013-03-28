@@ -62,6 +62,9 @@ public class SeaCraft
 		// entities.
 		int ID = 1;
 		EntityRegistry.registerModEntity(EntityBoatKayak.class, "SeaCraft_Kayak", ID++, instance, 80, 3, true);
+		
+		// renderring stuff
+		proxy.registerRenderStuff();
 	}
 
 	/**

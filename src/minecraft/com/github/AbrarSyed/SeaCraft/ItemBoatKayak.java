@@ -20,52 +20,44 @@ public class ItemBoatKayak extends Item
 		this.setMaxStackSize(2);
 		this.setHasSubtypes(false);
 		this.canRepair = false;
-		this.setUnlocalizedName(SeaCraft.MODID+":kayak");
+		this.setUnlocalizedName(SeaCraft.MODID + ":kayak");
 		this.setCreativeTab(SeaCraft.tab);
 	}
-	
-    /**
-     * This is called when the item is used, before the block is activated.
-     * @param stack The Item Stack
-     * @param player The Player that used the item
-     * @param world The Current World
-     * @param x Target X Position
-     * @param y Target Y Position
-     * @param z Target Z Position
-     * @param side The side of the target hit
-     * @return Return true to prevent any further processing.
-     */
-    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
-    {	
-    	MovingObjectPosition trace = SeaCraft.getPlayerLookingSpot(player, true);
-    	
-    	if (trace == null)
-    		return false;
-    	
-    	double spawnX, spawnY, spawnZ;
-    	
-    	if(trace.typeOfHit.equals(EnumMovingObjectType.ENTITY))
-    	{
-    		if (trace.entityHit instanceof EntityBoatKayak)
-    			return false;
-    		
-    		spawnX = trace.entityHit.posX;
-    		spawnY = trace.entityHit.posY+trace.entityHit.height+1;
-    		spawnZ = trace.entityHit.posZ;
-    	}
-    	else
-    	{
-    		spawnX = trace.blockX;
-    		spawnY = trace.blockY+1;
-    		spawnZ = trace.blockZ;
-    	}
-    	
-    	EntityBoatKayak entity = new EntityBoatKayak(world, spawnX, spawnY, spawnZ);
-    	world.spawnEntityInWorld(entity);
-    	
-    	if (!player.capabilities.isCreativeMode)
-    		stack.stackSize--;
-    	
-        return true;
-    }
+
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+	{
+		MovingObjectPosition trace = SeaCraft.getPlayerLookingSpot(player, true);
+
+		if (trace == null)
+			return stack;
+
+		double spawnX, spawnY, spawnZ;
+
+		if (trace.typeOfHit.equals(EnumMovingObjectType.ENTITY))
+		{
+			if (trace.entityHit instanceof EntityBoatKayak)
+				return stack;
+
+			spawnX = trace.entityHit.posX;
+			spawnY = trace.entityHit.posY + trace.entityHit.height + 1;
+			spawnZ = trace.entityHit.posZ;
+		}
+		else
+		{
+			spawnX = trace.blockX;
+			spawnY = trace.blockY + 1;
+			spawnZ = trace.blockZ;
+		}
+
+		if (!world.isRemote)
+		{
+			EntityBoatKayak entity = new EntityBoatKayak(world, spawnX, spawnY, spawnZ);
+			world.spawnEntityInWorld(entity);
+
+			if (!player.capabilities.isCreativeMode)
+				stack.stackSize--;
+		}
+
+		return stack;
+	}
 }
