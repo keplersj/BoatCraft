@@ -118,7 +118,7 @@ public abstract class EntityBoatBase extends Entity
 			this.setBeenAttacked();
 			boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode;
 
-			if (flag || this.getDamageTaken() > 40)
+			if (flag || this.getDamageTaken() > getMaxDamage())
 			{
 				if (this.riddenByEntity != null)
 				{
@@ -243,23 +243,24 @@ public abstract class EntityBoatBase extends Entity
 			}
 		}
 
-		double d3 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+		double groundMotion = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
 		double d4;
 		double d5;
 
-		// yay for splashing. and slightly up/down movement
-		if (d3 > 0.26249999999999996D)
+		// minimum splash speed.
+		if (groundMotion > 0.26249999999999996D)
 		{
 			d4 = Math.cos((double) this.rotationYaw * Math.PI / 180.0D);
 			d5 = Math.sin((double) this.rotationYaw * Math.PI / 180.0D);
 
-			for (int j = 0; (double) j < 1.0D + d3 * 60.0D; ++j)
+			for (int j = 0; (double) j < 1.0D + groundMotion * 60.0D; ++j)
 			{
 				double d6 = (double) (this.rand.nextFloat() * 2.0F - 1.0F);
 				double d7 = (double) (this.rand.nextInt(2) * 2 - 1) * 0.7D;
 				double d8;
 				double d9;
 
+				// random? wut?
 				if (this.rand.nextBoolean())
 				{
 					d8 = this.posX - d4 * d6 * 0.8D + d5 * d7;
@@ -278,7 +279,7 @@ public abstract class EntityBoatBase extends Entity
 		double d10;
 		double d11;
 
-		// 
+		// non-controlled movement
 		if (this.worldObj.isRemote && this.riddenByEntity == null)
 		{
 			if (this.boatPosRotationIncrements > 0)
@@ -312,6 +313,7 @@ public abstract class EntityBoatBase extends Entity
 				this.motionZ *= 0.9900000095367432D;
 			}
 		}
+		// controlled movement?
 		else
 		{
 			if (d0 < 1.0D)
@@ -345,7 +347,7 @@ public abstract class EntityBoatBase extends Entity
 				d4 = 0.35D;
 			}
 
-			if (d4 > d3 && this.speedMultiplier < 0.35D)
+			if (d4 > groundMotion && this.speedMultiplier < 0.35D)
 			{
 				this.speedMultiplier += (0.35D - this.speedMultiplier) / 35.0D;
 
@@ -373,7 +375,7 @@ public abstract class EntityBoatBase extends Entity
 
 			this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
-			if (this.isCollidedHorizontally && d3 > 0.2D)
+			if (this.isCollidedHorizontally && groundMotion > 0.2D)
 			{
 				if (!this.worldObj.isRemote)
 				{
@@ -561,8 +563,16 @@ public abstract class EntityBoatBase extends Entity
 		return this.dataWatcher.getWatchableObjectInt(18);
 	}
 	
+	/**
+	 * Called when the boat is broken.
+	 * Spawn drops here.
+	 */
 	public abstract void dropItemsOnBreak();
 	
+	/**
+	 * Called when the boat crashes horizontally.
+	 * Spawn drops here.
+	 */
 	public abstract void dropItemsOnCrash();
 	
 	public abstract boolean isMountableByPlayer();
@@ -579,8 +589,17 @@ public abstract class EntityBoatBase extends Entity
 	 */
 	public abstract int getBaseWeight();
 	
-	
+	/**
+	 * Vanilla boats are 40
+	 * @return
+	 */
 	public abstract int getMaxDamage();
 	
+	/**
+	 * Vanilla boats are 1.
+	 * The ammount of damage to remove each tick.
+	 * Players do 10 per hit.
+	 * @return
+	 */
 	public abstract int getRegenRate();
 }
