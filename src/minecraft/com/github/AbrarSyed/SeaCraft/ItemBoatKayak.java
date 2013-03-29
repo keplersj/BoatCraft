@@ -93,11 +93,11 @@ public class ItemBoatKayak extends Item
 			}
 
 			// create boat.
-			EntityBoat entityboat = new EntityBoat(world, (double) ((float) i + 0.5F), (double) ((float) j + 1.0F), (double) ((float) k + 0.5F));
-			entityboat.rotationYaw = (float) (((MathHelper.floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
+			EntityBoatKayak boat = new EntityBoatKayak(world, (double) ((float) i + 0.5F), (double) ((float) j + 1.0F), (double) ((float) k + 0.5F));
+			boat.rotationYaw = (float) (((MathHelper.floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
 
 			// ensure no 2 boats in same place
-			if (!world.getCollidingBoundingBoxes(entityboat, entityboat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
+			if (!world.getCollidingBoundingBoxes(boat, boat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
 			{
 				return stack;
 			}
@@ -105,7 +105,7 @@ public class ItemBoatKayak extends Item
 			// no spawn on client
 			if (!world.isRemote)
 			{
-				world.spawnEntityInWorld(entityboat);
+				world.spawnEntityInWorld(boat);
 			}
 
 			// no remove in creative
