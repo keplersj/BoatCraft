@@ -291,24 +291,7 @@ public abstract class EntityBoatBase extends Entity
 		// set ridding controls.
 		if (riddenByEntity != null && riddenByEntity instanceof EntityPlayer)
 		{
-			//this.rotationYaw = this.riddenByEntity.rotationYaw;
-			EntityPlayer rider = (EntityPlayer) riddenByEntity;
-
-			headingX = rider.getLookVec().normalize().xCoord; // in radians
-			headingZ = rider.getLookVec().normalize().zCoord; // in radians
-
-			{
-				float val = (float) (270f - Math.atan2(headingX, headingZ) * 180.0D / Math.PI);
-				val = (float) MathHelper.wrapAngleTo180_double(val);
-				//val += this.rotationYaw;
-
-				rotationYaw = val;
-				this.setRotation(val, rotationPitch);
-				this.setRotation(val);
-			}
-
-			motionX = getCurrentSpeed() * headingX;
-			motionZ = getCurrentSpeed() * headingZ;
+			calcRidingMotion();
 		}
 
 		// verify gravity.
@@ -395,6 +378,28 @@ public abstract class EntityBoatBase extends Entity
 				riddenByEntity = null;
 			}
 		}
+	}
+	
+	protected void calcRidingMotion()
+	{
+		//this.rotationYaw = this.riddenByEntity.rotationYaw;
+		EntityPlayer rider = (EntityPlayer) riddenByEntity;
+
+		double headingX = rider.getLookVec().normalize().xCoord; // in radians
+		double headingZ = rider.getLookVec().normalize().zCoord; // in radians
+
+		{
+			float val = (float) (270f - Math.atan2(headingX, headingZ) * 180.0D / Math.PI);
+			val = (float) MathHelper.wrapAngleTo180_double(val);
+			//val += this.rotationYaw;
+
+			rotationYaw = val;
+			this.setRotation(val, rotationPitch);
+			this.setRotation(val);
+		}
+
+		motionX = getCurrentSpeed() * headingX;
+		motionZ = getCurrentSpeed() * headingZ;
 	}
 
 	private final double calcDragForce()

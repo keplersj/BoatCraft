@@ -15,6 +15,7 @@ import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -28,7 +29,7 @@ public class SeaCraft
 	public static final String		MODID	= "SeaCraft";
 	public static final String		VERSION	= "0.0.1";
 
-	@Instance
+	@Instance(value=MODID)
 	public static SeaCraft			instance;
 
 	@SidedProxy(serverSide = "com.github.AbrarSyed.SeaCraft.ProxyServer", clientSide = "com.github.AbrarSyed.SeaCraft.client.ProxyClient")
@@ -66,6 +67,9 @@ public class SeaCraft
 
 		// renderring stuff
 		proxy.registerRenderStuff();
+		
+		// the gui handler
+		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 	}
 
 	/**
