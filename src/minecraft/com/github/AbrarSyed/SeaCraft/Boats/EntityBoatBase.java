@@ -32,8 +32,6 @@ public abstract class EntityBoatBase extends Entity
 	private double	boatYaw;
 	private double	boatPitch;
 	
-	private double rotation;
-	
 	@SideOnly(Side.CLIENT)
 	private double	velocityX;
 	@SideOnly(Side.CLIENT)
@@ -239,7 +237,7 @@ public abstract class EntityBoatBase extends Entity
 		
 		// check on water part.
 		// over water ammount
-		double d0 = 0.0D;
+		double waterFloor = 0.0D;
 		{	
 			for (int i = 0; i < 5; ++i)
 			{
@@ -249,7 +247,7 @@ public abstract class EntityBoatBase extends Entity
 
 				if (this.worldObj.isAABBInMaterial(axisalignedbb, Material.water))
 				{
-					d0 += 1.0 / 5;
+					waterFloor += 1.0 / 5;
 				}
 			}
 		}
@@ -259,8 +257,6 @@ public abstract class EntityBoatBase extends Entity
 		
 		double headingX = Math.cos((double) this.rotationYaw * Math.PI / 180.0D); // in radians
 		double headingZ = Math.sin((double) this.rotationYaw * Math.PI / 180.0D); // in radians
-		
-		
 		
 		// Make Splashes
 		if (headingVelocity > getMinSplashSpeed())
@@ -289,268 +285,113 @@ public abstract class EntityBoatBase extends Entity
 			}
 		}
 		
-		if (this.riddenByEntity != null)
+		// set ridding controls.
+		if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer)
 		{
-			System.out.println("RIDER >> "+this.riddenByEntity.rotationYaw);
-			System.out.println("CURRENT BEFORE >> "+rotationYaw);
-			this.rotationYaw = this.riddenByEntity.rotationYaw;
-			System.out.println("CURRENT AFTER >> "+rotationYaw);
-		}
+			//this.rotationYaw = this.riddenByEntity.rotationYaw;
+			EntityPlayer rider = (EntityPlayer) riddenByEntity;
 			
-
-		/*
-		if (this.getTimeSinceHit() > 0)
-		{
-			this.setTimeSinceHit(this.getTimeSinceHit() - 1);
-		}
-
-		if (this.getDamageTaken() > 0)
-		{
-			this.setDamageTaken(this.getDamageTaken() - 1);
-		}
-
-		this.prevPosX = this.posX;
-		this.prevPosY = this.posY;
-		this.prevPosZ = this.posZ;
-		byte b0 = 5;
-		double d0 = 0.0D;
-
-		// check on water part.
-		for (int i = 0; i < b0; ++i)
-		{
-			double d1 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double) (i + 0) / (double) b0 - 0.125D;
-			double d2 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double) (i + 1) / (double) b0 - 0.125D;
-			AxisAlignedBB axisalignedbb = AxisAlignedBB.getAABBPool().getAABB(this.boundingBox.minX, d1, this.boundingBox.minZ, this.boundingBox.maxX, d2, this.boundingBox.maxZ);
-
-			if (this.worldObj.isAABBInMaterial(axisalignedbb, Material.water))
+			headingX = rider.getLookVec().normalize().xCoord; // in radians
+			headingZ = rider.getLookVec().normalize().zCoord; // in radians
+			
 			{
-				d0 += 1.0D / (double) b0;
-			}
-		}
-		
-
-		double groundMotion = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-		double newMotionX;
-		double newMotionZ;
-
-		// minimum splash speed.
-		if (groundMotion > getMinSplashSpeed())
-		{
-			newMotionX = Math.cos((double) this.rotationYaw * Math.PI / 180.0D);
-			newMotionZ = Math.sin((double) this.rotationYaw * Math.PI / 180.0D);
-
-			for (int j = 0; (double) j < 1.0D + groundMotion * 60.0D; ++j)
-			{
-				double d6 = (double) (this.rand.nextFloat() * 2.0F - 1.0F);
-				double d7 = (double) (this.rand.nextInt(2) * 2 - 1) * 0.7D;
-				double particleX;
-				double particleZ;
-
-				// random? wut?
-				if (this.rand.nextBoolean())
-				{
-					particleX = this.posX - newMotionX * d6 * 0.8D + newMotionZ * d7;
-					particleZ = this.posZ - newMotionZ * d6 * 0.8D - newMotionX * d7;
-					this.worldObj.spawnParticle("splash", particleX, this.posY - 0.125D, particleZ, this.motionX, this.motionY, this.motionZ);
-				}
-				else
-				{
-					particleX = this.posX + newMotionX + newMotionZ * d6 * 0.7D;
-					particleZ = this.posZ + newMotionZ - newMotionX * d6 * 0.7D;
-					this.worldObj.spawnParticle("splash", particleX, this.posY - 0.125D, particleZ, this.motionX, this.motionY, this.motionZ);
-				}
-			}
-		}
-		
-		-------------------
-
-		double headingAngle;
-		double d11;
-
-		// non-controlled movement
-		if (this.worldObj.isRemote && this.riddenByEntity == null)
-		{
-			if (this.boatPosRotationIncrements > 0)
-			{
-				newMotionX = this.posX + (this.boatX - this.posX) / (double) this.boatPosRotationIncrements;
-				newMotionZ = this.posY + (this.boatY - this.posY) / (double) this.boatPosRotationIncrements;
-				d11 = this.posZ + (this.boatZ - this.posZ) / (double) this.boatPosRotationIncrements;
-				headingAngle = MathHelper.wrapAngleTo180_double(this.boatYaw - (double) this.rotationYaw);
-				this.rotationYaw = (float) ((double) this.rotationYaw + headingAngle / (double) this.boatPosRotationIncrements);
-				this.rotationPitch = (float) ((double) this.rotationPitch + (this.boatPitch - (double) this.rotationPitch) / (double) this.boatPosRotationIncrements);
-				--this.boatPosRotationIncrements;
-				this.setPosition(newMotionX, newMotionZ, d11);
-				this.setRotation(this.rotationYaw, this.rotationPitch);
-			}
-			else
-			{
-				newMotionX = this.posX + this.motionX;
-				newMotionZ = this.posY + this.motionY;
-				d11 = this.posZ + this.motionZ;
-				this.setPosition(newMotionX, newMotionZ, d11);
-
-				if (this.onGround)
-				{
-					setGroundDrag();
-				}
+				float val = (float) (270f - ((Math.atan2(headingX, headingZ)) * 180.0D / Math.PI));
+				val = (float) MathHelper.wrapAngleTo180_double(val);
+				//val += this.rotationYaw;
 				
-				setVelocityForDrag();
+				rotationYaw = val;
+				this.setRotation(val, this.rotationPitch);
+				this.setRotation(val);
 			}
+			
+			motionX = getCurrentSpeed()*headingX;
+			motionZ = getCurrentSpeed()*headingZ;
 		}
-		// controlled movement?  client?
+		
+		// verify gravity.
+		if (waterFloor < 1.0D)
+		{
+			double num = waterFloor * 2.0D - 1.0D;
+			this.motionY += 0.03999999910593033D * num;
+		}
 		else
 		{
-			if (d0 < 1.0D)
+			if (this.motionY < 0.0D)
 			{
-				newMotionX = d0 * 2.0D - 1.0D;
-				this.motionY += 0.03999999910593033D * newMotionX;
-			}
-			else
-			{
-				if (this.motionY < 0.0D)
-				{
-					this.motionY /= 2.0D;
-				}
-
-				this.motionY += 0.007000000216066837D;
+				this.motionY /= 2.0D;
 			}
 
-			// controlled speed
-			if (this.riddenByEntity != null)
-			{
-				// controlled.
-				this.rotationYaw = (float) MathHelper.wrapAngleTo180_double(this.riddenByEntity.rotationYaw);;
-				this.motionX += this.riddenByEntity.motionX * this.speedMultiplier;
-				this.motionZ += this.riddenByEntity.motionZ * this.speedMultiplier;
-			}
-
-			newMotionX = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-
-			if (newMotionX > 0.35D)
-			{
-				newMotionZ = 0.35D / newMotionX;
-				this.motionX *= newMotionZ;
-				this.motionZ *= newMotionZ;
-				newMotionX = 0.35D;
-			}
-
-			// going faster
-			if (newMotionX > groundMotion && this.speedMultiplier < 0.35D)
-			{
-				this.speedMultiplier += (0.35D - this.speedMultiplier) / 35.0D;
-
-				if (this.speedMultiplier > 0.35D)
-				{
-					this.speedMultiplier = 0.35D;
-				}
-			}
-			// getting slower or same?
-			else
-			{
-				this.speedMultiplier -= (this.speedMultiplier - 0.07D) / 35.0D;
-
-				if (this.speedMultiplier < 0.07D)
-				{
-					this.speedMultiplier = 0.07D;
-				}
-			}
-
-			// ground drag...
-			if (this.onGround)
-			{
-				setGroundDrag();
-			}
-
-			// moves the entity
-			this.moveEntity(this.motionX, this.motionY, this.motionZ);
-
-			// CRASH!!!!
-			if (this.isCollidedHorizontally && groundMotion > 0.2D)
-			{
-				if (!this.worldObj.isRemote)
-				{
-					this.setDead();
-					this.dropItemsOnCrash();
-				}
-			}
-			else
-			{
-				setVelocityForDrag();
-			}
-
-			this.rotationPitch = 0.0F;
-			newMotionZ = (double) this.rotationYaw;
-			d11 = this.prevPosX - this.posX;
-			headingAngle = this.prevPosZ - this.posZ;
-
-			if (d11 * d11 + headingAngle * headingAngle > 0.001D)
-			{
-				newMotionZ = (double) ((float) (Math.atan2(headingAngle, d11) * 180.0D / Math.PI));
-			}
-
-			double d12 = MathHelper.wrapAngleTo180_double(newMotionZ - (double) this.rotationYaw);
-
-			if (d12 > 20.0D)
-			{
-				d12 = 20.0D;
-			}
-
-			if (d12 < -20.0D)
-			{
-				d12 = -20.0D;
-			}
-
-			this.rotationYaw = (float) ((double) this.rotationYaw + d12);
-			this.setRotation(this.rotationYaw, this.rotationPitch);
-
+			this.motionY += 0.007000000216066837D;
+		}
+		
+		if (this.onGround)
+		{
+			setGroundDrag();
+		}
+		
+		double groundMotion = motionX * motionX + motionZ + motionZ;
+		
+		this.moveEntity(this.motionX, this.motionY, this.motionZ);
+		
+		if (this.isCollidedHorizontally && groundMotion > getCrashSpeed())
+		{
 			if (!this.worldObj.isRemote)
 			{
-				List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
-				int l;
-
-				if (list != null && !list.isEmpty())
-				{
-					for (l = 0; l < list.size(); ++l)
-					{
-						Entity entity = (Entity) list.get(l);
-
-						if (entity != this.riddenByEntity && entity.canBePushed() && entity instanceof EntityBoatBase)
-						{
-							entity.applyEntityCollision(this);
-						}
-					}
-				}
-
-				// check Block Collisions.
-				for (l = 0; l < 4; ++l)
-				{
-					int hitx = MathHelper.floor_double(this.posX + ((double) (l % 2) - 0.5D) * 0.8D);
-					int hitz = MathHelper.floor_double(this.posZ + ((double) (l / 2) - 0.5D) * 0.8D);
-
-					for (int k1 = 0; k1 < 2; ++k1)
-					{
-						int hity = MathHelper.floor_double(this.posY) + k1;
-						int blockID = this.worldObj.getBlockId(hitx, hity, hitz);
-
-						if (SeaCraftAPI.isBlockDestroyable(blockID))
-						{
-							ItemStack stack  = SeaCraftAPI.getDestroyableDrop(blockID);
-							if (stack != null)
-							{
-								this.worldObj.setBlockToAir(hitx, hity, hitz);
-								this.entityDropItem(stack, 1);
-							}
-						}
-					}
-				}
-
-				if (this.riddenByEntity != null && this.riddenByEntity.isDead)
-				{
-					this.riddenByEntity = null;
-				}
+				this.setDead();
+				this.dropItemsOnCrash();
 			}
 		}
-		*/
+		else
+		{
+			setVelocityForDrag();
+		}
+		
+		if (!this.worldObj.isRemote)
+		{
+			List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
+			int l;
+
+			if (list != null && !list.isEmpty())
+			{
+				for (l = 0; l < list.size(); ++l)
+				{
+					Entity entity = (Entity) list.get(l);
+
+					if (entity != this.riddenByEntity && entity.canBePushed() && entity instanceof EntityBoatBase)
+					{
+						entity.applyEntityCollision(this);
+					}
+				}
+			}
+
+			// check Block Collisions.
+			for (l = 0; l < 4; ++l)
+			{
+				int hitx = MathHelper.floor_double(this.posX + ((double) (l % 2) - 0.5D) * 0.8D);
+				int hitz = MathHelper.floor_double(this.posZ + ((double) (l / 2) - 0.5D) * 0.8D);
+
+				for (int k1 = 0; k1 < 2; ++k1)
+				{
+					int hity = MathHelper.floor_double(this.posY) + k1;
+					int blockID = this.worldObj.getBlockId(hitx, hity, hitz);
+
+					if (SeaCraftAPI.isBlockDestroyable(blockID))
+					{
+						ItemStack stack  = SeaCraftAPI.getDestroyableDrop(blockID);
+						if (stack != null)
+						{
+							this.worldObj.setBlockToAir(hitx, hity, hitz);
+							this.entityDropItem(stack, 1);
+						}
+					}
+				}
+			}
+
+			if (this.riddenByEntity != null && this.riddenByEntity.isDead)
+			{
+				this.riddenByEntity = null;
+			}
+		}
 	}
 	
 	private final double calcDragForce()
@@ -658,7 +499,7 @@ public abstract class EntityBoatBase extends Entity
 	}
 	
 	/**
-	 * Sets the time to count down from since the last time entity was hit.
+	 * Sets the forward direction of the entity.
 	 */
 	public final void setRotation(float rot)
 	{
@@ -666,7 +507,7 @@ public abstract class EntityBoatBase extends Entity
 	}
 
 	/**
-	 * Gets the time since the last hit.
+	 * Gets the forward direction of the entity.
 	 */
 	public final float getRotation()
 	{
@@ -733,4 +574,16 @@ public abstract class EntityBoatBase extends Entity
 	 * @return
 	 */
 	public abstract double getMaxSpeed();
+	
+	/**
+	 * get speed.
+	 * @return
+	 */
+	public abstract double getCurrentSpeed();
+	
+	/**
+	 * get crash speed. vanilla is .2
+	 * @return
+	 */
+	public abstract double getCrashSpeed();
 }

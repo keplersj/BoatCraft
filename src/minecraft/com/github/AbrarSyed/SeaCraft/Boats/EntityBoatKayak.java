@@ -93,4 +93,16 @@ public class EntityBoatKayak extends EntityBoatBase
 	protected void readEntityFromNBT(NBTTagCompound par1nbtTagCompound)
 	{
 	}
+
+	@Override
+	public double getCurrentSpeed()
+	{
+		return .15;
+	}
+
+	@Override
+	public double getCrashSpeed()
+	{
+		return .5;
+	}
 }
