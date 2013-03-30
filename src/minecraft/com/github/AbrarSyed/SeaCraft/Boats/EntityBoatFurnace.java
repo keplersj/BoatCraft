@@ -35,32 +35,32 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	@Override
 	public boolean interact(EntityPlayer player)
 	{
-		//player.openGui(SeaCraft.instance, 0, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-		//return true;
+		player.openGui(SeaCraft.instance, 0, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+		return true;
 
-				// already has something riding? DENIED
-				if (riddenByEntity != null &&
-						// ridden by player.
-						riddenByEntity instanceof EntityPlayer &&
-						// ridden by player thats not this player
-						riddenByEntity != player)
-					return true;
-				else if (isMountableByPlayer())
-				{
-					if (!worldObj.isRemote)
-					{
-						player.mountEntity(this);
-					}
-		
-					return true;
-				}
-				
-				return true;
+		//		// already has something riding? DENIED
+		//		if (riddenByEntity != null &&
+		//				// ridden by player.
+		//				riddenByEntity instanceof EntityPlayer &&
+		//				// ridden by player thats not this player
+		//				riddenByEntity != player)
+		//			return true;
+		//		else if (isMountableByPlayer())
+		//		{
+		//			if (!worldObj.isRemote)
+		//			{
+		//				player.mountEntity(this);
+		//			}
+		//
+		//			return true;
+		//		}
+		//		
+		//		return true;
 	}
 
 	protected void calcRidingMotion()
 	{
-		//if (burningLeft > 0)
+		if (burningLeft > 0)
 			super.calcRidingMotion();
 	}
 
