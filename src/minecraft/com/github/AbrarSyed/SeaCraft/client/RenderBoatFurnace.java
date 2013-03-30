@@ -7,7 +7,6 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
-import com.github.AbrarSyed.SeaCraft.client.models.ModelBoatKayak;
 
 public class RenderBoatFurnace extends Render
 {

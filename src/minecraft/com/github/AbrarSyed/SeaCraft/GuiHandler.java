@@ -7,8 +7,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
-import com.github.AbrarSyed.SeaCraft.client.gui.GuiBoatFurnace;
-import com.github.AbrarSyed.SeaCraft.container.ContainerBoatFurnace;
+import com.github.AbrarSyed.SeaCraft.client.GuiBoatFurnace;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 

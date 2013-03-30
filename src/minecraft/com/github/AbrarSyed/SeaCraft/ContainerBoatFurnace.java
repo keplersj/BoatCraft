@@ -1,4 +1,4 @@
-package com.github.AbrarSyed.SeaCraft.container;
+package com.github.AbrarSyed.SeaCraft;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

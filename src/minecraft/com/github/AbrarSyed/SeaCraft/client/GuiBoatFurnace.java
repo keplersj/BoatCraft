@@ -1,4 +1,4 @@
-package com.github.AbrarSyed.SeaCraft.client.gui;
+package com.github.AbrarSyed.SeaCraft.client;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -8,8 +8,8 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
+import com.github.AbrarSyed.SeaCraft.ContainerBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
-import com.github.AbrarSyed.SeaCraft.container.ContainerBoatFurnace;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -31,7 +31,26 @@ public class GuiBoatFurnace extends GuiContainer
 		super.initGui();
 		int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		int bw = xSize - 22;
-		buttonList.add(new GuiButton(1, x + 120, y + 20, bw / 4, 15, "Mount"));
+		buttonList.add(new GuiButton(1, x + 130, y + 10, bw / 4, 20, "Mount"));
+		buttonList.add(new GuiButton(2, x + 125, y + 30, bw / 3, 20, "UnMount"));
+		buttonList.add(new GuiButton(3, x + 75, y + 58, bw / 4, 20, "Start"));
+		buttonList.add(new GuiButton(4, x + 125, y + 58, bw / 4, 20, "Stop"));
+	}
+	
+	@Override
+	protected void actionPerformed(GuiButton button)
+	{
+		switch(button.id)
+		{
+			case 1: // mount
+				break;
+			case 2: // unmount
+				break;
+			case 3: // start
+				break;
+			case 4: // stop
+				break;
+		}
 	}
 
 	/**
