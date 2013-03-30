@@ -9,11 +9,11 @@ import org.lwjgl.opengl.GL11;
 import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.client.models.ModelBoatKayak;
 
-public class RenderBoatKayak extends Render
+public class RenderBoatFurnace extends Render
 {
 	private ModelBoatKayak	model;
 
-	public RenderBoatKayak()
+	public RenderBoatFurnace()
 	{
 		shadowSize = 0.5F;
 		model = new ModelBoatKayak();
@@ -44,7 +44,6 @@ public class RenderBoatKayak extends Render
 			GL11.glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F, 1.0F, 0.0F, 0.0F);
 		}
 
-		//this.loadTexture("/terrain.png");
 		float f4 = 0.75F;
 		GL11.glScalef(f4, f4, f4);
 		GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);

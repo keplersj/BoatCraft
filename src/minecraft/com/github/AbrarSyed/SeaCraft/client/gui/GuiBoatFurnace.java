@@ -1,5 +1,6 @@
 package com.github.AbrarSyed.SeaCraft.client.gui;
 
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -22,6 +23,15 @@ public class GuiBoatFurnace extends GuiContainer
 	{
 		super(new ContainerBoatFurnace(player, boat));
 		this.furnace = boat;
+	}
+
+	@Override
+	public void initGui()
+	{
+		super.initGui();
+		int x = (width - xSize) / 2, y = (height - ySize) / 2;
+		int bw = xSize - 22;
+		buttonList.add(new GuiButton(1, x + 120, y + 20, bw / 4, 15, "Mount"));
 	}
 
 	/**
@@ -49,7 +59,7 @@ public class GuiBoatFurnace extends GuiContainer
 		if (this.furnace.isBurning())
 		{
 			i1 = this.furnace.getBurnTimeRemainingScaled(12);
-			this.drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 2);
+			this.drawTexturedModalRect(k + 35, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 2);
 		}
 
 		i1 = this.furnace.getCookProgressScaled(24);

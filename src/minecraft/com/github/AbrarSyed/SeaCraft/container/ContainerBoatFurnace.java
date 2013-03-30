@@ -17,7 +17,7 @@ public class ContainerBoatFurnace extends Container
 	{
 		this.boat = boat;
 		this.addSlotToContainer(new Slot(boat, 0, 32, 16));
-		this.addSlotToContainer(new SlotFurnace(player.player, boat, 1, 85, 32));
+		this.addSlotToContainer(new SlotFurnace(player.player, boat, 1, 84, 32));
 		this.addSlotToContainer(new Slot(boat, 2, 14, 53));
 		this.addSlotToContainer(new Slot(boat, 3, 32, 53));
 		this.addSlotToContainer(new Slot(boat, 4, 50, 53));

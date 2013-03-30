@@ -10,6 +10,6 @@ public class ProxyClient extends ProxyServer
 	@Override
 	public void registerRenderStuff()
 	{
-		RenderingRegistry.registerEntityRenderingHandler(EntityBoatFurnace.class, new RenderBoatKayak());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoatFurnace.class, new RenderBoatFurnace());
 	}
 }
