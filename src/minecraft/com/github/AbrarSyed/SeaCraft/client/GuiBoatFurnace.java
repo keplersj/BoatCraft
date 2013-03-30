@@ -3,14 +3,15 @@ package com.github.AbrarSyed.SeaCraft.client;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
 import com.github.AbrarSyed.SeaCraft.ContainerBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
+import com.github.AbrarSyed.SeaCraft.network.PacketSC0MountEntity;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -36,15 +37,17 @@ public class GuiBoatFurnace extends GuiContainer
 		buttonList.add(new GuiButton(3, x + 75, y + 58, bw / 4, 20, "Start"));
 		buttonList.add(new GuiButton(4, x + 125, y + 58, bw / 4, 20, "Stop"));
 	}
-	
+
 	@Override
 	protected void actionPerformed(GuiButton button)
 	{
 		switch(button.id)
 		{
 			case 1: // mount
+				PacketDispatcher.sendPacketToServer(new PacketSC0MountEntity(furnace, true).getPacket250());
 				break;
 			case 2: // unmount
+				PacketDispatcher.sendPacketToServer(new PacketSC0MountEntity(furnace, false).getPacket250());
 				break;
 			case 3: // start
 				break;

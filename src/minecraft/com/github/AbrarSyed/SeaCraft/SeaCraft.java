@@ -1,5 +1,7 @@
 package com.github.AbrarSyed.SeaCraft;
 
+import java.util.logging.Logger;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.MathHelper;
@@ -7,6 +9,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 
 import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
+import com.github.AbrarSyed.SeaCraft.network.HandlerClient;
+import com.github.AbrarSyed.SeaCraft.network.HandlerServer;
+import com.github.AbrarSyed.SeaCraft.network.PacketSCBase;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -14,7 +19,9 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -22,27 +29,31 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @NetworkMod(
 		clientSideRequired = true,
-		serverSideRequired = true)
+		serverSideRequired = true,
+		clientPacketHandlerSpec = @SidedPacketHandler(channels = { PacketSCBase.CHANNEL }, packetHandler = HandlerClient.class),
+		serverPacketHandlerSpec = @SidedPacketHandler(channels = { PacketSCBase.CHANNEL }, packetHandler = HandlerServer.class))
 @Mod(modid = SeaCraft.MODID, version = SeaCraft.VERSION, name = SeaCraft.MODID)
 public class SeaCraft
 {
 	public static final String		MODID	= "SeaCraft";
 	public static final String		VERSION	= "0.0.1";
 
-	@Instance(value=MODID)
+	@Instance(value = MODID)
 	public static SeaCraft			instance;
 
 	@SidedProxy(serverSide = "com.github.AbrarSyed.SeaCraft.ProxyServer", clientSide = "com.github.AbrarSyed.SeaCraft.client.ProxyClient")
 	public static ProxyServer		proxy;
+
+	public static Logger			logger;
 
 	public static ItemBoatKayak		kayak;
 
 	public static CreativeTabBoats	tab;
 
 	@PreInit
-	public void preLoad(FMLInitializationEvent event)
+	public void preLoad(FMLPreInitializationEvent event)
 	{
-
+		logger = event.getModLog();
 	}
 
 	@Init
@@ -67,7 +78,7 @@ public class SeaCraft
 
 		// renderring stuff
 		proxy.registerRenderStuff();
-		
+
 		// the gui handler
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 	}
