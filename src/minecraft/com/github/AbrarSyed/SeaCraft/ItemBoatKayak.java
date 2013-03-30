@@ -14,7 +14,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
+import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
 
 public class ItemBoatKayak extends Item
 {
@@ -92,7 +92,7 @@ public class ItemBoatKayak extends Item
 			}
 
 			// create boat.
-			EntityBoatKayak boat = new EntityBoatKayak(world, i + 0.5F, j + 1.0F, k + 0.5F);
+			EntityBoatFurnace boat = new EntityBoatFurnace(world, i + 0.5F, j + 1.0F, k + 0.5F);
 			boat.rotationYaw = ((MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3) - 1) * 90;
 
 			// ensure no 2 boats in same place

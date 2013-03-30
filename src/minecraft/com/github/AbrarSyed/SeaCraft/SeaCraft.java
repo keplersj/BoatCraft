@@ -6,7 +6,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 
-import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
+import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -58,10 +58,11 @@ public class SeaCraft
 
 		// localizations
 		LanguageRegistry.addName(kayak, "Kayak");
+		LanguageRegistry.instance().addStringLocalization("SeaCraft.boats.furnace", "Furnace Boat");
 
 		// entities.
 		int ID = 1;
-		EntityRegistry.registerModEntity(EntityBoatKayak.class, "SeaCraft_Kayak", ID++, instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatFurnace.class, "SeaCraft_Kayak", ID++, instance, 80, 3, true);
 
 		// renderring stuff
 		proxy.registerRenderStuff();

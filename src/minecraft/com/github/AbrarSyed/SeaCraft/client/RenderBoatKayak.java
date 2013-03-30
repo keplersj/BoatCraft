@@ -6,7 +6,7 @@ import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
-import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
+import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.client.models.ModelBoatKayak;
 
 public class RenderBoatKayak extends Render
@@ -22,7 +22,7 @@ public class RenderBoatKayak extends Render
 	/**
 	 * The render method used in RenderBoat that renders the boat model.
 	 */
-	public void render(EntityBoatKayak entity, double x, double y, double z, float par8, float par9)
+	public void render(EntityBoatFurnace entity, double x, double y, double z, float par8, float par9)
 	{
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x, (float) y, (float) z);
@@ -67,6 +67,6 @@ public class RenderBoatKayak extends Render
 	@Override
 	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
 	{
-		render((EntityBoatKayak) par1Entity, par2, par4, par6, par8, par9);
+		render((EntityBoatFurnace) par1Entity, par2, par4, par6, par8, par9);
 	}
 }
