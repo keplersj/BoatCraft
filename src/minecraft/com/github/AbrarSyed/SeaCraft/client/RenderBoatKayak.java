@@ -47,7 +47,7 @@ public class RenderBoatKayak extends Render
 		//this.loadTexture("/terrain.png");
 		float f4 = 0.75F;
 		GL11.glScalef(f4, f4, f4);
-		GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
+        GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
         //loadTexture("/item/boat.png");
         GL11.glScalef(-1.0F, -1.0F, 1.0F);
 

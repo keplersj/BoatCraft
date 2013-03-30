@@ -17,43 +17,43 @@ public class ModelBoatKayak extends ModelBase
 
 	public ModelBoatKayak()
 	{
-        boatSides[0] = new ModelRenderer(this, 0, 0);
-        boatSides[1] = new ModelRenderer(this, 0, 0);
-        boatSides[2] = new ModelRenderer(this, 0, 0);
-        boatSides[3] = new ModelRenderer(this, 0, 0);
-        boatSides[4] = new ModelRenderer(this, 0, 0);
+		boatSides[0] = new ModelRenderer(this, 0, 0);
+		boatSides[1] = new ModelRenderer(this, 0, 0);
+		boatSides[2] = new ModelRenderer(this, 0, 0);
+		boatSides[3] = new ModelRenderer(this, 0, 0);
+		boatSides[4] = new ModelRenderer(this, 0, 0);
 
-        int length = 40;
-        int height = 6;
-        int thicknessFront = 12;
-        int thicknessBack = 10;
-        int thicknessSide = 1;
-        int width = 20;
-        int rotation = 4;
+		int length = 40;
+		int height = 6;
+		int thicknessFront = 12;
+		int thicknessBack = 10;
+		int thicknessSide = 1;
+		int width = 20;
+		int rotation = 4;
 
-        boatSides[0].addBox(-length / 2, -width / 2 + 2, -3.0F, length, width - 4, 4, 0.0F);
-        boatSides[0].setRotationPoint(0.0F, rotation, 0.0F);
+		boatSides[0].addBox(-length / 2, -width / 2 + 2, -3.0F, length, width - 4, 4, 0.0F);
+		boatSides[0].setRotationPoint(0.0F, rotation, 0.0F);
 
-        // front
-        boatSides[1].addBox(-width / 2, -height - 1, -thicknessFront, width, height, thicknessFront + 1, 0.0F);
-        boatSides[1].setRotationPoint(-length / 2 + 1, rotation, 0.0F);
+		// front
+		boatSides[1].addBox(-width / 2, -height - 1, -thicknessFront, width, height, thicknessFront + 1, 0.0F);
+		boatSides[1].setRotationPoint(-length / 2 + 1, rotation, 0.0F);
 
-        // back
-        boatSides[2].addBox(-width / 2, -height - 1, -thicknessBack, width, height, thicknessBack + 1, 0.0F);
-        boatSides[2].setRotationPoint(length / 2 - 1, rotation, 0.0F);
+		// back
+		boatSides[2].addBox(-width / 2, -height - 1, -thicknessBack, width, height, thicknessBack + 1, 0.0F);
+		boatSides[2].setRotationPoint(length / 2 - 1, rotation, 0.0F);
 
-        // left
-        boatSides[3].addBox(-length / 2 + 2, -height - 1, -thicknessSide, length - 4, height, thicknessSide + 1, 0.0F);
-        boatSides[3].setRotationPoint(0.0F, rotation, -width / 2 + 1);
+		// left
+		boatSides[3].addBox(-length / 2 + 2, -height - 1, -thicknessSide, length - 4, height, thicknessSide + 1, 0.0F);
+		boatSides[3].setRotationPoint(0.0F, rotation, -width / 2 + 1);
 
-        // back
-        boatSides[4].addBox(-length / 2 + 2, -height - 1, -thicknessSide, length - 4, height, thicknessSide + 1, 0.0F);
-        boatSides[4].setRotationPoint(0.0F, rotation, width / 2 - 1);
+		// back
+		boatSides[4].addBox(-length / 2 + 2, -height - 1, -thicknessSide, length - 4, height, thicknessSide + 1, 0.0F);
+		boatSides[4].setRotationPoint(0.0F, rotation, width / 2 - 1);
 
-        boatSides[0].rotateAngleX = (float) Math.PI / 2F;
-        boatSides[1].rotateAngleY = (float) Math.PI * 3F / 2F;
-        boatSides[2].rotateAngleY = (float) Math.PI / 2F;
-        boatSides[3].rotateAngleY = (float) Math.PI;
+		boatSides[0].rotateAngleX = (float) Math.PI / 2F;
+		boatSides[1].rotateAngleY = (float) Math.PI * 3F / 2F;
+		boatSides[2].rotateAngleY = (float) Math.PI / 2F;
+		boatSides[3].rotateAngleY = (float) Math.PI;
 	}
 
 	/**
