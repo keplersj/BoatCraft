@@ -15,12 +15,12 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @author heldplayer
  *
  */
-public class ModelBoatKayak extends ModelBase
+public class ModelBoatFurnace extends ModelBase
 {
 	public ModelRenderer[]		boatSides	= new ModelRenderer[5];
 	private NMTModelRenderer	render;
 
-	public ModelBoatKayak()
+	public ModelBoatFurnace()
 	{
 		boatSides[0] = new ModelRenderer(this, 0, 0);
 		boatSides[1] = new ModelRenderer(this, 0, 0);
@@ -28,10 +28,10 @@ public class ModelBoatKayak extends ModelBase
 		boatSides[3] = new ModelRenderer(this, 0, 0);
 		boatSides[4] = new ModelRenderer(this, 0, 0);
 
-		int length = 40;
+		int length = 24;
 		int height = 6;
-		int thicknessFront = 12;
-		int thicknessBack = 10;
+		int thicknessFront = 1;
+		int thicknessBack = 1;
 		int thicknessSide = 1;
 		int width = 20;
 		int rotation = 4;

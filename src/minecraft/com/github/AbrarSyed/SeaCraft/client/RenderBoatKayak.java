@@ -7,21 +7,22 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
+import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
 
-public class RenderBoatFurnace extends Render
+public class RenderBoatKayak extends Render
 {
-	private ModelBoatFurnace	model;
+	private ModelBoatKayak	model;
 
-	public RenderBoatFurnace()
+	public RenderBoatKayak()
 	{
 		shadowSize = 0.5F;
-		model = new ModelBoatFurnace();
+		model = new ModelBoatKayak();
 	}
 
 	/**
 	 * The render method used in RenderBoat that renders the boat model.
 	 */
-	public void render(EntityBoatFurnace entity, double x, double y, double z, float par8, float par9)
+	public void render(EntityBoatKayak entity, double x, double y, double z, float par8, float par9)
 	{
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x, (float) y, (float) z);
@@ -45,20 +46,20 @@ public class RenderBoatFurnace extends Render
 
 		float f4 = 0.75F;
 		GL11.glScalef(f4, f4, f4);
-        GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
-        //loadTexture("/item/boat.png");
-        GL11.glScalef(-1.0F, -1.0F, 1.0F);
+		GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
+		//loadTexture("/item/boat.png");
+		GL11.glScalef(-1.0F, -1.0F, 1.0F);
 
-        // scaling
-        //GL11.glScalef(1.5F, 1.0F, .8F);
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glColor3f(1.F, 0.39F, .39F);
+		// scaling
+		//GL11.glScalef(1.5F, 1.0F, .8F);
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glColor3f(0.0F, 0.34F, 0.73F);
 
-        model.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+		model.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        
-        GL11.glPopMatrix();
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+
+		GL11.glPopMatrix();
 	}
 
 	/**
@@ -70,6 +71,6 @@ public class RenderBoatFurnace extends Render
 	@Override
 	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
 	{
-		render((EntityBoatFurnace) par1Entity, par2, par4, par6, par8, par9);
+		render((EntityBoatKayak) par1Entity, par2, par4, par6, par8, par9);
 	}
 }

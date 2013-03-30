@@ -9,6 +9,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 
 import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
+import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
+import com.github.AbrarSyed.SeaCraft.items.ItemBoatFurnace;
+import com.github.AbrarSyed.SeaCraft.items.ItemBoatKayak;
 import com.github.AbrarSyed.SeaCraft.network.HandlerClient;
 import com.github.AbrarSyed.SeaCraft.network.HandlerServer;
 import com.github.AbrarSyed.SeaCraft.network.PacketSCBase;
@@ -47,6 +50,7 @@ public class SeaCraft
 	public static Logger			logger;
 
 	public static ItemBoatKayak		kayak;
+	public static ItemBoatFurnace	furnace;
 
 	public static CreativeTabBoats	tab;
 
@@ -64,17 +68,21 @@ public class SeaCraft
 
 		// items.
 		kayak = new ItemBoatKayak(9001);
+		furnace = new ItemBoatFurnace(9002);
 
 		// registrations
 		GameRegistry.registerItem(kayak, "SeaCraft_Kayak", MODID);
+		GameRegistry.registerItem(furnace, "SeaCraft_Furnace", MODID);
 
 		// localizations
 		LanguageRegistry.addName(kayak, "Kayak");
+		LanguageRegistry.addName(furnace, "Furnace");
 		LanguageRegistry.instance().addStringLocalization("SeaCraft.boats.furnace", "Furnace Boat");
 
 		// entities.
 		int ID = 1;
-		EntityRegistry.registerModEntity(EntityBoatFurnace.class, "SeaCraft_Kayak", ID++, instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatFurnace.class, "SeaCraft_Furnace", ID++, instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatKayak.class, "SeaCraft_Kayak", ID++, instance, 80, 3, true);
 
 		// renderring stuff
 		proxy.registerRenderStuff();

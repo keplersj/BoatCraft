@@ -1,4 +1,4 @@
-package com.github.AbrarSyed.SeaCraft;
+package com.github.AbrarSyed.SeaCraft.items;
 
 import java.util.List;
 
@@ -14,17 +14,19 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import com.github.AbrarSyed.SeaCraft.SeaCraft;
+import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatBase;
 import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
 
-public class ItemBoatKayak extends Item
+public abstract class ItemBoatBase extends Item
 {
-	public ItemBoatKayak(int par1)
+	public ItemBoatBase(int par1)
 	{
 		super(par1);
 		setMaxStackSize(2);
 		setHasSubtypes(false);
 		canRepair = false;
-		setUnlocalizedName(SeaCraft.MODID + ":kayak");
+		setUnlocalizedName(SeaCraft.MODID + ":" + getNameForTexture());
 		setCreativeTab(SeaCraft.tab);
 	}
 
@@ -92,7 +94,7 @@ public class ItemBoatKayak extends Item
 			}
 
 			// create boat.
-			EntityBoatFurnace boat = new EntityBoatFurnace(world, i + 0.5F, j + 1.0F, k + 0.5F);
+			EntityBoatBase boat = this.getBoat(world, i + 0.5F, j + 1.0F, k + 0.5F);
 			boat.rotationYaw = ((MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3) - 1) * 90;
 
 			// ensure no 2 boats in same place
@@ -114,4 +116,8 @@ public class ItemBoatKayak extends Item
 
 		return stack;
 	}
+
+	protected abstract String getNameForTexture();
+	
+	protected abstract EntityBoatBase getBoat(World world, float x, float y, float z);
 }

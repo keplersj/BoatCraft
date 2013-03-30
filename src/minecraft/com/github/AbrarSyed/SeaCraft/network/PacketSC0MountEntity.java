@@ -29,15 +29,17 @@ public class PacketSC0MountEntity extends PacketSCBase
 	public PacketSC0MountEntity(ObjectInputStream stream) throws IOException
 	{
 		super(stream);
-		entityID = stream.read();
+		entityID = stream.readInt();
 		mount = stream.readBoolean();
+		System.out.println("IN >> "+entityID);
 	}
 
 	@Override
 	public void writeToStream(ObjectOutputStream stream) throws IOException
 	{
-		stream.write(entityID);
+		stream.writeInt(entityID);
 		stream.writeBoolean(mount);
+		System.out.println("OUT >> "+entityID);
 	}
 
 	@Override
