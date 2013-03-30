@@ -2,20 +2,20 @@ package com.overminddl1.minecraft.libs.NMT;
 
 public class NMTModelVoxel extends NMTModelBase
 {
-	protected float xPos;
-	protected float yPos;
-	protected float zPos;
-	protected float width;
-	protected float height;
-	protected float depth;
-	protected int relativeU;
-	protected int relativeV;
-	
+	protected float	xPos;
+	protected float	yPos;
+	protected float	zPos;
+	protected float	width;
+	protected float	height;
+	protected float	depth;
+	protected int	relativeU;
+	protected int	relativeV;
+
 	public NMTModelVoxel(NMTModelRenderer nmtmodelrenderer, float x, float y, float z, float w, float h, float d)
 	{
 		this(nmtmodelrenderer, x, y, z, w, h, d, 0, 0);
 	}
-	
+
 	public NMTModelVoxel(NMTModelRenderer nmtmodelrenderer, float x, float y, float z, float w, float h, float d, int u, int v)
 	{
 		super(nmtmodelrenderer);
@@ -28,16 +28,17 @@ public class NMTModelVoxel extends NMTModelBase
 		relativeU = u;
 		relativeV = v;
 	}
-	
+
+	@Override
 	public NMTModelVoxel create()
 	{
 		float x1 = xPos;
 		float y1 = yPos;
 		float z1 = zPos;
-		float x2 = x1 + (float)width;
-		float y2 = y1 + (float)height;
-		float z2 = z1 + (float)depth;
-		
+		float x2 = x1 + width;
+		float y2 = y1 + height;
+		float z2 = z1 + depth;
+
 		vertices.add(new NMTVertex(x1, y1, z1));
 		vertices.add(new NMTVertex(x2, y1, z1));
 		vertices.add(new NMTVertex(x2, y2, z1));
@@ -46,20 +47,19 @@ public class NMTModelVoxel extends NMTModelBase
 		vertices.add(new NMTVertex(x2, y1, z2));
 		vertices.add(new NMTVertex(x2, y2, z2));
 		vertices.add(new NMTVertex(x1, y2, z2));
-		
-		createVoxel(new int[] {0, 1, 2, 3, 4, 5, 6, 7}, relativeU, relativeV);
-		
+
+		createVoxel(new int[] { 0, 1, 2, 3, 4, 5, 6, 7 }, relativeU, relativeV);
+
 		return this;
 	}
-	
+
 	protected void createVoxel(int[] vert, int relU, int relV)
 	{
-		float u = renderer.textureU + (float)relU;
-		float v = renderer.textureV + (float)relV;
+		float u = renderer.textureU + (float) relU;
+		float v = renderer.textureV + (float) relV;
 		float texW = renderer.textureWidth;
 		float texH = renderer.textureHeight;
-		
-		
+
 		float u1 = u / (texW + NMTGlobal.textureMargin);
 		float v1 = v / (texH + NMTGlobal.textureMargin);
 		float u2 = (u + 1) / (texW - NMTGlobal.textureMargin);

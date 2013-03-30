@@ -9,6 +9,7 @@ public class NMTModelFileBlenderTXT extends NMTModelFile
 		super(nmtmodelrenderer, mdlFile);
 	}
 
+	@Override
 	protected NMTModelFile getInstance()
 	{
 		try
@@ -22,16 +23,19 @@ public class NMTModelFileBlenderTXT extends NMTModelFile
 		return null;
 	}
 
+	@Override
 	protected NMTModelFile parseFile()
 	{
 		return null;
 	}
 
+	@Override
 	protected String[] getExtensions()
 	{
-		return new String[] {"txt", "Data.txt"};
+		return new String[] { "txt", "Data.txt" };
 	}
-	
+
+	@Override
 	protected String getModelFormat()
 	{
 		return "BlenderTXT";

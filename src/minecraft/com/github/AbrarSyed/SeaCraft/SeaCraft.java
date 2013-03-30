@@ -1,13 +1,13 @@
 package com.github.AbrarSyed.SeaCraft;
 
-
-import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
+
+import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -25,18 +25,18 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid = SeaCraft.MODID, version = SeaCraft.VERSION, name = SeaCraft.MODID)
 public class SeaCraft
 {
-	public static final String	MODID	= "SeaCraft";
-	public static final String	VERSION	= "0.0.1";
+	public static final String		MODID	= "SeaCraft";
+	public static final String		VERSION	= "0.0.1";
 
 	@Instance
-	public static SeaCraft		instance;
+	public static SeaCraft			instance;
 
 	@SidedProxy(serverSide = "com.github.AbrarSyed.SeaCraft.ProxyServer", clientSide = "com.github.AbrarSyed.SeaCraft.client.ProxyClient")
-	public static ProxyServer	proxy;
+	public static ProxyServer		proxy;
 
-	public static ItemBoatKayak	kayak;
-	
-	public static CreativeTabBoats tab;
+	public static ItemBoatKayak		kayak;
+
+	public static CreativeTabBoats	tab;
 
 	@PreInit
 	public void preLoad(FMLInitializationEvent event)
@@ -49,22 +49,20 @@ public class SeaCraft
 	{
 		// creative tab
 		tab = new CreativeTabBoats();
-		
+
 		// items.
 		kayak = new ItemBoatKayak(9001);
-		
+
 		// registrations
 		GameRegistry.registerItem(kayak, "SeaCraft_Kayak", MODID);
-		
-		
+
 		// localizations
 		LanguageRegistry.addName(kayak, "Kayak");
 
-		
 		// entities.
 		int ID = 1;
 		EntityRegistry.registerModEntity(EntityBoatKayak.class, "SeaCraft_Kayak", ID++, instance, 80, 3, true);
-		
+
 		// renderring stuff
 		proxy.registerRenderStuff();
 	}

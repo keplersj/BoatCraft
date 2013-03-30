@@ -1,21 +1,9 @@
 package com.github.AbrarSyed.SeaCraft.Boats;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import java.util.List;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 import com.github.AbrarSyed.SeaCraft.SeaCraft;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
 
 public class EntityBoatKayak extends EntityBoatBase
 {
@@ -24,7 +12,7 @@ public class EntityBoatKayak extends EntityBoatBase
 	{
 		super(world);
 	}
-	
+
 	public EntityBoatKayak(World world, double x, double y, double z)
 	{
 		super(world, x, y, z);
@@ -33,13 +21,13 @@ public class EntityBoatKayak extends EntityBoatBase
 	@Override
 	public void dropItemsOnBreak()
 	{
-		this.dropItemWithOffset(SeaCraft.kayak.itemID, 1, 1);
+		dropItemWithOffset(SeaCraft.kayak.itemID, 1, 1);
 	}
 
 	@Override
 	public void dropItemsOnCrash()
 	{
-		this.dropItemWithOffset(SeaCraft.kayak.itemID, 1, 1);
+		dropItemWithOffset(SeaCraft.kayak.itemID, 1, 1);
 	}
 
 	@Override
@@ -75,7 +63,7 @@ public class EntityBoatKayak extends EntityBoatBase
 	@Override
 	public double getMinSplashSpeed()
 	{
-		return 1/3.0;
+		return 1 / 3.0;
 	}
 
 	@Override
@@ -83,7 +71,7 @@ public class EntityBoatKayak extends EntityBoatBase
 	{
 		return .35;
 	}
-	
+
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound par1nbtTagCompound)
 	{

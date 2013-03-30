@@ -2,14 +2,8 @@ package com.github.AbrarSyed.SeaCraft;
 
 import java.util.List;
 
-import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,18 +14,21 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
+
 public class ItemBoatKayak extends Item
 {
 	public ItemBoatKayak(int par1)
 	{
 		super(par1);
-		this.setMaxStackSize(2);
-		this.setHasSubtypes(false);
-		this.canRepair = false;
-		this.setUnlocalizedName(SeaCraft.MODID + ":kayak");
-		this.setCreativeTab(SeaCraft.tab);
+		setMaxStackSize(2);
+		setHasSubtypes(false);
+		canRepair = false;
+		setUnlocalizedName(SeaCraft.MODID + ":kayak");
+		setCreativeTab(SeaCraft.tab);
 	}
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
 
@@ -39,9 +36,9 @@ public class ItemBoatKayak extends Item
 		float f = 1.0F;
 		float f1 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * f;
 		float f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f;
-		double d0 = player.prevPosX + (player.posX - player.prevPosX) * (double) f;
-		double d1 = player.prevPosY + (player.posY - player.prevPosY) * (double) f + 1.62D - (double) player.yOffset;
-		double d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * (double) f;
+		double d0 = player.prevPosX + (player.posX - player.prevPosX) * f;
+		double d1 = player.prevPosY + (player.posY - player.prevPosY) * f + 1.62D - player.yOffset;
+		double d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * f;
 		Vec3 vec3 = world.getWorldVec3Pool().getVecFromPool(d0, d1, d2);
 		float f3 = MathHelper.cos(-f2 * 0.017453292F - (float) Math.PI);
 		float f4 = MathHelper.sin(-f2 * 0.017453292F - (float) Math.PI);
@@ -50,7 +47,7 @@ public class ItemBoatKayak extends Item
 		float f7 = f4 * f5;
 		float f8 = f3 * f5;
 		double d3 = 5.0D;
-		Vec3 vec31 = vec3.addVector((double) f7 * d3, (double) f6 * d3, (double) f8 * d3);
+		Vec3 vec31 = vec3.addVector(f7 * d3, f6 * d3, f8 * d3);
 		MovingObjectPosition trace = world.rayTraceBlocks_do(vec3, vec31, true);
 
 		// looking at nothing? RETURN!
@@ -70,7 +67,7 @@ public class ItemBoatKayak extends Item
 			if (entity.canBeCollidedWith())
 			{
 				float f10 = entity.getCollisionBorderSize();
-				AxisAlignedBB axisalignedbb = entity.boundingBox.expand((double) f10, (double) f10, (double) f10);
+				AxisAlignedBB axisalignedbb = entity.boundingBox.expand(f10, f10, f10);
 
 				if (axisalignedbb.isVecInside(vec3))
 				{
@@ -95,14 +92,12 @@ public class ItemBoatKayak extends Item
 			}
 
 			// create boat.
-			EntityBoatKayak boat = new EntityBoatKayak(world, (double) ((float) i + 0.5F), (double) ((float) j + 1.0F), (double) ((float) k + 0.5F));
-			boat.rotationYaw = (float) (((MathHelper.floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
+			EntityBoatKayak boat = new EntityBoatKayak(world, i + 0.5F, j + 1.0F, k + 0.5F);
+			boat.rotationYaw = ((MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3) - 1) * 90;
 
 			// ensure no 2 boats in same place
 			if (!world.getCollidingBoundingBoxes(boat, boat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
-			{
 				return stack;
-			}
 
 			// no spawn on client
 			if (!world.isRemote)
