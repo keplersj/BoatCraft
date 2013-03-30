@@ -1,6 +1,8 @@
 package com.github.AbrarSyed.SeaCraft;
 
 
+import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.MathHelper;

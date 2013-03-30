@@ -1,5 +1,8 @@
 package com.github.AbrarSyed.SeaCraft.client.models;
 
+import java.io.File;
+import java.net.MalformedURLException;
+
 import com.github.AbrarSyed.SeaCraft.SeaCraft;
 import com.overminddl1.minecraft.libs.NMT.NMTModelBase;
 import com.overminddl1.minecraft.libs.NMT.NMTModelRenderer;
@@ -18,10 +21,21 @@ public class ModelBoatKayak extends ModelBase
 
     public ModelBoatKayak()
     {
-    	render = new NMTModelRenderer(this, "Kayak");
-    	render.addModelOBJ("all", "mods/"+SeaCraft.MODID+"/models/Kayak-Canoe.obj");
-    	
     	/*
+    	render = new NMTModelRenderer(this, "Kayak");
+    	render.setTextureOffset(0, 0);
+    	this.setTextureOffset("Kayak.all", 0, 0);
+    	File file = new File("mods/"+SeaCraft.MODID+"/models/Kayak-Canoe.obj");
+    	try
+		{
+			render.addModelOBJ("all", file.toURI().toURL().toString());
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		*/
+    	
         this.boatSides[0] = new ModelRenderer(this, 0, 8);
         this.boatSides[1] = new ModelRenderer(this, 0, 0);
         this.boatSides[2] = new ModelRenderer(this, 0, 0);
@@ -33,7 +47,6 @@ public class ModelBoatKayak extends ModelBase
         int b2 = 20;
         int b3 = 4;
         
-        //bottom
         this.boatSides[0].addBox((float)(-b0 / 2), (float)(-b2 / 2 + 2), -3.0F, b0, b2 - 4, 4, 0.0F);
         this.boatSides[0].setRotationPoint(0.0F, (float)b3, 0.0F);
         
@@ -57,7 +70,7 @@ public class ModelBoatKayak extends ModelBase
         this.boatSides[1].rotateAngleY = ((float)Math.PI * 3F / 2F);
         this.boatSides[2].rotateAngleY = ((float)Math.PI / 2F);
         this.boatSides[3].rotateAngleY = (float)Math.PI;
-        */
+        
     }
 
     /**
@@ -65,12 +78,9 @@ public class ModelBoatKayak extends ModelBase
      */
     public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
     {
-    	render.render(par7);
-    	/*
         for (int i = 0; i < 5; ++i)
         {
             this.boatSides[i].render(par7);
         }
-        */
     }
 }

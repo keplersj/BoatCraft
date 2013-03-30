@@ -7,7 +7,7 @@ import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
-import com.github.AbrarSyed.SeaCraft.EntityBoatKayak;
+import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
 import com.github.AbrarSyed.SeaCraft.client.models.ModelBoatKayak;
 
 public class RenderBoatKayak extends Render
@@ -38,7 +38,7 @@ public class RenderBoatKayak extends Render
 
         if (f2 > 0.0F)
         {
-            GL11.glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * (float)entity.getForwardDirection(), 1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F, 1.0F, 0.0F, 0.0F);
         }
 
         this.loadTexture("/terrain.png");
@@ -47,6 +47,10 @@ public class RenderBoatKayak extends Render
         GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
         this.loadTexture("/item/boat.png");
         GL11.glScalef(-1.0F, -1.0F, 1.0F);
+        
+        // scaling
+        //GL11.glScalef(1.5F, 1.0F, .8F);
+        
         this.model.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
 	}

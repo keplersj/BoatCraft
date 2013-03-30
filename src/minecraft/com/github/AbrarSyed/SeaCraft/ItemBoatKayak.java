@@ -2,6 +2,8 @@ package com.github.AbrarSyed.SeaCraft;
 
 import java.util.List;
 
+import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
