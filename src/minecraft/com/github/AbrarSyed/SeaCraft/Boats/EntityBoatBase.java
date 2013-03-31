@@ -277,37 +277,10 @@ public abstract class EntityBoatBase extends Entity
 				}
 			}
 		}
-
-		// set ridding controls.
-		if (riddenByEntity != null && riddenByEntity instanceof EntityPlayer)
-		{
-			calcRidingMotion();
-		}
-
-		// verify gravity.
-		if (waterFloor < 1.0D)
-		{
-			double num = waterFloor * 2.0D - 1.0D;
-			motionY += 0.03999999910593033D * num;
-		}
-		else
-		{
-			if (motionY < 0.0D)
-			{
-				motionY /= 2.0D;
-			}
-
-			motionY += 0.007000000216066837D;
-		}
-
-		if (onGround)
-		{
-			setGroundDrag();
-		}
-
+		
+		calcMotion(waterFloor);
+		
 		double groundMotion = motionX * motionX + motionZ + motionZ;
-
-		moveEntity(motionX, motionY, motionZ);
 
 		if (isCollidedHorizontally && groundMotion > getCrashSpeed())
 		{
@@ -370,43 +343,70 @@ public abstract class EntityBoatBase extends Entity
 		}
 	}
 	
-	protected void calcRidingMotion()
-	{
-		//this.rotationYaw = this.riddenByEntity.rotationYaw;
-		EntityPlayer rider = (EntityPlayer) riddenByEntity;
-
-		double headingX = rider.getLookVec().xCoord; // in radians
-		double headingZ = rider.getLookVec().zCoord; // in radians
-
+	protected void calcMotion(double waterFloor)
+	{	
+		// set ridding controls.
+		if (riddenByEntity != null && riddenByEntity instanceof EntityPlayer)
 		{
-			// new value
-			float lookingAngle = (float) (270f - Math.atan2(headingX, headingZ) * 180.0D / Math.PI);
-			float changed = (float) MathHelper.wrapAngleTo180_double(lookingAngle - rotationYaw);
-			
-			// get value changed
-			//float changed = lookingAngle - rotationYaw;
-			
-			if (changed > getMaxRotationChange())
-				changed = getMaxRotationChange();
-			else if (changed < -getMaxRotationChange())
-				changed = -getMaxRotationChange();
-			
-			
-			lookingAngle = this.rotationYaw + changed;
+			//this.rotationYaw = this.riddenByEntity.rotationYaw;
+			EntityPlayer rider = (EntityPlayer) riddenByEntity;
 
-			rotationYaw = lookingAngle;
-			this.riddenByEntity.prevRotationYaw = this.riddenByEntity.rotationYaw -= changed;
-			this.setRotation(lookingAngle, rotationPitch);
-			this.setRotation(lookingAngle);
-			
-			double rotation = Math.toRadians(lookingAngle);
-			
-			headingX = -Math.cos(rotation);
-			headingZ = -Math.sin(rotation);
+			double headingX = rider.getLookVec().xCoord; // in radians
+			double headingZ = rider.getLookVec().zCoord; // in radians
+
+			{
+				// new value
+				float lookingAngle = (float) (270f - Math.atan2(headingX, headingZ) * 180.0D / Math.PI);
+				float changed = (float) MathHelper.wrapAngleTo180_double(lookingAngle - rotationYaw);
+				
+				// get value changed
+				//float changed = lookingAngle - rotationYaw;
+				
+				if (changed > getMaxRotationChange())
+					changed = getMaxRotationChange();
+				else if (changed < -getMaxRotationChange())
+					changed = -getMaxRotationChange();
+				
+				
+				lookingAngle = this.rotationYaw + changed;
+
+				rotationYaw = lookingAngle;
+				this.riddenByEntity.prevRotationYaw = this.riddenByEntity.rotationYaw -= changed;
+				this.setRotation(lookingAngle, rotationPitch);
+				this.setRotation(lookingAngle);
+				
+				double rotation = Math.toRadians(lookingAngle);
+				
+				headingX = -Math.cos(rotation);
+				headingZ = -Math.sin(rotation);
+			}
+
+			motionX = getCurrentSpeed() * headingX;
+			motionZ = getCurrentSpeed() * headingZ;
 		}
 
-		motionX = getCurrentSpeed() * headingX;
-		motionZ = getCurrentSpeed() * headingZ;
+		// verify gravity.
+		if (waterFloor < 1.0D)
+		{
+			double num = waterFloor * 2.0D - 1.0D;
+			motionY += 0.03999999910593033D * num;
+		}
+		else
+		{
+			if (motionY < 0.0D)
+			{
+				motionY /= 2.0D;
+			}
+
+			motionY += 0.007000000216066837D;
+		}
+
+		if (onGround)
+		{
+			setGroundDrag();
+		}
+
+		moveEntity(motionX, motionY, motionZ);
 	}
 
 	private final double calcDragForce()
@@ -421,7 +421,7 @@ public abstract class EntityBoatBase extends Entity
 		motionZ *= 0.9900000095367432D;
 	}
 
-	private final void setGroundDrag()
+	protected final void setGroundDrag()
 	{
 		motionX *= 0.5D;
 		motionY *= 0.5D;

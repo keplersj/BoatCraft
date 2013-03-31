@@ -10,6 +10,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.github.AbrarSyed.SeaCraft.SeaCraft;
@@ -75,10 +76,78 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 		//		return true;
 	}
 
-	protected void calcRidingMotion()
+	@Override
+	protected void calcMotion(double waterFloor)
 	{
+		double headingX, headingZ;
+		// powerred movement.
 		if (canMove && this.isBurningFuel())
-			super.calcRidingMotion();
+		{
+
+			// set ridding controls.
+			if (riddenByEntity != null && riddenByEntity instanceof EntityPlayer)
+			{
+				//this.rotationYaw = this.riddenByEntity.rotationYaw;
+				EntityPlayer rider = (EntityPlayer) riddenByEntity;
+
+				headingX = rider.getLookVec().xCoord; // in radians
+				headingZ = rider.getLookVec().zCoord; // in radians
+
+				{
+					// new value
+					float lookingAngle = (float) (270f - Math.atan2(headingX, headingZ) * 180.0D / Math.PI);
+					float changed = (float) MathHelper.wrapAngleTo180_double(lookingAngle - rotationYaw);
+
+					// get value changed
+					//float changed = lookingAngle - rotationYaw;
+
+					if (changed > getMaxRotationChange())
+						changed = getMaxRotationChange();
+					else if (changed < -getMaxRotationChange())
+						changed = -getMaxRotationChange();
+
+					lookingAngle = this.rotationYaw + changed;
+
+					rotationYaw = lookingAngle;
+					this.riddenByEntity.prevRotationYaw = this.riddenByEntity.rotationYaw -= changed;
+					this.setRotation(lookingAngle, rotationPitch);
+					this.setRotation(lookingAngle);
+
+				}
+			}
+			
+			double rotation = Math.toRadians(rotationYaw);
+
+			headingX = -Math.cos(rotation);
+			headingZ = -Math.sin(rotation);
+			
+			motionX = getCurrentSpeed() * headingX;
+			motionZ = getCurrentSpeed() * headingZ;
+		}
+		
+		// verify gravity.
+		if (waterFloor < 1.0D)
+		{
+			double num = waterFloor * 2.0D - 1.0D;
+			motionY += 0.03999999910593033D * num;
+		}
+		else
+		{
+			if (motionY < 0.0D)
+			{
+				motionY /= 2.0D;
+			}
+
+			motionY += 0.007000000216066837D;
+		}
+
+		// regardless of powerred or not
+		if (onGround)
+		{
+			setGroundDrag();
+		}
+
+		moveEntity(motionX, motionY, motionZ);
 	}
 
 	@Override
@@ -161,7 +230,7 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	{
 		return .5;
 	}
-	
+
 	@Override
 	public float getMaxRotationChange()
 	{
@@ -320,7 +389,7 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	{
 		return dataWatcher.getWatchableObjectInt(BURN_WATCHER);
 	}
-	
+
 	public final void setTotalBurnTime(int ammount)
 	{
 		dataWatcher.updateObject(BURN_TOTAL_WATCHER, Integer.valueOf(ammount));
@@ -350,7 +419,7 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int num)
 	{
-		return (int) (num * ((double)this.getBurningLeft() / this.getTotalBurnTime()));
+		return (int) (num * ((double) this.getBurningLeft() / this.getTotalBurnTime()));
 	}
 
 	private void updateFurnace()
@@ -360,7 +429,7 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 			int burning = this.getBurningLeft();
 			if (burning > 0)
 				burning--;
-			
+
 			this.setBurningLeft(burning);
 		}
 
@@ -404,7 +473,7 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 					cookTime = 0;
 					this.smeltItem();
 				}
-				
+
 				this.setItemCookingTime(cookTime);
 			}
 			else
