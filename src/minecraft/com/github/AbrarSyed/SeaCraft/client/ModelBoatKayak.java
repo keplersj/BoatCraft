@@ -4,7 +4,11 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
+import com.github.AbrarSyed.SeaCraft.SeaCraft;
 import com.overminddl1.minecraft.libs.NMT.NMTModelRenderer;
+
+import java.io.File;
+import java.net.MalformedURLException;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,6 +26,21 @@ public class ModelBoatKayak extends ModelBase
 
 	public ModelBoatKayak()
 	{
+		render = new NMTModelRenderer(this, "kayak");
+		try
+		{
+			render.addModelOBJ((new File("mods/"+SeaCraft.MODID+"/models/Kayak-Canoe.obj")).toURI().toURL().toString());
+		}
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		render.rotateAngleZ = (float) (Math.PI/2);
+		render.rotateAngleX = (float) (Math.PI/2);
+		
+		/*
 		boatSides[0] = new ModelRenderer(this, 0, 0);
 		boatSides[1] = new ModelRenderer(this, 0, 0);
 		boatSides[2] = new ModelRenderer(this, 0, 0);
@@ -59,6 +78,7 @@ public class ModelBoatKayak extends ModelBase
 		boatSides[1].rotateAngleY = (float) Math.PI * 3F / 2F;
 		boatSides[2].rotateAngleY = (float) Math.PI / 2F;
 		boatSides[3].rotateAngleY = (float) Math.PI;
+		*/
 	}
 
 	/**
@@ -67,9 +87,12 @@ public class ModelBoatKayak extends ModelBase
 	@Override
 	public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
+		render.render(par7);
+		/*
 		for (int i = 0; i < 5; ++i)
 		{
 			boatSides[i].render(par7);
 		}
+		*/
 	}
 }

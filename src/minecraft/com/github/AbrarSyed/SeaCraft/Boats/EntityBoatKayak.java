@@ -29,6 +29,15 @@ public class EntityBoatKayak extends EntityBoatBase
 	{
 		dropItemWithOffset(SeaCraft.kayak.itemID, 1, 1);
 	}
+	
+	/**
+	 * Returns the Y offset from the entity's position for any entity riding this one.
+	 */
+	@Override
+	public double getMountedYOffset()
+	{
+		return -0.50000001192092896D;
+	}
 
 	@Override
 	public boolean isMountableByPlayer()

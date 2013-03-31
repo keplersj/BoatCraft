@@ -17,6 +17,7 @@
 
 !/src/common/com/
 !/src/minecraft/com/
+!/jars/mods/
 
 *.bat
 *.sh

@@ -25,7 +25,7 @@ public class RenderBoatKayak extends Render
 	public void render(EntityBoatKayak entity, double x, double y, double z, float par8, float par9)
 	{
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x, (float) y, (float) z);
+		GL11.glTranslatef((float) x, (float) y - .2f, (float) z + .5f);
 
 		// rotate arround y...
 		GL11.glRotatef(180 - par8, 0.0F, 1.0F, 0.0F);
@@ -51,13 +51,13 @@ public class RenderBoatKayak extends Render
 		GL11.glScalef(-1.0F, -1.0F, 1.0F);
 
 		// scaling
-		//GL11.glScalef(1.5F, 1.0F, .8F);
+		GL11.glScalef(.5F, .4F, .4F);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glColor3f(0.0F, 0.34F, 0.73F);
+		GL11.glColor3f(146/255F, 123/255F, 81/255F);
 
 		model.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		//GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 		GL11.glPopMatrix();
 	}
