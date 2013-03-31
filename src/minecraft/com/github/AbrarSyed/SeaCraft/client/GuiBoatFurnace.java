@@ -93,10 +93,10 @@ public class GuiBoatFurnace extends GuiContainer
 		if (this.furnace.isBurningFuel())
 		{
 			i1 = this.furnace.getBurnTimeRemainingScaled(12);
-			this.drawTexturedModalRect(k + 35, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 2);
+			this.drawTexturedModalRect(k + 33, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 2);
 		}
 
 		i1 = this.furnace.getCookProgressScaled(24);
-		this.drawTexturedModalRect(k + 52, l + 34, 176, 14, i1 + 1, 16);
+		this.drawTexturedModalRect(k + 52, l + 33, 176, 14, i1 + 1, 16);
 	}
 }

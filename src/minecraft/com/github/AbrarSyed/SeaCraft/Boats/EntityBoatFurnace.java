@@ -332,7 +332,9 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	@SideOnly(Side.CLIENT)
 	public int getCookProgressScaled(int num)
 	{
-		return num * (1 / ITEM_BURN_TIME);
+		double cookTime = getItemCookingTime();
+		double burn = cookTime / ITEM_BURN_TIME;
+		return (int) (num * burn);
 	}
 
 	/**
@@ -342,7 +344,7 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int num)
 	{
-		return num * (this.getBurningLeft() / this.getTotalBurnTime());
+		return (int) (num * ((double)this.getBurningLeft() / this.getTotalBurnTime()));
 	}
 
 	private void updateFurnace()
@@ -387,9 +389,9 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 			}
 
 			// items creattion and smelting
-			if (this.isBurning() && this.canSmelt())
+			if (this.isBurningFuel() && this.canSmelt())
 			{
-				int cookTime = this.getItemCookingTime();
+				int cookTime = this.getItemCookingTime() + 1;
 
 				if (cookTime == ITEM_BURN_TIME)
 				{
