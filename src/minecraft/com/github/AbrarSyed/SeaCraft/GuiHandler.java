@@ -20,8 +20,7 @@ public class GuiHandler implements IGuiHandler
 		switch(ID)
 		{
 			case 0:
-				List<EntityBoatFurnace> list = world.getEntitiesWithinAABB(EntityBoatFurnace.class, AxisAlignedBB.getBoundingBox(x, y, z, x+1, y+1, z+1));
-				EntityBoatFurnace boat = list.get(0);
+				EntityBoatFurnace boat = (EntityBoatFurnace) player.worldObj.getEntityByID(x);
 				return new ContainerBoatFurnace(player.inventory, boat);
 		}
 		return null;
@@ -33,8 +32,7 @@ public class GuiHandler implements IGuiHandler
 		switch(ID)
 		{
 			case 0:
-				List<EntityBoatFurnace> list = world.getEntitiesWithinAABB(EntityBoatFurnace.class, AxisAlignedBB.getBoundingBox(x, y, z, x+1, y+1, z+1));
-				EntityBoatFurnace boat = list.get(0);
+				EntityBoatFurnace boat = (EntityBoatFurnace) player.worldObj.getEntityByID(x);
 				return new GuiBoatFurnace(player.inventory, boat);
 		}
 		return null;

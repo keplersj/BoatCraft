@@ -43,7 +43,7 @@ public class ContainerBoatFurnace extends Container
     public void addCraftingToCrafters(ICrafting par1ICrafting)
     {
         super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, 0, this.boat.getItemBurnTime());
+        par1ICrafting.sendProgressBarUpdate(this, 0, this.boat.getItemCookingTime());
         par1ICrafting.sendProgressBarUpdate(this, 1, this.boat.getBurningLeft());
     }
 

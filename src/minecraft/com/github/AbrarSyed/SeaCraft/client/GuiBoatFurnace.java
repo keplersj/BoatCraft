@@ -1,5 +1,6 @@
 package com.github.AbrarSyed.SeaCraft.client;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -10,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import com.github.AbrarSyed.SeaCraft.ContainerBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.network.PacketSC0MountEntity;
+import com.github.AbrarSyed.SeaCraft.network.PacketSC1StartBoat;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
@@ -19,6 +21,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GuiBoatFurnace extends GuiContainer
 {
 	private EntityBoatFurnace	furnace;
+	
+	private GuiButton buttonMount;
+	private GuiButton buttonStart;
 
 	public GuiBoatFurnace(InventoryPlayer player, EntityBoatFurnace boat)
 	{
@@ -32,27 +37,34 @@ public class GuiBoatFurnace extends GuiContainer
 		super.initGui();
 		int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		int bw = xSize - 22;
-		buttonList.add(new GuiButton(1, x + 130, y + 10, bw / 4, 20, "Mount"));
-		buttonList.add(new GuiButton(2, x + 125, y + 30, bw / 3, 20, "UnMount"));
-		buttonList.add(new GuiButton(3, x + 75, y + 58, bw / 4, 20, "Start"));
-		buttonList.add(new GuiButton(4, x + 125, y + 58, bw / 4, 20, "Stop"));
+		buttonMount = new GuiButton(1, x + 120, y + 20, bw / 3, 20, "Mount");
+		buttonStart = new GuiButton(2, x + 120, y + 42, bw / 3, 20, "Start");
+		
+		buttonList.add(buttonMount);
+		buttonList.add(buttonStart);
 	}
 
 	@Override
 	protected void actionPerformed(GuiButton button)
 	{
-		switch(button.id)
+		if (button.id == 1)
+		{	
+			//Minecraft.getMinecraft().thePlayer.mountEntity(furnace);
+			PacketDispatcher.sendPacketToServer(new PacketSC0MountEntity(furnace).getPacket250());
+			
+			buttonMount.displayString = this.mc.thePlayer.ridingEntity == null ? "Mount" : "UnMount";
+			
+		}
+		else if (button.id == 2)
 		{
-			case 1: // mount
-				PacketDispatcher.sendPacketToServer(new PacketSC0MountEntity(furnace, true).getPacket250());
-				break;
-			case 2: // unmount
-				PacketDispatcher.sendPacketToServer(new PacketSC0MountEntity(furnace, false).getPacket250());
-				break;
-			case 3: // start
-				break;
-			case 4: // stop
-				break;
+			//true? > false
+			// false? > true
+			boolean start = !furnace.canMove;
+			
+			furnace.canMove = start;
+			PacketDispatcher.sendPacketToServer(new PacketSC1StartBoat(furnace, start).getPacket250());
+			
+			buttonStart.displayString = start ? "Stop" : "Start";
 		}
 	}
 
@@ -78,7 +90,7 @@ public class GuiBoatFurnace extends GuiContainer
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 		int i1;
 
-		if (this.furnace.isBurning())
+		if (this.furnace.isBurningFuel())
 		{
 			i1 = this.furnace.getBurnTimeRemainingScaled(12);
 			this.drawTexturedModalRect(k + 35, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 2);

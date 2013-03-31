@@ -1,23 +1,31 @@
 package com.github.AbrarSyed.SeaCraft.Boats;
 
+import net.minecraft.block.BlockFurnace;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.github.AbrarSyed.SeaCraft.SeaCraft;
-import com.github.AbrarSyed.SeaCraft.api.SeaCraftAPI;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 {
-	public static final String	UNLOCALIZED	= "SeaCraft.boats.furnace";
+	public static final String	UNLOCALIZED			= "SeaCraft.boats.furnace";
+
+	public boolean				canMove				= false;
+
+	private static final int	COOK_WATCHER		= 20;
+	private static final int	BURN_WATCHER		= 21;
+	private static final int	BURN_TOTAL_WATCHER	= 22;
 
 	public EntityBoatFurnace(World world)
 	{
@@ -29,13 +37,22 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 		super(world, x, y, z);
 	}
 
+	@Override
+	public void entityInit()
+	{
+		super.entityInit();
+		dataWatcher.addObject(COOK_WATCHER, new Integer(0));
+		dataWatcher.addObject(BURN_WATCHER, new Integer(0));
+		dataWatcher.addObject(BURN_TOTAL_WATCHER, new Integer(0));
+	}
+
 	/**
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
 	@Override
 	public boolean interact(EntityPlayer player)
 	{
-		player.openGui(SeaCraft.instance, 0, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+		player.openGui(SeaCraft.instance, 0, worldObj, this.entityId, 0, 0);
 		return true;
 
 		//		// already has something riding? DENIED
@@ -60,20 +77,35 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 
 	protected void calcRidingMotion()
 	{
-		if (burningLeft > 0)
+		if (canMove && this.isBurningFuel())
 			super.calcRidingMotion();
 	}
 
 	@Override
 	public void dropItemsOnBreak()
 	{
-		dropItemWithOffset(SeaCraft.kayak.itemID, 1, 1);
+		dropItemWithOffset(SeaCraft.furnace.itemID, 1, 1);
+
+		for (int i = 0; i < stacks.length; i++)
+			if (stacks[i] != null)
+				entityDropItem(stacks[i], 1);
 	}
 
 	@Override
 	public void dropItemsOnCrash()
 	{
-		dropItemWithOffset(SeaCraft.kayak.itemID, 1, 1);
+		dropItemWithOffset(SeaCraft.furnace.itemID, 1, 1);
+
+		for (int i = 0; i < stacks.length; i++)
+			if (stacks[i] != null)
+				entityDropItem(stacks[i], 1);
+	}
+
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+		this.updateFurnace();
 	}
 
 	@Override
@@ -140,7 +172,10 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	 * 1 = output
 	 * 2, 3, 4 = fuels
 	 */
-	private ItemStack[]	stacks	= new ItemStack[5];
+	private ItemStack[]			stacks		= new ItemStack[5];
+	private static final int	INPUT_SLOT	= 0;
+	private static final int	OUTPUT_SLOT	= 1;
+	private static final int[]	FUEL_SLOTS	= new int[] { 4, 3, 2 };
 
 	@Override
 	public int getSizeInventory()
@@ -258,19 +293,36 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	 * FURNACE STUFF
 	 * ---------------------------------------------------------------------------
 	 */
-
-	private int					burningLeft		= 0;
-	private int					itemBurnTime	= 0;
 	private static final int	ITEM_BURN_TIME	= 200;
 
-	public int getBurningLeft()
+	public final void setItemCookingTime(int ammount)
 	{
-		return burningLeft;
+		dataWatcher.updateObject(COOK_WATCHER, Integer.valueOf(ammount));
 	}
 
-	public int getItemBurnTime()
+	public final int getItemCookingTime()
 	{
-		return itemBurnTime;
+		return dataWatcher.getWatchableObjectInt(COOK_WATCHER);
+	}
+
+	public final void setBurningLeft(int ammount)
+	{
+		dataWatcher.updateObject(BURN_WATCHER, Integer.valueOf(ammount));
+	}
+
+	public final int getBurningLeft()
+	{
+		return dataWatcher.getWatchableObjectInt(BURN_WATCHER);
+	}
+	
+	public final void setTotalBurnTime(int ammount)
+	{
+		dataWatcher.updateObject(BURN_TOTAL_WATCHER, Integer.valueOf(ammount));
+	}
+
+	public final int getTotalBurnTime()
+	{
+		return dataWatcher.getWatchableObjectInt(BURN_TOTAL_WATCHER);
 	}
 
 	/**
@@ -280,7 +332,7 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	@SideOnly(Side.CLIENT)
 	public int getCookProgressScaled(int num)
 	{
-		return num * (this.burningLeft / ITEM_BURN_TIME);
+		return num * (1 / ITEM_BURN_TIME);
 	}
 
 	/**
@@ -290,32 +342,144 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int num)
 	{
-		if (this.itemBurnTime == 0)
-		{
-			this.itemBurnTime = 200;
-		}
-
-		return num * (this.burningLeft / this.itemBurnTime);
+		return num * (this.getBurningLeft() / this.getTotalBurnTime());
 	}
 
 	private void updateFurnace()
 	{
-		if (burningLeft > 0)
+		// update burning status.
 		{
-			burningLeft--;
-			return;
+			int burning = this.getBurningLeft();
+			if (burning > 0)
+				burning--;
+			
+			this.setBurningLeft(burning);
 		}
 
-		ItemStack burning = null;
-		for (int i = 4; i > 1 && burning == null; i--)
-			burning = stacks[i];
-
-		if (burning != null)
+		// SERVER ONLY
+		if (!this.worldObj.isRemote)
 		{
-			burning.stackSize--;
-			burningLeft = TileEntityFurnace.getItemBurnTime(burning);
-		}
+			int burning = this.getBurningLeft();
+			// CHECK FUEL AND CONSUME FUEL
+			// isBurning && canSmelt
+			if (burning == 0 && (this.canSmelt() || this.canMove))
+			{
+				int index = getFuelIndex();
+				if (index != -1)
+				{
+					burning = TileEntityFurnace.getItemBurnTime(this.stacks[index]);
+					this.setBurningLeft(burning);
+					this.setTotalBurnTime(burning);
 
+					if (burning > 0)
+					{
+						if (this.stacks[index] != null)
+						{
+							--this.stacks[index].stackSize;
+
+							if (this.stacks[index].stackSize == 0)
+							{
+								this.stacks[index] = this.stacks[index].getItem().getContainerItemStack(stacks[index]);
+							}
+						}
+					}
+				}
+			}
+
+			// items creattion and smelting
+			if (this.isBurning() && this.canSmelt())
+			{
+				int cookTime = this.getItemCookingTime();
+
+				if (cookTime == ITEM_BURN_TIME)
+				{
+					cookTime = 0;
+					this.smeltItem();
+				}
+				
+				this.setItemCookingTime(cookTime);
+			}
+			else
+			{
+				this.setItemCookingTime(0);
+			}
+		}
+	}
+
+	/**
+	 * -1 if no fuel.
+	 */
+	private int getFuelIndex()
+	{
+		for (int i : FUEL_SLOTS)
+		{
+			if (stacks[i] != null)
+				return i;
+		}
+		return -1;
+	}
+
+	/**
+	 * returns TRUE if an item can be smelted.
+	 */
+	private boolean canSmelt()
+	{
+		if (this.stacks[INPUT_SLOT] == null)
+		{
+			return false;
+		}
+		else
+		{
+			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.stacks[INPUT_SLOT]);
+			// no output;
+			if (itemstack == null)
+				return false;
+
+			// empty output
+			if (stacks[OUTPUT_SLOT] == null)
+				return true;
+
+			// not the same outputs
+			if (!this.stacks[OUTPUT_SLOT].isItemEqual(itemstack))
+				return false;
+
+			// calculate final 
+			int result = stacks[OUTPUT_SLOT].stackSize + itemstack.stackSize;
+
+			return result <= itemstack.getMaxStackSize();
+		}
+	}
+
+	/**
+	 * Smelts an input into an output
+	 */
+	public void smeltItem()
+	{
+		if (this.canSmelt())
+		{
+			ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.stacks[0]);
+
+			if (this.stacks[OUTPUT_SLOT] == null)
+			{
+				this.stacks[OUTPUT_SLOT] = itemstack.copy();
+			}
+			else if (this.stacks[OUTPUT_SLOT].isItemEqual(itemstack))
+			{
+				stacks[OUTPUT_SLOT].stackSize += itemstack.stackSize;
+			}
+
+			--this.stacks[INPUT_SLOT].stackSize;
+
+			if (this.stacks[INPUT_SLOT].stackSize <= 0)
+			{
+				this.stacks[INPUT_SLOT] = null;
+			}
+		}
+	}
+
+	public boolean isBurningFuel()
+	{
+		return this.getBurningLeft() > 0;
 	}
 
 	/*
