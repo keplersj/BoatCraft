@@ -19,9 +19,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class EntityBoatBase extends Entity
 {
-	private double	speedMultiplier;
-	private int		boatPosRotationIncrements;
-
 	// client stuff that makes no sense.
 	private double	boatX;
 	private double	boatY;
@@ -39,7 +36,6 @@ public abstract class EntityBoatBase extends Entity
 	public EntityBoatBase(World par1World)
 	{
 		super(par1World);
-		speedMultiplier = 0.07D;
 		preventEntitySpawning = true;
 		setSize(1.5F, 0.6F);
 		yOffset = height / 2.0F;
@@ -176,11 +172,7 @@ public abstract class EntityBoatBase extends Entity
 	 */
 	public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int par9)
 	{
-		if (riddenByEntity == null)
-		{
-			boatPosRotationIncrements = par9 + 5;
-		}
-		else
+		if (riddenByEntity != null)
 		{
 			double d3 = x - posX;
 			double d4 = y - posY;
@@ -189,8 +181,6 @@ public abstract class EntityBoatBase extends Entity
 
 			if (d6 <= 1.0D)
 				return;
-
-			boatPosRotationIncrements = 3;
 		}
 
 		boatX = x;
@@ -385,17 +375,34 @@ public abstract class EntityBoatBase extends Entity
 		//this.rotationYaw = this.riddenByEntity.rotationYaw;
 		EntityPlayer rider = (EntityPlayer) riddenByEntity;
 
-		double headingX = rider.getLookVec().normalize().xCoord; // in radians
-		double headingZ = rider.getLookVec().normalize().zCoord; // in radians
+		double headingX = rider.getLookVec().xCoord; // in radians
+		double headingZ = rider.getLookVec().zCoord; // in radians
 
 		{
-			float val = (float) (270f - Math.atan2(headingX, headingZ) * 180.0D / Math.PI);
-			val = (float) MathHelper.wrapAngleTo180_double(val);
-			//val += this.rotationYaw;
+			// new value
+			float lookingAngle = (float) (270f - Math.atan2(headingX, headingZ) * 180.0D / Math.PI);
+			float changed = (float) MathHelper.wrapAngleTo180_double(lookingAngle - rotationYaw);
+			
+			// get value changed
+			//float changed = lookingAngle - rotationYaw;
+			
+			if (changed > getMaxRotationChange())
+				changed = getMaxRotationChange();
+			else if (changed < -getMaxRotationChange())
+				changed = -getMaxRotationChange();
+			
+			
+			lookingAngle = this.rotationYaw + changed;
 
-			rotationYaw = val;
-			this.setRotation(val, rotationPitch);
-			this.setRotation(val);
+			rotationYaw = lookingAngle;
+			this.riddenByEntity.prevRotationYaw = this.riddenByEntity.rotationYaw -= changed;
+			this.setRotation(lookingAngle, rotationPitch);
+			this.setRotation(lookingAngle);
+			
+			double rotation = Math.toRadians(lookingAngle);
+			
+			headingX = -Math.cos(rotation);
+			headingZ = -Math.sin(rotation);
 		}
 
 		motionX = getCurrentSpeed() * headingX;
@@ -596,4 +603,6 @@ public abstract class EntityBoatBase extends Entity
 	 * @return
 	 */
 	public abstract double getCrashSpeed();
+	
+	public abstract float getMaxRotationChange();
 }

@@ -161,6 +161,12 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	{
 		return .5;
 	}
+	
+	@Override
+	public float getMaxRotationChange()
+	{
+		return 5;
+	}
 
 	/*
 	 * INVENTORY STUFF

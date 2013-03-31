@@ -103,4 +103,10 @@ public class EntityBoatKayak extends EntityBoatBase
 	{
 	}
 
+	@Override
+	public float getMaxRotationChange()
+	{
+		return 10;
+	}
+
 }
