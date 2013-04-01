@@ -17,6 +17,7 @@ import com.github.AbrarSyed.SeaCraft.boats.EntityBoatKayak;
 import com.github.AbrarSyed.SeaCraft.items.ItemAnchor;
 import com.github.AbrarSyed.SeaCraft.items.ItemBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.items.ItemBoatKayak;
+import com.github.AbrarSyed.SeaCraft.items.ItemHitch;
 import com.github.AbrarSyed.SeaCraft.network.HandlerClient;
 import com.github.AbrarSyed.SeaCraft.network.HandlerServer;
 import com.github.AbrarSyed.SeaCraft.network.PacketSCBase;
@@ -58,6 +59,7 @@ public class SeaCraft
 	public static ItemBoatKayak		kayak;
 	public static ItemBoatFurnace	furnace;
 	public static ItemAnchor		anchor;
+	public static ItemHitch			hitch;
 
 	// blocks
 	public static BlockBoatBuilder	builder;
@@ -85,17 +87,20 @@ public class SeaCraft
 		kayak = new ItemBoatKayak(9001);
 		furnace = new ItemBoatFurnace(9002);
 		anchor = new ItemAnchor(9003);
+		hitch = new ItemHitch(9004);
 
 		// registrations
 		GameRegistry.registerItem(kayak, "SeaCraft_Kayak", MODID);
 		GameRegistry.registerItem(furnace, "SeaCraft_Furnace", MODID);
 		GameRegistry.registerItem(anchor, "SeaCraft_Anchor", MODID);
+		GameRegistry.registerItem(anchor, "SeaCraft_Hitch", MODID);
 		GameRegistry.registerBlock(builder, "SeaCraft_BoatBuilder");
 
 		// localizations
 		LanguageRegistry.addName(kayak, "Kayak");
 		LanguageRegistry.addName(furnace, "Furnace BoaT");
 		LanguageRegistry.addName(anchor, "Anchor");
+		LanguageRegistry.addName(hitch, "Hitch");
 		LanguageRegistry.addName(builder, "Boat Builder");
 		LanguageRegistry.instance().addStringLocalization("SeaCraft.boats.furnace", "Furnace Boat");
 		LanguageRegistry.instance().addStringLocalization("SeaCraft.boats.chest", "Chest Boat");
@@ -115,16 +120,16 @@ public class SeaCraft
 
 		// the gui handler
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
-		
+
 		// recipes
 		IRecipe recipe = new ShapedOreRecipe(new ItemStack(builder, 1), new Object[] {
-			"X0X",
-			"0@0",
-			"X0X",
-			'X', "plankWood",
-			'0', Item.ingotIron,
-			'@', Block.workbench,
-			});
+				"X0X",
+				"0@0",
+				"X0X",
+				'X', "plankWood",
+				'0', Item.ingotIron,
+				'@', Block.workbench,
+		});
 		GameRegistry.addRecipe(recipe);
 	}
 }

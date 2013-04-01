@@ -23,7 +23,7 @@ public class EntityBoatChest extends EntityBoatBase implements IInventory
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
 	@Override
-	public boolean interact(EntityPlayer player)
+	public boolean playerInteract(EntityPlayer player)
 	{
 		player.openGui(SeaCraft.instance, 2, worldObj, this.entityId, 0, 0);
 		return true;

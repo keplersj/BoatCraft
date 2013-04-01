@@ -52,14 +52,14 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
 	@Override
-	public boolean interact(EntityPlayer player)
+	public boolean playerInteract(EntityPlayer player)
 	{
 		player.openGui(SeaCraft.instance, 0, worldObj, this.entityId, 0, 0);
 		return true;
 	}
 
 	@Override
-	protected void calcMotion(double waterFloor)
+	protected boolean calcPowerredMotion()
 	{
 		double headingX, headingZ;
 		// powerred movement.
@@ -105,31 +105,10 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 			
 			motionX = getPoweredSpeed() * headingX;
 			motionZ = getPoweredSpeed() * headingZ;
+			return true;
 		}
 		
-		// verify gravity.
-		if (waterFloor < 1.0D)
-		{
-			double num = waterFloor * 2.0D - 1.0D;
-			motionY += 0.03999999910593033D * num;
-		}
-		else
-		{
-			if (motionY < 0.0D)
-			{
-				motionY /= 2.0D;
-			}
-
-			motionY += 0.007000000216066837D;
-		}
-
-		// regardless of powerred or not
-		if (onGround)
-		{
-			setGroundDrag();
-		}
-
-		moveEntity(motionX, motionY, motionZ);
+		return false;
 	}
 
 	@Override

@@ -2,7 +2,9 @@ package com.github.AbrarSyed.SeaCraft.items;
 
 import com.github.AbrarSyed.SeaCraft.SeaCraft;
 
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class ItemHitch extends Item
 {

@@ -10,8 +10,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import com.github.AbrarSyed.SeaCraft.SeaCraft;
 import com.github.AbrarSyed.SeaCraft.api.SeaCraftAPI;
 
 import cpw.mods.fml.relauncher.Side;
@@ -20,18 +22,20 @@ import cpw.mods.fml.relauncher.SideOnly;
 public abstract class EntityBoatBase extends Entity
 {
 	// client stuff that makes no sense.
-	private double	boatX;
-	private double	boatY;
-	private double	boatZ;
-	private double	boatYaw;
-	private double	boatPitch;
+	private double			boatX;
+	private double			boatY;
+	private double			boatZ;
+	private double			boatYaw;
+	private double			boatPitch;
 
 	@SideOnly(Side.CLIENT)
-	private double	velocityX;
+	private double			velocityX;
 	@SideOnly(Side.CLIENT)
-	private double	velocityY;
+	private double			velocityY;
 	@SideOnly(Side.CLIENT)
-	private double	velocityZ;
+	private double			velocityZ;
+
+	private EntityBoatBase	hitched;
 
 	public EntityBoatBase(World par1World)
 	{
@@ -277,9 +281,9 @@ public abstract class EntityBoatBase extends Entity
 				}
 			}
 		}
-		
+
 		calcMotion(waterFloor);
-		
+
 		double groundMotion = motionX * motionX + motionZ + motionZ;
 
 		if (isCollidedHorizontally && groundMotion > getCrashSpeed())
@@ -342,47 +346,48 @@ public abstract class EntityBoatBase extends Entity
 			}
 		}
 	}
-	
-	protected void calcMotion(double waterFloor)
-	{	
+
+	private void calcMotion(double waterFloor)
+	{
 		// set ridding controls.
-		if (riddenByEntity != null && riddenByEntity instanceof EntityPlayer)
+		if (this.calcPowerredMotion())
 		{
-			//this.rotationYaw = this.riddenByEntity.rotationYaw;
-			EntityPlayer rider = (EntityPlayer) riddenByEntity;
+		}
+		else if (hitched != null)
+		{
+			double speed = Math.sqrt(hitched.motionX * hitched.motionX + hitched.motionZ * hitched.motionZ);
 
-			double headingX = rider.getLookVec().xCoord; // in radians
-			double headingZ = rider.getLookVec().zCoord; // in radians
-
+			Vec3 vector = Vec3.createVectorHelper(hitched.posX - this.posX, 0d, hitched.posZ - this.posZ).normalize();
+			double headingX = vector.xCoord;
+			double headingZ = vector.zCoord;
+			
 			{
 				// new value
 				float lookingAngle = (float) (270f - Math.atan2(headingX, headingZ) * 180.0D / Math.PI);
 				float changed = (float) MathHelper.wrapAngleTo180_double(lookingAngle - rotationYaw);
-				
+
 				// get value changed
 				//float changed = lookingAngle - rotationYaw;
-				
+
 				if (changed > getMaxRotationChange())
 					changed = getMaxRotationChange();
 				else if (changed < -getMaxRotationChange())
 					changed = -getMaxRotationChange();
-				
-				
+
 				lookingAngle = this.rotationYaw + changed;
 
 				rotationYaw = lookingAngle;
-				this.riddenByEntity.prevRotationYaw = this.riddenByEntity.rotationYaw -= changed;
 				this.setRotation(lookingAngle, rotationPitch);
 				this.setRotation(lookingAngle);
-				
+
 				double rotation = Math.toRadians(lookingAngle);
-				
+
 				headingX = -Math.cos(rotation);
 				headingZ = -Math.sin(rotation);
 			}
-
-			motionX = getPoweredSpeed() * headingX;
-			motionZ = getPoweredSpeed() * headingZ;
+			
+			motionX = speed * headingX;
+			motionZ = speed * headingZ;
 		}
 
 		// verify gravity.
@@ -407,6 +412,54 @@ public abstract class EntityBoatBase extends Entity
 		}
 
 		moveEntity(motionX, motionY, motionZ);
+	}
+	
+	/**
+	 * @param rider MAY BE NULL!
+	 */
+	protected boolean calcPowerredMotion()
+	{
+		// set ridding controls.
+		if (riddenByEntity != null && riddenByEntity instanceof EntityPlayer)
+		{
+			//this.rotationYaw = this.riddenByEntity.rotationYaw;
+			EntityPlayer rider = (EntityPlayer) riddenByEntity;
+
+			double headingX = rider.getLookVec().xCoord; // in radians
+			double headingZ = rider.getLookVec().zCoord; // in radians
+
+			{
+				// new value
+				float lookingAngle = (float) (270f - Math.atan2(headingX, headingZ) * 180.0D / Math.PI);
+				float changed = (float) MathHelper.wrapAngleTo180_double(lookingAngle - rotationYaw);
+
+				// get value changed
+				//float changed = lookingAngle - rotationYaw;
+
+				if (changed > getMaxRotationChange())
+					changed = getMaxRotationChange();
+				else if (changed < -getMaxRotationChange())
+					changed = -getMaxRotationChange();
+
+				lookingAngle = this.rotationYaw + changed;
+
+				rotationYaw = lookingAngle;
+				this.riddenByEntity.prevRotationYaw = this.riddenByEntity.rotationYaw -= changed;
+				this.setRotation(lookingAngle, rotationPitch);
+				this.setRotation(lookingAngle);
+
+				double rotation = Math.toRadians(lookingAngle);
+
+				headingX = -Math.cos(rotation);
+				headingZ = -Math.sin(rotation);
+			}
+
+			motionX = getPoweredSpeed() * headingX;
+			motionZ = getPoweredSpeed() * headingZ;
+			return true;
+		}
+		
+		return false;
 	}
 
 	private final double calcDragForce()
@@ -462,26 +515,70 @@ public abstract class EntityBoatBase extends Entity
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer)
+	public final boolean interact(EntityPlayer player)
 	{
+		// do check for hitch
+		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == SeaCraft.hitch.itemID)
+		{
+			ItemStack stack = player.getCurrentEquippedItem();
+			NBTTagCompound nbt = stack.stackTagCompound;
+			if (nbt == null)
+			{
+				nbt = new NBTTagCompound();
+				nbt.setInteger("entity", this.entityId);
+			}
+			else
+			{
+				int id = nbt.getInteger("entity");
+				if (id == this.entityId)
+				{
+					// rule it out.
+				}
+				else if (id == 0)
+				{
+					nbt.setInteger("entity", this.entityId);
+				}
+				else
+				{
+					EntityBoatBase other = (EntityBoatBase) this.worldObj.getEntityByID(id);
+					other.hitched = this;
+					
+					if (player.capabilities.isCreativeMode)
+						stack.stackSize--;
+					
+					nbt = null;
+				}
+			}
+			stack.setTagCompound(nbt);
+			return true;
+		}
+
+		if (playerInteract(player))
+			return true;
+
 		// already has something riding? DENIED
 		if (riddenByEntity != null &&
 				// ridden by player.
 				riddenByEntity instanceof EntityPlayer &&
 				// ridden by player thats not this player
-				riddenByEntity != par1EntityPlayer)
+				riddenByEntity != player)
 			return true;
 		else if (isMountableByPlayer())
 		{
 			if (!worldObj.isRemote)
 			{
-				par1EntityPlayer.mountEntity(this);
+				player.mountEntity(this);
 			}
 
 			return true;
 		}
 
 		return true;
+	}
+
+	public boolean playerInteract(EntityPlayer player)
+	{
+		return false;
 	}
 
 	/**
@@ -603,6 +700,6 @@ public abstract class EntityBoatBase extends Entity
 	 * @return
 	 */
 	public abstract double getCrashSpeed();
-	
+
 	public abstract float getMaxRotationChange();
 }
