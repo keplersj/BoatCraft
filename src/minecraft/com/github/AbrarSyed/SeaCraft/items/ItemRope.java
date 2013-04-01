@@ -6,16 +6,16 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemHitch extends Item
+public class ItemRope extends Item
 {
-	public ItemHitch(int par1)
+	public ItemRope(int par1)
 	{
 		super(par1);
 		this.setMaxStackSize(1);
 		this.setCreativeTab(SeaCraft.tab);
 		this.setNoRepair();
 		setHasSubtypes(false);
-		setUnlocalizedName(SeaCraft.MODID + ":hitch");
+		setUnlocalizedName(SeaCraft.MODID + ":rope");
 		setCreativeTab(SeaCraft.tab);
 	}
 }

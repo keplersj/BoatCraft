@@ -1,5 +1,6 @@
 package com.github.AbrarSyed.SeaCraft.boats;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityPig;
@@ -99,24 +100,24 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 
 				}
 			}
-			
+
 			double rotation = Math.toRadians(rotationYaw);
 
 			headingX = -Math.cos(rotation);
 			headingZ = -Math.sin(rotation);
-			
+
 			motionX = getPoweredSpeed() * headingX;
 			motionZ = getPoweredSpeed() * headingZ;
 			return true;
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	public void dropItemsOnBreak()
 	{
-		dropItemWithOffset(SeaCraft.furnace.itemID, 1, 1);
+		dropItemWithOffset(Block.furnaceIdle.blockID, 1, 1);
 
 		for (int i = 0; i < stacks.length; i++)
 			if (stacks[i] != null)
@@ -126,11 +127,13 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	@Override
 	public void dropItemsOnCrash()
 	{
-		dropItemWithOffset(SeaCraft.furnace.itemID, 1, 1);
+		dropItemWithOffset(Block.furnaceIdle.blockID, 1, 1);
 
 		for (int i = 0; i < stacks.length; i++)
 			if (stacks[i] != null)
 				entityDropItem(stacks[i], 1);
+		
+		worldObj.newExplosion(this, this.posX, this.posY, this.posZ, 1, true, true);
 	}
 
 	@Override
@@ -500,17 +503,28 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	 * ---------------------------------------------------------------------------
 	 */
 
-	private static final String	INVENTORY	= "inventory";
+	private static final String	INVENTORY			= "inventory";
+	private static final String	SAVE_CURRENT_BURN	= "burn";
+	private static final String	SAVE_TOTAL_BURN		= "totalBurn";
+	private static final String	SAVE_CURRENT_COOK	= "cook";
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbt)
 	{
+		super.writeEntityToNBT(nbt);
 		nbt.setTag(INVENTORY, FunctionHelper.writeInventoryToNBT(stacks));
+		nbt.setInteger(SAVE_CURRENT_BURN, this.getBurningLeft());
+		nbt.setInteger(SAVE_TOTAL_BURN, this.getTotalBurnTime());
+		nbt.setInteger(SAVE_CURRENT_COOK, this.getItemCookingTime());
 	}
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt)
 	{
-		stacks = FunctionHelper.readInventoryFromNBT(nbt.getTagList(INVENTORY), 5);
+		super.readEntityFromNBT(nbt);
+		stacks = FunctionHelper.readInventoryFromNBT(nbt.getTagList(INVENTORY), this.getSizeInventory());
+		this.setBurningLeft(nbt.getInteger(SAVE_CURRENT_BURN));
+		this.setTotalBurnTime(nbt.getInteger(SAVE_TOTAL_BURN));
+		this.setItemCookingTime(nbt.getInteger(SAVE_CURRENT_COOK));
 	}
 }

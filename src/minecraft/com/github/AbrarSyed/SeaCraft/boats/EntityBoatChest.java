@@ -34,13 +34,15 @@ public class EntityBoatChest extends EntityBoatBase implements IInventory
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbt)
 	{
+		super.writeEntityToNBT(nbt);
 		nbt.setTag(INVENTORY, FunctionHelper.writeInventoryToNBT(stacks));
 	}
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt)
 	{
-		stacks = FunctionHelper.readInventoryFromNBT(nbt.getTagList(INVENTORY), 27);
+		super.readEntityFromNBT(nbt);
+		stacks = FunctionHelper.readInventoryFromNBT(nbt.getTagList(INVENTORY), this.getSizeInventory());
 	}
 
 	@Override

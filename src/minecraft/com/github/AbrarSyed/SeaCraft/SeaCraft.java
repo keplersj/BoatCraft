@@ -15,9 +15,8 @@ import com.github.AbrarSyed.SeaCraft.boats.EntityBoatChest;
 import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.boats.EntityBoatKayak;
 import com.github.AbrarSyed.SeaCraft.items.ItemAnchor;
-import com.github.AbrarSyed.SeaCraft.items.ItemBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.items.ItemBoatKayak;
-import com.github.AbrarSyed.SeaCraft.items.ItemHitch;
+import com.github.AbrarSyed.SeaCraft.items.ItemRope;
 import com.github.AbrarSyed.SeaCraft.network.HandlerClient;
 import com.github.AbrarSyed.SeaCraft.network.HandlerServer;
 import com.github.AbrarSyed.SeaCraft.network.PacketSCBase;
@@ -57,9 +56,9 @@ public class SeaCraft
 
 	// items
 	public static ItemBoatKayak		kayak;
-	public static ItemBoatFurnace	furnace;
 	public static ItemAnchor		anchor;
-	public static ItemHitch			hitch;
+	public static ItemAnchor		anchor_noRope;
+	public static ItemRope			rope;
 
 	// blocks
 	public static BlockBoatBuilder	builder;
@@ -85,22 +84,21 @@ public class SeaCraft
 
 		// items.
 		kayak = new ItemBoatKayak(9001);
-		furnace = new ItemBoatFurnace(9002);
-		anchor = new ItemAnchor(9003);
-		hitch = new ItemHitch(9004);
+		anchor = new ItemAnchor(9003, true);
+		anchor_noRope = new ItemAnchor(9004, false);
+		rope = new ItemRope(9005);
 
 		// registrations
 		GameRegistry.registerItem(kayak, "SeaCraft_Kayak", MODID);
-		GameRegistry.registerItem(furnace, "SeaCraft_Furnace", MODID);
 		GameRegistry.registerItem(anchor, "SeaCraft_Anchor", MODID);
-		GameRegistry.registerItem(anchor, "SeaCraft_Hitch", MODID);
+		GameRegistry.registerItem(anchor_noRope, "SeaCraft_Anchor_NoRope", MODID);
+		GameRegistry.registerItem(rope, "SeaCraft_Hitch", MODID);
 		GameRegistry.registerBlock(builder, "SeaCraft_BoatBuilder");
 
 		// localizations
 		LanguageRegistry.addName(kayak, "Kayak");
-		LanguageRegistry.addName(furnace, "Furnace BoaT");
 		LanguageRegistry.addName(anchor, "Anchor");
-		LanguageRegistry.addName(hitch, "Hitch");
+		LanguageRegistry.addName(rope, "Hitch");
 		LanguageRegistry.addName(builder, "Boat Builder");
 		LanguageRegistry.instance().addStringLocalization("SeaCraft.boats.furnace", "Furnace Boat");
 		LanguageRegistry.instance().addStringLocalization("SeaCraft.boats.chest", "Chest Boat");
@@ -128,8 +126,28 @@ public class SeaCraft
 				"X0X",
 				'X', "plankWood",
 				'0', Item.ingotIron,
-				'@', Block.workbench,
+				'@', Block.workbench
 		});
 		GameRegistry.addRecipe(recipe);
+
+		GameRegistry.addRecipe(new ItemStack(rope, 1), new Object[] {
+				"XX",
+				"XX",
+				"XX",
+				'X', Item.silk
+		});
+
+		GameRegistry.addRecipe(new ItemStack(anchor_noRope, 1), new Object[] {
+				" X ",
+				" X ",
+				"X@X",
+				'X', Item.ingotIron,
+				'@', Block.blockSteel
+		});
+
+		GameRegistry.addShapelessRecipe(new ItemStack(anchor, 1), new Object[] {
+				rope,
+				anchor_noRope
+		});
 	}
 }

@@ -115,16 +115,6 @@ public class EntityBoatKayak extends EntityBoatBase
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound par1nbtTagCompound)
-	{
-	}
-
-	@Override
-	protected void readEntityFromNBT(NBTTagCompound par1nbtTagCompound)
-	{
-	}
-
-	@Override
 	public float getMaxRotationChange()
 	{
 		return 10;

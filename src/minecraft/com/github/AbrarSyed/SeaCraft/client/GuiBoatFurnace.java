@@ -36,8 +36,8 @@ public class GuiBoatFurnace extends GuiContainer
 		super.initGui();
 		int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		int bw = xSize - 22;
-		buttonMount = new GuiButton(1, x + 120, y + 20, bw / 3, 20, "Mount");
-		buttonStart = new GuiButton(2, x + 120, y + 42, bw / 3, 20, "Start");
+		buttonMount = new GuiButton(1, x + 120, y + 20, bw / 3, 20, this.mc.thePlayer.ridingEntity == null ? "Mount" : "UnMount");
+		buttonStart = new GuiButton(2, x + 120, y + 42, bw / 3, 20, furnace.canMove ? "Stop" : "Start");
 
 		buttonList.add(buttonMount);
 		buttonList.add(buttonStart);

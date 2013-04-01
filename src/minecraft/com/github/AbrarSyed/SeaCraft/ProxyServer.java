@@ -6,4 +6,9 @@ public class ProxyServer
 	{
 		// render stuff.. is only on client
 	}
+
+	public void registerKeyBindings()
+	{
+		// client only
+	}
 }

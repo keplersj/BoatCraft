@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -36,6 +37,7 @@ public abstract class EntityBoatBase extends Entity
 	private double			velocityZ;
 
 	public EntityBoatBase	hitched;
+	private boolean			isAnchored;
 
 	public EntityBoatBase(World par1World)
 	{
@@ -352,6 +354,7 @@ public abstract class EntityBoatBase extends Entity
 		// set ridding controls.
 		if (this.calcPowerredMotion())
 		{
+			
 		}
 		else if (hitched != null)
 		{
@@ -360,7 +363,7 @@ public abstract class EntityBoatBase extends Entity
 			Vec3 vector = Vec3.createVectorHelper(hitched.posX - this.posX, 0d, hitched.posZ - this.posZ).normalize();
 			double headingX = vector.xCoord;
 			double headingZ = vector.zCoord;
-			
+
 			{
 				// new value
 				float lookingAngle = (float) (270f - Math.atan2(headingX, headingZ) * 180.0D / Math.PI);
@@ -385,7 +388,7 @@ public abstract class EntityBoatBase extends Entity
 				headingX = -Math.cos(rotation);
 				headingZ = -Math.sin(rotation);
 			}
-			
+
 			motionX = speed * headingX;
 			motionZ = speed * headingZ;
 		}
@@ -410,10 +413,15 @@ public abstract class EntityBoatBase extends Entity
 		{
 			setGroundDrag();
 		}
+		
+		if (isAnchored)
+		{
+			this.motionX = this.motionZ = 0;
+		}
 
 		moveEntity(motionX, motionY, motionZ);
 	}
-	
+
 	/**
 	 * @param rider MAY BE NULL!
 	 */
@@ -458,7 +466,7 @@ public abstract class EntityBoatBase extends Entity
 			motionZ = getPoweredSpeed() * headingZ;
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -493,16 +501,45 @@ public abstract class EntityBoatBase extends Entity
 	}
 
 	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
+	 * Protected helper method to write subclass entity data to NBT.
 	 */
 	@Override
-	protected abstract void writeEntityToNBT(NBTTagCompound par1NBTTagCompound);
+	protected void writeEntityToNBT(NBTTagCompound nbt)
+	{
+		nbt.setBoolean("isHitched", this.hitched != null);
+		if (hitched != null)
+		{
+			nbt.setDouble("hitchX", hitched.posX);
+			nbt.setDouble("hitchY", hitched.posY);
+			nbt.setDouble("hitchZ", hitched.posZ);
+			nbt.setString("hitchClass", hitched.getEntityString());
+		}
+		
+		nbt.setBoolean("anchor", isAnchored);
+	}
 
 	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
+	 * Protected helper method to read subclass entity data from NBT.
 	 */
 	@Override
-	protected abstract void readEntityFromNBT(NBTTagCompound par1NBTTagCompound);
+	protected void readEntityFromNBT(NBTTagCompound nbt)
+	{
+		if (nbt.getBoolean("isHitched"))
+		{
+			double x = nbt.getDouble("hitchX");
+			double y = nbt.getDouble("hitchY");
+			double z = nbt.getDouble("hitchZ");
+			Class clazz = (Class) EntityList.stringToClassMapping.get(nbt.getString("hitchClass"));
+			
+			List<EntityBoatBase> list= worldObj.getEntitiesWithinAABB(clazz, AxisAlignedBB.getBoundingBox(x-.5, y-.5, z-.5, x+.5, y+.5, z+.5));
+			if (list.isEmpty())
+				hitched = null;
+			else
+				hitched = list.get(0);
+		}
+		
+		isAnchored = nbt.getBoolean("anchor");
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -518,7 +555,7 @@ public abstract class EntityBoatBase extends Entity
 	public final boolean interact(EntityPlayer player)
 	{
 		// do check for hitch
-		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == SeaCraft.hitch.itemID)
+		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == SeaCraft.rope.itemID)
 		{
 			ItemStack stack = player.getCurrentEquippedItem();
 			NBTTagCompound nbt = stack.stackTagCompound;
@@ -542,10 +579,10 @@ public abstract class EntityBoatBase extends Entity
 				{
 					EntityBoatBase other = (EntityBoatBase) this.worldObj.getEntityByID(id);
 					other.hitched = this;
-					
+
 					if (player.capabilities.isCreativeMode)
 						stack.stackSize--;
-					
+
 					nbt = null;
 				}
 			}
@@ -579,6 +616,16 @@ public abstract class EntityBoatBase extends Entity
 	public boolean playerInteract(EntityPlayer player)
 	{
 		return false;
+	}
+	
+	public boolean isAnchored()
+	{
+		return isAnchored;
+	}
+	
+	public void toggleAnchor()
+	{
+		isAnchored = !isAnchored;
 	}
 
 	/**

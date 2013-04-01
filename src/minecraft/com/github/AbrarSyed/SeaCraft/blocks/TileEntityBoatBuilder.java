@@ -8,7 +8,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.ForgeDirection;
@@ -138,7 +137,12 @@ public class TileEntityBoatBuilder extends TileEntity implements IInventory
 
 		if (stacks[SLOT_MAIN].itemID == Item.boat.itemID)
 		{
-			if (stacks[SLOT_COM_CENTER].itemID == Block.furnaceIdle.blockID)
+			if (stacks[SLOT_COM_CENTER] == null)
+			{
+				// kayak
+				return true;
+			}
+			else if (stacks[SLOT_COM_CENTER].itemID == Block.furnaceIdle.blockID)
 			{
 				// furnace boat.
 				return true;
@@ -165,7 +169,12 @@ public class TileEntityBoatBuilder extends TileEntity implements IInventory
 
 		if (stacks[SLOT_MAIN].itemID == Item.boat.itemID)
 		{
-			if (stacks[SLOT_COM_CENTER].itemID == Block.furnaceIdle.blockID)
+			if (stacks[SLOT_COM_CENTER] == null)
+			{
+				output = new EntityBoatKayak(this.worldObj);
+				clears[SLOT_MAIN] = true;
+			}
+			else if (stacks[SLOT_COM_CENTER].itemID == Block.furnaceIdle.blockID)
 			{
 				output = new EntityBoatFurnace(this.worldObj);
 				clears[SLOT_MAIN] = clears[SLOT_COM_CENTER] = true;
@@ -176,20 +185,14 @@ public class TileEntityBoatBuilder extends TileEntity implements IInventory
 				output = new EntityBoatChest(this.worldObj);
 				clears[SLOT_MAIN] = clears[SLOT_COM_CENTER] = true;
 			}
-			else
-			{
-				output = new EntityBoatKayak(this.worldObj);
-				clears[SLOT_MAIN] = true;
-			}
 		}
 
 		ForgeDirection dir = ForgeDirection.getOrientation(this.getBlockMetadata());
 		double x = this.xCoord + dir.offsetX * output.width;
 		double z = this.zCoord + dir.offsetZ * output.width;
 		double y = this.yCoord + dir.offsetY * output.height;
-		
 
-		output.rotationYaw = (float)  MathHelper.wrapAngleTo180_double((270f - Math.atan2(x, z) * 180.0f / Math.PI));
+		output.rotationYaw = (float) MathHelper.wrapAngleTo180_double((270f - Math.atan2(x, z) * 180.0f / Math.PI));
 		output.setPosition(x, y, z);
 
 		// spawn it.
