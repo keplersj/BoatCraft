@@ -7,32 +7,31 @@ import java.io.ObjectOutputStream;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
+
+import com.github.AbrarSyed.SeaCraft.boats.EntityBoatBase;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class PacketSC0MountEntity extends PacketSCBase
+public class PacketSC0MountEntity extends PacketSCBoatBase
 {
-	public final int		entityID;
-
 	/**
 	 * FROM CLIENT ONLY!
 	 */
 	public PacketSC0MountEntity(Entity mounted)
 	{
-		super();
-		entityID = mounted.entityId;
+		super(mounted.entityId);
 	}
 
 	public PacketSC0MountEntity(ObjectInputStream stream) throws IOException
 	{
 		super(stream);
-		entityID = stream.readInt();
 	}
 
 	@Override
 	public void writeToStream(ObjectOutputStream stream) throws IOException
 	{
-		stream.writeInt(entityID);
+		super.writeToStream(stream);
 	}
 
 	@Override
@@ -45,15 +44,15 @@ public class PacketSC0MountEntity extends PacketSCBase
 	@SideOnly(Side.CLIENT)
 	public void actionClient(World world, EntityPlayerMP player)
 	{
-		Entity e = world.getEntityByID(entityID);
-		player.mountEntity(e);
+		EntityBoatBase base = this.getBoat(world);
+		player.mountEntity(base);
 	}
 
 	@Override
 	public void actionServer(World world, EntityPlayerMP player)
 	{
-		Entity e = world.getEntityByID(entityID);
-		player.mountEntity(e);
+		EntityBoatBase base = this.getBoat(world);
+		player.mountEntity(base);
 	}
 
 }

@@ -94,7 +94,8 @@ public abstract class ItemBoatBase extends Item
 			}
 
 			// create boat.
-			EntityBoatBase boat = this.getBoat(world, i + 0.5F, j + 1.0F, k + 0.5F);
+			EntityBoatBase boat = this.getBoat(world);
+			boat.setPosition(i + 0.5d, j + 1.0d, k + 0.5d);
 			boat.rotationYaw = ((MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3) - 1) * 90;
 
 			// ensure no 2 boats in same place
@@ -119,5 +120,5 @@ public abstract class ItemBoatBase extends Item
 
 	protected abstract String getNameForTexture();
 	
-	protected abstract EntityBoatBase getBoat(World world, float x, float y, float z);
+	protected abstract EntityBoatBase getBoat(World world);
 }

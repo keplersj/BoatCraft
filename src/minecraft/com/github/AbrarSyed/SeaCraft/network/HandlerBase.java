@@ -39,6 +39,9 @@ public abstract class HandlerBase implements IPacketHandler
 					case 1:
 						parsedPacket = new PacketSC1StartBoat(stream);
 						break;
+					case 2:
+						parsedPacket = new PacketSC2BuildBoat(stream);
+						break;
 				}
 
 			doAction((EntityPlayerMP) player, parsedPacket);

@@ -19,8 +19,8 @@ public class ItemBoatFurnace extends ItemBoatBase
 	}
 
 	@Override
-	protected EntityBoatBase getBoat(World world, float x, float y, float z)
+	protected EntityBoatBase getBoat(World world)
 	{
-		return new EntityBoatFurnace(world, x, y, z);
+		return new EntityBoatFurnace(world);
 	}
 }

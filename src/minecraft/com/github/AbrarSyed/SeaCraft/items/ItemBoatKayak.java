@@ -20,8 +20,8 @@ public class ItemBoatKayak extends ItemBoatBase
 	}
 
 	@Override
-	protected EntityBoatBase getBoat(World world, float x, float y, float z)
+	protected EntityBoatBase getBoat(World world)
 	{
-		return new EntityBoatKayak(world, x, y, z);
+		return new EntityBoatKayak(world);
 	}
 }

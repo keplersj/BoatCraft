@@ -8,7 +8,10 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 import com.github.AbrarSyed.SeaCraft.blocks.TileEntityBoatBuilder;
+import com.github.AbrarSyed.SeaCraft.network.PacketSC2BuildBoat;
 import com.github.AbrarSyed.containers.ContainerBoatBuilder;
+
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class GuiBoatBuilder extends GuiContainer
 {
@@ -27,7 +30,16 @@ public class GuiBoatBuilder extends GuiContainer
 		int x = (width - xSize) / 2, y = (height - ySize) / 2;
 		int bw = xSize - 22;
 
-		buttonList.add(new GuiButton(1, x + 120, y + 20, bw / 3, 20, "build"));
+		buttonList.add(new GuiButton(1, x + 160, y + 60, bw / 3, 20, "Build"));
+	}
+
+	@Override
+	protected void actionPerformed(GuiButton button)
+	{
+		if (builder.canBuild())
+		{
+			PacketDispatcher.sendPacketToServer(new PacketSC2BuildBoat(builder.xCoord, builder.yCoord, builder.zCoord).getPacket250());
+		}
 	}
 
 	/**
@@ -36,8 +48,8 @@ public class GuiBoatBuilder extends GuiContainer
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		String s = StatCollector.translateToLocal(this.builder.getInvName());
-		this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
-		this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+		this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 0, 4210752);
+		this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 83 + 2, 4210752);
 	}
 
 	@Override
@@ -46,13 +58,13 @@ public class GuiBoatBuilder extends GuiContainer
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.renderEngine.bindTexture("/mods/SeaCraft/textures/guis/boatBuilder.png");
-		int k = (this.width - this.xSize) / 2 - (this.width - this.xSize) / 6;
-		int l = (this.height - this.ySize) / 2 - (this.height - this.ySize) / 6;
+		int startX = (this.width - this.xSize) / 2 - (this.width - this.xSize) / 6;
+		int startY = (this.height - this.ySize) / 2 - (this.height - this.ySize) / 6;
 
 		int x = (int) (this.xSize * (256 / 176.0));
 		int y = (int) (this.ySize * (191 / 165.0));
 
-		this.drawTexturedModalRect(k, l, 0, 0, x, y);
+		this.drawTexturedModalRect(startX, startY, 0, 0, x, y);
 	}
 
 }
