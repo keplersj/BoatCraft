@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import com.github.AbrarSyed.SeaCraft.blocks.BlockBoatBuilder;
@@ -34,6 +35,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @NetworkMod(
 		clientSideRequired = true,
@@ -65,12 +68,26 @@ public class SeaCraft
 
 	public static CreativeTabBoats	tab;
 
+	private int[]					ids;
+
 	@PreInit
 	public void preLoad(FMLPreInitializationEvent event)
 	{
 		logger = event.getModLog();
 
-		// TODO: configs
+		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+		ids = new int[]
+				{
+				config.getBlock("Blocks", "BoatBuilder", 4000).getInt(),
+				config.getItem("Items", "Kayak", 9000+256).getInt(),
+				config.getItem("Items", "Anchor", 9001+256).getInt(),
+				config.getItem("Items", "Anchor_NoRope", 9002+256).getInt(),
+				config.getItem("Items", "Rope", 9003+256).getInt()
+				};
+		
+		if (config.hasChanged())
+			config.save();
+
 	}
 
 	@Init
@@ -80,13 +97,13 @@ public class SeaCraft
 		tab = new CreativeTabBoats();
 
 		// blocks
-		builder = new BlockBoatBuilder(4000, Material.iron);
+		builder = new BlockBoatBuilder(ids[0], Material.iron);
 
 		// items.
-		kayak = new ItemBoatKayak(9001);
-		anchor = new ItemAnchor(9003, true);
-		anchor_noRope = new ItemAnchor(9004, false);
-		rope = new ItemRope(9005);
+		kayak = new ItemBoatKayak(ids[1]);
+		anchor = new ItemAnchor(ids[2], true);
+		anchor_noRope = new ItemAnchor(ids[3], false);
+		rope = new ItemRope(ids[4]);
 
 		// registrations
 		GameRegistry.registerItem(kayak, "SeaCraft_Kayak", MODID);
@@ -115,6 +132,12 @@ public class SeaCraft
 
 		// renderring stuff
 		proxy.registerRenderStuff();
+
+		// keybinding
+		proxy.registerKeyBindings();
+
+		// tick handler
+		TickRegistry.registerTickHandler(new TickHandlerBoatHunger(), Side.SERVER);
 
 		// the gui handler
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
