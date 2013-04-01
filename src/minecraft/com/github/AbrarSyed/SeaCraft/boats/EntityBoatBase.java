@@ -38,6 +38,7 @@ public abstract class EntityBoatBase extends Entity
 
 	public EntityBoatBase	hitched;
 	private boolean			isAnchored;
+	private boolean			canAnchor;
 
 	public EntityBoatBase(World par1World)
 	{
@@ -354,7 +355,7 @@ public abstract class EntityBoatBase extends Entity
 		// set ridding controls.
 		if (this.calcPowerredMotion())
 		{
-			
+
 		}
 		else if (hitched != null)
 		{
@@ -413,7 +414,7 @@ public abstract class EntityBoatBase extends Entity
 		{
 			setGroundDrag();
 		}
-		
+
 		if (isAnchored)
 		{
 			this.motionX = this.motionZ = 0;
@@ -514,8 +515,9 @@ public abstract class EntityBoatBase extends Entity
 			nbt.setDouble("hitchZ", hitched.posZ);
 			nbt.setString("hitchClass", hitched.getEntityString());
 		}
-		
+
 		nbt.setBoolean("anchor", isAnchored);
+		nbt.setBoolean("anchorable", canAnchor);
 	}
 
 	/**
@@ -530,15 +532,16 @@ public abstract class EntityBoatBase extends Entity
 			double y = nbt.getDouble("hitchY");
 			double z = nbt.getDouble("hitchZ");
 			Class clazz = (Class) EntityList.stringToClassMapping.get(nbt.getString("hitchClass"));
-			
-			List<EntityBoatBase> list= worldObj.getEntitiesWithinAABB(clazz, AxisAlignedBB.getBoundingBox(x-.5, y-.5, z-.5, x+.5, y+.5, z+.5));
+
+			List<EntityBoatBase> list = worldObj.getEntitiesWithinAABB(clazz, AxisAlignedBB.getBoundingBox(x - .5, y - .5, z - .5, x + .5, y + .5, z + .5));
 			if (list.isEmpty())
 				hitched = null;
 			else
 				hitched = list.get(0);
 		}
-		
+
 		isAnchored = nbt.getBoolean("anchor");
+		canAnchor = nbt.getBoolean("anchorable");
 	}
 
 	@Override
@@ -617,15 +620,28 @@ public abstract class EntityBoatBase extends Entity
 	{
 		return false;
 	}
-	
+
 	public boolean isAnchored()
 	{
 		return isAnchored;
 	}
-	
+
 	public void toggleAnchor()
 	{
-		isAnchored = !isAnchored;
+		if (!canAnchor)
+			isAnchored = false;
+		else
+			isAnchored = !isAnchored;
+	}
+	
+	public boolean isAnchorable()
+	{
+		return canAnchor;
+	}
+	
+	public void setAnchorable(boolean anchorable)
+	{
+		this.canAnchor = anchorable;
 	}
 
 	/**
