@@ -29,7 +29,7 @@ public class ModelBoatKayak extends ModelBase
 		render = new NMTModelRenderer(this, "kayak");
 		try
 		{
-			render.addModelOBJ((new File("mods/"+SeaCraft.MODID+"/models/Kayak-Canoe.obj")).toURI().toURL().toString());
+			render.addModelOBJ((new File("./mods/"+SeaCraft.MODID+"/models/Kayak-Canoe.obj")).toURI().toURL().toString());
 		}
 		catch (MalformedURLException e)
 		{

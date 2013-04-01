@@ -419,7 +419,6 @@ public abstract class EntityBoatBase extends Entity
 		if (isAnchored())
 		{
 			this.motionX = this.motionZ = 0;
-			System.out.println(FMLCommonHandler.instance().getEffectiveSide()+"-SOP-MOTION = "+isAnchored);
 		}
 
 		moveEntity(motionX, motionY, motionZ);
@@ -631,8 +630,6 @@ public abstract class EntityBoatBase extends Entity
 	public void toggleAnchor()
 	{
 		isAnchored = !isAnchored;
-		
-		System.out.println(FMLCommonHandler.instance().getEffectiveSide()+"-ANCHORED = "+isAnchored);
 	}
 
 	public boolean isAnchorable()
