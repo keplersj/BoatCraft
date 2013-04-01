@@ -1,21 +1,26 @@
 package com.github.AbrarSyed.SeaCraft.client;
 
+import net.minecraft.client.model.ModelBoat;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
+import com.github.AbrarSyed.SeaCraft.SeaCraft;
 import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
 
 public class RenderBoatFurnace extends Render
 {
-	private ModelBoatFurnace	model;
+	private ModelBoat		modelBoat;
+	private ModelFurnace	modelFurnace;
 
 	public RenderBoatFurnace()
 	{
 		shadowSize = 0.5F;
-		model = new ModelBoatFurnace();
+		modelBoat = new ModelBoat();
+		modelFurnace = new ModelFurnace();
 	}
 
 	/**
@@ -25,6 +30,18 @@ public class RenderBoatFurnace extends Render
 	{
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x, (float) y, (float) z);
+
+		// render lines BEFORE ANYTHING
+		if (entity.hitched != null)
+		{
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			Tessellator tess = Tessellator.instance;
+			tess.startDrawing(GL11.GL_LINES);
+			tess.addVertex(0, 0, 0);
+			tess.addVertex(entity.hitched.posX - entity.posX, entity.hitched.posY - entity.posY, entity.hitched.posZ - entity.posZ);
+			tess.draw();
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+		}
 
 		// rotate arround y...
 		GL11.glRotatef(180 - par8, 0.0F, 1.0F, 0.0F);
@@ -44,21 +61,27 @@ public class RenderBoatFurnace extends Render
 		}
 
 		float f4 = 0.75F;
-		GL11.glScalef(f4, f4, f4);
-        GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
-        //loadTexture("/item/boat.png");
-        GL11.glScalef(-1.0F, -1.0F, 1.0F);
+		GL11.glScalef(-1.0F, -1.0F, 1.0F);
 
-        // scaling
-        //GL11.glScalef(1.5F, 1.0F, .8F);
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glColor3f(1.F, 0.39F, .39F);
+		loadTexture("/item/boat.png");
+		
+		modelBoat.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+		
+		GL11.glTranslatef(1.4f, 0f, 0f);
 
-        model.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+		modelBoat.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        
-        GL11.glPopMatrix();
+		if (entity.isBurningFuel())
+			loadTexture("/mods/" + SeaCraft.MODID + "/textures/skins/furnaceBlock_on.png");
+		else
+			loadTexture("/mods/" + SeaCraft.MODID + "/textures/skins/furnaceBlock_off.png");
+		
+		GL11.glRotatef(-90, 0f, 1.0f, 0f);
+		GL11.glTranslatef(-.5f, -.9f, -0.5f);
+
+		modelFurnace.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+
+		GL11.glPopMatrix();
 	}
 
 	/**

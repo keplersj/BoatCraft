@@ -35,7 +35,7 @@ public abstract class EntityBoatBase extends Entity
 	@SideOnly(Side.CLIENT)
 	private double			velocityZ;
 
-	private EntityBoatBase	hitched;
+	public EntityBoatBase	hitched;
 
 	public EntityBoatBase(World par1World)
 	{

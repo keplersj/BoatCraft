@@ -32,6 +32,8 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	public EntityBoatFurnace(World world)
 	{
 		super(world);
+		setSize(3F, 1F);
+		yOffset = height / 2.0F;
 	}
 
 	public EntityBoatFurnace(World world, double x, double y, double z)

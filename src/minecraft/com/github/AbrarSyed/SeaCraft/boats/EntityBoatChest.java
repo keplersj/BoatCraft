@@ -17,6 +17,8 @@ public class EntityBoatChest extends EntityBoatBase implements IInventory
 	public EntityBoatChest(World par1World)
 	{
 		super(par1World);
+		setSize(1.5F, 1F);
+		yOffset = height / 2.0F;
 	}
 	
 	/**

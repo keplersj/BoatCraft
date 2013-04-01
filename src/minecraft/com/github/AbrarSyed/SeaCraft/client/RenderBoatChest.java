@@ -2,6 +2,7 @@ package com.github.AbrarSyed.SeaCraft.client;
 
 import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.model.ModelChest;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
@@ -29,6 +30,18 @@ public class RenderBoatChest extends Render
 	{
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x, (float) y, (float) z);
+		
+		// render lines BEFORE ANYTHING
+		if (entity.hitched != null)
+		{
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			Tessellator tess = Tessellator.instance;
+			tess.startDrawing(GL11.GL_LINES);
+			tess.addVertex(0, 0, 0);
+			tess.addVertex(entity.hitched.posX - entity.posX, entity.hitched.posY - entity.posY, entity.hitched.posZ - entity.posZ);
+			tess.draw();
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+		}
 
 		// rotate arround y...
 		GL11.glRotatef(180 - par8, 0.0F, 1.0F, 0.0F);
