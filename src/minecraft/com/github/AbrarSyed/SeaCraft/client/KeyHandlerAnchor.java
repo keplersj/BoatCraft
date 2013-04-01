@@ -41,14 +41,17 @@ public class KeyHandlerAnchor extends KeyHandler
 	@Override
 	public void keyUp(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd)
 	{
-		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-		Entity e = player.ridingEntity;
-		if (e instanceof EntityBoatBase)
+		if (!tickEnd)
 		{
-			((EntityBoatBase) e).toggleAnchor();
+			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			Entity e = player.ridingEntity;
+			if (e instanceof EntityBoatBase)
+			{
+				((EntityBoatBase) e).toggleAnchor();
+			}
+			
+			PacketDispatcher.sendPacketToServer(new PacketSC3ToggleAnchor().getPacket250());
 		}
-
-		PacketDispatcher.sendPacketToServer(new PacketSC3ToggleAnchor().getPacket250());
 	}
 
 	@Override

@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import com.github.AbrarSyed.SeaCraft.SeaCraft;
 import com.github.AbrarSyed.SeaCraft.api.SeaCraftAPI;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -415,9 +416,10 @@ public abstract class EntityBoatBase extends Entity
 			setGroundDrag();
 		}
 
-		if (isAnchored)
+		if (isAnchored())
 		{
 			this.motionX = this.motionZ = 0;
+			System.out.println(FMLCommonHandler.instance().getEffectiveSide()+"-SOP-MOTION = "+isAnchored);
 		}
 
 		moveEntity(motionX, motionY, motionZ);
@@ -623,24 +625,26 @@ public abstract class EntityBoatBase extends Entity
 
 	public boolean isAnchored()
 	{
-		return isAnchored;
+		return isAnchorable() && isAnchored;
 	}
 
 	public void toggleAnchor()
 	{
-		if (!canAnchor)
-			isAnchored = false;
-		else
-			isAnchored = !isAnchored;
+		isAnchored = !isAnchored;
+		
+		System.out.println(FMLCommonHandler.instance().getEffectiveSide()+"-ANCHORED = "+isAnchored);
 	}
-	
+
 	public boolean isAnchorable()
 	{
+		if (FMLCommonHandler.instance().getEffectiveSide().isClient())
+			return true;
+		
 		return canAnchor;
 	}
-	
+
 	public void setAnchorable(boolean anchorable)
-	{
+	{	
 		this.canAnchor = anchorable;
 	}
 
