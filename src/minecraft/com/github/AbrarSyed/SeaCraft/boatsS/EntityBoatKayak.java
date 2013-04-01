@@ -1,4 +1,4 @@
-package com.github.AbrarSyed.SeaCraft.Boats;
+package com.github.AbrarSyed.SeaCraft.boatsS;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

@@ -8,8 +8,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 
-import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
-import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
+import com.github.AbrarSyed.SeaCraft.boatsS.EntityBoatFurnace;
+import com.github.AbrarSyed.SeaCraft.boatsS.EntityBoatKayak;
 import com.github.AbrarSyed.SeaCraft.items.ItemBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.items.ItemBoatKayak;
 import com.github.AbrarSyed.SeaCraft.network.HandlerClient;

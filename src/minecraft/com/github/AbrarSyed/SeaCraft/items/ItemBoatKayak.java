@@ -2,9 +2,9 @@ package com.github.AbrarSyed.SeaCraft.items;
 
 import net.minecraft.world.World;
 
-import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatBase;
-import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
-import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatKayak;
+import com.github.AbrarSyed.SeaCraft.boatsS.EntityBoatBase;
+import com.github.AbrarSyed.SeaCraft.boatsS.EntityBoatFurnace;
+import com.github.AbrarSyed.SeaCraft.boatsS.EntityBoatKayak;
 
 public class ItemBoatKayak extends ItemBoatBase
 {

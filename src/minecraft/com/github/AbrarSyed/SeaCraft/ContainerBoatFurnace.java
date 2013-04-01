@@ -7,7 +7,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
 
-import com.github.AbrarSyed.SeaCraft.Boats.EntityBoatFurnace;
+import com.github.AbrarSyed.SeaCraft.boatsS.EntityBoatFurnace;
 
 public class ContainerBoatFurnace extends Container
 {
