@@ -1,5 +1,6 @@
 package com.github.AbrarSyed.SeaCraft;
 
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -45,6 +46,38 @@ public abstract class FunctionHelper
 		}
 		
 		return list;
+	}
+	
+	public static ItemStack decrStackSize(int slot, int amount, ItemStack[] stacks, IInventory inventory)
+	{
+		if (stacks[slot] != null)
+		{
+			ItemStack itemstack;
+
+			if (stacks[slot].stackSize <= amount)
+			{
+				itemstack = stacks[slot];
+				stacks[slot] = null;
+				inventory.onInventoryChanged();
+				return itemstack;
+			}
+			else
+			{
+				itemstack = stacks[slot].splitStack(amount);
+
+				if (stacks[slot].stackSize == 0)
+				{
+					stacks[slot] = null;
+				}
+
+				inventory.onInventoryChanged();
+				return itemstack;
+			}
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 }

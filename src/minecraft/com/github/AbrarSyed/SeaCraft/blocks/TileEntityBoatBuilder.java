@@ -1,5 +1,7 @@
 package com.github.AbrarSyed.SeaCraft.blocks;
 
+import com.github.AbrarSyed.SeaCraft.FunctionHelper;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -9,6 +11,8 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBoatBuilder extends TileEntity implements IInventory
 {
+	private static final String UNLOCALIZED = "SeaCraft.boatbuilder";
+	private static final String INVENTORY = "inventory";
 	
     /**
      * Reads a tile entity from NBT.
@@ -16,6 +20,7 @@ public class TileEntityBoatBuilder extends TileEntity implements IInventory
     public void readFromNBT(NBTTagCompound nbt)
     {
     	super.readFromNBT(nbt);
+    	stacks = FunctionHelper.readInventoryFromNBT(nbt.getTagList(INVENTORY), 11);
     }
 
     /**
@@ -24,6 +29,7 @@ public class TileEntityBoatBuilder extends TileEntity implements IInventory
     public void writeToNBT(NBTTagCompound nbt)
     {
     	super.writeToNBT(nbt);
+    	nbt.setTag(INVENTORY, FunctionHelper.writeInventoryToNBT(stacks));
     }
 	
     /**
@@ -31,6 +37,7 @@ public class TileEntityBoatBuilder extends TileEntity implements IInventory
      */
     public Packet getDescriptionPacket()
     {
+    	//TODO: make a packet.
         return null;
     }
     
@@ -38,88 +45,78 @@ public class TileEntityBoatBuilder extends TileEntity implements IInventory
 	 * INVENTORY STUFF
 	 * ---------------------------------------------------------------------------
 	 */
+    
+    private ItemStack[] stacks = new ItemStack[11];
 
 	@Override
 	public int getSizeInventory()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return 11;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return stacks[i];
 	}
 
 	@Override
 	public ItemStack decrStackSize(int i, int j)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return FunctionHelper.decrStackSize(i, j, stacks, this);
 	}
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int i)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
-		// TODO Auto-generated method stub
-		
+		stacks[i] = itemstack;
 	}
 
 	@Override
 	public String getInvName()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return UNLOCALIZED;
 	}
 
 	@Override
 	public boolean isInvNameLocalized()
 	{
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public int getInventoryStackLimit()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer)
+	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		return player.getDistance(xCoord, yCoord, zCoord) <= 10;
 	}
 
 	@Override
 	public void openChest()
 	{
-		// TODO Auto-generated method stub
-		
+		// useless
 	}
 
 	@Override
 	public void closeChest()
 	{
-		// TODO Auto-generated method stub
-		
+		// useless
 	}
 
 	@Override
 	public boolean isStackValidForSlot(int i, ItemStack itemstack)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }

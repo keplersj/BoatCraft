@@ -1,6 +1,5 @@
 package com.github.AbrarSyed.SeaCraft.client;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -8,10 +7,10 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import com.github.AbrarSyed.SeaCraft.ContainerBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.network.PacketSC0MountEntity;
 import com.github.AbrarSyed.SeaCraft.network.PacketSC1StartBoat;
+import com.github.AbrarSyed.containers.ContainerBoatFurnace;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
@@ -21,9 +20,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GuiBoatFurnace extends GuiContainer
 {
 	private EntityBoatFurnace	furnace;
-	
-	private GuiButton buttonMount;
-	private GuiButton buttonStart;
+
+	private GuiButton			buttonMount;
+	private GuiButton			buttonStart;
 
 	public GuiBoatFurnace(InventoryPlayer player, EntityBoatFurnace boat)
 	{
@@ -39,7 +38,7 @@ public class GuiBoatFurnace extends GuiContainer
 		int bw = xSize - 22;
 		buttonMount = new GuiButton(1, x + 120, y + 20, bw / 3, 20, "Mount");
 		buttonStart = new GuiButton(2, x + 120, y + 42, bw / 3, 20, "Start");
-		
+
 		buttonList.add(buttonMount);
 		buttonList.add(buttonStart);
 	}
@@ -48,22 +47,22 @@ public class GuiBoatFurnace extends GuiContainer
 	protected void actionPerformed(GuiButton button)
 	{
 		if (button.id == 1)
-		{	
+		{
 			//Minecraft.getMinecraft().thePlayer.mountEntity(furnace);
 			PacketDispatcher.sendPacketToServer(new PacketSC0MountEntity(furnace).getPacket250());
-			
+
 			buttonMount.displayString = this.mc.thePlayer.ridingEntity == null ? "Mount" : "UnMount";
-			
+
 		}
 		else if (button.id == 2)
 		{
 			//true? > false
 			// false? > true
 			boolean start = !furnace.canMove;
-			
+
 			furnace.canMove = start;
 			PacketDispatcher.sendPacketToServer(new PacketSC1StartBoat(furnace, start).getPacket250());
-			
+
 			buttonStart.displayString = start ? "Stop" : "Start";
 		}
 	}

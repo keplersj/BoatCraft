@@ -2,14 +2,18 @@ package com.github.AbrarSyed.SeaCraft;
 
 import java.util.logging.Logger;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 
+import com.github.AbrarSyed.SeaCraft.blocks.BlockBoatBuilder;
+import com.github.AbrarSyed.SeaCraft.blocks.TileEntityBoatBuilder;
 import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.boats.EntityBoatKayak;
+import com.github.AbrarSyed.SeaCraft.items.ItemAnchor;
 import com.github.AbrarSyed.SeaCraft.items.ItemBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.items.ItemBoatKayak;
 import com.github.AbrarSyed.SeaCraft.network.HandlerClient;
@@ -49,8 +53,13 @@ public class SeaCraft
 
 	public static Logger			logger;
 
+	// items
 	public static ItemBoatKayak		kayak;
 	public static ItemBoatFurnace	furnace;
+	public static ItemAnchor		anchor;
+
+	// blocks
+	public static BlockBoatBuilder	builder;
 
 	public static CreativeTabBoats	tab;
 
@@ -58,6 +67,8 @@ public class SeaCraft
 	public void preLoad(FMLPreInitializationEvent event)
 	{
 		logger = event.getModLog();
+
+		// TODO: configs
 	}
 
 	@Init
@@ -66,23 +77,35 @@ public class SeaCraft
 		// creative tab
 		tab = new CreativeTabBoats();
 
+		// blocks
+		builder = new BlockBoatBuilder(4000, Material.iron);
+
 		// items.
 		kayak = new ItemBoatKayak(9001);
 		furnace = new ItemBoatFurnace(9002);
+		anchor = new ItemAnchor(9003);
 
 		// registrations
 		GameRegistry.registerItem(kayak, "SeaCraft_Kayak", MODID);
 		GameRegistry.registerItem(furnace, "SeaCraft_Furnace", MODID);
+		GameRegistry.registerItem(anchor, "SeaCraft_Anchor", MODID);
+		GameRegistry.registerBlock(builder, "SeaCraft_BoatBuilder");
 
 		// localizations
 		LanguageRegistry.addName(kayak, "Kayak");
 		LanguageRegistry.addName(furnace, "Furnace");
+		LanguageRegistry.addName(anchor, "Anchor");
+		LanguageRegistry.addName(builder, "Boat Builder");
 		LanguageRegistry.instance().addStringLocalization("SeaCraft.boats.furnace", "Furnace Boat");
+		LanguageRegistry.instance().addStringLocalization("SeaCraft.boatbuilder", "Boat Builder");
 
 		// entities.
 		int ID = 1;
 		EntityRegistry.registerModEntity(EntityBoatFurnace.class, "SeaCraft_Furnace", ID++, instance, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBoatKayak.class, "SeaCraft_Kayak", ID++, instance, 80, 3, true);
+
+		// TileEntities
+		GameRegistry.registerTileEntity(TileEntityBoatBuilder.class, "SeaCraft_BoatBuilder");
 
 		// renderring stuff
 		proxy.registerRenderStuff();

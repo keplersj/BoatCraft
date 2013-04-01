@@ -268,34 +268,7 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	@Override
 	public ItemStack decrStackSize(int slot, int amount)
 	{
-		if (this.stacks[slot] != null)
-		{
-			ItemStack itemstack;
-
-			if (this.stacks[slot].stackSize <= amount)
-			{
-				itemstack = this.stacks[slot];
-				this.stacks[slot] = null;
-				this.onInventoryChanged();
-				return itemstack;
-			}
-			else
-			{
-				itemstack = this.stacks[slot].splitStack(amount);
-
-				if (this.stacks[slot].stackSize == 0)
-				{
-					this.stacks[slot] = null;
-				}
-
-				this.onInventoryChanged();
-				return itemstack;
-			}
-		}
-		else
-		{
-			return null;
-		}
+		return FunctionHelper.decrStackSize(slot, amount, stacks, this);
 	}
 
 	@Override
@@ -336,7 +309,7 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer)
 	{
-		return this.getDistanceToEntity(entityplayer) < 8;
+		return this.getDistanceToEntity(entityplayer) <= 8;
 	}
 
 	@Override
