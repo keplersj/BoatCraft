@@ -13,6 +13,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.github.AbrarSyed.SeaCraft.FunctionHelper;
 import com.github.AbrarSyed.SeaCraft.SeaCraft;
 
 import cpw.mods.fml.relauncher.Side;
@@ -565,37 +566,16 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	 */
 
 	private static final String	INVENTORY	= "inventory";
-	private static final String	SLOT		= "slot";
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbt)
 	{
-		NBTTagCompound stackNBT;
-		NBTTagList list = new NBTTagList();
-		for (int i = 0; i < 5; i++)
-		{
-			if (stacks[i] == null)
-				continue;
-
-			stackNBT = new NBTTagCompound();
-			stackNBT.setInteger(SLOT, i);
-			stacks[i].writeToNBT(stackNBT);
-			list.appendTag(stackNBT);
-		}
-		nbt.setTag(INVENTORY, list);
+		nbt.setTag(INVENTORY, FunctionHelper.writeInventoryToNBT(stacks));
 	}
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt)
 	{
-		NBTTagList list = nbt.getTagList(INVENTORY);
-		NBTTagCompound compound;
-		int index;
-		for (int i = 0; i < list.tagCount(); i++)
-		{
-			compound = (NBTTagCompound) list.tagAt(i);
-			index = compound.getInteger(SLOT);
-			stacks[index] = ItemStack.loadItemStackFromNBT(compound);
-		}
+		stacks = FunctionHelper.readInventoryFromNBT(nbt.getTagList(INVENTORY), 5);
 	}
 }
