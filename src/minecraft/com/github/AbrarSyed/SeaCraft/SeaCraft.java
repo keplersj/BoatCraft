@@ -2,15 +2,16 @@ package com.github.AbrarSyed.SeaCraft;
 
 import java.util.logging.Logger;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import com.github.AbrarSyed.SeaCraft.blocks.BlockBoatBuilder;
 import com.github.AbrarSyed.SeaCraft.blocks.TileEntityBoatBuilder;
+import com.github.AbrarSyed.SeaCraft.boats.EntityBoatChest;
 import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
 import com.github.AbrarSyed.SeaCraft.boats.EntityBoatKayak;
 import com.github.AbrarSyed.SeaCraft.items.ItemAnchor;
@@ -93,16 +94,18 @@ public class SeaCraft
 
 		// localizations
 		LanguageRegistry.addName(kayak, "Kayak");
-		LanguageRegistry.addName(furnace, "Furnace");
+		LanguageRegistry.addName(furnace, "Furnace BoaT");
 		LanguageRegistry.addName(anchor, "Anchor");
 		LanguageRegistry.addName(builder, "Boat Builder");
 		LanguageRegistry.instance().addStringLocalization("SeaCraft.boats.furnace", "Furnace Boat");
+		LanguageRegistry.instance().addStringLocalization("SeaCraft.boats.chest", "Chest Boat");
 		LanguageRegistry.instance().addStringLocalization("SeaCraft.boatbuilder", "Boat Builder");
 
 		// entities.
 		int ID = 1;
 		EntityRegistry.registerModEntity(EntityBoatFurnace.class, "SeaCraft_Furnace", ID++, instance, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBoatKayak.class, "SeaCraft_Kayak", ID++, instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatChest.class, "SeaCraft_Chest", ID++, instance, 80, 3, true);
 
 		// TileEntities
 		GameRegistry.registerTileEntity(TileEntityBoatBuilder.class, "SeaCraft_BoatBuilder");
@@ -112,35 +115,16 @@ public class SeaCraft
 
 		// the gui handler
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
-	}
-
-	/**
-	 * Get player's looking spot.
-	 * @param player
-	 * @param restrict Keep max distance to 5.
-	 * @return The position as a MovingObjectPosition Null if not existent.
-	 */
-	public static MovingObjectPosition getPlayerLookingSpot(EntityPlayer player, boolean restrict)
-	{
-		float var4 = 1.0F;
-		float var5 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * var4;
-		float var6 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * var4;
-		double var7 = player.prevPosX + (player.posX - player.prevPosX) * var4;
-		double var9 = player.prevPosY + (player.posY - player.prevPosY) * var4 + 1.62D - player.yOffset;
-		double var11 = player.prevPosZ + (player.posZ - player.prevPosZ) * var4;
-		Vec3 var13 = player.worldObj.getWorldVec3Pool().getVecFromPool(var7, var9, var11);
-		float var14 = MathHelper.cos(-var6 * 0.017453292F - (float) Math.PI);
-		float var15 = MathHelper.sin(-var6 * 0.017453292F - (float) Math.PI);
-		float var16 = -MathHelper.cos(-var5 * 0.017453292F);
-		float var17 = MathHelper.sin(-var5 * 0.017453292F);
-		float var18 = var15 * var16;
-		float var20 = var14 * var16;
-		double var21 = 500D;
-		if (player instanceof EntityPlayerMP && restrict)
-		{
-			var21 = ((EntityPlayerMP) player).theItemInWorldManager.getBlockReachDistance();
-		}
-		Vec3 var23 = var13.addVector(var18 * var21, var17 * var21, var20 * var21);
-		return player.worldObj.rayTraceBlocks_do_do(var13, var23, false, false);
+		
+		// recipes
+		IRecipe recipe = new ShapedOreRecipe(new ItemStack(builder, 1), new Object[] {
+			"X0X",
+			"0@0",
+			"X0X",
+			'X', "plankWood",
+			'0', Item.ingotIron,
+			'@', Block.workbench,
+			});
+		GameRegistry.addRecipe(recipe);
 	}
 }

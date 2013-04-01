@@ -34,7 +34,7 @@ public abstract class FunctionHelper
 	{
 		NBTTagCompound stackNBT;
 		NBTTagList list = new NBTTagList();
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < stacks.length; i++)
 		{
 			if (stacks[i] == null)
 				continue;

@@ -56,25 +56,6 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	{
 		player.openGui(SeaCraft.instance, 0, worldObj, this.entityId, 0, 0);
 		return true;
-
-		//		// already has something riding? DENIED
-		//		if (riddenByEntity != null &&
-		//				// ridden by player.
-		//				riddenByEntity instanceof EntityPlayer &&
-		//				// ridden by player thats not this player
-		//				riddenByEntity != player)
-		//			return true;
-		//		else if (isMountableByPlayer())
-		//		{
-		//			if (!worldObj.isRemote)
-		//			{
-		//				player.mountEntity(this);
-		//			}
-		//
-		//			return true;
-		//		}
-		//		
-		//		return true;
 	}
 
 	@Override
@@ -122,8 +103,8 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 			headingX = -Math.cos(rotation);
 			headingZ = -Math.sin(rotation);
 			
-			motionX = getCurrentSpeed() * headingX;
-			motionZ = getCurrentSpeed() * headingZ;
+			motionX = getPoweredSpeed() * headingX;
+			motionZ = getPoweredSpeed() * headingZ;
 		}
 		
 		// verify gravity.
@@ -221,7 +202,7 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	}
 
 	@Override
-	public double getCurrentSpeed()
+	public double getPoweredSpeed()
 	{
 		return .15;
 	}
@@ -235,7 +216,7 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 	@Override
 	public float getMaxRotationChange()
 	{
-		return 5;
+		return 1;
 	}
 
 	/*

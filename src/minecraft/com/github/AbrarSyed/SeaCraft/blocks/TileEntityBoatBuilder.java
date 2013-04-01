@@ -10,11 +10,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.ForgeDirection;
 
 import com.github.AbrarSyed.SeaCraft.FunctionHelper;
 import com.github.AbrarSyed.SeaCraft.boats.EntityBoatBase;
+import com.github.AbrarSyed.SeaCraft.boats.EntityBoatChest;
 import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
+import com.github.AbrarSyed.SeaCraft.boats.EntityBoatKayak;
 
 public class TileEntityBoatBuilder extends TileEntity implements IInventory
 {
@@ -37,15 +40,6 @@ public class TileEntityBoatBuilder extends TileEntity implements IInventory
 	{
 		super.writeToNBT(nbt);
 		nbt.setTag(INVENTORY, FunctionHelper.writeInventoryToNBT(stacks));
-	}
-
-	/**
-	 * Overriden in a sign to provide the text.
-	 */
-	public Packet getDescriptionPacket()
-	{
-		//TODO: make a packet.
-		return null;
 	}
 
 	/*
@@ -179,8 +173,13 @@ public class TileEntityBoatBuilder extends TileEntity implements IInventory
 			else if (stacks[SLOT_COM_CENTER].itemID == Block.chest.blockID)
 			{
 				// chest boat
-				//output = new EntityBoatFurnace(this.worldObj);
+				output = new EntityBoatChest(this.worldObj);
 				clears[SLOT_MAIN] = clears[SLOT_COM_CENTER] = true;
+			}
+			else
+			{
+				output = new EntityBoatKayak(this.worldObj);
+				clears[SLOT_MAIN] = true;
 			}
 		}
 
@@ -190,7 +189,7 @@ public class TileEntityBoatBuilder extends TileEntity implements IInventory
 		double y = this.yCoord + dir.offsetY * output.height;
 		
 
-		output.rotationYaw = (float) (270f - Math.atan2(x, z) * 180.0f / Math.PI);
+		output.rotationYaw = (float)  MathHelper.wrapAngleTo180_double((270f - Math.atan2(x, z) * 180.0f / Math.PI));
 		output.setPosition(x, y, z);
 
 		// spawn it.

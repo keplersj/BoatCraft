@@ -381,8 +381,8 @@ public abstract class EntityBoatBase extends Entity
 				headingZ = -Math.sin(rotation);
 			}
 
-			motionX = getCurrentSpeed() * headingX;
-			motionZ = getCurrentSpeed() * headingZ;
+			motionX = getPoweredSpeed() * headingX;
+			motionZ = getPoweredSpeed() * headingZ;
 		}
 
 		// verify gravity.
@@ -596,7 +596,7 @@ public abstract class EntityBoatBase extends Entity
 	 * get speed.
 	 * @return
 	 */
-	public abstract double getCurrentSpeed();
+	public abstract double getPoweredSpeed();
 
 	/**
 	 * get crash speed. vanilla is .2

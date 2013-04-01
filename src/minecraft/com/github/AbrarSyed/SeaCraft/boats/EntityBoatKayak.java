@@ -87,7 +87,7 @@ public class EntityBoatKayak extends EntityBoatBase
 	}
 
 	@Override
-	public double getCurrentSpeed()
+	public double getPoweredSpeed()
 	{
 		return .15;
 	}
