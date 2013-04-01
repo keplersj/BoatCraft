@@ -1,8 +1,8 @@
 package com.github.AbrarSyed.SeaCraft.client;
 
 import com.github.AbrarSyed.SeaCraft.ProxyServer;
-import com.github.AbrarSyed.SeaCraft.boatsS.EntityBoatFurnace;
-import com.github.AbrarSyed.SeaCraft.boatsS.EntityBoatKayak;
+import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
+import com.github.AbrarSyed.SeaCraft.boats.EntityBoatKayak;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 

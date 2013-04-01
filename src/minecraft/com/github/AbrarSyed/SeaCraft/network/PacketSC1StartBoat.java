@@ -7,7 +7,7 @@ import java.io.ObjectOutputStream;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
-import com.github.AbrarSyed.SeaCraft.boatsS.EntityBoatFurnace;
+import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -15,8 +15,8 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import com.github.AbrarSyed.SeaCraft.SeaCraft;
-import com.github.AbrarSyed.SeaCraft.boatsS.EntityBoatBase;
-import com.github.AbrarSyed.SeaCraft.boatsS.EntityBoatFurnace;
+import com.github.AbrarSyed.SeaCraft.boats.EntityBoatBase;
+import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
 
 public abstract class ItemBoatBase extends Item
 {

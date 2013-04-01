@@ -1,4 +1,4 @@
-package com.github.AbrarSyed.SeaCraft.boatsS;
+package com.github.AbrarSyed.SeaCraft.boats;
 
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.entity.Entity;
