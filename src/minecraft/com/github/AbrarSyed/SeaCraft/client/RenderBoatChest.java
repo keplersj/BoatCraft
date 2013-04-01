@@ -1,5 +1,7 @@
 package com.github.AbrarSyed.SeaCraft.client;
 
+import net.minecraft.client.model.ModelBoat;
+import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
@@ -7,16 +9,17 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 import com.github.AbrarSyed.SeaCraft.boats.EntityBoatChest;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
 
 public class RenderBoatChest extends Render
 {
-	private ModelBoatFurnace	model;
+	private ModelBoat	model;
+	private ModelChest	modelChest;
 
 	public RenderBoatChest()
 	{
 		shadowSize = 0.5F;
-		model = new ModelBoatFurnace();
+		model = new ModelBoat();
+		modelChest = new ModelChest();
 	}
 
 	/**
@@ -47,17 +50,18 @@ public class RenderBoatChest extends Render
 		float f4 = 0.75F;
 		GL11.glScalef(f4, f4, f4);
 		GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
-		//loadTexture("/item/boat.png");
+		loadTexture("/item/boat.png");
 		GL11.glScalef(-1.0F, -1.0F, 1.0F);
 
 		// scaling
 		//GL11.glScalef(1.5F, 1.0F, .8F);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glColor3f(64 / 255, 163 / 255, 122 / 255);
 
 		model.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glRotatef(-90, 0f, 1.0f, 0f);
+		GL11.glTranslatef(-.5f, -.9f, -0.5f);
+		loadTexture("/item/chest.png");
+		modelChest.renderAll();
 
 		GL11.glPopMatrix();
 	}
