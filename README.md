@@ -1,4 +1,4 @@
-BoatCraft
+BoatCraft [![Travis CI Build Status](https://travis-ci.org/k2b6s9j/BoatCraft.png?branch=master)](https://travis-ci.org/k2b6s9j/BoatCraft)
 =========
 
 Let's see if we can make Minecraft boats just a bit cooler shall we? Kepler Sticka-Jones' entry for Summer ModJam 2013.
