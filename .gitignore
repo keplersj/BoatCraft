@@ -4,3 +4,9 @@
 *.jar
 *.war
 *.ear
+
+
+# Build Script Artifacts #
+build/
+dist/
+download/
