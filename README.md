@@ -11,3 +11,6 @@ Let's see if we can make Minecraft boats just a bit cooler shall we? Kepler Stic
 - Initial Forestry wood support
 - Initial Natura wood support
 - Initial Binnie's Mod wood support
+
+## Summer ModJam 2013
+[The ModJam Contest homepage!](http://mcp.ocean-labs.de/page.php?7)
