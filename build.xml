@@ -23,7 +23,7 @@
 	<property file="${clientsrc.dir}/fmlversion.properties" />
 
 	<property name="mc.version" value="1.6.2"/>
-	<property name="forge.version" value="9.10.0.800"/>
+	<property name="forge.version" value="9.10.0.804"/>
 	<property name="mod.version" value="0"/>
   
 	<!-- Let's make ant make work with git ;) -->
