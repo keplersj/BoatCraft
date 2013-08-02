@@ -39,4 +39,16 @@ public class EntityBoatHopper extends EntityBoatContainer implements Hopper {
 		return 0;
 	}
 
+	@Override
+	public int getSizeInventory() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean isInvNameLocalized() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

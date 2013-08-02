@@ -4,9 +4,19 @@ import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
-public class EntityBoatContainer extends EntityBoat implements IInventory {
+public abstract class EntityBoatContainer extends EntityBoat implements IInventory {
+	
+	private ItemStack[] boatContainerItems = new ItemStack[36];
+
+    /**
+     * When set to true, the boat will drop all items when setDead() is called. When false (such as when travelling
+     * dimensions) it preserves its contents.
+     */
+    private boolean dropContentsWhenDead = true;
 	
 	public EntityBoatContainer(World par1World)
     {
@@ -17,83 +27,171 @@ public class EntityBoatContainer extends EntityBoat implements IInventory {
     {
         super(par1World, par2, par4, par6);
     }
+    
+    /**
+     * Returns the stack in slot i
+     */
+    public ItemStack getStackInSlot(int par1)
+    {
+        return this.boatContainerItems[par1];
+    }
 
-	@Override
-	public int getSizeInventory() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    /**
+     * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
+     * new stack.
+     */
+    public ItemStack decrStackSize(int par1, int par2)
+    {
+        if (this.boatContainerItems[par1] != null)
+        {
+            ItemStack itemstack;
 
-	@Override
-	public ItemStack getStackInSlot(int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+            if (this.boatContainerItems[par1].stackSize <= par2)
+            {
+                itemstack = this.boatContainerItems[par1];
+                this.boatContainerItems[par1] = null;
+                return itemstack;
+            }
+            else
+            {
+                itemstack = this.boatContainerItems[par1].splitStack(par2);
 
-	@Override
-	public ItemStack decrStackSize(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+                if (this.boatContainerItems[par1].stackSize == 0)
+                {
+                    this.boatContainerItems[par1] = null;
+                }
 
-	@Override
-	public ItemStack getStackInSlotOnClosing(int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+                return itemstack;
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
 
-	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
-		
-	}
+    /**
+     * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
+     * like when you close a workbench GUI.
+     */
+    public ItemStack getStackInSlotOnClosing(int par1)
+    {
+        if (this.boatContainerItems[par1] != null)
+        {
+            ItemStack itemstack = this.boatContainerItems[par1];
+            this.boatContainerItems[par1] = null;
+            return itemstack;
+        }
+        else
+        {
+            return null;
+        }
+    }
 
-	@Override
-	public String getInvName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /**
+     * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
+     */
+    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+    {
+        this.boatContainerItems[par1] = par2ItemStack;
 
-	@Override
-	public boolean isInvNameLocalized() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
+        {
+            par2ItemStack.stackSize = this.getInventoryStackLimit();
+        }
+    }
 
-	@Override
-	public int getInventoryStackLimit() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    /**
+     * Called when an the contents of an Inventory change, usually
+     */
+    public void onInventoryChanged() {}
 
-	@Override
-	public void onInventoryChanged() {
-		// TODO Auto-generated method stub
-		
-	}
+    /**
+     * Do not make give this method the name canInteractWith because it clashes with Container
+     */
+    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    {
+        return this.isDead ? false : par1EntityPlayer.getDistanceSqToEntity(this) <= 64.0D;
+    }
 
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public void openChest() {}
 
-	@Override
-	public void openChest() {
-		// TODO Auto-generated method stub
-		
-	}
+    public void closeChest() {}
 
-	@Override
-	public void closeChest() {
-		// TODO Auto-generated method stub
-		
-	}
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     */
+    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    {
+        return true;
+    }
 
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    /**
+     * Returns the name of the inventory.
+     */
+    public String getInvName()
+    {
+        return "container.boat";
+    }
 
+    /**
+     * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended. *Isn't
+     * this more of a set than a get?*
+     */
+    public int getInventoryStackLimit()
+    {
+        return 64;
+    }
+
+    /**
+     * Teleports the entity to another dimension. Params: Dimension number to teleport to
+     */
+    public void travelToDimension(int par1)
+    {
+        this.dropContentsWhenDead = false;
+        super.travelToDimension(par1);
+    }
+    
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.writeEntityToNBT(par1NBTTagCompound);
+        NBTTagList nbttaglist = new NBTTagList();
+
+        for (int i = 0; i < this.boatContainerItems.length; ++i)
+        {
+            if (this.boatContainerItems[i] != null)
+            {
+                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+                nbttagcompound1.setByte("Slot", (byte)i);
+                this.boatContainerItems[i].writeToNBT(nbttagcompound1);
+                nbttaglist.appendTag(nbttagcompound1);
+            }
+        }
+
+        par1NBTTagCompound.setTag("Items", nbttaglist);
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.readEntityFromNBT(par1NBTTagCompound);
+        NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
+        this.boatContainerItems = new ItemStack[this.getSizeInventory()];
+
+        for (int i = 0; i < nbttaglist.tagCount(); ++i)
+        {
+            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+            int j = nbttagcompound1.getByte("Slot") & 255;
+
+            if (j >= 0 && j < this.boatContainerItems.length)
+            {
+                this.boatContainerItems[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+            }
+        }
+    }
 }
