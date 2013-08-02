@@ -20,6 +20,9 @@ public class BoatCraft {
 	@Instance("BoatCraft")
     public static BoatCraft instance;
 	
+	//Config File Strings
+	public final String itemBoats = "Boats in Item Form";
+	
 	//Boat Items
 	public BoatBirch birchBoat;
 	public BoatJungle jungleBoat;
@@ -34,10 +37,10 @@ public class BoatCraft {
 		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
         try
         {
-        	birchBoat.ID = cfg.getItem("Boats in Item Form", "Birch Boat", 25500).getInt(25500);
-        	jungleBoat.ID = cfg.getItem("Boats in Item Form", "Jungle Boat", 25501).getInt(25501);
-        	oakBoat.ID = cfg.getItem("Boats in Item Form", "Oak Boat", 25502).getInt(25502);
-        	spruceBoat.ID = cfg.getItem("Boats in Item Form", "Spruce Boat", 25503).getInt(25503);
+        	birchBoat.ID = cfg.getItem(itemBoats, "Birch Boat", 25500).getInt(25500);
+        	jungleBoat.ID = cfg.getItem(itemBoats, "Jungle Boat", 25501).getInt(25501);
+        	oakBoat.ID = cfg.getItem(itemBoats, "Oak Boat", 25502).getInt(25502);
+        	spruceBoat.ID = cfg.getItem(itemBoats, "Spruce Boat", 25503).getInt(25503);
         }
         catch (Exception e)
         {
