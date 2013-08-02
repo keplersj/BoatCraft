@@ -99,10 +99,10 @@ public class BoatCraft {
 	public void RegisterRecipes() {
 		//Boat Recipes
 		CraftingUtilities.RemoveRecipe(new ItemStack(Item.boat));
-        GameRegistry.addRecipe(new ItemStack(birchBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2));
-        GameRegistry.addRecipe(new ItemStack(jungleBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 3));
         GameRegistry.addRecipe(new ItemStack(oakBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 0));
         GameRegistry.addRecipe(new ItemStack(spruceBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 1));
+        GameRegistry.addRecipe(new ItemStack(birchBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2));
+        GameRegistry.addRecipe(new ItemStack(jungleBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 3));
         
         //Stick Recipes
         CraftingUtilities.RemoveRecipe(new ItemStack(Item.stick));
@@ -115,10 +115,10 @@ public class BoatCraft {
 	@EventHandler
 	public void Init (FMLInitializationEvent event)
 	{
-		LanguageRegistry.addName(birchBoat, "Birch Wood Boat");
-		LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
 		LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
 		LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
+		LanguageRegistry.addName(birchBoat, "Birch Wood Boat");
+		LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
 	}
 
 	@EventHandler
