@@ -2,6 +2,10 @@ package k2b6s9j.BoatCraft;
 
 import java.util.logging.Level;
 
+import k2b6s9j.BoatCraft.item.boat.BoatBirch;
+import k2b6s9j.BoatCraft.item.boat.BoatJungle;
+import k2b6s9j.BoatCraft.item.boat.BoatOak;
+import k2b6s9j.BoatCraft.item.boat.BoatSpruce;
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -15,6 +19,12 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 public class BoatCraft {
 	@Instance("BoatCraft")
     public static BoatCraft instance;
+	
+	//Boat Items
+	public BoatBirch brichBoat;
+	public BoatJungle jungleBoat;
+	public BoatOak oakBoat;
+	public BoatSpruce spruceBoat;
 
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event)
@@ -24,6 +34,7 @@ public class BoatCraft {
 		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
         try
         {
+        	
         }
         catch (Exception e)
         {
