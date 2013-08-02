@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.entity.RenderBoat;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
-import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
@@ -28,17 +27,13 @@ public class RenderCustomBoat extends RenderBoat {
         this.modelBoat = new ModelBoat();
         this.renderBlocks = new RenderBlocks();
     }
-
-    /**
-     * The render method used in RenderBoat that renders the boat model.
-     */
-    public void renderBoat(EntityBoat par1EntityBoat, double par2, double par4, double par6, float par8, float par9)
-    {
-        GL11.glPushMatrix();
+    
+    public void renderBoat(EntityCustomBoat boat, double par2, double par4, double par6, float par8, float par9) {
+    	GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
         GL11.glRotatef(180.0F - par8, 0.0F, 1.0F, 0.0F);
-        float f2 = (float)par1EntityBoat.getTimeSinceHit() - par9;
-        float f3 = par1EntityBoat.getDamageTaken() - par9;
+        float f2 = (float)boat.getTimeSinceHit() - par9;
+        float f3 = boat.getDamageTaken() - par9;
 
         if (f3 < 0.0F)
         {
@@ -47,17 +42,17 @@ public class RenderCustomBoat extends RenderBoat {
 
         if (f2 > 0.0F)
         {
-            GL11.glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * (float)par1EntityBoat.getForwardDirection(), 1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * (float)boat.getForwardDirection(), 1.0F, 0.0F, 0.0F);
         }
 
         float f4 = 0.75F;
         GL11.glScalef(f4, f4, f4);
         GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
-        this.func_110777_b(par1EntityBoat);
+        this.func_110777_b(boat);
         
-        int j = par1EntityBoat.getDisplayTileOffset();
-        Block block = par1EntityBoat.getDisplayTile();
-        int k = par1EntityBoat.getDisplayTileData();
+        int j = boat.getDisplayTileOffset();
+        Block block = boat.getDisplayTile();
+        int k = boat.getDisplayTileData();
 
         if (block != null)
         {
@@ -66,14 +61,14 @@ public class RenderCustomBoat extends RenderBoat {
             float f8 = 0.75F;
             GL11.glScalef(f8, f8, f8);
             GL11.glTranslatef(0.0F, (float)j / 16.0F, 0.0F);
-            this.renderBlockInBoat(par1EntityBoat, par9, block, k);
+            this.renderBlockInBoat(boat, par9, block, k);
             GL11.glPopMatrix();
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            this.func_110777_b(par1EntityBoat);
+            this.func_110777_b(boat);
         }
         
         GL11.glScalef(-1.0F, -1.0F, 1.0F);
-        this.modelBoat.render(par1EntityBoat, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        this.modelBoat.render(boat, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
     }
 
@@ -98,21 +93,13 @@ public class RenderCustomBoat extends RenderBoat {
         this.renderBoat((EntityCustomBoat)par1Entity, par2, par4, par6, par8, par9);
     }
     
-    /**
-     * Renders the block that is inside the boat.
-     */
-    protected void renderBlockInBoat(EntityBoat entityBoat, float par2, Block par3Block, int par4)
+    protected void renderBlockInBoat(EntityCustomBoat entityBoat, float par2, Block par3Block, int par4)
     {
-        // TODO Look into boat brightness later
+    	// TODO Look into boat brightness later
     	//float f1 = entityBoat.getBrightness(par2);
         GL11.glPushMatrix();
         //this.renderBlocks.renderBlockAsItem(par3Block, par4, f1);
         this.renderBlocks.renderBlockAsItem(par3Block, par4, 0);
         GL11.glPopMatrix();
-    }
-    
-    protected void renderBlockInBoat(Class <? extends EntityBoat> entityBoat, float par2, Block par3Block, int par4)
-    {
-    	
     }
 }

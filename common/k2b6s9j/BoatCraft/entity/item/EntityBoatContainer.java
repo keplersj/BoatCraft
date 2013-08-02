@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
-public abstract class EntityBoatContainer extends EntityBoat implements IInventory {
+public abstract class EntityBoatContainer extends EntityCustomBoat implements IInventory {
 	
 	private ItemStack[] boatContainerItems = new ItemStack[36];
 

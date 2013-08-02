@@ -3,7 +3,7 @@ package k2b6s9j.BoatCraft.entity.item;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.world.World;
 
-public class EntityBoatTNT extends EntityBoat {
+public class EntityBoatTNT extends EntityCustomBoat {
 	
 	public EntityBoatTNT(World par1World)
     {
