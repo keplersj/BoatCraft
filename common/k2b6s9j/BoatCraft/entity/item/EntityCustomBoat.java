@@ -2,8 +2,10 @@ package k2b6s9j.BoatCraft.entity.item;
 
 import java.util.logging.Level;
 
+import k2b6s9j.BoatCraft.render.RenderCustomBoat;
 import cpw.mods.fml.common.FMLLog;
 import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class EntityCustomBoat extends EntityBoat {
@@ -15,19 +17,19 @@ public class EntityCustomBoat extends EntityBoat {
 	
 	public void BoatMaterialTexture(int typeID) {
 		if (typeID == 0) {
-			FMLLog.log(Level.INFO, "This should be an Oak textured boat!");
+			RenderCustomBoat.setCustomBoatTexture(new ResourceLocation("boatcraft/textures/boat/oak.png"));
 		}
 		if (typeID == 1) {
-			FMLLog.log(Level.INFO, "This should be a Spruce textured boat!");
+			RenderCustomBoat.setCustomBoatTexture(new ResourceLocation("boatcraft/textures/boat/spruce.png"));
 		}
 		if (typeID == 2) {
-			FMLLog.log(Level.INFO, "This should be a Birch textured boat!");
+			RenderCustomBoat.setCustomBoatTexture(new ResourceLocation("boatcraft/textures/boat/birch.png"));
 		}
 		if (typeID == 3) {
-			FMLLog.log(Level.INFO, "This should be a Jungle textured boat!");
+			RenderCustomBoat.setCustomBoatTexture(new ResourceLocation("boatcraft/textures/boat/jungle.png"));
 		}
 		else {
-			FMLLog.log(Level.INFO, "I'm not sure what texture you want this boat to be!");
+			RenderCustomBoat.setCustomBoatTexture(new ResourceLocation("boatcraft/textures/boat/unknown.png"));
 		}
 	}
 
