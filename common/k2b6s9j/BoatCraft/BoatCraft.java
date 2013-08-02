@@ -51,6 +51,10 @@ public class BoatCraft {
             if (cfg.hasChanged())
                 cfg.save();
         }
+        birchBoat = new BoatBirch(birchBoat.ID);
+        jungleBoat = new BoatJungle(jungleBoat.ID);
+        oakBoat = new BoatOak(oakBoat.ID);
+        spruceBoat = new BoatSpruce(spruceBoat.ID);
 	}
 
 	@EventHandler
