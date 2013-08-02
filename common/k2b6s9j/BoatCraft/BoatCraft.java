@@ -21,7 +21,7 @@ public class BoatCraft {
     public static BoatCraft instance;
 	
 	//Boat Items
-	public BoatBirch brichBoat;
+	public BoatBirch birchBoat;
 	public BoatJungle jungleBoat;
 	public BoatOak oakBoat;
 	public BoatSpruce spruceBoat;
@@ -34,7 +34,10 @@ public class BoatCraft {
 		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
         try
         {
-        	
+        	birchBoat.ID = cfg.getItem("Boats in Item Form", "Birch Boat", 25500).getInt(25500);
+        	jungleBoat.ID = cfg.getItem("Boats in Item Form", "Jungle Boat", 25501).getInt(25501);
+        	oakBoat.ID = cfg.getItem("Boats in Item Form", "Oak Boat", 25502).getInt(25502);
+        	spruceBoat.ID = cfg.getItem("Boats in Item Form", "Spruce Boat", 25503).getInt(25503);
         }
         catch (Exception e)
         {

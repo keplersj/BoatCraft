@@ -4,9 +4,10 @@ import net.minecraft.item.ItemBoat;
 
 public class BoatOak extends ItemBoat {
 
-	public BoatOak(int par1) {
-		super(par1);
-		// TODO Auto-generated constructor stub
+	public static int ID;
+	
+	public BoatOak(int id) {
+		super(id);
 	}
 
 }

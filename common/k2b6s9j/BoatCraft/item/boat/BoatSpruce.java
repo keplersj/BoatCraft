@@ -4,9 +4,10 @@ import net.minecraft.item.ItemBoat;
 
 public class BoatSpruce extends ItemBoat {
 
-	public BoatSpruce(int par1) {
-		super(par1);
-		// TODO Auto-generated constructor stub
+	public static int ID;
+	
+	public BoatSpruce(int id) {
+		super(id);
 	}
 
 }
