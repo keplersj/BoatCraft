@@ -42,4 +42,9 @@ public class EntityBoatChest extends EntityBoatContainer {
 	public boolean isInvNameLocalized() {
 		return false;
 	}
+	
+	@Override
+	public String getInvName() {
+		return "Boat";
+	}
 }
