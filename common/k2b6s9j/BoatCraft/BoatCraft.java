@@ -84,7 +84,6 @@ public class BoatCraft {
 		LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
 		LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
 		LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
-		EntityRegistry.registerModEntity(EntityCustomBoat.class, "Custom Boat", EntityCustomBoat.ID, this, 10, 10, true);
 	}
 
 	@EventHandler
