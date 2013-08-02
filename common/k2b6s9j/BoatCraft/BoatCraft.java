@@ -2,6 +2,7 @@ package k2b6s9j.BoatCraft;
 
 import java.util.logging.Level;
 
+import k2b6s9j.BoatCraft.entity.item.EntityCustomBoat;
 import k2b6s9j.BoatCraft.item.boat.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
@@ -21,6 +22,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -82,6 +84,7 @@ public class BoatCraft {
 		LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
 		LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
 		LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
+		EntityRegistry.registerModEntity(EntityCustomBoat.class, "Custom Boat", EntityCustomBoat.ID, this, 10, 10, true);
 	}
 
 	@EventHandler
