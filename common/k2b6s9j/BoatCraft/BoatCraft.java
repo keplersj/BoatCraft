@@ -76,6 +76,7 @@ public class BoatCraft {
             if (cfg.hasChanged())
                 cfg.save();
         }
+        InitItems();
         RegisterRecipes();
 	}
 	
