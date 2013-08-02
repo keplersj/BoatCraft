@@ -194,4 +194,14 @@ public abstract class EntityBoatContainer extends EntityBoat implements IInvento
             }
         }
     }
+    
+    public boolean func_130002_c(EntityPlayer par1EntityPlayer)
+    {
+        if (!this.worldObj.isRemote)
+        {
+            par1EntityPlayer.displayGUIChest(this);
+        }
+
+        return true;
+    }
 }
