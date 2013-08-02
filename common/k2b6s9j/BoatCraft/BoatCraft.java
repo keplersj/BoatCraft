@@ -14,6 +14,7 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "1.0.0")
 public class BoatCraft {
@@ -52,9 +53,13 @@ public class BoatCraft {
                 cfg.save();
         }
         birchBoat = new BoatBirch(birchBoat.ID);
+        GameRegistry.registerItem(birchBoat, "Birch Boat");
         jungleBoat = new BoatJungle(jungleBoat.ID);
+        GameRegistry.registerItem(jungleBoat, "Jungle Boat");
         oakBoat = new BoatOak(oakBoat.ID);
+        GameRegistry.registerItem(oakBoat, "Oak Boat");
         spruceBoat = new BoatSpruce(spruceBoat.ID);
+        GameRegistry.registerItem(spruceBoat, "Spruce Boat");
 	}
 
 	@EventHandler
