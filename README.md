@@ -10,6 +10,8 @@ Let's see if we can make Minecraft boats just a bit cooler shall we? Kepler Stic
 - Initial Forestry wood support
 - Initial Natura wood support
 - Initial Binnie's Mod wood support
+- Seaport Villages
+- Boats that contain all the same blocks that Vanilla Minecarts can contain (Chest, Furnace, TNT, Mob Spawner)
 
 ## Features (Currently implemented)
 - Boat Items for the 4 Vanilla Woods
