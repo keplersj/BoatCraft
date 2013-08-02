@@ -1,9 +1,6 @@
 package k2b6s9j.BoatCraft.entity.item;
 
-import java.util.logging.Level;
-
 import k2b6s9j.BoatCraft.render.RenderCustomBoat;
-import cpw.mods.fml.common.FMLLog;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
