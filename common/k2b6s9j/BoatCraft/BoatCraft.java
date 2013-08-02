@@ -3,9 +3,13 @@ package k2b6s9j.BoatCraft;
 import java.util.logging.Level;
 
 import k2b6s9j.BoatCraft.item.boat.BoatBirch;
+import k2b6s9j.BoatCraft.item.boat.BoatChest;
+import k2b6s9j.BoatCraft.item.boat.BoatFurnace;
+import k2b6s9j.BoatCraft.item.boat.BoatHopper;
 import k2b6s9j.BoatCraft.item.boat.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
 import k2b6s9j.BoatCraft.item.boat.BoatSpruce;
+import k2b6s9j.BoatCraft.item.boat.BoatTNT;
 import k2b6s9j.BoatCraft.item.stick.StickBirch;
 import k2b6s9j.BoatCraft.item.stick.StickJungle;
 import k2b6s9j.BoatCraft.item.stick.StickSpruce;
@@ -46,6 +50,12 @@ public class BoatCraft {
 	public BoatOak oakBoat;
 	public BoatSpruce spruceBoat;
 	
+	//Special Boats
+	public BoatChest chestBoat;
+	public BoatFurnace furnaceBoat;
+	public BoatHopper hopperBoat;
+	public BoatTNT tntBoat;
+	
 	//Stick Items
 	public StickSpruce spruceStick;
 	public StickBirch birchStick;
@@ -59,10 +69,19 @@ public class BoatCraft {
 		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
         try
         {
+        	//Boats
         	birchBoat.ID = cfg.getItem(itemBoats, "Birch Boat", 25500).getInt(25500);
         	jungleBoat.ID = cfg.getItem(itemBoats, "Jungle Boat", 25501).getInt(25501);
         	oakBoat.ID = cfg.getItem(itemBoats, "Oak Boat", 25502).getInt(25502);
         	spruceBoat.ID = cfg.getItem(itemBoats, "Spruce Boat", 25503).getInt(25503);
+        	
+        	//Special Boats
+        	chestBoat.ID = cfg.getItem(itemBoats, "Chest Boat", 25508).getInt(25508);
+        	furnaceBoat.ID = cfg.getItem(itemBoats, "Furnace Boat", 25509).getInt(25509);
+        	hopperBoat.ID = cfg.getItem(itemBoats, "Hopper Boat", 25510).getInt(25510);
+        	tntBoat.ID = cfg.getItem(itemBoats, "TNT Boat", 25511).getInt(25511);
+        	
+        	//Sticks
         	spruceStick.ID = cfg.getItem(sticks, "Spruce Sticks", 25505).getInt(25505);
         	birchStick.ID = cfg.getItem(sticks, "Birch Sticks", 25506).getInt(25506);
         	jungleStick.ID = cfg.getItem(sticks, "Jungle Sticks", 25507).getInt(25507);
@@ -86,6 +105,12 @@ public class BoatCraft {
 		spruceBoat = new BoatSpruce(spruceBoat.ID);
 		birchBoat = new BoatBirch(birchBoat.ID);
 		jungleBoat = new BoatJungle(jungleBoat.ID);
+		
+		//Special Boats
+		chestBoat = new BoatChest(chestBoat.ID);
+		furnaceBoat = new BoatFurnace(furnaceBoat.ID);
+		hopperBoat = new BoatHopper(hopperBoat.ID);
+		tntBoat = new BoatTNT(tntBoat.ID);
 		
 		//Sticks
 		spruceStick = new StickSpruce(spruceStick.ID);
@@ -117,6 +142,12 @@ public class BoatCraft {
 		LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
 		LanguageRegistry.addName(birchBoat, "Birch Wood Boat");
 		LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
+		
+		//Special Boats
+		LanguageRegistry.addName(chestBoat, "Chest Boat");
+		LanguageRegistry.addName(furnaceBoat, "Furnace Boat");
+		LanguageRegistry.addName(hopperBoat, "Hopper Boat");
+		LanguageRegistry.addName(tntBoat, "TNT Boat");
 		
 		//Sticks
 		LanguageRegistry.addName(Item.stick, "Oak Wood Sticks");
