@@ -99,7 +99,7 @@ public class RenderCustomBoat extends RenderBoat {
     	//float f1 = entityBoat.getBrightness(par2);
         GL11.glPushMatrix();
         //this.renderBlocks.renderBlockAsItem(par3Block, par4, f1);
-        this.renderBlocks.renderBlockAsItem(par3Block, par4, 0);
+        this.renderBlocks.renderBlockAsItem(par3Block, par4, 1);
         GL11.glPopMatrix();
     }
 }

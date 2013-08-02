@@ -13,6 +13,7 @@ import k2b6s9j.BoatCraft.item.boat.BoatTNT;
 import k2b6s9j.BoatCraft.item.stick.StickBirch;
 import k2b6s9j.BoatCraft.item.stick.StickJungle;
 import k2b6s9j.BoatCraft.item.stick.StickSpruce;
+import k2b6s9j.BoatCraft.proxy.ClientProxy;
 import k2b6s9j.BoatCraft.proxy.CommonProxy;
 import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
 import net.minecraft.block.Block;
@@ -137,7 +138,7 @@ public class BoatCraft {
 	@EventHandler
 	public void Init (FMLInitializationEvent event)
 	{
-		proxy.registerRenderers();
+		ClientProxy.registerRenderers();
 		//Boats
 		LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
 		LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
