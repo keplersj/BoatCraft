@@ -6,7 +6,9 @@ import k2b6s9j.BoatCraft.item.boat.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
 import k2b6s9j.BoatCraft.item.boat.BoatSpruce;
+import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.FMLLog;
@@ -55,6 +57,7 @@ public class BoatCraft {
             if (cfg.hasChanged())
                 cfg.save();
         }
+        CraftingUtilities.RemoveRecipe(new ItemStack(Item.boat));
         birchBoat = new BoatBirch(birchBoat.ID);
         GameRegistry.addRecipe(new ItemStack(birchBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2));
         jungleBoat = new BoatJungle(jungleBoat.ID);
