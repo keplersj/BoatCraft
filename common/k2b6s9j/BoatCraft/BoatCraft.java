@@ -115,10 +115,17 @@ public class BoatCraft {
 	@EventHandler
 	public void Init (FMLInitializationEvent event)
 	{
+		//Boats
 		LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
 		LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
 		LanguageRegistry.addName(birchBoat, "Birch Wood Boat");
 		LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
+		
+		//Sticks
+		LanguageRegistry.addName(oakStick, "Oak Wood Sticks");
+		LanguageRegistry.addName(spruceStick, "Spruce Wood Sticks");
+		LanguageRegistry.addName(birchStick, "Birch Wood Sticks");
+		LanguageRegistry.addName(jungleStick, "Jungle Wood Sticks");
 	}
 
 	@EventHandler
