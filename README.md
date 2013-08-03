@@ -15,6 +15,10 @@ Special Thanks goes out to:
 
 ## Half-Features (Needs work)
 - Dynamic Wooden Sticks (Again for the different wood types)
+- 
+## Working on Now
+- ModStats
+- Blocks in Boats (Will put out integration tutorial when finished)
 
 ## Goals (Not even begun work on, might not even happen)
 - OreDictionary!
@@ -26,7 +30,6 @@ Special Thanks goes out to:
 - IndustrialCraft2 wood support
 - ExtraBiomesXL wood support
 - Seaport Villages
-- Boats that contain all the same blocks that Vanilla Minecarts can contain (Chest, Furnace, TNT, Mob Spawner)
 - RailCraft Integration
 - Forestry Integration
 - IndustrialCraft2 Integration
@@ -36,7 +39,6 @@ Special Thanks goes out to:
 - ThaumCraft integration
 - Boats that hold Fluids and don't drown! (Tank Boats)
 - Boat Linking
-- API allowing other mods to add blocks to boats
 - Boats acting like tools based on material, varying in speed, durability, and yes enchantibility based on the material
 - Blocks that can load and unload content into boats
 - Blocks that can affect boats in the water
