@@ -8,11 +8,13 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderChestBoat extends Render {
+public class RenderChestBoat extends Render implements IItemRenderer {
 
 	private static final ResourceLocation field_110804_g = new ResourceLocation("textures/entity/boat.png");
 
@@ -102,4 +104,23 @@ public class RenderChestBoat extends Render {
     {
         this.renderTheBoat((EntityBoatChest)par1Entity, par2, par4, par6, par8, par9);
     }
+
+	@Override
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
+			ItemRendererHelper helper) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		// TODO Auto-generated method stub
+		
+	}
 }

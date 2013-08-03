@@ -1,6 +1,5 @@
 package k2b6s9j.BoatCraft.render;
 
-import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
@@ -9,11 +8,13 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderFurnaceBoat extends Render {
+public class RenderFurnaceBoat extends Render implements IItemRenderer {
 
 	private static final ResourceLocation field_110804_g = new ResourceLocation("textures/entity/boat.png");
 
@@ -103,4 +104,23 @@ public class RenderFurnaceBoat extends Render {
     {
         this.renderTheBoat((EntityBoatFurnace)par1Entity, par2, par4, par6, par8, par9);
     }
+
+	@Override
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
+			ItemRendererHelper helper) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		// TODO Auto-generated method stub
+		
+	}
 }
