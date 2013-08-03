@@ -9,6 +9,13 @@ Special Thanks goes out to:
 - Sargunster, for creating his Better than Wolves boat addon and giving me huge inspiration
 - CovertJaguar, for creating Railcraft and being one of the biggest inspiractions.
 
+## Features (Currently implemented)
+- Boat Items for the 4 Vanilla Woods
+- Dynamic Wooden Boat textures for the 4 Vanilla Woods
+
+## Half-Features (Needs work)
+- Dynamic Wooden Sticks (Again for the different wood types)
+
 ## Goals (Not even begun work on, might not even happen)
 - OreDictionary!
 - Biomes O Plenty wood support
@@ -36,13 +43,6 @@ Special Thanks goes out to:
 - And one day, STEAM BOATS!
 - PIRATES!
 - Much more
-
-## Features (Currently implemented)
-- Boat Items for the 4 Vanilla Woods
-- Dynamic Wooden Boat textures for the 4 Vanilla Woods
-
-## Half-Features (Needs work)
-- Dynamic Wooden Sticks (Again for the different wood types)
 
 ## The Build Enviroment
 When I develop with Java I try to make my enviroment as git friendly as possible. This means that it is easy for anyone to download and play around with my code. When you clone the repository onto your computer open your command line and run 'ant' inside the repository's folder on your computer, this requires [ant](http://ant.apache.org/manual/install.html) to be installed on your computer.
