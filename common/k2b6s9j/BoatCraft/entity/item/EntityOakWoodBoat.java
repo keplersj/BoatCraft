@@ -1,5 +1,6 @@
 package k2b6s9j.BoatCraft.entity.item;
 
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
