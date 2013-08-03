@@ -129,18 +129,18 @@
 		</copy>
 
 		<!-- Copy resoucres -->
-		<copy todir="build/forge/mcp/jars/assets">
-			<fileset dir="resources"></fileset>
-		</copy>
 		<copy todir="${commonsrc.dir}/assets">
-			<fileset dir="resources"></fileset>
+			<fileset dir="resources">
+				<exclude name="mcmod.info"/>
+			</fileset>
 		</copy>
+		<copy todir="${commonsrc.dir}" file="resources/mcmod.info"/>
 	</target>
 
 
 	<target name="compile" depends="copySRC">
 
-		<echo message="Compiling version ${mod.version.full}"/>
+		<echo message="Compiling"/>
 
 		<!-- Recompile -->
 		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
