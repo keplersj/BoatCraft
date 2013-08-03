@@ -632,7 +632,7 @@ public class EntityCustomBoat extends Entity
 
     public boolean hasDisplayTile()
     {
-        return this.getDataWatcher().getWatchableObjectByte(22) == 1;
+        return false;
     }
 
     public void setHasDisplayTile(boolean par1)
