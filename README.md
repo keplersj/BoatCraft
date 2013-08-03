@@ -15,7 +15,7 @@ Special Thanks goes out to:
 
 ## Half-Features (Needs work)
 - Dynamic Wooden Sticks (Again for the different wood types)
-- 
+
 ## Working on Now
 - Blocks in Boats (Will put out integration tutorial when finished)
 
