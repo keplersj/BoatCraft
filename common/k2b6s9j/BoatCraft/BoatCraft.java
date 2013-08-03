@@ -118,9 +118,9 @@ public class BoatCraft {
 	public void EntityWork() {
 		proxy.registerRenderers();
 		EntityRegistry.registerModEntity(EntityOakWoodBoat.class, "Oak Wood Boat", 1, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntitySpruceWoodBoat.class, "Spruce Wood Boat", 1, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityBirchWoodBoat.class, "Birch Wood Boat", 1, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityJungleWoodBoat.class, "Jungle Wood Boat", 1, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntitySpruceWoodBoat.class, "Spruce Wood Boat", 2, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBirchWoodBoat.class, "Birch Wood Boat", 3, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityJungleWoodBoat.class, "Jungle Wood Boat", 4, this, 80, 3, true);
 	}
 
 	@EventHandler
