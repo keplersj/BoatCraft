@@ -206,7 +206,6 @@ public abstract class EntityBoatContainer extends EntityCustomBoat implements II
         {
             player.displayGUIChest(this);
         }
-
         return true;
     }
 }
