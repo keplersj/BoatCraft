@@ -19,6 +19,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+
+import org.modstats.ModstatInfo;
+
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -32,8 +35,9 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "BoatCraft", name = "BoatCraft", version = "1.0.0")
+@Mod(modid = "BoatCraft", name = "BoatCraft", version = "1.0pr3")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
+@ModstatInfo(prefix = "boatcraft")
 public class BoatCraft {
 	@Instance("BoatCraft")
     public static BoatCraft instance;
