@@ -1,24 +1,18 @@
 package k2b6s9j.BoatCraft.entity.item;
 
-<<<<<<< HEAD
-import k2b6s9j.BoatCraft.render.RenderCustomBoat;
-import net.minecraft.block.Block;
-import net.minecraft.entity.item.EntityBoat;
-import net.minecraft.util.ResourceLocation;
-=======
 import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
->>>>>>> master
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -577,19 +571,6 @@ public class EntityCustomBoat extends Entity
     {
         return this.dataWatcher.getWatchableObjectInt(18);
     }
-
-<<<<<<< HEAD
-public class EntityCustomBoat extends EntityBoat {
-	
-	public EntityCustomBoat(World par1World)
-    {
-        super(par1World);
-    }
-
-    public EntityCustomBoat(World par1World, double par2, double par4, double par6)
-    {
-        super(par1World, par2, par4, par6);
-    }
     
     public Block getDisplayTile()
     {
@@ -659,11 +640,9 @@ public class EntityCustomBoat extends EntityBoat {
         this.getDataWatcher().updateObject(22, Byte.valueOf((byte)(par1 ? 1 : 0)));
     }
     
-=======
     @SideOnly(Side.CLIENT)
     public void func_70270_d(boolean par1)
     {
         this.field_70279_a = par1;
     }
->>>>>>> master
 }

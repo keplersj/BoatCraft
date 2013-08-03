@@ -5,14 +5,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class CommonProxy {
 	
-<<<<<<< HEAD
-	public static void registerRenderers() {
-		
-=======
 	@SideOnly(Side.CLIENT)
 	public static void registerRenderers() {
 		ClientProxy.registerRenderers();
->>>>>>> master
 	}
 
 }

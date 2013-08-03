@@ -17,14 +17,10 @@ import cpw.mods.fml.common.FMLLog;
 public class ClientProxy extends CommonProxy {
 	
 	public static void registerRenderers() {
-<<<<<<< HEAD
-		RenderingRegistry.registerEntityRenderingHandler(EntityCustomBoat.class, new RenderCustomBoat());
-=======
 		RenderingRegistry.registerEntityRenderingHandler(EntityOakWoodBoat.class, new RenderOakWoodBoat());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpruceWoodBoat.class, new RenderSpruceWoodBoat());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBirchWoodBoat.class, new RenderBirchWoodBoat());
 		RenderingRegistry.registerEntityRenderingHandler(EntityJungleWoodBoat.class, new RenderJungleWoodBoat());
->>>>>>> master
 	}
 
 }

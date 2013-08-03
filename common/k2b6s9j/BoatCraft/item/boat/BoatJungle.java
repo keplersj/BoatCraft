@@ -91,12 +91,7 @@ public class BoatJungle extends ItemBoat {
                     {
                         --j;
                     }
-
-<<<<<<< HEAD
-                    EntityCustomBoat entityboat = new EntityCustomBoat(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
-=======
                     EntityJungleWoodBoat entityboat = new EntityJungleWoodBoat(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
->>>>>>> master
                     entityboat.rotationYaw = (float)(((MathHelper.floor_double((double)(par3EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
 
                     if (!par2World.getCollidingBoundingBoxes(entityboat, entityboat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
