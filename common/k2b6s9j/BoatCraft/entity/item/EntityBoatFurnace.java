@@ -21,6 +21,12 @@ public class EntityBoatFurnace extends EntityCustomBoat {
     {
         return Block.furnaceBurning;
     }
+
+    public int getDefaultDisplayTileData()
+    {
+        return 2;
+    }
+    
     public boolean func_130002_c(EntityPlayer player)
     {
     	//Do not mount this boat on right click!
