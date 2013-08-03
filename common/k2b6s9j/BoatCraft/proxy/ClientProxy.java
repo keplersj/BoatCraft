@@ -40,10 +40,10 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBoatHopper.class, new RenderHopperBoat());
 		
 		//Register Item Renderers
-		MinecraftForgeClient.registerItemRenderer(BoatOak.ID, new RenderOakWoodBoat());
-		MinecraftForgeClient.registerItemRenderer(BoatSpruce.ID, new RenderSpruceWoodBoat());
-		MinecraftForgeClient.registerItemRenderer(BoatBirch.ID, new RenderBirchWoodBoat());
-		MinecraftForgeClient.registerItemRenderer(BoatJungle.ID, new RenderJungleWoodBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatOak.shiftedID, new RenderOakWoodBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatSpruce.shiftedID, new RenderSpruceWoodBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatBirch.shiftedID, new RenderBirchWoodBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatJungle.shiftedID, new RenderJungleWoodBoat());
 	}
 
 }

@@ -19,12 +19,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class BoatSpruce extends ItemBoat {
 
 	public static int ID;
+	public static int shiftedID ;
 	
 	public BoatSpruce(int id) {
 		super(id);
 		setUnlocalizedName("boatSpruce");
         func_111206_d("boatcraft:boatSpruce");
     	GameRegistry.registerItem(this, "Spruce Wood Boat");
+    	shiftedID = this.itemID;
 	}
 	
 	@Override
@@ -114,5 +116,4 @@ public class BoatSpruce extends ItemBoat {
             }
         }
 	}
-
 }
