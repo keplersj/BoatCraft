@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderSpruceWoodBoat extends Render implements IItemRenderer {
 
-	private static final ResourceLocation texture = new ResourceLocation("boatcraft/textures/boats/spruce.png");
+	private static final ResourceLocation texture = new ResourceLocation("boatcraft:textures/boats/spruce.png");
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat;

@@ -172,6 +172,9 @@
 		</copy>
 
 		<!-- Copy resoucres -->
+		<copy todir="build/forge/mcp/jars/assets">
+			<fileset dir="resources"></fileset>
+		</copy>
 		<copy todir="${classes.dir}/client/assets">
 			<fileset dir="resources"></fileset>
 		</copy>
