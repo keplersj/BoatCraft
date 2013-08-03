@@ -11,7 +11,6 @@ Special Thanks goes out to:
 
 ## Goals (Not even begun work on, might not even happen)
 - OreDictionary!
-- Dynamic Wooden Boat textures (For the different wood types)
 - Biomes O Plenty wood support
 - Forestry wood support
 - Natura wood support
@@ -40,6 +39,7 @@ Special Thanks goes out to:
 
 ## Features (Currently implemented)
 - Boat Items for the 4 Vanilla Woods
+- Dynamic Wooden Boat textures for the 4 Vanilla Woods
 
 ## Half-Features (Needs work)
 - Dynamic Wooden Sticks (Again for the different wood types)
