@@ -2,6 +2,7 @@ package k2b6s9j.BoatCraft;
 
 import java.util.logging.Level;
 
+import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
 import k2b6s9j.BoatCraft.item.boat.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
@@ -9,7 +10,6 @@ import k2b6s9j.BoatCraft.item.boat.BoatSpruce;
 import k2b6s9j.BoatCraft.item.stick.StickBirch;
 import k2b6s9j.BoatCraft.item.stick.StickJungle;
 import k2b6s9j.BoatCraft.item.stick.StickSpruce;
-import k2b6s9j.BoatCraft.proxy.ClientProxy;
 import k2b6s9j.BoatCraft.proxy.CommonProxy;
 import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
 import net.minecraft.block.Block;
@@ -25,10 +25,9 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "1.0.0")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
@@ -81,7 +80,7 @@ public class BoatCraft {
         }
         InitItems();
         RegisterRecipes();
-		proxy.registerRenderers();
+        EntityWork();
 	}
 	
 	public void InitItems() {
@@ -111,6 +110,11 @@ public class BoatCraft {
         GameRegistry.addRecipe(new ItemStack(spruceStick), "W", "W", Character.valueOf('W'), new ItemStack(Block.planks, 1, 1));
         GameRegistry.addRecipe(new ItemStack(birchStick), "W", "W", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2));
         GameRegistry.addRecipe(new ItemStack(jungleStick), "W", "W", Character.valueOf('W'), new ItemStack(Block.planks, 1, 3));
+	}
+	
+	public void EntityWork() {
+		proxy.registerRenderers();
+		EntityRegistry.registerModEntity(EntityOakWoodBoat.class, "Oak Wood Boat", 1, this, 80, 3, true);
 	}
 
 	@EventHandler
