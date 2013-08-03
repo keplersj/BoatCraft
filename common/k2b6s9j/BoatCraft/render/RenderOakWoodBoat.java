@@ -58,7 +58,7 @@ public class RenderOakWoodBoat extends Render {
 		
 	}
 
-    protected ResourceLocation func_110781_a(EntityBoat par1EntityBoat)
+    protected ResourceLocation func_110781_a(EntityOakWoodBoat par1Entity)
     {
         return texture;
     }
