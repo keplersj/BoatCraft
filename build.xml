@@ -65,7 +65,6 @@
 	<target name="download">
 		<mkdir dir="${download.dir}"/>
 		<get src="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${mc.version}-${forge.version}.zip" dest="${download.dir}" usetimestamp="True"/>
-		<get src="https://bitbucket.org/shedar/modstats/downloads/modstats.v1.1-mc.1.6.2.zip" dest="${download.dir}" usetimestamp="True"/>
 
 		<echo message="Download finished"/>
 	</target>
