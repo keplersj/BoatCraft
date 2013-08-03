@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.IItemRenderer.ItemRenderType;
+import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 import org.lwjgl.opengl.GL11;
 
@@ -52,8 +54,7 @@ public class RenderSpruceWoodBoat extends Render implements IItemRenderer {
     }
     
     @Override
-	public void doRender(Entity entity, double d0, double d1, double d2,
-			float f, float f1) {
+	public void doRender(Entity entity, double d0, double d1, double d2, float f, float f1) {
     	this.renderBoat((EntitySpruceWoodBoat)entity, d0, d1, d2, f, f1);
 		
 	}
@@ -68,23 +69,19 @@ public class RenderSpruceWoodBoat extends Render implements IItemRenderer {
         return this.func_110781_a((EntitySpruceWoodBoat)par1Entity);
     }
 
-	@Override
+    @Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-			ItemRendererHelper helper) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+		return true;
 	}
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		// TODO Auto-generated method stub
-		
+		renderBoat(null, 0.5F, 0.5F, 0.5F, 0.5F, 0.5F);
 	}
 
 }

@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.IItemRenderer.ItemRenderType;
+import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 import org.lwjgl.opengl.GL11;
 
@@ -68,23 +70,19 @@ public class RenderOakWoodBoat extends Render implements IItemRenderer {
         return this.func_110781_a((EntityOakWoodBoat)par1Entity);
     }
 
-	@Override
+    @Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-			ItemRendererHelper helper) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+		return true;
 	}
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		// TODO Auto-generated method stub
-		
+		renderBoat(null, 0.5F, 0.5F, 0.5F, 0.5F, 0.5F);
 	}
 
 }
