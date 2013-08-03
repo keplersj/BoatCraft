@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,9 +16,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityCustomBoat extends Entity {
-	
-	private boolean field_70279_a;
+public class EntityCustomBoat extends Entity
+{
+    private boolean field_70279_a;
     private double speedMultiplier;
     private int boatPosRotationIncrements;
     private double boatX;
@@ -445,7 +444,7 @@ public class EntityCustomBoat extends Entity {
                     {
                         Entity entity = (Entity)list.get(l);
 
-                        if (entity != this.riddenByEntity && entity.canBePushed() && entity instanceof EntityBoat)
+                        if (entity != this.riddenByEntity && entity.canBePushed() && entity instanceof EntityCustomBoat)
                         {
                             entity.applyEntityCollision(this);
                         }

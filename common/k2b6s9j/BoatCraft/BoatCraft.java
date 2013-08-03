@@ -9,6 +9,7 @@ import k2b6s9j.BoatCraft.item.boat.BoatSpruce;
 import k2b6s9j.BoatCraft.item.stick.StickBirch;
 import k2b6s9j.BoatCraft.item.stick.StickJungle;
 import k2b6s9j.BoatCraft.item.stick.StickSpruce;
+import k2b6s9j.BoatCraft.proxy.ClientProxy;
 import k2b6s9j.BoatCraft.proxy.CommonProxy;
 import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
 import net.minecraft.block.Block;
@@ -26,6 +27,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "1.0.0")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
@@ -78,6 +81,7 @@ public class BoatCraft {
         }
         InitItems();
         RegisterRecipes();
+		proxy.registerRenderers();
 	}
 	
 	public void InitItems() {
@@ -112,7 +116,6 @@ public class BoatCraft {
 	@EventHandler
 	public void Init (FMLInitializationEvent event)
 	{
-		proxy.registerRenderers();
 		//Boats
 		LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
 		LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
