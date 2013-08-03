@@ -1,5 +1,6 @@
 package k2b6s9j.BoatCraft.entity.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -20,6 +21,11 @@ public class EntityBoatTNT extends EntityCustomBoat {
     {
     	//Do not mount this boat on right click!
         return false;
+    }
+    
+    public Block getDefaultDisplayTile()
+    {
+        return Block.tnt;
     }
 
 }
