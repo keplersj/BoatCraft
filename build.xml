@@ -176,9 +176,6 @@
 			<fileset dir="resources"></fileset>
 		</copy>
 
-		<replace file="${classes.dir}/client/mcmod.info" token="%VERSION%" value="${mod.version.full}"/>
-		<replace file="${classes.dir}/client/mcmod.info" token="%MCVERSION%" value="${mc.version}"/>
-
 		<echo message="Compiling finished"/>
 
 	</target>
