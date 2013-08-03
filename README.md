@@ -17,7 +17,6 @@ Special Thanks goes out to:
 - Dynamic Wooden Sticks (Again for the different wood types)
 - 
 ## Working on Now
-- ModStats
 - Blocks in Boats (Will put out integration tutorial when finished)
 
 ## Goals (Not even begun work on, might not even happen)
