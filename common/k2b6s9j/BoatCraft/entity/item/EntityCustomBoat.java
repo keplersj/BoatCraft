@@ -1,12 +1,12 @@
 package k2b6s9j.BoatCraft.entity.item;
 
 import java.util.List;
+import java.util.logging.Level;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,6 +14,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -507,9 +508,14 @@ public class EntityCustomBoat extends Entity
         return 0.0F;
     }
 
-    public boolean func_130002_c(EntityPlayer par1EntityPlayer)
+    public boolean func_130002_c(EntityPlayer player)
     {
-        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != par1EntityPlayer)
+    	//Do not mount if the player is shift clicking
+    	if (player.isSneaking())
+    	{
+    		return false;
+    	}
+        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != player)
         {
             return true;
         }
@@ -517,7 +523,7 @@ public class EntityCustomBoat extends Entity
         {
             if (!this.worldObj.isRemote)
             {
-                par1EntityPlayer.mountEntity(this);
+                player.mountEntity(this);
             }
 
             return true;

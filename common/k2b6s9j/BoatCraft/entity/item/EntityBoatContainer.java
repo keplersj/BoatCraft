@@ -195,11 +195,16 @@ public abstract class EntityBoatContainer extends EntityCustomBoat implements II
         }
     }
     
-    public boolean func_130002_c(EntityPlayer par1EntityPlayer)
+    public boolean func_130002_c(EntityPlayer player)
     {
+    	//Do not mount if the player is shift clicking
+    	if (player.isSneaking())
+    	{
+    		return false;
+    	}
         if (!this.worldObj.isRemote)
         {
-            par1EntityPlayer.displayGUIChest(this);
+            player.displayGUIChest(this);
         }
 
         return true;
