@@ -3,6 +3,10 @@ package k2b6s9j.BoatCraft;
 import java.util.logging.Level;
 
 import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
+import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
+import k2b6s9j.BoatCraft.entity.item.EntityBoatFurnace;
+import k2b6s9j.BoatCraft.entity.item.EntityBoatHopper;
+import k2b6s9j.BoatCraft.entity.item.EntityBoatTNT;
 import k2b6s9j.BoatCraft.entity.item.EntityJungleWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntitySpruceWoodBoat;
@@ -147,10 +151,18 @@ public class BoatCraft {
 	
 	public void EntityWork() {
 		proxy.registerRenderers();
+		// Regular Boats
 		EntityRegistry.registerModEntity(EntityOakWoodBoat.class, "Oak Wood Boat", 1, this, 80, 3, true);
 		EntityRegistry.registerModEntity(EntitySpruceWoodBoat.class, "Spruce Wood Boat", 2, this, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBirchWoodBoat.class, "Birch Wood Boat", 3, this, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityJungleWoodBoat.class, "Jungle Wood Boat", 4, this, 80, 3, true);
+		
+		//Special Boats
+		EntityRegistry.registerModEntity(EntityBoatChest.class, "Chest Boat", 5, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatFurnace.class, "Furnace Boat", 6, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatHopper.class, "Hopper Boat", 7, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatTNT.class, "TNT Boat", 8, this, 80, 3, true);
+		
 	}
 
 	@EventHandler
