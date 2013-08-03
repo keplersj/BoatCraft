@@ -2,7 +2,10 @@ package k2b6s9j.BoatCraft;
 
 import java.util.logging.Level;
 
+import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
+import k2b6s9j.BoatCraft.entity.item.EntityJungleWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
+import k2b6s9j.BoatCraft.entity.item.EntitySpruceWoodBoat;
 import k2b6s9j.BoatCraft.item.boat.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
@@ -115,6 +118,9 @@ public class BoatCraft {
 	public void EntityWork() {
 		proxy.registerRenderers();
 		EntityRegistry.registerModEntity(EntityOakWoodBoat.class, "Oak Wood Boat", 1, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntitySpruceWoodBoat.class, "Spruce Wood Boat", 1, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBirchWoodBoat.class, "Birch Wood Boat", 1, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityJungleWoodBoat.class, "Jungle Wood Boat", 1, this, 80, 3, true);
 	}
 
 	@EventHandler
