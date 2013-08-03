@@ -65,6 +65,7 @@
 	<target name="download">
 		<mkdir dir="${download.dir}"/>
 		<get src="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${mc.version}-${forge.version}.zip" dest="${download.dir}" usetimestamp="True"/>
+		<get src="https://bitbucket.org/shedar/modstats/downloads/modstats.v1.1-mc.1.6.2.zip" dest="${download.dir}" usetimestamp="True"/>
 
 		<echo message="Download finished"/>
 	</target>
@@ -98,6 +99,12 @@
 		<chmod file="${mcp.dir}/runtime/bin/jad-osx" perm="+x"/>
 
 		<echo message="Decompile finished"/>
+		
+		<unzip dest="${commonsrc.dir}" failOnEmptyArchive="true">
+			<fileset dir="${download.dir}">
+				<include name="modstats.v1.1-mc.1.6.2.zip"/>
+			</fileset>
+		</unzip>
 
 		<!-- Refresh MD5 -->
 		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
@@ -166,7 +173,7 @@
 		</copy>
 
 		<!-- Copy resoucres -->
-		<copy todir="${classes.dir}/client">
+		<copy todir="${classes.dir}/client/assets">
 			<fileset dir="resources"></fileset>
 		</copy>
 
@@ -178,9 +185,9 @@
 	</target>
 
 	<target name="package" depends="compile">
-		<echo message="Packing version ${mod.version.full}"/>
+		<echo message="Packing version}"/>
 
-		<jar destfile="dist/BoatCraft-${mod.version.full}.jar" basedir="${classes.dir}/client"/>
+		<jar destfile="dist/BoatCraft.jar" basedir="${classes.dir}/client"/>
 
 		<echo message="Packing finished"/>
 	</target>
