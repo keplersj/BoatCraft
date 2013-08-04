@@ -1,21 +1,17 @@
 package k2b6s9j.BoatCraft.render;
 
-import java.util.logging.Level;
-
 import k2b6s9j.BoatCraft.entity.item.EntityCustomBoat;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 
 public class RenderCustomBoat extends Render implements IItemRenderer {
 
@@ -68,7 +64,7 @@ public class RenderCustomBoat extends Render implements IItemRenderer {
 
     protected ResourceLocation func_110781_a(EntityCustomBoat entity)
     {
-    	switch (entity.getType())
+    	switch (this.getType(entity))
         {
             case 0:
                 return oak;
@@ -81,6 +77,12 @@ public class RenderCustomBoat extends Render implements IItemRenderer {
             default:
                 return unknown;
         }
+    }
+    
+    private int getType(EntityCustomBoat entity)
+    {
+    	NBTTagCompound nbt = entity.getEntityData();
+    	return nbt.getInteger("Type");
     }
 
     protected ResourceLocation func_110775_a(Entity par1Entity)
