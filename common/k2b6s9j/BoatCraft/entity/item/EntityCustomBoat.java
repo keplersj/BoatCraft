@@ -2,6 +2,7 @@ package k2b6s9j.BoatCraft.entity.item;
 
 import java.util.List;
 
+import k2b6s9j.BoatCraft.item.boat.BoatOak;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -103,7 +104,7 @@ public class EntityCustomBoat extends Entity
     {
         return (double)this.height * 0.0D - 0.30000001192092896D;
     }
-
+    
     /**
      * Called when the entity is attacked.
      */
@@ -130,7 +131,14 @@ public class EntityCustomBoat extends Entity
 
                 if (!flag)
                 {
-                    this.dropItemWithOffset(Item.boat.itemID, 1, 0.0F);
+                	if (isCustomBoat())
+                	{
+                        this.dropItemWithOffset(customBoatItem(), 1, 0.0F);
+                	}
+                	else
+                	{
+                		this.dropItemWithOffset(BoatOak.shiftedID, 1, 0.0F);
+                	}
                 }
 
                 this.setDead();
@@ -144,6 +152,16 @@ public class EntityCustomBoat extends Entity
         }
     }
 
+    public boolean isCustomBoat()
+    {
+    	return false;
+    }
+    
+    public int customBoatItem()
+    {
+    	return BoatOak.shiftedID;
+    }
+    
     @SideOnly(Side.CLIENT)
 
     /**
@@ -506,9 +524,14 @@ public class EntityCustomBoat extends Entity
         return 0.0F;
     }
 
-    public boolean func_130002_c(EntityPlayer par1EntityPlayer)
+    public boolean func_130002_c(EntityPlayer player)
     {
-        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != par1EntityPlayer)
+    	//Do not mount if the player is shift clicking
+    	if (player.isSneaking())
+    	{
+    		return false;
+    	}
+        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != player)
         {
             return true;
         }
@@ -516,7 +539,7 @@ public class EntityCustomBoat extends Entity
         {
             if (!this.worldObj.isRemote)
             {
-                par1EntityPlayer.mountEntity(this);
+                player.mountEntity(this);
             }
 
             return true;
@@ -570,7 +593,75 @@ public class EntityCustomBoat extends Entity
     {
         return this.dataWatcher.getWatchableObjectInt(18);
     }
+    
+    public Block getDisplayTile()
+    {
+        if (!this.hasDisplayTile())
+        {
+            return this.getDefaultDisplayTile();
+        }
+        else
+        {
+            int i = this.getDataWatcher().getWatchableObjectInt(20) & 65535;
+            return i > 0 && i < Block.blocksList.length ? Block.blocksList[i] : null;
+        }
+    }
 
+    public Block getDefaultDisplayTile()
+    {
+        return null;
+    }
+
+    public int getDisplayTileData()
+    {
+        return !this.hasDisplayTile() ? this.getDefaultDisplayTileData() : this.getDataWatcher().getWatchableObjectInt(20) >> 16;
+    }
+
+    public int getDefaultDisplayTileData()
+    {
+        return 0;
+    }
+
+    public int getDisplayTileOffset()
+    {
+        return !this.hasDisplayTile() ? this.getDefaultDisplayTileOffset() : this.getDataWatcher().getWatchableObjectInt(21);
+    }
+
+    public int getDefaultDisplayTileOffset()
+    {
+        return 6;
+    }
+    
+    public void setDisplayTile(int par1)
+    {
+        this.getDataWatcher().updateObject(20, Integer.valueOf(par1 & 65535 | this.getDisplayTileData() << 16));
+        this.setHasDisplayTile(true);
+    }
+
+    public void setDisplayTileData(int par1)
+    {
+        Block block = this.getDisplayTile();
+        int j = block == null ? 0 : block.blockID;
+        this.getDataWatcher().updateObject(20, Integer.valueOf(j & 65535 | par1 << 16));
+        this.setHasDisplayTile(true);
+    }
+
+    public void setDisplayTileOffset(int par1)
+    {
+        this.getDataWatcher().updateObject(21, Integer.valueOf(par1));
+        this.setHasDisplayTile(true);
+    }
+
+    public boolean hasDisplayTile()
+    {
+        return false;
+    }
+
+    public void setHasDisplayTile(boolean par1)
+    {
+        this.getDataWatcher().updateObject(22, Byte.valueOf((byte)(par1 ? 1 : 0)));
+    }
+    
     @SideOnly(Side.CLIENT)
     public void func_70270_d(boolean par1)
     {

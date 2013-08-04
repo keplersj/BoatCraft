@@ -5,15 +5,17 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderBirchWoodBoat extends Render {
+public class RenderBirchWoodBoat extends Render implements IItemRenderer {
 
-	private static final ResourceLocation texture = new ResourceLocation("boatcraft/textures/boats/birch.png");
+	private static final ResourceLocation texture = new ResourceLocation("boatcraft:textures/boats/birch.png");
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat;
@@ -51,8 +53,7 @@ public class RenderBirchWoodBoat extends Render {
     }
     
     @Override
-	public void doRender(Entity entity, double d0, double d1, double d2,
-			float f, float f1) {
+	public void doRender(Entity entity, double d0, double d1, double d2, float f, float f1) {
     	this.renderBoat((EntityBirchWoodBoat)entity, d0, d1, d2, f, f1);
 		
 	}
@@ -66,5 +67,20 @@ public class RenderBirchWoodBoat extends Render {
     {
         return this.func_110781_a((EntityBirchWoodBoat)par1Entity);
     }
+
+    @Override
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+		return true;
+	}
+
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+		return true;
+	}
+
+	@Override
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		renderBoat(null, 1, 1, 1, 1, 1);
+	}
 
 }

@@ -1,18 +1,20 @@
 package k2b6s9j.BoatCraft.render;
 
 import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
-
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.IItemRenderer.ItemRenderType;
+import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
-public class RenderOakWoodBoat extends Render {
+import org.lwjgl.opengl.GL11;
+
+public class RenderOakWoodBoat extends Render implements IItemRenderer {
 
 	private static final ResourceLocation texture = new ResourceLocation("textures/entity/boat.png");
 
@@ -67,5 +69,20 @@ public class RenderOakWoodBoat extends Render {
     {
         return this.func_110781_a((EntityOakWoodBoat)par1Entity);
     }
+
+    @Override
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+		return true;
+	}
+
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+		return true;
+	}
+
+	@Override
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		renderBoat(null, 0.5F, 0.5F, 0.5F, 1, 1);
+	}
 
 }
