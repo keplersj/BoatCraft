@@ -1,32 +1,37 @@
 package k2b6s9j.BoatCraft.render;
 
-import k2b6s9j.BoatCraft.entity.item.EntityJungleWoodBoat;
+import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderJungleWoodBoat extends Render implements IItemRenderer {
+public class RenderCustomBoat extends Render implements IItemRenderer {
 
-	private static final ResourceLocation texture = new ResourceLocation("boatcraft:textures/boats/jungle.png");
+	private static ResourceLocation texture = new ResourceLocation("boatcraft:textures/boats/birch.png");
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat;
 	
-	public RenderJungleWoodBoat () {
+	public RenderCustomBoat () {
 		this.shadowSize = 0.5F;
         this.modelBoat = new ModelBoat();
 	}
 	
-	public void renderBoat(EntityJungleWoodBoat par1EntityBoat, double par2, double par4, double par6, float par8, float par9)
+	public RenderCustomBoat(ResourceLocation location)
+	{
+		this();
+		texture = location;
+	}
+	
+	public void renderBoat(EntityBirchWoodBoat par1EntityBoat, double par2, double par4, double par6, float par8, float par9)
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
@@ -54,20 +59,19 @@ public class RenderJungleWoodBoat extends Render implements IItemRenderer {
     }
     
     @Override
-	public void doRender(Entity entity, double d0, double d1, double d2,
-			float f, float f1) {
-    	this.renderBoat((EntityJungleWoodBoat)entity, d0, d1, d2, f, f1);
+	public void doRender(Entity entity, double d0, double d1, double d2, float f, float f1) {
+    	this.renderBoat((EntityBirchWoodBoat)entity, d0, d1, d2, f, f1);
 		
 	}
 
-    protected ResourceLocation func_110781_a(EntityJungleWoodBoat par1Entity)
+    protected ResourceLocation func_110781_a(EntityBirchWoodBoat par1Entity)
     {
         return texture;
     }
 
     protected ResourceLocation func_110775_a(Entity par1Entity)
     {
-        return this.func_110781_a((EntityJungleWoodBoat)par1Entity);
+        return this.func_110781_a((EntityBirchWoodBoat)par1Entity);
     }
 
     @Override
