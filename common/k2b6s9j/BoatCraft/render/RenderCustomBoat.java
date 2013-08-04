@@ -20,15 +20,14 @@ public class RenderCustomBoat extends Render implements IItemRenderer {
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat;
 	
-	public RenderCustomBoat () {
+	public RenderCustomBoat() {
 		this.shadowSize = 0.5F;
         this.modelBoat = new ModelBoat();
 	}
 	
-	public RenderCustomBoat(ResourceLocation location)
-	{
+	public RenderCustomBoat(ResourceLocation location) {
 		this();
-		texture = location;
+		location = texture;
 	}
 	
 	public void renderBoat(EntityCustomBoat par1EntityBoat, double par2, double par4, double par6, float par8, float par9)
@@ -60,8 +59,7 @@ public class RenderCustomBoat extends Render implements IItemRenderer {
     
     @Override
 	public void doRender(Entity entity, double d0, double d1, double d2, float f, float f1) {
-    	this.renderBoat((EntityCustomBoat)entity, d0, d1, d2, f, f1);
-		
+    	this.renderBoat((EntityCustomBoat)entity, d0, d1, d2, f, f1);	
 	}
 
     protected ResourceLocation func_110781_a(EntityCustomBoat par1Entity)
