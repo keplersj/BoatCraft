@@ -13,7 +13,6 @@ Special Thanks goes out to:
 - Blocks in Boats (Will put out integration tutorial when finished)
 
 ## Goals (Not even begun work on, might not even happen)
-- Forestry wood support
 - Natura wood support
 - Binnie's Mods wood support
 - ThaumCraft wood support
