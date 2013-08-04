@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EntityCustomBoat extends EntityBoat
 {
     private boolean field_70279_a;
-    public String material;
+    public int type;
     
     public EntityCustomBoat(World par1World)
     {
@@ -32,10 +33,38 @@ public class EntityCustomBoat extends EntityBoat
 		super(par1World, par2, par4, par6);
 	}
     
-    public EntityCustomBoat(World par1World, double par2, double par4, double par6, String material) {
+    public EntityCustomBoat(World par1World, double par2, double par4, double par6, int type) {
     	super(par1World, par2, par4, par6);
-    	this.material = material;
+    	this.type = type;
 	}
+    
+    public void setType(int par1)
+    {
+        this.dataWatcher.updateObject(16, Integer.valueOf(par1));
+    }
+
+    public int getType()
+    {
+        return this.dataWatcher.getWatchableObjectInt(16);
+    }
+    
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.writeEntityToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setInteger("Type", this.getType());
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.readEntityFromNBT(par1NBTTagCompound);
+        this.setType(par1NBTTagCompound.getInteger("Type"));
+    }
 
 	/**
      * Called when the entity is attacked.
