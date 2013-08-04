@@ -1,11 +1,11 @@
 package k2b6s9j.BoatCraft.render;
 
 import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
+import k2b6s9j.BoatCraft.entity.item.EntityCustomBoat;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
@@ -31,7 +31,7 @@ public class RenderCustomBoat extends Render implements IItemRenderer {
 		texture = location;
 	}
 	
-	public void renderBoat(EntityBirchWoodBoat par1EntityBoat, double par2, double par4, double par6, float par8, float par9)
+	public void renderBoat(EntityCustomBoat par1EntityBoat, double par2, double par4, double par6, float par8, float par9)
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
@@ -60,18 +60,18 @@ public class RenderCustomBoat extends Render implements IItemRenderer {
     
     @Override
 	public void doRender(Entity entity, double d0, double d1, double d2, float f, float f1) {
-    	this.renderBoat((EntityBirchWoodBoat)entity, d0, d1, d2, f, f1);
+    	this.renderBoat((EntityCustomBoat)entity, d0, d1, d2, f, f1);
 		
 	}
 
-    protected ResourceLocation func_110781_a(EntityBirchWoodBoat par1Entity)
+    protected ResourceLocation func_110781_a(EntityCustomBoat par1Entity)
     {
         return texture;
     }
 
     protected ResourceLocation func_110775_a(Entity par1Entity)
     {
-        return this.func_110781_a((EntityBirchWoodBoat)par1Entity);
+        return this.func_110781_a((EntityCustomBoat)par1Entity);
     }
 
     @Override
