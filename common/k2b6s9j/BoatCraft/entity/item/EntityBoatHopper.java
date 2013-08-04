@@ -141,7 +141,7 @@ public class EntityBoatHopper extends EntityBoatContainer implements Hopper {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("TransferCooldown", this.transferTicker);
@@ -150,7 +150,7 @@ public class EntityBoatHopper extends EntityBoatContainer implements Hopper {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.transferTicker = par1NBTTagCompound.getInteger("TransferCooldown");
