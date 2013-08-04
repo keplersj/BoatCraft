@@ -141,6 +141,12 @@ public class BoatCraft {
         GameRegistry.addRecipe(new ItemStack(birchBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2));
         GameRegistry.addRecipe(new ItemStack(jungleBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 3));
         
+        //Special Boat Recipes
+        CraftingUtilities.AddShapelessRecipe(new ItemStack(chestBoat), new ItemStack(Block.chest), "itemBoat");
+        CraftingUtilities.AddShapelessRecipe(new ItemStack(furnaceBoat), new ItemStack(Block.furnaceIdle), "itemBoat");
+        CraftingUtilities.AddShapelessRecipe(new ItemStack(tntBoat), new ItemStack(Block.tnt), "itemBoat");
+        CraftingUtilities.AddShapelessRecipe(new ItemStack(hopperBoat), new ItemStack(Block.hopperBlock), "itemBoat");
+        
         //Stick Recipes
         CraftingUtilities.RemoveRecipe(new ItemStack(Item.stick));
         GameRegistry.addRecipe(new ItemStack(Item.stick), "W", "W", Character.valueOf('W'), new ItemStack(Block.planks, 1, 0));
