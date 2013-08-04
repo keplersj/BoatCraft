@@ -14,6 +14,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BoatBirch extends ItemBoat {
@@ -27,6 +28,7 @@ public class BoatBirch extends ItemBoat {
         func_111206_d("boatcraft:boatBirch");
     	GameRegistry.registerItem(this, "Birch Wood Boat");
     	shiftedID = this.itemID;
+    	OreDictionary.registerOre("itemBoat", new ItemStack(this));
 	}
 	
 	@Override
