@@ -9,13 +9,6 @@ Special Thanks goes out to:
 - Sargunster, for creating his Better than Wolves boat addon and giving me huge inspiration
 - CovertJaguar, for creating Railcraft and being one of the biggest inspiractions.
 
-## Features (Currently implemented)
-- Boat Items for the 4 Vanilla Woods
-- Dynamic Wooden Boat textures for the 4 Vanilla Woods
-
-## Half-Features (Needs work)
-- Dynamic Wooden Sticks (Again for the different wood types)
-
 ## Working on Now
 - Blocks in Boats (Will put out integration tutorial when finished)
 
