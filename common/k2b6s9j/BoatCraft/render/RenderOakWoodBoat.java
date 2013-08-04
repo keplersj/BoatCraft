@@ -77,7 +77,7 @@ public class RenderOakWoodBoat extends Render implements IItemRenderer {
 
 	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-		return true;
+		return false;
 	}
 
 	@Override
