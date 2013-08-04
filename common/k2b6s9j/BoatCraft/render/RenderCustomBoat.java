@@ -21,6 +21,7 @@ public class RenderCustomBoat extends Render implements IItemRenderer {
 
 	private final static ResourceLocation oak = new ResourceLocation("textures/entity/boat.png");
 	private final static String modBase = "boatcraft:textures/boats/";
+	private final static ResourceLocation unknown = new ResourceLocation(modBase + "unknown.png");
 	private final static ResourceLocation spruce = new ResourceLocation(modBase + "spruce.png");
 	private final static ResourceLocation birch = new ResourceLocation(modBase + "birch.png");
 	private final static ResourceLocation jungle = new ResourceLocation(modBase + "jungle.png");
@@ -78,7 +79,7 @@ public class RenderCustomBoat extends Render implements IItemRenderer {
             case 3:
                 return jungle;
             default:
-                return oak;
+                return unknown;
         }
     }
 
