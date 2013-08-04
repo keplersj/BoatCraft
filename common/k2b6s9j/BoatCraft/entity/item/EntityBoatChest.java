@@ -1,10 +1,13 @@
 package k2b6s9j.BoatCraft.entity.item;
 
+import k2b6s9j.BoatCraft.item.boat.BoatChest;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
 public class EntityBoatChest extends EntityBoatContainer {
 
+	public BoatChest item;
+	
 	public EntityBoatChest(World par1World)
     {
         super(par1World);
@@ -47,4 +50,16 @@ public class EntityBoatChest extends EntityBoatContainer {
 	public String getInvName() {
 		return "Boat";
 	}
+	
+	@Override
+	public boolean isCustomBoat()
+    {
+    	return true;
+    }
+    
+	@Override
+    public int customBoatItem()
+    {
+    	return item.shiftedID;
+    }
 }

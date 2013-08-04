@@ -1,8 +1,8 @@
 package k2b6s9j.BoatCraft.entity.item;
 
 import java.util.List;
-import java.util.logging.Level;
 
+import k2b6s9j.BoatCraft.item.boat.BoatOak;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -14,7 +14,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -105,7 +104,7 @@ public class EntityCustomBoat extends Entity
     {
         return (double)this.height * 0.0D - 0.30000001192092896D;
     }
-
+    
     /**
      * Called when the entity is attacked.
      */
@@ -132,7 +131,14 @@ public class EntityCustomBoat extends Entity
 
                 if (!flag)
                 {
-                    this.dropItemWithOffset(Item.boat.itemID, 1, 0.0F);
+                	if (isCustomBoat())
+                	{
+                        this.dropItemWithOffset(customBoatItem(), 1, 0.0F);
+                	}
+                	else
+                	{
+                		this.dropItemWithOffset(BoatOak.shiftedID, 1, 0.0F);
+                	}
                 }
 
                 this.setDead();
@@ -146,6 +152,16 @@ public class EntityCustomBoat extends Entity
         }
     }
 
+    public boolean isCustomBoat()
+    {
+    	return false;
+    }
+    
+    public int customBoatItem()
+    {
+    	return BoatOak.shiftedID;
+    }
+    
     @SideOnly(Side.CLIENT)
 
     /**

@@ -1,11 +1,13 @@
 package k2b6s9j.BoatCraft.entity.item;
 
+import k2b6s9j.BoatCraft.item.boat.BoatFurnace;
 import net.minecraft.block.Block;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class EntityBoatFurnace extends EntityCustomBoat {
+	
+	public BoatFurnace item;
 	
 	public EntityBoatFurnace(World par1World)
     {
@@ -31,5 +33,17 @@ public class EntityBoatFurnace extends EntityCustomBoat {
     {
     	//Do not mount this boat on right click!
         return false;
+    }
+    
+    @Override
+	public boolean isCustomBoat()
+    {
+    	return true;
+    }
+    
+	@Override
+    public int customBoatItem()
+    {
+    	return item.shiftedID;
     }
 }
