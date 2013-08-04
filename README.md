@@ -9,9 +9,6 @@ Special Thanks goes out to:
 - Sargunster, for creating his Better than Wolves boat addon and giving me huge inspiration
 - CovertJaguar, for creating Railcraft and being one of the biggest inspiractions.
 
-## Working on Now
-- Blocks in Boats (Will put out integration tutorial when finished)
-
 ## Goals (Not even begun work on, might not even happen)
 - IndustrialCraft2 wood support
 - ExtraBiomesXL wood support
