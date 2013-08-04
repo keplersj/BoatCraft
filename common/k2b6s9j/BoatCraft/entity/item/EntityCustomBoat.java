@@ -40,12 +40,12 @@ public class EntityCustomBoat extends EntityBoat
     
     public void setType(int par1)
     {
-        this.dataWatcher.updateObject(16, Integer.valueOf(par1));
+        this.type = par1;
     }
 
     public int getType()
     {
-        return this.dataWatcher.getWatchableObjectInt(16);
+        return this.type;
     }
     
     /**
