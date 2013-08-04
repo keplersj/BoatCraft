@@ -10,7 +10,6 @@ Special Thanks goes out to:
 - CovertJaguar, for creating Railcraft and being one of the biggest inspiractions.
 
 ## Goals (Not even begun work on, might not even happen)
-- ExtraBiomesXL wood support
 - Seaport Villages
 - RailCraft Integration
 - Forestry Integration
