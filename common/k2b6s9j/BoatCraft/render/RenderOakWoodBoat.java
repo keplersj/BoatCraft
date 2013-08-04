@@ -82,7 +82,6 @@ public class RenderOakWoodBoat extends Render implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		renderBoat(null, 0.5F, 0.5F, 0.5F, 1, 1);
 	}
 
 }

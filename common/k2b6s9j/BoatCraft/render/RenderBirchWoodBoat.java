@@ -80,7 +80,6 @@ public class RenderBirchWoodBoat extends Render implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		renderBoat(null, 1, 1, 1, 1, 1);
 	}
 
 }
