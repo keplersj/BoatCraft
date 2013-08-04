@@ -39,7 +39,8 @@ public class EntityCustomBoat extends EntityBoat
     
     public void setType(int type)
     {
-        this.dataWatcher.updateObject(16, type);
+    	int b0 = this.dataWatcher.getWatchableObjectInt(16);
+        this.dataWatcher.updateObject(16, Integer.valueOf((int)(b0 | type)));
     }
 
     public int getType()
