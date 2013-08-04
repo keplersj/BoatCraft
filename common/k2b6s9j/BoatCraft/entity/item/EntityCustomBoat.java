@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EntityCustomBoat extends EntityBoat
 {
     private boolean field_70279_a;
-    private String material;
+    public String material;
     
     public EntityCustomBoat(World par1World)
     {

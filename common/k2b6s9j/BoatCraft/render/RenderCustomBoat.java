@@ -6,6 +6,7 @@ import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
@@ -14,7 +15,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderCustomBoat extends Render implements IItemRenderer {
 
-	private static ResourceLocation texture = new ResourceLocation("textures/entity/boat.png");
+	private static ResourceLocation texture;
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat;
@@ -61,9 +62,17 @@ public class RenderCustomBoat extends Render implements IItemRenderer {
     	this.renderBoat((EntityCustomBoat)entity, d0, d1, d2, f, f1);	
 	}
 
-    protected ResourceLocation func_110781_a(EntityCustomBoat par1Entity)
+    protected ResourceLocation func_110781_a(EntityCustomBoat entity)
     {
-        return texture;
+    	if(entity.material == "oak")
+    	{
+    		texture = new ResourceLocation("textures/entity/boat.png");
+    	}
+    	else
+    	{
+    		texture = new ResourceLocation("boatcraft:textures/boats/" + entity.material + ".png"); 
+    	}
+    	return texture;
     }
 
     protected ResourceLocation func_110775_a(Entity par1Entity)
