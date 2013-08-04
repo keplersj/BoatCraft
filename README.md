@@ -43,6 +43,10 @@ Special Thanks goes out to:
 - Blocks that can affect boats in the water
 - And one day, STEAM BOATS!
 - PIRATES!
+- Proper docking
+- Sails
+- Weapons (Fire Cannons, Lasers)
+- Galgadorian boats
 - Much more
 
 ## The Build Enviroment
