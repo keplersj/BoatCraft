@@ -14,17 +14,21 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BoatOak extends ItemBoat {
 
 	public static int ID;
+	public static int shiftedID;
 	
 	public BoatOak(int id) {
 		super(id);
 		setUnlocalizedName("boatOak");
         func_111206_d("boatcraft:boatOak");
     	GameRegistry.registerItem(this, "Oak Wood Boat");
+    	shiftedID = this.itemID;
+    	OreDictionary.registerOre("itemBoat", new ItemStack(this));
 	}
 	
 	@Override
@@ -91,7 +95,6 @@ public class BoatOak extends ItemBoat {
                     {
                         --j;
                     }
-
                     EntityOakWoodBoat entityboat = new EntityOakWoodBoat(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
                     entityboat.rotationYaw = (float)(((MathHelper.floor_double((double)(par3EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
 

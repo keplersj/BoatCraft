@@ -1,20 +1,22 @@
 package k2b6s9j.BoatCraft.render;
 
 import k2b6s9j.BoatCraft.entity.item.EntitySpruceWoodBoat;
-
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.IItemRenderer.ItemRenderType;
+import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
-public class RenderSpruceWoodBoat extends Render {
+import org.lwjgl.opengl.GL11;
 
-	private static final ResourceLocation texture = new ResourceLocation("boatcraft/textures/boats/spruce.png");
+public class RenderSpruceWoodBoat extends Render implements IItemRenderer {
+
+	private static final ResourceLocation texture = new ResourceLocation("boatcraft:textures/boats/spruce.png");
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat;
@@ -52,8 +54,7 @@ public class RenderSpruceWoodBoat extends Render {
     }
     
     @Override
-	public void doRender(Entity entity, double d0, double d1, double d2,
-			float f, float f1) {
+	public void doRender(Entity entity, double d0, double d1, double d2, float f, float f1) {
     	this.renderBoat((EntitySpruceWoodBoat)entity, d0, d1, d2, f, f1);
 		
 	}
@@ -67,5 +68,20 @@ public class RenderSpruceWoodBoat extends Render {
     {
         return this.func_110781_a((EntitySpruceWoodBoat)par1Entity);
     }
+
+    @Override
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+		return true;
+	}
+
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+		return true;
+	}
+
+	@Override
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		renderBoat(null, 0.5F, 0.5F, 0.5F, 1, 1);
+	}
 
 }

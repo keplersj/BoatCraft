@@ -172,6 +172,9 @@
 		</copy>
 
 		<!-- Copy resoucres -->
+		<copy todir="build/forge/mcp/jars/assets">
+			<fileset dir="resources"></fileset>
+		</copy>
 		<copy todir="${classes.dir}/client/assets">
 			<fileset dir="resources"></fileset>
 		</copy>
@@ -190,7 +193,7 @@
 
 	<target name="copy-new-code">
 		<!-- Takes the new code from the build envrironment, most likely made with Eclipse and puts it in the main source directory -->
-		<delete dir="${src.dir}"/>
+		<delete dir="${src.dir}/k2b6s9j/BoatCraft"/>
 		<copy todir="${src.dir}/k2b6s9j/BoatCraft">
 			<fileset dir="${commonsrc.dir}/k2b6s9j/BoatCraft"/>
 		</copy>

@@ -50,6 +50,19 @@ Special Thanks goes out to:
 - Buoys
 - Much more
 
+<<<<<<< HEAD
+## Features (Currently implemented)
+- Boat Items for the 4 Vanilla Woods
+
+## Half-Features (Needs work)
+- Dynamic Wooden Sticks (Again for the different wood types)
+
+## Currently Being Worked On
+- Boats that contain all the same blocks that Vanilla Minecarts can contain (Chest, Furnace, TNT, Mob Spawner)
+- API allowing other mods to add blocks to boats
+
+=======
+>>>>>>> master
 ## The Build Enviroment
 When I develop with Java I try to make my enviroment as git friendly as possible. This means that it is easy for anyone to download and play around with my code. When you clone the repository onto your computer open your command line and run 'ant' inside the repository's folder on your computer, this requires [ant](http://ant.apache.org/manual/install.html) to be installed on your computer.
 

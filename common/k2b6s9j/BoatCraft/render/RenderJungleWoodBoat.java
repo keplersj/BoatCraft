@@ -1,20 +1,22 @@
 package k2b6s9j.BoatCraft.render;
 
 import k2b6s9j.BoatCraft.entity.item.EntityJungleWoodBoat;
-
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.IItemRenderer.ItemRenderType;
+import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
-public class RenderJungleWoodBoat extends Render {
+import org.lwjgl.opengl.GL11;
 
-	private static final ResourceLocation texture = new ResourceLocation("boatcraft/textures/boats/jungle.png");
+public class RenderJungleWoodBoat extends Render implements IItemRenderer {
+
+	private static final ResourceLocation texture = new ResourceLocation("boatcraft:textures/boats/jungle.png");
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat;
@@ -67,5 +69,20 @@ public class RenderJungleWoodBoat extends Render {
     {
         return this.func_110781_a((EntityJungleWoodBoat)par1Entity);
     }
+
+    @Override
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+		return true;
+	}
+
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+		return true;
+	}
+
+	@Override
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		renderBoat(null, 0.5F, 0.5F, 0.5F, 1, 1);
+	}
 
 }
