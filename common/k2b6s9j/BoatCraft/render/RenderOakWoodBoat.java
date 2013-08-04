@@ -86,9 +86,8 @@ public class RenderOakWoodBoat extends Render implements IItemRenderer {
     {
 		GL11.glPushMatrix();
 
-        GL11.glScalef(.05F, .05F, .05F);
         Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
-        this.modelBoat.render(entity, 1F, 1F, 1F, 1F, 1F, 1F);
+        this.modelBoat.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
     }
 }
