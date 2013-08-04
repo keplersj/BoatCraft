@@ -19,12 +19,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class BoatHopper extends ItemBoat {
 	
 	public static int ID;
+	public static int shiftedID;
 	
 	public BoatHopper(int id) {
 		super(id);
 		setUnlocalizedName("boatHopper");
         func_111206_d("boatcraft:boatHopper");
     	GameRegistry.registerItem(this, "Hopper Boat");
+    	shiftedID = this.itemID;
 	}
 	
 	@Override
