@@ -1,13 +1,10 @@
 package k2b6s9j.BoatCraft.proxy;
 
-import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatFurnace;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatHopper;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatTNT;
-import k2b6s9j.BoatCraft.entity.item.EntityJungleWoodBoat;
-import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
-import k2b6s9j.BoatCraft.entity.item.EntitySpruceWoodBoat;
+import k2b6s9j.BoatCraft.entity.item.EntityCustomBoat;
 import k2b6s9j.BoatCraft.item.boat.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
@@ -26,10 +23,7 @@ public class ClientProxy extends CommonProxy {
 	
 	public static void registerRenderers() {
 		//Regular Boats
-		RenderingRegistry.registerEntityRenderingHandler(EntityOakWoodBoat.class, new RenderCustomBoat(new ResourceLocation("textures/entity/boat.png")));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySpruceWoodBoat.class, new RenderCustomBoat(new ResourceLocation("boatcraft:textures/boats/spruce.png")));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBirchWoodBoat.class, new RenderCustomBoat(new ResourceLocation("boatcraft:textures/boats/birch.png")));
-		RenderingRegistry.registerEntityRenderingHandler(EntityJungleWoodBoat.class, new RenderCustomBoat(new ResourceLocation("boatcraft:textures/boats/jungle.png")));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCustomBoat.class, new RenderCustomBoat());
 		
 		//Special Boats
 		RenderingRegistry.registerEntityRenderingHandler(EntityBoatChest.class, new RenderChestBoat());
