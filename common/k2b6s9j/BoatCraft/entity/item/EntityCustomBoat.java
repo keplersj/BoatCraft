@@ -21,6 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EntityCustomBoat extends EntityBoat
 {
     private boolean field_70279_a;
+    private String material;
     
     public EntityCustomBoat(World par1World)
     {
@@ -31,10 +32,17 @@ public class EntityCustomBoat extends EntityBoat
 		super(par1World, par2, par4, par6);
 	}
     
-    public EntityCustomBoat(World par1World, double par2, double par4, double par6, NBTTagCompound material) {
+    public EntityCustomBoat(World par1World, double par2, double par4, double par6, String material) {
     	super(par1World, par2, par4, par6);
-    	writeEntityToNBT(material);
+    	this.material = material;
 	}
+    
+    @Override
+    public void writeToNBT(NBTTagCompound nbt)
+    {
+        super.writeToNBT(nbt);
+        nbt.setString("material", this.material);
+    }
 
 	/**
      * Called when the entity is attacked.
