@@ -1,22 +1,23 @@
 package k2b6s9j.BoatCraft.render;
 
 import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 import org.lwjgl.opengl.GL11;
 
 public class RenderOakWoodBoat extends Render implements IItemRenderer {
 
 	private static final ResourceLocation texture = new ResourceLocation("textures/entity/boat.png");
+	private EntityOakWoodBoat entity;
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat;
@@ -81,7 +82,16 @@ public class RenderOakWoodBoat extends Render implements IItemRenderer {
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-	}
+	public void renderItem(ItemRenderType type, ItemStack item, Object ... var3)
+    {
+		GL11.glPushMatrix();
 
+        float f4 = 0.75F;
+        GL11.glScalef(f4, f4, f4);
+        GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
+        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
+        GL11.glScalef(-1.0F, -1.0F, 1.0F);
+        this.modelBoat.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        GL11.glPopMatrix();
+    }
 }
