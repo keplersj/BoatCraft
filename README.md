@@ -47,6 +47,7 @@ Special Thanks goes out to:
 - Sails
 - Weapons (Fire Cannons, Lasers)
 - Galgadorian boats
+- Buoys
 - Much more
 
 ## The Build Enviroment
