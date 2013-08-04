@@ -22,7 +22,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EntityCustomBoat extends EntityBoat
 {
     private boolean field_70279_a;
-    public int type;
     
     public EntityCustomBoat(World par1World)
     {
@@ -35,17 +34,17 @@ public class EntityCustomBoat extends EntityBoat
     
     public EntityCustomBoat(World par1World, double par2, double par4, double par6, int type) {
     	super(par1World, par2, par4, par6);
-    	this.type = type;
+    	setType(type);
 	}
     
-    public void setType(int par1)
+    public void setType(int type)
     {
-        this.type = par1;
+        this.dataWatcher.updateObject(16, type);
     }
 
     public int getType()
     {
-        return this.type;
+    	return this.dataWatcher.getWatchableObjectInt(16);
     }
     
     /**
@@ -54,7 +53,7 @@ public class EntityCustomBoat extends EntityBoat
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("Type", this.getType());
+        par1NBTTagCompound.setInteger("Type", (int)this.getType());
     }
 
     /**
