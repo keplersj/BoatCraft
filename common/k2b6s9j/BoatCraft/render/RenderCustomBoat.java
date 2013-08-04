@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderCustomBoat extends Render implements IItemRenderer {
 
-	private static ResourceLocation texture = new ResourceLocation("boatcraft:textures/boats/birch.png");
+	private static ResourceLocation texture;
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat;
