@@ -36,13 +36,6 @@ public class EntityCustomBoat extends EntityBoat
     	super(par1World, par2, par4, par6);
     	this.material = material;
 	}
-    
-    @Override
-    public void writeToNBT(NBTTagCompound nbt)
-    {
-        super.writeToNBT(nbt);
-        nbt.setString("material", this.material);
-    }
 
 	/**
      * Called when the entity is attacked.
