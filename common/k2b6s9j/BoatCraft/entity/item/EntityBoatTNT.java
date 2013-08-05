@@ -49,10 +49,16 @@ public class EntityBoatTNT extends EntityCustomBoat {
     	return true;
     }
     
+    @Override
+	public boolean useItemID()
+	{
+		return true;
+	}
+    
 	@Override
-    public ItemStack customBoatItem()
+    public int customBoatItemID()
     {
-    	return new ItemStack(item, 1, 0);
+    	return item.shiftedID;
     }
 
 }

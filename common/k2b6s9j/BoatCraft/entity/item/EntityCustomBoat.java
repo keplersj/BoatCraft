@@ -134,7 +134,14 @@ public class EntityCustomBoat extends Entity
                 {
                 	if (isCustomBoat())
                 	{
-                        this.entityDropItem(customBoatItem(), 0.0F);
+                		if (useItemID())
+                		{
+                			this.dropItemWithOffset(customBoatItemID(), 1, 0.0F);
+                		}
+                		else
+                		{
+                			this.entityDropItem(customBoatItem(), 0.0F);
+                		}
                 	}
                 	else
                 	{
@@ -161,6 +168,16 @@ public class EntityCustomBoat extends Entity
     public ItemStack customBoatItem()
     {
     	return new ItemStack(Item.boat, 1, 0);
+    }
+    
+    public boolean useItemID()
+    {
+    	return false;
+    }
+    
+    public int customBoatItemID()
+    {
+    	return Item.boat.itemID;
     }
     
     public ItemStack customPlank()

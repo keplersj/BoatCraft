@@ -25,9 +25,15 @@ public class EntitySpruceWoodBoat extends EntityCustomBoat {
     }
     
 	@Override
-    public ItemStack customBoatItem()
+	public boolean useItemID()
+	{
+		return true;
+	}
+    
+	@Override
+    public int customBoatItemID()
     {
-    	return new ItemStack(item, 1, 0);
+    	return item.shiftedID;
     }
 	
 	@Override
