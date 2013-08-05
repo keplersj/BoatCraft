@@ -1,6 +1,7 @@
 package k2b6s9j.BoatCraft.entity.item;
 
 import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -207,5 +208,47 @@ public abstract class EntityBoatContainer extends EntityCustomBoat implements II
             player.displayGUIChest(this);
         }
         return true;
+    }
+    
+    public void dropContents()
+    {
+    	for (int i = 0; i < this.getSizeInventory(); ++i)
+        {
+            ItemStack itemstack = this.getStackInSlot(i);
+
+            if (itemstack != null)
+            {
+                float f = this.rand.nextFloat() * 0.8F + 0.1F;
+                float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
+                float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
+
+                while (itemstack.stackSize > 0)
+                {
+                    int j = this.rand.nextInt(21) + 10;
+
+                    if (j > itemstack.stackSize)
+                    {
+                        j = itemstack.stackSize;
+                    }
+
+                    itemstack.stackSize -= j;
+                    EntityItem entityitem = new EntityItem(this.worldObj, this.posX + (double)f, this.posY + (double)f1, this.posZ + (double)f2, new ItemStack(itemstack.itemID, j, itemstack.getItemDamage()));
+                    float f3 = 0.05F;
+                    entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
+                    entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
+                    entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
+                    this.worldObj.spawnEntityInWorld(entityitem);
+                }
+            }
+        }
+    }
+    
+    @Override
+    public void crashedDrops()
+    {
+    	if (dropContentsWhenDead)
+    	{
+    		dropContents();
+    	}
     }
 }

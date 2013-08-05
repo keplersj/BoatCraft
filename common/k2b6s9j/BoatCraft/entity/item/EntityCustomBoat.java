@@ -173,6 +173,35 @@ public class EntityCustomBoat extends Entity
     	return new ItemStack(Item.stick, 1, 0);
     }
     
+    public void crashedDrops()
+    {
+        int k;
+
+        for (k = 0; k < 3; ++k)
+        {
+        	if (isCustomBoat())
+        	{
+        		this.entityDropItem(customPlank(), 0.0F);
+        	}
+        	else
+        	{
+        		this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F);
+        	}
+        }
+
+        for (k = 0; k < 2; ++k)
+        {
+        	if (isCustomBoat())
+        	{
+                this.entityDropItem(customStick(), 0.0F);
+        	}
+        	else
+        	{
+        		this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F);
+        	}
+        }
+    }
+    
     @SideOnly(Side.CLIENT)
 
     /**
@@ -416,32 +445,8 @@ public class EntityCustomBoat extends Entity
             {
                 if (!this.worldObj.isRemote && !this.isDead)
                 {
-                    this.setDead();
-                    int k;
-
-                    for (k = 0; k < 3; ++k)
-                    {
-                    	if (isCustomBoat())
-                    	{
-                    		this.entityDropItem(customPlank(), 0.0F);
-                    	}
-                    	else
-                    	{
-                    		this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F);
-                    	}
-                    }
-
-                    for (k = 0; k < 2; ++k)
-                    {
-                    	if (isCustomBoat())
-                    	{
-                            this.entityDropItem(customStick(), 0.0F);
-                    	}
-                    	else
-                    	{
-                    		this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F);
-                    	}
-                    }
+                	this.setDead();
+                    this.crashedDrops();
                 }
             }
             else
