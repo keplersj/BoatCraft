@@ -2,6 +2,7 @@ package k2b6s9j.BoatCraft.render;
 
 import k2b6s9j.BoatCraft.entity.item.EntityBoatTNT;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -11,12 +12,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.IItemRenderer.ItemRenderType;
+import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 import org.lwjgl.opengl.GL11;
 
 public class RenderTNTBoat extends Render implements IItemRenderer {
 
-	private static final ResourceLocation field_110804_g = new ResourceLocation("textures/entity/boat.png");
+	private static final ResourceLocation texture = new ResourceLocation("textures/entity/boat.png");
+	private EntityBoatTNT entity;
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat = new ModelBoat();
@@ -75,7 +79,7 @@ public class RenderTNTBoat extends Render implements IItemRenderer {
 
     protected ResourceLocation func_110803_a(EntityBoatTNT boat)
     {
-        return field_110804_g;
+        return texture;
     }
 
     /**
@@ -105,22 +109,46 @@ public class RenderTNTBoat extends Render implements IItemRenderer {
         this.renderTheBoat((EntityBoatTNT)par1Entity, par2, par4, par6, par8, par9);
     }
 
-	@Override
+    @Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		// TODO Auto-generated method stub
+		switch (type) {
+			case EQUIPPED_FIRST_PERSON:
+				return true;
+			case EQUIPPED:
+				return true;
+			case INVENTORY:
+				return false; //For now... Until I find a way.
+			case ENTITY:
+				return true;
+			default:
+				return false;
+		}
+	}
+
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
 		return false;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-			ItemRendererHelper helper) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public void renderItem(ItemRenderType type, ItemStack item, Object ... var3)
+    {
+		switch (type) {
+			default:
+				GL11.glPushMatrix();
+		        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
 
-	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		// TODO Auto-generated method stub
-		
-	}
+				float defaultScale = 1F;
+				GL11.glScalef(defaultScale, defaultScale, defaultScale);
+				GL11.glRotatef(90, -1, 0, 0);
+				GL11.glRotatef(90, 0, 0, 1);
+				GL11.glRotatef(180, 0, 1, 0);
+				GL11.glRotatef(90, 1, 0, 0);
+				GL11.glTranslatef(-0.1F, -0.5F, 0F); // Left-Right
+				// Forward-Backwards Up-Down
+				modelBoat.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.05F);
+
+				GL11.glPopMatrix();
+		}
+    }
 }
