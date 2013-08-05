@@ -26,11 +26,6 @@ public class EntityBoatChest extends EntityBoatContainer {
         return 27;
     }
 
-    public int getMinecartType()
-    {
-        return 1;
-    }
-
     public Block getDefaultDisplayTile()
     {
         return Block.chest;
