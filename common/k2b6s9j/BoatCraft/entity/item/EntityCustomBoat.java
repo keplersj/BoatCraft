@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -133,7 +134,7 @@ public class EntityCustomBoat extends Entity
                 {
                 	if (isCustomBoat())
                 	{
-                        this.dropItemWithOffset(customBoatItem(), 1, 0.0F);
+                        this.entityDropItem(customBoatItem(), 0.0F);
                 	}
                 	else
                 	{
@@ -157,19 +158,19 @@ public class EntityCustomBoat extends Entity
     	return false;
     }
     
-    public int customBoatItem()
+    public ItemStack customBoatItem()
     {
-    	return BoatOak.shiftedID;
+    	return new ItemStack(Item.boat, 1, 0);
     }
     
-    public int customPlank()
+    public ItemStack customPlank()
     {
-    	return Block.planks.blockID;
+    	return new ItemStack(Block.planks, 1, 0);
     }
     
-    public int customStick()
+    public ItemStack customStick()
     {
-    	return Item.stick.itemID;
+    	return new ItemStack(Item.stick, 1, 0);
     }
     
     @SideOnly(Side.CLIENT)
@@ -422,7 +423,7 @@ public class EntityCustomBoat extends Entity
                     {
                     	if (isCustomBoat())
                     	{
-                    		this.dropItemWithOffset(customPlank(), 1, 0.0F);
+                    		this.entityDropItem(customPlank(), 0.0F);
                     	}
                     	else
                     	{
@@ -434,7 +435,7 @@ public class EntityCustomBoat extends Entity
                     {
                     	if (isCustomBoat())
                     	{
-                            this.dropItemWithOffset(customStick(), 1, 0.0F);
+                            this.entityDropItem(customStick(), 0.0F);
                     	}
                     	else
                     	{
