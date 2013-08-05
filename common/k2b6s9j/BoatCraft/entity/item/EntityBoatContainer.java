@@ -1,8 +1,11 @@
 package k2b6s9j.BoatCraft.entity.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -208,4 +211,73 @@ public abstract class EntityBoatContainer extends EntityCustomBoat implements II
         }
         return true;
     }
+    
+    public void dropContents()
+    {
+    	for (int i = 0; i < this.getSizeInventory(); ++i)
+        {
+            ItemStack itemstack = this.getStackInSlot(i);
+
+            if (itemstack != null)
+            {
+                float f = this.rand.nextFloat() * 0.8F + 0.1F;
+                float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
+                float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
+
+                while (itemstack.stackSize > 0)
+                {
+                    int j = this.rand.nextInt(21) + 10;
+
+                    if (j > itemstack.stackSize)
+                    {
+                        j = itemstack.stackSize;
+                    }
+
+                    itemstack.stackSize -= j;
+                    EntityItem entityitem = new EntityItem(this.worldObj, this.posX + (double)f, this.posY + (double)f1, this.posZ + (double)f2, new ItemStack(itemstack.itemID, j, itemstack.getItemDamage()));
+                    float f3 = 0.05F;
+                    entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
+                    entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
+                    entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
+                    this.worldObj.spawnEntityInWorld(entityitem);
+                }
+            }
+        }
+    }
+    
+    @Override
+	public void crashedDrops()
+	{
+		dropContents();
+		int k;
+
+        for (k = 0; k < 3; ++k)
+        {
+        	if (isCustomBoat())
+        	{
+        		this.entityDropItem(customPlank(), 0.0F);
+        	}
+        	else
+        	{
+        		this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F);
+        	}
+        }
+
+        for (k = 0; k < 2; ++k)
+        {
+        	if (isCustomBoat())
+        	{
+                this.entityDropItem(customStick(), 0.0F);
+        	}
+        	else
+        	{
+        		this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F);
+        	}
+        }
+        
+        if (doesBoatContainBlock())
+        {
+        	this.entityDropItem(blockInBoat(), 0.0F);
+        }
+	}
 }
