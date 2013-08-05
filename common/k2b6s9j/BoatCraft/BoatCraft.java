@@ -18,9 +18,6 @@ import k2b6s9j.BoatCraft.item.boat.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
 import k2b6s9j.BoatCraft.item.boat.BoatSpruce;
 import k2b6s9j.BoatCraft.item.boat.BoatTNT;
-import k2b6s9j.BoatCraft.item.stick.StickBirch;
-import k2b6s9j.BoatCraft.item.stick.StickJungle;
-import k2b6s9j.BoatCraft.item.stick.StickSpruce;
 import k2b6s9j.BoatCraft.proxy.ClientProxy;
 import k2b6s9j.BoatCraft.proxy.CommonProxy;
 import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
@@ -69,11 +66,6 @@ public class BoatCraft {
 	public BoatFurnace furnaceBoat;
 	public BoatHopper hopperBoat;
 	public BoatTNT tntBoat;
-	
-	//Stick Items
-	public StickSpruce spruceStick;
-	public StickBirch birchStick;
-	public StickJungle jungleStick;
 
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event)
@@ -94,11 +86,6 @@ public class BoatCraft {
         	furnaceBoat.ID = cfg.getItem(itemBoats, "Furnace Boat", 25509).getInt(25509);
         	hopperBoat.ID = cfg.getItem(itemBoats, "Hopper Boat", 25510).getInt(25510);
         	tntBoat.ID = cfg.getItem(itemBoats, "TNT Boat", 25511).getInt(25511);
-        	
-        	//Sticks
-        	spruceStick.ID = cfg.getItem(sticks, "Spruce Sticks", 25505).getInt(25505);
-        	birchStick.ID = cfg.getItem(sticks, "Birch Sticks", 25506).getInt(25506);
-        	jungleStick.ID = cfg.getItem(sticks, "Jungle Sticks", 25507).getInt(25507);
         }
         catch (Exception e)
         {
@@ -126,11 +113,6 @@ public class BoatCraft {
 		furnaceBoat = new BoatFurnace(furnaceBoat.ID);
 		hopperBoat = new BoatHopper(hopperBoat.ID);
 		tntBoat = new BoatTNT(tntBoat.ID);
-		
-		//Sticks
-		spruceStick = new StickSpruce(spruceStick.ID);
-		birchStick = new StickBirch(birchStick.ID);
-		jungleStick = new StickJungle(jungleStick.ID);
 	}
 	
 	public void RegisterRecipes() {
@@ -146,13 +128,6 @@ public class BoatCraft {
         CraftingUtilities.AddShapelessRecipe(new ItemStack(furnaceBoat), new ItemStack(Block.furnaceIdle), "itemBoat");
         CraftingUtilities.AddShapelessRecipe(new ItemStack(tntBoat), new ItemStack(Block.tnt), "itemBoat");
         CraftingUtilities.AddShapelessRecipe(new ItemStack(hopperBoat), new ItemStack(Block.hopperBlock), "itemBoat");
-        
-        //Stick Recipes
-        CraftingUtilities.RemoveRecipe(new ItemStack(Item.stick));
-        GameRegistry.addRecipe(new ItemStack(Item.stick), "W", "W", Character.valueOf('W'), new ItemStack(Block.planks, 1, 0));
-        GameRegistry.addRecipe(new ItemStack(spruceStick), "W", "W", Character.valueOf('W'), new ItemStack(Block.planks, 1, 1));
-        GameRegistry.addRecipe(new ItemStack(birchStick), "W", "W", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2));
-        GameRegistry.addRecipe(new ItemStack(jungleStick), "W", "W", Character.valueOf('W'), new ItemStack(Block.planks, 1, 3));
 	}
 	
 	public void EntityWork() {
@@ -186,12 +161,6 @@ public class BoatCraft {
 		LanguageRegistry.addName(furnaceBoat, "Furnace Boat");
 		LanguageRegistry.addName(hopperBoat, "Hopper Boat");
 		LanguageRegistry.addName(tntBoat, "TNT Boat");
-		
-		//Sticks
-		LanguageRegistry.addName(Item.stick, "Oak Wood Sticks");
-		LanguageRegistry.addName(spruceStick, "Spruce Wood Sticks");
-		LanguageRegistry.addName(birchStick, "Birch Wood Sticks");
-		LanguageRegistry.addName(jungleStick, "Jungle Wood Sticks");
 	}
 
 	@EventHandler

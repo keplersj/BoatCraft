@@ -1,7 +1,6 @@
 package k2b6s9j.BoatCraft.entity.item;
 
 import k2b6s9j.BoatCraft.item.boat.BoatSpruce;
-import k2b6s9j.BoatCraft.item.stick.StickSpruce;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -9,7 +8,6 @@ import net.minecraft.world.World;
 public class EntitySpruceWoodBoat extends EntityCustomBoat {
 	
 	public BoatSpruce item;
-	public StickSpruce stick;
 	
 	public EntitySpruceWoodBoat(World par1World)
     {
@@ -37,11 +35,4 @@ public class EntitySpruceWoodBoat extends EntityCustomBoat {
 	{
 		return new ItemStack(Block.planks, 1, 1);
 	}
-	
-	@Override
-	public ItemStack customStick()
-	{
-		return new ItemStack(stick, 1, 0);
-	}
-	
 }
