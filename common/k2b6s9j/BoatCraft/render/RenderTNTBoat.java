@@ -135,15 +135,33 @@ public class RenderTNTBoat extends Render implements IItemRenderer {
     {
 		switch (type) {
 			default:
-				GL11.glPushMatrix();
-		        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
+				int j = 8;
+		        Block block = Block.tnt;
+		        int k = 2;
 
+		        if (block != null)
+		        {
+		        	GL11.glPushMatrix();
+		            float f8 = 0.75F;
+		            GL11.glScalef(f8, f8, f8);
+					GL11.glRotatef(90, 0, -1, 0);
+		            GL11.glTranslatef(0.0F, (float)j / 8.0F, 0.0F);
+		            GL11.glPushMatrix();
+		            this.field_94145_f.renderBlockAsItem(block, 0, k);
+		            GL11.glPopMatrix();
+		            GL11.glPopMatrix();
+		            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		        }
+		        GL11.glPushMatrix();
+		        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
+		        
 				float defaultScale = 1F;
 				GL11.glScalef(defaultScale, defaultScale, defaultScale);
 				GL11.glRotatef(90, -1, 0, 0);
 				GL11.glRotatef(90, 0, 0, 1);
 				GL11.glRotatef(180, 0, 1, 0);
 				GL11.glRotatef(90, 1, 0, 0);
+				
 				GL11.glTranslatef(-0.1F, -0.5F, 0F); // Left-Right
 				// Forward-Backwards Up-Down
 				modelBoat.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.05F);
