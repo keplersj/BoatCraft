@@ -53,3 +53,7 @@ All the ant commands:
 
 ## Summer ModJam 2013
 [The ModJam Contest homepage!](http://mcp.ocean-labs.de/page.php?7)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/k2b6s9j/BoatCraft/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
