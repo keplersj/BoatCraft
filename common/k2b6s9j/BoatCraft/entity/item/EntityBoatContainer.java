@@ -1,9 +1,11 @@
 package k2b6s9j.BoatCraft.entity.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -244,11 +246,38 @@ public abstract class EntityBoatContainer extends EntityCustomBoat implements II
     }
     
     @Override
-    public void crashedDrops()
-    {
-    	if (dropContentsWhenDead)
-    	{
-    		dropContents();
-    	}
-    }
+	public void crashedDrops()
+	{
+		dropContents();
+		int k;
+
+        for (k = 0; k < 3; ++k)
+        {
+        	if (isCustomBoat())
+        	{
+        		this.entityDropItem(customPlank(), 0.0F);
+        	}
+        	else
+        	{
+        		this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F);
+        	}
+        }
+
+        for (k = 0; k < 2; ++k)
+        {
+        	if (isCustomBoat())
+        	{
+                this.entityDropItem(customStick(), 0.0F);
+        	}
+        	else
+        	{
+        		this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F);
+        	}
+        }
+        
+        if (doesBoatContainBlock())
+        {
+        	this.entityDropItem(blockInBoat(), 0.0F);
+        }
+	}
 }

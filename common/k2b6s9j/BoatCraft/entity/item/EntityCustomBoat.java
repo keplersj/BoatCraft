@@ -173,6 +173,16 @@ public class EntityCustomBoat extends Entity
     	return new ItemStack(Item.stick, 1, 0);
     }
     
+    public boolean doesBoatContainBlock()
+    {
+    	return false;
+    }
+    
+    public ItemStack blockInBoat()
+    {
+    	return null;
+    }
+    
     public void crashedDrops()
     {
         int k;
@@ -199,6 +209,11 @@ public class EntityCustomBoat extends Entity
         	{
         		this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F);
         	}
+        }
+        
+        if (doesBoatContainBlock())
+        {
+        	this.entityDropItem(blockInBoat(), 0.0F);
         }
     }
     

@@ -19,6 +19,18 @@ public class EntityBoatFurnace extends EntityCustomBoat {
     {
         super(par1World, par2, par4, par6);
     }
+    
+    @Override
+    public boolean doesBoatContainBlock()
+    {
+    	return true;
+    }
+    
+    @Override
+    public ItemStack blockInBoat()
+    {
+    	return new ItemStack(Block.furnaceIdle, 1, 0);
+    }
 
     public Block getDefaultDisplayTile()
     {

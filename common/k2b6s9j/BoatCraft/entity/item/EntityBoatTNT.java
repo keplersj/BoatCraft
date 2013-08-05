@@ -20,6 +20,18 @@ public class EntityBoatTNT extends EntityCustomBoat {
         super(par1World, par2, par4, par6);
     }
     
+    @Override
+    public boolean doesBoatContainBlock()
+    {
+    	return true;
+    }
+    
+    @Override
+    public ItemStack blockInBoat()
+    {
+    	return new ItemStack(Block.tnt, 1, 0);
+    }
+    
     public boolean func_130002_c(EntityPlayer player)
     {
     	//Do not mount this boat on right click!

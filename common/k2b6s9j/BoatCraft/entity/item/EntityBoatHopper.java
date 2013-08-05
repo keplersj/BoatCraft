@@ -29,6 +29,18 @@ public class EntityBoatHopper extends EntityBoatContainer implements Hopper {
     {
         super(par1World, par2, par4, par6);
     }
+    
+    @Override
+    public boolean doesBoatContainBlock()
+    {
+    	return true;
+    }
+    
+    @Override
+    public ItemStack blockInBoat()
+    {
+    	return new ItemStack(Block.hopperBlock, 1, 0);
+    }
 
     public int getBoatType()
     {
