@@ -7,9 +7,11 @@ import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatFurnace;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatHopper;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatTNT;
+import k2b6s9j.BoatCraft.entity.item.EntityBuoy;
 import k2b6s9j.BoatCraft.entity.item.EntityJungleWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntitySpruceWoodBoat;
+import k2b6s9j.BoatCraft.item.Buoy;
 import k2b6s9j.BoatCraft.item.boat.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.BoatChest;
 import k2b6s9j.BoatCraft.item.boat.BoatFurnace;
@@ -74,6 +76,8 @@ public class BoatCraft {
 	public StickSpruce spruceStick;
 	public StickBirch birchStick;
 	public StickJungle jungleStick;
+	
+	public Buoy buoy;
 
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event)
@@ -99,6 +103,8 @@ public class BoatCraft {
         	spruceStick.ID = cfg.getItem(sticks, "Spruce Sticks", 25505).getInt(25505);
         	birchStick.ID = cfg.getItem(sticks, "Birch Sticks", 25506).getInt(25506);
         	jungleStick.ID = cfg.getItem(sticks, "Jungle Sticks", 25507).getInt(25507);
+        	
+        	buoy.ID = cfg.getItem(itemBoats, "Buoy", 25508).getInt(25508);
         }
         catch (Exception e)
         {
@@ -131,6 +137,8 @@ public class BoatCraft {
 		spruceStick = new StickSpruce(spruceStick.ID);
 		birchStick = new StickBirch(birchStick.ID);
 		jungleStick = new StickJungle(jungleStick.ID);
+		
+		buoy = new Buoy(buoy.ID);
 	}
 	
 	public void RegisterRecipes() {
@@ -169,6 +177,7 @@ public class BoatCraft {
 		EntityRegistry.registerModEntity(EntityBoatHopper.class, "Hopper Boat", 7, this, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBoatTNT.class, "TNT Boat", 8, this, 80, 3, true);
 		
+		EntityRegistry.registerModEntity(EntityBuoy.class, "Buoy", 9, this, 80, 3, true);
 	}
 
 	@EventHandler
@@ -186,6 +195,8 @@ public class BoatCraft {
 		LanguageRegistry.addName(furnaceBoat, "Furnace Boat");
 		LanguageRegistry.addName(hopperBoat, "Hopper Boat");
 		LanguageRegistry.addName(tntBoat, "TNT Boat");
+		
+		LanguageRegistry.addName(buoy, "Buoy");
 		
 		//Sticks
 		LanguageRegistry.addName(Item.stick, "Oak Wood Sticks");
