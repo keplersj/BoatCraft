@@ -1,6 +1,9 @@
 package k2b6s9j.BoatCraft.entity.item;
 
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class EntityOakWoodBoat extends EntityCustomBoat {
@@ -23,9 +26,21 @@ public class EntityOakWoodBoat extends EntityCustomBoat {
     }
     
 	@Override
-    public int customBoatItem()
+    public ItemStack customBoatItem()
     {
-    	return item.shiftedID;
+    	return new ItemStack(item, 1, 0);
     }
+	
+	@Override
+	public ItemStack customPlank()
+	{
+		return new ItemStack(Block.planks, 1, 0);
+	}
+	
+	@Override
+	public ItemStack customStick()
+	{
+		return new ItemStack(Item.stick, 1, 0);
+	}
 	
 }
