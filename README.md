@@ -21,7 +21,6 @@ Special Thanks goes out to:
 - Boats that hold Fluids and don't drown! (Tank Boats)
 - Boat Linking
 - Boats acting like tools based on material, varying in speed, durability, and yes enchantibility based on the material
-- Blocks that can load and unload content into boats
 - Blocks that can affect boats in the water
 - And one day, STEAM BOATS!
 - PIRATES!
