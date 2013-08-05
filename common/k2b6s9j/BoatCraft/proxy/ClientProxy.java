@@ -9,9 +9,13 @@ import k2b6s9j.BoatCraft.entity.item.EntityJungleWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntitySpruceWoodBoat;
 import k2b6s9j.BoatCraft.item.boat.BoatBirch;
+import k2b6s9j.BoatCraft.item.boat.BoatChest;
+import k2b6s9j.BoatCraft.item.boat.BoatFurnace;
+import k2b6s9j.BoatCraft.item.boat.BoatHopper;
 import k2b6s9j.BoatCraft.item.boat.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
 import k2b6s9j.BoatCraft.item.boat.BoatSpruce;
+import k2b6s9j.BoatCraft.item.boat.BoatTNT;
 import k2b6s9j.BoatCraft.render.RenderBirchWoodBoat;
 import k2b6s9j.BoatCraft.render.RenderChestBoat;
 import k2b6s9j.BoatCraft.render.RenderFurnaceBoat;
@@ -40,12 +44,14 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBoatHopper.class, new RenderHopperBoat());
 		
 		//Register Item Renderers
-		/*
 		MinecraftForgeClient.registerItemRenderer(BoatOak.shiftedID, new RenderOakWoodBoat());
 		MinecraftForgeClient.registerItemRenderer(BoatSpruce.shiftedID, new RenderSpruceWoodBoat());
 		MinecraftForgeClient.registerItemRenderer(BoatBirch.shiftedID, new RenderBirchWoodBoat());
 		MinecraftForgeClient.registerItemRenderer(BoatJungle.shiftedID, new RenderJungleWoodBoat());
-		*/
+		MinecraftForgeClient.registerItemRenderer(BoatChest.shiftedID, new RenderChestBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatFurnace.shiftedID, new RenderFurnaceBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatTNT.shiftedID, new RenderTNTBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatHopper.shiftedID, new RenderHopperBoat());
 	}
 
 }

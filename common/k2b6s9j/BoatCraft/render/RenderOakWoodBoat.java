@@ -1,22 +1,23 @@
 package k2b6s9j.BoatCraft.render;
 
 import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 import org.lwjgl.opengl.GL11;
 
 public class RenderOakWoodBoat extends Render implements IItemRenderer {
 
 	private static final ResourceLocation texture = new ResourceLocation("textures/entity/boat.png");
+	private EntityOakWoodBoat entity;
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat;
@@ -72,17 +73,44 @@ public class RenderOakWoodBoat extends Render implements IItemRenderer {
 
     @Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		return true;
+		switch (type) {
+			case EQUIPPED_FIRST_PERSON:
+				return true;
+			case EQUIPPED:
+				return true;
+			case INVENTORY:
+				return false; //For now... Until I find a way.
+			case ENTITY:
+				return true;
+			default:
+				return false;
+		}
 	}
 
 	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-		return true;
+		return false;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		renderBoat(null, 0.5F, 0.5F, 0.5F, 1, 1);
-	}
+	public void renderItem(ItemRenderType type, ItemStack item, Object ... var3)
+    {
+		switch (type) {
+			default:
+				GL11.glPushMatrix();
+		        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
 
+				float defaultScale = 1F;
+				GL11.glScalef(defaultScale, defaultScale, defaultScale);
+				GL11.glRotatef(90, -1, 0, 0);
+				GL11.glRotatef(90, 0, 0, 1);
+				GL11.glRotatef(180, 0, 1, 0);
+				GL11.glRotatef(90, 1, 0, 0);
+				GL11.glTranslatef(-0.1F, -0.5F, 0F); // Left-Right
+				// Forward-Backwards Up-Down
+				modelBoat.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.05F);
+
+				GL11.glPopMatrix();
+		}
+    }
 }
