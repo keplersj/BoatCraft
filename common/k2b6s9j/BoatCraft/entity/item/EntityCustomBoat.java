@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -133,7 +134,7 @@ public class EntityCustomBoat extends Entity
                 {
                 	if (isCustomBoat())
                 	{
-                        this.dropItemWithOffset(customBoatItem(), 1, 0.0F);
+                        this.entityDropItem(customBoatItem(), 0.0F);
                 	}
                 	else
                 	{
@@ -157,9 +158,63 @@ public class EntityCustomBoat extends Entity
     	return false;
     }
     
-    public int customBoatItem()
+    public ItemStack customBoatItem()
     {
-    	return BoatOak.shiftedID;
+    	return new ItemStack(Item.boat, 1, 0);
+    }
+    
+    public ItemStack customPlank()
+    {
+    	return new ItemStack(Block.planks, 1, 0);
+    }
+    
+    public ItemStack customStick()
+    {
+    	return new ItemStack(Item.stick, 1, 0);
+    }
+    
+    public boolean doesBoatContainBlock()
+    {
+    	return false;
+    }
+    
+    public ItemStack blockInBoat()
+    {
+    	return null;
+    }
+    
+    public void crashedDrops()
+    {
+        int k;
+
+        for (k = 0; k < 3; ++k)
+        {
+        	if (isCustomBoat())
+        	{
+        		this.entityDropItem(customPlank(), 0.0F);
+        	}
+        	else
+        	{
+        		this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F);
+        	}
+        }
+
+        for (k = 0; k < 2; ++k)
+        {
+        	if (isCustomBoat())
+        	{
+                this.entityDropItem(customStick(), 0.0F);
+        	}
+        	else
+        	{
+        		this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F);
+        	}
+        }
+        
+        if (doesBoatContainBlock())
+        {
+        	this.entityDropItem(blockInBoat(), 0.0F);
+        }
     }
     
     @SideOnly(Side.CLIENT)
@@ -405,18 +460,8 @@ public class EntityCustomBoat extends Entity
             {
                 if (!this.worldObj.isRemote && !this.isDead)
                 {
-                    this.setDead();
-                    int k;
-
-                    for (k = 0; k < 3; ++k)
-                    {
-                        this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F);
-                    }
-
-                    for (k = 0; k < 2; ++k)
-                    {
-                        this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F);
-                    }
+                	this.setDead();
+                    this.crashedDrops();
                 }
             }
             else

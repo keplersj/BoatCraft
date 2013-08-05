@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.Hopper;
 import net.minecraft.tileentity.TileEntityHopper;
@@ -27,6 +28,18 @@ public class EntityBoatHopper extends EntityBoatContainer implements Hopper {
     public EntityBoatHopper(World par1World, double par2, double par4, double par6)
     {
         super(par1World, par2, par4, par6);
+    }
+    
+    @Override
+    public boolean doesBoatContainBlock()
+    {
+    	return true;
+    }
+    
+    @Override
+    public ItemStack blockInBoat()
+    {
+    	return new ItemStack(Block.hopperBlock, 1, 0);
     }
 
     public int getBoatType()
@@ -185,8 +198,8 @@ public class EntityBoatHopper extends EntityBoatContainer implements Hopper {
     }
     
 	@Override
-    public int customBoatItem()
+    public ItemStack customBoatItem()
     {
-    	return item.shiftedID;
+    	return new ItemStack(item, 1, 0);
     }
 }
