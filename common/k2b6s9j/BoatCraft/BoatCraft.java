@@ -41,7 +41,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "BoatCraft", name = "BoatCraft", version = "1.0pr4")
+@Mod(modid = "BoatCraft", name = "BoatCraft", version = "1.0.1")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
 @ModstatInfo(prefix = "boatcraft")
 public class BoatCraft {
@@ -149,7 +149,6 @@ public class BoatCraft {
 	@EventHandler
 	public void Init (FMLInitializationEvent event)
 	{
-		ClientProxy.registerRenderers();
 		//Boats
 		LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
 		LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
