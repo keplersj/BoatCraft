@@ -8,6 +8,7 @@ Special Thanks goes out to:
 - CiderCraft, for creating his CiderBoats addon for IC2 and giving me and inspiration
 - Sargunster, for creating his Better than Wolves boat addon and giving me huge inspiration
 - CovertJaguar, for creating Railcraft and being one of the biggest inspiractions.
+- #ModJam on Espernet and everyone over there, for just being awesome!
 
 ## Goals (Not even begun work on, might not even happen)
 - Seaport Villages
