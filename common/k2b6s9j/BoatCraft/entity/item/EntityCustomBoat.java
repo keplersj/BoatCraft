@@ -162,6 +162,16 @@ public class EntityCustomBoat extends Entity
     	return BoatOak.shiftedID;
     }
     
+    public int customPlank()
+    {
+    	return Block.planks.blockID;
+    }
+    
+    public int customStick()
+    {
+    	return Item.stick.itemID;
+    }
+    
     @SideOnly(Side.CLIENT)
 
     /**
@@ -410,12 +420,26 @@ public class EntityCustomBoat extends Entity
 
                     for (k = 0; k < 3; ++k)
                     {
-                        this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F);
+                    	if (isCustomBoat())
+                    	{
+                    		this.dropItemWithOffset(customPlank(), 1, 0.0F);
+                    	}
+                    	else
+                    	{
+                    		this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F);
+                    	}
                     }
 
                     for (k = 0; k < 2; ++k)
                     {
-                        this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F);
+                    	if (isCustomBoat())
+                    	{
+                            this.dropItemWithOffset(customStick(), 1, 0.0F);
+                    	}
+                    	else
+                    	{
+                    		this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F);
+                    	}
                     }
                 }
             }
