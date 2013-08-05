@@ -1,4 +1,4 @@
-BoatCraft [![Travis CI Build Status](https://travis-ci.org/k2b6s9j/BoatCraft.png?branch=master)](https://travis-ci.org/k2b6s9j/BoatCraft)
+BoatCraft [![Travis CI Build Status](https://travis-ci.org/k2b6s9j/BoatCraft.png?branch=master)](https://travis-ci.org/k2b6s9j/BoatCraft) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/k2b6s9j/BoatCraft/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 =========
 
 Rails had their turn, now out to the Minecraftian seas. Out there we will inteact with our boats in ways that we had only dreamed of and ways that we had never though of before. This mod will overhaul your oceans and how you will exerience them. Will you turn your sealine into an industrial outlet, or will you take advantage of your near by sea port and get all the booty you could ever wish for? So go ahead take your world out to sea and never worry about a creeper destroying your rails again, but watch out becuase one day you might turn around and see them, the pirates!
@@ -53,7 +53,3 @@ All the ant commands:
 
 ## Summer ModJam 2013
 [The ModJam Contest homepage!](http://mcp.ocean-labs.de/page.php?7)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/k2b6s9j/BoatCraft/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
