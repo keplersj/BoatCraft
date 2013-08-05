@@ -136,7 +136,6 @@ public class RenderChestBoat extends Render implements IItemRenderer {
 		switch (type) {
 			default:
 				GL11.glPushMatrix();
-		        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
 
 				float defaultScale = 1F;
 				GL11.glScalef(defaultScale, defaultScale, defaultScale);
@@ -152,15 +151,16 @@ public class RenderChestBoat extends Render implements IItemRenderer {
 		        if (block != null)
 		        {
 		            GL11.glPushMatrix();
-			        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
 		            float f8 = 0.75F;
 		            GL11.glScalef(f8, f8, f8);
 		            GL11.glTranslatef(0.0F, (float)j / 16.0F, 0.0F);
 		            GL11.glPushMatrix();
 		            this.field_94145_f.renderBlockAsItem(block, 0, k);
 		            GL11.glPopMatrix();
+		            GL11.glPopMatrix();
 		            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		        }
+		        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
 				
 				GL11.glTranslatef(-0.1F, -0.5F, 0F); // Left-Right
 				// Forward-Backwards Up-Down
