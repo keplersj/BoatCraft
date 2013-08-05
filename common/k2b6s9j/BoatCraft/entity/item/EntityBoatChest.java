@@ -2,6 +2,7 @@ package k2b6s9j.BoatCraft.entity.item;
 
 import k2b6s9j.BoatCraft.item.boat.BoatChest;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class EntityBoatChest extends EntityBoatContainer {
@@ -53,8 +54,8 @@ public class EntityBoatChest extends EntityBoatContainer {
     }
     
 	@Override
-    public int customBoatItem()
+    public ItemStack customBoatItem()
     {
-    	return item.shiftedID;
+    	return new ItemStack(item, 1, 0);
     }
 }
