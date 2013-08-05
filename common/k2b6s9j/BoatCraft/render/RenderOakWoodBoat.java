@@ -85,6 +85,21 @@ public class RenderOakWoodBoat extends Render implements IItemRenderer {
 	public void renderItem(ItemRenderType type, ItemStack item, Object ... var3)
     {
 		switch (type) {
+			case EQUIPPED_FIRST_PERSON:
+				GL11.glPushMatrix();
+		        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
+
+				float scale = 1F;
+				GL11.glScalef(scale, scale, scale);
+				GL11.glRotatef(90, -1, 0, 0);
+				GL11.glRotatef(85, 0, 0, 1);
+				GL11.glRotatef(180, 0, 1, 0);
+				GL11.glRotatef(135, 1, 0, 0);
+				GL11.glTranslatef(-0.1F, -0.5F, 0.5F); // Left-Right
+				// Forward-Backwards Up-Down
+				modelBoat.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.05F);
+
+				GL11.glPopMatrix();
 			default:
 				GL11.glPushMatrix();
 
