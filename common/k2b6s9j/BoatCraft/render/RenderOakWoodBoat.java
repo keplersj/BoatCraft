@@ -84,12 +84,14 @@ public class RenderOakWoodBoat extends Render implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object ... var3)
     {
-		GL11.glPushMatrix();
+		switch (type) {
+			default:
+				GL11.glPushMatrix();
 
-        GL11.glScalef(-1F, -1F, 1F);
-        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
-        this.modelBoat.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.05F);
-        GL11.glPopMatrix();
-
+		        GL11.glScalef(-1F, -1F, 1F);
+		        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
+		        this.modelBoat.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.05F);
+		        GL11.glPopMatrix();
+		}
     }
 }
