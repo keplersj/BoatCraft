@@ -73,7 +73,7 @@ public class RenderOakWoodBoat extends Render implements IItemRenderer {
 
     @Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		return true;
+    	return true;
 	}
 
 	@Override
@@ -115,28 +115,21 @@ public class RenderOakWoodBoat extends Render implements IItemRenderer {
 				modelBoat.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.05F);
 
 				GL11.glPopMatrix();
-			case EQUIPPED:
+			default:
 				GL11.glPushMatrix();
 		        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
 
-				float equippedScale = 1F;
-				GL11.glScalef(equippedScale, equippedScale, equippedScale);
+				float defaultScale = 1.5F;
 				GL11.glRotatef(90, -1, 0, 0);
-				GL11.glRotatef(85, 0, 0, 1);
+				GL11.glRotatef(90, 0, 0, 1);
 				GL11.glRotatef(180, 0, 1, 0);
-				GL11.glRotatef(135, 1, 0, 0);
+				GL11.glRotatef(90, 1, 0, 0);
+				GL11.glScalef(defaultScale, defaultScale, defaultScale);
 				GL11.glTranslatef(-0.1F, -0.5F, 0.5F); // Left-Right
 				// Forward-Backwards Up-Down
 				modelBoat.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.05F);
 
 				GL11.glPopMatrix();
-			default:
-				GL11.glPushMatrix();
-
-		        GL11.glScalef(-1F, -1F, 1F);
-		        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
-		        this.modelBoat.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.05F);
-		        GL11.glPopMatrix();
 		}
     }
 }
