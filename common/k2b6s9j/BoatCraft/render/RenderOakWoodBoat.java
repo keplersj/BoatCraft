@@ -80,6 +80,8 @@ public class RenderOakWoodBoat extends Render implements IItemRenderer {
 				return true;
 			case INVENTORY:
 				return false; //For now... Until I find a way.
+			case ENTITY:
+				return true;
 			default:
 				return false;
 		}
@@ -94,38 +96,21 @@ public class RenderOakWoodBoat extends Render implements IItemRenderer {
 	public void renderItem(ItemRenderType type, ItemStack item, Object ... var3)
     {
 		switch (type) {
-			case EQUIPPED_FIRST_PERSON:
-				GL11.glPushMatrix();
-		        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
-
-				float fpScale = 1F;
-				GL11.glScalef(fpScale, fpScale, fpScale);
-				GL11.glRotatef(90, -1, 0, 0);
-				GL11.glRotatef(85, 0, 0, 1);
-				GL11.glRotatef(180, 0, 1, 0);
-				GL11.glRotatef(135, 1, 0, 0);
-				GL11.glTranslatef(-0.1F, -0.5F, 0.5F); // Left-Right
-				// Forward-Backwards Up-Down
-				modelBoat.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.05F);
-
-				GL11.glPopMatrix();
-			case EQUIPPED:
-				GL11.glPushMatrix();
-		        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
-
-				float equippedScale = 1F;
-				GL11.glScalef(equippedScale, equippedScale, equippedScale);
-				GL11.glRotatef(90, -1, 0, 0);
-				GL11.glRotatef(85, 0, 0, 1);
-				GL11.glRotatef(180, 0, 1, 0);
-				GL11.glRotatef(135, 1, 0, 0);
-				GL11.glTranslatef(-0.1F, -0.5F, 0.5F); // Left-Right
-				// Forward-Backwards Up-Down
-				modelBoat.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.05F);
-
-				GL11.glPopMatrix();
 			default:
-				break;
+				GL11.glPushMatrix();
+		        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
+
+				float defaultScale = 1F;
+				GL11.glScalef(defaultScale, defaultScale, defaultScale);
+				GL11.glRotatef(90, -1, 0, 0);
+				GL11.glRotatef(90, 0, 0, 1);
+				GL11.glRotatef(180, 0, 1, 0);
+				GL11.glRotatef(90, 1, 0, 0);
+				GL11.glTranslatef(-0.1F, -0.5F, 0F); // Left-Right
+				// Forward-Backwards Up-Down
+				modelBoat.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.05F);
+
+				GL11.glPopMatrix();
 		}
     }
 }
