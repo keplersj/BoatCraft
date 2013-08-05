@@ -141,13 +141,13 @@ public class RenderHopperBoat extends Render implements IItemRenderer {
 
 		        if (block != null)
 		        {
-		            GL11.glPushMatrix();
+		        	GL11.glPushMatrix();
 		            float f8 = 0.75F;
 		            GL11.glScalef(f8, f8, f8);
 					GL11.glRotatef(90, 0, -1, 0);
 		            GL11.glTranslatef(0.0F, (float)j / 8.0F, 0.0F);
 		            GL11.glPushMatrix();
-		            this.field_94145_f.renderBlockAsItem(block, k, 1);
+		            this.field_94145_f.renderBlockAsItem(block, 0, k);
 		            GL11.glPopMatrix();
 		            GL11.glPopMatrix();
 		            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

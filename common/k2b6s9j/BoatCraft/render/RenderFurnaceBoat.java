@@ -147,7 +147,7 @@ public class RenderFurnaceBoat extends Render implements IItemRenderer {
 					GL11.glRotatef(90, 0, -1, 0);
 		            GL11.glTranslatef(0.0F, (float)j / 8.0F, 0.0F);
 		            GL11.glPushMatrix();
-		            this.field_94145_f.renderBlockAsItem(block, k, 1);
+		            this.field_94145_f.renderBlockAsItem(block, k, 0F);
 		            GL11.glPopMatrix();
 		            GL11.glPopMatrix();
 		            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
