@@ -35,7 +35,6 @@ Special Thanks goes out to:
 - API allowing other mods to add blocks to boats (Kinda. A mod support page will be in the wiki some time after ModJam)
 
 ## Half-Features (Needs work)
-- Dynamic Wooden Sticks (Again for the different wood types)
 - Boats that contain all the same blocks that Vanilla Minecarts can contain (Chest, Furnace, TNT, Mob Spawner)
 
 ## The Build Enviroment
