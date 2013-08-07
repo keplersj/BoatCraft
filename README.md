@@ -20,7 +20,6 @@ Special Thanks goes out to:
 - Universal Electricity Integration
 - ThaumCraft integration
 - Boats that hold Fluids and don't drown! (Tank Boats)
-- Boat Linking
 - Boats acting like tools based on material, varying in speed, durability, and yes enchantibility based on the material
 - Blocks that can affect boats in the water
 - And one day, STEAM BOATS!
@@ -35,7 +34,6 @@ Special Thanks goes out to:
 - API allowing other mods to add blocks to boats (Kinda. A mod support page will be in the wiki some time after ModJam)
 
 ## Half-Features (Needs work)
-- Dynamic Wooden Sticks (Again for the different wood types)
 - Boats that contain all the same blocks that Vanilla Minecarts can contain (Chest, Furnace, TNT, Mob Spawner)
 
 ## The Build Enviroment

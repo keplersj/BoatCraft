@@ -1,7 +1,6 @@
 package k2b6s9j.BoatCraft.entity.item;
 
 import k2b6s9j.BoatCraft.item.boat.BoatJungle;
-import k2b6s9j.BoatCraft.item.stick.StickJungle;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -9,7 +8,6 @@ import net.minecraft.world.World;
 public class EntityJungleWoodBoat extends EntityCustomBoat {
 	
 	public BoatJungle item;
-	public StickJungle stick;
 	
 	public EntityJungleWoodBoat(World par1World)
     {
@@ -27,9 +25,15 @@ public class EntityJungleWoodBoat extends EntityCustomBoat {
     }
     
 	@Override
-    public ItemStack customBoatItem()
+	public boolean useItemID()
+	{
+		return true;
+	}
+    
+	@Override
+    public int customBoatItemID()
     {
-    	return new ItemStack(item, 1, 0);
+    	return item.shiftedID;
     }
 	
 	@Override
@@ -37,11 +41,4 @@ public class EntityJungleWoodBoat extends EntityCustomBoat {
 	{
 		return new ItemStack(Block.planks, 1, 3);
 	}
-	
-	@Override
-	public ItemStack customStick()
-	{
-		return new ItemStack(stick, 1, 0);
-	}
-	
 }
