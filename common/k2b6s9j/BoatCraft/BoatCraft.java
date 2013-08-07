@@ -41,7 +41,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0")
+@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.1")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
 @ModstatInfo(prefix = "boatcraft")
 public class BoatCraft {
