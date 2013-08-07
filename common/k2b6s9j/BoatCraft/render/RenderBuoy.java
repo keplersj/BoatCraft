@@ -25,13 +25,13 @@ public class RenderBuoy extends Render implements IItemRenderer {
         this.modelBuoy = new ModelBuoy();
 	}
 	
-	public void renderBoat(EntityBuoy par1EntityBoat, double par2, double par4, double par6, float par8, float par9)
+	public void renderBuoy(EntityBuoy entity, double par2, double par4, double par6, float par8, float par9)
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
         GL11.glRotatef(180.0F - par8, 0.0F, 1.0F, 0.0F);
-        float f2 = (float)par1EntityBoat.getTimeSinceHit() - par9;
-        float f3 = par1EntityBoat.getDamageTaken() - par9;
+        float f2 = (float)entity.getTimeSinceHit() - par9;
+        float f3 = entity.getDamageTaken() - par9;
 
         if (f3 < 0.0F)
         {
@@ -40,21 +40,21 @@ public class RenderBuoy extends Render implements IItemRenderer {
 
         if (f2 > 0.0F)
         {
-            GL11.glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * (float)par1EntityBoat.getForwardDirection(), 1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * (float)entity.getForwardDirection(), 1.0F, 0.0F, 0.0F);
         }
 
         float f4 = 0.75F;
         GL11.glScalef(f4, f4, f4);
         GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
-        this.func_110777_b(par1EntityBoat);
+        this.func_110777_b(entity);
         GL11.glScalef(-1.0F, -1.0F, 1.0F);
-        this.modelBuoy.render(par1EntityBoat, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        this.modelBuoy.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
     }
     
     @Override
 	public void doRender(Entity entity, double d0, double d1, double d2, float f, float f1) {
-    	this.renderBoat((EntityBuoy)entity, d0, d1, d2, f, f1);
+    	this.renderBuoy((EntityBuoy)entity, d0, d1, d2, f, f1);
 		
 	}
 
