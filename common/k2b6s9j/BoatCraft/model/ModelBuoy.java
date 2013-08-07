@@ -71,10 +71,10 @@ public class ModelBuoy extends ModelBase
     Base.render(f5);
     Shape1.render(f5);
     TopBase.render(f5);
+    CornorPole1.render(f5);
     CornorPole2.render(f5);
-    CornorPole1.render(f5);
-    CornorPole1.render(f5);
-    CornorPole1.render(f5);
+    CornorPole3.render(f5);
+    CornorPole4.render(f5);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)
