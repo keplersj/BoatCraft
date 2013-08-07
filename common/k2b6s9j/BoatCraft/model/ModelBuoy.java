@@ -43,25 +43,25 @@ public class ModelBuoy extends ModelBase
       CornorPole1.setRotationPoint(4F, -2F, -5F);
       CornorPole1.setTextureSize(64, 64);
       CornorPole1.mirror = true;
-      setRotation(CornorPole2, -0.0698132F, 0F, -0.0698132F);
+      setRotation(CornorPole1, -0.0698132F, 0F, -0.0698132F);
       CornorPole2 = new ModelRenderer(this, 0, 22);
       CornorPole2.addBox(0F, 0F, 0F, 2, 21, 2);
       CornorPole2.setRotationPoint(3F, -2F, 3F);
       CornorPole2.setTextureSize(64, 64);
       CornorPole2.mirror = true;
-      setRotation(CornorPole1, 0.0872665F, 0F, -0.0872665F);
+      setRotation(CornorPole2, 0.0872665F, 0F, -0.0872665F);
       CornorPole3 = new ModelRenderer(this, 0, 22);
       CornorPole3.addBox(0F, 0F, 0F, 2, 21, 2);
       CornorPole3.setRotationPoint(-5F, -2F, 3F);
       CornorPole3.setTextureSize(64, 64);
       CornorPole3.mirror = true;
-      setRotation(CornorPole1, 0.0872665F, 0F, 0.0872665F);
+      setRotation(CornorPole3, 0.0872665F, 0F, 0.0872665F);
       CornorPole4 = new ModelRenderer(this, 0, 22);
       CornorPole4.addBox(0F, 0F, 0F, 2, 21, 2);
       CornorPole4.setRotationPoint(-5F, -3F, -5F);
       CornorPole4.setTextureSize(64, 64);
       CornorPole4.mirror = true;
-      setRotation(CornorPole1, -0.0872665F, 0F, 0.0872665F);
+      setRotation(CornorPole4, -0.0872665F, 0F, 0.0872665F);
   }
   
   public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
