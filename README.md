@@ -13,7 +13,6 @@ Special Thanks goes out to:
 ## Goals (Not even begun work on, might not even happen)
 - Seaport Villages
 - RailCraft Integration
-- ThaumCraft integration
 - Boats that hold Fluids and don't drown! (Tank Boats)
 - Boats acting like tools based on material, varying in speed, durability, and yes enchantibility based on the material
 - Blocks that can affect boats in the water
