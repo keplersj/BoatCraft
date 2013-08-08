@@ -67,6 +67,12 @@
 		<mkdir dir="${download.dir}"/>
 		<get src="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${mc.version}-${forge.version}.zip" dest="${download.dir}" usetimestamp="True"/>
                 <get src="https://dl.dropboxusercontent.com/u/44760587/forestry/previews/${forestry.version}/forestry-api-${forestry.version}.zip" dest="${download.dir}" usetimestamp="True"/>
+                
+                <unzip dest="${forestry.dir}" failOnEmptyArchive="true">
+			<fileset dir="${download.dir}">
+				<include name="forestry-api-${forestry.version}.zip"/>
+			</fileset>
+		</unzip>
 
 		<echo message="Download finished"/>
 	</target>
