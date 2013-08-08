@@ -13,11 +13,6 @@ Special Thanks goes out to:
 ## Goals (Not even begun work on, might not even happen)
 - Seaport Villages
 - RailCraft Integration
-- Forestry Integration
-- IndustrialCraft2 Integration
-- ThermalExpansion Integration
-- GregTech Integration
-- Universal Electricity Integration
 - ThaumCraft integration
 - Boats that hold Fluids and don't drown! (Tank Boats)
 - Boats acting like tools based on material, varying in speed, durability, and yes enchantibility based on the material
