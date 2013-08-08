@@ -18,13 +18,13 @@ import k2b6s9j.BoatCraft.item.boat.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
 import k2b6s9j.BoatCraft.item.boat.BoatSpruce;
 import k2b6s9j.BoatCraft.item.boat.BoatTNT;
-import k2b6s9j.BoatCraft.proxy.ClientProxy;
 import k2b6s9j.BoatCraft.proxy.CommonProxy;
 import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.oredict.OreDictionary;
 
 import org.modstats.ModstatInfo;
 
@@ -102,6 +102,8 @@ public class BoatCraft {
 	}
 	
 	public void InitItems() {
+		OreDictionary.registerOre("itemBoat", Item.boat);
+		
 		//Boats
 		oakBoat = new BoatOak(oakBoat.ID);
 		spruceBoat = new BoatSpruce(spruceBoat.ID);
