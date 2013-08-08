@@ -25,6 +25,7 @@
 	<property name="mc.version" value="1.6.2"/>
 	<property name="forge.version" value="9.10.0.804"/>
 	<property name="mod.version" value="0"/>
+        <property name="forestry.version" value="2.2.9.11"/>
   
 	<!-- Let's make ant make work with git ;) -->
 	<macrodef name = "git">
@@ -65,6 +66,7 @@
 	<target name="download">
 		<mkdir dir="${download.dir}"/>
 		<get src="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${mc.version}-${forge.version}.zip" dest="${download.dir}" usetimestamp="True"/>
+                <get src="https://dl.dropboxusercontent.com/u/44760587/forestry/previews/${forestry.version}/forestry-api-${forestry.version}.zip
 
 		<echo message="Download finished"/>
 	</target>
