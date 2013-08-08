@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.IItemRenderer.ItemRenderType;
@@ -37,28 +38,26 @@ public class RenderFurnaceBoat extends Render implements IItemRenderer {
      */
     public void renderTheBoat(EntityBoatFurnace boat, double par2, double par4, double par6, float par8, float par9)
     {
-        GL11.glPushMatrix();
-        this.func_110777_b(boat);
-        long i = (long)boat.entityId * 493286711L;
-        i = i * i * 4392167121L + i * 98761L;
-        float f2 = (((float)(i >> 16 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
-        float f3 = (((float)(i >> 20 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
-        float f4 = (((float)(i >> 24 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
-        GL11.glTranslatef(f2, f3, f4);
-        double d3 = boat.lastTickPosX + (boat.posX - boat.lastTickPosX) * (double)par9;
-        double d4 = boat.lastTickPosY + (boat.posY - boat.lastTickPosY) * (double)par9;
-        double d5 = boat.lastTickPosZ + (boat.posZ - boat.lastTickPosZ) * (double)par9;
-        double d6 = 0.30000001192092896D;
-        float f5 = boat.prevRotationPitch + (boat.rotationPitch - boat.prevRotationPitch) * par9;
-
+    	GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
         GL11.glRotatef(180.0F - par8, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(-f5, 0.0F, 0.0F, 1.0F);
+        float f2 = (float)boat.getTimeSinceHit() - par9;
+        float f3 = boat.getDamageTaken() - par9;
 
+        if (f3 < 0.0F)
+        {
+            f3 = 0.0F;
+        }
+
+        if (f2 > 0.0F)
+        {
+            GL11.glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * (float)boat.getForwardDirection(), 1.0F, 0.0F, 0.0F);
+        }
+        
         int j = boat.getDisplayTileOffset();
         Block block = boat.getDisplayTile();
         int k = boat.getDisplayTileData();
-
+        
         if (block != null)
         {
             GL11.glPushMatrix();
@@ -72,6 +71,10 @@ public class RenderFurnaceBoat extends Render implements IItemRenderer {
             this.func_110777_b(boat);
         }
 
+        float f4 = 0.75F;
+        GL11.glScalef(f4, f4, f4);
+        GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
+        this.func_110777_b(boat);
         GL11.glScalef(-1.0F, -1.0F, 1.0F);
         this.modelBoat.render(boat, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
