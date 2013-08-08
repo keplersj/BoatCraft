@@ -108,11 +108,12 @@
 
 		<echo message="Decompile finished"/>
 		
-		<unzip dest="${commonsrc.dir}" failOnEmptyArchive="true">
-			<fileset dir="${download.dir}">
-				<include name="modstats.v1.1-mc.1.6.2.zip"/>
-			</fileset>
-		</unzip>
+		<!-- Copy Forestry API source -->
+		<copy todir="${commonsrc.dir}">
+			<fileset dir="${forestry.dir}"/>
+		</copy>
+
+		<echo message="Copied Forestry API"/>
 
 		<!-- Refresh MD5 -->
 		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
