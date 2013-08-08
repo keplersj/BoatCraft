@@ -12,16 +12,7 @@ Special Thanks goes out to:
 
 ## Goals (Not even begun work on, might not even happen)
 - Seaport Villages
-- RailCraft Integration
-- Forestry Integration
-- IndustrialCraft2 Integration
-- ThermalExpansion Integration
-- GregTech Integration
-- Universal Electricity Integration
-- ThaumCraft integration
-- Boats that hold Fluids and don't drown! (Tank Boats)
 - Boats acting like tools based on material, varying in speed, durability, and yes enchantibility based on the material
-- Blocks that can affect boats in the water
 - And one day, STEAM BOATS!
 - PIRATES!
 - Sails
@@ -48,6 +39,3 @@ All the ant commands:
 `ant copy-new-code` Typically used to copy newly created/edited code from the build directory, typically when used with Eclipse, into the root directory for use with git.
 
 `ant test` Used for continuous integration testing, like Travis CI
-
-## Summer ModJam 2013
-[The ModJam Contest homepage!](http://mcp.ocean-labs.de/page.php?7)
