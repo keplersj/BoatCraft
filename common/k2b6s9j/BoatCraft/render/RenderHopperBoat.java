@@ -138,18 +138,19 @@ public class RenderHopperBoat extends Render implements IItemRenderer {
     {
 		switch (type) {
 			default:
-				int j = 6;
+				int j = 8;
 		        Block block = Block.hopperBlock;
-		        int k = 0;
+		        int k = 2;
 
 		        if (block != null)
 		        {
 		        	GL11.glPushMatrix();
+		        	Minecraft.getMinecraft().renderEngine.func_110577_a(TextureMap.field_110575_b);
 		            float f8 = 0.75F;
 		            GL11.glScalef(f8, f8, f8);
 					GL11.glRotatef(90, 0, -1, 0);
 		            GL11.glTranslatef(0.0F, (float)j / 8.0F, 0.0F);
-		            GL11.glPushMatrix();
+		            GL11.glPushMatrix();;
 		            this.field_94145_f.renderBlockAsItem(block, 0, k);
 		            GL11.glPopMatrix();
 		            GL11.glPopMatrix();
