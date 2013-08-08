@@ -42,6 +42,3 @@ All the ant commands:
 `ant copy-new-code` Typically used to copy newly created/edited code from the build directory, typically when used with Eclipse, into the root directory for use with git.
 
 `ant test` Used for continuous integration testing, like Travis CI
-
-## Summer ModJam 2013
-[The ModJam Contest homepage!](http://mcp.ocean-labs.de/page.php?7)
