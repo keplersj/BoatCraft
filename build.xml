@@ -66,7 +66,7 @@
 	<target name="download">
 		<mkdir dir="${download.dir}"/>
 		<get src="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${mc.version}-${forge.version}.zip" dest="${download.dir}" usetimestamp="True"/>
-                <get src="https://dl.dropboxusercontent.com/u/44760587/forestry/previews/${forestry.version}/forestry-api-${forestry.version}.zip
+                <get src="https://dl.dropboxusercontent.com/u/44760587/forestry/previews/${forestry.version}/forestry-api-${forestry.version}.zip dest="${download.dir}" usetimestamp="True"/>
 
 		<echo message="Download finished"/>
 	</target>
