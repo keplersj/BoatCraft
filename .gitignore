@@ -1,14 +1,20 @@
-*.class
-
-# Package Files #
-*.jar
-!grade-wrapper.jar
-*.war
-*.ear
-
-
-# Build Script Artifacts #
-build/
-dist/
-download/
+# gradle stuff
+build
 .gradle
+
+# eclipse stuff
+.classpath
+.project
+.settings
+bin
+
+# GMCP plugin stuff
+minecraft
+
+# windows
+*.cmd
+*.bat
+
+# don't want those on github
+*deobf.jar*
+*deobf.zip*
