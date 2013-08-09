@@ -5,5 +5,4 @@ jdk:
   - openjdk6
 before_script:
   - sudo apt-get install astyle
-  - sudo apt-get install gradle
 script: gradle build
