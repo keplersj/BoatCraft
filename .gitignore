@@ -2,6 +2,7 @@
 
 # Package Files #
 *.jar
+!grade-wrapper.jar
 *.war
 *.ear
 
@@ -11,4 +12,3 @@ build/
 dist/
 download/
 .gradle
-!grade-wrapper.jar
