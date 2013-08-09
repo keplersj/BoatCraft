@@ -11,3 +11,4 @@ build/
 dist/
 download/
 .gradle
+!grade-wrapper.jar
