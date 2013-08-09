@@ -5,16 +5,16 @@ buildscript {
 		 //}
 		 mavenCentral()
 	}
-	dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:0.5' }
+	dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:0.6.2' }
 }
 
 apply plugin: "gmcp"
 
-group = 'net.dries007.PotentialRecipeNinja'
-version = '1.0'
-archivesBaseName = 'PotentialRecipeNinja'
+group = 'k2b6s9j.BoatCraft'
+version = '2.0'
+archivesBaseName = 'BoatCraft'
 
-minecraft { minecraftVersion = "1.5.2" }
+minecraft { minecraftVersion = "1.6.2" }
 
 dependencies {
 	compile fileTree('lib') {
