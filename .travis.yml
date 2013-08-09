@@ -6,4 +6,4 @@ jdk:
 before_script:
   - sudo apt-get install astyle
   - sudo apt-get install gradle
-script: gradle
+script: gradle build
