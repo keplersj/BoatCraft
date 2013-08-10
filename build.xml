@@ -16,6 +16,7 @@
 
 	<property name="forge.dir" value="${build.dir}/forge"/>
 	<property name="mcp.dir" value="${forge.dir}/mcp"/>
+	<property name="forestry.dir" value="${mcp.dir}/unpack/forestry"/>
 
 	<property name="clientsrc.dir" value="${mcp.dir}/src/minecraft"/>
 	<property name="commonsrc.dir" value="${clientsrc.dir}"/>
@@ -23,8 +24,9 @@
 	<property file="${clientsrc.dir}/fmlversion.properties" />
 
 	<property name="mc.version" value="1.6.2"/>
-	<property name="forge.version" value="9.10.0.804"/>
+	<property name="forge.version" value="9.10.0.819"/>
 	<property name="mod.version" value="0"/>
+        <property name="forestry.version" value="2.2.9.11"/>
   
 	<!-- Let's make ant make work with git ;) -->
 	<macrodef name = "git">
@@ -65,7 +67,8 @@
 	<target name="download">
 		<mkdir dir="${download.dir}"/>
 		<get src="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${mc.version}-${forge.version}.zip" dest="${download.dir}" usetimestamp="True"/>
-
+                <get src="https://dl.dropboxusercontent.com/u/44760587/forestry/previews/${forestry.version}/forestry-api-${forestry.version}.zip" dest="${download.dir}" usetimestamp="True"/>
+                
 		<echo message="Download finished"/>
 	</target>
 
@@ -99,11 +102,20 @@
 
 		<echo message="Decompile finished"/>
 		
-		<unzip dest="${commonsrc.dir}" failOnEmptyArchive="true">
+		<!-- Copy Forestry API source -->
+		<unzip dest="${forestry.dir}" failOnEmptyArchive="true">
 			<fileset dir="${download.dir}">
-				<include name="modstats.v1.1-mc.1.6.2.zip"/>
+				<include name="forestry-api-${forestry.version}.zip"/>
 			</fileset>
 		</unzip>
+		
+		<echo message="Unpacking Forestry API finished"/>
+		
+		<copy todir="${commonsrc.dir}">
+			<fileset dir="${forestry.dir}"/>
+		</copy>
+
+		<echo message="Copied Forestry API"/>
 
 		<!-- Refresh MD5 -->
 		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
