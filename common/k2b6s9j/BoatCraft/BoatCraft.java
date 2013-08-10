@@ -18,13 +18,13 @@ import k2b6s9j.BoatCraft.item.boat.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
 import k2b6s9j.BoatCraft.item.boat.BoatSpruce;
 import k2b6s9j.BoatCraft.item.boat.BoatTNT;
-import k2b6s9j.BoatCraft.proxy.ClientProxy;
 import k2b6s9j.BoatCraft.proxy.CommonProxy;
 import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.oredict.OreDictionary;
 
 import org.modstats.ModstatInfo;
 
@@ -41,7 +41,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "BoatCraft", name = "BoatCraft", version = "1.0.2")
+@Mod(modid = "BoatCraft", name = "BoatCraft", version = "1.1")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
 @ModstatInfo(prefix = "boatcraft")
 public class BoatCraft {
@@ -102,6 +102,8 @@ public class BoatCraft {
 	}
 	
 	public void InitItems() {
+		OreDictionary.registerOre("itemBoat", Item.boat);
+		
 		//Boats
 		oakBoat = new BoatOak(oakBoat.ID);
 		spruceBoat = new BoatSpruce(spruceBoat.ID);
@@ -149,6 +151,8 @@ public class BoatCraft {
 	@EventHandler
 	public void Init (FMLInitializationEvent event)
 	{
+		LanguageRegistry.addName(Item.boat, "Vanilla Boat");
+		
 		//Boats
 		LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
 		LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
