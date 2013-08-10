@@ -7,9 +7,11 @@ import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatFurnace;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatHopper;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatTNT;
+import k2b6s9j.BoatCraft.entity.item.EntityBuoy;
 import k2b6s9j.BoatCraft.entity.item.EntityJungleWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntitySpruceWoodBoat;
+import k2b6s9j.BoatCraft.item.Buoy;
 import k2b6s9j.BoatCraft.item.boat.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.BoatChest;
 import k2b6s9j.BoatCraft.item.boat.BoatFurnace;
@@ -66,6 +68,8 @@ public class BoatCraft {
 	public BoatFurnace furnaceBoat;
 	public BoatHopper hopperBoat;
 	public BoatTNT tntBoat;
+	
+	public Buoy buoy;
 
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event)
@@ -86,6 +90,8 @@ public class BoatCraft {
         	furnaceBoat.ID = cfg.getItem(itemBoats, "Furnace Boat", 25509).getInt(25509);
         	hopperBoat.ID = cfg.getItem(itemBoats, "Hopper Boat", 25510).getInt(25510);
         	tntBoat.ID = cfg.getItem(itemBoats, "TNT Boat", 25511).getInt(25511);
+        	
+        	buoy.ID = cfg.getItem(itemBoats, "Buoy", 25512).getInt(25512);
         }
         catch (Exception e)
         {
@@ -115,6 +121,8 @@ public class BoatCraft {
 		furnaceBoat = new BoatFurnace(furnaceBoat.ID);
 		hopperBoat = new BoatHopper(hopperBoat.ID);
 		tntBoat = new BoatTNT(tntBoat.ID);
+		
+		buoy = new Buoy(buoy.ID);
 	}
 	
 	public void RegisterRecipes() {
@@ -146,6 +154,8 @@ public class BoatCraft {
 		EntityRegistry.registerModEntity(EntityBoatHopper.class, "Hopper Boat", 7, this, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBoatTNT.class, "TNT Boat", 8, this, 80, 3, true);
 		
+		EntityRegistry.registerModEntity(EntityBuoy.class, "Buoy", 9, this, 80, 3, true);
+		
 	}
 
 	@EventHandler
@@ -164,6 +174,8 @@ public class BoatCraft {
 		LanguageRegistry.addName(furnaceBoat, "Furnace Boat");
 		LanguageRegistry.addName(hopperBoat, "Hopper Boat");
 		LanguageRegistry.addName(tntBoat, "TNT Boat");
+		
+		LanguageRegistry.addName(buoy, "Buoy");
 	}
 
 	@EventHandler
