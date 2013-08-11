@@ -1,6 +1,7 @@
 package k2b6s9j.BoatCraft.entity.item;
 
 import java.util.List;
+import java.util.logging.Level;
 
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
 import net.minecraft.block.Block;
@@ -16,6 +17,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -41,7 +43,12 @@ public class EntityCustomBoat extends EntityBoat
         super(par1World, par2, par4, par6);
     }
     
-    /**
+    public EntityCustomBoat(World par2World, double d, double e, double f, String type) {
+		super(par2World, d, e, f);
+		FMLLog.log(Level.INFO, "A " + type + " boat was placed");
+	}
+
+	/**
      * Called when the entity is attacked.
      */
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)

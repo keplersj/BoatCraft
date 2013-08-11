@@ -16,7 +16,7 @@ import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderBirchWoodBoat extends Render implements IItemRenderer {
+public class RenderCustomBoat extends Render implements IItemRenderer {
 
 	private static final ResourceLocation texture = new ResourceLocation("boatcraft:textures/boats/birch.png");
 	private EntityBirchWoodBoat entity;
@@ -24,7 +24,7 @@ public class RenderBirchWoodBoat extends Render implements IItemRenderer {
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat;
 	
-	public RenderBirchWoodBoat () {
+	public RenderCustomBoat () {
 		this.shadowSize = 0.5F;
         this.modelBoat = new ModelBoat();
 	}
