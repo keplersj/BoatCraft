@@ -26,6 +26,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.oredict.OreDictionary;
 
 import org.modstats.ModstatInfo;
 
@@ -107,6 +108,8 @@ public class BoatCraft {
 	}
 	
 	public void InitItems() {
+		OreDictionary.registerOre("itemBoat", Item.boat);
+		
 		//Boats
 		oakBoat = new BoatOak(oakBoat.ID);
 		spruceBoat = new BoatSpruce(spruceBoat.ID);
@@ -158,6 +161,8 @@ public class BoatCraft {
 	@EventHandler
 	public void Init (FMLInitializationEvent event)
 	{
+		LanguageRegistry.addName(Item.boat, "Vanilla Boat");
+		
 		//Boats
 		LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
 		LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
