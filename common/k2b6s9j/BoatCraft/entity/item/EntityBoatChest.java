@@ -2,6 +2,8 @@ package k2b6s9j.BoatCraft.entity.item;
 
 import k2b6s9j.BoatCraft.item.boat.BoatChest;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class EntityBoatChest extends EntityBoatContainer {
@@ -18,17 +20,24 @@ public class EntityBoatChest extends EntityBoatContainer {
         super(par1World, par2, par4, par6);
     }
     
+    @Override
+    public boolean doesBoatContainBlock()
+    {
+    	return true;
+    }
+    
+    @Override
+    public ItemStack blockInBoat()
+    {
+    	return new ItemStack(Block.chest, 1, 0);
+    }
+    
     /**
      * Returns the number of slots in the inventory.
      */
     public int getSizeInventory()
     {
         return 27;
-    }
-
-    public int getMinecartType()
-    {
-        return 1;
     }
 
     public Block getDefaultDisplayTile()
@@ -58,7 +67,13 @@ public class EntityBoatChest extends EntityBoatContainer {
     }
     
 	@Override
-    public int customBoatItem()
+	public boolean useItemID()
+	{
+		return true;
+	}
+    
+	@Override
+    public int customBoatItemID()
     {
     	return item.shiftedID;
     }

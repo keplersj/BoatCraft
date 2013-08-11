@@ -2,6 +2,7 @@ package k2b6s9j.BoatCraft.render;
 
 import k2b6s9j.BoatCraft.entity.item.EntityBoatTNT;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -9,14 +10,18 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.IItemRenderer.ItemRenderType;
+import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
 import org.lwjgl.opengl.GL11;
 
 public class RenderTNTBoat extends Render implements IItemRenderer {
 
-	private static final ResourceLocation field_110804_g = new ResourceLocation("textures/entity/boat.png");
+	private static final ResourceLocation texture = new ResourceLocation("textures/entity/boat.png");
+	private EntityBoatTNT entity;
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat = new ModelBoat();
@@ -33,28 +38,26 @@ public class RenderTNTBoat extends Render implements IItemRenderer {
      */
     public void renderTheBoat(EntityBoatTNT boat, double par2, double par4, double par6, float par8, float par9)
     {
-        GL11.glPushMatrix();
-        this.func_110777_b(boat);
-        long i = (long)boat.entityId * 493286711L;
-        i = i * i * 4392167121L + i * 98761L;
-        float f2 = (((float)(i >> 16 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
-        float f3 = (((float)(i >> 20 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
-        float f4 = (((float)(i >> 24 & 7L) + 0.5F) / 8.0F - 0.5F) * 0.004F;
-        GL11.glTranslatef(f2, f3, f4);
-        double d3 = boat.lastTickPosX + (boat.posX - boat.lastTickPosX) * (double)par9;
-        double d4 = boat.lastTickPosY + (boat.posY - boat.lastTickPosY) * (double)par9;
-        double d5 = boat.lastTickPosZ + (boat.posZ - boat.lastTickPosZ) * (double)par9;
-        double d6 = 0.30000001192092896D;
-        float f5 = boat.prevRotationPitch + (boat.rotationPitch - boat.prevRotationPitch) * par9;
-
+    	GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
         GL11.glRotatef(180.0F - par8, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(-f5, 0.0F, 0.0F, 1.0F);
+        float f2 = (float)boat.getTimeSinceHit() - par9;
+        float f3 = boat.getDamageTaken() - par9;
 
+        if (f3 < 0.0F)
+        {
+            f3 = 0.0F;
+        }
+
+        if (f2 > 0.0F)
+        {
+            GL11.glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * (float)boat.getForwardDirection(), 1.0F, 0.0F, 0.0F);
+        }
+        
         int j = boat.getDisplayTileOffset();
         Block block = boat.getDisplayTile();
         int k = boat.getDisplayTileData();
-
+        
         if (block != null)
         {
             GL11.glPushMatrix();
@@ -68,6 +71,10 @@ public class RenderTNTBoat extends Render implements IItemRenderer {
             this.func_110777_b(boat);
         }
 
+        float f4 = 0.75F;
+        GL11.glScalef(f4, f4, f4);
+        GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
+        this.func_110777_b(boat);
         GL11.glScalef(-1.0F, -1.0F, 1.0F);
         this.modelBoat.render(boat, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
@@ -75,7 +82,7 @@ public class RenderTNTBoat extends Render implements IItemRenderer {
 
     protected ResourceLocation func_110803_a(EntityBoatTNT boat)
     {
-        return field_110804_g;
+        return texture;
     }
 
     /**
@@ -105,22 +112,65 @@ public class RenderTNTBoat extends Render implements IItemRenderer {
         this.renderTheBoat((EntityBoatTNT)par1Entity, par2, par4, par6, par8, par9);
     }
 
-	@Override
+    @Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		// TODO Auto-generated method stub
+		switch (type) {
+			case EQUIPPED_FIRST_PERSON:
+				return true;
+			case EQUIPPED:
+				return true;
+			case INVENTORY:
+				return false; //For now... Until I find a way.
+			case ENTITY:
+				return true;
+			default:
+				return false;
+		}
+	}
+
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
 		return false;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-			ItemRendererHelper helper) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public void renderItem(ItemRenderType type, ItemStack item, Object ... var3)
+    {
+		switch (type) {
+		default:
+			int j = 8;
+	        Block block = Block.tnt;
+	        int k = 2;
 
-	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		// TODO Auto-generated method stub
-		
-	}
+	        if (block != null)
+	        {
+	        	GL11.glPushMatrix();
+	        	Minecraft.getMinecraft().renderEngine.func_110577_a(TextureMap.field_110575_b);
+	            float f8 = 0.75F;
+	            GL11.glScalef(f8, f8, f8);
+				GL11.glRotatef(90, 0, -1, 0);
+	            GL11.glTranslatef(0.0F, (float)j / 8.0F, 0.0F);
+	            GL11.glPushMatrix();;
+	            this.field_94145_f.renderBlockAsItem(block, 0, k);
+	            GL11.glPopMatrix();
+	            GL11.glPopMatrix();
+	            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+	        }
+	        GL11.glPushMatrix();
+	        Minecraft.getMinecraft().renderEngine.func_110577_a(texture);
+	        
+			float defaultScale = 1F;
+			GL11.glScalef(defaultScale, defaultScale, defaultScale);
+			GL11.glRotatef(90, -1, 0, 0);
+			GL11.glRotatef(90, 0, 0, 1);
+			GL11.glRotatef(180, 0, 1, 0);
+			GL11.glRotatef(90, 1, 0, 0);
+			
+			GL11.glTranslatef(-0.1F, -0.5F, 0F); // Left-Right
+			// Forward-Backwards Up-Down
+			modelBoat.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.05F);
+
+			GL11.glPopMatrix();
+		}
+    }
 }

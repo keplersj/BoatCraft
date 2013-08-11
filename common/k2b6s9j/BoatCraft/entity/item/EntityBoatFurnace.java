@@ -3,6 +3,7 @@ package k2b6s9j.BoatCraft.entity.item;
 import k2b6s9j.BoatCraft.item.boat.BoatFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class EntityBoatFurnace extends EntityCustomBoat {
@@ -17,6 +18,18 @@ public class EntityBoatFurnace extends EntityCustomBoat {
     public EntityBoatFurnace(World par1World, double par2, double par4, double par6)
     {
         super(par1World, par2, par4, par6);
+    }
+    
+    @Override
+    public boolean doesBoatContainBlock()
+    {
+    	return true;
+    }
+    
+    @Override
+    public ItemStack blockInBoat()
+    {
+    	return new ItemStack(Block.furnaceIdle, 1, 0);
     }
 
     public Block getDefaultDisplayTile()
@@ -41,8 +54,14 @@ public class EntityBoatFurnace extends EntityCustomBoat {
     	return true;
     }
     
+    @Override
+	public boolean useItemID()
+	{
+		return true;
+	}
+    
 	@Override
-    public int customBoatItem()
+    public int customBoatItemID()
     {
     	return item.shiftedID;
     }
