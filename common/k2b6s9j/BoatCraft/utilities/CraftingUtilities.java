@@ -38,4 +38,9 @@ public class CraftingUtilities {
 	{
 		CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(item, parts));
 	}
+	
+	public static void RegisterBoatRecipes()
+	{
+		
+	}
 }

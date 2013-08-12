@@ -3,7 +3,6 @@ package k2b6s9j.BoatCraft.entity.item;
 import java.util.List;
 import java.util.logging.Level;
 
-import k2b6s9j.BoatCraft.item.boat.BoatOak;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -12,7 +11,6 @@ import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -87,7 +85,7 @@ public class EntityCustomBoat extends EntityBoat
                 	}
                 	else
                 	{
-                		this.dropItemWithOffset(BoatOak.shiftedID, 1, 0.0F);
+                		//this.dropItemWithOffset(BoatOak.shiftedID, 1, 0.0F);
                 	}
                 }
 
