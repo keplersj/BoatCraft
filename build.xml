@@ -98,12 +98,6 @@
 		<chmod file="${mcp.dir}/runtime/bin/jad-osx" perm="+x"/>
 
 		<echo message="Decompile finished"/>
-		
-		<unzip dest="${commonsrc.dir}" failOnEmptyArchive="true">
-			<fileset dir="${download.dir}">
-				<include name="modstats.v1.1-mc.1.6.2.zip"/>
-			</fileset>
-		</unzip>
 
 		<!-- Refresh MD5 -->
 		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
