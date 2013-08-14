@@ -1,6 +1,9 @@
 package k2b6s9j.BoatCraft;
 
+import java.io.IOException;
 import java.util.logging.Level;
+
+import org.mcstats.MetricsLite;
 
 import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
@@ -47,6 +50,10 @@ public class BoatCraft {
 	
 	@SidedProxy(clientSide="k2b6s9j.BoatCraft.proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.proxy.CommonProxy")
 	public static CommonProxy proxy;
+	
+	//Mod Info
+	public final String modName = "BoatCraft";
+	public final String modVersion = "2.0";
 	
 	//Config File Strings
 	public final String itemBoats = "Boats in Item Form";
@@ -96,6 +103,12 @@ public class BoatCraft {
         InitItems();
         RegisterRecipes();
         EntityWork();
+        try {
+            MetricsLite metrics = new MetricsLite(this.modName, this.modVersion);
+            metrics.start();
+        } catch (IOException e) {
+        	FMLLog.log(Level.SEVERE, e, "BoatCraft had a problem submitting data to MCStats");
+        }
 	}
 	
 	public void InitItems() {
