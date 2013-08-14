@@ -65,6 +65,7 @@
 	<target name="download">
 		<mkdir dir="${download.dir}"/>
 		<get src="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${mc.version}-${forge.version}.zip" dest="${download.dir}" usetimestamp="True"/>
+		<git-clone-pull repository="https://github.com/Hidendra/Plugin-Metrics.git" dest="${download.dir}/Plugin-Metrics"/>
 
 		<echo message="Download finished"/>
 	</target>
@@ -98,6 +99,10 @@
 		<chmod file="${mcp.dir}/runtime/bin/jad-osx" perm="+x"/>
 
 		<echo message="Decompile finished"/>
+		
+		<copy todir="${commonsrc.dir}">
+			<fileset dir="${download.dir}/Plugin-Metrics/mods/forge/metrics-lite/src/main/java/"/>
+		</copy>
 
 		<!-- Refresh MD5 -->
 		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
