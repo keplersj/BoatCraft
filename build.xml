@@ -65,7 +65,7 @@
 	<target name="download">
 		<mkdir dir="${download.dir}"/>
 		<get src="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${mc.version}-${forge.version}.zip" dest="${download.dir}" usetimestamp="True"/>
-		<git-clone-pull repository="https://github.com/Hidendra/Plugin-Metrics.git" dest="${download.dir}/Plugin-Metrics"/>
+		<git-clone-pull repository="https://github.com/k2b6s9j/Plugin-Metrics.git" dest="${download.dir}/Plugin-Metrics"/>
 
 		<echo message="Download finished"/>
 	</target>
