@@ -134,14 +134,14 @@ public class BoatCraft {
 	
 	public void RegisterRecipes() {
 		//Boat Recipes
-		if (OreDictWoodBoat) {
+		if (!OreDictWoodBoat) {
 			CraftingUtilities.RemoveRecipe(new ItemStack(Item.boat));
 	        GameRegistry.addRecipe(new ItemStack(oakBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 0));
 	        GameRegistry.addRecipe(new ItemStack(spruceBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 1));
 	        GameRegistry.addRecipe(new ItemStack(birchBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2));
 	        GameRegistry.addRecipe(new ItemStack(jungleBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 3));
 		}
-		if (!OreDictWoodBoat) {
+		if (OreDictWoodBoat) {
 			CraftingUtilities.RemoveRecipe(new ItemStack(Item.boat));
 			CraftingUtilities.AddRecipe(new ItemStack(oakBoat), "W W", "WWW", Character.valueOf('W'), "planksWood");
 		}
