@@ -70,6 +70,8 @@ public class BoatCraft {
 	public BoatFurnace furnaceBoat;
 	public BoatHopper hopperBoat;
 	public BoatTNT tntBoat;
+	
+	public boolean OreDictWoodBoat;
 
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event)
@@ -90,6 +92,9 @@ public class BoatCraft {
         	furnaceBoat.ID = cfg.getItem(itemBoats, "Furnace Boat", 25509).getInt(25509);
         	hopperBoat.ID = cfg.getItem(itemBoats, "Hopper Boat", 25510).getInt(25510);
         	tntBoat.ID = cfg.getItem(itemBoats, "TNT Boat", 25511).getInt(25511);
+        	
+        	//Modules
+        	this.OreDictWoodBoat = cfg.get("Modules", "OreDictWoodBoats", false, "Use the OreDictionary to craft Wooden Boats").getBoolean(false);
         }
         catch (Exception e)
         {
