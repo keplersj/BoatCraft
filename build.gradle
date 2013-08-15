@@ -1,6 +1,6 @@
 buildscript {
 	repositories { mavenCentral() }
-	dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:0.7.4' }
+	dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:0.7.3' }
 }
 
 apply plugin: "gmcp"
