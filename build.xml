@@ -65,6 +65,7 @@
 	<target name="download">
 		<mkdir dir="${download.dir}"/>
 		<get src="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${mc.version}-${forge.version}.zip" dest="${download.dir}" usetimestamp="True"/>
+		<git-clone-pull repository="https://github.com/k2b6s9j/Plugin-Metrics.git" dest="${download.dir}/Plugin-Metrics"/>
 
 		<echo message="Download finished"/>
 	</target>
@@ -99,11 +100,9 @@
 
 		<echo message="Decompile finished"/>
 		
-		<unzip dest="${commonsrc.dir}" failOnEmptyArchive="true">
-			<fileset dir="${download.dir}">
-				<include name="modstats.v1.1-mc.1.6.2.zip"/>
-			</fileset>
-		</unzip>
+		<copy todir="${commonsrc.dir}">
+			<fileset dir="${download.dir}/Plugin-Metrics/mods/forge/metrics-lite/src/main/java/"/>
+		</copy>
 
 		<!-- Refresh MD5 -->
 		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">

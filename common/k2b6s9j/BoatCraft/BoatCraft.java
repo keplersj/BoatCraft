@@ -1,5 +1,6 @@
 package k2b6s9j.BoatCraft;
 
+import java.io.IOException;
 import java.util.logging.Level;
 
 import k2b6s9j.BoatCraft.entity.item.EntityCustomBoat;
@@ -8,9 +9,6 @@ import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
-
-import org.modstats.ModstatInfo;
-
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -25,7 +23,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
-@ModstatInfo(prefix = "boatcraft")
+
 public class BoatCraft {
 	@Instance("BoatCraft")
     public static BoatCraft instance;
@@ -55,6 +53,12 @@ public class BoatCraft {
         InitItems();
         RegisterRecipes();
         EntityWork();
+        try {
+            MetricsLite metrics = new MetricsLite(this.modName, this.modVersion);
+            metrics.start();
+        } catch (IOException e) {
+        	FMLLog.log(Level.SEVERE, e, "BoatCraft had a problem submitting data to MCStats");
+        }
 	}
 	
 	public void InitItems() {
