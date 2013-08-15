@@ -74,6 +74,8 @@ public class BoatCraft {
 	public BoatTNT tntBoat;
 	
 	public Buoy buoy;
+	
+	public boolean OreDictWoodBoat;
 
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event)
@@ -96,6 +98,9 @@ public class BoatCraft {
         	tntBoat.ID = cfg.getItem(itemBoats, "TNT Boat", 25511).getInt(25511);
         	
         	buoy.ID = cfg.getItem(itemBoats, "Buoy", 25512).getInt(25512);
+        	
+        	//Modules
+        	this.OreDictWoodBoat = cfg.get("Modules", "OreDictWoodBoats", false, "Use the OreDictionary to craft Wooden Boats").getBoolean(false);
         }
         catch (Exception e)
         {
@@ -137,11 +142,17 @@ public class BoatCraft {
 	
 	public void RegisterRecipes() {
 		//Boat Recipes
-		CraftingUtilities.RemoveRecipe(new ItemStack(Item.boat));
-        GameRegistry.addRecipe(new ItemStack(oakBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 0));
-        GameRegistry.addRecipe(new ItemStack(spruceBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 1));
-        GameRegistry.addRecipe(new ItemStack(birchBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2));
-        GameRegistry.addRecipe(new ItemStack(jungleBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 3));
+		if (!OreDictWoodBoat) {
+			CraftingUtilities.RemoveRecipe(new ItemStack(Item.boat));
+	        GameRegistry.addRecipe(new ItemStack(oakBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 0));
+	        GameRegistry.addRecipe(new ItemStack(spruceBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 1));
+	        GameRegistry.addRecipe(new ItemStack(birchBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2));
+	        GameRegistry.addRecipe(new ItemStack(jungleBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 3));
+		}
+		if (OreDictWoodBoat) {
+			CraftingUtilities.RemoveRecipe(new ItemStack(Item.boat));
+			CraftingUtilities.AddRecipe(new ItemStack(oakBoat), "W W", "WWW", Character.valueOf('W'), "plankWood");
+		}
         
         //Special Boat Recipes
         CraftingUtilities.AddShapelessRecipe(new ItemStack(chestBoat), new ItemStack(Block.chest), "itemBoat");
@@ -174,10 +185,15 @@ public class BoatCraft {
 		LanguageRegistry.addName(Item.boat, "Vanilla Boat");
 		
 		//Boats
-		LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
-		LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
-		LanguageRegistry.addName(birchBoat, "Birch Wood Boat");
-		LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
+		if (!OreDictWoodBoat) {
+			LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
+			LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
+			LanguageRegistry.addName(birchBoat, "Birch Wood Boat");
+			LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
+		}
+		if (OreDictWoodBoat) {
+			LanguageRegistry.addName(oakBoat, "Wooden Boat");
+		}
 		
 		//Special Boats
 		LanguageRegistry.addName(chestBoat, "Chest Boat");
