@@ -1,6 +1,9 @@
 package k2b6s9j.BoatCraft;
 
+import java.io.IOException;
 import java.util.logging.Level;
+
+import org.mcstats.MetricsLite;
 
 import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
@@ -18,16 +21,13 @@ import k2b6s9j.BoatCraft.item.boat.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
 import k2b6s9j.BoatCraft.item.boat.BoatSpruce;
 import k2b6s9j.BoatCraft.item.boat.BoatTNT;
-import k2b6s9j.BoatCraft.proxy.ClientProxy;
 import k2b6s9j.BoatCraft.proxy.CommonProxy;
 import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
-
-import org.modstats.ModstatInfo;
-
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -43,13 +43,17 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
-@ModstatInfo(prefix = "boatcraft")
+
 public class BoatCraft {
 	@Instance("BoatCraft")
     public static BoatCraft instance;
 	
 	@SidedProxy(clientSide="k2b6s9j.BoatCraft.proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.proxy.CommonProxy")
 	public static CommonProxy proxy;
+	
+	//Mod Info
+	public final String modName = "BoatCraft";
+	public final String modVersion = "2.0";
 	
 	//Config File Strings
 	public final String itemBoats = "Boats in Item Form";
@@ -99,9 +103,17 @@ public class BoatCraft {
         InitItems();
         RegisterRecipes();
         EntityWork();
+        try {
+            MetricsLite metrics = new MetricsLite(this.modName, this.modVersion);
+            metrics.start();
+        } catch (IOException e) {
+        	FMLLog.log(Level.SEVERE, e, "BoatCraft had a problem submitting data to MCStats");
+        }
 	}
 	
 	public void InitItems() {
+		OreDictionary.registerOre("itemBoat", Item.boat);
+		
 		//Boats
 		oakBoat = new BoatOak(oakBoat.ID);
 		spruceBoat = new BoatSpruce(spruceBoat.ID);
@@ -149,6 +161,8 @@ public class BoatCraft {
 	@EventHandler
 	public void Init (FMLInitializationEvent event)
 	{
+		LanguageRegistry.addName(Item.boat, "Vanilla Boat");
+		
 		//Boats
 		LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
 		LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
