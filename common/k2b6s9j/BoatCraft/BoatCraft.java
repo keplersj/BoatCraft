@@ -3,6 +3,8 @@ package k2b6s9j.BoatCraft;
 import java.io.IOException;
 import java.util.logging.Level;
 
+import org.mcstats.MetricsLite;
+
 import k2b6s9j.BoatCraft.entity.item.EntityCustomBoat;
 import k2b6s9j.BoatCraft.proxy.CommonProxy;
 import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
