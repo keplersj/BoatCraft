@@ -175,10 +175,15 @@ public class BoatCraft {
 		LanguageRegistry.addName(Item.boat, "Vanilla Boat");
 		
 		//Boats
-		LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
-		LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
-		LanguageRegistry.addName(birchBoat, "Birch Wood Boat");
-		LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
+		if (!OreDictWoodBoat) {
+			LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
+			LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
+			LanguageRegistry.addName(birchBoat, "Birch Wood Boat");
+			LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
+		}
+		if (OreDictWoodBoat) {
+			LanguageRegistry.addName(oakBoat, "Wooden Boat");
+		}
 		
 		//Special Boats
 		LanguageRegistry.addName(chestBoat, "Chest Boat");
