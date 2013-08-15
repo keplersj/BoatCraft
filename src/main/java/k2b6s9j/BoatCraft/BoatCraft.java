@@ -1,6 +1,9 @@
 package k2b6s9j.BoatCraft;
 
+import java.io.IOException;
 import java.util.logging.Level;
+
+import org.mcstats.MetricsLite;
 
 import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
@@ -25,9 +28,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
-
-import org.modstats.ModstatInfo;
-
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -43,13 +43,17 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
-@ModstatInfo(prefix = "boatcraft")
+
 public class BoatCraft {
 	@Instance("BoatCraft")
     public static BoatCraft instance;
 	
 	@SidedProxy(clientSide="k2b6s9j.BoatCraft.proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.proxy.CommonProxy")
 	public static CommonProxy proxy;
+	
+	//Mod Info
+	public final String modName = "BoatCraft";
+	public final String modVersion = "2.0";
 	
 	//Config File Strings
 	public final String itemBoats = "Boats in Item Form";
@@ -99,6 +103,12 @@ public class BoatCraft {
         InitItems();
         RegisterRecipes();
         EntityWork();
+        try {
+            MetricsLite metrics = new MetricsLite(this.modName, this.modVersion);
+            metrics.start();
+        } catch (IOException e) {
+        	FMLLog.log(Level.SEVERE, e, "BoatCraft had a problem submitting data to MCStats");
+        }
 	}
 	
 	public void InitItems() {
