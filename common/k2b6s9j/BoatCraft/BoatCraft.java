@@ -32,6 +32,10 @@ public class BoatCraft {
 	
 	@SidedProxy(clientSide="k2b6s9j.BoatCraft.proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.proxy.CommonProxy")
 	public static CommonProxy proxy;
+	
+	//Mod Info
+	public final String modName = "BoatCraft";
+	public final String modVersion = "2.0";
 
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event)
