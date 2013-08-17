@@ -43,7 +43,7 @@ public class BoatCraft {
 	public final String modVersion = "2.0";
 	
 	//Configuration File Strings
-	private final String item = "Items"; 
+	private final String vanillaBoat = "Vanilla Boats"; 
 	
 	public Oak itemOak;
 	public Spruce itemSpruce;
@@ -58,10 +58,10 @@ public class BoatCraft {
 		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
         try
         {	
-        	itemOak.ID = cfg.getItem(item, 25500, "Oak Boat").getInt(25500);
-        	itemSpruce.ID = cfg.getItem(item, 25501, "Spruce Boat").getInt(25501);
-        	itemBirch.ID = cfg.getItem(item, 25502, "Birch Boat").getInt(25502);
-        	itemJungle.ID = cfg.getItem(item, 25503, "Jungle Boat").getInt(25503);
+        	itemOak.ID = cfg.getItem(vanillaBoat, 25500, "Oak Boat").getInt(25500);
+        	itemSpruce.ID = cfg.getItem(vanillaBoat, 25501, "Spruce Boat").getInt(25501);
+        	itemBirch.ID = cfg.getItem(vanillaBoat, 25502, "Birch Boat").getInt(25502);
+        	itemJungle.ID = cfg.getItem(vanillaBoat, 25503, "Jungle Boat").getInt(25503);
         }
         catch (Exception e)
         {
