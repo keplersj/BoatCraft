@@ -7,7 +7,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Birch extends ItemBoat {
 	
-	public int ID;
+	public static int ID;
 	public final int shiftedID = this.itemID;
 
 	public Birch(int par1) {

@@ -7,7 +7,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class Oak extends ItemBoat {
 	
-	public int ID;
+	public static int ID;
 	public final int shiftedID = this.itemID;
 
 	public Oak(int par1) {

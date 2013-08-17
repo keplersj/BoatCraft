@@ -7,7 +7,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class Spruce extends ItemBoat {
 	
-	public int ID;
+	public static int ID;
 	public final int shiftedID = this.itemID;
 
 	public Spruce(int par1) {

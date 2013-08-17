@@ -64,10 +64,10 @@ public class BoatCraft {
 		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
         try
         {	
-        	itemOak.ID = cfg.getItem(vanillaBoat, 25500, "Oak Boat").getInt(25500);
-        	itemSpruce.ID = cfg.getItem(vanillaBoat, 25501, "Spruce Boat").getInt(25501);
-        	itemBirch.ID = cfg.getItem(vanillaBoat, 25502, "Birch Boat").getInt(25502);
-        	itemJungle.ID = cfg.getItem(vanillaBoat, 25503, "Jungle Boat").getInt(25503);
+        	itemOak.ID = cfg.getItem(vanillaBoat, "Oak Boat", 25500).getInt(25500);
+        	itemSpruce.ID = cfg.getItem(vanillaBoat, "Spruce Boat", 25501).getInt(25501);
+        	itemBirch.ID = cfg.getItem(vanillaBoat, "Birch Boat", 25502).getInt(25502);
+        	itemJungle.ID = cfg.getItem(vanillaBoat, "Jungle Boat", 25503).getInt(25503);
         	
         	this.OreDictWoodBoat = cfg.get("Options", "OreDictWoodBoats", false, "Use the OreDictionary to craft Wooden Boats").getBoolean(false);
         }
