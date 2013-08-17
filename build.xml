@@ -70,6 +70,7 @@
                 <get src="https://dl.dropboxusercontent.com/u/44760587/forestry/previews/${forestry.version}/forestry-api-${forestry.version}.zip" dest="${download.dir}" usetimestamp="True"/>
                 
 		<git-clone-pull repository="https://github.com/k2b6s9j/Plugin-Metrics.git" dest="${download.dir}/Plugin-Metrics"/>
+		<git-clone-pull repository="https://github.com/Hidendra/Plugin-Metrics.git" dest="${download.dir}/Plugin-Metrics"/>
 
 		<echo message="Download finished"/>
 	</target>
