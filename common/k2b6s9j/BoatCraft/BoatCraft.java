@@ -3,7 +3,7 @@ package k2b6s9j.BoatCraft;
 import java.io.IOException;
 import java.util.logging.Level;
 
-import k2b6s9j.BoatCraft.entity.item.EntityCustomBoat;
+import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;
 import k2b6s9j.BoatCraft.item.boat.vanilla.wood.Birch;
 import k2b6s9j.BoatCraft.item.boat.vanilla.wood.Jungle;
 import k2b6s9j.BoatCraft.item.boat.vanilla.wood.Oak;
