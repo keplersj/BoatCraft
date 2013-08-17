@@ -1,11 +1,11 @@
 package k2b6s9j.BoatCraft.item.boat.vanilla.wood;
 
-import net.minecraft.item.ItemBoat;
+import k2b6s9j.BoatCraft.item.boat.ItemCustomBoat;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class Birch extends ItemBoat {
+public class Birch extends ItemCustomBoat {
 	
 	public static int ID;
 	public final int shiftedID = this.itemID;
