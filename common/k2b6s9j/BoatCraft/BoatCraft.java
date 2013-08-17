@@ -3,14 +3,19 @@ package k2b6s9j.BoatCraft;
 import java.io.IOException;
 import java.util.logging.Level;
 
-import org.mcstats.MetricsLite;
-
 import k2b6s9j.BoatCraft.entity.item.EntityCustomBoat;
+import k2b6s9j.BoatCraft.item.boat.vanilla.wood.Birch;
+import k2b6s9j.BoatCraft.item.boat.vanilla.wood.Jungle;
+import k2b6s9j.BoatCraft.item.boat.vanilla.wood.Oak;
+import k2b6s9j.BoatCraft.item.boat.vanilla.wood.Spruce;
 import k2b6s9j.BoatCraft.proxy.CommonProxy;
 import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+
+import org.mcstats.MetricsLite;
+
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -36,6 +41,14 @@ public class BoatCraft {
 	//Mod Info
 	public final String modName = "BoatCraft";
 	public final String modVersion = "2.0";
+	
+	//Configuration File Strings
+	private final String item = "Items"; 
+	
+	public Oak itemOak;
+	public Spruce itemSpruce;
+	public Birch itemBirch;
+	public Jungle itemJungle;
 
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event)
@@ -45,7 +58,10 @@ public class BoatCraft {
 		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
         try
         {	
-        	
+        	itemOak.ID = cfg.getItem(item, 25500, "Oak Boat").getInt(25500);
+        	itemSpruce.ID = cfg.getItem(item, 25501, "Spruce Boat").getInt(25501);
+        	itemBirch.ID = cfg.getItem(item, 25502, "Birch Boat").getInt(25502);
+        	itemJungle.ID = cfg.getItem(item, 25503, "Jungle Boat").getInt(25503);
         }
         catch (Exception e)
         {
