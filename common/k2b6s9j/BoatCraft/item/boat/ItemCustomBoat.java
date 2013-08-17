@@ -2,6 +2,7 @@ package k2b6s9j.BoatCraft.item.boat;
 
 import java.util.List;
 
+import k2b6s9j.BoatCraft.entity.item.EntityCustomBoat;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
@@ -16,9 +17,19 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class ItemCustomBoat extends ItemBoat {
+	
+	private EntityCustomBoat entity;
 
 	public ItemCustomBoat(int par1) {
 		super(par1);
+	}
+	
+	public EntityCustomBoat getEntity() {
+		return entity;
+	}
+	
+	public void setEntity(EntityCustomBoat entity) {
+		this.entity = entity;
 	}
 	
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
