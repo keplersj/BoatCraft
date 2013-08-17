@@ -24,12 +24,25 @@ public class ItemCustomBoat extends ItemBoat {
 		super(par1);
 	}
 	
-	public EntityCustomBoat getEntity() {
-		return entity;
-	}
-	
-	public void setEntity(EntityCustomBoat entity) {
-		this.entity = entity;
+	public ItemStack deployEntity(ItemStack itemStack, World world, EntityPlayer player, int x, int y, int z) {
+		EntityBoat entity = new EntityBoat(world, (double)((float)x + 0.5F), (double)((float)y + 1.0F), (double)((float)z + 0.5F));
+        entity.rotationYaw = (float)(((MathHelper.floor_double((double)(player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
+        
+        if (!world.getCollidingBoundingBoxes(entity, entity.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
+        {
+            return itemStack;
+        }
+
+        if (!world.isRemote)
+        {
+            world.spawnEntityInWorld(entity);
+        }
+
+        if (!player.capabilities.isCreativeMode)
+        {
+            --itemStack.stackSize;
+        }
+        return itemStack;
 	}
 	
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
@@ -96,23 +109,7 @@ public class ItemCustomBoat extends ItemBoat {
                         --j;
                     }
 
-                    EntityBoat entityboat = new EntityBoat(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
-                    entityboat.rotationYaw = (float)(((MathHelper.floor_double((double)(par3EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
-
-                    if (!par2World.getCollidingBoundingBoxes(entityboat, entityboat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
-                    {
-                        return par1ItemStack;
-                    }
-
-                    if (!par2World.isRemote)
-                    {
-                        par2World.spawnEntityInWorld(entityboat);
-                    }
-
-                    if (!par3EntityPlayer.capabilities.isCreativeMode)
-                    {
-                        --par1ItemStack.stackSize;
-                    }
+                    deployEntity(par1ItemStack, par2World, par3EntityPlayer, i, j, k);
                 }
 
                 return par1ItemStack;

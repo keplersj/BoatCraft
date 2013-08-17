@@ -1,5 +1,6 @@
 package k2b6s9j.BoatCraft.item.boat.vanilla.wood;
 
+import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;
 import k2b6s9j.BoatCraft.item.boat.ItemCustomBoat;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -17,5 +18,4 @@ public class Spruce extends ItemCustomBoat {
     	GameRegistry.registerItem(this, "Spruce Wood Boat");
     	OreDictionary.registerOre("itemBoat", new ItemStack(this));
 	}
-
 }
