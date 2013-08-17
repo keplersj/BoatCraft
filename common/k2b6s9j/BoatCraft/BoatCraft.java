@@ -47,9 +47,6 @@ public class BoatCraft {
 	
 	//Configuration File Strings
 	private final String vanillaBoat = "Vanilla Boats"; 
-	//Config File Strings
-	public final String itemBoats = "Boats in Item Form";
-	public final String sticks = "Sticks";
 	
 	//Boat Items
 	public Oak itemOak;
