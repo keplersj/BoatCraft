@@ -20,13 +20,6 @@ Special Thanks goes out to:
 - Oars
 - Much more
 
-## Features (Currently implemented)
-- Boat Items for the 4 Vanilla Woods
-- API allowing other mods to add blocks to boats (Kinda. A mod support page will be in the wiki some time after ModJam)
-
-## Half-Features (Needs work)
-- Boats that contain all the same blocks that Vanilla Minecarts can contain (Chest, Furnace, TNT, Mob Spawner)
-
 ## The Build Enviroment
 When I develop with Java I try to make my enviroment as git friendly as possible. This means that it is easy for anyone to download and play around with my code. When you clone the repository onto your computer open your command line and run 'ant' inside the repository's folder on your computer, this requires [ant](http://ant.apache.org/manual/install.html) to be installed on your computer.
 
