@@ -11,7 +11,6 @@ Special Thanks goes out to:
 - #ModJam on Espernet and everyone over there, for just being awesome!
 
 ## Goals (Not even begun work on, might not even happen)
-- Seaport Villages
 - And one day, STEAM BOATS!
 - PIRATES!
 - Sails
