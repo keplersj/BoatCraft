@@ -10,6 +10,8 @@ Special Thanks goes out to:
 - CovertJaguar, for creating Railcraft and being one of the biggest inspiractions.
 - #ModJam on Espernet and everyone over there, for just being awesome!
 
+[![MCStats Statistics](http://api.mcstats.org/signature/BoatCraft.png)](http://mcstats.org/plugin/BoatCraft)
+
 ## Goals (Not even begun work on, might not even happen)
 - And one day, STEAM BOATS!
 - PIRATES!
