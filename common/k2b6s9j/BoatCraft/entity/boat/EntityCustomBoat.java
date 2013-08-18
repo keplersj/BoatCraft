@@ -1,112 +1,59 @@
-package k2b6s9j.BoatCraft.entity.item;
+package k2b6s9j.BoatCraft.entity.boat;
 
 import java.util.List;
+import java.util.logging.Level;
 
-import k2b6s9j.BoatCraft.item.boat.BoatOak;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityCustomBoat extends Entity
+public abstract class EntityCustomBoat extends EntityBoat implements IInventory
 {
-    private boolean field_70279_a;
-    private double speedMultiplier;
-    private int boatPosRotationIncrements;
-    private double boatX;
-    private double boatY;
-    private double boatZ;
-    private double boatYaw;
-    private double boatPitch;
-    @SideOnly(Side.CLIENT)
-    private double velocityX;
-    @SideOnly(Side.CLIENT)
-    private double velocityY;
-    @SideOnly(Side.CLIENT)
-    private double velocityZ;
+    public boolean field_70279_a;
+	private double speedMultiplier;
+	private int boatPosRotationIncrements;
+	private double boatX;
+	private double boatY;
+	private double boatZ;
+	private double boatYaw;
+	private double boatPitch;
+	
+	//Container Boat Fields
+	private ItemStack[] boatContainerItems = new ItemStack[36];
+	private boolean dropContentsWhenDead = true;
 
-    public EntityCustomBoat(World par1World)
+	public EntityCustomBoat(World par1World)
     {
         super(par1World);
-        this.field_70279_a = true;
-        this.speedMultiplier = 0.07D;
-        this.preventEntitySpawning = true;
-        this.setSize(1.5F, 0.6F);
-        this.yOffset = this.height / 2.0F;
-    }
-
-    /**
-     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-     * prevent them from trampling crops
-     */
-    protected boolean canTriggerWalking()
-    {
-        return false;
-    }
-
-    protected void entityInit()
-    {
-        this.dataWatcher.addObject(17, new Integer(0));
-        this.dataWatcher.addObject(18, new Integer(1));
-        this.dataWatcher.addObject(19, new Float(0.0F));
-    }
-
-    /**
-     * Returns a boundingBox used to collide the entity with other entities and blocks. This enables the entity to be
-     * pushable on contact, like boats or minecarts.
-     */
-    public AxisAlignedBB getCollisionBox(Entity par1Entity)
-    {
-        return par1Entity.boundingBox;
-    }
-
-    /**
-     * returns the bounding box for this entity
-     */
-    public AxisAlignedBB getBoundingBox()
-    {
-        return this.boundingBox;
-    }
-
-    /**
-     * Returns true if this entity should push and be pushed by other entities when colliding.
-     */
-    public boolean canBePushed()
-    {
-        return true;
     }
 
     public EntityCustomBoat(World par1World, double par2, double par4, double par6)
     {
-        this(par1World);
-        this.setPosition(par2, par4 + (double)this.yOffset, par6);
-        this.motionX = 0.0D;
-        this.motionY = 0.0D;
-        this.motionZ = 0.0D;
-        this.prevPosX = par2;
-        this.prevPosY = par4;
-        this.prevPosZ = par6;
-    }
-
-    /**
-     * Returns the Y offset from the entity's position for any entity riding this one.
-     */
-    public double getMountedYOffset()
-    {
-        return (double)this.height * 0.0D - 0.30000001192092896D;
+        super(par1World, par2, par4, par6);
     }
     
-    /**
+    public EntityCustomBoat(World par2World, double d, double e, double f, String type) {
+		super(par2World, d, e, f);
+		FMLLog.log(Level.INFO, "A " + type + " boat was placed");
+	}
+
+	/**
      * Called when the entity is attacked.
      */
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
@@ -145,7 +92,7 @@ public class EntityCustomBoat extends Entity
                 	}
                 	else
                 	{
-                		this.dropItemWithOffset(BoatOak.shiftedID, 1, 0.0F);
+                		//this.dropItemWithOffset(BoatOak.shiftedID, 1, 0.0F);
                 	}
                 }
 
@@ -159,150 +106,7 @@ public class EntityCustomBoat extends Entity
             return true;
         }
     }
-
-    public boolean isCustomBoat()
-    {
-    	return false;
-    }
     
-    public ItemStack customBoatItem()
-    {
-    	return new ItemStack(Item.boat, 1, 0);
-    }
-    
-    public boolean useItemID()
-    {
-    	return false;
-    }
-    
-    public int customBoatItemID()
-    {
-    	return Item.boat.itemID;
-    }
-    
-    public ItemStack customPlank()
-    {
-    	return new ItemStack(Block.planks, 1, 0);
-    }
-    
-    public ItemStack customStick()
-    {
-    	return new ItemStack(Item.stick, 1, 0);
-    }
-    
-    public boolean doesBoatContainBlock()
-    {
-    	return false;
-    }
-    
-    public ItemStack blockInBoat()
-    {
-    	return null;
-    }
-    
-    public void crashedDrops()
-    {
-        int k;
-
-        for (k = 0; k < 3; ++k)
-        {
-        	if (isCustomBoat())
-        	{
-        		this.entityDropItem(customPlank(), 0.0F);
-        	}
-        	else
-        	{
-        		this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F);
-        	}
-        }
-
-        for (k = 0; k < 2; ++k)
-        {
-        	if (isCustomBoat())
-        	{
-                this.entityDropItem(customStick(), 0.0F);
-        	}
-        	else
-        	{
-        		this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F);
-        	}
-        }
-        
-        if (doesBoatContainBlock())
-        {
-        	this.entityDropItem(blockInBoat(), 0.0F);
-        }
-    }
-    
-    @SideOnly(Side.CLIENT)
-
-    /**
-     * Setups the entity to do the hurt animation. Only used by packets in multiplayer.
-     */
-    public void performHurtAnimation()
-    {
-        this.setForwardDirection(-this.getForwardDirection());
-        this.setTimeSinceHit(10);
-        this.setDamageTaken(this.getDamageTaken() * 11.0F);
-    }
-
-    /**
-     * Returns true if other Entities should be prevented from moving through this Entity.
-     */
-    public boolean canBeCollidedWith()
-    {
-        return !this.isDead;
-    }
-
-    @SideOnly(Side.CLIENT)
-
-    /**
-     * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
-     * posY, posZ, yaw, pitch
-     */
-    public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9)
-    {
-        if (this.field_70279_a)
-        {
-            this.boatPosRotationIncrements = par9 + 5;
-        }
-        else
-        {
-            double d3 = par1 - this.posX;
-            double d4 = par3 - this.posY;
-            double d5 = par5 - this.posZ;
-            double d6 = d3 * d3 + d4 * d4 + d5 * d5;
-
-            if (d6 <= 1.0D)
-            {
-                return;
-            }
-
-            this.boatPosRotationIncrements = 3;
-        }
-
-        this.boatX = par1;
-        this.boatY = par3;
-        this.boatZ = par5;
-        this.boatYaw = (double)par7;
-        this.boatPitch = (double)par8;
-        this.motionX = this.velocityX;
-        this.motionY = this.velocityY;
-        this.motionZ = this.velocityZ;
-    }
-
-    @SideOnly(Side.CLIENT)
-
-    /**
-     * Sets the velocity to the args. Args: x, y, z
-     */
-    public void setVelocity(double par1, double par3, double par5)
-    {
-        this.velocityX = this.motionX = par1;
-        this.velocityY = this.motionY = par3;
-        this.velocityZ = this.motionZ = par5;
-    }
-
     /**
      * Called to update the entity's position/logic.
      */
@@ -524,7 +328,7 @@ public class EntityCustomBoat extends Entity
                     {
                         Entity entity = (Entity)list.get(l);
 
-                        if (entity != this.riddenByEntity && entity.canBePushed() && entity instanceof EntityCustomBoat)
+                        if (entity != this.riddenByEntity && entity.canBePushed() && entity instanceof EntityBoat)
                         {
                             entity.applyEntityCollision(this);
                         }
@@ -560,32 +364,84 @@ public class EntityCustomBoat extends Entity
         }
     }
 
-    public void updateRiderPosition()
+    public boolean isCustomBoat()
     {
-        if (this.riddenByEntity != null)
+    	return false;
+    }
+    
+    public ItemStack customBoatItem()
+    {
+    	return new ItemStack(Item.boat, 1, 0);
+    }
+    
+    public boolean useItemID()
+    {
+    	return false;
+    }
+    
+    public int customBoatItemID()
+    {
+    	return Item.boat.itemID;
+    }
+    
+    public ItemStack customPlank()
+    {
+    	return new ItemStack(Block.planks, 1, 0);
+    }
+    
+    public ItemStack customStick()
+    {
+    	return new ItemStack(Item.stick, 1, 0);
+    }
+    
+    public boolean doesBoatContainBlock()
+    {
+    	return false;
+    }
+    
+    public ItemStack blockInBoat()
+    {
+    	return null;
+    }
+    
+    public void crashedDrops()
+    {
+    	dropContents();
+        int k;
+
+        for (k = 0; k < 3; ++k)
         {
-            double d0 = Math.cos((double)this.rotationYaw * Math.PI / 180.0D) * 0.4D;
-            double d1 = Math.sin((double)this.rotationYaw * Math.PI / 180.0D) * 0.4D;
-            this.riddenByEntity.setPosition(this.posX + d0, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ + d1);
+        	if (isCustomBoat())
+        	{
+        		this.entityDropItem(customPlank(), 0.0F);
+        	}
+        	else
+        	{
+        		this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F);
+        	}
+        }
+
+        for (k = 0; k < 2; ++k)
+        {
+        	if (isCustomBoat())
+        	{
+                this.entityDropItem(customStick(), 0.0F);
+        	}
+        	else
+        	{
+        		this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F);
+        	}
+        }
+        
+        if (doesBoatContainBlock())
+        {
+        	this.entityDropItem(blockInBoat(), 0.0F);
         }
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
+    /*
+     * This function is called with the Player action clicks on the Boat entity
      */
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {}
-
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {}
-
-    @SideOnly(Side.CLIENT)
-    public float getShadowSize()
-    {
-        return 0.0F;
-    }
-
     public boolean func_130002_c(EntityPlayer player)
     {
     	//Do not mount if the player is shift clicking
@@ -601,61 +457,21 @@ public class EntityCustomBoat extends Entity
         {
             if (!this.worldObj.isRemote)
             {
-                player.mountEntity(this);
+            	if (!hasDisplayTile()) {
+            		player.mountEntity(this);
+            	}
+            	else {
+            		
+            	}
             }
 
             return true;
         }
     }
-
-    /**
-     * Sets the damage taken from the last hit.
-     */
-    public void setDamageTaken(float par1)
-    {
-        this.dataWatcher.updateObject(19, Float.valueOf(par1));
-    }
-
-    /**
-     * Gets the damage taken from the last hit.
-     */
-    public float getDamageTaken()
-    {
-        return this.dataWatcher.func_111145_d(19);
-    }
-
-    /**
-     * Sets the time to count down from since the last time entity was hit.
-     */
-    public void setTimeSinceHit(int par1)
-    {
-        this.dataWatcher.updateObject(17, Integer.valueOf(par1));
-    }
-
-    /**
-     * Gets the time since the last hit.
-     */
-    public int getTimeSinceHit()
-    {
-        return this.dataWatcher.getWatchableObjectInt(17);
-    }
-
-    /**
-     * Sets the forward direction of the entity.
-     */
-    public void setForwardDirection(int par1)
-    {
-        this.dataWatcher.updateObject(18, Integer.valueOf(par1));
-    }
-
-    /**
-     * Gets the forward direction of the entity.
-     */
-    public int getForwardDirection()
-    {
-        return this.dataWatcher.getWatchableObjectInt(18);
-    }
     
+    /*
+     * These classes below supply the information needed for Block in Boats
+     */
     public Block getDisplayTile()
     {
         if (!this.hasDisplayTile())
@@ -728,5 +544,205 @@ public class EntityCustomBoat extends Entity
     public void func_70270_d(boolean par1)
     {
         this.field_70279_a = par1;
+    }
+    
+    /**
+     * Returns the stack in slot i
+     */
+    public ItemStack getStackInSlot(int par1)
+    {
+        return this.boatContainerItems[par1];
+    }
+    
+    /**
+     * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
+     * new stack.
+     */
+    public ItemStack decrStackSize(int par1, int par2)
+    {
+        if (this.boatContainerItems[par1] != null)
+        {
+            ItemStack itemstack;
+
+            if (this.boatContainerItems[par1].stackSize <= par2)
+            {
+                itemstack = this.boatContainerItems[par1];
+                this.boatContainerItems[par1] = null;
+                return itemstack;
+            }
+            else
+            {
+                itemstack = this.boatContainerItems[par1].splitStack(par2);
+
+                if (this.boatContainerItems[par1].stackSize == 0)
+                {
+                    this.boatContainerItems[par1] = null;
+                }
+
+                return itemstack;
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    /**
+     * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
+     * like when you close a workbench GUI.
+     */
+    public ItemStack getStackInSlotOnClosing(int par1)
+    {
+        if (this.boatContainerItems[par1] != null)
+        {
+            ItemStack itemstack = this.boatContainerItems[par1];
+            this.boatContainerItems[par1] = null;
+            return itemstack;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    /**
+     * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
+     */
+    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+    {
+        this.boatContainerItems[par1] = par2ItemStack;
+
+        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
+        {
+            par2ItemStack.stackSize = this.getInventoryStackLimit();
+        }
+    }
+
+    /**
+     * Called when an the contents of an Inventory change, usually
+     */
+    public void onInventoryChanged() {}
+
+    /**
+     * Do not make give this method the name canInteractWith because it clashes with Container
+     */
+    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    {
+        return this.isDead ? false : par1EntityPlayer.getDistanceSqToEntity(this) <= 64.0D;
+    }
+
+    public void openChest() {}
+
+    public void closeChest() {}
+
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     */
+    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+    {
+        return true;
+    }
+
+    /**
+     * Returns the name of the inventory.
+     */
+    public String getInvName()
+    {
+        return "container.boat";
+    }
+
+    /**
+     * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended. *Isn't
+     * this more of a set than a get?*
+     */
+    public int getInventoryStackLimit()
+    {
+        return 64;
+    }
+
+    /**
+     * Teleports the entity to another dimension. Params: Dimension number to teleport to
+     */
+    public void travelToDimension(int par1)
+    {
+        this.dropContentsWhenDead = false;
+        super.travelToDimension(par1);
+    }
+    
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.writeEntityToNBT(par1NBTTagCompound);
+        NBTTagList nbttaglist = new NBTTagList();
+
+        for (int i = 0; i < this.boatContainerItems.length; ++i)
+        {
+            if (this.boatContainerItems[i] != null)
+            {
+                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+                nbttagcompound1.setByte("Slot", (byte)i);
+                this.boatContainerItems[i].writeToNBT(nbttagcompound1);
+                nbttaglist.appendTag(nbttagcompound1);
+            }
+        }
+
+        par1NBTTagCompound.setTag("Items", nbttaglist);
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.readEntityFromNBT(par1NBTTagCompound);
+        NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
+        this.boatContainerItems = new ItemStack[this.getSizeInventory()];
+
+        for (int i = 0; i < nbttaglist.tagCount(); ++i)
+        {
+            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+            int j = nbttagcompound1.getByte("Slot") & 255;
+
+            if (j >= 0 && j < this.boatContainerItems.length)
+            {
+                this.boatContainerItems[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+            }
+        }
+    }
+    
+    public void dropContents()
+    {
+    	for (int i = 0; i < this.getSizeInventory(); ++i)
+        {
+            ItemStack itemstack = this.getStackInSlot(i);
+
+            if (itemstack != null)
+            {
+                float f = this.rand.nextFloat() * 0.8F + 0.1F;
+                float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
+                float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
+
+                while (itemstack.stackSize > 0)
+                {
+                    int j = this.rand.nextInt(21) + 10;
+
+                    if (j > itemstack.stackSize)
+                    {
+                        j = itemstack.stackSize;
+                    }
+
+                    itemstack.stackSize -= j;
+                    EntityItem entityitem = new EntityItem(this.worldObj, this.posX + (double)f, this.posY + (double)f1, this.posZ + (double)f2, new ItemStack(itemstack.itemID, j, itemstack.getItemDamage()));
+                    float f3 = 0.05F;
+                    entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
+                    entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
+                    entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
+                    this.worldObj.spawnEntityInWorld(entityitem);
+                }
+            }
+        }
     }
 }

@@ -2,9 +2,10 @@ package k2b6s9j.BoatCraft.item.boat;
 
 import java.util.List;
 
-import k2b6s9j.BoatCraft.entity.item.EntityBoatHopper;
+import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBoat;
 import net.minecraft.item.ItemStack;
@@ -14,26 +15,39 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.registry.GameRegistry;
 
-public class BoatHopper extends ItemBoat {
+public class ItemCustomBoat extends ItemBoat {
 	
-	public static int ID;
-	public static int shiftedID;
-	
-	public BoatHopper(int id) {
-		super(id);
-		setUnlocalizedName("boatHopper");
-        func_111206_d("boatcraft:boatHopper");
-    	GameRegistry.registerItem(this, "Hopper Boat");
-    	shiftedID = this.itemID;
+	private EntityCustomBoat entity;
+
+	public ItemCustomBoat(int par1) {
+		super(par1);
 	}
 	
-	@Override
+	public ItemStack deployEntity(ItemStack itemStack, World world, EntityPlayer player, int x, int y, int z) {
+		EntityBoat entity = new EntityBoat(world, (double)((float)x + 0.5F), (double)((float)y + 1.0F), (double)((float)z + 0.5F));
+        entity.rotationYaw = (float)(((MathHelper.floor_double((double)(player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
+        
+        if (!world.getCollidingBoundingBoxes(entity, entity.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
+        {
+            return itemStack;
+        }
+
+        if (!world.isRemote)
+        {
+            world.spawnEntityInWorld(entity);
+        }
+
+        if (!player.capabilities.isCreativeMode)
+        {
+            --itemStack.stackSize;
+        }
+        return itemStack;
+	}
+	
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-	{
-		float f = 1.0F;
+    {
+        float f = 1.0F;
         float f1 = par3EntityPlayer.prevRotationPitch + (par3EntityPlayer.rotationPitch - par3EntityPlayer.prevRotationPitch) * f;
         float f2 = par3EntityPlayer.prevRotationYaw + (par3EntityPlayer.rotationYaw - par3EntityPlayer.prevRotationYaw) * f;
         double d0 = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * (double)f;
@@ -95,27 +109,11 @@ public class BoatHopper extends ItemBoat {
                         --j;
                     }
 
-                    EntityBoatHopper entityboat = new EntityBoatHopper(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
-                    entityboat.rotationYaw = (float)(((MathHelper.floor_double((double)(par3EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
-
-                    if (!par2World.getCollidingBoundingBoxes(entityboat, entityboat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
-                    {
-                        return par1ItemStack;
-                    }
-
-                    if (!par2World.isRemote)
-                    {
-                        par2World.spawnEntityInWorld(entityboat);
-                    }
-
-                    if (!par3EntityPlayer.capabilities.isCreativeMode)
-                    {
-                        --par1ItemStack.stackSize;
-                    }
+                    deployEntity(par1ItemStack, par2World, par3EntityPlayer, i, j, k);
                 }
 
                 return par1ItemStack;
             }
         }
-	}
+    }
 }
