@@ -43,7 +43,7 @@ public class BoatCraft {
 	
 	//Mod Info
 	public final String modName = "BoatCraft";
-	public final String modVersion = "2.0-DEV";
+	public final String modVersion = "2.0-EntityRewrite";
 	
 	//Configuration File Strings
 	private final String vanillaBoat = "Vanilla Boats"; 
