@@ -1,12 +1,23 @@
-*.class
+/bin/*
+/conf/*
+/docs/*
+/eclipse/*
+/forge/*
+/jars/*
+/lib/*
+/logs/*
+/modsrc/*
+/reobf/*
+/runtime/*
+/temp/*
 
-# Package Files #
-*.jar
-*.war
-*.ear
+/src/common/*
+/src/minecraft/*
+/src/minecraft_server/*
 
+!/src/minecraft/com/
+!/src/minecraft/mods/
+!/jars/mods/
 
-# Build Script Artifacts #
-build/
-dist/
-download/
+*.bat
+*.sh
