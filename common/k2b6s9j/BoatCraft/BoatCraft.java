@@ -2,8 +2,7 @@ package k2b6s9j.BoatCraft;
 
 import java.io.IOException;
 import java.util.logging.Level;
-
-import org.mcstats.MetricsLite;
+import java.util.logging.Logger;
 
 import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
@@ -28,6 +27,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.mcstats.MetricsLite;
+
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -50,6 +52,8 @@ public class BoatCraft {
 	
 	@SidedProxy(clientSide="k2b6s9j.BoatCraft.proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.proxy.CommonProxy")
 	public static CommonProxy proxy;
+	
+	public static Logger logger;
 	
 	//Mod Info
 	public final String modName = "BoatCraft";
@@ -76,8 +80,11 @@ public class BoatCraft {
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event)
 	{
-		FMLLog.log(Level.INFO, "BoatCraft");
-		FMLLog.log(Level.INFO, "Copyright Kepler Sticka-Jones 2013");
+		logger = event.getModLog();
+		
+		logger.info("BoatCraft");
+		logger.info("Copyright Kepler Sticka-Jones 2013");
+		
 		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
         try
         {
@@ -98,7 +105,7 @@ public class BoatCraft {
         }
         catch (Exception e)
         {
-            FMLLog.log(Level.SEVERE, e, "BoatCraft had a problem loading it's configuration");
+            logger.severe("BoatCraft had a problem loading it's configuration");
         }
         finally
         {
@@ -112,7 +119,7 @@ public class BoatCraft {
             MetricsLite metrics = new MetricsLite(this.modName, this.modVersion);
             metrics.start();
         } catch (IOException e) {
-        	FMLLog.log(Level.SEVERE, e, "BoatCraft had a problem submitting data to MCStats");
+        	logger.severe("BoatCraft had a problem submitting data to MCStats");
         }
 	}
 	
