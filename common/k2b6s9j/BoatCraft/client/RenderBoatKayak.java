@@ -1,14 +1,12 @@
-package com.github.AbrarSyed.SeaCraft.client;
+package k2b6s9j.BoatCraft.client;
 
+import k2b6s9j.BoatCraft.boats.EntityBoatKayak;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
-
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatKayak;
 
 public class RenderBoatKayak extends Render
 {
@@ -89,5 +87,11 @@ public class RenderBoatKayak extends Render
 	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
 	{
 		render((EntityBoatKayak) par1Entity, par2, par4, par6, par8, par9);
+	}
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

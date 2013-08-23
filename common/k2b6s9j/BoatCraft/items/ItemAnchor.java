@@ -1,11 +1,13 @@
-package com.github.AbrarSyed.SeaCraft.items;
+package k2b6s9j.BoatCraft.items;
 
-import com.github.AbrarSyed.SeaCraft.SeaCraft;
-
+import k2b6s9j.BoatCraft.SeaCraft;
 import net.minecraft.item.Item;
 
 public class ItemAnchor extends Item
 {
+	public static int ID;
+	public static int shiftedID;
+	
 	public ItemAnchor(int par1, boolean hasRope)
 	{
 		super(par1);

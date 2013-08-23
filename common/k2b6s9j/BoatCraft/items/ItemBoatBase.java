@@ -1,7 +1,9 @@
-package com.github.AbrarSyed.SeaCraft.items;
+package k2b6s9j.BoatCraft.items;
 
 import java.util.List;
 
+import k2b6s9j.BoatCraft.SeaCraft;
+import k2b6s9j.BoatCraft.boats.EntityBoatBase;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,10 +15,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import com.github.AbrarSyed.SeaCraft.SeaCraft;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatBase;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
 
 public abstract class ItemBoatBase extends Item
 {

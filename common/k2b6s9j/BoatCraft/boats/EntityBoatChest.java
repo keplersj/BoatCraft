@@ -1,13 +1,12 @@
-package com.github.AbrarSyed.SeaCraft.boats;
+package k2b6s9j.BoatCraft.boats;
 
+import k2b6s9j.BoatCraft.FunctionHelper;
+import k2b6s9j.BoatCraft.SeaCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-
-import com.github.AbrarSyed.SeaCraft.FunctionHelper;
-import com.github.AbrarSyed.SeaCraft.SeaCraft;
 
 public class EntityBoatChest extends EntityBoatBase implements IInventory
 {
@@ -221,6 +220,12 @@ public class EntityBoatChest extends EntityBoatBase implements IInventory
 	public boolean isStackValidForSlot(int i, ItemStack itemstack)
 	{
 		return true;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -1,13 +1,10 @@
-package com.github.AbrarSyed.containers;
+package k2b6s9j.BoatCraft.containers;
 
-import com.github.AbrarSyed.SeaCraft.blocks.TileEntityBoatBuilder;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
-
+import k2b6s9j.BoatCraft.blocks.TileEntityBoatBuilder;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnace;
 
 public class ContainerBoatBuilder extends Container
 {

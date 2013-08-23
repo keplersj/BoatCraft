@@ -1,9 +1,8 @@
-package com.github.AbrarSyed.SeaCraft.api;
+package k2b6s9j.BoatCraft.api;
 
 import java.util.HashMap;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class SeaCraftAPI

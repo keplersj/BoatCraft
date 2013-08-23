@@ -1,8 +1,6 @@
-package com.github.AbrarSyed.SeaCraft.blocks;
+package k2b6s9j.BoatCraft.blocks;
 
-import com.github.AbrarSyed.SeaCraft.SeaCraft;
-
-import net.minecraft.block.Block;
+import k2b6s9j.BoatCraft.SeaCraft;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
@@ -19,6 +17,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBoatBuilder extends BlockContainer
 {
+	
+	public static int ID;
+	public static int shiftedID;
+	
 	@SideOnly(Side.CLIENT)
 	private Icon	outIcon;
 	

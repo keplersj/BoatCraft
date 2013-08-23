@@ -1,7 +1,9 @@
-package com.github.AbrarSyed.SeaCraft.boats;
+package k2b6s9j.BoatCraft.boats;
 
 import java.util.List;
 
+import k2b6s9j.BoatCraft.SeaCraft;
+import k2b6s9j.BoatCraft.api.SeaCraftAPI;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -13,10 +15,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import com.github.AbrarSyed.SeaCraft.SeaCraft;
-import com.github.AbrarSyed.SeaCraft.api.SeaCraftAPI;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

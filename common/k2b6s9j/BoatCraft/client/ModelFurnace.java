@@ -1,4 +1,4 @@
-package com.github.AbrarSyed.SeaCraft.client;
+package k2b6s9j.BoatCraft.client;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;

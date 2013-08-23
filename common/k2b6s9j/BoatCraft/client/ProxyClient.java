@@ -1,10 +1,9 @@
-package com.github.AbrarSyed.SeaCraft.client;
+package k2b6s9j.BoatCraft.client;
 
-import com.github.AbrarSyed.SeaCraft.ProxyServer;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatChest;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatKayak;
-
+import k2b6s9j.BoatCraft.ProxyServer;
+import k2b6s9j.BoatCraft.boats.EntityBoatChest;
+import k2b6s9j.BoatCraft.boats.EntityBoatFurnace;
+import k2b6s9j.BoatCraft.boats.EntityBoatKayak;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 

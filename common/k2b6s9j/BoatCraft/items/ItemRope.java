@@ -1,13 +1,13 @@
-package com.github.AbrarSyed.SeaCraft.items;
+package k2b6s9j.BoatCraft.items;
 
-import com.github.AbrarSyed.SeaCraft.SeaCraft;
-
-import net.minecraft.entity.EntityLiving;
+import k2b6s9j.BoatCraft.SeaCraft;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class ItemRope extends Item
 {
+	public static int ID;
+	public static int shiftedID;
+	
 	public ItemRope(int par1)
 	{
 		super(par1);

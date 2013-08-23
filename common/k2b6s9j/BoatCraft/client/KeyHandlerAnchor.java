@@ -1,17 +1,16 @@
-package com.github.AbrarSyed.SeaCraft.client;
+package k2b6s9j.BoatCraft.client;
 
 import java.util.EnumSet;
 
+import k2b6s9j.BoatCraft.SeaCraft;
+import k2b6s9j.BoatCraft.boats.EntityBoatBase;
+import k2b6s9j.BoatCraft.network.PacketSC3ToggleAnchor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.lwjgl.input.Keyboard;
-
-import com.github.AbrarSyed.SeaCraft.SeaCraft;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatBase;
-import com.github.AbrarSyed.SeaCraft.network.PacketSC3ToggleAnchor;
 
 import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
 import cpw.mods.fml.common.TickType;

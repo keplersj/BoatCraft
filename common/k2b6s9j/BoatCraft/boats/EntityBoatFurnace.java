@@ -1,22 +1,16 @@
-package com.github.AbrarSyed.SeaCraft.boats;
+package k2b6s9j.BoatCraft.boats;
 
+import k2b6s9j.BoatCraft.FunctionHelper;
+import k2b6s9j.BoatCraft.SeaCraft;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFurnace;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.github.AbrarSyed.SeaCraft.FunctionHelper;
-import com.github.AbrarSyed.SeaCraft.SeaCraft;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -526,5 +520,11 @@ public class EntityBoatFurnace extends EntityBoatBase implements IInventory
 		this.setBurningLeft(nbt.getInteger(SAVE_CURRENT_BURN));
 		this.setTotalBurnTime(nbt.getInteger(SAVE_TOTAL_BURN));
 		this.setItemCookingTime(nbt.getInteger(SAVE_CURRENT_COOK));
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

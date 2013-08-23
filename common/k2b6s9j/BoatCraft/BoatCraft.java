@@ -1,9 +1,9 @@
 package k2b6s9j.BoatCraft;
 
 import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import k2b6s9j.BoatCraft.blocks.BlockBoatBuilder;
 import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatFurnace;
@@ -20,6 +20,9 @@ import k2b6s9j.BoatCraft.item.boat.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.BoatOak;
 import k2b6s9j.BoatCraft.item.boat.BoatSpruce;
 import k2b6s9j.BoatCraft.item.boat.BoatTNT;
+import k2b6s9j.BoatCraft.items.ItemAnchor;
+import k2b6s9j.BoatCraft.items.ItemBoatKayak;
+import k2b6s9j.BoatCraft.items.ItemRope;
 import k2b6s9j.BoatCraft.proxy.CommonProxy;
 import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
 import net.minecraft.block.Block;
@@ -30,7 +33,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import org.mcstats.MetricsLite;
 
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -75,6 +77,15 @@ public class BoatCraft {
 	public BoatHopper hopperBoat;
 	public BoatTNT tntBoat;
 	
+	// items
+	public static ItemBoatKayak kayak;
+	public static ItemAnchor anchor;
+	public static ItemAnchor anchor_noRope;
+	public static ItemRope rope;
+	
+	// blocks
+	public static BlockBoatBuilder builder;
+	
 	public boolean OreDictWoodBoat;
 
 	@EventHandler
@@ -99,6 +110,15 @@ public class BoatCraft {
         	furnaceBoat.ID = cfg.getItem(itemBoats, "Furnace Boat", 25509).getInt(25509);
         	hopperBoat.ID = cfg.getItem(itemBoats, "Hopper Boat", 25510).getInt(25510);
         	tntBoat.ID = cfg.getItem(itemBoats, "TNT Boat", 25511).getInt(25511);
+        	
+        	//SeaCraft Block
+        	builder.ID = cfg.getBlock("Blocks", "boatBuilder", 4000).getInt(4000);
+        	
+        	//SeaCraft Items
+        	kayak.ID = cfg.getItem("SeaCraft Items", "Kayak", 25512).getInt(25512);
+			anchor.ID = cfg.getItem("SeaCraft Items", "Anchor", 25513).getInt(25513);
+			anchor_noRope.ID = cfg.getItem("SeaCraft Items", "Anchor_NoRope", 25514).getInt(25514);
+			rope.ID = cfg.getItem("SeaCraft Items", "Rope", 25515).getInt(25515);
         	
         	//Modules
         	this.OreDictWoodBoat = cfg.get("Modules", "OreDictWoodBoats", false, "Use the OreDictionary to craft Wooden Boats").getBoolean(false);

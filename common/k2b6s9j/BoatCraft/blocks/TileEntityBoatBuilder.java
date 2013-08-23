@@ -2,6 +2,12 @@ package com.github.AbrarSyed.SeaCraft.blocks;
 
 import java.util.Arrays;
 
+import k2b6s9j.BoatCraft.FunctionHelper;
+import k2b6s9j.BoatCraft.SeaCraft;
+import k2b6s9j.BoatCraft.boats.EntityBoatBase;
+import k2b6s9j.BoatCraft.boats.EntityBoatChest;
+import k2b6s9j.BoatCraft.boats.EntityBoatFurnace;
+import k2b6s9j.BoatCraft.boats.EntityBoatKayak;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -11,13 +17,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.ForgeDirection;
-
-import com.github.AbrarSyed.SeaCraft.FunctionHelper;
-import com.github.AbrarSyed.SeaCraft.SeaCraft;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatBase;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatChest;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatKayak;
 
 public class TileEntityBoatBuilder extends TileEntity implements IInventory
 {

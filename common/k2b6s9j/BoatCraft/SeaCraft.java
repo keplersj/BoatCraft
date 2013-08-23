@@ -1,7 +1,14 @@
-package com.github.AbrarSyed.SeaCraft;
+package k2b6s9j.BoatCraft;
 
 import java.util.logging.Logger;
 
+import k2b6s9j.BoatCraft.blocks.BlockBoatBuilder;
+import k2b6s9j.BoatCraft.items.ItemAnchor;
+import k2b6s9j.BoatCraft.items.ItemBoatKayak;
+import k2b6s9j.BoatCraft.items.ItemRope;
+import k2b6s9j.BoatCraft.network.HandlerClient;
+import k2b6s9j.BoatCraft.network.HandlerServer;
+import k2b6s9j.BoatCraft.network.PacketSCBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
@@ -9,19 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-
-import com.github.AbrarSyed.SeaCraft.blocks.BlockBoatBuilder;
-import com.github.AbrarSyed.SeaCraft.blocks.TileEntityBoatBuilder;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatChest;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatKayak;
-import com.github.AbrarSyed.SeaCraft.items.ItemAnchor;
-import com.github.AbrarSyed.SeaCraft.items.ItemBoatKayak;
-import com.github.AbrarSyed.SeaCraft.items.ItemRope;
-import com.github.AbrarSyed.SeaCraft.network.HandlerClient;
-import com.github.AbrarSyed.SeaCraft.network.HandlerServer;
-import com.github.AbrarSyed.SeaCraft.network.PacketSCBase;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;

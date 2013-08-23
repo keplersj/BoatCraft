@@ -1,15 +1,14 @@
-package com.github.AbrarSyed.SeaCraft.client;
+package k2b6s9j.BoatCraft.client;
 
+import k2b6s9j.BoatCraft.blocks.TileEntityBoatBuilder;
+import k2b6s9j.BoatCraft.containers.ContainerBoatBuilder;
+import k2b6s9j.BoatCraft.network.PacketSC2BuildBoat;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
-
-import com.github.AbrarSyed.SeaCraft.blocks.TileEntityBoatBuilder;
-import com.github.AbrarSyed.SeaCraft.network.PacketSC2BuildBoat;
-import com.github.AbrarSyed.containers.ContainerBoatBuilder;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 

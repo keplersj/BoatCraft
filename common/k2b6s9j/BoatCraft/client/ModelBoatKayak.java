@@ -1,14 +1,14 @@
-package com.github.AbrarSyed.SeaCraft.client;
+package k2b6s9j.BoatCraft.client;
 
+import java.io.File;
+import java.net.MalformedURLException;
+
+import k2b6s9j.BoatCraft.SeaCraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-import com.github.AbrarSyed.SeaCraft.SeaCraft;
 import com.overminddl1.minecraft.libs.NMT.NMTModelRenderer;
-
-import java.io.File;
-import java.net.MalformedURLException;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

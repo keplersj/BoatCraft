@@ -1,11 +1,9 @@
-package com.github.AbrarSyed.SeaCraft.boats;
+package k2b6s9j.BoatCraft.boats;
 
+import k2b6s9j.BoatCraft.SeaCraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.FoodStats;
 import net.minecraft.world.World;
-
-import com.github.AbrarSyed.SeaCraft.SeaCraft;
 
 public class EntityBoatKayak extends EntityBoatBase
 {

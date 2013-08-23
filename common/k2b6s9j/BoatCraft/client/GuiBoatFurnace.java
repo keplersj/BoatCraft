@@ -1,16 +1,15 @@
-package com.github.AbrarSyed.SeaCraft.client;
+package k2b6s9j.BoatCraft.client;
 
+import k2b6s9j.BoatCraft.boats.EntityBoatFurnace;
+import k2b6s9j.BoatCraft.containers.ContainerBoatFurnace;
+import k2b6s9j.BoatCraft.network.PacketSC0MountEntity;
+import k2b6s9j.BoatCraft.network.PacketSC1StartBoat;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
-
-import com.github.AbrarSyed.SeaCraft.boats.EntityBoatFurnace;
-import com.github.AbrarSyed.SeaCraft.network.PacketSC0MountEntity;
-import com.github.AbrarSyed.SeaCraft.network.PacketSC1StartBoat;
-import com.github.AbrarSyed.containers.ContainerBoatFurnace;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
