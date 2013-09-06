@@ -1,6 +1,6 @@
 package k2b6s9j.BoatCraft.entity.item;
 
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatFurnace;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatFurnace extends EntityCustomBoat {
 	
-	public BoatFurnace item;
+	public BoatOakFurnace item;
 	
 	public EntityBoatFurnace(World par1World)
     {

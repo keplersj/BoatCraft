@@ -1,6 +1,6 @@
 package k2b6s9j.BoatCraft.entity.item;
 
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatChest;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakChest;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatChest extends EntityBoatContainer {
 
-	public BoatChest item;
+	public BoatOakChest item;
 	
 	public EntityBoatChest(World par1World)
     {

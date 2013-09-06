@@ -3,7 +3,7 @@ package k2b6s9j.BoatCraft.entity.item;
 import java.util.List;
 import java.util.logging.Level;
 
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatHopper;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakHopper;
 import net.minecraft.block.Block;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.item.EntityItem;
@@ -18,7 +18,7 @@ import cpw.mods.fml.common.FMLLog;
 public class EntityBoatHopper extends EntityBoatContainer implements Hopper {
 	
 	private int transferTicker = -1;
-	public BoatHopper item;
+	public BoatOakHopper item;
 	
 	public EntityBoatHopper(World par1World)
     {

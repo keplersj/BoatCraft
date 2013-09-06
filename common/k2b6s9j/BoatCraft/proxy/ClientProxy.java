@@ -10,11 +10,11 @@ import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntitySpruceWoodBoat;
 import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.wood.jungle.BoatJungle;
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatChest;
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatFurnace;
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatHopper;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakChest;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakFurnace;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakHopper;
 import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOak;
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatTNT;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakTNT;
 import k2b6s9j.BoatCraft.item.boat.wood.spruce.BoatSpruce;
 import k2b6s9j.BoatCraft.render.RenderBirchWoodBoat;
 import k2b6s9j.BoatCraft.render.RenderChestBoat;
@@ -49,10 +49,10 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(BoatSpruce.shiftedID, new RenderSpruceWoodBoat());
 		MinecraftForgeClient.registerItemRenderer(BoatBirch.shiftedID, new RenderBirchWoodBoat());
 		MinecraftForgeClient.registerItemRenderer(BoatJungle.shiftedID, new RenderJungleWoodBoat());
-		MinecraftForgeClient.registerItemRenderer(BoatChest.shiftedID, new RenderChestBoat());
-		MinecraftForgeClient.registerItemRenderer(BoatFurnace.shiftedID, new RenderFurnaceBoat());
-		MinecraftForgeClient.registerItemRenderer(BoatTNT.shiftedID, new RenderTNTBoat());
-		MinecraftForgeClient.registerItemRenderer(BoatHopper.shiftedID, new RenderHopperBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatOakChest.shiftedID, new RenderChestBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatOakFurnace.shiftedID, new RenderFurnaceBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatOakTNT.shiftedID, new RenderTNTBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatOakHopper.shiftedID, new RenderHopperBoat());
 	}
 
 }

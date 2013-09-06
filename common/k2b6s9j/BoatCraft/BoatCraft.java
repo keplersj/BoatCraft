@@ -13,11 +13,11 @@ import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntitySpruceWoodBoat;
 import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.wood.jungle.BoatJungle;
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatChest;
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatFurnace;
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatHopper;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakChest;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakFurnace;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakHopper;
 import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOak;
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatTNT;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakTNT;
 import k2b6s9j.BoatCraft.item.boat.wood.spruce.BoatSpruce;
 import k2b6s9j.BoatCraft.proxy.CommonProxy;
 import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
@@ -62,10 +62,10 @@ public class BoatCraft {
 	
 	//Boat Items
 	public BoatOak oakBoat;
-	public BoatChest oakChestBoat;
-	public BoatFurnace oakFurnaceBoat;
-	public BoatHopper oakHopperBoat;
-	public BoatTNT oakTntBoat;
+	public BoatOakChest oakChestBoat;
+	public BoatOakFurnace oakFurnaceBoat;
+	public BoatOakHopper oakHopperBoat;
+	public BoatOakTNT oakTntBoat;
 	public BoatSpruce spruceBoat;
 	public BoatBirch birchBoat;
 	public BoatJungle jungleBoat;
@@ -119,10 +119,10 @@ public class BoatCraft {
 		
 		//Boats
 		oakBoat = new BoatOak(oakBoat.ID);
-		oakChestBoat = new BoatChest(oakChestBoat.ID);
-		oakFurnaceBoat = new BoatFurnace(oakFurnaceBoat.ID);
-		oakHopperBoat = new BoatHopper(oakHopperBoat.ID);
-		oakTntBoat = new BoatTNT(oakTntBoat.ID);
+		oakChestBoat = new BoatOakChest(oakChestBoat.ID);
+		oakFurnaceBoat = new BoatOakFurnace(oakFurnaceBoat.ID);
+		oakHopperBoat = new BoatOakHopper(oakHopperBoat.ID);
+		oakTntBoat = new BoatOakTNT(oakTntBoat.ID);
 		spruceBoat = new BoatSpruce(spruceBoat.ID);
 		birchBoat = new BoatBirch(birchBoat.ID);
 		jungleBoat = new BoatJungle(jungleBoat.ID);

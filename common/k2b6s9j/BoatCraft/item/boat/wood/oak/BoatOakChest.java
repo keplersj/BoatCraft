@@ -17,12 +17,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class BoatChest extends ItemBoat {
+public class BoatOakChest extends ItemBoat {
 	
 	public static int ID;
 	public static int shiftedID;
 	
-	public BoatChest(int id) {
+	public BoatOakChest(int id) {
 		super(id);
 		setUnlocalizedName("boatChest");
         func_111206_d("boatcraft:boatChest");
