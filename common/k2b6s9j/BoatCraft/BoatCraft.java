@@ -48,7 +48,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import forestry.api.storage.EnumBackpackType;
 import forestry.api.storage.IBackpackInterface;
 
-@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0")
+@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", dependencies="after:Forestry;")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
 
 public class BoatCraft {
@@ -81,7 +81,6 @@ public class BoatCraft {
 	//Backpacks
 	public BackpackSailorT1 sailorBackpack1;
 	public BackpackSailorT2 sailorBackpack2;
-	IBackpackInterface bpInterface;
 	EnumBackpackType type;
 	BackpackSailorDefinition definition;
 	
@@ -153,10 +152,6 @@ public class BoatCraft {
 		//Yes. I am going to initialize this regardless if you have Forestry installed or not.
 		sailorBackpack1 = new BackpackSailorT1(sailorBackpack1.ID);
 		sailorBackpack2 = new BackpackSailorT2(sailorBackpack2.ID);
-		if (Loader.isModLoaded("Forestry")) {
-			bpInterface.addBackpack(sailorBackpack1.shiftedID, definition, type.T1);
-			bpInterface.addBackpack(sailorBackpack2.shiftedID, definition, type.T2);
-		}
 	}
 	
 	public void RegisterRecipes() {
@@ -222,7 +217,10 @@ public class BoatCraft {
 	@EventHandler
 	public void PostInit (FMLPostInitializationEvent event)
 	{
-
+		if (Loader.isModLoaded("Forestry")) {
+			sailorBackpack1.addBackpack(sailorBackpack1.itemID, definition, type.T1);
+			sailorBackpack2.addBackpack(sailorBackpack2.itemID, definition, type.T2);
+		}
 	}
 
 }
