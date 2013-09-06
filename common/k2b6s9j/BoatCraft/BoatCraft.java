@@ -142,29 +142,23 @@ public class BoatCraft {
 		if (OreDictWoodBoat) {
 			CraftingUtilities.RemoveRecipe(new ItemStack(Item.boat));
 			CraftingUtilities.AddRecipe(new ItemStack(oakBoat), "W W", "WWW", Character.valueOf('W'), "plankWood");
+			CraftingUtilities.AddShapelessRecipe(new ItemStack(chestBoat), new ItemStack(Block.chest), "itemBoat");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(furnaceBoat), new ItemStack(Block.furnaceIdle), "itemBoat");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(tntBoat), new ItemStack(Block.tnt), "itemBoat");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(hopperBoat), new ItemStack(Block.hopperBlock), "itemBoat");
 		}
-        
-        //Special Boat Recipes
-        CraftingUtilities.AddShapelessRecipe(new ItemStack(chestBoat), new ItemStack(Block.chest), "itemBoat");
-        CraftingUtilities.AddShapelessRecipe(new ItemStack(furnaceBoat), new ItemStack(Block.furnaceIdle), "itemBoat");
-        CraftingUtilities.AddShapelessRecipe(new ItemStack(tntBoat), new ItemStack(Block.tnt), "itemBoat");
-        CraftingUtilities.AddShapelessRecipe(new ItemStack(hopperBoat), new ItemStack(Block.hopperBlock), "itemBoat");
 	}
 	
 	public void EntityWork() {
 		proxy.registerRenderers();
-		// Regular Boats
 		EntityRegistry.registerModEntity(EntityOakWoodBoat.class, "Oak Wood Boat", 1, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntitySpruceWoodBoat.class, "Spruce Wood Boat", 2, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityBirchWoodBoat.class, "Birch Wood Boat", 3, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityJungleWoodBoat.class, "Jungle Wood Boat", 4, this, 80, 3, true);
-		
-		//Special Boats
-		EntityRegistry.registerModEntity(EntityBoatChest.class, "Chest Boat", 5, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityBoatFurnace.class, "Furnace Boat", 6, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityBoatHopper.class, "Hopper Boat", 7, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityBoatTNT.class, "TNT Boat", 8, this, 80, 3, true);
-		
+		EntityRegistry.registerModEntity(EntityBoatChest.class, "Oak Wood Chest Boat", 2, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatFurnace.class, "Oak Wood Furnace Boat", 3, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatHopper.class, "Oak Wood Hopper Boat", 4, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatTNT.class, "Oak Wood TNT Boat", 5, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntitySpruceWoodBoat.class, "Spruce Wood Boat", 6, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBirchWoodBoat.class, "Birch Wood Boat", 7, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityJungleWoodBoat.class, "Jungle Wood Boat", 8, this, 80, 3, true);
 	}
 
 	@EventHandler
@@ -175,19 +169,22 @@ public class BoatCraft {
 		//Boats
 		if (!OreDictWoodBoat) {
 			LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
+			LanguageRegistry.addName(chestBoat, "Oak Wood Chest Boat");
+			LanguageRegistry.addName(furnaceBoat, "Oak Wood Furnace Boat");
+			LanguageRegistry.addName(hopperBoat, "Oak Wood Hopper Boat");
+			LanguageRegistry.addName(tntBoat, "Oak Wood TNT Boat");
 			LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
 			LanguageRegistry.addName(birchBoat, "Birch Wood Boat");
 			LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
 		}
 		if (OreDictWoodBoat) {
 			LanguageRegistry.addName(oakBoat, "Wooden Boat");
+			LanguageRegistry.addName(chestBoat, "Chest Boat");
+			LanguageRegistry.addName(furnaceBoat, "Furnace Boat");
+			LanguageRegistry.addName(hopperBoat, "Hopper Boat");
+			LanguageRegistry.addName(tntBoat, "TNT Boat");
 		}
 		
-		//Special Boats
-		LanguageRegistry.addName(chestBoat, "Chest Boat");
-		LanguageRegistry.addName(furnaceBoat, "Furnace Boat");
-		LanguageRegistry.addName(hopperBoat, "Hopper Boat");
-		LanguageRegistry.addName(tntBoat, "TNT Boat");
 	}
 
 	@EventHandler
