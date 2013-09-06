@@ -3,8 +3,6 @@ package k2b6s9j.BoatCraft;
 import java.io.IOException;
 import java.util.logging.Level;
 
-import org.mcstats.MetricsLite;
-
 import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatFurnace;
@@ -28,7 +26,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.mcstats.MetricsLite;
+
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -41,7 +43,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0")
+@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", dependencies="after:Forestry;")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
 
 public class BoatCraft {
