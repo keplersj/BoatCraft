@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft.item.boat;
+package k2b6s9j.BoatCraft.item.boat.wood.spruce;
 
 import java.util.List;
 

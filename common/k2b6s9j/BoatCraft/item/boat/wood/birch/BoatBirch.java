@@ -1,8 +1,8 @@
-package k2b6s9j.BoatCraft.item.boat;
+package k2b6s9j.BoatCraft.item.boat.wood.birch;
 
 import java.util.List;
 
-import k2b6s9j.BoatCraft.entity.item.EntityJungleWoodBoat;
+import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,16 +17,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class BoatJungle extends ItemBoat {
+public class BoatBirch extends ItemBoat {
 
 	public static int ID;
 	public static int shiftedID;
 	
-	public BoatJungle(int id) {
+	public BoatBirch(int id) {
 		super(id);
-		setUnlocalizedName("boatJungle");
-        func_111206_d("boatcraft:boatJungle");
-    	GameRegistry.registerItem(this, "Jungle Wood Boat");
+		setUnlocalizedName("boatBirch");
+        func_111206_d("boatcraft:boatBirch");
+    	GameRegistry.registerItem(this, "Birch Wood Boat");
     	shiftedID = this.itemID;
     	OreDictionary.registerOre("itemBoat", new ItemStack(this));
 	}
@@ -95,7 +95,7 @@ public class BoatJungle extends ItemBoat {
                     {
                         --j;
                     }
-                    EntityJungleWoodBoat entityboat = new EntityJungleWoodBoat(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
+                    EntityBirchWoodBoat entityboat = new EntityBirchWoodBoat(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
                     entityboat.rotationYaw = (float)(((MathHelper.floor_double((double)(par3EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
 
                     if (!par2World.getCollidingBoundingBoxes(entityboat, entityboat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
@@ -118,5 +118,4 @@ public class BoatJungle extends ItemBoat {
             }
         }
 	}
-
 }
