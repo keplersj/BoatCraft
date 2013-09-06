@@ -28,6 +28,11 @@ public class BoatOakTNT extends ItemBoat {
         func_111206_d("boatcraft:boatTNT");
     	GameRegistry.registerItem(this, "TNT Boat");
     	shiftedID = this.itemID;
+    	OreDictionary.registerOre("itemBoat", new ItemStack(this));
+    	OreDictionary.registerOre("boat", new ItemStack(this));
+    	OreDictionary.registerOre("boatOak", new ItemStack(this));
+    	OreDictionary.registerOre("boatTNT", new ItemStack(this));
+    	OreDictionary.registerOre("boatOakTNT", new ItemStack(this));
 	}
 	
 	@Override

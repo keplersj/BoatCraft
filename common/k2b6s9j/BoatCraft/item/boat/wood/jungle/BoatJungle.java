@@ -29,6 +29,8 @@ public class BoatJungle extends ItemBoat {
     	GameRegistry.registerItem(this, "Jungle Wood Boat");
     	shiftedID = this.itemID;
     	OreDictionary.registerOre("itemBoat", new ItemStack(this));
+    	OreDictionary.registerOre("boat", new ItemStack(this));
+    	OreDictionary.registerOre("boatJungle", new ItemStack(this));
 	}
 	
 	@Override

@@ -28,6 +28,11 @@ public class BoatOakHopper extends ItemBoat {
         func_111206_d("boatcraft:boatHopper");
     	GameRegistry.registerItem(this, "Hopper Boat");
     	shiftedID = this.itemID;
+    	OreDictionary.registerOre("itemBoat", new ItemStack(this));
+    	OreDictionary.registerOre("boat", new ItemStack(this));
+    	OreDictionary.registerOre("boatOak", new ItemStack(this));
+    	OreDictionary.registerOre("boatHopper", new ItemStack(this));
+    	OreDictionary.registerOre("boatOakHopper", new ItemStack(this));
 	}
 	
 	@Override

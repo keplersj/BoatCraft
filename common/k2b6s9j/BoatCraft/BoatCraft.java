@@ -116,6 +116,7 @@ public class BoatCraft {
 	
 	public void InitItems() {
 		OreDictionary.registerOre("itemBoat", Item.boat);
+		OreDictionary.registerOre("boat", Item.boat);
 		
 		//Boats
 		oakBoat = new BoatOak(oakBoat.ID);
