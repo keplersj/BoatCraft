@@ -3,8 +3,6 @@ package k2b6s9j.BoatCraft;
 import java.io.IOException;
 import java.util.logging.Level;
 
-import org.mcstats.MetricsLite;
-
 import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
 import k2b6s9j.BoatCraft.entity.item.EntityBoatFurnace;
@@ -13,6 +11,9 @@ import k2b6s9j.BoatCraft.entity.item.EntityBoatTNT;
 import k2b6s9j.BoatCraft.entity.item.EntityJungleWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
 import k2b6s9j.BoatCraft.entity.item.EntitySpruceWoodBoat;
+import k2b6s9j.BoatCraft.item.backpack.BackpackSailorDefinition;
+import k2b6s9j.BoatCraft.item.backpack.BackpackSailorT1;
+import k2b6s9j.BoatCraft.item.backpack.BackpackSailorT2;
 import k2b6s9j.BoatCraft.item.boat.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.BoatChest;
 import k2b6s9j.BoatCraft.item.boat.BoatFurnace;
@@ -28,7 +29,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.mcstats.MetricsLite;
+
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -40,6 +45,8 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import forestry.api.storage.EnumBackpackType;
+import forestry.api.storage.IBackpackInterface;
 
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
@@ -71,6 +78,13 @@ public class BoatCraft {
 	public BoatHopper hopperBoat;
 	public BoatTNT tntBoat;
 	
+	//Backpacks
+	public BackpackSailorT1 sailorBackpack1;
+	public BackpackSailorT2 sailorBackpack2;
+	IBackpackInterface bpInterface;
+	EnumBackpackType type;
+	BackpackSailorDefinition definition;
+	
 	public boolean OreDictWoodBoat;
 
 	@EventHandler
@@ -92,6 +106,10 @@ public class BoatCraft {
         	furnaceBoat.ID = cfg.getItem(itemBoats, "Furnace Boat", 25509).getInt(25509);
         	hopperBoat.ID = cfg.getItem(itemBoats, "Hopper Boat", 25510).getInt(25510);
         	tntBoat.ID = cfg.getItem(itemBoats, "TNT Boat", 25511).getInt(25511);
+        	
+        	//Backpacks
+        	sailorBackpack1.ID = cfg.getItem("Forestry Item IDs", "Sailor's Backpack Tier 1", 26000).getInt(26000);
+        	sailorBackpack2.ID = cfg.getItem("Forestry Item IDs", "Sailor's Backpack Tier 2", 26001).getInt(26001);
         	
         	//Modules
         	this.OreDictWoodBoat = cfg.get("Modules", "OreDictWoodBoats", false, "Use the OreDictionary to craft Wooden Boats").getBoolean(false);
@@ -130,6 +148,15 @@ public class BoatCraft {
 		furnaceBoat = new BoatFurnace(furnaceBoat.ID);
 		hopperBoat = new BoatHopper(hopperBoat.ID);
 		tntBoat = new BoatTNT(tntBoat.ID);
+		
+		//Backpacks
+		//Yes. I am going to initialize this regardless if you have Forestry installed or not.
+		sailorBackpack1 = new BackpackSailorT1(sailorBackpack1.ID);
+		sailorBackpack2 = new BackpackSailorT2(sailorBackpack2.ID);
+		if (Loader.isModLoaded("Forestry")) {
+			bpInterface.addBackpack(sailorBackpack1.shiftedID, definition, type.T1);
+			bpInterface.addBackpack(sailorBackpack2.shiftedID, definition, type.T2);
+		}
 	}
 	
 	public void RegisterRecipes() {
