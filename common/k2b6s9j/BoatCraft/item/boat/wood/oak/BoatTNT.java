@@ -1,8 +1,8 @@
-package k2b6s9j.BoatCraft.item.boat;
+package k2b6s9j.BoatCraft.item.boat.wood.oak;
 
 import java.util.List;
 
-import k2b6s9j.BoatCraft.entity.item.EntityBoatHopper;
+import k2b6s9j.BoatCraft.entity.item.EntityBoatTNT;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,16 +17,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class BoatHopper extends ItemBoat {
+public class BoatTNT extends ItemBoat {
 	
 	public static int ID;
 	public static int shiftedID;
 	
-	public BoatHopper(int id) {
+	public BoatTNT(int id) {
 		super(id);
-		setUnlocalizedName("boatHopper");
-        func_111206_d("boatcraft:boatHopper");
-    	GameRegistry.registerItem(this, "Hopper Boat");
+		setUnlocalizedName("boatTNT");
+        func_111206_d("boatcraft:boatTNT");
+    	GameRegistry.registerItem(this, "TNT Boat");
     	shiftedID = this.itemID;
 	}
 	
@@ -95,7 +95,7 @@ public class BoatHopper extends ItemBoat {
                         --j;
                     }
 
-                    EntityBoatHopper entityboat = new EntityBoatHopper(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
+                    EntityBoatTNT entityboat = new EntityBoatTNT(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
                     entityboat.rotationYaw = (float)(((MathHelper.floor_double((double)(par3EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
 
                     if (!par2World.getCollidingBoundingBoxes(entityboat, entityboat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())

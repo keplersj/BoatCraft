@@ -1,8 +1,8 @@
-package k2b6s9j.BoatCraft.item.boat;
+package k2b6s9j.BoatCraft.item.boat.wood.oak;
 
 import java.util.List;
 
-import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
+import k2b6s9j.BoatCraft.entity.item.EntityBoatFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,16 +17,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class BoatChest extends ItemBoat {
+public class BoatFurnace extends ItemBoat {
 	
 	public static int ID;
 	public static int shiftedID;
 	
-	public BoatChest(int id) {
+	public BoatFurnace(int id) {
 		super(id);
-		setUnlocalizedName("boatChest");
-        func_111206_d("boatcraft:boatChest");
-    	GameRegistry.registerItem(this, "Chest Boat");
+		setUnlocalizedName("boatFurnace");
+        func_111206_d("boatcraft:boatFurnace");
+    	GameRegistry.registerItem(this, "Furnace Boat");
     	shiftedID = this.itemID;
 	}
 	
@@ -95,7 +95,7 @@ public class BoatChest extends ItemBoat {
                         --j;
                     }
 
-                    EntityBoatChest entityboat = new EntityBoatChest(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
+                    EntityBoatFurnace entityboat = new EntityBoatFurnace(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
                     entityboat.rotationYaw = (float)(((MathHelper.floor_double((double)(par3EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
 
                     if (!par2World.getCollidingBoundingBoxes(entityboat, entityboat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())

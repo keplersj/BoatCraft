@@ -2,7 +2,7 @@ package k2b6s9j.BoatCraft.entity.item;
 
 import java.util.List;
 
-import k2b6s9j.BoatCraft.item.boat.BoatOak;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOak;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;

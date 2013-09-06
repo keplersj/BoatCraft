@@ -1,6 +1,6 @@
 package k2b6s9j.BoatCraft.entity.item;
 
-import k2b6s9j.BoatCraft.item.boat.BoatOak;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOak;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
