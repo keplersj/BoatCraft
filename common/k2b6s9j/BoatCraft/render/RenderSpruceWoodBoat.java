@@ -1,6 +1,6 @@
 package k2b6s9j.BoatCraft.render;
 
-import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntitySpruceWoodBoat;
+import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruce;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;
@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderSpruceWoodBoat extends Render implements IItemRenderer {
 
 	private static final ResourceLocation texture = new ResourceLocation("boatcraft:textures/boats/spruce.png");
-	private EntitySpruceWoodBoat entity;
+	private EntityBoatSpruce entity;
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat;
@@ -28,7 +28,7 @@ public class RenderSpruceWoodBoat extends Render implements IItemRenderer {
         this.modelBoat = new ModelBoat();
 	}
 	
-	public void renderBoat(EntitySpruceWoodBoat par1EntityBoat, double par2, double par4, double par6, float par8, float par9)
+	public void renderBoat(EntityBoatSpruce par1EntityBoat, double par2, double par4, double par6, float par8, float par9)
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
@@ -57,18 +57,18 @@ public class RenderSpruceWoodBoat extends Render implements IItemRenderer {
     
     @Override
 	public void doRender(Entity entity, double d0, double d1, double d2, float f, float f1) {
-    	this.renderBoat((EntitySpruceWoodBoat)entity, d0, d1, d2, f, f1);
+    	this.renderBoat((EntityBoatSpruce)entity, d0, d1, d2, f, f1);
 		
 	}
 
-    protected ResourceLocation func_110781_a(EntitySpruceWoodBoat par1Entity)
+    protected ResourceLocation func_110781_a(EntityBoatSpruce par1Entity)
     {
         return texture;
     }
 
     protected ResourceLocation func_110775_a(Entity par1Entity)
     {
-        return this.func_110781_a((EntitySpruceWoodBoat)par1Entity);
+        return this.func_110781_a((EntityBoatSpruce)par1Entity);
     }
 
     @Override

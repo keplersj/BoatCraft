@@ -7,16 +7,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class EntityBoatTNT extends EntityCustomBoat {
+public class EntityBoatOakTNT extends EntityCustomBoat {
 	
 	public BoatOakTNT item;
 	
-	public EntityBoatTNT(World par1World)
+	public EntityBoatOakTNT(World par1World)
     {
         super(par1World);
     }
 
-    public EntityBoatTNT(World par1World, double par2, double par4, double par6)
+    public EntityBoatOakTNT(World par1World, double par2, double par4, double par6)
     {
         super(par1World, par2, par4, par6);
     }

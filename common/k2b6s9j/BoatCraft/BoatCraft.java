@@ -3,14 +3,14 @@ package k2b6s9j.BoatCraft;
 import java.io.IOException;
 import java.util.logging.Level;
 
-import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBirchWoodBoat;
-import k2b6s9j.BoatCraft.entity.boat.wood.jungle.EntityJungleWoodBoat;
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatChest;
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatFurnace;
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatHopper;
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatTNT;
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityOakWoodBoat;
-import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntitySpruceWoodBoat;
+import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBoatBirch;
+import k2b6s9j.BoatCraft.entity.boat.wood.jungle.EntityBoatJungle;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakChest;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakFurnace;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakHopper;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakTNT;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOak;
+import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruce;
 import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.wood.jungle.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakChest;
@@ -154,14 +154,14 @@ public class BoatCraft {
 	
 	public void EntityWork() {
 		proxy.registerRenderers();
-		EntityRegistry.registerModEntity(EntityOakWoodBoat.class, "Oak Wood Boat", 1, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityBoatChest.class, "Oak Wood Chest Boat", 2, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityBoatFurnace.class, "Oak Wood Furnace Boat", 3, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityBoatHopper.class, "Oak Wood Hopper Boat", 4, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityBoatTNT.class, "Oak Wood TNT Boat", 5, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntitySpruceWoodBoat.class, "Spruce Wood Boat", 6, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityBirchWoodBoat.class, "Birch Wood Boat", 7, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityJungleWoodBoat.class, "Jungle Wood Boat", 8, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatOak.class, "Oak Wood Boat", 1, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatOakChest.class, "Oak Wood Chest Boat", 2, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatOakFurnace.class, "Oak Wood Furnace Boat", 3, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatOakHopper.class, "Oak Wood Hopper Boat", 4, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatOakTNT.class, "Oak Wood TNT Boat", 5, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatSpruce.class, "Spruce Wood Boat", 6, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatBirch.class, "Birch Wood Boat", 7, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatJungle.class, "Jungle Wood Boat", 8, this, 80, 3, true);
 	}
 
 	@EventHandler

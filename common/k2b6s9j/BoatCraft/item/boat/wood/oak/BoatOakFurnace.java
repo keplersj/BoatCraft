@@ -2,7 +2,7 @@ package k2b6s9j.BoatCraft.item.boat.wood.oak;
 
 import java.util.List;
 
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatFurnace;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -100,7 +100,7 @@ public class BoatOakFurnace extends ItemBoat {
                         --j;
                     }
 
-                    EntityBoatFurnace entityboat = new EntityBoatFurnace(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
+                    EntityBoatOakFurnace entityboat = new EntityBoatOakFurnace(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
                     entityboat.rotationYaw = (float)(((MathHelper.floor_double((double)(par3EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
 
                     if (!par2World.getCollidingBoundingBoxes(entityboat, entityboat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())

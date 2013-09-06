@@ -2,7 +2,7 @@ package k2b6s9j.BoatCraft.item.boat.wood.oak;
 
 import java.util.List;
 
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatChest;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakChest;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -100,7 +100,7 @@ public class BoatOakChest extends ItemBoat {
                         --j;
                     }
 
-                    EntityBoatChest entityboat = new EntityBoatChest(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
+                    EntityBoatOakChest entityboat = new EntityBoatOakChest(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
                     entityboat.rotationYaw = (float)(((MathHelper.floor_double((double)(par3EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
 
                     if (!par2World.getCollidingBoundingBoxes(entityboat, entityboat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())

@@ -1,6 +1,6 @@
 package k2b6s9j.BoatCraft.render;
 
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatFurnace;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderFurnaceBoat extends Render implements IItemRenderer {
 
 	private static final ResourceLocation texture = new ResourceLocation("textures/entity/boat.png");
-	private EntityBoatFurnace entity;
+	private EntityBoatOakFurnace entity;
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat = new ModelBoat();
@@ -36,7 +36,7 @@ public class RenderFurnaceBoat extends Render implements IItemRenderer {
     /**
      * Renders the Boat.
      */
-    public void renderTheBoat(EntityBoatFurnace boat, double par2, double par4, double par6, float par8, float par9)
+    public void renderTheBoat(EntityBoatOakFurnace boat, double par2, double par4, double par6, float par8, float par9)
     {
     	GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
@@ -80,7 +80,7 @@ public class RenderFurnaceBoat extends Render implements IItemRenderer {
         GL11.glPopMatrix();
     }
 
-    protected ResourceLocation func_110803_a(EntityBoatFurnace boat)
+    protected ResourceLocation func_110803_a(EntityBoatOakFurnace boat)
     {
         return texture;
     }
@@ -88,7 +88,7 @@ public class RenderFurnaceBoat extends Render implements IItemRenderer {
     /**
      * Renders the block that is inside the boat.
      */
-    protected void renderBlockInBoat(EntityBoatFurnace boat, float par2, Block par3Block, int par4)
+    protected void renderBlockInBoat(EntityBoatOakFurnace boat, float par2, Block par3Block, int par4)
     {
         float f1 = boat.getBrightness(par2);
         GL11.glPushMatrix();
@@ -98,7 +98,7 @@ public class RenderFurnaceBoat extends Render implements IItemRenderer {
 
     protected ResourceLocation func_110775_a(Entity par1Entity)
     {
-        return this.func_110803_a((EntityBoatFurnace)par1Entity);
+        return this.func_110803_a((EntityBoatOakFurnace)par1Entity);
     }
 
     /**
@@ -109,7 +109,7 @@ public class RenderFurnaceBoat extends Render implements IItemRenderer {
      */
     public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
-        this.renderTheBoat((EntityBoatFurnace)par1Entity, par2, par4, par6, par8, par9);
+        this.renderTheBoat((EntityBoatOakFurnace)par1Entity, par2, par4, par6, par8, par9);
     }
 
     @Override

@@ -16,17 +16,17 @@ import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLLog;
 
-public class EntityBoatHopper extends EntityBoatContainer implements Hopper {
+public class EntityBoatOakHopper extends EntityBoatContainer implements Hopper {
 	
 	private int transferTicker = -1;
 	public BoatOakHopper item;
 	
-	public EntityBoatHopper(World par1World)
+	public EntityBoatOakHopper(World par1World)
     {
         super(par1World);
     }
 
-    public EntityBoatHopper(World par1World, double par2, double par4, double par6)
+    public EntityBoatOakHopper(World par1World, double par2, double par4, double par6)
     {
         super(par1World, par2, par4, par6);
     }

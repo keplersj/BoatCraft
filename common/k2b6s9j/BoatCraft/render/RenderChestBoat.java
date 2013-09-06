@@ -1,6 +1,6 @@
 package k2b6s9j.BoatCraft.render;
 
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatChest;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakChest;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderChestBoat extends Render implements IItemRenderer {
 
 	private static final ResourceLocation texture = new ResourceLocation("textures/entity/boat.png");
-	private EntityBoatChest entity;
+	private EntityBoatOakChest entity;
 
     /** instance of ModelBoat for rendering */
     protected ModelBase modelBoat = new ModelBoat();
@@ -36,7 +36,7 @@ public class RenderChestBoat extends Render implements IItemRenderer {
     /**
      * Renders the Boat.
      */
-    public void renderTheBoat(EntityBoatChest boat, double par2, double par4, double par6, float par8, float par9)
+    public void renderTheBoat(EntityBoatOakChest boat, double par2, double par4, double par6, float par8, float par9)
     {
     	GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
@@ -80,7 +80,7 @@ public class RenderChestBoat extends Render implements IItemRenderer {
         GL11.glPopMatrix();
     }
 
-    protected ResourceLocation func_110803_a(EntityBoatChest boat)
+    protected ResourceLocation func_110803_a(EntityBoatOakChest boat)
     {
         return texture;
     }
@@ -88,7 +88,7 @@ public class RenderChestBoat extends Render implements IItemRenderer {
     /**
      * Renders the block that is inside the boat.
      */
-    protected void renderBlockInBoat(EntityBoatChest boat, float par2, Block par3Block, int par4)
+    protected void renderBlockInBoat(EntityBoatOakChest boat, float par2, Block par3Block, int par4)
     {
         float f1 = boat.getBrightness(par2);
         GL11.glPushMatrix();
@@ -98,7 +98,7 @@ public class RenderChestBoat extends Render implements IItemRenderer {
 
     protected ResourceLocation func_110775_a(Entity par1Entity)
     {
-        return this.func_110803_a((EntityBoatChest)par1Entity);
+        return this.func_110803_a((EntityBoatOakChest)par1Entity);
     }
 
     /**
@@ -109,7 +109,7 @@ public class RenderChestBoat extends Render implements IItemRenderer {
      */
     public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
-        this.renderTheBoat((EntityBoatChest)par1Entity, par2, par4, par6, par8, par9);
+        this.renderTheBoat((EntityBoatOakChest)par1Entity, par2, par4, par6, par8, par9);
     }
 
     @Override

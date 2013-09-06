@@ -1,13 +1,13 @@
 package k2b6s9j.BoatCraft.proxy;
 
-import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBirchWoodBoat;
-import k2b6s9j.BoatCraft.entity.boat.wood.jungle.EntityJungleWoodBoat;
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatChest;
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatFurnace;
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatHopper;
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatTNT;
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityOakWoodBoat;
-import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntitySpruceWoodBoat;
+import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBoatBirch;
+import k2b6s9j.BoatCraft.entity.boat.wood.jungle.EntityBoatJungle;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakChest;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakFurnace;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakHopper;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakTNT;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOak;
+import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruce;
 import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.wood.jungle.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakChest;
@@ -33,16 +33,16 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerRenderers() {
 		//Regular Boats
-		RenderingRegistry.registerEntityRenderingHandler(EntityOakWoodBoat.class, new RenderOakWoodBoat());
-		RenderingRegistry.registerEntityRenderingHandler(EntitySpruceWoodBoat.class, new RenderSpruceWoodBoat());
-		RenderingRegistry.registerEntityRenderingHandler(EntityBirchWoodBoat.class, new RenderBirchWoodBoat());
-		RenderingRegistry.registerEntityRenderingHandler(EntityJungleWoodBoat.class, new RenderJungleWoodBoat());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoatOak.class, new RenderOakWoodBoat());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoatSpruce.class, new RenderSpruceWoodBoat());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoatBirch.class, new RenderBirchWoodBoat());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoatJungle.class, new RenderJungleWoodBoat());
 		
 		//Special Boats
-		RenderingRegistry.registerEntityRenderingHandler(EntityBoatChest.class, new RenderChestBoat());
-		RenderingRegistry.registerEntityRenderingHandler(EntityBoatFurnace.class, new RenderFurnaceBoat());
-		RenderingRegistry.registerEntityRenderingHandler(EntityBoatTNT.class, new RenderTNTBoat());
-		RenderingRegistry.registerEntityRenderingHandler(EntityBoatHopper.class, new RenderHopperBoat());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoatOakChest.class, new RenderChestBoat());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoatOakFurnace.class, new RenderFurnaceBoat());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoatOakTNT.class, new RenderTNTBoat());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoatOakHopper.class, new RenderHopperBoat());
 		
 		//Register Item Renderers
 		MinecraftForgeClient.registerItemRenderer(BoatOak.shiftedID, new RenderOakWoodBoat());

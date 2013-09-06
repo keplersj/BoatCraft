@@ -7,16 +7,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class EntityBoatChest extends EntityBoatContainer {
+public class EntityBoatOakChest extends EntityBoatContainer {
 
 	public BoatOakChest item;
 	
-	public EntityBoatChest(World par1World)
+	public EntityBoatOakChest(World par1World)
     {
         super(par1World);
     }
 
-    public EntityBoatChest(World par1World, double par2, double par4, double par6)
+    public EntityBoatOakChest(World par1World, double par2, double par4, double par6)
     {
         super(par1World, par2, par4, par6);
     }

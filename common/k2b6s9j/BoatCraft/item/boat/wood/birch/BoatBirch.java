@@ -2,7 +2,7 @@ package k2b6s9j.BoatCraft.item.boat.wood.birch;
 
 import java.util.List;
 
-import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBirchWoodBoat;
+import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBoatBirch;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -97,7 +97,7 @@ public class BoatBirch extends ItemBoat {
                     {
                         --j;
                     }
-                    EntityBirchWoodBoat entityboat = new EntityBirchWoodBoat(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
+                    EntityBoatBirch entityboat = new EntityBoatBirch(par2World, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
                     entityboat.rotationYaw = (float)(((MathHelper.floor_double((double)(par3EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
 
                     if (!par2World.getCollidingBoundingBoxes(entityboat, entityboat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
