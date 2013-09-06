@@ -59,19 +59,17 @@ public class BoatCraft {
 	
 	//Config File Strings
 	public final String itemBoats = "Boats in Item Form";
-	public final String sticks = "Sticks";
 	
 	//Boat Items
+	public BoatOak oakBoat;
+	public BoatChest oakChestBoat;
+	public BoatFurnace oakFurnaceBoat;
+	public BoatHopper oakHopperBoat;
+	public BoatTNT oakTntBoat;
+	public BoatSpruce spruceBoat;
 	public BoatBirch birchBoat;
 	public BoatJungle jungleBoat;
-	public BoatOak oakBoat;
-	public BoatSpruce spruceBoat;
 	
-	//Special Boats
-	public BoatChest chestBoat;
-	public BoatFurnace furnaceBoat;
-	public BoatHopper hopperBoat;
-	public BoatTNT tntBoat;
 	
 	public boolean OreDictWoodBoat;
 
@@ -85,10 +83,10 @@ public class BoatCraft {
         {
         	//Boats
         	oakBoat.ID = cfg.getItem(itemBoats, "Oak Boat", 25500).getInt(25500);
-        	chestBoat.ID = cfg.getItem(itemBoats, "Chest Boat", 25501).getInt(25501);
-        	furnaceBoat.ID = cfg.getItem(itemBoats, "Furnace Boat", 25502).getInt(25502);
-        	hopperBoat.ID = cfg.getItem(itemBoats, "Hopper Boat", 25503).getInt(25503);
-        	tntBoat.ID = cfg.getItem(itemBoats, "TNT Boat", 25504).getInt(25504);
+        	oakChestBoat.ID = cfg.getItem(itemBoats, "Chest Boat", 25501).getInt(25501);
+        	oakFurnaceBoat.ID = cfg.getItem(itemBoats, "Furnace Boat", 25502).getInt(25502);
+        	oakHopperBoat.ID = cfg.getItem(itemBoats, "Hopper Boat", 25503).getInt(25503);
+        	oakTntBoat.ID = cfg.getItem(itemBoats, "TNT Boat", 25504).getInt(25504);
         	spruceBoat.ID = cfg.getItem(itemBoats, "Spruce Boat", 25505).getInt(25505);
         	birchBoat.ID = cfg.getItem(itemBoats, "Birch Boat", 25506).getInt(25506);
         	jungleBoat.ID = cfg.getItem(itemBoats, "Jungle Boat", 25507).getInt(25507);
@@ -121,10 +119,10 @@ public class BoatCraft {
 		
 		//Boats
 		oakBoat = new BoatOak(oakBoat.ID);
-		chestBoat = new BoatChest(chestBoat.ID);
-		furnaceBoat = new BoatFurnace(furnaceBoat.ID);
-		hopperBoat = new BoatHopper(hopperBoat.ID);
-		tntBoat = new BoatTNT(tntBoat.ID);
+		oakChestBoat = new BoatChest(oakChestBoat.ID);
+		oakFurnaceBoat = new BoatFurnace(oakFurnaceBoat.ID);
+		oakHopperBoat = new BoatHopper(oakHopperBoat.ID);
+		oakTntBoat = new BoatTNT(oakTntBoat.ID);
 		spruceBoat = new BoatSpruce(spruceBoat.ID);
 		birchBoat = new BoatBirch(birchBoat.ID);
 		jungleBoat = new BoatJungle(jungleBoat.ID);
@@ -142,10 +140,10 @@ public class BoatCraft {
 		if (OreDictWoodBoat) {
 			CraftingUtilities.RemoveRecipe(new ItemStack(Item.boat));
 			CraftingUtilities.AddRecipe(new ItemStack(oakBoat), "W W", "WWW", Character.valueOf('W'), "plankWood");
-			CraftingUtilities.AddShapelessRecipe(new ItemStack(chestBoat), new ItemStack(Block.chest), "itemBoat");
-	        CraftingUtilities.AddShapelessRecipe(new ItemStack(furnaceBoat), new ItemStack(Block.furnaceIdle), "itemBoat");
-	        CraftingUtilities.AddShapelessRecipe(new ItemStack(tntBoat), new ItemStack(Block.tnt), "itemBoat");
-	        CraftingUtilities.AddShapelessRecipe(new ItemStack(hopperBoat), new ItemStack(Block.hopperBlock), "itemBoat");
+			CraftingUtilities.AddShapelessRecipe(new ItemStack(oakChestBoat), new ItemStack(Block.chest), "itemBoat");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(oakFurnaceBoat), new ItemStack(Block.furnaceIdle), "itemBoat");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(oakHopperBoat), new ItemStack(Block.tnt), "itemBoat");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(oakTntBoat), new ItemStack(Block.hopperBlock), "itemBoat");
 		}
 	}
 	
@@ -169,20 +167,20 @@ public class BoatCraft {
 		//Boats
 		if (!OreDictWoodBoat) {
 			LanguageRegistry.addName(oakBoat, "Oak Wood Boat");
-			LanguageRegistry.addName(chestBoat, "Oak Wood Chest Boat");
-			LanguageRegistry.addName(furnaceBoat, "Oak Wood Furnace Boat");
-			LanguageRegistry.addName(hopperBoat, "Oak Wood Hopper Boat");
-			LanguageRegistry.addName(tntBoat, "Oak Wood TNT Boat");
+			LanguageRegistry.addName(oakChestBoat, "Oak Wood Chest Boat");
+			LanguageRegistry.addName(oakFurnaceBoat, "Oak Wood Furnace Boat");
+			LanguageRegistry.addName(oakHopperBoat, "Oak Wood Hopper Boat");
+			LanguageRegistry.addName(oakTntBoat, "Oak Wood TNT Boat");
 			LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
 			LanguageRegistry.addName(birchBoat, "Birch Wood Boat");
 			LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
 		}
 		if (OreDictWoodBoat) {
 			LanguageRegistry.addName(oakBoat, "Wooden Boat");
-			LanguageRegistry.addName(chestBoat, "Chest Boat");
-			LanguageRegistry.addName(furnaceBoat, "Furnace Boat");
-			LanguageRegistry.addName(hopperBoat, "Hopper Boat");
-			LanguageRegistry.addName(tntBoat, "TNT Boat");
+			LanguageRegistry.addName(oakChestBoat, "Chest Boat");
+			LanguageRegistry.addName(oakFurnaceBoat, "Furnace Boat");
+			LanguageRegistry.addName(oakHopperBoat, "Hopper Boat");
+			LanguageRegistry.addName(oakTntBoat, "TNT Boat");
 		}
 		
 	}
