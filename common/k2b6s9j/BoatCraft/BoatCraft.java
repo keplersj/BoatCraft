@@ -55,7 +55,7 @@ public class BoatCraft {
 	
 	//Mod Info
 	public final String modName = "BoatCraft";
-	public final String modVersion = "2.0-PR1";
+	public final String modVersion = "2.0-ForestryWood";
 	
 	//Config File Strings
 	public final String itemBoats = "Boats in Item Form";
