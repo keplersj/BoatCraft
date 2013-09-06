@@ -1,5 +1,6 @@
-package k2b6s9j.BoatCraft.entity.item;
+package k2b6s9j.BoatCraft.entity.boat.wood.oak;
 
+import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;
 import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

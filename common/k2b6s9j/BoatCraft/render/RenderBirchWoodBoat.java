@@ -1,6 +1,6 @@
 package k2b6s9j.BoatCraft.render;
 
-import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
+import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBirchWoodBoat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBoat;

@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft.entity.item;
+package k2b6s9j.BoatCraft.entity.boat;
 
 import java.util.List;
 

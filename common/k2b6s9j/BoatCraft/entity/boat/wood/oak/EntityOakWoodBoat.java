@@ -1,20 +1,21 @@
-package k2b6s9j.BoatCraft.entity.item;
+package k2b6s9j.BoatCraft.entity.boat.wood.oak;
 
-import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirch;
+import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOak;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class EntityBirchWoodBoat extends EntityCustomBoat {
+public class EntityOakWoodBoat extends EntityCustomBoat {
 	
-	public BoatBirch item;
+	public BoatOak item;
 	
-	public EntityBirchWoodBoat(World par1World)
+	public EntityOakWoodBoat(World par1World)
     {
 		super(par1World);
     }
 	
-	public EntityBirchWoodBoat(World world, double par2, double par4, double par6) {
+	public EntityOakWoodBoat(World world, double par2, double par4, double par6) {
 		super(world, par2, par4, par6);
 	}
 	
@@ -23,7 +24,7 @@ public class EntityBirchWoodBoat extends EntityCustomBoat {
     {
     	return true;
     }
-	
+    
 	@Override
 	public boolean useItemID()
 	{
@@ -39,7 +40,7 @@ public class EntityBirchWoodBoat extends EntityCustomBoat {
 	@Override
 	public ItemStack customPlank()
 	{
-		return new ItemStack(Block.planks, 1, 2);
+		return new ItemStack(Block.planks, 1, 0);
 	}
 	
 }

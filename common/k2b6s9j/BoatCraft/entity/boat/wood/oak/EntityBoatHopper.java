@@ -1,8 +1,9 @@
-package k2b6s9j.BoatCraft.entity.item;
+package k2b6s9j.BoatCraft.entity.boat.wood.oak;
 
 import java.util.List;
 import java.util.logging.Level;
 
+import k2b6s9j.BoatCraft.entity.boat.EntityBoatContainer;
 import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakHopper;
 import net.minecraft.block.Block;
 import net.minecraft.command.IEntitySelector;

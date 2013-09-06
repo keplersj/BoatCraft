@@ -2,7 +2,7 @@ package k2b6s9j.BoatCraft.item.boat.wood.jungle;
 
 import java.util.List;
 
-import k2b6s9j.BoatCraft.entity.item.EntityJungleWoodBoat;
+import k2b6s9j.BoatCraft.entity.boat.wood.jungle.EntityJungleWoodBoat;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

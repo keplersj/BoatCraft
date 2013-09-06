@@ -1,13 +1,13 @@
 package k2b6s9j.BoatCraft.proxy;
 
-import k2b6s9j.BoatCraft.entity.item.EntityBirchWoodBoat;
-import k2b6s9j.BoatCraft.entity.item.EntityBoatChest;
-import k2b6s9j.BoatCraft.entity.item.EntityBoatFurnace;
-import k2b6s9j.BoatCraft.entity.item.EntityBoatHopper;
-import k2b6s9j.BoatCraft.entity.item.EntityBoatTNT;
-import k2b6s9j.BoatCraft.entity.item.EntityJungleWoodBoat;
-import k2b6s9j.BoatCraft.entity.item.EntityOakWoodBoat;
-import k2b6s9j.BoatCraft.entity.item.EntitySpruceWoodBoat;
+import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBirchWoodBoat;
+import k2b6s9j.BoatCraft.entity.boat.wood.jungle.EntityJungleWoodBoat;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatChest;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatFurnace;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatHopper;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatTNT;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityOakWoodBoat;
+import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntitySpruceWoodBoat;
 import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.wood.jungle.BoatJungle;
 import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakChest;
