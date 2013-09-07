@@ -30,9 +30,9 @@ public class BoatSpruceChest extends ItemBoat {
     	shiftedID = this.itemID;
     	OreDictionary.registerOre("itemBoat", new ItemStack(this));
     	OreDictionary.registerOre("boat", new ItemStack(this));
-    	OreDictionary.registerOre("boatOak", new ItemStack(this));
+    	OreDictionary.registerOre("boatSpruce", new ItemStack(this));
     	OreDictionary.registerOre("boatChest", new ItemStack(this));
-    	OreDictionary.registerOre("boatOakChest", new ItemStack(this));
+    	OreDictionary.registerOre("boatSpruceChest", new ItemStack(this));
 	}
 	
 	@Override
