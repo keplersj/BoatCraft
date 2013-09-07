@@ -1,7 +1,7 @@
 package k2b6s9j.BoatCraft.entity.boat.wood.jungle;
 
 import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakTNT;
+import k2b6s9j.BoatCraft.item.boat.wood.jungle.BoatJungleTNT;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatJungleTNT extends EntityCustomBoat {
 	
-	public BoatOakTNT item;
+	public BoatJungleTNT item;
 	
 	public EntityBoatJungleTNT(World par1World)
     {

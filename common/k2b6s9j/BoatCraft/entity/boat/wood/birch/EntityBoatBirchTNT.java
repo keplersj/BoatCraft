@@ -1,7 +1,7 @@
 package k2b6s9j.BoatCraft.entity.boat.wood.birch;
 
 import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakTNT;
+import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirchTNT;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatBirchTNT extends EntityCustomBoat {
 	
-	public BoatOakTNT item;
+	public BoatBirchTNT item;
 	
 	public EntityBoatBirchTNT(World par1World)
     {

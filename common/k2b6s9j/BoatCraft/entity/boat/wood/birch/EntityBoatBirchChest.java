@@ -1,15 +1,14 @@
 package k2b6s9j.BoatCraft.entity.boat.wood.birch;
 
 import k2b6s9j.BoatCraft.entity.boat.EntityBoatContainer;
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakChest;
+import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirchChest;
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class EntityBoatBirchChest extends EntityBoatContainer {
 
-	public BoatOakChest item;
+	public BoatBirchChest item;
 	
 	public EntityBoatBirchChest(World par1World)
     {
