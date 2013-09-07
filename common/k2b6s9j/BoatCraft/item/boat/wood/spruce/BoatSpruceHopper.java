@@ -24,9 +24,9 @@ public class BoatSpruceHopper extends ItemBoat {
 	
 	public BoatSpruceHopper(int id) {
 		super(id);
-		setUnlocalizedName("boatHopper");
-        func_111206_d("boatcraft:boatHopper");
-    	GameRegistry.registerItem(this, "Hopper Boat");
+		setUnlocalizedName("boat.wood.spruce.hopper");
+        func_111206_d("boatcraft:boat.wood.spruce.hopper");
+    	GameRegistry.registerItem(this, "Spruce Hopper Boat");
     	shiftedID = this.itemID;
     	OreDictionary.registerOre("itemBoat", new ItemStack(this));
     	OreDictionary.registerOre("boat", new ItemStack(this));

@@ -24,9 +24,9 @@ public class BoatJungleFurnace extends ItemBoat {
 	
 	public BoatJungleFurnace(int id) {
 		super(id);
-		setUnlocalizedName("boatFurnace");
-        func_111206_d("boatcraft:boatFurnace");
-    	GameRegistry.registerItem(this, "Furnace Boat");
+		setUnlocalizedName("boat.wood.jungle.furnace");
+        func_111206_d("boatcraft:boat.wood.jungle.furnace");
+    	GameRegistry.registerItem(this, "Jungle Furnace Boat");
     	shiftedID = this.itemID;
     	OreDictionary.registerOre("itemBoat", new ItemStack(this));
     	OreDictionary.registerOre("boat", new ItemStack(this));

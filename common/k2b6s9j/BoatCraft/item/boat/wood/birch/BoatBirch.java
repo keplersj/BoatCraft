@@ -24,8 +24,8 @@ public class BoatBirch extends ItemBoat {
 	
 	public BoatBirch(int id) {
 		super(id);
-		setUnlocalizedName("boatBirch");
-        func_111206_d("boatcraft:boatBirch");
+		setUnlocalizedName("boat.wood.birch.empty");
+        func_111206_d("boatcraft:boat.wood.birch.empty");
     	GameRegistry.registerItem(this, "Birch Wood Boat");
     	shiftedID = this.itemID;
     	OreDictionary.registerOre("itemBoat", new ItemStack(this));
