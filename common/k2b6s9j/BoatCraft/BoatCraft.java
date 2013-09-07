@@ -5,20 +5,36 @@ import java.util.logging.Level;
 
 import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBoatBirch;
 import k2b6s9j.BoatCraft.entity.boat.wood.jungle.EntityBoatJungle;
+import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOak;
 import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakChest;
 import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakFurnace;
 import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakHopper;
 import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakTNT;
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOak;
 import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruce;
+import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruceChest;
+import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruceFurnace;
+import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruceHopper;
+import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruceTNT;
 import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirch;
+import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirchChest;
+import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirchFurnace;
+import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirchHopper;
+import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirchTNT;
 import k2b6s9j.BoatCraft.item.boat.wood.jungle.BoatJungle;
+import k2b6s9j.BoatCraft.item.boat.wood.jungle.BoatJungleChest;
+import k2b6s9j.BoatCraft.item.boat.wood.jungle.BoatJungleFurnace;
+import k2b6s9j.BoatCraft.item.boat.wood.jungle.BoatJungleHopper;
+import k2b6s9j.BoatCraft.item.boat.wood.jungle.BoatJungleTNT;
+import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOak;
 import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakChest;
 import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakFurnace;
 import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakHopper;
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOak;
 import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOakTNT;
 import k2b6s9j.BoatCraft.item.boat.wood.spruce.BoatSpruce;
+import k2b6s9j.BoatCraft.item.boat.wood.spruce.BoatSpruceChest;
+import k2b6s9j.BoatCraft.item.boat.wood.spruce.BoatSpruceFurnace;
+import k2b6s9j.BoatCraft.item.boat.wood.spruce.BoatSpruceHopper;
+import k2b6s9j.BoatCraft.item.boat.wood.spruce.BoatSpruceTNT;
 import k2b6s9j.BoatCraft.proxy.CommonProxy;
 import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
 import net.minecraft.block.Block;
@@ -30,7 +46,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.mcstats.MetricsLite;
 
 import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -67,8 +82,20 @@ public class BoatCraft {
 	public BoatOakHopper oakHopperBoat;
 	public BoatOakTNT oakTntBoat;
 	public BoatSpruce spruceBoat;
+	public BoatSpruceChest spruceChestBoat;
+	public BoatSpruceFurnace spruceFurnaceBoat;
+	public BoatSpruceHopper spruceHopperBoat;
+	public BoatSpruceTNT spruceTNTBoat;
 	public BoatBirch birchBoat;
+	public BoatBirchChest birchChestBoat;
+	public BoatBirchFurnace birchFurnaceBoat;
+	public BoatBirchHopper birchHopperBoat;
+	public BoatBirchTNT birchTNTBoat;
 	public BoatJungle jungleBoat;
+	public BoatJungleChest jungleChestBoat;
+	public BoatJungleFurnace jungleFurnaceBoat;
+	public BoatJungleHopper jungleHopperBoat;
+	public BoatJungleTNT jungleTNTBoat;
 	
 	
 	public boolean OreDictWoodBoat;
@@ -83,13 +110,17 @@ public class BoatCraft {
         {
         	//Boats
         	oakBoat.ID = cfg.getItem(itemBoats, "Oak Boat", 25500).getInt(25500);
-        	oakChestBoat.ID = cfg.getItem(itemBoats, "Chest Boat", 25501).getInt(25501);
-        	oakFurnaceBoat.ID = cfg.getItem(itemBoats, "Furnace Boat", 25502).getInt(25502);
-        	oakHopperBoat.ID = cfg.getItem(itemBoats, "Hopper Boat", 25503).getInt(25503);
-        	oakTntBoat.ID = cfg.getItem(itemBoats, "TNT Boat", 25504).getInt(25504);
+        	oakChestBoat.ID = cfg.getItem(itemBoats, "Oak Chest Boat", 25501).getInt(25501);
+        	oakFurnaceBoat.ID = cfg.getItem(itemBoats, "Oak Furnace Boat", 25502).getInt(25502);
+        	oakHopperBoat.ID = cfg.getItem(itemBoats, "Oak Hopper Boat", 25503).getInt(25503);
+        	oakTntBoat.ID = cfg.getItem(itemBoats, "Oak TNT Boat", 25504).getInt(25504);
         	spruceBoat.ID = cfg.getItem(itemBoats, "Spruce Boat", 25505).getInt(25505);
-        	birchBoat.ID = cfg.getItem(itemBoats, "Birch Boat", 25506).getInt(25506);
-        	jungleBoat.ID = cfg.getItem(itemBoats, "Jungle Boat", 25507).getInt(25507);
+        	spruceChestBoat.ID = cfg.getItem(itemBoats, "Spruce Chest Boat", 25506).getInt(25506);
+        	spruceFurnaceBoat.ID = cfg.getItem(itemBoats, "Spruce Furnace Boat", 25507).getInt(25507);
+        	spruceHopperBoat.ID = cfg.getItem(itemBoats, "Spruce Hopper Boat", 25508).getInt(25508);
+        	spruceTNTBoat.ID = cfg.getItem(itemBoats, "Spruce TNT Boat", 25509).getInt(25509);
+        	birchBoat.ID = cfg.getItem(itemBoats, "Birch Boat", 25510).getInt(25510);
+        	jungleBoat.ID = cfg.getItem(itemBoats, "Jungle Boat", 25511).getInt(25511);
         	
         	//Modules
         	this.OreDictWoodBoat = cfg.get("Modules", "OreDictWoodBoats", false, "Use the OreDictionary to craft Wooden Boats").getBoolean(false);
@@ -125,6 +156,10 @@ public class BoatCraft {
 		oakHopperBoat = new BoatOakHopper(oakHopperBoat.ID);
 		oakTntBoat = new BoatOakTNT(oakTntBoat.ID);
 		spruceBoat = new BoatSpruce(spruceBoat.ID);
+		spruceChestBoat = new BoatSpruceChest(spruceChestBoat.ID);
+		spruceFurnaceBoat = new BoatSpruceFurnace(spruceFurnaceBoat.ID);
+		spruceHopperBoat = new BoatSpruceHopper(spruceHopperBoat.ID);
+		spruceTNTBoat = new BoatSpruceTNT(spruceTNTBoat.ID);
 		birchBoat = new BoatBirch(birchBoat.ID);
 		jungleBoat = new BoatJungle(jungleBoat.ID);
 	}
@@ -139,6 +174,10 @@ public class BoatCraft {
 	        CraftingUtilities.AddShapelessRecipe(new ItemStack(oakHopperBoat), new ItemStack(Block.tnt), "boatOak");
 	        CraftingUtilities.AddShapelessRecipe(new ItemStack(oakTntBoat), new ItemStack(Block.hopperBlock), "boatOak");
 	        GameRegistry.addRecipe(new ItemStack(spruceBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 1));
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(spruceChestBoat), new ItemStack(Block.chest), "boatSpruce");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(spruceFurnaceBoat), new ItemStack(Block.furnaceIdle), "boatSpruce");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(spruceHopperBoat), new ItemStack(Block.tnt), "boatSpruce");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(spruceTNTBoat), new ItemStack(Block.hopperBlock), "boatSpruce");
 	        GameRegistry.addRecipe(new ItemStack(birchBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2));
 	        GameRegistry.addRecipe(new ItemStack(jungleBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 3));
 		}
@@ -160,8 +199,12 @@ public class BoatCraft {
 		EntityRegistry.registerModEntity(EntityBoatOakHopper.class, "Oak Wood Hopper Boat", 4, this, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBoatOakTNT.class, "Oak Wood TNT Boat", 5, this, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBoatSpruce.class, "Spruce Wood Boat", 6, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityBoatBirch.class, "Birch Wood Boat", 7, this, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityBoatJungle.class, "Jungle Wood Boat", 8, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatSpruceChest.class, "Spruce Wood Chest Boat", 7, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatSpruceFurnace.class, "Spruce Wood Furnace Boat", 8, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatSpruceHopper.class, "Spruce Wood Hopper Boat", 9, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatSpruceTNT.class, "Spruce Wood TNT Boat", 10, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatBirch.class, "Birch Wood Boat", 11, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBoatJungle.class, "Jungle Wood Boat", 12, this, 80, 3, true);
 	}
 
 	@EventHandler
@@ -177,6 +220,10 @@ public class BoatCraft {
 			LanguageRegistry.addName(oakHopperBoat, "Oak Wood Hopper Boat");
 			LanguageRegistry.addName(oakTntBoat, "Oak Wood TNT Boat");
 			LanguageRegistry.addName(spruceBoat, "Spruce Wood Boat");
+			LanguageRegistry.addName(spruceChestBoat, "Spruce Wood Chest Boat");
+			LanguageRegistry.addName(spruceFurnaceBoat, "Spruce Wood Furnace Boat");
+			LanguageRegistry.addName(spruceHopperBoat, "Spruce Wood Hopper Boat");
+			LanguageRegistry.addName(spruceTNTBoat, "Spruce Wood TNT Boat");
 			LanguageRegistry.addName(birchBoat, "Birch Wood Boat");
 			LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
 		}
