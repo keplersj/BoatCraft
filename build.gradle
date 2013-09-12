@@ -1,62 +1,48 @@
-//import com.github.abrarsyed.gmcp.GMCP
-// this is required for adding obfuscated jar classes.
-
 buildscript {
-	repositories { mavenCentral() }
-	dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:0.6.2' }
+    repositories {
+        mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    }
+    dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:0.7.4-SNAPSHOT' }
 }
 
 apply plugin: "gmcp"
 
 group = 'k2b6s9j.BoatCraft'
-version = '2.0'
+version = "2.0.0.${System.env.BUILD_NUMBER}.BETA"
 archivesBaseName = 'BoatCraft'
 
-minecraft.minecraftVersion = '1.6.2'
-
-dependencies {
-	compile fileTree('lib') {
-	include '*.jar'
-	}
+sourceSets {
+    main {
+	java { srcDir 'common' }
+        resources { srcDir 'resources' }
+    }
 }
 
-processResources{
-	exclude '**/*.xcf'
-
-	// specify a sub-filter so that it doesn't try to replace stuff in images.
-	// unfortunately it doesnt know the difference between text and binary files.
-	with {
-		exclude '**/*.png'
-		expand version: version, mcversion: minecraft.minecraftVersion
-	}
-
-	// generate version properties file
-	doLast {
-		def file = new File(destinationDir, 'version.properties')
-		def properties = new Properties()
-
-		properties.store(file.newWriter(), '')
-	}
+minecraft {
+	minecraftVersion = '1.6.2'
 }
 
-jar { appendix = 'universal' }
+processResources {
+    eachFile { file ->
+        if (!(file.getPath().endsWith('png'))){
+            expand version: version, mcversion: minecraft.minecraftVersion
+        }
+    }
+}
+
+// This is the standard obfuscated jar is created
+jar {
+    appendix = 'universal'
+    manifest {
+        attributes 'MCVersion' : project.minecraft.minecraftVersion
+        attributes 'Version' : project.version
+    }
+}
 
 task sourceJar(type: Jar) {
-	from sourceSets.main.allSource
-	appendix = 'src'
+    from sourceSets.main.allSource
+    appendix = 'src'
 }
 
-
-// because the normal default jar task has been modified to be obfuscated
-task deobfJar(type: Jar) {
-	from sourceSets.main.output
-	appendix = 'deobf'
-}
-
-artifacts {
-	archives sourceJar
-	archives deobfJar
-}
-
-// wrapper
-task wrapper(type: Wrapper){ gradleVersion = '1.6' }
+artifacts {  archives sourceJar  }
