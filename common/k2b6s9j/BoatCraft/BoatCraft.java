@@ -265,7 +265,15 @@ public class BoatCraft {
 			LanguageRegistry.addName(spruceHopperBoat, "Spruce Wood Hopper Boat");
 			LanguageRegistry.addName(spruceTNTBoat, "Spruce Wood TNT Boat");
 			LanguageRegistry.addName(birchBoat, "Birch Wood Boat");
+			LanguageRegistry.addName(birchChestBoat, "Birch Wood Chest Boat");
+			LanguageRegistry.addName(birchFurnaceBoat, "Birch Wood Furnace Boat");
+			LanguageRegistry.addName(birchHopperBoat, "Birch Wood Hopper Boat");
+			LanguageRegistry.addName(birchTNTBoat, "Birch Wood TNT Boat");
 			LanguageRegistry.addName(jungleBoat, "Jungle Wood Boat");
+			LanguageRegistry.addName(jungleChestBoat, "Jungle Wood Chest Boat");
+			LanguageRegistry.addName(jungleFurnaceBoat, "Jungle Wood Furnace Boat");
+			LanguageRegistry.addName(jungleHopperBoat, "Jungle Wood Hopper Boat");
+			LanguageRegistry.addName(jungleTNTBoat, "Jungle Wood TNT Boat");
 		}
 		if (OreDictWoodBoat) {
 			LanguageRegistry.addName(oakBoat, "Wooden Boat");
