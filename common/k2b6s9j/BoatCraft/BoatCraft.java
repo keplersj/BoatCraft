@@ -195,7 +195,15 @@ public class BoatCraft {
 	        CraftingUtilities.AddShapelessRecipe(new ItemStack(spruceHopperBoat), new ItemStack(Block.tnt), "boatSpruce");
 	        CraftingUtilities.AddShapelessRecipe(new ItemStack(spruceTNTBoat), new ItemStack(Block.hopperBlock), "boatSpruce");
 	        GameRegistry.addRecipe(new ItemStack(birchBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2));
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(birchChestBoat), new ItemStack(Block.chest), "boatBirch");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(birchFurnaceBoat), new ItemStack(Block.furnaceIdle), "boatBirch");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(birchHopperBoat), new ItemStack(Block.tnt), "boatBirch");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(birchTNTBoat), new ItemStack(Block.hopperBlock), "boatBirch");
 	        GameRegistry.addRecipe(new ItemStack(jungleBoat), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 3));
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(jungleChestBoat), new ItemStack(Block.chest), "boatJungle");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(jungleFurnaceBoat), new ItemStack(Block.furnaceIdle), "boatJungle");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(jungleHopperBoat), new ItemStack(Block.tnt), "boatJungle");
+	        CraftingUtilities.AddShapelessRecipe(new ItemStack(jungleTNTBoat), new ItemStack(Block.hopperBlock), "boatJungle");
 		}
 		if (OreDictWoodBoat) {
 			CraftingUtilities.RemoveRecipe(new ItemStack(Item.boat));
