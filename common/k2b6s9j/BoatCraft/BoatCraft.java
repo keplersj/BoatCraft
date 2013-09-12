@@ -120,7 +120,15 @@ public class BoatCraft {
         	spruceHopperBoat.ID = cfg.getItem(itemBoats, "Spruce Hopper Boat", 25508).getInt(25508);
         	spruceTNTBoat.ID = cfg.getItem(itemBoats, "Spruce TNT Boat", 25509).getInt(25509);
         	birchBoat.ID = cfg.getItem(itemBoats, "Birch Boat", 25510).getInt(25510);
-        	jungleBoat.ID = cfg.getItem(itemBoats, "Jungle Boat", 25511).getInt(25511);
+        	birchChestBoat.ID = cfg.getItem(itemBoats, "Birch Chest Boat", 25511).getInt(25511);
+        	birchFurnaceBoat.ID = cfg.getItem(itemBoats, "Birch Furnace Boat", 25512).getInt(25512);
+        	birchHopperBoat.ID = cfg.getItem(itemBoats, "Birch Hopper Boat", 25513).getInt(25513);
+        	birchTNTBoat.ID = cfg.getItem(itemBoats, "Birch TNT Boat", 25514).getInt(25514);
+        	jungleBoat.ID = cfg.getItem(itemBoats, "Jungle Boat", 25515).getInt(25515);
+        	jungleChestBoat.ID = cfg.getItem(itemBoats, "Jungle Chest Boat", 25516).getInt(25516);
+        	jungleFurnaceBoat.ID = cfg.getItem(itemBoats, "Jungle Furnace Boat", 25517).getInt(25517);
+        	jungleHopperBoat.ID = cfg.getItem(itemBoats, "Jungle Hopper Boat", 25518).getInt(25518);
+        	jungleTNTBoat.ID = cfg.getItem(itemBoats, "Jungle TNT Boat", 25519).getInt(25519);
         	
         	//Modules
         	this.OreDictWoodBoat = cfg.get("Modules", "OreDictWoodBoats", false, "Use the OreDictionary to craft Wooden Boats").getBoolean(false);
@@ -161,7 +169,15 @@ public class BoatCraft {
 		spruceHopperBoat = new BoatSpruceHopper(spruceHopperBoat.ID);
 		spruceTNTBoat = new BoatSpruceTNT(spruceTNTBoat.ID);
 		birchBoat = new BoatBirch(birchBoat.ID);
+		birchChestBoat = new BoatBirchChest(birchChestBoat.ID);
+		birchFurnaceBoat = new BoatBirchFurnace(birchFurnaceBoat.ID);
+		birchHopperBoat = new BoatBirchHopper(birchHopperBoat.ID);
+		birchTNTBoat = new BoatBirchTNT(birchTNTBoat.ID);
 		jungleBoat = new BoatJungle(jungleBoat.ID);
+		jungleChestBoat = new BoatJungleChest(jungleChestBoat.ID);
+		jungleFurnaceBoat = new BoatJungleFurnace(jungleFurnaceBoat.ID);
+		jungleHopperBoat = new BoatJungleHopper(jungleHopperBoat.ID);
+		jungleTNTBoat = new BoatJungleTNT(jungleTNTBoat.ID);
 	}
 	
 	public void RegisterRecipes() {
