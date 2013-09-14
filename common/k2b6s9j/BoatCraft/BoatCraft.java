@@ -3,6 +3,30 @@ package k2b6s9j.BoatCraft;
 import java.io.IOException;
 import java.util.logging.Level;
 
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.acacia.EntityBoatAcacia;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.balsa.EntityBoatBalsa;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.baobob.EntityBoatBaobob;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.cherry.EntityBoatCherry;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.chestnut.EntityBoatChestnut;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.citrus.EntityBoatCitrus;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.ebony.EntityBoatEbony;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.greenheart.EntityBoatGreenheart;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.kapok.EntityBoatKapok;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.larch.EntityBoatLarch;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.lime.EntityBoatLime;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.mahoe.EntityBoatMahoe;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.mahogany.EntityBoatMahogany;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.maple.EntityBoatMaple;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.palm.EntityBoatPalm;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.papaya.EntityBoatPapaya;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.pine.EntityBoatPine;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.plum.EntityBoatPlum;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.poplar.EntityBoatPoplar;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.sequoia.EntityBoatSequoia;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.teak.EntityBoatTeak;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.walnut.EntityBoatWalnut;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.wenge.EntityBoatWenge;
+import k2b6s9j.BoatCraft.entity.boat.forestry.wood.willow.EntityBoatWillow;
 import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBoatBirch;
 import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBoatBirchChest;
 import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBoatBirchFurnace;
@@ -23,6 +47,30 @@ import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruceChest;
 import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruceFurnace;
 import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruceHopper;
 import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruceTNT;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.acacia.BoatAcacia;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.balsa.BoatBalsa;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.baobob.BoatBaobob;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.cherry.BoatCherry;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.chestnut.BoatChestnut;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.citrus.BoatCitrus;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.ebony.BoatEbony;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.greenheart.BoatGreenheart;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.kapok.BoatKapok;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.larch.BoatLarch;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.lime.BoatLime;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.mahoe.BoatMahoe;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.mahogany.BoatMahogany;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.maple.BoatMaple;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.palm.BoatPalm;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.papaya.BoatPapaya;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.pine.BoatPine;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.plum.BoatPlum;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.poplar.BoatPoplar;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.sequoia.BoatSequoia;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.teak.BoatTeak;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.walnut.BoatWalnut;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.wenge.BoatWenge;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.willow.BoatWillow;
 import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirch;
 import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirchChest;
 import k2b6s9j.BoatCraft.item.boat.wood.birch.BoatBirchFurnace;
@@ -110,29 +158,53 @@ public class BoatCraft {
 	public BoatJungleTNT jungleTNTBoat;
 	///Forestry Wood Boats
 	////Larch Wood Based
+	public BoatLarch larchBoat;
 	////Teak Wood Based
+	public BoatTeak teakBoat;
 	////Acacia Wood Based
+	public BoatAcacia acaciaBoat;
 	////Lime Wood Based
+	public BoatLime limeBoat;
 	////Chestnut Wood Based
+	public BoatChestnut chestnutBoat;
 	////Wenge Wood Based
+	public BoatWenge wengeBoat;
 	////Baobob Wood Based
+	public BoatBaobob baobobBoat;
 	////Sequoia Wood Based
+	public BoatSequoia sequoiaBoat;
 	////Kapok Wood Based
+	public BoatKapok kapokBoat;
 	////Ebony Wood Based
+	public BoatEbony ebonyBoat;
 	////Mahogany Wood Based
+	public BoatMahogany mahoganyBoat;
 	////Balsa Wood Based
-	////Willow Wood Based
+	public BoatBalsa balsaBoat;
+	////Wilow Wood Based
+	public BoatWillow willowBoat;
 	////Walnut Wood Based
+	public BoatWalnut walnutBoat;
 	////Greenheart Wood Based
+	public BoatGreenheart greenheartBoat;
 	////Cherry Wood Based
+	public BoatCherry cherryBoat;
 	////Mahoe Wood Based
+	public BoatMahoe mahoeBoat;
 	////Poplar Wood Based
+	public BoatPoplar poplarBoat;
 	////Palm Wood Based
+	public BoatPalm palmBoat;
 	////Papaya Wood Based
+	public BoatPapaya papayaBoat;
 	////Pine Wood Based
+	public BoatPine pineBoat;
 	////Plum Wood Based
+	public BoatPlum plumBoat;
 	////Maple Wood Based
+	public BoatMaple mapleBoat;
 	////Citrus Wood Based
+	public BoatCitrus citrusBoat;
 	
 	public boolean OreDictWoodBoat;
 
@@ -171,29 +243,53 @@ public class BoatCraft {
         	jungleTNTBoat.ID = cfg.getItem(itemBoats, "Jungle TNT Boat", 25519).getInt(25519);
         	///Forestry Wood Boats
     		////Larch Wood Based
+        	larchBoat.ID = cfg.getItem(itemBoats, "Larch Wood Boat", 25520).getInt(25520);
     		////Teak Wood Based
+        	teakBoat.ID = cfg.getItem(itemBoats, "Teak Wood Boat", 25521).getInt(25521);
     		////Acacia Wood Based
+        	acaciaBoat.ID = cfg.getItem(itemBoats, "Acacia Wood Boat", 25522).getInt(25522);
     		////Lime Wood Based
+        	limeBoat.ID = cfg.getItem(itemBoats, "Lime Wood Boat", 25523).getInt(25523);
     		////Chestnut Wood Based
+        	chestnutBoat.ID = cfg.getItem(itemBoats, "Chestnut Wood Boat", 25524).getInt(25524);
     		////Wenge Wood Based
+        	wengeBoat.ID = cfg.getItem(itemBoats, "Wenge Wood Boat", 25525).getInt(25525);
     		////Baobob Wood Based
+        	baobobBoat.ID = cfg.getItem(itemBoats, "Baobob Wood Boat", 25526).getInt(25526);
     		////Sequoia Wood Based
+        	sequoiaBoat.ID = cfg.getItem(itemBoats, "Sequoia Wood Boat", 25527).getInt(25527);
     		////Kapok Wood Based
+        	kapokBoat.ID = cfg.getItem(itemBoats, "Kapok Wood Boat", 25528).getInt(25528);
     		////Ebony Wood Based
+        	ebonyBoat.ID = cfg.getItem(itemBoats, "Ebony Wood Boat", 25529).getInt(25529);
     		////Mahogany Wood Based
+        	mahoganyBoat.ID = cfg.getItem(itemBoats, "Mahogany Wood Boat", 25530).getInt(25530);
     		////Balsa Wood Based
+        	balsaBoat.ID = cfg.getItem(itemBoats, "Balsa Wood Boat", 25531).getInt(25531);
     		////Willow Wood Based
+        	willowBoat.ID = cfg.getItem(itemBoats, "Willow Wood Boat", 25532).getInt(25532);
     		////Walnut Wood Based
+        	walnutBoat.ID = cfg.getItem(itemBoats, "Walnut Wood Boat", 25533).getInt(25533);
     		////Greenheart Wood Based
+        	greenheartBoat.ID = cfg.getItem(itemBoats, "Greenheart Wood Boat", 25534).getInt(25534);
     		////Cherry Wood Based
+        	cherryBoat.ID = cfg.getItem(itemBoats, "Cherry Wood Boat", 25535).getInt(25535);
     		////Mahoe Wood Based
+        	mahoeBoat.ID = cfg.getItem(itemBoats, "Mahoe Wood Boat", 25536).getInt(25536);
     		////Poplar Wood Based
+        	poplarBoat.ID = cfg.getItem(itemBoats, "Poplar Wood Boat", 25537).getInt(25537);
     		////Palm Wood Based
+        	palmBoat.ID = cfg.getItem(itemBoats, "Palm Wood Boat", 25538).getInt(25538);
     		////Papaya Wood Based
+        	papayaBoat.ID = cfg.getItem(itemBoats, "Papaya Wood Boat", 25539).getInt(25539);
     		////Pine Wood Based
+        	pineBoat.ID = cfg.getItem(itemBoats, "Pine Wood Boat", 25540).getInt(25540);
     		////Plum Wood Based
+        	plumBoat.ID = cfg.getItem(itemBoats, "Plum Wood Boat", 25541).getInt(25541);
     		////Maple Wood Based
+        	mapleBoat.ID = cfg.getItem(itemBoats, "Maple Wood Boat", 25542).getInt(25542);
     		////Citrus Wood Based
+        	citrusBoat.ID = cfg.getItem(itemBoats, "Citrus Wood Boat", 25543).getInt(25543);
         	
         	//Modules
         	this.OreDictWoodBoat = cfg.get("Modules", "OreDictWoodBoats", false, "Use the OreDictionary to craft Wooden Boats").getBoolean(false);
@@ -249,29 +345,53 @@ public class BoatCraft {
 		jungleTNTBoat = new BoatJungleTNT(jungleTNTBoat.ID);
 		///Forestry Wood Boats
 		////Larch Wood Based
+		larchBoat = new BoatLarch(larchBoat.ID);
 		////Teak Wood Based
+		teakBoat = new BoatTeak(teakBoat.ID);
 		////Acacia Wood Based
+		acaciaBoat = new BoatAcacia(acaciaBoat.ID);
 		////Lime Wood Based
+		limeBoat = new BoatLime(limeBoat.ID);
 		////Chestnut Wood Based
+		chestnutBoat = new BoatChestnut(chestnutBoat.ID);
 		////Wenge Wood Based
+		wengeBoat = new BoatWenge(wengeBoat.ID);
 		////Baobob Wood Based
+		baobobBoat = new BoatBaobob(baobobBoat.ID);
 		////Sequoia Wood Based
+		sequoiaBoat = new BoatSequoia(sequoiaBoat.ID);
 		////Kapok Wood Based
+		kapokBoat = new BoatKapok(kapokBoat.ID);
 		////Ebony Wood Based
+		ebonyBoat = new BoatEbony(ebonyBoat.ID);
 		////Mahogany Wood Based
+		mahoganyBoat = new BoatMahogany(mahoganyBoat.ID);
 		////Balsa Wood Based
+		balsaBoat = new BoatBalsa(balsaBoat.ID);
 		////Willow Wood Based
+		willowBoat = new BoatWillow(willowBoat.ID);
 		////Walnut Wood Based
+		walnutBoat = new BoatWalnut(walnutBoat.ID);
 		////Greenheart Wood Based
+		greenheartBoat = new BoatGreenheart(greenheartBoat.ID);
 		////Cherry Wood Based
+		cherryBoat = new BoatCherry(cherryBoat.ID);
 		////Mahoe Wood Based
+		mahoeBoat = new BoatMahoe(mahoeBoat.ID);
 		////Poplar Wood Based
+		poplarBoat = new BoatPoplar(poplarBoat.ID);
 		////Palm Wood Based
+		palmBoat = new BoatPalm(palmBoat.ID);
 		////Papaya Wood Based
+		papayaBoat = new BoatPapaya(papayaBoat.ID);
 		////Pine Wood Based
+		pineBoat = new BoatPine(pineBoat.ID);
 		////Plum Wood Based
+		plumBoat = new BoatPlum(plumBoat.ID);
 		////Maple Wood Based
+		mapleBoat = new BoatMaple(mapleBoat.ID);
 		////Citrus Wood Based
+		citrusBoat = new BoatCitrus(citrusBoat.ID);
 	}
 	
 	public void RegisterRecipes() {
@@ -368,29 +488,53 @@ public class BoatCraft {
 		EntityRegistry.registerModEntity(EntityBoatJungleTNT.class, "Jungle Wood TNT Boat", 20, this, 80, 3, true);
 		///Forestry Wood Boats
 		////Larch Wood Based
+		EntityRegistry.registerModEntity(EntityBoatLarch.class, "Larch Wood Boat", 21, this, 80, 3, true);
 		////Teak Wood Based
+		EntityRegistry.registerModEntity(EntityBoatTeak.class, "Teak Wood Boat", 22, this, 80, 3, true);
 		////Acacia Wood Based
+		EntityRegistry.registerModEntity(EntityBoatAcacia.class, "Acacia Wood Boat", 23, this, 80, 3, true);
 		////Lime Wood Based
+		EntityRegistry.registerModEntity(EntityBoatLime.class, "Lime Wood Boat", 24, this, 80, 3, true);
 		////Chestnut Wood Based
+		EntityRegistry.registerModEntity(EntityBoatChestnut.class, "Chestnut Wood Boat", 25, this, 80, 3, true);
 		////Wenge Wood Based
+		EntityRegistry.registerModEntity(EntityBoatWenge.class, "Wenge Wood Boat", 26, this, 80, 3, true);
 		////Baobob Wood Based
+		EntityRegistry.registerModEntity(EntityBoatBaobob.class, "Baobob Wood Boat", 27, this, 80, 3, true);
 		////Sequoia Wood Based
+		EntityRegistry.registerModEntity(EntityBoatSequoia.class, "Sequoia Wood Boat", 28, this, 80, 3, true);
 		////Kapok Wood Based
+		EntityRegistry.registerModEntity(EntityBoatKapok.class, "Kapok Wood Boat", 29, this, 80, 3, true);
 		////Ebony Wood Based
+		EntityRegistry.registerModEntity(EntityBoatEbony.class, "Ebony Wood Boat", 30, this, 80, 3, true);
 		////Mahogany Wood Based
+		EntityRegistry.registerModEntity(EntityBoatMahogany.class, "Mahogany Wood Boat", 31, this, 80, 3, true);
 		////Balsa Wood Based
+		EntityRegistry.registerModEntity(EntityBoatBalsa.class, "Balsa Wood Boat", 32, this, 80, 3, true);
 		////Willow Wood Based
+		EntityRegistry.registerModEntity(EntityBoatWillow.class, "Willow Wood Boat", 33, this, 80, 3, true);
 		////Walnut Wood Based
+		EntityRegistry.registerModEntity(EntityBoatWalnut.class, "Walnut Wood Boat", 34, this, 80, 3, true);
 		////Greenheart Wood Based
+		EntityRegistry.registerModEntity(EntityBoatGreenheart.class, "Greenheart Wood Boat", 35, this, 80, 3, true);
 		////Cherry Wood Based
+		EntityRegistry.registerModEntity(EntityBoatCherry.class, "Cherry Wood Boat", 36, this, 80, 3, true);
 		////Mahoe Wood Based
+		EntityRegistry.registerModEntity(EntityBoatMahoe.class, "Mahoe Wood Boat", 37, this, 80, 3, true);
 		////Poplar Wood Based
+		EntityRegistry.registerModEntity(EntityBoatPoplar.class, "Poplar Wood Boat", 38, this, 80, 3, true);
 		////Palm Wood Based
+		EntityRegistry.registerModEntity(EntityBoatPalm.class, "Palm Wood Boat", 39, this, 80, 3, true);
 		////Papaya Wood Based
+		EntityRegistry.registerModEntity(EntityBoatPapaya.class, "Papaya Wood Boat", 40, this, 80, 3, true);
 		////Pine Wood Based
+		EntityRegistry.registerModEntity(EntityBoatPine.class, "Pine Wood Boat", 41, this, 80, 3, true);
 		////Plum Wood Based
+		EntityRegistry.registerModEntity(EntityBoatPlum.class, "Plum Wood Boat", 42, this, 80, 3, true);
 		////Maple Wood Based
+		EntityRegistry.registerModEntity(EntityBoatMaple.class, "Maple Wood Boat", 43, this, 80, 3, true);
 		////Citrus Wood Based
+		EntityRegistry.registerModEntity(EntityBoatCitrus.class, "Citrus Wood Boat", 44, this, 80, 3, true);
 	}
 
 	@EventHandler
