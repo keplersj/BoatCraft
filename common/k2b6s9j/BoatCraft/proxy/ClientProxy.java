@@ -94,6 +94,15 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBoatJungleTNT.class, new RenderJungleTNTBoat());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBoatJungleHopper.class, new RenderJungleHopperBoat());
 		
+		//Special Boats
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoatChest.class, new RenderChestBoat());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoatFurnace.class, new RenderFurnaceBoat());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoatTNT.class, new RenderTNTBoat());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoatHopper.class, new RenderHopperBoat());
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityBuoy.class, new RenderBuoy());
+		
+		//Register Item Renderers
 		//Wood Boat Item Renders
 		///Oak Wood Based Boat Items
 		MinecraftForgeClient.registerItemRenderer(BoatOak.shiftedID, new RenderOakWoodBoat());
@@ -119,6 +128,13 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(BoatJungleFurnace.shiftedID, new RenderJungleFurnaceBoat());
 		MinecraftForgeClient.registerItemRenderer(BoatJungleTNT.shiftedID, new RenderJungleTNTBoat());
 		MinecraftForgeClient.registerItemRenderer(BoatJungleHopper.shiftedID, new RenderJungleHopperBoat());
+		
+		MinecraftForgeClient.registerItemRenderer(BoatChest.shiftedID, new RenderChestBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatFurnace.shiftedID, new RenderFurnaceBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatTNT.shiftedID, new RenderTNTBoat());
+		MinecraftForgeClient.registerItemRenderer(BoatHopper.shiftedID, new RenderHopperBoat());
+		
+		MinecraftForgeClient.registerItemRenderer(Buoy.shiftedID, new RenderBuoy());
 	}
 
 }

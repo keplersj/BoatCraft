@@ -78,7 +78,7 @@ public class BoatCraft {
 	
 	//Mod Info
 	public final String modName = "BoatCraft";
-	public final String modVersion = "2.0-ForestryWood";
+	public final String modVersion = "2.0-Buoy";
 	
 	//Config File Strings
 	public final String itemBoats = "Boats in Item Form";
@@ -105,6 +105,7 @@ public class BoatCraft {
 	public BoatJungleHopper jungleHopperBoat;
 	public BoatJungleTNT jungleTNTBoat;
 	
+	public Buoy buoy;
 	
 	public boolean OreDictWoodBoat;
 
@@ -137,6 +138,8 @@ public class BoatCraft {
         	jungleFurnaceBoat.ID = cfg.getItem(itemBoats, "Jungle Furnace Boat", 25517).getInt(25517);
         	jungleHopperBoat.ID = cfg.getItem(itemBoats, "Jungle Hopper Boat", 25518).getInt(25518);
         	jungleTNTBoat.ID = cfg.getItem(itemBoats, "Jungle TNT Boat", 25519).getInt(25519);
+        	
+        	buoy.ID = cfg.getItem(itemBoats, "Buoy", 25512).getInt(25512);
         	
         	//Modules
         	this.OreDictWoodBoat = cfg.get("Modules", "OreDictWoodBoats", false, "Use the OreDictionary to craft Wooden Boats").getBoolean(false);
@@ -186,6 +189,8 @@ public class BoatCraft {
 		jungleFurnaceBoat = new BoatJungleFurnace(jungleFurnaceBoat.ID);
 		jungleHopperBoat = new BoatJungleHopper(jungleHopperBoat.ID);
 		jungleTNTBoat = new BoatJungleTNT(jungleTNTBoat.ID);
+		
+		buoy = new Buoy(buoy.ID);
 	}
 	
 	public void RegisterRecipes() {
@@ -283,6 +288,7 @@ public class BoatCraft {
 			LanguageRegistry.addName(oakTntBoat, "TNT Boat");
 		}
 		
+		LanguageRegistry.addName(buoy, "Buoy");
 	}
 
 	@EventHandler
