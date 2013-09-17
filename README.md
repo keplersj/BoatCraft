@@ -14,7 +14,6 @@ Special Thanks goes out to:
 
 ## Goals (Not even begun work on, might not even happen)
 - And one day, STEAM BOATS!
-- Sails
 - Weapons (Fire Cannons, Lasers)
 - Galgadorian boats
 
