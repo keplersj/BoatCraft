@@ -66,7 +66,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", dependencies="after:Forestry;")
+@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.1", dependencies="after:Forestry;")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
 
 public class BoatCraft {
@@ -78,7 +78,7 @@ public class BoatCraft {
 	
 	//Mod Info
 	public final String modName = "BoatCraft";
-	public final String modVersion = "2.0";
+	public final String modVersion = "2.1";
 	
 	//Config File Strings
 	public final String itemBoats = "Boats in Item Form";
