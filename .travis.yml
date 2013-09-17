@@ -5,4 +5,4 @@ jdk:
   - openjdk6
 before_script:
   - sudo apt-get install astyle
-script: ant test
+script: gradle build

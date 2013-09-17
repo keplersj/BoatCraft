@@ -1,12 +1,20 @@
-*.class
+# gradle stuff
+build
+.gradle
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# eclipse stuff
+.classpath
+.project
+.settings
+bin
 
+# GMCP plugin stuff
+minecraft
 
-# Build Script Artifacts #
-build/
-dist/
-download/
+# windows
+*.cmd
+*.bat
+
+# don't want those on github
+*deobf.jar*
+*deobf.zip*
