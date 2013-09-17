@@ -13,7 +13,6 @@ Special Thanks goes out to:
 [![MCStats Statistics](http://api.mcstats.org/signature/BoatCraft.png)](http://mcstats.org/plugin/BoatCraft)
 
 ## Goals (Not even begun work on, might not even happen)
-- And one day, STEAM BOATS!
 - Weapons (Fire Cannons, Lasers)
 - Galgadorian boats
 
