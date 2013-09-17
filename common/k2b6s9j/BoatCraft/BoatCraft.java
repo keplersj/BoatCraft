@@ -105,7 +105,6 @@ public class BoatCraft {
 	public BoatJungleHopper jungleHopperBoat;
 	public BoatJungleTNT jungleTNTBoat;
 	
-	
 	public Buoy buoy;
 	
 	public boolean OreDictWoodBoat;
@@ -139,12 +138,6 @@ public class BoatCraft {
         	jungleFurnaceBoat.ID = cfg.getItem(itemBoats, "Jungle Furnace Boat", 25517).getInt(25517);
         	jungleHopperBoat.ID = cfg.getItem(itemBoats, "Jungle Hopper Boat", 25518).getInt(25518);
         	jungleTNTBoat.ID = cfg.getItem(itemBoats, "Jungle TNT Boat", 25519).getInt(25519);
-        	
-        	//Special Boats
-        	chestBoat.ID = cfg.getItem(itemBoats, "Chest Boat", 25508).getInt(25508);
-        	furnaceBoat.ID = cfg.getItem(itemBoats, "Furnace Boat", 25509).getInt(25509);
-        	hopperBoat.ID = cfg.getItem(itemBoats, "Hopper Boat", 25510).getInt(25510);
-        	tntBoat.ID = cfg.getItem(itemBoats, "TNT Boat", 25511).getInt(25511);
         	
         	buoy.ID = cfg.getItem(itemBoats, "Buoy", 25512).getInt(25512);
         	
@@ -196,12 +189,6 @@ public class BoatCraft {
 		jungleFurnaceBoat = new BoatJungleFurnace(jungleFurnaceBoat.ID);
 		jungleHopperBoat = new BoatJungleHopper(jungleHopperBoat.ID);
 		jungleTNTBoat = new BoatJungleTNT(jungleTNTBoat.ID);
-		
-		//Special Boats
-		chestBoat = new BoatChest(chestBoat.ID);
-		furnaceBoat = new BoatFurnace(furnaceBoat.ID);
-		hopperBoat = new BoatHopper(hopperBoat.ID);
-		tntBoat = new BoatTNT(tntBoat.ID);
 		
 		buoy = new Buoy(buoy.ID);
 	}
@@ -300,12 +287,6 @@ public class BoatCraft {
 			LanguageRegistry.addName(oakHopperBoat, "Hopper Boat");
 			LanguageRegistry.addName(oakTntBoat, "TNT Boat");
 		}
-		
-		//Special Boats
-		LanguageRegistry.addName(chestBoat, "Chest Boat");
-		LanguageRegistry.addName(furnaceBoat, "Furnace Boat");
-		LanguageRegistry.addName(hopperBoat, "Hopper Boat");
-		LanguageRegistry.addName(tntBoat, "TNT Boat");
 		
 		LanguageRegistry.addName(buoy, "Buoy");
 	}
