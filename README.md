@@ -12,8 +12,6 @@ Special Thanks goes out to:
 
 [![MCStats Statistics](http://api.mcstats.org/signature/BoatCraft.png)](http://mcstats.org/plugin/BoatCraft)
 
-## Goals (Not even begun work on, might not even happen)
-
 ## The Build Enviroment
 When I develop with Java I try to make my enviroment as git friendly as possible. This means that it is easy for anyone to download and play around with my code. When you clone the repository onto your computer open your command line and run 'ant' inside the repository's folder on your computer, this requires [ant](http://ant.apache.org/manual/install.html) to be installed on your computer.
 
