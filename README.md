@@ -18,9 +18,6 @@ Special Thanks goes out to:
 - Sails
 - Weapons (Fire Cannons, Lasers)
 - Galgadorian boats
-- Paddles
-- Oars
-- Much more
 
 ## The Build Enviroment
 When I develop with Java I try to make my enviroment as git friendly as possible. This means that it is easy for anyone to download and play around with my code. When you clone the repository onto your computer open your command line and run 'ant' inside the repository's folder on your computer, this requires [ant](http://ant.apache.org/manual/install.html) to be installed on your computer.
