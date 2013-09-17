@@ -16,6 +16,7 @@
 
 	<property name="forge.dir" value="${build.dir}/forge"/>
 	<property name="mcp.dir" value="${forge.dir}/mcp"/>
+	<property name="forestry.dir" value="${mcp.dir}/unpack/forestry"/>
 
 	<property name="clientsrc.dir" value="${mcp.dir}/src/minecraft"/>
 	<property name="commonsrc.dir" value="${clientsrc.dir}"/>
@@ -23,8 +24,9 @@
 	<property file="${clientsrc.dir}/fmlversion.properties" />
 
 	<property name="mc.version" value="1.6.2"/>
-	<property name="forge.version" value="9.10.0.804"/>
+	<property name="forge.version" value="9.10.0.819"/>
 	<property name="mod.version" value="0"/>
+        <property name="forestry.version" value="2.3.0.1"/>
   
 	<!-- Let's make ant make work with git ;) -->
 	<macrodef name = "git">
@@ -65,6 +67,7 @@
 	<target name="download">
 		<mkdir dir="${download.dir}"/>
 		<get src="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${mc.version}-${forge.version}.zip" dest="${download.dir}" usetimestamp="True"/>
+                <get src="http://forestry.sengir.net/files/forestry/releases/${forestry.version}/forestry-api-${forestry.version}.zip" dest="${download.dir}" usetimestamp="True"/>
 		<git-clone-pull repository="https://github.com/Hidendra/Plugin-Metrics.git" dest="${download.dir}/Plugin-Metrics"/>
 
 		<echo message="Download finished"/>
@@ -99,6 +102,21 @@
 		<chmod file="${mcp.dir}/runtime/bin/jad-osx" perm="+x"/>
 
 		<echo message="Decompile finished"/>
+		
+		<!-- Copy Forestry API source -->
+		<unzip dest="${forestry.dir}" failOnEmptyArchive="true">
+			<fileset dir="${download.dir}">
+				<include name="forestry-api-${forestry.version}.zip"/>
+			</fileset>
+		</unzip>
+		
+		<echo message="Unpacking Forestry API finished"/>
+		
+		<copy todir="${commonsrc.dir}">
+			<fileset dir="${forestry.dir}"/>
+		</copy>
+
+		<echo message="Copied Forestry API"/>
 		
 		<copy todir="${commonsrc.dir}">
 			<fileset dir="${download.dir}/Plugin-Metrics/mods/forge/metrics-lite/src/main/java/"/>
