@@ -10,22 +10,7 @@ Special Thanks goes out to:
 - CovertJaguar, for creating Railcraft and being one of the biggest inspiractions.
 - #ModJam on Espernet and everyone over there, for just being awesome!
 
-## Goals (Not even begun work on, might not even happen)
-- Seaport Villages
-- Boats acting like tools based on material, varying in speed, durability, and yes enchantibility based on the material
-- And one day, STEAM BOATS!
-- PIRATES!
-- Sails
-- Weapons (Fire Cannons, Lasers)
-- Galgadorian boats
-- Much more
-
-## Features (Currently implemented)
-- Boat Items for the 4 Vanilla Woods
-- API allowing other mods to add blocks to boats (Kinda. A mod support page will be in the wiki some time after ModJam)
-
-## Half-Features (Needs work)
-- Boats that contain all the same blocks that Vanilla Minecarts can contain (Chest, Furnace, TNT, Mob Spawner)
+[![MCStats Statistics](http://api.mcstats.org/signature/BoatCraft.png)](http://mcstats.org/plugin/BoatCraft)
 
 ## The Build Enviroment
 When I develop with Java I try to make my enviroment as git friendly as possible. This means that it is easy for anyone to download and play around with my code. When you clone the repository onto your computer open your command line and run 'ant' inside the repository's folder on your computer, this requires [ant](http://ant.apache.org/manual/install.html) to be installed on your computer.
