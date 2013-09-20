@@ -48,6 +48,10 @@ import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruceFurnace;
 import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruceHopper;
 import k2b6s9j.BoatCraft.entity.boat.wood.spruce.EntityBoatSpruceTNT;
 import k2b6s9j.BoatCraft.item.boat.forestry.wood.acacia.BoatAcacia;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.acacia.BoatAcaciaChest;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.acacia.BoatAcaciaFurnace;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.acacia.BoatAcaciaHopper;
+import k2b6s9j.BoatCraft.item.boat.forestry.wood.acacia.BoatAcaciaTNT;
 import k2b6s9j.BoatCraft.item.boat.forestry.wood.balsa.BoatBalsa;
 import k2b6s9j.BoatCraft.item.boat.forestry.wood.baobob.BoatBaobob;
 import k2b6s9j.BoatCraft.item.boat.forestry.wood.cherry.BoatCherry;
@@ -163,6 +167,10 @@ public class BoatCraft {
 	public BoatTeak teakBoat;
 	////Acacia Wood Based
 	public BoatAcacia acaciaBoat;
+	public BoatAcaciaChest acaciaChestBoat;
+	public BoatAcaciaFurnace acaciaFurnaceBoat;
+	public BoatAcaciaHopper acaciaHopperBoat;
+	public BoatAcaciaTNT acaciaTNTBoat;
 	////Lime Wood Based
 	public BoatLime limeBoat;
 	////Chestnut Wood Based
@@ -248,48 +256,52 @@ public class BoatCraft {
         	teakBoat.ID = cfg.getItem(itemBoats, "Teak Wood Boat", 25521).getInt(25521);
     		////Acacia Wood Based
         	acaciaBoat.ID = cfg.getItem(itemBoats, "Acacia Wood Boat", 25522).getInt(25522);
+        	acaciaChestBoat.ID = cfg.getItem(itemBoats, "Acacia Wood Chest Boat", 25523).getInt(25523);
+        	acaciaFurnaceBoat.ID = cfg.getItem(itemBoats, "Acacia Wood Furnace Boat", 25524).getInt(25524);
+        	acaciaHopperBoat.ID = cfg.getItem(itemBoats, "Acacia Wood Hopper Boat", 25525).getInt(25525);
+        	acaciaTNTBoat.ID = cfg.getItem(itemBoats, "Acacia Wood TNT Boat", 25526).getInt(25526);
     		////Lime Wood Based
-        	limeBoat.ID = cfg.getItem(itemBoats, "Lime Wood Boat", 25523).getInt(25523);
+        	limeBoat.ID = cfg.getItem(itemBoats, "Lime Wood Boat", 25527).getInt(25527);
     		////Chestnut Wood Based
-        	chestnutBoat.ID = cfg.getItem(itemBoats, "Chestnut Wood Boat", 25524).getInt(25524);
+        	chestnutBoat.ID = cfg.getItem(itemBoats, "Chestnut Wood Boat", 25528).getInt(25528);
     		////Wenge Wood Based
-        	wengeBoat.ID = cfg.getItem(itemBoats, "Wenge Wood Boat", 25525).getInt(25525);
+        	wengeBoat.ID = cfg.getItem(itemBoats, "Wenge Wood Boat", 25529).getInt(25529);
     		////Baobob Wood Based
-        	baobobBoat.ID = cfg.getItem(itemBoats, "Baobob Wood Boat", 25526).getInt(25526);
+        	baobobBoat.ID = cfg.getItem(itemBoats, "Baobob Wood Boat", 25530).getInt(25530);
     		////Sequoia Wood Based
-        	sequoiaBoat.ID = cfg.getItem(itemBoats, "Sequoia Wood Boat", 25527).getInt(25527);
+        	sequoiaBoat.ID = cfg.getItem(itemBoats, "Sequoia Wood Boat", 25531).getInt(25531);
     		////Kapok Wood Based
-        	kapokBoat.ID = cfg.getItem(itemBoats, "Kapok Wood Boat", 25528).getInt(25528);
+        	kapokBoat.ID = cfg.getItem(itemBoats, "Kapok Wood Boat", 25532).getInt(25532);
     		////Ebony Wood Based
-        	ebonyBoat.ID = cfg.getItem(itemBoats, "Ebony Wood Boat", 25529).getInt(25529);
+        	ebonyBoat.ID = cfg.getItem(itemBoats, "Ebony Wood Boat", 25533).getInt(25533);
     		////Mahogany Wood Based
-        	mahoganyBoat.ID = cfg.getItem(itemBoats, "Mahogany Wood Boat", 25530).getInt(25530);
+        	mahoganyBoat.ID = cfg.getItem(itemBoats, "Mahogany Wood Boat", 25534).getInt(25534);
     		////Balsa Wood Based
-        	balsaBoat.ID = cfg.getItem(itemBoats, "Balsa Wood Boat", 25531).getInt(25531);
+        	balsaBoat.ID = cfg.getItem(itemBoats, "Balsa Wood Boat", 25535).getInt(25535);
     		////Willow Wood Based
-        	willowBoat.ID = cfg.getItem(itemBoats, "Willow Wood Boat", 25532).getInt(25532);
+        	willowBoat.ID = cfg.getItem(itemBoats, "Willow Wood Boat", 25536).getInt(25536);
     		////Walnut Wood Based
-        	walnutBoat.ID = cfg.getItem(itemBoats, "Walnut Wood Boat", 25533).getInt(25533);
+        	walnutBoat.ID = cfg.getItem(itemBoats, "Walnut Wood Boat", 25537).getInt(25537);
     		////Greenheart Wood Based
-        	greenheartBoat.ID = cfg.getItem(itemBoats, "Greenheart Wood Boat", 25534).getInt(25534);
+        	greenheartBoat.ID = cfg.getItem(itemBoats, "Greenheart Wood Boat", 25538).getInt(25538);
     		////Cherry Wood Based
-        	cherryBoat.ID = cfg.getItem(itemBoats, "Cherry Wood Boat", 25535).getInt(25535);
+        	cherryBoat.ID = cfg.getItem(itemBoats, "Cherry Wood Boat", 25539).getInt(25539);
     		////Mahoe Wood Based
-        	mahoeBoat.ID = cfg.getItem(itemBoats, "Mahoe Wood Boat", 25536).getInt(25536);
+        	mahoeBoat.ID = cfg.getItem(itemBoats, "Mahoe Wood Boat", 25540).getInt(25540);
     		////Poplar Wood Based
-        	poplarBoat.ID = cfg.getItem(itemBoats, "Poplar Wood Boat", 25537).getInt(25537);
+        	poplarBoat.ID = cfg.getItem(itemBoats, "Poplar Wood Boat", 25541).getInt(25541);
     		////Palm Wood Based
-        	palmBoat.ID = cfg.getItem(itemBoats, "Palm Wood Boat", 25538).getInt(25538);
+        	palmBoat.ID = cfg.getItem(itemBoats, "Palm Wood Boat", 25542).getInt(25542);
     		////Papaya Wood Based
-        	papayaBoat.ID = cfg.getItem(itemBoats, "Papaya Wood Boat", 25539).getInt(25539);
+        	papayaBoat.ID = cfg.getItem(itemBoats, "Papaya Wood Boat", 25543).getInt(25543);
     		////Pine Wood Based
-        	pineBoat.ID = cfg.getItem(itemBoats, "Pine Wood Boat", 25540).getInt(25540);
+        	pineBoat.ID = cfg.getItem(itemBoats, "Pine Wood Boat", 25544).getInt(25544);
     		////Plum Wood Based
-        	plumBoat.ID = cfg.getItem(itemBoats, "Plum Wood Boat", 25541).getInt(25541);
+        	plumBoat.ID = cfg.getItem(itemBoats, "Plum Wood Boat", 25545).getInt(25545);
     		////Maple Wood Based
-        	mapleBoat.ID = cfg.getItem(itemBoats, "Maple Wood Boat", 25542).getInt(25542);
+        	mapleBoat.ID = cfg.getItem(itemBoats, "Maple Wood Boat", 25546).getInt(25546);
     		////Citrus Wood Based
-        	citrusBoat.ID = cfg.getItem(itemBoats, "Citrus Wood Boat", 25543).getInt(25543);
+        	citrusBoat.ID = cfg.getItem(itemBoats, "Citrus Wood Boat", 25547).getInt(25547);
         	
         	//Modules
         	this.OreDictWoodBoat = cfg.get("Modules", "OreDictWoodBoats", false, "Use the OreDictionary to craft Wooden Boats").getBoolean(false);
@@ -350,6 +362,10 @@ public class BoatCraft {
 		teakBoat = new BoatTeak(teakBoat.ID);
 		////Acacia Wood Based
 		acaciaBoat = new BoatAcacia(acaciaBoat.ID);
+		acaciaChestBoat = new BoatAcaciaChest(acaciaChestBoat.ID);
+		acaciaFurnaceBoat = new BoatAcaciaFurnace(acaciaFurnaceBoat.ID);
+		acaciaHopperBoat = new BoatAcaciaHopper(acaciaHopperBoat.ID);
+		acaciaTNTBoat = new BoatAcaciaTNT(acaciaTNTBoat.ID);
 		////Lime Wood Based
 		limeBoat = new BoatLime(limeBoat.ID);
 		////Chestnut Wood Based
