@@ -1,12 +1,21 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        mavenLocal()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
     }
-    dependencies { classpath 'com.github.abrarsyed.gmcp:GMCP:0.7.4-SNAPSHOT' }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
+    }
 }
 
-apply plugin: "gmcp"
+import static net.minecraftforge.gradle.dev.FmlDevPlugin.*
+
+apply plugin: 'maven'
+apply plugin: 'fmldev'
 
 group = 'k2b6s9j.BoatCraft'
 version = "2.0.0.${System.env.BUILD_NUMBER}.BETA"
@@ -20,7 +29,11 @@ sourceSets {
 }
 
 minecraft {
-	minecraftVersion = '1.6.2'
+    version = '1.6.4'
+    mcpVersion = '8.11'
+    fmlDir = projectDir.getAbsolutePath();
+    mainClass = 'cpw.mods.fml.relauncher.ServerLaunchWrapper'
+    installerVersion = "1.4"
 }
 
 processResources {
