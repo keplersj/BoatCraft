@@ -12,8 +12,6 @@ buildscript {
     }
 }
 
-import static net.minecraftforge.gradle.dev.FmlDevPlugin.*
-
 apply plugin: 'maven'
 apply plugin: 'fmldev'
 
