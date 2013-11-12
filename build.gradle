@@ -21,10 +21,10 @@ group = 'k2b6s9j.BoatCraft'
 version = "2.0.0.${System.env.BUILD_NUMBER}.BETA"
 archivesBaseName = 'BoatCraft'
 
-sourceSets {
-    main {
-	java { srcDir 'common' }
-        resources { srcDir 'resources' }
+repositories {
+    flatDir {
+        name "fileRepo"
+        dirs "repo"
     }
 }
 
@@ -35,6 +35,8 @@ minecraft {
     mainClass = 'cpw.mods.fml.relauncher.ServerLaunchWrapper'
     installerVersion = "1.4"
 }
+
+group = ‘k2b6s9j.BoatCraft’
 
 processResources {
     eachFile { file ->
