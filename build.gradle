@@ -32,7 +32,7 @@ minecraft {
     version = '1.6.4'
     mcpVersion = '8.11'
     fmlDir = projectDir.getAbsolutePath();
-    mainClass = 'cpw.mods.fml.relauncher.ServerLaunchWrapper'
+    mainClass = ‘k2b6s9j.BoatCraft.BoatCraft’
     installerVersion = "1.4"
 }
 
