@@ -2,41 +2,27 @@ buildscript {
     repositories {
         mavenCentral()
         mavenLocal()
-        /*
         maven {
-            name = "forge"
+            name = "Minecraft Forge"
             url = "http://files.minecraftforge.net/maven"
         }
-        */
         maven {
-        	name = "gmcp"
-            url = "https://oss.sonatype.org/content/repositories/snapshots"
+            name = "Plugin Metrics"
+            url = "http://repo.mcstats.org/content/repositories/public"
         }
     }
     dependencies {
-        //classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
-        classpath 'com.github.abrarsyed.gmcp:GMCP:0.8.7'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
+        classpath 'org.mcstats.forge:metrics-lite:R8-SNAPSHOT'
     }
 }
 
-apply plugin: "gmcp"
-
-group = "k2b6s9j.BoatCraft"
-version = "2.0.0.BETA"
-archivesBaseName = 'BoatCraft'
-targetCompatibility = '1.6'
-sourceCompatibility = '1.6'
-
-repositories {
-    flatDir {
-        name "fileRepo"
-        dirs "repo"
-    }
-}
+apply plugin: 'forge'
 
 minecraft {
-    version = '1.6.4'
+    version = '1.6.4-9.11.1.916'
     mcpVersion = '8.11'
-    fmlDir = projectDir.getAbsolutePath();
-    mainClass = "k2b6s9j.BoatCraft.BoatCraft"
 }
+
+group = 'k2b6s9j.BoatCraft'
+version = 2.0
