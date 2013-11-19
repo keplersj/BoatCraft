@@ -1,20 +1,26 @@
-# gradle stuff
-build
-.gradle
+*.class
 
-# eclipse stuff
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# gradle
+.gradle
+build
+gradle-app.setting
+
+# GMCP plugin
+/minecraft
+
+# eclipse
+.settings
+.metadata
 .classpath
 .project
-.settings
 bin
 
-# GMCP plugin stuff
-minecraft
-
-# windows
-*.cmd
-*.bat
-
-# don't want those on github
-*deobf.jar*
-*deobf.zip*
+# intellij
+out
+*.idea
+*.iml
