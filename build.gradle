@@ -20,7 +20,7 @@ buildscript {
 apply plugin: 'forge'
 
 minecraft {
-    version = '1.6.4-9.11.1.916'
+    version = '1.6.4-9.11.1.963'
     mcpVersion = '8.11'
 }
 
