@@ -1,27 +1,32 @@
 buildscript {
     repositories {
         mavenCentral()
-        mavenLocal()
         maven {
             name = "Minecraft Forge"
             url = "http://files.minecraftforge.net/maven"
         }
-        maven {
-            name = "Plugin Metrics"
-            url = "http://repo.mcstats.org/content/repositories/public"
-        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
-        classpath 'org.mcstats.forge:metrics-lite:R8-SNAPSHOT'
+    }
+}
+
+repositories {
+    maven {
+        name = "Plugin Metrics"
+        url = "http://repo.mcstats.org/content/repositories/public"
     }
 }
 
 apply plugin: 'forge'
 
 minecraft {
-    version = '1.6.4-9.11.1.963'
-    mcpVersion = '8.11'
+    version = '1.6.4-9.11.1.964'
+}
+
+dependencies {
+    runtime fileTree(dir: 'lib', include: '*.jar')
+    compile 'org.mcstats.forge:metrics-lite:R8-SNAPSHOT'
 }
 
 group = 'k2b6s9j.BoatCraft'
