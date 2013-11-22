@@ -11,16 +11,3 @@ Special Thanks goes out to:
 - #ModJam on Espernet and everyone over there, for just being awesome!
 
 [![MCStats Statistics](http://api.mcstats.org/signature/BoatCraft.png)](http://mcstats.org/plugin/BoatCraft)
-
-## The Build Enviroment
-When I develop with Java I try to make my enviroment as git friendly as possible. This means that it is easy for anyone to download and play around with my code. When you clone the repository onto your computer open your command line and run 'ant' inside the repository's folder on your computer, this requires [ant](http://ant.apache.org/manual/install.html) to be installed on your computer.
-
-All the ant commands:
-
-`ant` Downloads all the dependancies, sets up the enviroment, compiles, and if all goes well give you a binary you can use in Minecraft
-
-`ant copySRC` Typically used to copy newly cloned code into your build directory.
-
-`ant copy-new-code` Typically used to copy newly created/edited code from the build directory, typically when used with Eclipse, into the root directory for use with git.
-
-`ant test` Used for continuous integration testing, like Travis CI

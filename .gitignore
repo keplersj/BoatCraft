@@ -5,8 +5,22 @@
 *.war
 *.ear
 
+# gradle
+.gradle
+build
+gradle-app.setting
 
-# Build Script Artifacts #
-build/
-dist/
-download/
+# GMCP plugin
+/minecraft
+
+# eclipse
+.settings
+.metadata
+.classpath
+.project
+bin
+
+# intellij
+out
+*.idea
+*.iml
