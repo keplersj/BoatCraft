@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatBirchFurnace extends EntityCustomBoat {
 	
-	public BoatBirchFurnace item;
+	private BoatBirchFurnace item;
 	
 	public EntityBoatBirchFurnace(World par1World)
     {
@@ -64,6 +64,6 @@ public class EntityBoatBirchFurnace extends EntityCustomBoat {
 	@Override
     public int customBoatItemID()
     {
-    	return item.shiftedID;
+    	return BoatBirchFurnace.shiftedID;
     }
 }

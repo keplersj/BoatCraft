@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatJungleTNT extends EntityCustomBoat {
 	
-	public BoatJungleTNT item;
+	private BoatJungleTNT item;
 	
 	public EntityBoatJungleTNT(World par1World)
     {
@@ -59,7 +59,7 @@ public class EntityBoatJungleTNT extends EntityCustomBoat {
 	@Override
     public int customBoatItemID()
     {
-    	return item.shiftedID;
+    	return BoatJungleTNT.shiftedID;
     }
 
 }

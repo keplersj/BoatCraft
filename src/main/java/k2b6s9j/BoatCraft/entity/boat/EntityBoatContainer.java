@@ -15,18 +15,12 @@ public abstract class EntityBoatContainer extends EntityCustomBoat implements II
 	
 	private ItemStack[] boatContainerItems = new ItemStack[36];
 
-    /**
-     * When set to true, the boat will drop all items when setDead() is called. When false (such as when travelling
-     * dimensions) it preserves its contents.
-     */
-    private boolean dropContentsWhenDead = true;
-	
-	public EntityBoatContainer(World par1World)
+    protected EntityBoatContainer(World par1World)
     {
         super(par1World);
     }
 
-    public EntityBoatContainer(World par1World, double par2, double par4, double par6)
+    protected EntityBoatContainer(World par1World, double par2, double par4, double par6)
     {
         super(par1World, par2, par4, par6);
     }
@@ -114,7 +108,7 @@ public abstract class EntityBoatContainer extends EntityCustomBoat implements II
      */
     public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
     {
-        return this.isDead ? false : par1EntityPlayer.getDistanceSqToEntity(this) <= 64.0D;
+        return !this.isDead && par1EntityPlayer.getDistanceSqToEntity(this) <= 64.0D;
     }
 
     public void openChest() {}
@@ -151,7 +145,11 @@ public abstract class EntityBoatContainer extends EntityCustomBoat implements II
      */
     public void travelToDimension(int par1)
     {
-        this.dropContentsWhenDead = false;
+        /*
+      When set to true, the boat will drop all items when setDead() is called. When false (such as when travelling
+      dimensions) it preserves its contents.
+     */
+        boolean dropContentsWhenDead = false;
         super.travelToDimension(par1);
     }
     
@@ -212,7 +210,7 @@ public abstract class EntityBoatContainer extends EntityCustomBoat implements II
         return true;
     }
     
-    public void dropContents()
+    void dropContents()
     {
     	for (int i = 0; i < this.getSizeInventory(); ++i)
         {

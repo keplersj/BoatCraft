@@ -7,7 +7,6 @@ public class RenderJungleFurnaceBoat extends RenderJungleWoodBoat {
 	
 	@Override
 	public EntityCustomBoat getEntity() {
-		EntityBoatJungleFurnace entity =  null;
-		return entity;
+        return null;
 	}
 }

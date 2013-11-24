@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatSpruceChest extends EntityBoatContainer {
 
-	public BoatSpruceChest item;
+	private BoatSpruceChest item;
 	
 	public EntityBoatSpruceChest(World par1World)
     {
@@ -75,6 +75,6 @@ public class EntityBoatSpruceChest extends EntityBoatContainer {
 	@Override
     public int customBoatItemID()
     {
-    	return item.shiftedID;
+    	return BoatSpruceChest.shiftedID;
     }
 }

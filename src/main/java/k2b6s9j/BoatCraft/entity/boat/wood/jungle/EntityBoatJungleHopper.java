@@ -19,7 +19,7 @@ import cpw.mods.fml.common.FMLLog;
 public class EntityBoatJungleHopper extends EntityBoatContainer implements Hopper {
 	
 	private int transferTicker = -1;
-	public BoatJungleHopper item;
+	private BoatJungleHopper item;
 	
 	public EntityBoatJungleHopper(World par1World)
     {
@@ -120,7 +120,7 @@ public class EntityBoatJungleHopper extends EntityBoatContainer implements Hoppe
         {
             --this.transferTicker;
 
-            if (!this.canTransfer())
+            if (this.canTransfer())
             {
                 this.setTransferTicker(0);
 
@@ -133,7 +133,7 @@ public class EntityBoatJungleHopper extends EntityBoatContainer implements Hoppe
         }
     }
 
-    public boolean func_96112_aD()
+    boolean func_96112_aD()
     {
         if (TileEntityHopper.suckItemsIntoHopper(this))
         {
@@ -173,7 +173,7 @@ public class EntityBoatJungleHopper extends EntityBoatContainer implements Hoppe
     /**
      * Sets the transfer ticker, used to determine the delay between transfers.
      */
-    public void setTransferTicker(int par1)
+    void setTransferTicker(int par1)
     {
         this.transferTicker = par1;
     }
@@ -181,9 +181,9 @@ public class EntityBoatJungleHopper extends EntityBoatContainer implements Hoppe
     /**
      * Returns whether the hopper cart can currently transfer an item.
      */
-    public boolean canTransfer()
+    boolean canTransfer()
     {
-        return this.transferTicker > 0;
+        return this.transferTicker <= 0;
     }
 
 	@Override
@@ -207,6 +207,6 @@ public class EntityBoatJungleHopper extends EntityBoatContainer implements Hoppe
 	@Override
     public int customBoatItemID()
     {
-    	return item.shiftedID;
+    	return BoatJungleHopper.shiftedID;
     }
 }

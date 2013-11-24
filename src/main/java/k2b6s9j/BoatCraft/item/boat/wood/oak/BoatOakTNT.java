@@ -28,7 +28,6 @@ public class BoatOakTNT extends ItemCustomBoat {
 	
 	@Override
 	public EntityCustomBoat getEntity(World world, int x, int y, int z) {
-		EntityBoatOakTNT entity = new EntityBoatOakTNT(world, (double)((float)x + 0.5F), (double)((float)y + 1.0F), (double)((float)z + 0.5F));
-		return entity;
+        return new EntityBoatOakTNT(world, (double)((float)x + 0.5F), (double)((float)y + 1.0F), (double)((float)z + 0.5F));
 	}
 }

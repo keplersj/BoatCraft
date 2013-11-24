@@ -12,10 +12,11 @@ public class BoatBirch extends ItemCustomBoat {
 
 	public static int ID;
 	public static int shiftedID;
-	
-	public BoatBirch(int id) {
+
+    public BoatBirch(int id) {
 		super(id);
-		setUnlocalizedName("boat.wood.birch.empty");
+        int id1 = id;
+        setUnlocalizedName("boat.wood.birch.empty");
         func_111206_d("boatcraft:boat.wood.birch.empty");
     	GameRegistry.registerItem(this, "Birch Wood Boat");
     	shiftedID = this.itemID;
@@ -26,7 +27,6 @@ public class BoatBirch extends ItemCustomBoat {
 	
 	@Override
 	public EntityCustomBoat getEntity(World world, int x, int y, int z) {
-		EntityBoatBirch entity = new EntityBoatBirch(world, (double)((float)x + 0.5F), (double)((float)y + 1.0F), (double)((float)z + 0.5F));
-		return entity;
+        return new EntityBoatBirch(world, (double)((float)x + 0.5F), (double)((float)y + 1.0F), (double)((float)z + 0.5F));
 	}
 }

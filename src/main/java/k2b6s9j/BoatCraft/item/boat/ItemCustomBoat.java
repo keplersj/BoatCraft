@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 public class ItemCustomBoat extends ItemBoat {
 
-	public ItemCustomBoat(int par1) {
+	protected ItemCustomBoat(int par1) {
 		super(par1);
 	}
 	
@@ -111,8 +111,7 @@ public class ItemCustomBoat extends ItemBoat {
         }
 	}
 	
-	public EntityCustomBoat getEntity(World world, int x, int y, int z) {
-		EntityBoatOak entity = new EntityBoatOak(world, (double)((float)x + 0.5F), (double)((float)y + 1.0F), (double)((float)z + 0.5F));
-		return entity;
+	protected EntityCustomBoat getEntity(World world, int x, int y, int z) {
+        return new EntityBoatOak(world, (double)((float)x + 0.5F), (double)((float)y + 1.0F), (double)((float)z + 0.5F));
 	}
 }
