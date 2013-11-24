@@ -285,10 +285,4 @@ public class BoatCraft {
 		
 	}
 
-	@EventHandler
-	public void PostInit (FMLPostInitializationEvent event)
-	{
-
-	}
-
 }
