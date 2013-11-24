@@ -207,6 +207,6 @@ public class EntityBoatOakHopper extends EntityBoatContainer implements Hopper {
 	@Override
     public int customBoatItemID()
     {
-    	return item.shiftedID;
+    	return BoatOakHopper.shiftedID;
     }
 }

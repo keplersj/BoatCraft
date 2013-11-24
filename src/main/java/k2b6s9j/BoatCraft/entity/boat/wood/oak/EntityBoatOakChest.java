@@ -76,6 +76,6 @@ public class EntityBoatOakChest extends EntityBoatContainer {
 	@Override
     public int customBoatItemID()
     {
-    	return item.shiftedID;
+    	return BoatOakChest.shiftedID;
     }
 }

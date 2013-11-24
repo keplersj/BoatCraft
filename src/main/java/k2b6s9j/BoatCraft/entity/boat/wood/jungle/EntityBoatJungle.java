@@ -34,7 +34,7 @@ public class EntityBoatJungle extends EntityCustomBoat {
 	@Override
     public int customBoatItemID()
     {
-    	return item.shiftedID;
+    	return BoatJungle.shiftedID;
     }
 	
 	@Override

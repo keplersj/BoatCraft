@@ -64,6 +64,6 @@ public class EntityBoatBirchFurnace extends EntityCustomBoat {
 	@Override
     public int customBoatItemID()
     {
-    	return item.shiftedID;
+    	return BoatBirchFurnace.shiftedID;
     }
 }

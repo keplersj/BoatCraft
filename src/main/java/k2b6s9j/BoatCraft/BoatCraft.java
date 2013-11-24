@@ -117,26 +117,26 @@ public class BoatCraft {
         try
         {
         	//Boats
-        	oakBoat.ID = cfg.getItem(itemBoats, "Oak Boat", 25500).getInt(25500);
-        	oakChestBoat.ID = cfg.getItem(itemBoats, "Oak Chest Boat", 25501).getInt(25501);
-        	oakFurnaceBoat.ID = cfg.getItem(itemBoats, "Oak Furnace Boat", 25502).getInt(25502);
-        	oakHopperBoat.ID = cfg.getItem(itemBoats, "Oak Hopper Boat", 25503).getInt(25503);
-        	oakTntBoat.ID = cfg.getItem(itemBoats, "Oak TNT Boat", 25504).getInt(25504);
-        	spruceBoat.ID = cfg.getItem(itemBoats, "Spruce Boat", 25505).getInt(25505);
-        	spruceChestBoat.ID = cfg.getItem(itemBoats, "Spruce Chest Boat", 25506).getInt(25506);
-        	spruceFurnaceBoat.ID = cfg.getItem(itemBoats, "Spruce Furnace Boat", 25507).getInt(25507);
-        	spruceHopperBoat.ID = cfg.getItem(itemBoats, "Spruce Hopper Boat", 25508).getInt(25508);
-        	spruceTNTBoat.ID = cfg.getItem(itemBoats, "Spruce TNT Boat", 25509).getInt(25509);
-        	birchBoat.ID = cfg.getItem(itemBoats, "Birch Boat", 25510).getInt(25510);
-        	birchChestBoat.ID = cfg.getItem(itemBoats, "Birch Chest Boat", 25511).getInt(25511);
-        	birchFurnaceBoat.ID = cfg.getItem(itemBoats, "Birch Furnace Boat", 25512).getInt(25512);
-        	birchHopperBoat.ID = cfg.getItem(itemBoats, "Birch Hopper Boat", 25513).getInt(25513);
-        	birchTNTBoat.ID = cfg.getItem(itemBoats, "Birch TNT Boat", 25514).getInt(25514);
-        	jungleBoat.ID = cfg.getItem(itemBoats, "Jungle Boat", 25515).getInt(25515);
-        	jungleChestBoat.ID = cfg.getItem(itemBoats, "Jungle Chest Boat", 25516).getInt(25516);
-        	jungleFurnaceBoat.ID = cfg.getItem(itemBoats, "Jungle Furnace Boat", 25517).getInt(25517);
-        	jungleHopperBoat.ID = cfg.getItem(itemBoats, "Jungle Hopper Boat", 25518).getInt(25518);
-        	jungleTNTBoat.ID = cfg.getItem(itemBoats, "Jungle TNT Boat", 25519).getInt(25519);
+        	BoatOak.ID = cfg.getItem(itemBoats, "Oak Boat", 25500).getInt(25500);
+        	BoatOakChest.ID = cfg.getItem(itemBoats, "Oak Chest Boat", 25501).getInt(25501);
+        	BoatOakFurnace.ID = cfg.getItem(itemBoats, "Oak Furnace Boat", 25502).getInt(25502);
+        	BoatOakHopper.ID = cfg.getItem(itemBoats, "Oak Hopper Boat", 25503).getInt(25503);
+        	BoatOakTNT.ID = cfg.getItem(itemBoats, "Oak TNT Boat", 25504).getInt(25504);
+        	BoatSpruce.ID = cfg.getItem(itemBoats, "Spruce Boat", 25505).getInt(25505);
+        	BoatSpruceChest.ID = cfg.getItem(itemBoats, "Spruce Chest Boat", 25506).getInt(25506);
+        	BoatSpruceFurnace.ID = cfg.getItem(itemBoats, "Spruce Furnace Boat", 25507).getInt(25507);
+        	BoatSpruceHopper.ID = cfg.getItem(itemBoats, "Spruce Hopper Boat", 25508).getInt(25508);
+        	BoatSpruceTNT.ID = cfg.getItem(itemBoats, "Spruce TNT Boat", 25509).getInt(25509);
+        	BoatBirch.ID = cfg.getItem(itemBoats, "Birch Boat", 25510).getInt(25510);
+        	BoatBirchChest.ID = cfg.getItem(itemBoats, "Birch Chest Boat", 25511).getInt(25511);
+        	BoatBirchFurnace.ID = cfg.getItem(itemBoats, "Birch Furnace Boat", 25512).getInt(25512);
+        	BoatBirchHopper.ID = cfg.getItem(itemBoats, "Birch Hopper Boat", 25513).getInt(25513);
+        	BoatBirchTNT.ID = cfg.getItem(itemBoats, "Birch TNT Boat", 25514).getInt(25514);
+        	BoatJungle.ID = cfg.getItem(itemBoats, "Jungle Boat", 25515).getInt(25515);
+        	BoatJungleChest.ID = cfg.getItem(itemBoats, "Jungle Chest Boat", 25516).getInt(25516);
+        	BoatJungleFurnace.ID = cfg.getItem(itemBoats, "Jungle Furnace Boat", 25517).getInt(25517);
+        	BoatJungleHopper.ID = cfg.getItem(itemBoats, "Jungle Hopper Boat", 25518).getInt(25518);
+        	BoatJungleTNT.ID = cfg.getItem(itemBoats, "Jungle TNT Boat", 25519).getInt(25519);
         	
         	//Modules
         	this.OreDictWoodBoat = cfg.get("Modules", "OreDictWoodBoats", false, "Use the OreDictionary to craft Wooden Boats").getBoolean(false);
@@ -166,26 +166,26 @@ public class BoatCraft {
 		OreDictionary.registerOre("boat", Item.boat);
 		
 		//Boats
-		oakBoat = new BoatOak(oakBoat.ID);
-		oakChestBoat = new BoatOakChest(oakChestBoat.ID);
-		oakFurnaceBoat = new BoatOakFurnace(oakFurnaceBoat.ID);
-		oakHopperBoat = new BoatOakHopper(oakHopperBoat.ID);
-		oakTntBoat = new BoatOakTNT(oakTntBoat.ID);
-		spruceBoat = new BoatSpruce(spruceBoat.ID);
-		spruceChestBoat = new BoatSpruceChest(spruceChestBoat.ID);
-		spruceFurnaceBoat = new BoatSpruceFurnace(spruceFurnaceBoat.ID);
-		spruceHopperBoat = new BoatSpruceHopper(spruceHopperBoat.ID);
-		spruceTNTBoat = new BoatSpruceTNT(spruceTNTBoat.ID);
-		birchBoat = new BoatBirch(birchBoat.ID);
-		birchChestBoat = new BoatBirchChest(birchChestBoat.ID);
-		birchFurnaceBoat = new BoatBirchFurnace(birchFurnaceBoat.ID);
-		birchHopperBoat = new BoatBirchHopper(birchHopperBoat.ID);
-		birchTNTBoat = new BoatBirchTNT(birchTNTBoat.ID);
-		jungleBoat = new BoatJungle(jungleBoat.ID);
-		jungleChestBoat = new BoatJungleChest(jungleChestBoat.ID);
-		jungleFurnaceBoat = new BoatJungleFurnace(jungleFurnaceBoat.ID);
-		jungleHopperBoat = new BoatJungleHopper(jungleHopperBoat.ID);
-		jungleTNTBoat = new BoatJungleTNT(jungleTNTBoat.ID);
+		oakBoat = new BoatOak(BoatOak.ID);
+		oakChestBoat = new BoatOakChest(BoatOakChest.ID);
+		oakFurnaceBoat = new BoatOakFurnace(BoatOakFurnace.ID);
+		oakHopperBoat = new BoatOakHopper(BoatOakHopper.ID);
+		oakTntBoat = new BoatOakTNT(BoatOakTNT.ID);
+		spruceBoat = new BoatSpruce(BoatSpruce.ID);
+		spruceChestBoat = new BoatSpruceChest(BoatSpruceChest.ID);
+		spruceFurnaceBoat = new BoatSpruceFurnace(BoatSpruceFurnace.ID);
+		spruceHopperBoat = new BoatSpruceHopper(BoatSpruceHopper.ID);
+		spruceTNTBoat = new BoatSpruceTNT(BoatSpruceTNT.ID);
+		birchBoat = new BoatBirch(BoatBirch.ID);
+		birchChestBoat = new BoatBirchChest(BoatBirchChest.ID);
+		birchFurnaceBoat = new BoatBirchFurnace(BoatBirchFurnace.ID);
+		birchHopperBoat = new BoatBirchHopper(BoatBirchHopper.ID);
+		birchTNTBoat = new BoatBirchTNT(BoatBirchTNT.ID);
+		jungleBoat = new BoatJungle(BoatJungle.ID);
+		jungleChestBoat = new BoatJungleChest(BoatJungleChest.ID);
+		jungleFurnaceBoat = new BoatJungleFurnace(BoatJungleFurnace.ID);
+		jungleHopperBoat = new BoatJungleHopper(BoatJungleHopper.ID);
+		jungleTNTBoat = new BoatJungleTNT(BoatJungleTNT.ID);
 	}
 	
 	void RegisterRecipes() {

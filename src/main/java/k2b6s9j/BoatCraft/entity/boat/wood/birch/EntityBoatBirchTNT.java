@@ -59,7 +59,7 @@ public class EntityBoatBirchTNT extends EntityCustomBoat {
 	@Override
     public int customBoatItemID()
     {
-    	return item.shiftedID;
+    	return BoatBirchTNT.shiftedID;
     }
 
 }

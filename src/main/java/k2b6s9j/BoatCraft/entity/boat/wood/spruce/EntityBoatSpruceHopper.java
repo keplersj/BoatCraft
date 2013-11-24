@@ -207,6 +207,6 @@ public class EntityBoatSpruceHopper extends EntityBoatContainer implements Hoppe
 	@Override
     public int customBoatItemID()
     {
-    	return item.shiftedID;
+    	return BoatSpruceHopper.shiftedID;
     }
 }

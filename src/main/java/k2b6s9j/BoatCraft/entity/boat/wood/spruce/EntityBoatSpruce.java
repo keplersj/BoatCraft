@@ -34,7 +34,7 @@ public class EntityBoatSpruce extends EntityCustomBoat {
 	@Override
     public int customBoatItemID()
     {
-    	return item.shiftedID;
+    	return BoatSpruce.shiftedID;
     }
 	
 	@Override
