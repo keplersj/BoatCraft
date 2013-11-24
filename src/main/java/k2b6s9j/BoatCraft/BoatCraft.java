@@ -74,32 +74,39 @@ public class BoatCraft {
     public static BoatCraft instance;
 	
 	@SidedProxy(clientSide="k2b6s9j.BoatCraft.proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.proxy.CommonProxy")
-    private static CommonProxy proxy;
-
-    //Boat Items
-    private BoatOak oakBoat;
-	private BoatOakChest oakChestBoat;
-	private BoatOakFurnace oakFurnaceBoat;
-	private BoatOakHopper oakHopperBoat;
-	private BoatOakTNT oakTntBoat;
-	private BoatSpruce spruceBoat;
-	private BoatSpruceChest spruceChestBoat;
-	private BoatSpruceFurnace spruceFurnaceBoat;
-	private BoatSpruceHopper spruceHopperBoat;
-	private BoatSpruceTNT spruceTNTBoat;
-	private BoatBirch birchBoat;
-	private BoatBirchChest birchChestBoat;
-	private BoatBirchFurnace birchFurnaceBoat;
-	private BoatBirchHopper birchHopperBoat;
-	private BoatBirchTNT birchTNTBoat;
-	private BoatJungle jungleBoat;
-	private BoatJungleChest jungleChestBoat;
-	private BoatJungleFurnace jungleFurnaceBoat;
-	private BoatJungleHopper jungleHopperBoat;
-	private BoatJungleTNT jungleTNTBoat;
+	public static CommonProxy proxy;
+	
+	//Mod Info
+	public final String modName = "BoatCraft";
+	public final String modVersion = "2.0";
+	
+	//Config File Strings
+	public final String itemBoats = "Boats in Item Form";
+	
+	//Boat Items
+	public BoatOak oakBoat;
+	public BoatOakChest oakChestBoat;
+	public BoatOakFurnace oakFurnaceBoat;
+	public BoatOakHopper oakHopperBoat;
+	public BoatOakTNT oakTntBoat;
+	public BoatSpruce spruceBoat;
+	public BoatSpruceChest spruceChestBoat;
+	public BoatSpruceFurnace spruceFurnaceBoat;
+	public BoatSpruceHopper spruceHopperBoat;
+	public BoatSpruceTNT spruceTNTBoat;
+	public BoatBirch birchBoat;
+	public BoatBirchChest birchChestBoat;
+	public BoatBirchFurnace birchFurnaceBoat;
+	public BoatBirchHopper birchHopperBoat;
+	public BoatBirchTNT birchTNTBoat;
+	public BoatJungle jungleBoat;
+	public BoatJungleChest jungleChestBoat;
+	public BoatJungleFurnace jungleFurnaceBoat;
+	public BoatJungleHopper jungleHopperBoat;
+	public BoatJungleTNT jungleTNTBoat;
 	
 	
-	private boolean OreDictWoodBoat;
+	public boolean OreDictWoodBoat;
 
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event)
@@ -110,8 +117,7 @@ public class BoatCraft {
         try
         {
         	//Boats
-            String itemBoats = "Boats in Item Form";
-            BoatOak.ID = cfg.getItem(itemBoats, "Oak Boat", 25500).getInt(25500);
+        	BoatOak.ID = cfg.getItem(itemBoats, "Oak Boat", 25500).getInt(25500);
         	BoatOakChest.ID = cfg.getItem(itemBoats, "Oak Chest Boat", 25501).getInt(25501);
         	BoatOakFurnace.ID = cfg.getItem(itemBoats, "Oak Furnace Boat", 25502).getInt(25502);
         	BoatOakHopper.ID = cfg.getItem(itemBoats, "Oak Hopper Boat", 25503).getInt(25503);
@@ -148,43 +154,41 @@ public class BoatCraft {
         RegisterRecipes();
         EntityWork();
         try {
-            String modVersion = "2.0";
-            String modName = "BoatCraft";
-            MetricsLite metrics = new MetricsLite(modName, modVersion);
+            MetricsLite metrics = new MetricsLite(this.modName, this.modVersion);
             metrics.start();
         } catch (IOException e) {
         	FMLLog.log(Level.SEVERE, e, "BoatCraft had a problem submitting data to MCStats");
         }
 	}
 	
-	void InitItems() {
+	public void InitItems() {
 		OreDictionary.registerOre("itemBoat", Item.boat);
 		OreDictionary.registerOre("boat", Item.boat);
 		
 		//Boats
-		oakBoat = new BoatOak(BoatOak.ID);
-		oakChestBoat = new BoatOakChest(BoatOakChest.ID);
-		oakFurnaceBoat = new BoatOakFurnace(BoatOakFurnace.ID);
-		oakHopperBoat = new BoatOakHopper(BoatOakHopper.ID);
-		oakTntBoat = new BoatOakTNT(BoatOakTNT.ID);
-		spruceBoat = new BoatSpruce(BoatSpruce.ID);
-		spruceChestBoat = new BoatSpruceChest(BoatSpruceChest.ID);
-		spruceFurnaceBoat = new BoatSpruceFurnace(BoatSpruceFurnace.ID);
-		spruceHopperBoat = new BoatSpruceHopper(BoatSpruceHopper.ID);
-		spruceTNTBoat = new BoatSpruceTNT(BoatSpruceTNT.ID);
-		birchBoat = new BoatBirch(BoatBirch.ID);
-		birchChestBoat = new BoatBirchChest(BoatBirchChest.ID);
-		birchFurnaceBoat = new BoatBirchFurnace(BoatBirchFurnace.ID);
-		birchHopperBoat = new BoatBirchHopper(BoatBirchHopper.ID);
-		birchTNTBoat = new BoatBirchTNT(BoatBirchTNT.ID);
-		jungleBoat = new BoatJungle(BoatJungle.ID);
-		jungleChestBoat = new BoatJungleChest(BoatJungleChest.ID);
-		jungleFurnaceBoat = new BoatJungleFurnace(BoatJungleFurnace.ID);
-		jungleHopperBoat = new BoatJungleHopper(BoatJungleHopper.ID);
-		jungleTNTBoat = new BoatJungleTNT(BoatJungleTNT.ID);
+		oakBoat = new BoatOak(oakBoat.ID);
+		oakChestBoat = new BoatOakChest(oakChestBoat.ID);
+		oakFurnaceBoat = new BoatOakFurnace(oakFurnaceBoat.ID);
+		oakHopperBoat = new BoatOakHopper(oakHopperBoat.ID);
+		oakTntBoat = new BoatOakTNT(oakTntBoat.ID);
+		spruceBoat = new BoatSpruce(spruceBoat.ID);
+		spruceChestBoat = new BoatSpruceChest(spruceChestBoat.ID);
+		spruceFurnaceBoat = new BoatSpruceFurnace(spruceFurnaceBoat.ID);
+		spruceHopperBoat = new BoatSpruceHopper(spruceHopperBoat.ID);
+		spruceTNTBoat = new BoatSpruceTNT(spruceTNTBoat.ID);
+		birchBoat = new BoatBirch(birchBoat.ID);
+		birchChestBoat = new BoatBirchChest(birchChestBoat.ID);
+		birchFurnaceBoat = new BoatBirchFurnace(birchFurnaceBoat.ID);
+		birchHopperBoat = new BoatBirchHopper(birchHopperBoat.ID);
+		birchTNTBoat = new BoatBirchTNT(birchTNTBoat.ID);
+		jungleBoat = new BoatJungle(jungleBoat.ID);
+		jungleChestBoat = new BoatJungleChest(jungleChestBoat.ID);
+		jungleFurnaceBoat = new BoatJungleFurnace(jungleFurnaceBoat.ID);
+		jungleHopperBoat = new BoatJungleHopper(jungleHopperBoat.ID);
+		jungleTNTBoat = new BoatJungleTNT(jungleTNTBoat.ID);
 	}
 	
-	void RegisterRecipes() {
+	public void RegisterRecipes() {
 		//Boat Recipes
 		if (!OreDictWoodBoat) {
 			CraftingUtilities.RemoveRecipe(new ItemStack(Item.boat));
@@ -219,7 +223,7 @@ public class BoatCraft {
 		}
 	}
 	
-	void EntityWork() {
+	public void EntityWork() {
 		proxy.registerRenderers();
 		EntityRegistry.registerModEntity(EntityBoatOak.class, "Oak Wood Boat", 1, this, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBoatOakChest.class, "Oak Wood Chest Boat", 2, this, 80, 3, true);
@@ -279,6 +283,12 @@ public class BoatCraft {
 			LanguageRegistry.addName(oakTntBoat, "TNT Boat");
 		}
 		
+	}
+
+	@EventHandler
+	public void PostInit (FMLPostInitializationEvent event)
+	{
+
 	}
 
 }
