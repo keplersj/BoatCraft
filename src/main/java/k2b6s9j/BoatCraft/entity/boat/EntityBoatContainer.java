@@ -15,13 +15,7 @@ public abstract class EntityBoatContainer extends EntityCustomBoat implements II
 	
 	private ItemStack[] boatContainerItems = new ItemStack[36];
 
-    /**
-     * When set to true, the boat will drop all items when setDead() is called. When false (such as when travelling
-     * dimensions) it preserves its contents.
-     */
-    private boolean dropContentsWhenDead = true;
-	
-	protected EntityBoatContainer(World par1World)
+    protected EntityBoatContainer(World par1World)
     {
         super(par1World);
     }
@@ -151,7 +145,11 @@ public abstract class EntityBoatContainer extends EntityCustomBoat implements II
      */
     public void travelToDimension(int par1)
     {
-        this.dropContentsWhenDead = false;
+        /*
+      When set to true, the boat will drop all items when setDead() is called. When false (such as when travelling
+      dimensions) it preserves its contents.
+     */
+        boolean dropContentsWhenDead = false;
         super.travelToDimension(par1);
     }
     

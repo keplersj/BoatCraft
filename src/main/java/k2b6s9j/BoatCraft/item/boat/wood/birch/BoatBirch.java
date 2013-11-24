@@ -12,11 +12,10 @@ public class BoatBirch extends ItemCustomBoat {
 
 	public static int ID;
 	public static int shiftedID;
-    private final int id;
 
     public BoatBirch(int id) {
 		super(id);
-        this.id = id;
+        int id1 = id;
         setUnlocalizedName("boat.wood.birch.empty");
         func_111206_d("boatcraft:boat.wood.birch.empty");
     	GameRegistry.registerItem(this, "Birch Wood Boat");

@@ -75,15 +75,8 @@ public class BoatCraft {
 	
 	@SidedProxy(clientSide="k2b6s9j.BoatCraft.proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.proxy.CommonProxy")
     private static CommonProxy proxy;
-	
-	//Mod Info
-	private final String modName = "BoatCraft";
-	private final String modVersion = "2.0";
-	
-	//Config File Strings
-	private final String itemBoats = "Boats in Item Form";
-	
-	//Boat Items
+
+    //Boat Items
     private BoatOak oakBoat;
 	private BoatOakChest oakChestBoat;
 	private BoatOakFurnace oakFurnaceBoat;
@@ -117,7 +110,8 @@ public class BoatCraft {
         try
         {
         	//Boats
-        	BoatOak.ID = cfg.getItem(itemBoats, "Oak Boat", 25500).getInt(25500);
+            String itemBoats = "Boats in Item Form";
+            BoatOak.ID = cfg.getItem(itemBoats, "Oak Boat", 25500).getInt(25500);
         	BoatOakChest.ID = cfg.getItem(itemBoats, "Oak Chest Boat", 25501).getInt(25501);
         	BoatOakFurnace.ID = cfg.getItem(itemBoats, "Oak Furnace Boat", 25502).getInt(25502);
         	BoatOakHopper.ID = cfg.getItem(itemBoats, "Oak Hopper Boat", 25503).getInt(25503);
@@ -154,7 +148,9 @@ public class BoatCraft {
         RegisterRecipes();
         EntityWork();
         try {
-            MetricsLite metrics = new MetricsLite(this.modName, this.modVersion);
+            String modVersion = "2.0";
+            String modName = "BoatCraft";
+            MetricsLite metrics = new MetricsLite(modName, modVersion);
             metrics.start();
         } catch (IOException e) {
         	FMLLog.log(Level.SEVERE, e, "BoatCraft had a problem submitting data to MCStats");
