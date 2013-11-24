@@ -19,8 +19,11 @@ gradle-app.setting
 .classpath
 .project
 bin
+eclipse
 
 # intellij
 out
 *.idea
 *.iml
+*.ipr
+.iws
