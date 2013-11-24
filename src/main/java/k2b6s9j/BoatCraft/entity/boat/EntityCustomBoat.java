@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityCustomBoat extends EntityBoat
 {
-    private boolean field_70279_a;
+    private final boolean field_70279_a;
     private double speedMultiplier;
     private int boatPosRotationIncrements;
     private double boatX;

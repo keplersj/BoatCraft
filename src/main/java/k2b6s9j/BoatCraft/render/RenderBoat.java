@@ -21,7 +21,7 @@ public class RenderBoat extends Render implements IItemRenderer {
 	private static ResourceLocation texture;
 
     /** instance of ModelBoat for rendering */
-    private ModelBase modelBoat;
+    private final ModelBase modelBoat;
     private final RenderBlocks field_94145_f;
 	
 	protected RenderBoat() {
