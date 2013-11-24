@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatBirch extends EntityCustomBoat {
 	
-	public BoatBirch item;
+	private BoatBirch item;
 	
 	public EntityBoatBirch(World par1World)
     {

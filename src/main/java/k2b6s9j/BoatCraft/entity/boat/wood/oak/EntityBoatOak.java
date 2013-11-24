@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatOak extends EntityCustomBoat {
 	
-	public BoatOak item;
+	private BoatOak item;
 	
 	public EntityBoatOak(World par1World)
     {

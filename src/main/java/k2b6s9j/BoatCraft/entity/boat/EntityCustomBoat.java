@@ -36,7 +36,7 @@ public class EntityCustomBoat extends EntityBoat
     @SideOnly(Side.CLIENT)
     private double velocityZ;
 
-    public EntityCustomBoat(World par1World)
+    protected EntityCustomBoat(World par1World)
     {
         super(par1World);
         this.field_70279_a = true;
@@ -46,7 +46,7 @@ public class EntityCustomBoat extends EntityBoat
         this.yOffset = this.height / 2.0F;
     }
 
-    public EntityCustomBoat(World par1World, double par2, double par4, double par6)
+    protected EntityCustomBoat(World par1World, double par2, double par4, double par6)
     {
         this(par1World);
         this.setPosition(par2, par4 + (double)this.yOffset, par6);
@@ -58,7 +58,7 @@ public class EntityCustomBoat extends EntityBoat
         this.prevPosZ = par6;
     }
 
-    public boolean isCustomBoat()
+    protected boolean isCustomBoat()
     {
     	return false;
     }
@@ -78,27 +78,27 @@ public class EntityCustomBoat extends EntityBoat
     	return Item.boat.itemID;
     }
     
-    public ItemStack customPlank()
+    protected ItemStack customPlank()
     {
     	return new ItemStack(Block.planks, 1, 0);
     }
     
-    public ItemStack customStick()
+    ItemStack customStick()
     {
     	return new ItemStack(Item.stick, 1, 0);
     }
     
-    public boolean doesBoatContainBlock()
+    protected boolean doesBoatContainBlock()
     {
     	return false;
     }
     
-    public ItemStack blockInBoat()
+    protected ItemStack blockInBoat()
     {
     	return null;
     }
     
-    public void crashedDrops()
+    void crashedDrops()
     {
         int k;
 
@@ -424,7 +424,7 @@ public class EntityCustomBoat extends EntityBoat
         }
     }
 
-    public Block getDefaultDisplayTile()
+    protected Block getDefaultDisplayTile()
     {
         return null;
     }
@@ -434,7 +434,7 @@ public class EntityCustomBoat extends EntityBoat
         return !this.hasDisplayTile() ? this.getDefaultDisplayTileData() : this.getDataWatcher().getWatchableObjectInt(20) >> 16;
     }
 
-    public int getDefaultDisplayTileData()
+    protected int getDefaultDisplayTileData()
     {
         return 0;
     }
@@ -444,7 +444,7 @@ public class EntityCustomBoat extends EntityBoat
         return !this.hasDisplayTile() ? this.getDefaultDisplayTileOffset() : this.getDataWatcher().getWatchableObjectInt(21);
     }
 
-    public int getDefaultDisplayTileOffset()
+    protected int getDefaultDisplayTileOffset()
     {
         return 6;
     }
@@ -469,12 +469,12 @@ public class EntityCustomBoat extends EntityBoat
         this.setHasDisplayTile(true);
     }
 
-    public boolean hasDisplayTile()
+    boolean hasDisplayTile()
     {
         return false;
     }
 
-    public void setHasDisplayTile(boolean par1)
+    void setHasDisplayTile(boolean par1)
     {
         this.getDataWatcher().updateObject(22, Byte.valueOf((byte)(par1 ? 1 : 0)));
     }

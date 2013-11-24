@@ -74,39 +74,39 @@ public class BoatCraft {
     public static BoatCraft instance;
 	
 	@SidedProxy(clientSide="k2b6s9j.BoatCraft.proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.proxy.CommonProxy")
-	public static CommonProxy proxy;
+    private static CommonProxy proxy;
 	
 	//Mod Info
-	public final String modName = "BoatCraft";
-	public final String modVersion = "2.0";
+	private final String modName = "BoatCraft";
+	private final String modVersion = "2.0";
 	
 	//Config File Strings
-	public final String itemBoats = "Boats in Item Form";
+	private final String itemBoats = "Boats in Item Form";
 	
 	//Boat Items
-	public BoatOak oakBoat;
-	public BoatOakChest oakChestBoat;
-	public BoatOakFurnace oakFurnaceBoat;
-	public BoatOakHopper oakHopperBoat;
-	public BoatOakTNT oakTntBoat;
-	public BoatSpruce spruceBoat;
-	public BoatSpruceChest spruceChestBoat;
-	public BoatSpruceFurnace spruceFurnaceBoat;
-	public BoatSpruceHopper spruceHopperBoat;
-	public BoatSpruceTNT spruceTNTBoat;
-	public BoatBirch birchBoat;
-	public BoatBirchChest birchChestBoat;
-	public BoatBirchFurnace birchFurnaceBoat;
-	public BoatBirchHopper birchHopperBoat;
-	public BoatBirchTNT birchTNTBoat;
-	public BoatJungle jungleBoat;
-	public BoatJungleChest jungleChestBoat;
-	public BoatJungleFurnace jungleFurnaceBoat;
-	public BoatJungleHopper jungleHopperBoat;
-	public BoatJungleTNT jungleTNTBoat;
+    private BoatOak oakBoat;
+	private BoatOakChest oakChestBoat;
+	private BoatOakFurnace oakFurnaceBoat;
+	private BoatOakHopper oakHopperBoat;
+	private BoatOakTNT oakTntBoat;
+	private BoatSpruce spruceBoat;
+	private BoatSpruceChest spruceChestBoat;
+	private BoatSpruceFurnace spruceFurnaceBoat;
+	private BoatSpruceHopper spruceHopperBoat;
+	private BoatSpruceTNT spruceTNTBoat;
+	private BoatBirch birchBoat;
+	private BoatBirchChest birchChestBoat;
+	private BoatBirchFurnace birchFurnaceBoat;
+	private BoatBirchHopper birchHopperBoat;
+	private BoatBirchTNT birchTNTBoat;
+	private BoatJungle jungleBoat;
+	private BoatJungleChest jungleChestBoat;
+	private BoatJungleFurnace jungleFurnaceBoat;
+	private BoatJungleHopper jungleHopperBoat;
+	private BoatJungleTNT jungleTNTBoat;
 	
 	
-	public boolean OreDictWoodBoat;
+	private boolean OreDictWoodBoat;
 
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event)
@@ -161,7 +161,7 @@ public class BoatCraft {
         }
 	}
 	
-	public void InitItems() {
+	void InitItems() {
 		OreDictionary.registerOre("itemBoat", Item.boat);
 		OreDictionary.registerOre("boat", Item.boat);
 		
@@ -188,7 +188,7 @@ public class BoatCraft {
 		jungleTNTBoat = new BoatJungleTNT(jungleTNTBoat.ID);
 	}
 	
-	public void RegisterRecipes() {
+	void RegisterRecipes() {
 		//Boat Recipes
 		if (!OreDictWoodBoat) {
 			CraftingUtilities.RemoveRecipe(new ItemStack(Item.boat));
@@ -223,7 +223,7 @@ public class BoatCraft {
 		}
 	}
 	
-	public void EntityWork() {
+	void EntityWork() {
 		proxy.registerRenderers();
 		EntityRegistry.registerModEntity(EntityBoatOak.class, "Oak Wood Boat", 1, this, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityBoatOakChest.class, "Oak Wood Chest Boat", 2, this, 80, 3, true);

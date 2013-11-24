@@ -21,16 +21,16 @@ public class RenderBoat extends Render implements IItemRenderer {
 	private static ResourceLocation texture;
 
     /** instance of ModelBoat for rendering */
-    protected ModelBase modelBoat;
-    protected final RenderBlocks field_94145_f;
+    private ModelBase modelBoat;
+    private final RenderBlocks field_94145_f;
 	
-	public RenderBoat () {
+	protected RenderBoat() {
 		this.shadowSize = 0.5F;
         this.modelBoat = new ModelBoat();
         this.field_94145_f = new RenderBlocks();
 	}
 	
-	public void renderBoat(EntityCustomBoat boat, double par2, double par4, double par6, float par8, float par9)
+	void renderBoat(EntityCustomBoat boat, double par2, double par4, double par6, float par8, float par9)
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
@@ -77,7 +77,7 @@ public class RenderBoat extends Render implements IItemRenderer {
 	/**
      * Renders the block that is inside the boat.
      */
-    protected void renderBlockInBoat(EntityCustomBoat boat, float par2, Block par3Block, int par4)
+    void renderBlockInBoat(EntityCustomBoat boat, float par2, Block par3Block, int par4)
     {
         float f1 = boat.getBrightness(par2);
         GL11.glPushMatrix();
@@ -85,7 +85,7 @@ public class RenderBoat extends Render implements IItemRenderer {
         GL11.glPopMatrix();
     }
 	
-	protected ResourceLocation func_110781_a(Entity par1Entity)
+	ResourceLocation func_110781_a(Entity par1Entity)
     {
         return getTexture();
     }
@@ -145,11 +145,11 @@ public class RenderBoat extends Render implements IItemRenderer {
 		}
     }
     
-    public ResourceLocation getTexture() {
+    protected ResourceLocation getTexture() {
     	return new ResourceLocation("textures/entity/boat.png");
     }
 	
-	public EntityCustomBoat getEntity() {
+	protected EntityCustomBoat getEntity() {
         return null;
 	}
 }

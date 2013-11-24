@@ -19,7 +19,7 @@ import cpw.mods.fml.common.FMLLog;
 public class EntityBoatBirchHopper extends EntityBoatContainer implements Hopper {
 	
 	private int transferTicker = -1;
-	public BoatBirchHopper item;
+	private BoatBirchHopper item;
 	
 	public EntityBoatBirchHopper(World par1World)
     {
@@ -133,7 +133,7 @@ public class EntityBoatBirchHopper extends EntityBoatContainer implements Hopper
         }
     }
 
-    public boolean func_96112_aD()
+    boolean func_96112_aD()
     {
         if (TileEntityHopper.suckItemsIntoHopper(this))
         {
@@ -173,7 +173,7 @@ public class EntityBoatBirchHopper extends EntityBoatContainer implements Hopper
     /**
      * Sets the transfer ticker, used to determine the delay between transfers.
      */
-    public void setTransferTicker(int par1)
+    void setTransferTicker(int par1)
     {
         this.transferTicker = par1;
     }
@@ -181,7 +181,7 @@ public class EntityBoatBirchHopper extends EntityBoatContainer implements Hopper
     /**
      * Returns whether the hopper cart can currently transfer an item.
      */
-    public boolean canTransfer()
+    boolean canTransfer()
     {
         return this.transferTicker > 0;
     }

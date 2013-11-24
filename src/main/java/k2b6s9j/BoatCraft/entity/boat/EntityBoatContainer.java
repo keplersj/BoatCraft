@@ -21,12 +21,12 @@ public abstract class EntityBoatContainer extends EntityCustomBoat implements II
      */
     private boolean dropContentsWhenDead = true;
 	
-	public EntityBoatContainer(World par1World)
+	protected EntityBoatContainer(World par1World)
     {
         super(par1World);
     }
 
-    public EntityBoatContainer(World par1World, double par2, double par4, double par6)
+    protected EntityBoatContainer(World par1World, double par2, double par4, double par6)
     {
         super(par1World, par2, par4, par6);
     }
@@ -212,7 +212,7 @@ public abstract class EntityBoatContainer extends EntityCustomBoat implements II
         return true;
     }
     
-    public void dropContents()
+    void dropContents()
     {
     	for (int i = 0; i < this.getSizeInventory(); ++i)
         {

@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatSpruceTNT extends EntityCustomBoat {
 	
-	public BoatSpruceTNT item;
+	private BoatSpruceTNT item;
 	
 	public EntityBoatSpruceTNT(World par1World)
     {

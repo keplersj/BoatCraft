@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatSpruce extends EntityCustomBoat {
 	
-	public BoatSpruce item;
+	private BoatSpruce item;
 	
 	public EntityBoatSpruce(World par1World)
     {

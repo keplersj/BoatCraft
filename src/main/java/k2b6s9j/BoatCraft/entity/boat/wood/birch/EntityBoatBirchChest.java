@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatBirchChest extends EntityBoatContainer {
 
-	public BoatBirchChest item;
+	private BoatBirchChest item;
 	
 	public EntityBoatBirchChest(World par1World)
     {

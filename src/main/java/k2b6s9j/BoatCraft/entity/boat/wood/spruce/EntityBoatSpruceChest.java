@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatSpruceChest extends EntityBoatContainer {
 
-	public BoatSpruceChest item;
+	private BoatSpruceChest item;
 	
 	public EntityBoatSpruceChest(World par1World)
     {

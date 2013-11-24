@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 public class EntityBoatSpruceFurnace extends EntityCustomBoat {
 	
-	public BoatSpruceFurnace item;
+	private BoatSpruceFurnace item;
 	
 	public EntityBoatSpruceFurnace(World par1World)
     {
