@@ -112,7 +112,6 @@ public class ItemCustomBoat extends ItemBoat {
 	}
 	
 	public EntityCustomBoat getEntity(World world, int x, int y, int z) {
-		EntityBoatOak entity = new EntityBoatOak(world, (double)((float)x + 0.5F), (double)((float)y + 1.0F), (double)((float)z + 0.5F));
-		return entity;
+        return new EntityBoatOak(world, (double)((float)x + 0.5F), (double)((float)y + 1.0F), (double)((float)z + 0.5F));
 	}
 }

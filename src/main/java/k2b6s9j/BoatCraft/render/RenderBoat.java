@@ -150,7 +150,6 @@ public class RenderBoat extends Render implements IItemRenderer {
     }
 	
 	public EntityCustomBoat getEntity() {
-		EntityCustomBoat entity =  null;
-		return entity;
+        return null;
 	}
 }

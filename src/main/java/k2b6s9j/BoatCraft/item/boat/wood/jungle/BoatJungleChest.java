@@ -28,7 +28,6 @@ public class BoatJungleChest extends ItemCustomBoat {
 	
 	@Override
 	public EntityCustomBoat getEntity(World world, int x, int y, int z) {
-		EntityBoatJungleChest entity = new EntityBoatJungleChest(world, (double)((float)x + 0.5F), (double)((float)y + 1.0F), (double)((float)z + 0.5F));
-		return entity;
+        return new EntityBoatJungleChest(world, (double)((float)x + 0.5F), (double)((float)y + 1.0F), (double)((float)z + 0.5F));
 	}
 }

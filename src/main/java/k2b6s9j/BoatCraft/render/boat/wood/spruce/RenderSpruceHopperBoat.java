@@ -7,7 +7,6 @@ public class RenderSpruceHopperBoat extends RenderSpruceWoodBoat {
 	
 	@Override
 	public EntityCustomBoat getEntity() {
-		EntityBoatSpruceHopper entity =  null;
-		return entity;
+        return null;
 	}
 }

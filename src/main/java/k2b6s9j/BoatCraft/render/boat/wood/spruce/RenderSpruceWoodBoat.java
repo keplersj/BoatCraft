@@ -14,7 +14,6 @@ public class RenderSpruceWoodBoat extends RenderBoat {
 	
 	@Override
 	public EntityCustomBoat getEntity() {
-		EntityBoatSpruce entity =  null;
-		return entity;
+        return null;
 	}
 }
