@@ -120,7 +120,7 @@ public class EntityBoatBirchHopper extends EntityBoatContainer implements Hopper
         {
             --this.transferTicker;
 
-            if (!this.canTransfer())
+            if (this.canTransfer())
             {
                 this.setTransferTicker(0);
 
@@ -183,7 +183,7 @@ public class EntityBoatBirchHopper extends EntityBoatContainer implements Hopper
      */
     boolean canTransfer()
     {
-        return this.transferTicker > 0;
+        return this.transferTicker <= 0;
     }
 
 	@Override

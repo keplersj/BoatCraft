@@ -2,7 +2,6 @@ package k2b6s9j.BoatCraft.entity.boat;
 
 import java.util.List;
 
-import k2b6s9j.BoatCraft.item.boat.wood.oak.BoatOak;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -11,9 +10,7 @@ import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -413,7 +410,7 @@ public class EntityCustomBoat extends EntityBoat
     
     public Block getDisplayTile()
     {
-        if (!this.hasDisplayTile())
+        if (this.hasDisplayTile())
         {
             return this.getDefaultDisplayTile();
         }
@@ -431,7 +428,7 @@ public class EntityCustomBoat extends EntityBoat
 
     public int getDisplayTileData()
     {
-        return !this.hasDisplayTile() ? this.getDefaultDisplayTileData() : this.getDataWatcher().getWatchableObjectInt(20) >> 16;
+        return this.hasDisplayTile() ? this.getDefaultDisplayTileData() : this.getDataWatcher().getWatchableObjectInt(20) >> 16;
     }
 
     protected int getDefaultDisplayTileData()
@@ -441,7 +438,7 @@ public class EntityCustomBoat extends EntityBoat
 
     public int getDisplayTileOffset()
     {
-        return !this.hasDisplayTile() ? this.getDefaultDisplayTileOffset() : this.getDataWatcher().getWatchableObjectInt(21);
+        return this.hasDisplayTile() ? this.getDefaultDisplayTileOffset() : this.getDataWatcher().getWatchableObjectInt(21);
     }
 
     protected int getDefaultDisplayTileOffset()
@@ -471,7 +468,7 @@ public class EntityCustomBoat extends EntityBoat
 
     boolean hasDisplayTile()
     {
-        return false;
+        return true;
     }
 
     void setHasDisplayTile(boolean par1)
