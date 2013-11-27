@@ -1,7 +1,7 @@
 package k2b6s9j.BoatCraft.compatibility.forestry.item.boat.wood.teak;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.forestry.wood.teak.EntityBoatTeak;
+import k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.wood.teak.EntityBoatTeak;
 import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;
 import k2b6s9j.BoatCraft.item.boat.ItemCustomBoat;
 import net.minecraft.item.ItemStack;
