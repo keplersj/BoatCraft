@@ -45,6 +45,7 @@ import k2b6s9j.BoatCraft.item.boat.wood.spruce.BoatSpruceHopper;
 import k2b6s9j.BoatCraft.item.boat.wood.spruce.BoatSpruceTNT;
 import k2b6s9j.BoatCraft.proxy.CommonProxy;
 import k2b6s9j.BoatCraft.utilities.CraftingUtilities;
+import k2b6s9j.BoatCraft.utilities.log.ModLogger;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -111,8 +112,8 @@ public class BoatCraft {
 	@EventHandler
 	public void PreInit (FMLPreInitializationEvent event)
 	{
-		FMLLog.log(Level.INFO, "BoatCraft");
-		FMLLog.log(Level.INFO, "Copyright Kepler Sticka-Jones 2013");
+        ModLogger.info("BoatCraft");
+        ModLogger.info("Copyright Kepler Sticka-Jones 2013");
 		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
         try
         {
@@ -143,7 +144,7 @@ public class BoatCraft {
         }
         catch (Exception e)
         {
-            FMLLog.log(Level.SEVERE, e, "BoatCraft had a problem loading it's configuration");
+            ModLogger.severe("Failed to load configuration file.");
         }
         finally
         {
@@ -156,8 +157,8 @@ public class BoatCraft {
         try {
             MetricsLite metrics = new MetricsLite(this.modName, this.modVersion);
             metrics.start();
-        } catch (IOException e) {
-        	FMLLog.log(Level.SEVERE, e, "BoatCraft had a problem submitting data to MCStats");
+        } catch (Exception e) {
+        	ModLogger.severe("Failed to Submit Stats to MCStats");
         }
 	}
 	
