@@ -10,8 +10,6 @@
 build
 gradle-app.setting
 
-# GMCP plugin
-/minecraft
 
 # eclipse
 .settings
@@ -26,4 +24,4 @@ out
 *.idea
 *.iml
 *.ipr
-.iws
+*.iws
