@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft.compatibility.forestry.render.boat.forestry.wood.mahogany;
+package k2b6s9j.BoatCraft.compatibility.forestry.render.boat.wood.mahogany;
 
 import k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.forestry.wood.mahogany.EntityBoatMahogany;
 import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;

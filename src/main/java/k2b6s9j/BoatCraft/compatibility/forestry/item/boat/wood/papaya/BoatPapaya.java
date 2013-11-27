@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft.compatibility.forestry.item.boat.forestry.wood.papaya;
+package k2b6s9j.BoatCraft.compatibility.forestry.item.boat.wood.papaya;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.forestry.wood.papaya.EntityBoatPapaya;

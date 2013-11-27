@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.forestry.wood.willow;
+package k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.wood.willow;
 
 import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;
 import k2b6s9j.BoatCraft.item.boat.forestry.wood.willow.BoatWillow;

@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft.compatibility.forestry.render.boat.forestry.wood.sequoia;
+package k2b6s9j.BoatCraft.compatibility.forestry.render.boat.wood.sequoia;
 
 import k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.forestry.wood.sequoia.EntityBoatSequoia;
 import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;

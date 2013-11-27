@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.forestry.wood.chestnut;
+package k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.wood.chestnut;
 
 import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;
 import k2b6s9j.BoatCraft.item.boat.forestry.wood.chestnut.BoatChestnut;

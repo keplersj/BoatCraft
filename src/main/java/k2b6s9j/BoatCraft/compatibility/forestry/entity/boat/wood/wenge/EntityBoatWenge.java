@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.forestry.wood.wenge;
+package k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.wood.wenge;
 
 import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;
 import k2b6s9j.BoatCraft.item.boat.forestry.wood.wenge.BoatWenge;

@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft.compatibility.forestry.render.boat.forestry.wood.greenheart;
+package k2b6s9j.BoatCraft.compatibility.forestry.render.boat.wood.greenheart;
 
 import k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.forestry.wood.greenheart.EntityBoatGreenheart;
 import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;

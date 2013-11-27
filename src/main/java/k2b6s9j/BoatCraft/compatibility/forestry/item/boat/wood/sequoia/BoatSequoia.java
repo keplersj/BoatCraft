@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft.compatibility.forestry.item.boat.forestry.wood.sequoia;
+package k2b6s9j.BoatCraft.compatibility.forestry.item.boat.wood.sequoia;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.forestry.wood.sequoia.EntityBoatSequoia;

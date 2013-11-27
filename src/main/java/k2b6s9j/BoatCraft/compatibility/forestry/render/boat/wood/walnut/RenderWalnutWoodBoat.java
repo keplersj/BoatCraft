@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft.compatibility.forestry.render.boat.forestry.wood.walnut;
+package k2b6s9j.BoatCraft.compatibility.forestry.render.boat.wood.walnut;
 
 import k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.forestry.wood.walnut.EntityBoatWalnut;
 import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;

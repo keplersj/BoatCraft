@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft.compatibility.forestry.render.boat.forestry.wood.mahoe;
+package k2b6s9j.BoatCraft.compatibility.forestry.render.boat.wood.mahoe;
 
 import k2b6s9j.BoatCraft.compatibility.forestry.entity.boat.forestry.wood.mahoe.EntityBoatMahoe;
 import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;
