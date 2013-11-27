@@ -1,8 +1,5 @@
 package k2b6s9j.BoatCraft;
 
-import java.io.IOException;
-import java.util.logging.Level;
-
 import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBoatBirch;
 import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBoatBirchChest;
 import k2b6s9j.BoatCraft.entity.boat.wood.birch.EntityBoatBirchFurnace;
@@ -67,7 +64,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", dependencies="after:Forestry;")
+@Mod(modid = BoatCraft.name, name = BoatCraft.name, version = BoatCraft.version, dependencies="after:Forestry;")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
 
 public class BoatCraft {
@@ -76,10 +73,10 @@ public class BoatCraft {
 	
 	@SidedProxy(clientSide="k2b6s9j.BoatCraft.proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.proxy.CommonProxy")
 	public static CommonProxy proxy;
-	
-	//Mod Info
-	public final String modName = "BoatCraft";
-	public final String modVersion = "2.0";
+
+    //General Mod Information
+    public static final String version = "2.0";
+    public static final String name = "BoatCraft";
 	
 	//Config File Strings
 	public final String itemBoats = "Boats in Item Form";
@@ -155,7 +152,7 @@ public class BoatCraft {
         RegisterRecipes();
         EntityWork();
         try {
-            MetricsLite metrics = new MetricsLite(this.modName, this.modVersion);
+            MetricsLite metrics = new MetricsLite(name, version);
             metrics.start();
         } catch (Exception e) {
         	ModLogger.severe("Failed to Submit Stats to MCStats");
