@@ -1,12 +1,12 @@
 package k2b6s9j.BoatCraft.item.boat.wood.oak;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import k2b6s9j.BoatCraft.entity.boat.EntityCustomBoat;
 import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOakHopper;
 import k2b6s9j.BoatCraft.item.boat.ItemCustomBoat;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BoatOakHopper extends ItemCustomBoat {
 	
