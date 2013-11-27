@@ -1,7 +1,6 @@
 package k2b6s9j.BoatCraft.entity.boat;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

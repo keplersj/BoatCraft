@@ -1,8 +1,6 @@
 package k2b6s9j.BoatCraft.entity.boat.wood.jungle;
 
-import java.util.List;
-import java.util.logging.Level;
-
+import cpw.mods.fml.common.FMLLog;
 import k2b6s9j.BoatCraft.entity.boat.EntityBoatContainer;
 import k2b6s9j.BoatCraft.item.boat.wood.jungle.BoatJungleHopper;
 import net.minecraft.block.Block;
@@ -14,7 +12,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.Hopper;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLLog;
+
+import java.util.List;
+import java.util.logging.Level;
 
 public class EntityBoatJungleHopper extends EntityBoatContainer implements Hopper {
 	
