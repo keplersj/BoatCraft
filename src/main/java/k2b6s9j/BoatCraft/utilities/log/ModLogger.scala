@@ -21,10 +21,10 @@ object ModLogger {
     }
 
     def getLogger() {
-        return log
+        log
     }
 
-    def static {
+    def static() {
         log.setParent(FMLLog.getLogger)
     }
 }
