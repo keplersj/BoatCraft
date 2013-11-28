@@ -10,16 +10,16 @@ import k2b6s9j.BoatCraft.registry._
 import k2b6s9j.BoatCraft.utilities.log.ModLogger
 import cpw.mods.fml.common.{SidedProxy, Mod}
 import cpw.mods.fml.common.network.NetworkMod
-import k2b6s9j.BoatCraft.proxy.CommonProxy
+import k2b6s9j.BoatCraft.Proxy.CommonProxy
 
-@Mod(modid = BoatCraft.name, name = BoatCraft.name, version = BoatCraft.version, dependencies="after:Forestry;")
+@Mod(modid = BoatCraft.name, name = BoatCraft.name, version = BoatCraft.version, modLanguage = "scala",dependencies="after:Forestry;")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
 class BoatCraft
 {
 	  @Instance("BoatCraft")
     val instance:this.type
 
-	  @SidedProxy(clientSide="k2b6s9j.BoatCraft.proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.proxy.CommonProxy")
+	  @SidedProxy(clientSide="k2b6s9j.BoatCraft.Proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.Proxy.CommonProxy")
 	  def proxy:CommonProxy
 
     //General Mod Information
