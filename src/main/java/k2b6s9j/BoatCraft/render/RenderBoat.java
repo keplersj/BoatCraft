@@ -103,6 +103,11 @@ public class RenderBoat extends Render implements IItemRenderer {
     }
 
     @Override
+    protected ResourceLocation getEntityTexture(Entity entity) {
+        return null;
+    }
+
+    @Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		switch (type) {
 			case EQUIPPED_FIRST_PERSON:
