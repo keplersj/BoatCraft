@@ -8,9 +8,12 @@ import net.minecraft.entity.{EntityLivingBase, Entity}
 import java.lang
 import net.minecraft.block.Block
 import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOak
-import net.minecraft.entity.item.EntityBoat
+import net.minecraft.entity.item.{EntityItem, EntityBoat}
 import cpw.mods.fml.relauncher.{SideOnly, Side}
 import net.minecraft.block.material.Material
+import net.minecraft.inventory.IInventory
+import java.lang.String
+import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 
 object Boat {
   class ItemCustomBoat extends ItemBoat {
@@ -497,7 +500,7 @@ object Boat {
       }
       else
       {
-        val i: Int = this.getDataWatcher().getWatchableObjectInt(20) & 65535
+        val i: Int = this.getDataWatcher.getWatchableObjectInt(20) & 65535
         return i > 0 && i < Block.blocksList.length ? Block.blocksList[i] : null
       }
     }
@@ -556,6 +559,266 @@ object Boat {
     {
       this.getDataWatcher.updateObject(22, Byte.valueOf(byte(par1 ? 1 : 0)))
     }
+  }
+  abstract class EntityBoatContainer extends EntityCustomBoat with IInventory {
+    def this(par1World: World) {
+      this()
+      `super`(par1World)
+    }
+
+    def this(par1World: World, par2: Double, par4: Double, par6: Double) {
+      this()
+      `super`(par1World, par2, par4, par6)
+    }
+
+    /**
+     * Returns the stack in slot i
+     */
+    def getStackInSlot(par1: Int): ItemStack = {
+      this.boatContainerItems(par1)
+    }
+
+    /**
+     * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
+     * new stack.
+     */
+    def decrStackSize(par1: Int, par2: Int): ItemStack = {
+      if (this.boatContainerItems(par1) != null) {
+        var itemstack: ItemStack = null
+        if (this.boatContainerItems(par1).stackSize <= par2) {
+          itemstack = this.boatContainerItems(par1)
+          this.boatContainerItems(par1) = null
+          itemstack
+        }
+        else {
+          itemstack = this.boatContainerItems(par1).splitStack(par2)
+          if (this.boatContainerItems(par1).stackSize == 0) {
+            this.boatContainerItems(par1) = null
+          }
+          itemstack
+        }
+      }
+      else {
+        null
+      }
+    }
+
+    /**
+     * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
+     * like when you close a workbench GUI.
+     */
+    def getStackInSlotOnClosing(par1: Int): ItemStack = {
+      if (this.boatContainerItems(par1) != null) {
+        val itemstack: ItemStack = this.boatContainerItems(par1)
+        this.boatContainerItems(par1) = null
+        itemstack
+      }
+      else {
+        null
+      }
+    }
+
+    /**
+     * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
+     */
+    def setInventorySlotContents(par1: Int, par2ItemStack: ItemStack) {
+      this.boatContainerItems(par1) = par2ItemStack
+      if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit) {
+        par2ItemStack.stackSize = this.getInventoryStackLimit
+      }
+    }
+
+    /**
+     * Called when an the contents of an Inventory change, usually
+     */
+    def onInventoryChanged() {
+    }
+
+    /**
+     * Do not make give this method the name canInteractWith because it clashes with Container
+     */
+    def isUseableByPlayer(par1EntityPlayer: EntityPlayer): Boolean = {
+      if (this.isDead) false else par1EntityPlayer.getDistanceSqToEntity(this) <= 64.0D
+    }
+
+    def openChest() {
+    }
+
+    def closeChest() {
+    }
+
+    /**
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+     */
+    def isItemValidForSlot(par1: Int, par2ItemStack: ItemStack): Boolean = {
+      true
+    }
+
+    /**
+     * Returns the name of the inventory.
+     */
+    def getInvName: String = {
+      "container.boat"
+    }
+
+    /**
+     * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended. *Isn't
+     * this more of a set than a get?*
+     */
+    def getInventoryStackLimit: Int = {
+      64
+    }
+
+    /**
+     * Teleports the entity to another dimension. Params: Dimension number to teleport to
+     */
+    def travelToDimension(par1: Int) {
+      this.dropContentsWhenDead = false
+      super.travelToDimension(par1)
+    }
+
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    protected def writeEntityToNBT(par1NBTTagCompound: NBTTagCompound) {
+      super.writeEntityToNBT(par1NBTTagCompound)
+      val nbttaglist: NBTTagList = new NBTTagList
+      {
+        var i: Int = 0
+        while (i < this.boatContainerItems.length) {
+          {
+            if (this.boatContainerItems(i) != null) {
+              val nbttagcompound1: NBTTagCompound = new NBTTagCompound
+              nbttagcompound1.setByte("Slot", i.asInstanceOf[Byte])
+              this.boatContainerItems(i).writeToNBT(nbttagcompound1)
+              nbttaglist.appendTag(nbttagcompound1)
+            }
+          }
+          {
+            i += 1
+            i
+          }
+        }
+      }
+      par1NBTTagCompound.setTag("Items", nbttaglist)
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    protected def readEntityFromNBT(par1NBTTagCompound: NBTTagCompound) {
+      super.readEntityFromNBT(par1NBTTagCompound)
+      val nbttaglist: NBTTagList = par1NBTTagCompound.getTagList("Items")
+      this.boatContainerItems = new Array[ItemStack](this.getSizeInventory)
+      {
+        var i: Int = 0
+        while (i < nbttaglist.tagCount) {
+          {
+            val nbttagcompound1: NBTTagCompound = nbttaglist.tagAt(i).asInstanceOf[NBTTagCompound]
+            val j: Int = nbttagcompound1.getByte("Slot") & 255
+            if (j >= 0 && j < this.boatContainerItems.length) {
+              this.boatContainerItems(j) = ItemStack.loadItemStackFromNBT(nbttagcompound1)
+            }
+          }
+          {
+            i += 1
+            i
+          }
+        }
+      }
+    }
+
+    def func_130002_c(player: EntityPlayer): Boolean = {
+      if (player.isSneaking) {
+        return false
+      }
+      if (!this.worldObj.isRemote) {
+        player.displayGUIChest(this)
+      }
+      true
+    }
+
+    def dropContents() {
+      {
+        var i: Int = 0
+        while (i < this.getSizeInventory) {
+          {
+            val itemstack: ItemStack = this.getStackInSlot(i)
+            if (itemstack != null) {
+              val f: Float = this.rand.nextFloat * 0.8F + 0.1F
+              val f1: Float = this.rand.nextFloat * 0.8F + 0.1F
+              val f2: Float = this.rand.nextFloat * 0.8F + 0.1F
+              while (itemstack.stackSize > 0) {
+                var j: Int = this.rand.nextInt(21) + 10
+                if (j > itemstack.stackSize) {
+                  j = itemstack.stackSize
+                }
+                itemstack.stackSize -= j
+                val entityitem: EntityItem = new EntityItem(this.worldObj, this.posX + f.asInstanceOf[Double], this.posY + f1.asInstanceOf[Double], this.posZ + f2.asInstanceOf[Double], new ItemStack(itemstack.itemID, j, itemstack.getItemDamage))
+                val f3: Float = 0.05F
+                entityitem.motionX = (this.rand.nextGaussian.asInstanceOf[Float] * f3).asInstanceOf[Double]
+                entityitem.motionY = (this.rand.nextGaussian.asInstanceOf[Float] * f3 + 0.2F).asInstanceOf[Double]
+                entityitem.motionZ = (this.rand.nextGaussian.asInstanceOf[Float] * f3).asInstanceOf[Double]
+                this.worldObj.spawnEntityInWorld(entityitem)
+              }
+            }
+          }
+          {
+            i += 1
+            i
+          }
+        }
+      }
+    }
+
+    def crashedDrops() {
+      dropContents()
+      var k: Int = 0
+      {
+        k = 0
+        while (k < 3) {
+          {
+            if (isCustomBoat()) {
+              this.entityDropItem(customPlank(), 0.0F)
+            }
+            else {
+              this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F)
+            }
+          }
+          {
+            k += 1
+            k
+          }
+        }
+      }
+      {
+        k = 0
+        while (k < 2) {
+          {
+            if (isCustomBoat()) {
+              this.entityDropItem(customStick(), 0.0F)
+            }
+            else {
+              this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F)
+            }
+          }
+          {
+            k += 1
+            k
+          }
+        }
+      }
+      if (doesBoatContainBlock()) {
+        this.entityDropItem(blockInBoat(), 0.0F)
+      }
+    }
+
+    private var boatContainerItems: Array[ItemStack] = new Array[ItemStack](36)
+    /**
+     * When set to true, the boat will drop all items when setDead() is called. When false (such as when travelling
+     * dimensions) it preserves its contents.
+     */
+    private var dropContentsWhenDead: Boolean = true
   }
 
 }
