@@ -46,7 +46,7 @@ class RecipeRegistration {
         CraftingManager.getInstance().getRecipeList.add(new ShapelessOreRecipe(item, parts))
     }
 
-    def RegisterRecipies() {
+    def RegisterRecipes() {
         //Boat Recipes
         if (!ConfigRegistry.OreDictWoodBoat) {
             RemoveRecipe(new ItemStack(Item.boat))
