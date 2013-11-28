@@ -5,12 +5,11 @@ import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 
-import k2b6s9j.BoatCraft.registry._
-;
 import k2b6s9j.BoatCraft.utilities.log.ModLogger
 import cpw.mods.fml.common.{SidedProxy, Mod}
 import cpw.mods.fml.common.network.NetworkMod
 import k2b6s9j.BoatCraft.Proxy.CommonProxy
+import k2b6s9j.BoatCraft.registry._
 
 @Mod(modid = BoatCraft.name, name = BoatCraft.name, version = BoatCraft.version, modLanguage = "scala",dependencies="after:Forestry;")
 @NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)

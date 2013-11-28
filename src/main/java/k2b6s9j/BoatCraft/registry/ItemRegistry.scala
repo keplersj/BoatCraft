@@ -7,7 +7,7 @@ import k2b6s9j.BoatCraft.item.boat.wood.spruce._
 import net.minecraft.item.Item
 import net.minecraftforge.oredict.OreDictionary
 
-class ItemRegistry {
+object ItemRegistry {
 
      def InitItems() {
         //OreDictionary Registration

@@ -6,13 +6,13 @@ import k2b6s9j.BoatCraft.entity.boat.wood.jungle._
 import k2b6s9j.BoatCraft.entity.boat.wood.oak._
 import k2b6s9j.BoatCraft.entity.boat.wood.spruce._
 
-class EntityRegistry {
+object EntityRegistry {
 
-    def mod:BoatCraft
+    val mod:BoatCraft = mod
 
-    public static void RegisterEntities() {
-        int.id = 1
-        cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityBoatOak, "Oak Wood Boat", id, mod, 80, 3, true)
+    def RegisterEntities() {
+      int.id = 1
+      cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityBoatOak, "Oak Wood Boat", id, mod, 80, 3, true)
       cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityBoatOakChest, "Oak Wood Chest Boat", id++, mod, 80, 3, true)
       cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityBoatOakFurnace, "Oak Wood Furnace Boat", id++, mod, 80, 3, true)
       cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(EntityBoatOakHopper, "Oak Wood Hopper Boat", id++, mod, 80, 3, true)

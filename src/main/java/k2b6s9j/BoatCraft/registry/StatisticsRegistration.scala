@@ -4,10 +4,9 @@ import org.mcstats.MetricsLite
 import k2b6s9j.BoatCraft.BoatCraft
 import k2b6s9j.BoatCraft.utilities.log.ModLogger
 
-class StatisticsRegistration {
+object StatisticsRegistration {
 
-  def mod:BoatCraft
-  def log:ModLogger.type
+  def mod:BoatCraft = mod
 
     def RegisterMCStats() {
       try
@@ -15,7 +14,7 @@ class StatisticsRegistration {
         metrics.start()
       catch
         {
-          case e:Exception => log.severe("Unable to Submit Statistics")
+          case e:Exception => ModLogger.severe("Unable to Submit Statistics")
           case e:Exception => e.printStackTrace()
         }
 

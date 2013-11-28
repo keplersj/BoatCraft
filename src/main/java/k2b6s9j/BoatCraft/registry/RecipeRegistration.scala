@@ -16,7 +16,7 @@ import k2b6s9j.BoatCraft.item.boat.wood.birch._
 import k2b6s9j.BoatCraft.item.boat.wood.jungle._
 import java.util
 
-class RecipeRegistration {
+object RecipeRegistration {
 
     def RemoveRecipe(resultItem:ItemStack)
     {
