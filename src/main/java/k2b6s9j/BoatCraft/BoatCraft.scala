@@ -17,14 +17,14 @@ import k2b6s9j.BoatCraft.proxy.CommonProxy
 class BoatCraft
 {
 	  @Instance("BoatCraft")
-    def instance:this.type
+    val instance:this.type
 
 	  @SidedProxy(clientSide="k2b6s9j.BoatCraft.proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.proxy.CommonProxy")
 	  def proxy:CommonProxy
 
     //General Mod Information
-    def version = "2.0"
-    def name = "BoatCraft"
+    val version: String = "2.0"
+    val name: String = "BoatCraft"
 
     @EventHandler
 	  def PreInit (event:FMLPreInitializationEvent)

@@ -1,30 +1,30 @@
-package k2b6s9j.BoatCraft.utilities.log;
+package k2b6s9j.BoatCraft.utilities.log
 
-import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.FMLLog
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.Level
+import java.util.logging.Logger
 
-public class ModLogger {
-    private static Logger log = Logger.getLogger("BoatCraft");
+object ModLogger {
+    def log: Logger = Logger.getLogger("BoatCraft")
 
-    public static void info(String msg) {
-        log.log(Level.INFO, msg);
+  def info(msg:String) {
+        log.log(Level.INFO, msg)
+  }
+
+    def warning(msg:String) {
+        log.log(Level.WARNING, msg)
     }
 
-    public static void warning(String msg) {
-        log.log(Level.WARNING, msg);
+    def severe(msg:String) {
+        log.log(Level.SEVERE, msg)
     }
 
-    public static void severe(String msg) {
-        log.log(Level.SEVERE, msg);
+    def getLogger() {
+        return log
     }
 
-    public static Logger getLogger() {
-        return log;
-    }
-
-    static {
-        log.setParent(FMLLog.getLogger());
+    def static {
+        log.setParent(FMLLog.getLogger)
     }
 }

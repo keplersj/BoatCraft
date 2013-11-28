@@ -8,7 +8,7 @@ import k2b6s9j.BoatCraft.entity.boat.wood.spruce.*;
 
 public class EntityRegistry {
 
-    static BoatCraft mod;
+    private static BoatCraft mod;
 
     public static void RegisterEntities() {
         int id = 1;
