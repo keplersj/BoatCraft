@@ -1,46 +1,48 @@
-package k2b6s9j.BoatCraft.registry;
+package k2b6s9j.BoatCraft.registry
 
-import k2b6s9j.BoatCraft.item.boat.wood.birch.*;
-import k2b6s9j.BoatCraft.item.boat.wood.jungle.*;
-import k2b6s9j.BoatCraft.item.boat.wood.oak.*;
-import k2b6s9j.BoatCraft.item.boat.wood.spruce.*;
-import net.minecraft.item.Item;
+import k2b6s9j.BoatCraft.item.boat.wood.birch._
+import k2b6s9j.BoatCraft.item.boat.wood.jungle._
+import k2b6s9j.BoatCraft.item.boat.wood.oak._
+import k2b6s9j.BoatCraft.item.boat.wood.spruce._
+import net.minecraft.item.Item
 
-public class LanguageRegistry {
+class LanguageRegistry {
 
-    public static void RegisterName() {
+  def FMLLanguageRegistry:cpw.mods.fml.common.registry.LanguageRegistry
 
-        cpw.mods.fml.common.registry.LanguageRegistry.addName(Item.boat, "Vanilla Boat");
+    def RegisterName() {
+
+        FMLLanguageRegistry.addName(Item.boat, "Vanilla Boat")
 
         //Boats
         if (!ConfigRegistry.OreDictWoodBoat) {
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatOak.class, "Oak Wood Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatOakChest.class, "Oak Wood Chest Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatOakFurnace.class, "Oak Wood Furnace Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatOakHopper.class, "Oak Wood Hopper Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatOakTNT.class, "Oak Wood TNT Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatSpruce.class, "Spruce Wood Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatSpruceChest.class, "Spruce Wood Chest Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatSpruceFurnace.class, "Spruce Wood Furnace Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatSpruceHopper.class, "Spruce Wood Hopper Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatSpruceTNT.class, "Spruce Wood TNT Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatBirch.class, "Birch Wood Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatBirchChest.class, "Birch Wood Chest Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatBirchFurnace.class, "Birch Wood Furnace Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatBirchHopper.class, "Birch Wood Hopper Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatBirchTNT.class, "Birch Wood TNT Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatJungle.class, "Jungle Wood Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatJungleChest.class, "Jungle Wood Chest Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatJungleFurnace.class, "Jungle Wood Furnace Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatJungleHopper.class, "Jungle Wood Hopper Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatJungleTNT.class, "Jungle Wood TNT Boat");
+          FMLLanguageRegistry.addName(BoatOak, "Oak Wood Boat")
+          FMLLanguageRegistry.addName(BoatOakChest, "Oak Wood Chest Boat")
+          FMLLanguageRegistry.addName(BoatOakFurnace, "Oak Wood Furnace Boat")
+          FMLLanguageRegistry.addName(BoatOakHopper, "Oak Wood Hopper Boat")
+          FMLLanguageRegistry.addName(BoatOakTNT, "Oak Wood TNT Boat")
+          FMLLanguageRegistry.addName(BoatSpruce, "Spruce Wood Boat")
+          FMLLanguageRegistry.addName(BoatSpruceChest, "Spruce Wood Chest Boat")
+          FMLLanguageRegistry.addName(BoatSpruceFurnace, "Spruce Wood Furnace Boat")
+          FMLLanguageRegistry.addName(BoatSpruceHopper, "Spruce Wood Hopper Boat")
+          FMLLanguageRegistry.addName(BoatSpruceTNT, "Spruce Wood TNT Boat")
+          FMLLanguageRegistry.addName(BoatBirch, "Birch Wood Boat")
+          FMLLanguageRegistry.addName(BoatBirchChest, "Birch Wood Chest Boat")
+          FMLLanguageRegistry.addName(BoatBirchFurnace, "Birch Wood Furnace Boat")
+          FMLLanguageRegistry.addName(BoatBirchHopper, "Birch Wood Hopper Boat")
+          FMLLanguageRegistry.addName(BoatBirchTNT, "Birch Wood TNT Boat")
+          FMLLanguageRegistry.addName(BoatJungle, "Jungle Wood Boat")
+          FMLLanguageRegistry.addName(BoatJungleChest, "Jungle Wood Chest Boat")
+          FMLLanguageRegistry.addName(BoatJungleFurnace, "Jungle Wood Furnace Boat")
+          FMLLanguageRegistry.addName(BoatJungleHopper, "Jungle Wood Hopper Boat")
+          FMLLanguageRegistry.addName(BoatJungleTNT, "Jungle Wood TNT Boat")
         }
         if (ConfigRegistry.OreDictWoodBoat) {
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatOak.class, "Wooden Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatOakChest.class, "Chest Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatOakFurnace.class, "Furnace Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatOakHopper.class, "Hopper Boat");
-            cpw.mods.fml.common.registry.LanguageRegistry.addName(BoatOakTNT.class, "TNT Boat");
+          FMLLanguageRegistry.addName(BoatOak, "Wooden Boat")
+          FMLLanguageRegistry.addName(BoatOakChest, "Chest Boat")
+          FMLLanguageRegistry.addName(BoatOakFurnace, "Furnace Boat")
+          FMLLanguageRegistry.addName(BoatOakHopper, "Hopper Boat")
+          FMLLanguageRegistry.addName(BoatOakTNT, "TNT Boat")
         }
     }
 }
