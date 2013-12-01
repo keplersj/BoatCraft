@@ -13,6 +13,8 @@ import net.minecraft.block.material.Material
 import net.minecraft.inventory.IInventory
 import java.lang.String
 import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
+import net.minecraftforge.client.IItemRenderer
+import net.minecraft.client.renderer.entity.Render
 
 object Boat {
   trait ItemCustomBoat extends ItemBoat {
@@ -818,6 +820,10 @@ object Boat {
      * dimensions) it preserves its contents.
      */
     private var dropContentsWhenDead: Boolean = true
+  }
+
+  trait RenderBoat extends Render with IItemRenderer {
+
   }
 
 }
