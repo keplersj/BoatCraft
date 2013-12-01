@@ -10,7 +10,12 @@ object Chest {
 
   }
 
-  class Render {
+  class Render extends RenderBoat {
+
+    override def getEntity(): EntityCustomBoat = {
+      entity: Entity =  null
+      return entity
+    }
 
   }
 
