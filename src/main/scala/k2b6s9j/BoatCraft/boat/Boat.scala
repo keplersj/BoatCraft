@@ -7,7 +7,6 @@ import net.minecraft.util._
 import net.minecraft.entity.{EntityLivingBase, Entity}
 import java.lang
 import net.minecraft.block.Block
-import k2b6s9j.BoatCraft.entity.boat.wood.oak.EntityBoatOak
 import net.minecraft.entity.item.{EntityItem, EntityBoat}
 import cpw.mods.fml.relauncher.{SideOnly, Side}
 import net.minecraft.block.material.Material

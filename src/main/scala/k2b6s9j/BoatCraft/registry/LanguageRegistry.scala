@@ -1,9 +1,5 @@
 package k2b6s9j.BoatCraft.registry
 
-import k2b6s9j.BoatCraft.item.boat.wood.birch._
-import k2b6s9j.BoatCraft.item.boat.wood.jungle._
-import k2b6s9j.BoatCraft.item.boat.wood.oak._
-import k2b6s9j.BoatCraft.item.boat.wood.spruce._
 import net.minecraft.item.Item
 
 object LanguageRegistry {

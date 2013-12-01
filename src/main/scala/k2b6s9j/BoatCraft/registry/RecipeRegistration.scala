@@ -10,10 +10,6 @@ import net.minecraft.item.crafting.IRecipe
 import net.minecraftforge.oredict.ShapedOreRecipe
 import net.minecraftforge.oredict.ShapelessOreRecipe
 
-import k2b6s9j.BoatCraft.item.boat.wood.oak._
-import k2b6s9j.BoatCraft.item.boat.wood.spruce._
-import k2b6s9j.BoatCraft.item.boat.wood.birch._
-import k2b6s9j.BoatCraft.item.boat.wood.jungle._
 import java.util
 
 object RecipeRegistration {

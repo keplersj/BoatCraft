@@ -4,10 +4,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent
 
 import k2b6s9j.BoatCraft.utilities.log.ModLogger
 import net.minecraftforge.common.Configuration
-import k2b6s9j.BoatCraft.item.boat.wood.oak._
-import k2b6s9j.BoatCraft.item.boat.wood.spruce._
-import k2b6s9j.BoatCraft.item.boat.wood.birch._
-import k2b6s9j.BoatCraft.item.boat.wood.jungle._
 
 object ConfigRegistry {
 

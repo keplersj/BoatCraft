@@ -1,19 +1,7 @@
 package k2b6s9j.BoatCraft
 
-import k2b6s9j.BoatCraft.render.boat.wood.oak._
-import k2b6s9j.BoatCraft.render.boat.wood.spruce._
-import k2b6s9j.BoatCraft.render.boat.wood.birch._
-import k2b6s9j.BoatCraft.render.boat.wood.jungle._
 import cpw.mods.fml.client.registry.RenderingRegistry
-import k2b6s9j.BoatCraft.entity.boat.wood.oak._
-import k2b6s9j.BoatCraft.entity.boat.wood.spruce._
-import k2b6s9j.BoatCraft.entity.boat.wood.birch._
-import k2b6s9j.BoatCraft.entity.boat.wood.jungle._
 import net.minecraftforge.client.MinecraftForgeClient
-import k2b6s9j.BoatCraft.item.boat.wood.oak._
-import k2b6s9j.BoatCraft.item.boat.wood.spruce._
-import k2b6s9j.BoatCraft.item.boat.wood.birch._
-import k2b6s9j.BoatCraft.item.boat.wood.jungle._
 
 object Proxy {
   class CommonProxy {

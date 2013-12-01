@@ -1,10 +1,6 @@
 package k2b6s9j.BoatCraft.registry
 
 import k2b6s9j.BoatCraft.BoatCraft
-import k2b6s9j.BoatCraft.entity.boat.wood.birch._
-import k2b6s9j.BoatCraft.entity.boat.wood.jungle._
-import k2b6s9j.BoatCraft.entity.boat.wood.oak._
-import k2b6s9j.BoatCraft.entity.boat.wood.spruce._
 
 object EntityRegistry {
 
