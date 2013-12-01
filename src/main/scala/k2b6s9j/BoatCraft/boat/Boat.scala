@@ -500,7 +500,7 @@ object Boat {
       else
       {
         val i: Int = this.getDataWatcher.getWatchableObjectInt(20) & 65535
-        return i > 0 && i < Block.blocksList.length ? Block.blocksList[i] : null
+        return i > 0 && i < Block.blocksList.length ? Block.blocksList[i]
       }
     }
 
