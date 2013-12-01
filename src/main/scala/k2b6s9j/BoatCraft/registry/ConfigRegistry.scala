@@ -14,7 +14,7 @@ object ConfigRegistry {
 
     def CreateConfig (event:FMLPreInitializationEvent) {
       Configuration.cfg = new Configuration(event.getSuggestedConfigurationFile())
-      try
+      try {
         //Boats
         BoatOak.ID = cfg.getItem(itemBoats, "Oak Boat", 25500).getInt(25500)
         BoatOakChest.ID = cfg.getItem(itemBoats, "Oak Chest Boat", 25501).getInt(25501)
@@ -39,7 +39,7 @@ object ConfigRegistry {
 
         //Modules
         OreDictWoodBoat = cfg.get("Modules", "OreDictWoodBoats", false, "Use the OreDictionary to craft Wooden Boats").getBoolean(false)
-
+      }
       catch {
         case e: Exception => ModLogger.severe("Failed to load configuration file.")
         case e: Exception => e.printStackTrace()

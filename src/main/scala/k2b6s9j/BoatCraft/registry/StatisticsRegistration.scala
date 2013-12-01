@@ -9,15 +9,14 @@ object StatisticsRegistration {
   def mod:BoatCraft = mod
 
     def RegisterMCStats() {
-      try
+      try {
         MetricsLite.metrics = new MetricsLite(mod.name, mod.version)
         metrics.start()
+      }
       catch
         {
           case e:Exception => ModLogger.severe("Unable to Submit Statistics")
           case e:Exception => e.printStackTrace()
         }
-
-
     }
 }
