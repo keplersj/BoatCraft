@@ -2,19 +2,19 @@ package k2b6s9j.BoatCraft.boat
 
 object Modifiers {
 
-  class Chest {
+  trait Chest {
 
   }
 
-  class Furnace {
+  trait Furnace {
 
   }
 
-  class TNT {
+  trait TNT {
 
   }
 
-  class Hopper {
+  trait Hopper {
 
   }
 
