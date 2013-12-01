@@ -15,6 +15,12 @@ import java.lang.String
 import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import net.minecraftforge.client.IItemRenderer
 import net.minecraft.client.renderer.entity.Render
+import net.minecraft.client.model.ModelBoat
+import net.minecraft.client.renderer.RenderBlocks
+import net.minecraftforge.client.IItemRenderer.{ItemRendererHelper, ItemRenderType}
+import org.lwjgl.opengl.GL11
+import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.texture.TextureMap
 
 object Boat {
   trait ItemCustomBoat extends ItemBoat {
@@ -823,6 +829,134 @@ object Boat {
   }
 
   trait RenderBoat extends Render with IItemRenderer {
+
+    var texture: ResourceLocation
+
+    /** instance of ModelBoat for rendering */
+    var model: ModelBoat
+
+    /** instanse of RenderBlocks for rendering the blocks */
+    var blocks: RenderBlocks
+
+    def RenderBoat() {
+      this.shadowSize = 0.5F
+      this.model = new ModelBoat
+      this.blocks = new RenderBlocks
+    }
+
+    override def handleRenderType(item: ItemStack, kind: ItemRenderType): Boolean = {
+      kind match {
+        case ENTITY => false
+        case EQUIPPED => false
+        case EQUIPPED_FIRST_PERSON => false
+        case INVENTORY => false
+        case FIRST_PERSON_MAP => false
+        case default => false
+      }
+    }
+
+    def renderBoat(boat: EntityCustomBoat, par2: Double, par4: Double, par6: Double, par8: Float, par9: Float) {
+      GL11.glPushMatrix()
+      GL11.glTranslatef(par2: Float, par4: Float, par6: Float)
+      GL11.glRotatef(180.0F - par8, 0.0F, 1.0F, 0.0F)
+      val f2: Float = boat.getTimeSinceHit - par9
+      val f3: Float = boat.getDamageTaken - par9
+
+      if (f3 < 0.0F)
+      {
+        val f3 = 0.0F
+      }
+
+      if (f2 > 0.0F)
+      {
+        GL11.glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * boat.getForwardDirection, 1.0F, 0.0F, 0.0F)
+      }
+
+      val j: Int = boat.getDisplayTileOffset()
+      val block: Block = boat.getDisplayTile()
+      val k: Int = boat.getDisplayTileData()
+
+      if (block != null)
+      {
+        GL11.glPushMatrix()
+        this.func_110776_a(TextureMap.field_110575_b)
+        val f8: Float = 0.75F
+        GL11.glScalef(f8, f8, f8)
+        GL11.glTranslatef(0.0F, j / 16.0F, 0.0F)
+        this.renderBlockInBoat(boat, par9, block, k)
+        GL11.glPopMatrix()
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
+        this.func_110777_b(boat)
+      }
+
+      val f4: Float = 0.75F
+      GL11.glScalef(f4, f4, f4)
+      GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4)
+      this.func_110777_b(boat)
+      GL11.glScalef(-1.0F, -1.0F, 1.0F)
+      this.modelBoat.render(boat, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)
+      GL11.glPopMatrix()
+    }
+
+    /**
+     * Renders the block that is inside the boat.
+     */
+    def renderBlockInBoat(boat: EntityCustomBoat, par2: Float, block: Block, par4: Int) {
+      val fl: Float = boat.getBrightness(par2)
+      GL11.glPushMatrix()
+      this.field_94145_f.renderBlockAsItem(par3Block, par4, f1)
+      GL11.glPopMatrix()
+    }
+
+    def func_110781_a(entity: Entity): ResourceLocation = {
+      getTexture()
+    }
+
+    override def func_110775_a(entity: Entity): ResourceLocation = {
+      this.func_110781_a((Entity)entity)
+    }
+
+    override def doRender(entity: Entity, d0: Double, d1: Double, d2: Double, f: Float, f1: Float) {
+      this.renderBoat((EntityCustomBoat)entity, d0, d1, d2, f, f1)
+    }
+
+    override def getEntityTexture(entity: Entity): ResourceLocation = {
+      null
+    }
+
+    override def shouldUseRenderHelper(kind: ItemRenderType, item: ItemStack, helper: ItemRendererHelper): Boolean = {
+      false
+    }
+
+    override def renderItem(kind: ItemRenderType, item: ItemStack, var3: Object*) {
+      kind match {
+        case default => {
+          GL11.glPushMatrix()
+          Minecraft.getMinecraft.renderEngine.func_110577_a(func_110781_a(getEntity()))
+
+          val defaultScale: Float = 1F
+          GL11.glScalef(defaultScale, defaultScale, defaultScale)
+          GL11.glRotatef(90, -1, 0, 0)
+          GL11.glRotatef(90, 0, 0, 1)
+          GL11.glRotatef(180, 0, 1, 0)
+          GL11.glRotatef(90, 1, 0, 0)
+          GL11.glTranslatef(-0.1F, -0.5F, 0F) // Left-Right
+          // Forward-Backwards Up-Down
+          model.render(getEntity(), 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.05F)
+
+          GL11.glPopMatrix()
+        }
+      }
+    }
+
+    def getTexture(): ResourceLocation = {
+      new ResourceLocation("textures/entity/boat.png")
+    }
+
+    def getEntity(): EntityCustomBoat = {
+      val entity = null
+      entity
+    }
 
   }
 
