@@ -8,11 +8,11 @@ object Materials {
 
   object Wood {
 
-    trait Oak extends Wood{
+    trait Oak extends Wood {
 
     }
 
-    trait Spruce extends Wood{
+    trait Spruce extends Wood {
 
     }
 
@@ -20,7 +20,7 @@ object Materials {
 
     }
 
-    trait Jungle extends Wood{
+    trait Jungle extends Wood {
 
     }
 
