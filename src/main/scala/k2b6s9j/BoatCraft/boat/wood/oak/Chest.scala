@@ -2,11 +2,11 @@ package k2b6s9j.BoatCraft.boat.wood.oak
 
 object Chest {
 
-  class Entity {
+  class Entity extends EntityBoatContainer {
 
   }
 
-  class Item {
+  class Item extends ItemCustomBoat {
 
   }
 
