@@ -5,8 +5,23 @@
 *.war
 *.ear
 
+# gradle
+.gradle
+build
+gradle-app.setting
 
-# Build Script Artifacts #
-build/
-dist/
-download/
+
+# eclipse
+.settings
+.metadata
+.classpath
+.project
+bin
+eclipse
+
+# intellij
+out
+*.idea
+*.iml
+*.ipr
+*.iws
