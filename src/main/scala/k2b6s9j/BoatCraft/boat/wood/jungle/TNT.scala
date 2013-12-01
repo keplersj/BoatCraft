@@ -13,7 +13,7 @@ object TNT {
   class Render extends RenderBoat {
 
     override def getEntity(): EntityCustomBoat = {
-      entity: Entity =  null
+      val entity: Entity =  null
       return entity
     }
 
