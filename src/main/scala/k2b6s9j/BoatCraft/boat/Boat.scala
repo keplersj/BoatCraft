@@ -556,7 +556,7 @@ object Boat {
 
     def setHasDisplayTile(par1: Boolean)
     {
-      this.getDataWatcher.updateObject(22, Byte.valueOf(byte(par1 ? 1 : 0)))
+      this.getDataWatcher.updateObject(22, Byte.==(par1))
     }
   }
   abstract class EntityBoatContainer extends EntityCustomBoat with IInventory {
