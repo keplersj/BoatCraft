@@ -15,7 +15,7 @@ import java.lang.String
 import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 
 object Boat {
-  class ItemCustomBoat extends ItemBoat {
+  trait ItemCustomBoat extends ItemBoat {
 
     def ItemCustomBoat( par1: Int) {
       super.par1
@@ -113,8 +113,7 @@ object Boat {
     }
   }
 
-  class EntityCustomBoat extends EntityBoat
-  {
+  trait EntityCustomBoat extends EntityBoat {
     def field_70279_a: Boolean
     def speedMultiplier: Double
     def boatPosRotationIncrements: Int
@@ -559,7 +558,8 @@ object Boat {
       this.getDataWatcher.updateObject(22, Byte.==(par1))
     }
   }
-  abstract class EntityBoatContainer extends EntityCustomBoat with IInventory {
+
+  trait EntityBoatContainer extends EntityCustomBoat with IInventory {
     def this(par1World: World) {
       this()
       `super`(par1World)
