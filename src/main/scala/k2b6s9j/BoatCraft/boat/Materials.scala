@@ -2,25 +2,49 @@ package k2b6s9j.BoatCraft.boat
 
 object Materials {
 
-  trait Wood {
+  object Entity {
+
+    object Wood {
+
+      trait Oak {
+
+      }
+
+      trait Spruce {
+
+      }
+
+      trait Birch {
+
+      }
+
+      trait Jungle {
+
+      }
+
+    }
 
   }
 
-  object Wood {
+  object Render {
 
-    trait Oak extends Wood {
+    object Wood {
 
-    }
+      trait Oak {
 
-    trait Spruce extends Wood {
+      }
 
-    }
+      trait Spruce {
 
-    trait Birch extends Wood {
+      }
 
-    }
+      trait Birch {
 
-    trait Jungle extends Wood {
+      }
+
+      trait Jungle {
+
+      }
 
     }
 
