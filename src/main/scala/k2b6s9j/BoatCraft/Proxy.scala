@@ -17,29 +17,29 @@ object Proxy {
     def registerRenderers() {
       //Wood Boat Renders
       ///Oak Wood Based Boats
-      RenderingRegistry.registerEntityRenderingHandler(new oak.Empty.Entity, new oak.Empty.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new oak.Chest.Entity, new oak.Chest.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new oak.Furnace.Entity, new oak.Furnace.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new oak.TNT.Entity, new oak.TNT.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new oak.Hopper.Entity, new oak.Hopper.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new oak.Empty.Entity.type, new oak.Empty.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new oak.Chest.Entity.type, new oak.Chest.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new oak.Furnace.Entity.type , new oak.Furnace.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new oak.TNT.Entity.type, new oak.TNT.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new oak.Hopper.Entity.type , new oak.Hopper.Render())
       ///Spruce Wood Based Boats
-      RenderingRegistry.registerEntityRenderingHandler(new spruce.Empty.Entity, new spruce.Empty.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new spruce.Chest.Entity, new spruce.Chest.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new spruce.Furnace.Entity, new spruce.Furnace.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new spruce.TNT.Entity, new spruce.TNT.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new spruce.Hopper.Entity, new spruce.Hopper.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new spruce.Empty.Entity.type , new spruce.Empty.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new spruce.Chest.Entity.type , new spruce.Chest.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new spruce.Furnace.Entity.type , new spruce.Furnace.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new spruce.TNT.Entity.type , new spruce.TNT.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new spruce.Hopper.Entity.type , new spruce.Hopper.Render())
       ///Birch Wood Based Boats
-      RenderingRegistry.registerEntityRenderingHandler(new birch.Empty.Entity, new birch.Empty.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new birch.Chest.Entity, new birch.Chest.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new birch.Furnace.Entity, new birch.Furnace.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new birch.TNT.Entity, new birch.TNT.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new birch.Hopper.Entity, new birch.Hopper.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new birch.Empty.Entity.type , new birch.Empty.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new birch.Chest.Entity.type , new birch.Chest.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new birch.Furnace.Entity.type , new birch.Furnace.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new birch.TNT.Entity.type , new birch.TNT.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new birch.Hopper.Entity.type , new birch.Hopper.Render())
       ///Jungle Wood Based Boats
-      RenderingRegistry.registerEntityRenderingHandler(new jungle.Empty.Entity, new jungle.Empty.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new jungle.Chest.Entity, new jungle.Chest.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new jungle.Furnace.Entity, new jungle.Furnace.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new jungle.TNT.Entity, new jungle.TNT.Render())
-      RenderingRegistry.registerEntityRenderingHandler(new jungle.Hopper.Entity, new jungle.Hopper.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new jungle.Empty.Entity.type , new jungle.Empty.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new jungle.Chest.Entity.type , new jungle.Chest.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new jungle.Furnace.Entity.type , new jungle.Furnace.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new jungle.TNT.Entity.type , new jungle.TNT.Render())
+      RenderingRegistry.registerEntityRenderingHandler(new jungle.Hopper.Entity.type , new jungle.Hopper.Render())
 
       //Wood Boat Item Renders
       ///Oak Wood Based Boat Items
