@@ -182,7 +182,7 @@ object Modifiers {
         }
         else
         {
-          var list: List = this.worldObj.selectEntitiesWithinAABB(EntityItem.class, this.boundingBox.expand(0.25D, 0.0D, 0.25D), IEntitySelector.selectAnything);
+          var list: List = this.worldObj.selectEntitiesWithinAABB(EntityItem, this.boundingBox.expand(0.25D, 0.0D, 0.25D), IEntitySelector.selectAnything);
 
           if (list.size() > 0)
           {
