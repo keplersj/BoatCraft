@@ -23,7 +23,8 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.texture.TextureMap
 
 object Boat {
-  trait ItemCustomBoat extends ItemBoat {
+
+  class ItemCustomBoat extends ItemBoat {
 
     def ItemCustomBoat( par1: Int) {
       super.par1
@@ -121,7 +122,7 @@ object Boat {
     }
   }
 
-  trait EntityCustomBoat extends EntityBoat {
+  class EntityCustomBoat extends EntityBoat {
     def field_70279_a: Boolean
     def speedMultiplier: Double
     def boatPosRotationIncrements: Int
@@ -567,7 +568,7 @@ object Boat {
     }
   }
 
-  trait EntityBoatContainer extends EntityCustomBoat with IInventory {
+  class EntityBoatContainer extends EntityCustomBoat with IInventory {
     def this(par1World: World) {
       this()
       `super`(par1World)
@@ -828,7 +829,7 @@ object Boat {
     private var dropContentsWhenDead: Boolean = true
   }
 
-  trait RenderBoat extends Render with IItemRenderer {
+  class RenderBoat extends Render with IItemRenderer {
 
     var texture: ResourceLocation
 

@@ -1,5 +1,7 @@
 package k2b6s9j.BoatCraft.boat.wood.spruce
 
+import k2b6s9j.BoatCraft.boat.Boat.{ItemCustomBoat, RenderBoat, EntityCustomBoat}
+
 object Furnace {
 
   class Entity extends EntityCustomBoat {

@@ -1,6 +1,6 @@
 package k2b6s9j.BoatCraft.boat.wood.birch
 
-import k2b6s9j.boat.Boat
+import k2b6s9j.BoatCraft.boat.Boat.{ItemCustomBoat, RenderBoat, EntityCustomBoat}
 
 object Empty {
 
