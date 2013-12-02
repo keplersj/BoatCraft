@@ -186,7 +186,7 @@ object Modifiers {
 
           if (list.size() > 0)
           {
-            TileEntityHopper.func_96114_a(this, (EntityItem)list.get(0))
+            TileEntityHopper.func_96114_a(this, list.get(0))
           }
 
           false
