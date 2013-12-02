@@ -32,7 +32,7 @@ object Boat {
       val f1: Float = par3EntityPlayer.prevRotationPitch + (par3EntityPlayer.rotationPitch - par3EntityPlayer.prevRotationPitch) * f
       val f2: Float = par3EntityPlayer.prevRotationYaw + (par3EntityPlayer.rotationYaw - par3EntityPlayer.prevRotationYaw) * f
       val d0: Double = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * f.toDouble
-      val d1: Double = (par3EntityPlayer.prevPosY + (par3EntityPlayer.posY - par3EntityPlayer.prevPosY) * double f +1.62D - double).par3EntityPlayer.yOffset
+      val d1: Double = (par3EntityPlayer.prevPosY + (par3EntityPlayer.posY - par3EntityPlayer.prevPosY) * f.toDouble +1.62D - par3EntityPlayer.yOffset.toDouble)
       val d2: Double = par3EntityPlayer.prevPosZ + (par3EntityPlayer.posZ - par3EntityPlayer.prevPosZ) * f.toDouble
       val vec3: Vec3 = par2World.getWorldVec3Pool.getVecFromPool(d0, d1, d2)
       val f3: Float = MathHelper.cos(-f2 * 0.017453292F - lang.Math.PI.toFloat)
@@ -54,10 +54,10 @@ object Boat {
         val vec32: Vec3 = par3EntityPlayer.getLook(f)
         var flag: Boolean = false
         val f9: Float = 1.0F
-        val list: List = par2World.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.boundingBox.addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3).expand(f9.toDouble, f9.toDouble, f9.toDouble))
-        var i: Int = null
+        val list = par2World.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.boundingBox.addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3).expand(f9.toDouble, f9.toDouble, f9.toDouble))
+        val i: Int = 0
 
-        for (i < list.size() <- ++.i)
+        for (i < list.size() <- i.to(list.size()))
         {
           val entity: Entity = Entity.list.get(i)
 
@@ -81,17 +81,17 @@ object Boat {
         {
           if (movingobjectposition.typeOfHit == EnumMovingObjectType.TILE)
           {
-            i = movingobjectposition.blockX
+            val i: Int = movingobjectposition.blockX
             val j: Int = movingobjectposition.blockY
             val k: Int = movingobjectposition.blockZ
 
             if (par2World.getBlockId(i, j, k) == Block.snow.blockID)
             {
-              --.j
+              j - 1
             }
 
             val entityboat: EntityCustomBoat = getEntity(par2World, i, j, k)
-            entityboat.rotationYaw = float(((MathHelper.floor_double(double(par3EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90)
+            entityboat.rotationYaw = (((MathHelper.floor_double((par3EntityPlayer.rotationYaw * 4.0F / 360.0F).toDouble + 0.5D) & 3) - 1) * 90).toFloat
 
             if (!par2World.getCollidingBoundingBoxes(entityboat, entityboat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty) par1ItemStack
 
@@ -102,22 +102,27 @@ object Boat {
 
             if (!par3EntityPlayer.capabilities.isCreativeMode)
             {
-              --.par1ItemStack.stackSize
+              par1ItemStack.stackSize - 1
             }
           }
-
           par1ItemStack
         }
       }
     }
 
     def getEntity(world: World, x: Int, y: Int, z: Int): EntityCustomBoat = {
-      val entity: EntityCustomBoat = new EntityCustomBoat(world, double(float x + 0.5F), double(float y + 1.0F), double(float z + 0.5F))
+      val entity: EntityCustomBoat = new EntityCustomBoat(world, (x.toFloat + 0.5F).toDouble, (y.toFloat + 1.0F).toDouble, (z.toFloat + 0.5F).toDouble)
       entity
     }
   }
 
-  class EntityCustomBoat extends EntityBoat {
+  class EntityCustomBoat(par1World: World) extends EntityCustomBoat(par1World, par2, par4, par6) {
+    par2 = 0.0D
+    par4 = 0.0D
+    par6 = 0.0D
+  }
+
+  class EntityCustomBoat(par1World: World, par2: Double, par4: Double, par6: Double) extends EntityBoat(par1World, par2, par4, par6) {
     def field_70279_a: Boolean
     def speedMultiplier: Double
     def boatPosRotationIncrements: Int
@@ -133,27 +138,14 @@ object Boat {
     @SideOnly(Side.CLIENT)
     def velocityZ: Double
 
-    def EntityCustomBoat(par1World: World)
-    {
-      super.par1World
-      this.field_70279_a = true
-      this.speedMultiplier = 0.07D
-      this.preventEntitySpawning = true
-      this.setSize(1.5F, 0.6F)
-      this.yOffset = this.height / 2.0F
-    }
-
-    def EntityCustomBoat(par1World: World, par2: Double, par4: Double, par6: Double)
-    {
-      this(par1World)
-      this.setPosition(par2, par4 + this.yOffset, par6)
-      this.motionX = 0.0D
-      this.motionY = 0.0D
-      this.motionZ = 0.0D
-      this.prevPosX = par2
-      this.prevPosY = par4
-      this.prevPosZ = par6
-    }
+    this(par1World)
+    this.setPosition(par2, par4 + this.yOffset, par6)
+    this.motionX = 0.0D
+    this.motionY = 0.0D
+    this.motionZ = 0.0D
+    this.prevPosX = par2
+    this.prevPosY = par4
+    this.prevPosZ = par6
 
     def isCustomBoat: Boolean = {
       false
@@ -189,11 +181,9 @@ object Boat {
 
     def crashedDrops()
     {
-      val k: Int = null
-
       for (k <- k.to(3))
       {
-        if (isCustomBoat())
+        if (isCustomBoat)
         {
           this.entityDropItem(customPlank(), 0.0F)
         }
@@ -205,7 +195,7 @@ object Boat {
 
       for ( k <- k.to(2))
       {
-        if (isCustomBoat())
+        if (isCustomBoat)
         {
           this.entityDropItem(customStick(), 0.0F)
         }
@@ -241,13 +231,13 @@ object Boat {
       this.prevPosX = this.posX
       this.prevPosY = this.posY
       this.prevPosZ = this.posZ
-      byte.b0 = 5
-      double.d0 = 0.0D
+      val b0: Byte = 5
+      val d0: Double = 0.0D
 
       for ( i < b0 <- ++.i)
       {
-        double.d1 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * double(i + 0) / double b0 - 0.125D
-        double.d2 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * double(i + 1) / double b0 - 0.125D
+        val d1: Double = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (i + 0).toDouble / b0 - 0.125D
+        val d2: Double = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (i + 1).toDouble / b0 - 0.125D
         AxisAlignedBB.axisalignedbb = AxisAlignedBB.getAABBPool.getAABB(this.boundingBox.minX, d1, this.boundingBox.minZ, this.boundingBox.maxX, d2, this.boundingBox.maxZ)
 
         if (this.worldObj.isAABBInMaterial(axisalignedbb, Material.water))
