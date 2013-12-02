@@ -74,6 +74,14 @@ object Modifiers {
 
     trait TNT extends EntityCustomBoat with Block {
 
+      override def blockInBoat(): ItemStack = {
+        new ItemStack(Block.tnt, 1, 0)
+      }
+
+      override def getDefaultDisplayTile(): net.minecraft.block.Block = {
+        Block.tnt
+      }
+
     }
 
     trait Hopper extends EntityBoatContainer with Block with net.minecraft.tileentity.Hopper {
