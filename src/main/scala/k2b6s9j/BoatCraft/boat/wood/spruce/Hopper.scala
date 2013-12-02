@@ -24,19 +24,15 @@ object Hopper {
 
   }
 
-  class Item extends ItemCustomBoat {
+  class Item(id: Int) extends ItemCustomBoat(id) {
 
     val ID: Int
     var shiftedID: Int
-
-    def Item(id: Int) {
-      super.id
-      setUnlocalizedName("boat.wood.spruce.hopper")
-      func_111206_d("boatcraft:boat.wood.spruce.hopper")
-      GameRegistry.registerItem(this, "Hopper Spruce Wood Boat")
-      shiftedID = this.itemID
-      OreDictionary.registerOre("boatSpruceWoodHopper", new ItemStack(this))
-    }
+    setUnlocalizedName("boat.wood.spruce.hopper")
+    func_111206_d("boatcraft:boat.wood.spruce.hopper")
+    GameRegistry.registerItem(this, "Hopper Spruce Wood Boat")
+    shiftedID = this.itemID
+    OreDictionary.registerOre("boatSpruceWoodHopper", new ItemStack(this))
 
     override def getEntity(world: World, x: Int, y: Int, z: Int): EntityCustomBoat = {
       val entity: Entity = new Entity(world, x + 0.5F, y + 1.0F, z + 0.5F)

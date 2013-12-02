@@ -24,11 +24,7 @@ import net.minecraft.client.renderer.texture.TextureMap
 
 object Boat {
 
-  class ItemCustomBoat extends ItemBoat {
-
-    def ItemCustomBoat( par1: Int) {
-      super.par1
-    }
+  class ItemCustomBoat(id: Int) extends ItemBoat(id) {
 
     @Override
     def onItemRightClick (par1ItemStack: ItemStack, par2World: World, par3EntityPlayer: EntityPlayer): ItemStack = {
@@ -159,51 +155,43 @@ object Boat {
       this.prevPosZ = par6
     }
 
-    def isCustomBoat()
-    {
+    def isCustomBoat(): Boolean = {
       false
     }
 
-    def customBoatItem()
-    {
+    def customBoatItem(): ItemStack ={
       new ItemStack(Item.boat, 1, 0)
     }
 
-    def useItemID()
-    {
+    def useItemID(): Boolean = {
       false
     }
 
-    def customBoatItemID()
-    {
+    def customBoatItemID(): Int = {
       Item.boat.itemID
     }
 
-    def customPlank()
-    {
+    def customPlank(): ItemStack = {
       new ItemStack(Block.planks, 1, 0)
     }
 
-    def customStick()
-    {
+    def customStick(): ItemStack = {
       new ItemStack(Item.stick, 1, 0)
     }
 
-    def doesBoatContainBlock()
-    {
+    def doesBoatContainBlock(): Boolean = {
       false
     }
 
-    def blockInBoat()
-    {
+    def blockInBoat(): ItemStack = {
       null
     }
 
     def crashedDrops()
     {
-      int.k
+      val k: Int = null
 
-      for (k < 3 <- ++.k)
+      for (k <- k.to(3))
       {
         if (isCustomBoat())
         {
@@ -215,7 +203,7 @@ object Boat {
         }
       }
 
-      for ( k < 2 <- ++.k)
+      for ( k <- k.to(2))
       {
         if (isCustomBoat())
         {
@@ -483,8 +471,7 @@ object Boat {
       }
     }
 
-    def func_130002_c(player: EntityPlayer)
-    {
+    def func_130002_c(player: EntityPlayer): Boolean = {
       //Do not mount if the player is shift clicking
       if (player.isSneaking)
         false
@@ -498,46 +485,39 @@ object Boat {
       }
     }
 
-    def getDisplayTile()
-    {
+    def getDisplayTile(): Block = {
       if (!this.hasDisplayTile())
       {
         this.getDefaultDisplayTile()
       }
       else
       {
-        val i: Int = this.getDataWatcher.getWatchableObjectInt(20) & 65535
-        return i > 0 && i < Block.blocksList.length ? Block.blocksList[i]
+        val i: Int = this.getDataWatcher().getWatchableObjectInt(20) & 65535
+        i > 0 && i < Block.blocksList.length ? Block.blocksList[i] : null
       }
     }
 
-    def getDefaultDisplayTile()
-    {
+    def getDefaultDisplayTile(): Block = {
       null
     }
 
-    def getDisplayTileData()
-    {
+    def getDisplayTileData(): Int = {
       return !this.hasDisplayTile() ? this.getDefaultDisplayTileData(); this.getDataWatcher.getWatchableObjectInt(20) >> 16
     }
 
-    def getDefaultDisplayTileData()
-    {
+    def getDefaultDisplayTileData(): Int = {
       0
     }
 
-    def getDisplayTileOffset()
-    {
+    def getDisplayTileOffset(): Int = {
       return !this.hasDisplayTile() ? this.getDefaultDisplayTileOffset(); this.getDataWatcher.getWatchableObjectInt(21)
     }
 
-    def getDefaultDisplayTileOffset()
-    {
+    def getDefaultDisplayTileOffset(): Int = {
       6
     }
 
-    def setDisplayTile(par1: Int)
-    {
+    def setDisplayTile(par1: Int) {
       this.getDataWatcher.updateObject(20, Integer.valueOf(par1 & 65535 | this.getDisplayTileData() << 16))
       this.setHasDisplayTile(par1 = true)
     }
@@ -556,8 +536,7 @@ object Boat {
       this.setHasDisplayTile(par1 = true)
     }
 
-    def hasDisplayTile()
-    {
+    def hasDisplayTile(): Boolean = {
       false
     }
 
