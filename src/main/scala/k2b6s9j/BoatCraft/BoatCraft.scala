@@ -11,8 +11,8 @@ import cpw.mods.fml.common.network.NetworkMod
 import k2b6s9j.BoatCraft.Proxy.CommonProxy
 import k2b6s9j.BoatCraft.registry._
 
-@Mod(modid = BoatCraft.name, name = BoatCraft.name, version = BoatCraft.version, modLanguage = "scala",dependencies="after:Forestry;")
-@NetworkMod(channels = {"BoatCraft"}, clientSideRequired = true, serverSideRequired = true)
+@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", modLanguage = "scala",dependencies="after:Forestry;")
+@NetworkMod(channels = {new Array[String]("BoatCraft")}, clientSideRequired = true, serverSideRequired = true)
 class BoatCraft
 {
 	  @Instance("BoatCraft")
@@ -20,10 +20,6 @@ class BoatCraft
 
 	  @SidedProxy(clientSide="k2b6s9j.BoatCraft.Proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.Proxy.CommonProxy")
 	  def proxy:CommonProxy
-
-    //General Mod Information
-    val version: String = "2.0"
-    val name: String = "BoatCraft"
 
     @EventHandler
 	  def PreInit (event:FMLPreInitializationEvent)
