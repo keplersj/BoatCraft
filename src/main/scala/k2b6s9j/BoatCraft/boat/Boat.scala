@@ -31,18 +31,18 @@ object Boat {
       val f: Float = 1.0F
       val f1: Float = par3EntityPlayer.prevRotationPitch + (par3EntityPlayer.rotationPitch - par3EntityPlayer.prevRotationPitch) * f
       val f2: Float = par3EntityPlayer.prevRotationYaw + (par3EntityPlayer.rotationYaw - par3EntityPlayer.prevRotationYaw) * f
-      val d0: Double = (par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * double).f
+      val d0: Double = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * f.toDouble
       val d1: Double = (par3EntityPlayer.prevPosY + (par3EntityPlayer.posY - par3EntityPlayer.prevPosY) * double f +1.62D - double).par3EntityPlayer.yOffset
-      val d2: Double = (par3EntityPlayer.prevPosZ + (par3EntityPlayer.posZ - par3EntityPlayer.prevPosZ) * double).f
+      val d2: Double = par3EntityPlayer.prevPosZ + (par3EntityPlayer.posZ - par3EntityPlayer.prevPosZ) * f.toDouble
       val vec3: Vec3 = par2World.getWorldVec3Pool.getVecFromPool(d0, d1, d2)
-      val f3: Float = MathHelper.cos(-f2 * 0.017453292F - lang.Math.PI)
-      val f4: Float = MathHelper.sin(-f2 * 0.017453292F - lang.Math.PI)
+      val f3: Float = MathHelper.cos(-f2 * 0.017453292F - lang.Math.PI.toFloat)
+      val f4: Float = MathHelper.sin(-f2 * 0.017453292F - lang.Math.PI.toFloat)
       val f5: Float = -MathHelper.cos(-f1 * 0.017453292F)
       val f6: Float = MathHelper.sin(-f1 * 0.017453292F)
       val f7: Float = f4 * f5
       val f8: Float = f3 * f5
       val d3: Double = 5.0D
-      val vec31: Vec3 = vec3.addVector(double f7 * d3, double f6 * d3, double f8 * d3)
+      val vec31: Vec3 = vec3.addVector(f7.toDouble * d3,  f6.toDouble * d3, f8.toDouble * d3)
       val movingobjectposition: MovingObjectPosition = par2World.clip(vec3, vec31, true)
 
       if (movingobjectposition == null)
