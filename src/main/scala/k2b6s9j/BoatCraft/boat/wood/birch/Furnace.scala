@@ -1,10 +1,11 @@
 package k2b6s9j.BoatCraft.boat.wood.birch
 
 import k2b6s9j.BoatCraft.boat.Boat.{ItemCustomBoat, RenderBoat, EntityCustomBoat}
+import k2b6s9j.BoatCraft.boat.Modifiers.{Entity, Render}
 
 object Furnace {
 
-  class Entity extends EntityCustomBoat {
+  class Entity extends EntityCustomBoat with Entity.Furnace {
 
   }
 
@@ -12,7 +13,7 @@ object Furnace {
 
   }
 
-  class Render extends RenderBoat {
+  class Render extends RenderBoat with Render.Furnace {
 
     override def getEntity(): EntityCustomBoat = {
       val entity: Entity =  null

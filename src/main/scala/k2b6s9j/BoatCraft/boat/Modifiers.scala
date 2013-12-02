@@ -2,19 +2,43 @@ package k2b6s9j.BoatCraft.boat
 
 object Modifiers {
 
-  trait Chest {
+  object Entity {
+
+    trait Chest {
+
+    }
+
+    trait Furnace {
+
+    }
+
+    trait TNT {
+
+    }
+
+    trait Hopper {
+
+    }
 
   }
 
-  trait Furnace {
+  object Render {
 
-  }
+    trait Chest {
 
-  trait TNT {
+    }
 
-  }
+    trait Furnace {
 
-  trait Hopper {
+    }
+
+    trait TNT {
+
+    }
+
+    trait Hopper {
+
+    }
 
   }
 
