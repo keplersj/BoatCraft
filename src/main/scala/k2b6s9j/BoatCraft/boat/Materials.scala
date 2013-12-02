@@ -12,11 +12,11 @@ object Materials {
     trait Entity extends EntityCustomBoat {
 
       def Entity(world: World){
-        super.world
+        this(world)
       }
 
       def Entity(world: World, x: Double, y: Double, z: Double) {
-        super.Entity(world, x, y, z)
+        this(world, x, y, z)
       }
 
       override def isCustomBoat(): Boolean = {
@@ -30,7 +30,7 @@ object Materials {
       trait Oak extends EntityCustomBoat with Entity {
 
         override def customPlank(): ItemStack = {
-          new ItemStack(Block.plank, 1, 0)
+          new ItemStack(Block.planks, 1, 0)
         }
 
       }
@@ -38,7 +38,7 @@ object Materials {
       trait Spruce extends EntityCustomBoat with Entity {
 
         override def customPlank(): ItemStack = {
-          new ItemStack(Block.plank, 1, 1)
+          new ItemStack(Block.planks, 1, 1)
         }
 
       }
@@ -46,7 +46,7 @@ object Materials {
       trait Birch extends EntityCustomBoat with Entity {
 
         override def customPlank(): ItemStack = {
-          new ItemStack(Block.plank, 1, 2)
+          new ItemStack(Block.planks, 1, 2)
         }
 
       }
@@ -54,7 +54,7 @@ object Materials {
       trait Jungle extends EntityCustomBoat with Entity {
 
         override def customPlank(): ItemStack = {
-          new ItemStack(Block.plank, 1, 3)
+          new ItemStack(Block.planks, 1, 3)
         }
 
       }

@@ -46,7 +46,7 @@ object Modifiers {
         8
       }
 
-      override def isInvNameLocalized(): Int = {
+      override def isInvNameLocalized(): Boolean = {
         false
       }
 
@@ -110,7 +110,7 @@ object Modifiers {
       override def func_130002_c(par1EntityPlayer: EntityPlayer): Boolean = {
         if (!this.worldObj.isRemote) {
           //par1EntityPlayer.displayGUIHopper(this);
-          ModLogger.ifo("A Hopper GUI should really be showing by now, I'll fix it later.")
+          ModLogger.info("A Hopper GUI should really be showing by now, I'll fix it later.")
         }
 
         true
@@ -182,9 +182,9 @@ object Modifiers {
         }
         else
         {
-          var list: List = this.worldObj.selectEntitiesWithinAABB(EntityItem, this.boundingBox.expand(0.25D, 0.0D, 0.25D), IEntitySelector.selectAnything);
+          var list: List = this.worldObj.selectEntitiesWithinAABB(EntityItem.type, this.boundingBox.expand(0.25D, 0.0D, 0.25D), IEntitySelector.selectAnything);
 
-          if (list.size() > 0)
+          if (list.size > 0)
           {
             TileEntityHopper.func_96114_a(this, list.get(0))
           }
@@ -212,14 +212,14 @@ object Modifiers {
       /**
        * Sets the transfer ticker, used to determine the delay between transfers.
        */
-      override def setTransferTicker(par1: Int) {
+      def setTransferTicker(par1: Int) {
         this.transferTicker = par1
       }
 
       /**
        * Returns whether the hopper cart can currently transfer an item.
        */
-      override def canTransfer(): Boolean = {
+      def canTransfer(): Boolean = {
         this.transferTicker > 0
       }
 
