@@ -12,7 +12,7 @@ import k2b6s9j.BoatCraft.Proxy.CommonProxy
 import k2b6s9j.BoatCraft.registry._
 
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", modLanguage = "scala",dependencies="after:Forestry;")
-@NetworkMod(channels = {new Array[String]("BoatCraft")}, clientSideRequired = true, serverSideRequired = true)
+@NetworkMod(clientSideRequired = true, serverSideRequired = true)
 class BoatCraft
 {
 	  @Instance("BoatCraft")
