@@ -34,7 +34,7 @@ class BoatCraft
         //Item Registration
         ItemRegistry.InitItems()
 
-        RecipeRegistration.RegisterRecipies()
+        RecipeRegistration.RegisterRecipes()
 
         //Entity Registration
         proxy.registerRenderers()
