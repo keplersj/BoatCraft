@@ -54,16 +54,16 @@ object Boat {
         val vec32: Vec3 = par3EntityPlayer.getLook(f)
         var flag: Boolean = false
         val f9: Float = 1.0F
-        val list: List = par2World.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.boundingBox.addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3).expand(double f9, double f9, double f9))
+        val list: List = par2World.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.boundingBox.addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3).expand(f9.toDouble, f9.toDouble, f9.toDouble))
         var i: Int = null
 
         for (i < list.size() <- ++.i)
         {
           val entity: Entity = Entity.list.get(i)
 
-          if (entity.canBeCollidedWith())
+          if (entity.canBeCollidedWith)
           {
-            float.f10 = entity.getCollisionBorderSize()
+            float.f10 = entity.getCollisionBorderSize
             AxisAlignedBB.axisalignedbb = entity.boundingBox.expand(f10: Double, f10: Double, f10: Double)
 
             if (axisalignedbb.isVecInside(vec3))
@@ -112,8 +112,8 @@ object Boat {
     }
 
     def getEntity(world: World, x: Int, y: Int, z: Int): EntityCustomBoat = {
-      EntityCustomBoat.entity = new EntityCustomBoat(world, double(float x + 0.5F), double(float y + 1.0F), double(float z + 0.5F))
-      return entity
+      val entity: EntityCustomBoat = new EntityCustomBoat(world, double(float x + 0.5F), double(float y + 1.0F), double(float z + 0.5F))
+      entity
     }
   }
 
@@ -155,7 +155,7 @@ object Boat {
       this.prevPosZ = par6
     }
 
-    def isCustomBoat(): Boolean = {
+    def isCustomBoat: Boolean = {
       false
     }
 
@@ -485,14 +485,14 @@ object Boat {
       }
     }
 
-    def getDisplayTile(): Block = {
+    def getDisplayTile: Block = {
       if (!this.hasDisplayTile())
       {
         this.getDefaultDisplayTile()
       }
       else
       {
-        val i: Int = this.getDataWatcher().getWatchableObjectInt(20) & 65535
+        val i: Int = this.getDataWatcher.getWatchableObjectInt(20) & 65535
         if (i > 0 && i < Block.blocksList.length) {
           Block.blocksList(i)
         }
@@ -502,23 +502,23 @@ object Boat {
       }
     }
 
-    def getDefaultDisplayTile(): Block = {
+    def getDefaultDisplayTile: Block = {
       null
     }
 
-    def getDisplayTileData(): Int = {
+    def getDisplayTileData: Int = {
       return !this.hasDisplayTile() ? this.getDefaultDisplayTileData(); this.getDataWatcher.getWatchableObjectInt(20) >> 16
     }
 
-    def getDefaultDisplayTileData(): Int = {
+    def getDefaultDisplayTileData: Int = {
       0
     }
 
-    def getDisplayTileOffset(): Int = {
+    def getDisplayTileOffset: Int = {
       return !this.hasDisplayTile() ? this.getDefaultDisplayTileOffset(); this.getDataWatcher.getWatchableObjectInt(21)
     }
 
-    def getDefaultDisplayTileOffset(): Int = {
+    def getDefaultDisplayTileOffset: Int = {
       6
     }
 
@@ -541,7 +541,7 @@ object Boat {
       this.setHasDisplayTile(par1 = true)
     }
 
-    def hasDisplayTile(): Boolean = {
+    def hasDisplayTile: Boolean = {
       false
     }
 
