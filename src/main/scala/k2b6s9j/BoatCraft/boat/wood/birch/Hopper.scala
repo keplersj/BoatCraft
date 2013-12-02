@@ -12,6 +12,16 @@ object Hopper {
 
   class Entity extends EntityBoatContainer with Materials.Entity.Wood.Birch with Modifiers.Entity.Hopper {
 
+    var item: Item
+
+    override def useItemID(): Boolean = {
+      true
+    }
+
+    override def customBoatItemID(): Int = {
+      item.shiftedID
+    }
+
   }
 
   class Item extends ItemCustomBoat {

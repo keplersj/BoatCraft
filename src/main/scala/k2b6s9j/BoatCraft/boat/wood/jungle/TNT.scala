@@ -12,6 +12,16 @@ object TNT {
 
   class Entity extends EntityCustomBoat with Materials.Entity.Wood.Jungle with Modifiers.Entity.TNT {
 
+    var item: Item
+
+    override def useItemID(): Boolean = {
+      true
+    }
+
+    override def customBoatItemID(): Int = {
+      item.shiftedID
+    }
+
   }
 
   class Item extends ItemCustomBoat {

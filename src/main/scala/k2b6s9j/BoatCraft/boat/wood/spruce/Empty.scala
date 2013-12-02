@@ -11,6 +11,16 @@ object Empty {
 
   class Entity extends EntityCustomBoat with Materials.Entity.Wood.Spruce {
 
+    var item: Item
+
+    override def useItemID(): Boolean = {
+      true
+    }
+
+    override def customBoatItemID(): Int = {
+      item.shiftedID
+    }
+
   }
 
   class Item extends ItemCustomBoat {

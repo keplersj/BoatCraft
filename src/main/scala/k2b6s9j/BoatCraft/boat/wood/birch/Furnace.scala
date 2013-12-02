@@ -12,6 +12,16 @@ object Furnace {
 
   class Entity extends EntityCustomBoat with Materials.Entity.Wood.Birch with Modifiers.Entity.Furnace {
 
+    var item: Item
+
+    override def useItemID(): Boolean = {
+      true
+    }
+
+    override def customBoatItemID(): Int = {
+      item.shiftedID
+    }
+
   }
 
   class Item extends ItemCustomBoat {

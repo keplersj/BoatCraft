@@ -12,6 +12,16 @@ object Chest {
 
   class Entity extends EntityBoatContainer with Materials.Entity.Wood.Oak with Modifiers.Entity.Chest {
 
+    var item: Item
+
+    override def useItemID(): Boolean = {
+      true
+    }
+
+    override def customBoatItemID(): Int = {
+      item.shiftedID
+    }
+
   }
 
   class Item extends ItemCustomBoat {
