@@ -12,6 +12,9 @@ object TNT {
 
   class Item extends ItemCustomBoat {
 
+    val ID: Int
+    val shiftedID: Int
+
   }
 
   class Render extends RenderBoat with Materials.Render.Wood.Birch with Modifiers.Render.TNT {
