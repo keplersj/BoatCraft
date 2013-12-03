@@ -175,19 +175,21 @@ object Modifiers {
         }
       }
 
-      override def func_96112_aD(): Boolean = {
+      def func_96112_aD(): Boolean = {
         if (TileEntityHopper.suckItemsIntoHopper(this))
         {
           true
         }
         else
         {
-          var list: List = this.worldObj.selectEntitiesWithinAABB(EntityItem.type, this.boundingBox.expand(0.25D, 0.0D, 0.25D), IEntitySelector.selectAnything);
+          /*
+          val list: List = this.worldObj.selectEntitiesWithinAABB(EntityItem, this.boundingBox.expand(0.25D, 0.0D, 0.25D), IEntitySelector.selectAnything);
 
           if (list.size > 0)
           {
             TileEntityHopper.func_96114_a(this, list.get(0))
           }
+          */
 
           false
         }
