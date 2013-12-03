@@ -23,6 +23,13 @@ object Empty {
 
   }
 
+  object Item {
+
+    val ID: Int = 0
+    var shiftedID: Int = 0
+
+  }
+
   class Item(id: Int) extends ItemCustomBoat(id) {
 
     val ID: Int

@@ -24,14 +24,19 @@ object Chest {
 
   }
 
+  object Item {
+
+    val ID: Int = 0
+    var shiftedID: Int = 0
+
+  }
+
   class Item(id: Int) extends ItemCustomBoat(id) {
 
-    val ID: Int
-    var shiftedID: Int
     setUnlocalizedName("boat.wood.jungle.chest")
     func_111206_d("boatcraft:boat.wood.jungle.chest")
     GameRegistry.registerItem(this, "Chest Jungle Wood Boat")
-    shiftedID = this.itemID
+    Item.shiftedID = this.itemID
     OreDictionary.registerOre("boatJungleWoodChest", new ItemStack(this))
 
     override def getEntity(world: World, x: Int, y: Int, z: Int): EntityCustomBoat = {
