@@ -10,7 +10,7 @@ object StatisticsRegistration {
 
     def RegisterMCStats() {
       try {
-        MetricsLite.metrics = new MetricsLite(mod.name, mod.version)
+        var metrics: MetricsLite = new MetricsLite("BoatCraft", "2.0")
         metrics.start()
       }
       catch
