@@ -12,10 +12,10 @@ object ConfigRegistry {
     //Config File Strings
     def itemBoats: String = "Boats in Item Form"
 
-    def OreDictWoodBoat: Boolean = null
+  var OreDictWoodBoat: Boolean = false
 
     def CreateConfig (event:FMLPreInitializationEvent) {
-      Configuration.cfg = new Configuration(event.getSuggestedConfigurationFile())
+      val cfg: Configuration = new Configuration(event.getSuggestedConfigurationFile())
       try {
         //Boats
         oak.Empty.Item.ID = cfg.getItem(itemBoats, "Oak Boat", 25500).getInt(25500)

@@ -26,7 +26,7 @@ object Hopper {
 
   object Item {
 
-    val ID: Int = 0
+    var ID: Int = 0
     var shiftedID: Int = 0
 
   }
