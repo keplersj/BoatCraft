@@ -660,7 +660,7 @@ object Boat {
       val k = boat.getDisplayTileData
       if (block != null) {
         GL11.glPushMatrix()
-        this.func_110776_a(TextureMap.field_110575_b)
+        this.func_110776_a(TextureMap.locationBlocksTexture)
         val f8 = 0.75F
         GL11.glScalef(f8, f8, f8)
         GL11.glTranslatef(0.0F, j.toFloat / 16.0F, 0.0F)
@@ -735,5 +735,4 @@ object Boat {
       entity
     }
   }
-
 }
