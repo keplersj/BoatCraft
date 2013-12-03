@@ -694,16 +694,11 @@ object Boat {
       this.func_110781_a(par1Entity.asInstanceOf[Entity])
     }
 
-    override def doRender(entity: Entity,
-                          d0: Double,
-                          d1: Double,
-                          d2: Double,
-                          f: Float,
-                          f1: Float) {
+    override def doRender(entity: Entity, d0: Double, d1: Double, d2: Double, f: Float, f1: Float) {
       this.renderBoat(entity.asInstanceOf[EntityCustomBoat], d0, d1, d2, f, f1)
     }
 
-    override def handleRenderType(item: ItemStack, kind: ItemRenderType): Boolean = kind match {
+    def handleRenderType(item: ItemStack, kind: ItemRenderType): Boolean = kind match {
       case ItemRenderType.ENTITY => true
       case ItemRenderType.EQUIPPED => true
       case ItemRenderType.EQUIPPED_FIRST_PERSON => true
@@ -712,11 +707,11 @@ object Boat {
       case _ => false
     }
 
-    override def shouldUseRenderHelper(`type`: ItemRenderType, item: ItemStack, helper: ItemRendererHelper): Boolean = {
+    def shouldUseRenderHelper(`type`: ItemRenderType, item: ItemStack, helper: ItemRendererHelper): Boolean = {
       false
     }
 
-    override def renderItem(kind: ItemRenderType, item: ItemStack, var3: AnyRef*) = kind match {
+    def renderItem(kind: ItemRenderType, item: ItemStack, var3: AnyRef*) = kind match {
       case _ =>
         GL11.glPushMatrix()
         Minecraft.getMinecraft.renderEngine.func_110577_a(func_110781_a(getEntity))
