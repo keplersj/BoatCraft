@@ -714,7 +714,7 @@ object Boat {
     def renderItem(kind: ItemRenderType, item: ItemStack, var3: AnyRef*) = kind match {
       case _ =>
         GL11.glPushMatrix()
-        Minecraft.getMinecraft.renderEngine.func_110577_a(func_110781_a(getEntity))
+        Minecraft.getMinecraft.renderEngine.bindTexture(func_110781_a(getEntity))
         var defaultScale = 1F
         GL11.glScalef(defaultScale, defaultScale, defaultScale)
         GL11.glRotatef(90, -1, 0, 0)
