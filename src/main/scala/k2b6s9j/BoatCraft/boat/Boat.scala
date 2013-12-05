@@ -247,7 +247,7 @@ object Boat {
       if (d3 > 0.26249999999999996D) {
         d4 = Math.cos(this.rotationYaw.toDouble * Math.PI / 180.0D)
         d5 = Math.sin(this.rotationYaw.toDouble * Math.PI / 180.0D)
-        for (j <- 0 until 1.0D + d3 * 60.0D) {
+        for (j <- 0 until 1.0D.toInt + d3.toInt * 60.0D.toInt) {
           val d6 = (this.rand.nextFloat() * 2.0F - 1.0F).toDouble
           val d7 = (this.rand.nextInt(2) * 2 - 1).toDouble * 0.7D
           var d8: Double = 0.0
@@ -470,9 +470,11 @@ object Boat {
 
     private var dropContentsWhenDead: Boolean = true
 
+    /*
     def this(par1World: World, par2: Double, par4: Double, par6: Double) {
       this(par1World, par2, par4, par6)
     }
+    */
 
     def getStackInSlot(par1: Int): ItemStack = this.boatContainerItems(par1)
 
@@ -660,7 +662,7 @@ object Boat {
       val k = boat.getDisplayTileData
       if (block != null) {
         GL11.glPushMatrix()
-        this.func_110776_a(TextureMap.locationBlocksTexture)
+        //this.func_110776_a(TextureMap.locationBlocksTexture) TODO: FIX THIS! This will most likely cause block rendering issues as it has in the past!
         val f8 = 0.75F
         GL11.glScalef(f8, f8, f8)
         GL11.glTranslatef(0.0F, j.toFloat / 16.0F, 0.0F)
@@ -714,7 +716,7 @@ object Boat {
     def renderItem(kind: ItemRenderType, item: ItemStack, var3: AnyRef*) = kind match {
       case _ =>
         GL11.glPushMatrix()
-        Minecraft.getMinecraft.renderEngine.bindTexture(func_110781_a(getEntity))
+        //Minecraft.getMinecraft.renderEngine.bindTexture(func_110781_a(getEntity)) TODO: FIX THIS! This will cause issues with binding of boat textures.
         var defaultScale = 1F
         GL11.glScalef(defaultScale, defaultScale, defaultScale)
         GL11.glRotatef(90, -1, 0, 0)
