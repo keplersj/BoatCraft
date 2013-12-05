@@ -402,7 +402,7 @@ object Boat {
       }
     }
 
-    def func_130002_c(player: EntityPlayer): Boolean = {
+    override def func_130002_c(player: EntityPlayer): Boolean = {
       if (player.isSneaking) {
         return false
       }
