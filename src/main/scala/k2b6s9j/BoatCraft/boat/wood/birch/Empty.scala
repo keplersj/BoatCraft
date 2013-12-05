@@ -33,7 +33,7 @@ object Empty {
     setUnlocalizedName("boat.wood.birch.empty")
     func_111206_d("boatcraft:boat.wood.birch.empty")
     GameRegistry.registerItem(this, "Birch Wood Boat")
-    shiftedID = this.itemID
+    Item.shiftedID = this.itemID
     OreDictionary.registerOre("boatBirchWoodEmpty", new ItemStack(this))
 
     override def getEntity(world: World, x: Int, y: Int, z: Int): EntityCustomBoat = {
