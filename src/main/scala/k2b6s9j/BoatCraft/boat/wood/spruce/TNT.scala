@@ -10,7 +10,7 @@ import net.minecraft.world.World
 
 object TNT {
 
-  class Entity extends EntityCustomBoat(par1World = World) with Materials.Entity.Wood.Spruce with Modifiers.Entity.TNT {
+  class Entity(world: World) extends EntityCustomBoat(world) with Materials.Entity.Wood.Spruce with Modifiers.Entity.TNT {
 
     override def useItemID(): Boolean = {
       true
@@ -38,8 +38,7 @@ object TNT {
     OreDictionary.registerOre("boatSpruceWoodTNT", new ItemStack(this))
 
     override def getEntity(world: World, x: Int, y: Int, z: Int): EntityCustomBoat = {
-      val entity: Entity = new Entity(world, x + 0.5F, y + 1.0F, z + 0.5F)
-      return entity
+      new Entity(world)
     }
 
   }
