@@ -9,16 +9,14 @@ import cpw.mods.fml.common.registry.GameRegistry
 
 object Empty {
 
-  class Entity extends EntityCustomBoat with Materials.Entity.Wood.Birch {
-
-    var item: Item
+  class Entity extends EntityCustomBoat(par1World = World) with Materials.Entity.Wood.Birch {
 
     override def useItemID(): Boolean = {
       true
     }
 
     override def customBoatItemID(): Int = {
-      item.shiftedID
+      Item.shiftedID
     }
 
   }

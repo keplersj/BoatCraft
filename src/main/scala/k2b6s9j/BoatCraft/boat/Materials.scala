@@ -11,14 +11,6 @@ object Materials {
 
     trait Entity extends EntityCustomBoat {
 
-      def Entity(world: World){
-        this(world)
-      }
-
-      def Entity(world: World, x: Double, y: Double, z: Double) {
-        this(world, x, y, z)
-      }
-
       override def isCustomBoat(): Boolean = {
         true
       }

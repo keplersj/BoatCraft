@@ -9,16 +9,14 @@ import net.minecraft.world.World
 
 object Empty {
 
-  class Entity extends EntityCustomBoat with Materials.Entity.Wood.Jungle {
-
-    var item: Item
+  class Entity extends EntityCustomBoat(par1World = World) with Materials.Entity.Wood.Jungle {
 
     override def useItemID(): Boolean = {
       true
     }
 
     override def customBoatItemID(): Int = {
-      item.shiftedID
+      Item.shiftedID
     }
 
   }

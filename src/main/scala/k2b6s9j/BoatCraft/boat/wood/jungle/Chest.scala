@@ -10,16 +10,14 @@ import net.minecraft.world.World
 
 object Chest {
 
-  class Entity extends EntityBoatContainer with Materials.Entity.Wood.Jungle with Modifiers.Entity.Chest {
-
-    var item: Item
+  class Entity extends EntityBoatContainer(par1World = World) with Materials.Entity.Wood.Jungle with Modifiers.Entity.Chest {
 
     override def useItemID(): Boolean = {
       true
     }
 
     override def customBoatItemID(): Int = {
-      item.shiftedID
+      Item.shiftedID
     }
 
   }

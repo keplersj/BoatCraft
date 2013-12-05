@@ -10,16 +10,14 @@ import net.minecraft.world.World
 
 object TNT {
 
-  class Entity extends EntityCustomBoat with Materials.Entity.Wood.Jungle with Modifiers.Entity.TNT {
-
-    var item: Item
+  class Entity extends EntityCustomBoat(par1World = World) with Materials.Entity.Wood.Jungle with Modifiers.Entity.TNT {
 
     override def useItemID(): Boolean = {
       true
     }
 
     override def customBoatItemID(): Int = {
-      item.shiftedID
+      Item.shiftedID
     }
 
   }

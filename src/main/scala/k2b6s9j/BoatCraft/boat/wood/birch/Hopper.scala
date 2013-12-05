@@ -10,16 +10,14 @@ import net.minecraft.world.World
 
 object Hopper {
 
-  class Entity extends EntityBoatContainer with Materials.Entity.Wood.Birch with Modifiers.Entity.Hopper {
-
-    var item: Item
+  class Entity extends EntityBoatContainer(par1World = World) with Materials.Entity.Wood.Birch with Modifiers.Entity.Hopper {
 
     override def useItemID(): Boolean = {
       true
     }
 
     override def customBoatItemID(): Int = {
-      item.shiftedID
+      Item.shiftedID
     }
 
   }

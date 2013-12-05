@@ -10,16 +10,14 @@ import net.minecraft.world.World
 
 object Furnace {
 
-  class Entity extends EntityCustomBoat with Materials.Entity.Wood.Spruce with Modifiers.Entity.Furnace {
-
-    var item: Item
+  class Entity extends EntityCustomBoat(par1World = World) with Materials.Entity.Wood.Spruce with Modifiers.Entity.Furnace {
 
     override def useItemID(): Boolean = {
       true
     }
 
     override def customBoatItemID(): Int = {
-      item.shiftedID
+      Item.shiftedID
     }
 
   }
