@@ -16,10 +16,10 @@ import k2b6s9j.BoatCraft.registry._
 class BoatCraft
 {
 	  @Instance("BoatCraft")
-    val instance:this.type
+    val instance: k2b6s9j.BoatCraft.BoatCraft = instance
 
 	  @SidedProxy(clientSide="k2b6s9j.BoatCraft.Proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.Proxy.CommonProxy")
-	  def proxy:CommonProxy
+	  def proxy: k2b6s9j.BoatCraft.Proxy.CommonProxy = proxy
 
     @EventHandler
 	  def PreInit (event:FMLPreInitializationEvent)
