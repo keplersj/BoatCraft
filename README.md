@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/k2b6s9j/BoatCraft.png?label=ready)](https://waffle.io/k2b6s9j/BoatCraft)  
 BoatCraft [![Travis CI Build Status](https://travis-ci.org/k2b6s9j/BoatCraft.png?branch=master)](https://travis-ci.org/k2b6s9j/BoatCraft) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/k2b6s9j/BoatCraft/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 =========
 
