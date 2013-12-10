@@ -1,6 +1,6 @@
 package k2b6s9j.BoatCraft
 
-import cpw.mods.fml.common.Mod.{Instance, EventHandler}
+import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
@@ -15,9 +15,6 @@ import k2b6s9j.BoatCraft.registry._
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
 object BoatCraft
 {
-	  @Instance("BoatCraft")
-    val instance: k2b6s9j.BoatCraft.BoatCraft = instance
-
 	  @SidedProxy(clientSide="k2b6s9j.BoatCraft.Proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.Proxy.CommonProxy")
 	  def proxy: k2b6s9j.BoatCraft.Proxy.CommonProxy = proxy
 
