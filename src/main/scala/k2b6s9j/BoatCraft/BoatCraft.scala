@@ -13,7 +13,7 @@ import k2b6s9j.BoatCraft.registry._
 
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", modLanguage = "scala",dependencies="after:Forestry;")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
-class BoatCraft
+object BoatCraft
 {
 	  @Instance("BoatCraft")
     val instance: k2b6s9j.BoatCraft.BoatCraft = instance
