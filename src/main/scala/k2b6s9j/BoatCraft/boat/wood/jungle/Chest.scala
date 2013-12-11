@@ -32,7 +32,7 @@ object Chest {
   class Item(id: Int) extends ItemCustomBoat(id) {
 
     setUnlocalizedName("boat.wood.jungle.chest")
-    func_111206_d("boatcraft:boat.wood.jungle.chest")
+    //func_111206_d("boatcraft:boat.wood.jungle.chest")
     GameRegistry.registerItem(this, "Chest Jungle Wood Boat")
     Item.shiftedID = this.itemID
     OreDictionary.registerOre("boatJungleWoodChest", new ItemStack(this))
