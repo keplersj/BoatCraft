@@ -16,7 +16,7 @@ import k2b6s9j.BoatCraft.registry._
 object BoatCraft
 {
 	  @SidedProxy(clientSide="k2b6s9j.BoatCraft.Proxy.ClientProxy", serverSide="k2b6s9j.BoatCraft.Proxy.CommonProxy")
-	  def proxy: k2b6s9j.BoatCraft.Proxy.CommonProxy = proxy
+	  def proxy: CommonProxy = proxy
 
     @EventHandler
 	  def PreInit (event:FMLPreInitializationEvent)
