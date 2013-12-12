@@ -14,8 +14,8 @@ object ConfigRegistry {
 
   var OreDictWoodBoat: Boolean = false
 
-    def CreateConfig (event:FMLPreInitializationEvent) {
-      val cfg: Configuration = new Configuration(event.getSuggestedConfigurationFile())
+    def CreateConfig (event: FMLPreInitializationEvent) {
+      val cfg: Configuration = Config.CreateConfig(event)
       try {
         //Boats
         oak.Empty.Item.ID = cfg.getItem(itemBoats, "Oak Boat", 25500).getInt(25500)
