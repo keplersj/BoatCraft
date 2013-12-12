@@ -24,8 +24,8 @@ object Hopper {
 
   object Item {
 
-    var ID: Int = 0
-    var shiftedID: Int = 0
+    var ID: Int = _
+    var shiftedID: Int = _
 
   }
 
