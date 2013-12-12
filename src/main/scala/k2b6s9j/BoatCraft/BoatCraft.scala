@@ -26,7 +26,7 @@ object BoatCraft
         ModLogger.info("http://k2b6s9j.com/projects/minecraft/BoatCraft")
 
         //Configuration Registration
-        ConfigRegistry.CreateConfig(event)
+        ConfigRegistry.CreateConfig(event.getSuggestedConfigurationFile)
 
         //Item Registration
         ItemRegistry.InitItems()
