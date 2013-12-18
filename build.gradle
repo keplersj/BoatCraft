@@ -36,9 +36,14 @@ minecraft {
 
 dependencies {
     compile 'org.mcstats.forge:metrics:R8-SNAPSHOT'
+    testCompile 'org.mcstats.forge:metrics:R8-SNAPSHOT'
     testCompile 'junit:junit:4.11'
     testCompile 'org.scalatest:scalatest_2.10:2.0'
     testCompile 'org.scalamock:scalamock-scalatest-support_2.10:3.0.1'
+}
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.useAnt = false
 }
 
 group = 'k2b6s9j.BoatCraft'
