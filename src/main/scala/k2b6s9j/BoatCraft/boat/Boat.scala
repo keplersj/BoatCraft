@@ -669,12 +669,12 @@ object Boat {
         this.renderBlockInBoat(boat, par9, block, k)
         GL11.glPopMatrix()
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
-        this.func_110777_b(boat)
+        //this.func_110777_b(boat)
       }
       val f4 = 0.75F
       GL11.glScalef(f4, f4, f4)
       GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4)
-      this.func_110777_b(boat)
+      //this.func_110777_b(boat)
       GL11.glScalef(-1.0F, -1.0F, 1.0F)
       this.modelBoat.render(boat, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)
       GL11.glPopMatrix()
