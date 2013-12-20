@@ -690,15 +690,11 @@ object Boat {
       GL11.glPopMatrix()
     }
 
-    protected def func_110781_a(par1Entity: Entity): ResourceLocation = getTexture
+    override def getEntityTexture(par1Entity: Entity): ResourceLocation = getTexture
 
-    protected def func_110775_a(par1Entity: Entity): ResourceLocation = {
-      this.func_110781_a(par1Entity.asInstanceOf[Entity])
-    }
+    override def func_110775_a(par1Entity: Entity): ResourceLocation = this.getEntityTexture(par1Entity.asInstanceOf[Entity])
 
-    override def doRender(entity: Entity, d0: Double, d1: Double, d2: Double, f: Float, f1: Float) {
-      this.renderBoat(entity.asInstanceOf[EntityCustomBoat], d0, d1, d2, f, f1)
-    }
+    override def doRender(entity: Entity, d0: Double, d1: Double, d2: Double, f: Float, f1: Float) = this.renderBoat(entity.asInstanceOf[EntityCustomBoat], d0, d1, d2, f, f1)
 
     def handleRenderType(item: ItemStack, kind: ItemRenderType): Boolean = kind match {
       case ItemRenderType.ENTITY => true
