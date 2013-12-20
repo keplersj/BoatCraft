@@ -4,6 +4,7 @@ import k2b6s9j.BoatCraft.boat.Boat.{EntityCustomBoat, RenderBoat}
 import net.minecraft.world.World
 import net.minecraft.item.ItemStack
 import net.minecraft.block.Block
+import net.minecraft.util.ResourceLocation
 
 object Materials {
 
@@ -61,17 +62,25 @@ object Materials {
 
       trait Oak extends RenderBoat {
 
+        override def getTexture(): ResourceLocation = new ResourceLocation("textures/entity/boat.png")
+
       }
 
       trait Spruce extends RenderBoat {
+
+        override def getTexture(): ResourceLocation = new ResourceLocation("boatcraft:textures/boats/spruce.png")
 
       }
 
       trait Birch extends RenderBoat {
 
+        override def getTexture(): ResourceLocation = new ResourceLocation("boatcraft:textures/boats/birch.png")
+
       }
 
       trait Jungle extends RenderBoat {
+
+        override def getTexture(): ResourceLocation = new ResourceLocation("boatcraft:textures/boats/jungle.png")
 
       }
 
