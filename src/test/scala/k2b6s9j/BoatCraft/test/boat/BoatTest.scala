@@ -5,8 +5,6 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import k2b6s9j.BoatCraft.boat.Boat
 import net.minecraft.util.ResourceLocation
-import net.minecraft.item.ItemStack
-import k2b6s9j.BoatCraft.boat.wood.oak.Empty
 import net.minecraftforge.client.IItemRenderer.ItemRenderType
 
 @RunWith(classOf[JUnitRunner])

@@ -5,7 +5,6 @@ import cpw.mods.fml.client.registry.RenderingRegistry
 import k2b6s9j.BoatCraft.boat.wood._
 
 import net.minecraftforge.client.MinecraftForgeClient
-import k2b6s9j.BoatCraft.boat.wood.oak.Empty
 
 object Proxy {
   class CommonProxy {

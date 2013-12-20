@@ -12,8 +12,6 @@ import net.minecraft.client.model.{ModelBase, ModelBoat}
 import net.minecraft.client.renderer.RenderBlocks
 import net.minecraftforge.client.IItemRenderer.{ItemRendererHelper, ItemRenderType}
 import org.lwjgl.opengl.GL11
-import net.minecraft.client.Minecraft
-import net.minecraft.client.renderer.texture.TextureMap
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block

@@ -1,7 +1,6 @@
 package k2b6s9j.BoatCraft.boat
 
 import k2b6s9j.BoatCraft.boat.Boat.{EntityCustomBoat, RenderBoat}
-import net.minecraft.world.World
 import net.minecraft.item.ItemStack
 import net.minecraft.block.Block
 import net.minecraft.util.ResourceLocation

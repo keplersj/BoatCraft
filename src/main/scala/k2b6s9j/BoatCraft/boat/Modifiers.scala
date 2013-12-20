@@ -7,8 +7,6 @@ import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.world.World
 import net.minecraft.tileentity.TileEntityHopper
-import net.minecraft.entity.item.EntityItem
-import net.minecraft.command.IEntitySelector
 import net.minecraft.nbt.NBTTagCompound
 
 object Modifiers {
