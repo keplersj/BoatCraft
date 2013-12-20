@@ -402,7 +402,7 @@ object Boat {
       }
     }
 
-    override def func_130002_c(player: EntityPlayer): Boolean = {
+    override def interactFirst(player: EntityPlayer): Boolean = {
       if (player.isSneaking) {
         return false
       }
@@ -564,7 +564,7 @@ object Boat {
       }
     }
 
-    override def func_130002_c(player: EntityPlayer): Boolean = {
+    override def interactFirst(player: EntityPlayer): Boolean = {
       if (player.isSneaking) {
         return false
       }

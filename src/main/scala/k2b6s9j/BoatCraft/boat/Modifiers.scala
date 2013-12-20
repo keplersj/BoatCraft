@@ -21,7 +21,7 @@ object Modifiers {
         true
       }
 
-      override def func_130002_c(player: EntityPlayer): Boolean = {
+      override def interactFirst(player: EntityPlayer): Boolean = {
         //Do not mount this boat! It contains a block!
         false
       }
@@ -107,7 +107,7 @@ object Modifiers {
         5
       }
 
-      override def func_130002_c(par1EntityPlayer: EntityPlayer): Boolean = {
+      override def interactFirst(par1EntityPlayer: EntityPlayer): Boolean = {
         if (!this.worldObj.isRemote) {
           //par1EntityPlayer.displayGUIHopper(this);
           ModLogger.info("A Hopper GUI should really be showing by now, I'll fix it later.")
