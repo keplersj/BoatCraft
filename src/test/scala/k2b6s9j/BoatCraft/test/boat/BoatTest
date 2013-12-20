@@ -1,0 +1,23 @@
+package k2b6s9j.BoatCraft.test.boat
+
+import org.scalatest._
+import org.junit.runner.RunWith
+import org.scalatest.junit.JUnitRunner
+import k2b6s9j.BoatCraft.boat.Boat
+import net.minecraft.util.ResourceLocation
+
+object BoatTest {
+
+  def boat = Boat
+  def render = new Boat.RenderBoat
+
+  @RunWith(classOf[JUnitRunner])
+  class RenderTest extends FlatSpec with Matchers {
+
+    "The Default Boat Texture" should "be the Vanilla Oak Wood Boat Texture." in {
+      render.getTexture() should be (new ResourceLocation("textures/entity/boat.png"))
+    }
+
+  }
+
+}
