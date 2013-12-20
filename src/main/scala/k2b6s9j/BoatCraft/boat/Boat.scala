@@ -690,9 +690,7 @@ object Boat {
       GL11.glPopMatrix()
     }
 
-    override def getEntityTexture(par1Entity: Entity): ResourceLocation = getTexture
-
-    override def func_110775_a(par1Entity: Entity): ResourceLocation = this.getEntityTexture(par1Entity.asInstanceOf[Entity])
+    override def getEntityTexture(entity: Entity): ResourceLocation = getTexture
 
     override def doRender(entity: Entity, d0: Double, d1: Double, d2: Double, f: Float, f1: Float) = this.renderBoat(entity.asInstanceOf[EntityCustomBoat], d0, d1, d2, f, f1)
 
