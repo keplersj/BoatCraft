@@ -45,8 +45,5 @@ object ConfigRegistry {
     jungle.Furnace.Item.ID = cfg.getItem(itemBoats, "Jungle Furnace Boat", 25517).getInt
     jungle.Hopper.Item.ID = cfg.getItem(itemBoats, "Jungle Hopper Boat", 25518).getInt
     jungle.TNT.Item.ID = cfg.getItem(itemBoats, "Jungle TNT Boat", 25519).getInt
-
-    //Modules
-    OreDictWoodBoat = cfg.get("Modules", "OreDictWoodBoats", false, "Use the OreDictionary to craft Wooden Boats").getBoolean(false)
   }
 }

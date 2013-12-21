@@ -7,6 +7,7 @@ import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
+import net.minecraft.block.Block
 
 object Chest {
 
@@ -26,6 +27,8 @@ object Chest {
 
     var ID: Int = _
     var shiftedID: Int = _
+    var item: Item = new Item(ID)
+    RecipeRegistration.AddShapelessRecipe(new ItemStack(item), new ItemStack(Block.chest), "boatSpruce")
 
   }
 

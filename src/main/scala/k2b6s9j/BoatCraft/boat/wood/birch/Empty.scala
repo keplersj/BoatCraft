@@ -6,6 +6,7 @@ import net.minecraft.world.World
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
 import cpw.mods.fml.common.registry.GameRegistry
+import net.minecraft.block.Block
 
 object Empty {
 
@@ -25,6 +26,8 @@ object Empty {
 
     var ID: Int = _
     var shiftedID: Int = _
+    var item: Item = new Item(ID)
+    GameRegistry.addRecipe(new ItemStack(item), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2))
 
   }
 
