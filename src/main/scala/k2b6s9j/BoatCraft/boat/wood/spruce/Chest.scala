@@ -8,6 +8,7 @@ import net.minecraftforge.oredict.OreDictionary
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
 import net.minecraft.block.Block
+import k2b6s9j.BoatCraft.registry.RecipeRegistration
 
 object Chest {
 
