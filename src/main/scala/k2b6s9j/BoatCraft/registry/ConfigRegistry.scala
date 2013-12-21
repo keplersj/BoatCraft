@@ -8,7 +8,7 @@ import net.minecraftforge.common.Configuration
 object ConfigRegistry {
 
   //Config File Strings
-  def itemBoats: String = "boats"
+  def itemBoats: String = "Boat Item IDs"
 
   def CreateConfig(file: File) : Unit = {
     val config = new Configuration(file)
