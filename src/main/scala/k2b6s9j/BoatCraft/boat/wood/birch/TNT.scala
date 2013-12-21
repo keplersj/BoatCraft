@@ -33,7 +33,7 @@ object TNT {
 
     setUnlocalizedName("boat.wood.birch.furnace")
     //func_111206_d("boatcraft:boat.wood.birch.furnace")
-    GameRegistry.registerItem(this, "Furnace Birch Wood Boat")
+    GameRegistry.registerItem(this, "TNT Birch Wood Boat")
     Item.shiftedID = this.itemID
     OreDictionary.registerOre("boatBirchWoodFurnace", new ItemStack(this))
 
