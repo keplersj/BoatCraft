@@ -1,12 +1,29 @@
-language: java
+language: scala
+
+scala:
+  - 2.10.2
+  - 2.10.3
+
 jdk:
   - oraclejdk7
   - openjdk7
   - openjdk6
+
+env:
+- TERM=dumb
+
+
 before_install:
   - chmod +x gradlew
+
 install:
   - true
+
 before_script:
-  ./gradlew setupCIWorkspace
+  - ./gradlew setupCIWorkspace
+
 script: ./gradlew buildNeeded
+
+after_success:
+- ./gradlew cobertura
+- ./gradlew coveralls
