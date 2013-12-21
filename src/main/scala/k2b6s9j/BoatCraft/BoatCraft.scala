@@ -31,8 +31,6 @@ object BoatCraft
 
       RecipeRegistration.RemoveRecipe(new ItemStack(Item.boat))
 
-      RecipeRegistration.RegisterRecipes()
-
       //Entity Registration
       proxy.registerRenderers()
       EntityRegistry.RegisterEntities()
