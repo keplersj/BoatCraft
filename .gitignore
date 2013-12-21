@@ -25,3 +25,9 @@ out
 *.iml
 *.ipr
 *.iws
+*.log
+*.log.lck
+config
+crash-reports
+saves
+stats
