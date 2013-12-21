@@ -6,7 +6,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 
 import k2b6s9j.BoatCraft.utilities.log.ModLogger
-import cpw.mods.fml.common.{SidedProxy, Mod}
+import cpw.mods.fml.common.{Loader, SidedProxy, Mod}
 import cpw.mods.fml.common.network.NetworkMod
 import k2b6s9j.BoatCraft.Proxy.CommonProxy
 import k2b6s9j.BoatCraft.registry._
@@ -25,6 +25,10 @@ object BoatCraft
       ModLogger.info("BoatCraft")
       ModLogger.info("Copyright Kepler Sticka-Jones 2013")
       ModLogger.info("http://k2b6s9j.com/projects/minecraft/BoatCraft")
+
+      if (Loader.isModLoaded("Thaumcraft")) {
+
+      }
 
       //Configuration Registration
       ConfigRegistry.CreateConfig(event.getSuggestedConfigurationFile)
