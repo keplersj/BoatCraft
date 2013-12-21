@@ -8,6 +8,14 @@ object Empty {
 
   class Entity(world: World) extends EntityCustomBoat(world) with Materials.Entity.Wood.Silverwood {
 
+    override def useItemID(): Boolean = {
+      true
+    }
+
+    override def customBoatItemID(): Int = {
+      Item.shiftedID
+    }
+
   }
 
   object Item {
