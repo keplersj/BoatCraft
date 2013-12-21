@@ -8,9 +8,7 @@ import net.minecraftforge.common.Configuration
 object ConfigRegistry {
 
   //Config File Strings
-  def itemBoats: String = "Boats in Item Form"
-
-  var OreDictWoodBoat: Boolean = false
+  def itemBoats: String = "boats"
 
   def CreateConfig(file: File) : Unit = {
     val config = new Configuration(file)
