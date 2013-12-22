@@ -3,6 +3,7 @@ package k2b6s9j.BoatCraft.compatibility.thaumcraft.boat.wood.greatwood
 import net.minecraft.world.World
 import k2b6s9j.BoatCraft.boat.Boat.{RenderBoat, ItemCustomBoat, EntityCustomBoat}
 import k2b6s9j.BoatCraft.compatibility.thaumcraft.boat.Materials
+import cpw.mods.fml.common.registry.GameRegistry
 
 object Empty {
 
@@ -27,6 +28,10 @@ object Empty {
   }
 
   class Item(id: Int) extends ItemCustomBoat(id) {
+
+    setUnlocalizedName("boat.compatibility.wood.greatwood.empty")
+    GameRegistry.registerItem(this, "Empty Greatwood Boat")
+    Item.shiftedID = this.itemID
 
   }
 
