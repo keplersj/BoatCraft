@@ -17,6 +17,8 @@ object Thaumcraft {
 
     loadBoats(config)
 
+    registerEntities()
+
   }
 
   private def loadBoats (cfg: Configuration) {
@@ -41,6 +43,10 @@ object Thaumcraft {
     silverwood.Furnace.Item.ID = cfg.getItem(boats, "Furnace Silverwood Boat", 25527).getInt
     silverwood.TNT.Item.ID = cfg.getItem(boats, "TNT Silverwood Boat", 25528).getInt
     silverwood.Hopper.Item.ID = cfg.getItem(boats, "Hopper Silverwood Boat", 25529).getInt
+
+  }
+
+  private def registerEntities() {
 
   }
 
