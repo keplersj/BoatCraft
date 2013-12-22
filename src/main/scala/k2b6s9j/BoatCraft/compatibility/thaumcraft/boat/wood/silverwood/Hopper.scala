@@ -8,7 +8,7 @@ import cpw.mods.fml.common.registry.GameRegistry
 
 object Hopper {
 
-  class Entity(world: World) extends EntityBoatContainer(world) with Materials.Entity.Wood.Greatwood with Modifiers.Entity.Hopper {
+  class Entity(world: World) extends EntityBoatContainer(world) with Materials.Entity.Wood.Silverwood with Modifiers.Entity.Hopper {
 
     override def useItemID(): Boolean = {
       true
@@ -36,7 +36,7 @@ object Hopper {
 
   }
 
-  class Render extends RenderBoat with Materials.Render.Wood.Greatwood with Modifiers.Render.Hopper {
+  class Render extends RenderBoat with Materials.Render.Wood.Silverwood with Modifiers.Render.Hopper {
 
   }
 
