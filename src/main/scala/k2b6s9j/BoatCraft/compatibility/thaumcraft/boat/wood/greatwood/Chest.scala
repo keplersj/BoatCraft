@@ -1,14 +1,14 @@
 package k2b6s9j.BoatCraft.compatibility.thaumcraft.boat.wood.greatwood
 
 import net.minecraft.world.World
-import k2b6s9j.BoatCraft.boat.Boat.{RenderBoat, ItemCustomBoat, EntityCustomBoat}
+import k2b6s9j.BoatCraft.boat.Boat.{EntityBoatContainer, RenderBoat, ItemCustomBoat}
 import k2b6s9j.BoatCraft.compatibility.thaumcraft.boat.Materials
 import cpw.mods.fml.common.registry.GameRegistry
 import k2b6s9j.BoatCraft.boat.Modifiers
 
 object Chest {
 
-  class Entity(world: World) extends EntityCustomBoat(world) with Materials.Entity.Wood.Greatwood with Modifiers.Entity.Chest {
+  class Entity(world: World) extends EntityBoatContainer(world) with Materials.Entity.Wood.Greatwood with Modifiers.Entity.Chest {
 
     override def useItemID(): Boolean = {
       true
