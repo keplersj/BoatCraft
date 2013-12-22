@@ -3,8 +3,11 @@ package k2b6s9j.BoatCraft
 import cpw.mods.fml.client.registry.RenderingRegistry
 
 import k2b6s9j.BoatCraft.boat.wood._
+import k2b6s9j.BoatCraft.compatibility.thaumcraft.boat.wood._
 
 import net.minecraftforge.client.MinecraftForgeClient
+import cpw.mods.fml.common.Loader
+import k2b6s9j.BoatCraft.compatibility.thaumcraft.boat.wood.greatwood.Empty
 
 object Proxy {
   class CommonProxy {
@@ -65,6 +68,53 @@ object Proxy {
       MinecraftForgeClient.registerItemRenderer(jungle.Furnace.Item.shiftedID, new jungle.Furnace.Render())
       MinecraftForgeClient.registerItemRenderer(jungle.TNT.Item.shiftedID, new jungle.TNT.Render())
       MinecraftForgeClient.registerItemRenderer(jungle.Hopper.Item.shiftedID, new jungle.Hopper.Render())
+
+      if (Loader.isModLoaded("Thaumcraft")) {
+        /*
+        Wood Boat Rendering
+         */
+
+        /*
+        Greatwood Boat Rendering
+         */
+        RenderingRegistry.registerEntityRenderingHandler(classOf[greatwood.Empty.Entity], new greatwood.Empty.Render())
+        RenderingRegistry.registerEntityRenderingHandler(classOf[greatwood.Chest.Entity], new greatwood.Chest.Render())
+        RenderingRegistry.registerEntityRenderingHandler(classOf[greatwood.Furnace.Entity], new greatwood.Furnace.Render())
+        RenderingRegistry.registerEntityRenderingHandler(classOf[greatwood.TNT.Entity], new greatwood.TNT.Render())
+        RenderingRegistry.registerEntityRenderingHandler(classOf[greatwood.Hopper.Entity], new greatwood.Hopper.Render())
+
+        /*
+        Silverwood Boat Rendering
+         */
+        RenderingRegistry.registerEntityRenderingHandler(classOf[silverwood.Empty.Entity], new silverwood.Empty.Render())
+        RenderingRegistry.registerEntityRenderingHandler(classOf[silverwood.Chest.Entity], new silverwood.Chest.Render())
+        RenderingRegistry.registerEntityRenderingHandler(classOf[silverwood.Furnace.Entity], new silverwood.Furnace.Render())
+        RenderingRegistry.registerEntityRenderingHandler(classOf[silverwood.TNT.Entity], new silverwood.TNT.Render())
+        RenderingRegistry.registerEntityRenderingHandler(classOf[silverwood.Hopper.Entity], new silverwood.Hopper.Render())
+
+        /*
+        Wood Boat Item Rendering
+         */
+
+        /*
+        Greatwood Boat Item Rendering
+         */
+        MinecraftForgeClient.registerItemRenderer(greatwood.Empty.Item.item.itemID, new greatwood.Empty.Render())
+        MinecraftForgeClient.registerItemRenderer(greatwood.Chest.Item.item.itemID, new greatwood.Chest.Render())
+        MinecraftForgeClient.registerItemRenderer(greatwood.Furnace.Item.item.itemID, new greatwood.Furnace.Render())
+        MinecraftForgeClient.registerItemRenderer(greatwood.TNT.Item.item.itemID, new greatwood.TNT.Render())
+        MinecraftForgeClient.registerItemRenderer(greatwood.Hopper.Item.item.itemID, new greatwood.Hopper.Render())
+
+        /*
+        Silverwood Boat Item Rendering
+         */
+        MinecraftForgeClient.registerItemRenderer(silverwood.Empty.Item.item.itemID, new silverwood.Empty.Render())
+        MinecraftForgeClient.registerItemRenderer(silverwood.Chest.Item.item.itemID, new silverwood.Chest.Render())
+        MinecraftForgeClient.registerItemRenderer(silverwood.Furnace.Item.item.itemID, new silverwood.Furnace.Render())
+        MinecraftForgeClient.registerItemRenderer(silverwood.TNT.Item.item.itemID, new silverwood.TNT.Render())
+        MinecraftForgeClient.registerItemRenderer(silverwood.Hopper.Item.item.itemID, new silverwood.Hopper.Render())
+
+      }
     }
   }
 }
