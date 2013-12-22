@@ -35,7 +35,6 @@ object Hopper {
   class Item(id: Int) extends ItemCustomBoat(id) {
 
     setUnlocalizedName("boat.wood.spruce.hopper")
-    //func_111206_d("boatcraft:boat.wood.spruce.hopper")
     GameRegistry.registerItem(this, "Hopper Spruce Wood Boat")
     OreDictionary.registerOre("boatSpruceWoodHopper", new ItemStack(this))
 

@@ -35,7 +35,6 @@ object TNT {
   class Item(id: Int) extends ItemCustomBoat(id) {
 
     setUnlocalizedName("boat.wood.oak.tnt")
-    //func_111206_d("boatcraft:boat.wood.oak.tnt")
     GameRegistry.registerItem(this, "TNT Oak Wood Boat")
     OreDictionary.registerOre("boatOakWoodTNT", new ItemStack(this))
 
