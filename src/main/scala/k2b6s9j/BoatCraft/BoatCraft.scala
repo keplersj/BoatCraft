@@ -11,6 +11,7 @@ import cpw.mods.fml.common.network.NetworkMod
 import k2b6s9j.BoatCraft.Proxy.CommonProxy
 import k2b6s9j.BoatCraft.registry._
 import net.minecraft.item.{Item, ItemStack}
+import k2b6s9j.BoatCraft.compatibility.thaumcraft.boat.Thaumcraft
 
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", modLanguage = "scala",dependencies="after:Forestry;")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
@@ -27,7 +28,7 @@ object BoatCraft
       ModLogger.info("http://k2b6s9j.com/projects/minecraft/BoatCraft")
 
       if (Loader.isModLoaded("Thaumcraft")) {
-
+        Thaumcraft.PreInit(event)
       }
 
       //Configuration Registration
@@ -47,11 +48,17 @@ object BoatCraft
 	  def Init (event:FMLInitializationEvent)
 	  {
       LanguageRegistry.RegisterName()
+
+      if (Loader.isModLoaded("Thaumcraft")) {
+        Thaumcraft.Init(event)
+      }
     }
 
 	  @EventHandler
 	  def PostInit (event:FMLPostInitializationEvent)
 	  {
-
+      if (Loader.isModLoaded("Thaumcraft")) {
+        Thaumcraft.PostInit(event)
+      }
 	  }
 }
