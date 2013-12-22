@@ -13,7 +13,7 @@ import k2b6s9j.BoatCraft.registry._
 import net.minecraft.item.{Item, ItemStack}
 import k2b6s9j.BoatCraft.compatibility.thaumcraft.boat.Thaumcraft
 
-@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", modLanguage = "scala",dependencies="after:Forestry;Thaumcraft;")
+@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", modLanguage = "scala",dependencies="after:Forestry,Thaumcraft;")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
 object BoatCraft
 {
