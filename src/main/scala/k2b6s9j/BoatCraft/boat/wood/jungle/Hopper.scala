@@ -19,7 +19,7 @@ object Hopper {
     }
 
     override def customBoatItemID(): Int = {
-      Item.shiftedID
+      Item.item.itemID
     }
 
   }
@@ -27,7 +27,6 @@ object Hopper {
   object Item {
 
     var ID: Int = _
-    var shiftedID: Int = _
     var item: Item = new Item(ID)
     RecipeRegistration.AddShapelessRecipe(new ItemStack(item), new ItemStack(Block.hopperBlock), "boatJungle")
 
@@ -38,7 +37,6 @@ object Hopper {
     setUnlocalizedName("boat.wood.jungle.Hopper")
     //func_111206_d("boatcraft:boat.wood.jungle.Hopper")
     GameRegistry.registerItem(this, "Hopper Jungle Wood Boat")
-    Item.shiftedID = this.itemID
     OreDictionary.registerOre("boatJungleWoodHopper", new ItemStack(this))
 
     override def getEntity(world: World, x: Int, y: Int, z: Int): EntityCustomBoat = {

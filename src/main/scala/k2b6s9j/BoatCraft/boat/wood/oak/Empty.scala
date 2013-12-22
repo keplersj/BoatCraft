@@ -17,7 +17,7 @@ object Empty {
     }
 
     override def customBoatItemID(): Int = {
-      Item.shiftedID
+      Item.item.itemID
     }
 
   }
@@ -25,7 +25,6 @@ object Empty {
   object Item {
 
     var ID: Int = _
-    var shiftedID: Int = _
     var item: Item = new Item(ID)
     GameRegistry.addRecipe(new ItemStack(item), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 0))
 
@@ -36,7 +35,6 @@ object Empty {
     setUnlocalizedName("boat.wood.oak.empty")
     //func_111206_d("boatcraft:boat.wood.oak.empty")
     GameRegistry.registerItem(this, "Oak Wood Boat")
-    Item.shiftedID = this.itemID
     OreDictionary.registerOre("boatOakWoodEmpty", new ItemStack(this))
 
     override def getEntity(world: World, x: Int, y: Int, z: Int): EntityCustomBoat = {

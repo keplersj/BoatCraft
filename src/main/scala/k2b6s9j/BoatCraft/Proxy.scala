@@ -42,29 +42,29 @@ object Proxy {
 
       //Wood Boat Item Renders
       ///Oak Wood Based Boat Items
-      MinecraftForgeClient.registerItemRenderer(oak.Empty.Item.shiftedID, new oak.Empty.Render())
-      MinecraftForgeClient.registerItemRenderer(oak.Chest.Item.shiftedID, new oak.Chest.Render())
-      MinecraftForgeClient.registerItemRenderer(oak.Furnace.Item.shiftedID, new oak.Furnace.Render())
-      MinecraftForgeClient.registerItemRenderer(oak.TNT.Item.shiftedID, new oak.TNT.Render())
-      MinecraftForgeClient.registerItemRenderer(oak.Hopper.Item.shiftedID, new oak.Hopper.Render())
+      MinecraftForgeClient.registerItemRenderer(oak.Empty.Item.item.itemID, new oak.Empty.Render())
+      MinecraftForgeClient.registerItemRenderer(oak.Chest.Item.item.itemID, new oak.Chest.Render())
+      MinecraftForgeClient.registerItemRenderer(oak.Furnace.Item.item.itemID, new oak.Furnace.Render())
+      MinecraftForgeClient.registerItemRenderer(oak.TNT.Item.item.itemID, new oak.TNT.Render())
+      MinecraftForgeClient.registerItemRenderer(oak.Hopper.Item.item.itemID, new oak.Hopper.Render())
       ///Spruce Wood Based Boat Items
-      MinecraftForgeClient.registerItemRenderer(spruce.Empty.Item.shiftedID, new spruce.Empty.Render())
-      MinecraftForgeClient.registerItemRenderer(spruce.Chest.Item.shiftedID, new spruce.Chest.Render())
-      MinecraftForgeClient.registerItemRenderer(spruce.Furnace.Item.shiftedID, new spruce.Furnace.Render())
-      MinecraftForgeClient.registerItemRenderer(spruce.TNT.Item.shiftedID, new spruce.TNT.Render())
-      MinecraftForgeClient.registerItemRenderer(spruce.Hopper.Item.shiftedID, new spruce.Hopper.Render())
+      MinecraftForgeClient.registerItemRenderer(spruce.Empty.Item.item.itemID, new spruce.Empty.Render())
+      MinecraftForgeClient.registerItemRenderer(spruce.Chest.Item.item.itemID, new spruce.Chest.Render())
+      MinecraftForgeClient.registerItemRenderer(spruce.Furnace.Item.item.itemID, new spruce.Furnace.Render())
+      MinecraftForgeClient.registerItemRenderer(spruce.TNT.Item.item.itemID, new spruce.TNT.Render())
+      MinecraftForgeClient.registerItemRenderer(spruce.Hopper.Item.item.itemID, new spruce.Hopper.Render())
       ///Birch Wood Based Boat Items
-      MinecraftForgeClient.registerItemRenderer(birch.Empty.Item.shiftedID, new birch.Empty.Render())
-      MinecraftForgeClient.registerItemRenderer(birch.Chest.Item.shiftedID, new birch.Chest.Render())
-      MinecraftForgeClient.registerItemRenderer(birch.Furnace.Item.shiftedID, new birch.Furnace.Render())
-      MinecraftForgeClient.registerItemRenderer(birch.TNT.Item.shiftedID, new birch.TNT.Render())
-      MinecraftForgeClient.registerItemRenderer(birch.Hopper.Item.shiftedID, new birch.Hopper.Render())
+      MinecraftForgeClient.registerItemRenderer(birch.Empty.Item.item.itemID, new birch.Empty.Render())
+      MinecraftForgeClient.registerItemRenderer(birch.Chest.Item.item.itemID, new birch.Chest.Render())
+      MinecraftForgeClient.registerItemRenderer(birch.Furnace.Item.item.itemID, new birch.Furnace.Render())
+      MinecraftForgeClient.registerItemRenderer(birch.TNT.Item.item.itemID, new birch.TNT.Render())
+      MinecraftForgeClient.registerItemRenderer(birch.Hopper.Item.item.itemID, new birch.Hopper.Render())
       ///Jungle Wood Based Boat Items
-      MinecraftForgeClient.registerItemRenderer(jungle.Empty.Item.shiftedID, new jungle.Empty.Render())
-      MinecraftForgeClient.registerItemRenderer(jungle.Chest.Item.shiftedID, new jungle.Chest.Render())
-      MinecraftForgeClient.registerItemRenderer(jungle.Furnace.Item.shiftedID, new jungle.Furnace.Render())
-      MinecraftForgeClient.registerItemRenderer(jungle.TNT.Item.shiftedID, new jungle.TNT.Render())
-      MinecraftForgeClient.registerItemRenderer(jungle.Hopper.Item.shiftedID, new jungle.Hopper.Render())
+      MinecraftForgeClient.registerItemRenderer(jungle.Empty.Item.item.itemID, new jungle.Empty.Render())
+      MinecraftForgeClient.registerItemRenderer(jungle.Chest.Item.item.itemID, new jungle.Chest.Render())
+      MinecraftForgeClient.registerItemRenderer(jungle.Furnace.Item.item.itemID, new jungle.Furnace.Render())
+      MinecraftForgeClient.registerItemRenderer(jungle.TNT.Item.item.itemID, new jungle.TNT.Render())
+      MinecraftForgeClient.registerItemRenderer(jungle.Hopper.Item.item.itemID, new jungle.Hopper.Render())
     }
   }
 }
