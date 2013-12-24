@@ -630,8 +630,6 @@ object Boat {
 
     protected var modelBoat: ModelBase = new ModelBoat()
 
-    protected val renderBlocks = new RenderBlocks()
-
     this.shadowSize = 0.5F
 
     def renderBoat(boat: EntityCustomBoat, par2: Double, par4: Double, par6: Double, par8: Float, par9: Float) {
