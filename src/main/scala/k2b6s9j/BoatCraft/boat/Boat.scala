@@ -626,12 +626,6 @@ object Boat {
     }
   }
 
-  object RenderBoat {
-
-    private var texture: ResourceLocation = _
-
-  }
-
   class RenderBoat extends Render with IItemRenderer {
 
     protected var modelBoat: ModelBase = new ModelBoat()
