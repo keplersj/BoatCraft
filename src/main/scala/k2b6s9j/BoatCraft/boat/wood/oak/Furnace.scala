@@ -25,8 +25,6 @@ object Furnace {
   }
 
   object Item {
-
-    var ID: Int = _
     var item: Item = _
     RecipeRegistration.AddShapelessRecipe(new ItemStack(item), new ItemStack(Block.furnaceIdle), "boatOak")
 
