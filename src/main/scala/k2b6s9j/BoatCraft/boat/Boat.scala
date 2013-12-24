@@ -718,13 +718,8 @@ object Boat {
         GL11.glPopMatrix()
     }
 
-    def getTexture(): ResourceLocation = {
-      new ResourceLocation("textures/entity/boat.png")
-    }
+    def getTexture(): ResourceLocation = new ResourceLocation("textures/entity/boat.png")
 
-    def getEntity(): EntityCustomBoat = {
-      val entity: EntityCustomBoat = _
-      entity
-    }
+    def getEntity(): EntityCustomBoat = null
   }
 }
