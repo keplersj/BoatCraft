@@ -36,7 +36,7 @@ object Modifiers {
         27
       }
 
-      override def getDefaultDisplayTile(): net.minecraft.block.Block = {
+      override def getDisplayTile(): net.minecraft.block.Block = {
         Block.chest
       }
 
@@ -60,7 +60,7 @@ object Modifiers {
         new ItemStack(Block.furnaceIdle, 1, 0)
       }
 
-      override def getDefaultDisplayTile(): net.minecraft.block.Block = {
+      override def getDisplayTile(): net.minecraft.block.Block = {
         Block.furnaceBurning
       }
 
@@ -76,7 +76,7 @@ object Modifiers {
         new ItemStack(Block.tnt, 1, 0)
       }
 
-      override def getDefaultDisplayTile(): net.minecraft.block.Block = {
+      override def getDisplayTile(): net.minecraft.block.Block = {
         Block.tnt
       }
 
@@ -90,7 +90,7 @@ object Modifiers {
         new ItemStack(Block.hopperBlock, 1, 0)
       }
 
-      override def getDefaultDisplayTile(): net.minecraft.block.Block = {
+      override def getDisplayTile(): net.minecraft.block.Block = {
         Block.hopperBlock
       }
 
