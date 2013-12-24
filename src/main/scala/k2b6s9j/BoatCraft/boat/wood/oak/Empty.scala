@@ -24,7 +24,7 @@ object Empty {
 
   object Item {
     var item: Item = _
-    GameRegistry.addRecipe(new ItemStack(item), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 0))
+    //GameRegistry.addRecipe(new ItemStack(item), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 0))
   }
 
   class Item(id: Int) extends ItemCustomBoat(id) {
