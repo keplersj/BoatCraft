@@ -25,7 +25,7 @@ object Empty {
   object Item {
 
     var ID: Int = _
-    var item: Item = new Item(ID)
+    var item: Item = _
     GameRegistry.addRecipe(new ItemStack(item), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 1))
 
   }

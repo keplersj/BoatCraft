@@ -27,7 +27,7 @@ object TNT {
   object Item {
 
     var ID: Int = _
-    var item: Item = new Item(ID)
+    var item: Item = _
     RecipeRegistration.AddShapelessRecipe(new ItemStack(item), new ItemStack(Block.tnt), "boatSpruce")
 
   }
