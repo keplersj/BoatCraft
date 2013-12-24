@@ -30,38 +30,38 @@ object ConfigRegistry {
       /*
       Oak Wood Boats
       */
-      new oak.Empty.Item(cfg.getItem(itemBoats, "Empty Oak Wood Boat", 25500).getInt)
-      new oak.Chest.Item(cfg.getItem(itemBoats, "Chest Oak Wood Boat", 25501).getInt)
-      new oak.Furnace.Item(cfg.getItem(itemBoats, "Furnace Oak Wood Boat", 25502).getInt)
-      new oak.Hopper.Item(cfg.getItem(itemBoats, "Hopper Oak Wood Boat", 25503).getInt)
-      new oak.TNT.Item(cfg.getItem(itemBoats, "TNT Oak Wood Boat", 25504).getInt)
+      oak.Empty.Item.item = new oak.Empty.Item(cfg.getItem(itemBoats, "Empty Oak Wood Boat", 25500).getInt)
+      oak.Chest.Item.item = new oak.Chest.Item(cfg.getItem(itemBoats, "Chest Oak Wood Boat", 25501).getInt)
+      oak.Furnace.Item.item = new oak.Furnace.Item(cfg.getItem(itemBoats, "Furnace Oak Wood Boat", 25502).getInt)
+      oak.Hopper.Item.item = new oak.Hopper.Item(cfg.getItem(itemBoats, "Hopper Oak Wood Boat", 25503).getInt)
+      oak.TNT.Item.item = new oak.TNT.Item(cfg.getItem(itemBoats, "TNT Oak Wood Boat", 25504).getInt)
 
       /*
       Spruce Wood Boats
       */
-      new spruce.Empty.Item(cfg.getItem(itemBoats, "Empty Spruce Wood Boat", 25505).getInt)
-      new spruce.Chest.Item(cfg.getItem(itemBoats, "Chest Spruce Wood Boat", 25506).getInt)
-      new spruce.Furnace.Item(cfg.getItem(itemBoats, "Furnace Spruce Wood Boat", 25507).getInt)
-      new spruce.Hopper.Item(cfg.getItem(itemBoats, "Hopper Spruce Wood Boat", 25508).getInt)
-      new spruce.TNT.Item(cfg.getItem(itemBoats, "TNT Spruce Wood Boat Boat", 25509).getInt)
+      spruce.Empty.Item.item = new spruce.Empty.Item(cfg.getItem(itemBoats, "Empty Spruce Wood Boat", 25505).getInt)
+      spruce.Chest.Item.item = new spruce.Chest.Item(cfg.getItem(itemBoats, "Chest Spruce Wood Boat", 25506).getInt)
+      spruce.Furnace.Item.item = new spruce.Furnace.Item(cfg.getItem(itemBoats, "Furnace Spruce Wood Boat", 25507).getInt)
+      spruce.Hopper.Item.item = new spruce.Hopper.Item(cfg.getItem(itemBoats, "Hopper Spruce Wood Boat", 25508).getInt)
+      spruce.TNT.Item.item = new spruce.TNT.Item(cfg.getItem(itemBoats, "TNT Spruce Wood Boat Boat", 25509).getInt)
 
       /*
       Birch Wood Boats
        */
-      new birch.Empty.Item(cfg.getItem(itemBoats, "Empty Birch Wood Boat", 25510).getInt)
-      new birch.Chest.Item(cfg.getItem(itemBoats, "Chest Birch Wood Boat", 25511).getInt)
-      new birch.Furnace.Item(cfg.getItem(itemBoats, "Furnace Birch Wood Boat", 25512).getInt)
-      new birch.Hopper.Item(cfg.getItem(itemBoats, "Hopper Birch Wood Boat", 25513).getInt)
-      new birch.TNT.Item(cfg.getItem(itemBoats, "TNT Birch Wood Boat", 25514).getInt)
+      birch.Empty.Item.item = new birch.Empty.Item(cfg.getItem(itemBoats, "Empty Birch Wood Boat", 25510).getInt)
+      birch.Chest.Item.item = new birch.Chest.Item(cfg.getItem(itemBoats, "Chest Birch Wood Boat", 25511).getInt)
+      birch.Furnace.Item.item = new birch.Furnace.Item(cfg.getItem(itemBoats, "Furnace Birch Wood Boat", 25512).getInt)
+      birch.Hopper.Item.item = new birch.Hopper.Item(cfg.getItem(itemBoats, "Hopper Birch Wood Boat", 25513).getInt)
+      birch.TNT.Item.item = new birch.TNT.Item(cfg.getItem(itemBoats, "TNT Birch Wood Boat", 25514).getInt)
 
       /*
       Jungle Wood Boats
       */
-      new jungle.Empty.Item(cfg.getItem(itemBoats, "Empty Jungle Wood Boat", 25515).getInt)
-      new jungle.Chest.Item(cfg.getItem(itemBoats, "Chest Jungle Wood Boat", 25516).getInt)
-      new jungle.Furnace.Item(cfg.getItem(itemBoats, "Furnace Jungle Wood Boat", 25517).getInt)
-      new jungle.Hopper.Item(cfg.getItem(itemBoats, "Hopper Jungle Wood Boat", 25518).getInt)
-      new jungle.TNT.Item(cfg.getItem(itemBoats, "TNT Jungle Wood Boat", 25519).getInt)
+      jungle.Empty.Item.item = new jungle.Empty.Item(cfg.getItem(itemBoats, "Empty Jungle Wood Boat", 25515).getInt)
+      jungle.Chest.Item.item = new jungle.Chest.Item(cfg.getItem(itemBoats, "Chest Jungle Wood Boat", 25516).getInt)
+      jungle.Furnace.Item.item = new jungle.Furnace.Item(cfg.getItem(itemBoats, "Furnace Jungle Wood Boat", 25517).getInt)
+      jungle.Hopper.Item.item = new jungle.Hopper.Item(cfg.getItem(itemBoats, "Hopper Jungle Wood Boat", 25518).getInt)
+      jungle.TNT.Item.item = new jungle.TNT.Item(cfg.getItem(itemBoats, "TNT Jungle Wood Boat", 25519).getInt)
     }
     catch {
       case e: Exception => e.printStackTrace()
