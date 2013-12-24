@@ -25,6 +25,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.MathHelper
 import net.minecraft.world.World
+import net.minecraft.client.renderer.texture.TextureMap
 
 object Boat {
 
@@ -627,6 +628,7 @@ object Boat {
   object RenderBoat {
 
     private var texture: ResourceLocation = _
+
   }
 
   class RenderBoat extends Render with IItemRenderer {
@@ -637,12 +639,7 @@ object Boat {
 
     this.shadowSize = 0.5F
 
-    def renderBoat(boat: EntityCustomBoat,
-                   par2: Double,
-                   par4: Double,
-                   par6: Double,
-                   par8: Float,
-                   par9: Float) {
+    def renderBoat(boat: EntityCustomBoat, par2: Double, par4: Double, par6: Double, par8: Float, par9: Float) {
       GL11.glPushMatrix()
       GL11.glTranslatef(par2.toFloat, par4.toFloat, par6.toFloat)
       GL11.glRotatef(180.0F - par8, 0.0F, 1.0F, 0.0F)
@@ -660,19 +657,19 @@ object Boat {
       val k = boat.getDisplayTileData
       if (block != null) {
         GL11.glPushMatrix()
-        //this.func_110776_a(TextureMap.locationBlocksTexture) TODO: FIX THIS! This will most likely cause block rendering issues as it has in the past!
+        this.bindTexture(TextureMap.locationBlocksTexture)
         val f8 = 0.75F
         GL11.glScalef(f8, f8, f8)
         GL11.glTranslatef(0.0F, j.toFloat / 16.0F, 0.0F)
         this.renderBlockInBoat(boat, par9, block, k)
         GL11.glPopMatrix()
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
-        //this.func_110777_b(boat)
+        this.bindEntityTexture(boat)
       }
       val f4 = 0.75F
       GL11.glScalef(f4, f4, f4)
       GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4)
-      //this.func_110777_b(boat)
+      this.bindEntityTexture(boat)
       GL11.glScalef(-1.0F, -1.0F, 1.0F)
       this.modelBoat.render(boat, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)
       GL11.glPopMatrix()
