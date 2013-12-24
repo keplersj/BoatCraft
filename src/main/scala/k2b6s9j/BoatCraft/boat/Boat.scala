@@ -636,7 +636,7 @@ object Boat {
 
     protected var modelBoat: ModelBase = new ModelBoat()
 
-    protected val field_94145_f = new RenderBlocks()
+    private val renderBlocks = new RenderBlocks()
 
     this.shadowSize = 0.5F
 
@@ -676,13 +676,10 @@ object Boat {
       GL11.glPopMatrix()
     }
 
-    protected def renderBlockInBoat(boat: EntityCustomBoat,
-                                    par2: Float,
-                                    par3Block: Block,
-                                    par4: Int) {
-      val f1 = boat.getBrightness(par2)
+    protected def renderBlockInBoat(boat: EntityCustomBoat, float: Float, block: Block, int: Int) {
+      val brightness = boat.getBrightness(float)
       GL11.glPushMatrix()
-      this.field_94145_f.renderBlockAsItem(par3Block, par4, f1)
+      this.renderBlocks.renderBlockAsItem(block, int, brightness)
       GL11.glPopMatrix()
     }
 
