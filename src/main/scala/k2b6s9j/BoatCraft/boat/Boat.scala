@@ -630,7 +630,7 @@ object Boat {
 
     protected var modelBoat: ModelBase = new ModelBoat()
 
-    private val renderBlocks = new RenderBlocks()
+    protected val renderBlocks = new RenderBlocks()
 
     this.shadowSize = 0.5F
 
