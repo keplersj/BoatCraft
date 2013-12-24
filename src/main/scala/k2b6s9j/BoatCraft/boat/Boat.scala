@@ -26,6 +26,7 @@ import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.MathHelper
 import net.minecraft.world.World
 import net.minecraft.client.renderer.texture.TextureMap
+import net.minecraft.client.Minecraft
 
 object Boat {
 
@@ -705,7 +706,7 @@ object Boat {
     def renderItem(kind: ItemRenderType, item: ItemStack, var3: AnyRef*) = kind match {
       case _ =>
         GL11.glPushMatrix()
-        //Minecraft.getMinecraft.renderEngine.bindTexture(func_110781_a(getEntity)) TODO: FIX THIS! This will cause issues with binding of boat textures.
+        Minecraft.getMinecraft.renderEngine.bindTexture(getEntityTexture(getEntity()))
         var defaultScale = 1F
         GL11.glScalef(defaultScale, defaultScale, defaultScale)
         GL11.glRotatef(90, -1, 0, 0)
@@ -722,7 +723,7 @@ object Boat {
     }
 
     def getEntity(): EntityCustomBoat = {
-      val entity: EntityCustomBoat = null
+      val entity: EntityCustomBoat = _
       entity
     }
   }
