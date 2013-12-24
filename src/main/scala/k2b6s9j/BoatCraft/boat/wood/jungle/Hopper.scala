@@ -26,8 +26,7 @@ object Hopper {
 
   object Item {
     var item: Item = _
-    RecipeRegistration.AddShapelessRecipe(new ItemStack(item), new ItemStack(Block.hopperBlock), "boatJungle")
-
+    //RecipeRegistration.AddShapelessRecipe(new ItemStack(item), new ItemStack(Block.hopperBlock), "boatJungle")
   }
 
   class Item(id: Int) extends ItemCustomBoat(id) {

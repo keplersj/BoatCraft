@@ -26,8 +26,7 @@ object Chest {
 
   object Item {
     var item: Item = _
-    RecipeRegistration.AddShapelessRecipe(new ItemStack(item), new ItemStack(Block.chest), "boatJungle")
-
+    //RecipeRegistration.AddShapelessRecipe(new ItemStack(item), new ItemStack(Block.chest), "boatJungle")
   }
 
   class Item(id: Int) extends ItemCustomBoat(id) {
