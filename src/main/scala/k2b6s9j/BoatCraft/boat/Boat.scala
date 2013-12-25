@@ -244,7 +244,7 @@ object Boat {
       if (d3 > 0.26249999999999996D) {
         d4 = Math.cos(this.rotationYaw.toDouble * Math.PI / 180.0D)
         d5 = Math.sin(this.rotationYaw.toDouble * Math.PI / 180.0D)
-        for (j <- 0 until 1.0D + d3 * 60.0D) {
+        for (j <- 0 until 1.0D.toInt + d3.toInt * 60.0D.toInt) {
           val d6 = (this.rand.nextFloat() * 2.0F - 1.0F).toDouble
           val d7 = (this.rand.nextInt(2) * 2 - 1).toDouble * 0.7D
           var d8: Double = 0.0
