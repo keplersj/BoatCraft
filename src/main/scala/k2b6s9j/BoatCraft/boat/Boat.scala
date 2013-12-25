@@ -467,10 +467,6 @@ object Boat {
 
     private var dropContentsWhenDead: Boolean = true
 
-    def this(par1World: World, par2: Double, par4: Double, par6: Double) {
-      this(par1World, par2, par4, par6)
-    }
-
     def getStackInSlot(par1: Int): ItemStack = this.boatContainerItems(par1)
 
     def decrStackSize(par1: Int, par2: Int): ItemStack = {
