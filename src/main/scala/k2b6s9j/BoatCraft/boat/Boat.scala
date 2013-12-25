@@ -158,10 +158,7 @@ object Boat {
 
     this.yOffset = this.height / 2.0F
 
-    def this(par1World: World,
-             par2: Double,
-             par4: Double,
-             par6: Double) {
+    def this(par1World: World, par2: Double, par4: Double, par6: Double) {
       this(par1World)
       this.setPosition(par2, par4 + this.yOffset.toDouble, par6)
       this.motionX = 0.0D
@@ -247,7 +244,7 @@ object Boat {
       if (d3 > 0.26249999999999996D) {
         d4 = Math.cos(this.rotationYaw.toDouble * Math.PI / 180.0D)
         d5 = Math.sin(this.rotationYaw.toDouble * Math.PI / 180.0D)
-        for (j <- 0 until 1.0D.toInt + d3.toInt * 60.0D.toInt) {
+        for (j <- 0 until 1.0D + d3 * 60.0D) {
           val d6 = (this.rand.nextFloat() * 2.0F - 1.0F).toDouble
           val d7 = (this.rand.nextInt(2) * 2 - 1).toDouble * 0.7D
           var d8: Double = 0.0
@@ -470,11 +467,9 @@ object Boat {
 
     private var dropContentsWhenDead: Boolean = true
 
-    /*
     def this(par1World: World, par2: Double, par4: Double, par6: Double) {
       this(par1World, par2, par4, par6)
     }
-    */
 
     def getStackInSlot(par1: Int): ItemStack = this.boatContainerItems(par1)
 
@@ -688,9 +683,7 @@ object Boat {
       case _ => false
     }
 
-    def shouldUseRenderHelper(`type`: ItemRenderType, item: ItemStack, helper: ItemRendererHelper): Boolean = {
-      false
-    }
+    def shouldUseRenderHelper(`type`: ItemRenderType, item: ItemStack, helper: ItemRendererHelper): Boolean = false
 
     def renderItem(kind: ItemRenderType, item: ItemStack, var3: AnyRef*) = kind match {
       case _ =>
@@ -711,4 +704,5 @@ object Boat {
 
     def getEntity(): EntityCustomBoat = null
   }
+
 }
