@@ -35,7 +35,7 @@ repositories {
 }
 
 minecraft {
-    version = '1.7.2-10.12.0.967'
+    version = '1.7.2-10.12.0.972'
 }
 
 dependencies {
