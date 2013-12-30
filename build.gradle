@@ -8,7 +8,7 @@ buildscript {
     repositories {
         mavenCentral()
         maven {
-            name = "Minecraft Forge"
+            name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
         maven {
@@ -35,7 +35,7 @@ repositories {
 }
 
 minecraft {
-    version = '1.7.2-10.12.0.972'
+    version = '1.7.2-10.12.0.977'
 }
 
 dependencies {
