@@ -10,7 +10,7 @@ import cpw.mods.fml.common.{SidedProxy, Mod}
 import cpw.mods.fml.common.network.NetworkMod
 import k2b6s9j.BoatCraft.Proxy.CommonProxy
 import k2b6s9j.BoatCraft.registry._
-import net.minecraft.item.{Item, ItemStack}
+import net.minecraft.item.{ItemBoat, ItemStack}
 
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", modLanguage = "scala",dependencies="after:Forestry;")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
@@ -29,7 +29,7 @@ object BoatCraft
       //Configuration Registration
       ConfigRegistry.CreateConfig(event.getSuggestedConfigurationFile)
 
-      RecipeRegistration.RemoveRecipe(new ItemStack(Item.boat))
+      RecipeRegistration.RemoveRecipe(new ItemStack(ItemBoat))
 
       //Entity Registration
       proxy.registerRenderers()
