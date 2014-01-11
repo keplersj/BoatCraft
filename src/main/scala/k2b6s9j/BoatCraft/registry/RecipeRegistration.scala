@@ -1,12 +1,8 @@
 package k2b6s9j.BoatCraft.registry
 
-import cpw.mods.fml.common.registry.GameRegistry
 import k2b6s9j.BoatCraft.utilities.log.ModLogger
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{ShapelessRecipes, ShapedRecipes, CraftingManager, IRecipe}
-import net.minecraftforge.oredict.ShapedOreRecipe
-import net.minecraftforge.oredict.ShapelessOreRecipe
-
 import java.util
 
 object RecipeRegistration {
@@ -34,13 +30,5 @@ object RecipeRegistration {
         recipes.remove(scan)
       }
     }
-  }
-
-  def AddRecipe(item: ItemStack, parts: AnyRef*) {
-    GameRegistry.addRecipe(new ShapedOreRecipe(item, parts))
-  }
-
-  def AddShapelessRecipe(item: ItemStack, parts: AnyRef*) {
-    CraftingManager.getInstance().getRecipeList.asInstanceOf[util.ArrayList[Any]].add(new ShapelessOreRecipe(item, parts))
   }
 }
