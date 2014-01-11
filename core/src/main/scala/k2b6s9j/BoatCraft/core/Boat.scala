@@ -25,7 +25,7 @@ object Boat {
 
   case class EntityBoatContainer(world2: World, x2: Double, y2: Double, z2: Double) extends EntityCustomBoat(world2, x2, y2, z2) with IInventory{
 
-    def getSizeInventory: Int = null
+    def getSizeInventory: Int = 0
 
     def getStackInSlot(p1: Int): ItemStack = null
 
@@ -39,7 +39,7 @@ object Boat {
 
     def func_145825_b(): String = "something"
 
-    def func_145818_k_(): Boolean = ture
+    def func_145818_k_(): Boolean = true
 
     def getInventoryStackLimit: Int = 0
 
