@@ -49,3 +49,9 @@ version = '2.0'
 
 cobertura.coverageFormats = ['html', 'xml']
 cobertura.coverageSourceDirs = sourceSets.main.scala.srcDirs
+
+project(':vanilla') {
+    dependencies {
+        compile project(':core')
+    }
+}
