@@ -27,7 +27,7 @@ object BoatCraft
       //Configuration Registration
       ConfigRegistry.CreateConfig(event.getSuggestedConfigurationFile)
 
-      RecipeRegistration.RemoveRecipe(new ItemStack(ItemBoat))
+      //RecipeRegistration.RemoveRecipe(new ItemStack(ItemBoat))
 
       //Entity Registration
       proxy.registerRenderers()
