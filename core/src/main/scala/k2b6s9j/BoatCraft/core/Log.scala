@@ -1,7 +1,5 @@
 package k2b6s9j.BoatCraft.core
 
-import cpw.mods.fml.common.FMLLog
-
 import java.util.logging.Level
 import java.util.logging.Logger
 
@@ -22,9 +20,5 @@ object Log {
 
     def getLogger() {
         log
-    }
-
-    def static() {
-        log.setParent(FMLLog.getLogger)
     }
 }
