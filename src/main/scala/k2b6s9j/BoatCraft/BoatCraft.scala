@@ -34,9 +34,6 @@ object BoatCraft
       //Entity Registration
       proxy.registerRenderers()
       EntityRegistry.RegisterEntities()
-
-      //Statistics Registration
-      StatisticsRegistration.RegisterMCStats()
 	  }
 
 	  @EventHandler
