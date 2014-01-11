@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft
+package k2b6s9j.BoatCraft.core
 
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.FMLInitializationEvent
@@ -7,7 +7,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent
 
 import k2b6s9j.BoatCraft.utilities.log.ModLogger
 import cpw.mods.fml.common.{SidedProxy, Mod}
-import k2b6s9j.BoatCraft.Proxy.CommonProxy
+import k2b6s9j.BoatCraft.core.Proxy.CommonProxy
 
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", modLanguage = "scala",dependencies="after:Forestry;")
 object BoatCraft

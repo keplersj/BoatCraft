@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft.boat
+package k2b6s9j.BoatCraft.core
 
 import net.minecraft.item.ItemBoat
 import net.minecraft.util._

@@ -1,11 +1,11 @@
-package k2b6s9j.BoatCraft.utilities.log
+package k2b6s9j.BoatCraft.core
 
 import cpw.mods.fml.common.FMLLog
 
 import java.util.logging.Level
 import java.util.logging.Logger
 
-object ModLogger {
+object Logger {
     def log: Logger = Logger.getLogger("BoatCraft")
 
   def info(msg:String) {

@@ -1,4 +1,4 @@
-package k2b6s9j.BoatCraft
+package k2b6s9j.BoatCraft.core
 
 object Proxy {
   class CommonProxy {

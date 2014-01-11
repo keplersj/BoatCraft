@@ -1,11 +1,11 @@
-package k2b6s9j.BoatCraft.registry
+package k2b6s9j.BoatCraft.core.utilities
 
 import k2b6s9j.BoatCraft.utilities.log.ModLogger
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{ShapelessRecipes, ShapedRecipes, CraftingManager, IRecipe}
 import java.util
 
-object RecipeRegistration {
+object Recipies {
 
   def RemoveRecipe(resultItem: ItemStack) {
     var recipeResult: ItemStack = null
