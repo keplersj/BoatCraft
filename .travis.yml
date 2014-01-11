@@ -12,10 +12,6 @@ jdk:
 env:
 - TERM=dumb
 
-
-before_install:
-  - chmod +x gradlew
-
 install:
   - true
 
