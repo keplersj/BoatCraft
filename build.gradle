@@ -42,7 +42,6 @@ allprojects {
     dependencies {
         testCompile 'junit:junit:4.11'
         testCompile 'org.scalatest:scalatest_2.10:2.0'
-        testCompile 'org.scalamock:scalamock-scalatest-support_2.10:3.0.1'
     }
 
     tasks.withType(ScalaCompile) {
