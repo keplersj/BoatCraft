@@ -7,26 +7,16 @@ import net.minecraft.inventory.IInventory
 import java.lang.String
 import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import net.minecraftforge.client.IItemRenderer
-import net.minecraft.client.renderer.entity.{RenderBoat, Render}
-import net.minecraft.client.model.{ModelBase, ModelBoat}
-import net.minecraft.client.renderer.RenderBlocks
+import net.minecraft.client.renderer.entity.RenderBoat
 import net.minecraftforge.client.IItemRenderer.{ItemRendererHelper, ItemRenderType}
-import org.lwjgl.opengl.GL11
-import cpw.mods.fml.relauncher.Side
-import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.block.Block
-import net.minecraft.block.material.Material
 import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.item.EntityBoat
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.MathHelper
 import net.minecraft.world.World
-import net.minecraft.client.renderer.texture.TextureMap
-import net.minecraft.client.Minecraft
 
 object Boat {
 
