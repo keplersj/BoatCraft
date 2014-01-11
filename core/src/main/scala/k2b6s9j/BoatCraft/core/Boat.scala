@@ -23,7 +23,7 @@ object Boat {
 
   case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double) extends EntityBoat(world, x, y, z)
 
-  case class EntityBoatContainer(world2: World, x2: Double, y2: Double, z2: Double) extends EntityCustomBoat(world2, x2, y2, z2) with IInventory{
+  class EntityBoatContainer(world2: World, x2: Double, y2: Double, z2: Double) extends EntityCustomBoat(world2, x2, y2, z2) with IInventory{
 
     def getSizeInventory: Int = 0
 
