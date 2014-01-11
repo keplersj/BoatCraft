@@ -8,8 +8,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import k2b6s9j.BoatCraft.utilities.log.ModLogger
 import cpw.mods.fml.common.{SidedProxy, Mod}
 import k2b6s9j.BoatCraft.Proxy.CommonProxy
-import k2b6s9j.BoatCraft.registry._
-import net.minecraft.item.{ItemBoat, ItemStack}
 
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", modLanguage = "scala",dependencies="after:Forestry;")
 object BoatCraft
@@ -24,20 +22,13 @@ object BoatCraft
       ModLogger.info("Copyright Kepler Sticka-Jones 2013")
       ModLogger.info("http://k2b6s9j.com/projects/minecraft/BoatCraft")
 
-      //Configuration Registration
-      ConfigRegistry.CreateConfig(event.getSuggestedConfigurationFile)
-
-      //RecipeRegistration.RemoveRecipe(new ItemStack(ItemBoat))
-
       //Entity Registration
       proxy.registerRenderers()
-      EntityRegistry.RegisterEntities()
 	  }
 
 	  @EventHandler
 	  def Init (event:FMLInitializationEvent)
 	  {
-      LanguageRegistry.RegisterName()
     }
 
 	  @EventHandler
