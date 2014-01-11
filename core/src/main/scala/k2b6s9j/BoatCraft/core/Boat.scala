@@ -72,7 +72,7 @@ object Boat {
 
     def shouldUseRenderHelper(p1: ItemRenderType, p2: ItemStack, p3: ItemRendererHelper): Boolean = true
 
-    def renderItem(p1: ItemRenderType, p2: ItemStack, p3: Array[AnyRef]): Unit = {
+    def renderItem(itemRenderType: ItemRenderType, itemStack: ItemStack, objects: AnyRef *): Unit = {
 
     }
   }
