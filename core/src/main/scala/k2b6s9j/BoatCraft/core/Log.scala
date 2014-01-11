@@ -5,7 +5,7 @@ import cpw.mods.fml.common.FMLLog
 import java.util.logging.Level
 import java.util.logging.Logger
 
-object Logger {
+object Log {
     def log: Logger = Logger.getLogger("BoatCraft")
 
   def info(msg:String) {

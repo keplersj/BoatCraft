@@ -3,7 +3,7 @@ package k2b6s9j.BoatCraft.core.utilities
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{ShapelessRecipes, ShapedRecipes, CraftingManager, IRecipe}
 import java.util
-import k2b6s9j.BoatCraft.core.Logger
+import k2b6s9j.BoatCraft.core.Log
 
 object Recipies {
 
@@ -26,7 +26,7 @@ object Recipies {
 
       if (ItemStack.areItemStacksEqual(resultItem, recipeResult))
       {
-        Logger.info("Removed Recipe: " + recipes.get(scan) + " -> " + recipeResult)
+        Log.info("Removed Recipe: " + recipes.get(scan) + " -> " + recipeResult)
         recipes.remove(scan)
       }
     }

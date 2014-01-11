@@ -17,9 +17,9 @@ object BoatCraft
     @EventHandler
 	  def PreInit (event:FMLPreInitializationEvent)
 	  {
-      Logger.info("BoatCraft")
-      Logger.info("Copyright Kepler Sticka-Jones 2013")
-      Logger.info("http://k2b6s9j.com/projects/minecraft/BoatCraft")
+      Log.info("BoatCraft")
+      Log.info("Copyright Kepler Sticka-Jones 2013")
+      Log.info("http://k2b6s9j.com/projects/minecraft/BoatCraft")
 
       //Entity Registration
       proxy.registerRenderers()
