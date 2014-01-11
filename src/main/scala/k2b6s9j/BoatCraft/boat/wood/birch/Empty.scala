@@ -1,6 +1,6 @@
 package k2b6s9j.BoatCraft.boat.wood.birch
 
-import k2b6s9j.BoatCraft.boat.Boat.{ItemCustomBoat, RenderBoat, EntityCustomBoat}
+import k2b6s9j.BoatCraft.boat.Boat.{ItemCustomBoat, RenderCustomBoat, EntityCustomBoat}
 import k2b6s9j.BoatCraft.boat.Materials
 import net.minecraft.world.World
 import net.minecraft.item.ItemStack

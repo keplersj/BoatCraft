@@ -1,6 +1,6 @@
 package k2b6s9j.BoatCraft.boat.wood.birch
 
-import k2b6s9j.BoatCraft.boat.Boat.{EntityBoatContainer, ItemCustomBoat, RenderBoat, EntityCustomBoat}
+import k2b6s9j.BoatCraft.boat.Boat.{EntityBoatContainer, ItemCustomBoat, RenderCustomBoat, EntityCustomBoat}
 import k2b6s9j.BoatCraft.boat.Materials
 import k2b6s9j.BoatCraft.boat.Modifiers
 import cpw.mods.fml.common.registry.GameRegistry
