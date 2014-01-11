@@ -23,11 +23,8 @@ object Empty {
   }
 
   object Item {
-
-    var ID: Int = _
-    var item: Item = new Item(ID)
-    GameRegistry.addRecipe(new ItemStack(item), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2))
-
+    var item: Item = _
+    //GameRegistry.addRecipe(new ItemStack(item), "W W", "WWW", Character.valueOf('W'), new ItemStack(Block.planks, 1, 2))
   }
 
   class Item(id: Int) extends ItemCustomBoat(id) {

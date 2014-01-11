@@ -25,11 +25,8 @@ object TNT {
   }
 
   object Item {
-
-    var ID: Int = _
-    var item: Item = new Item(ID)
-    RecipeRegistration.AddShapelessRecipe(new ItemStack(item), new ItemStack(Block.tnt), "boatBirch")
-
+    var item: Item = _
+    //RecipeRegistration.AddShapelessRecipe(new ItemStack(item), new ItemStack(Block.tnt), "boatBirch")
   }
 
   class Item(id: Int) extends ItemCustomBoat(id) {

@@ -25,6 +25,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.MathHelper
 import net.minecraft.world.World
+import net.minecraft.client.renderer.texture.TextureMap
+import net.minecraft.client.Minecraft
 
 object Boat {
 
@@ -156,10 +158,7 @@ object Boat {
 
     this.yOffset = this.height / 2.0F
 
-    def this(par1World: World,
-             par2: Double,
-             par4: Double,
-             par6: Double) {
+    def this(par1World: World, par2: Double, par4: Double, par6: Double) {
       this(par1World)
       this.setPosition(par2, par4 + this.yOffset.toDouble, par6)
       this.motionX = 0.0D
@@ -468,12 +467,6 @@ object Boat {
 
     private var dropContentsWhenDead: Boolean = true
 
-    /*
-    def this(par1World: World, par2: Double, par4: Double, par6: Double) {
-      this(par1World, par2, par4, par6)
-    }
-    */
-
     def getStackInSlot(par1: Int): ItemStack = this.boatContainerItems(par1)
 
     def decrStackSize(par1: Int, par2: Int): ItemStack = {
@@ -624,25 +617,13 @@ object Boat {
     }
   }
 
-  object RenderBoat {
-
-    private var texture: ResourceLocation = _
-  }
-
   class RenderBoat extends Render with IItemRenderer {
 
     protected var modelBoat: ModelBase = new ModelBoat()
 
-    protected val field_94145_f = new RenderBlocks()
-
     this.shadowSize = 0.5F
 
-    def renderBoat(boat: EntityCustomBoat,
-                   par2: Double,
-                   par4: Double,
-                   par6: Double,
-                   par8: Float,
-                   par9: Float) {
+    def renderBoat(boat: EntityCustomBoat, par2: Double, par4: Double, par6: Double, par8: Float, par9: Float) {
       GL11.glPushMatrix()
       GL11.glTranslatef(par2.toFloat, par4.toFloat, par6.toFloat)
       GL11.glRotatef(180.0F - par8, 0.0F, 1.0F, 0.0F)
@@ -660,31 +641,28 @@ object Boat {
       val k = boat.getDisplayTileData
       if (block != null) {
         GL11.glPushMatrix()
-        //this.func_110776_a(TextureMap.locationBlocksTexture) TODO: FIX THIS! This will most likely cause block rendering issues as it has in the past!
+        this.bindTexture(TextureMap.locationBlocksTexture)
         val f8 = 0.75F
         GL11.glScalef(f8, f8, f8)
         GL11.glTranslatef(0.0F, j.toFloat / 16.0F, 0.0F)
         this.renderBlockInBoat(boat, par9, block, k)
         GL11.glPopMatrix()
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
-        //this.func_110777_b(boat)
+        this.bindEntityTexture(boat)
       }
       val f4 = 0.75F
       GL11.glScalef(f4, f4, f4)
       GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4)
-      //this.func_110777_b(boat)
+      this.bindEntityTexture(boat)
       GL11.glScalef(-1.0F, -1.0F, 1.0F)
       this.modelBoat.render(boat, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)
       GL11.glPopMatrix()
     }
 
-    protected def renderBlockInBoat(boat: EntityCustomBoat,
-                                    par2: Float,
-                                    par3Block: Block,
-                                    par4: Int) {
-      val f1 = boat.getBrightness(par2)
+    protected def renderBlockInBoat(boat: EntityCustomBoat, float: Float, block: Block, int: Int) {
+      val brightness = boat.getBrightness(float)
       GL11.glPushMatrix()
-      this.field_94145_f.renderBlockAsItem(par3Block, par4, f1)
+      this.renderBlocks.renderBlockAsItem(block, int, brightness)
       GL11.glPopMatrix()
     }
 
@@ -701,14 +679,12 @@ object Boat {
       case _ => false
     }
 
-    def shouldUseRenderHelper(`type`: ItemRenderType, item: ItemStack, helper: ItemRendererHelper): Boolean = {
-      false
-    }
+    def shouldUseRenderHelper(`type`: ItemRenderType, item: ItemStack, helper: ItemRendererHelper): Boolean = false
 
     def renderItem(kind: ItemRenderType, item: ItemStack, var3: AnyRef*) = kind match {
       case _ =>
         GL11.glPushMatrix()
-        //Minecraft.getMinecraft.renderEngine.bindTexture(func_110781_a(getEntity)) TODO: FIX THIS! This will cause issues with binding of boat textures.
+        Minecraft.getMinecraft.renderEngine.bindTexture(getEntityTexture(getEntity()))
         var defaultScale = 1F
         GL11.glScalef(defaultScale, defaultScale, defaultScale)
         GL11.glRotatef(90, -1, 0, 0)
@@ -720,13 +696,9 @@ object Boat {
         GL11.glPopMatrix()
     }
 
-    def getTexture(): ResourceLocation = {
-      new ResourceLocation("textures/entity/boat.png")
-    }
+    def getTexture(): ResourceLocation = new ResourceLocation("textures/entity/boat.png")
 
-    def getEntity(): EntityCustomBoat = {
-      val entity: EntityCustomBoat = null
-      entity
-    }
+    def getEntity(): EntityCustomBoat = null
   }
+
 }

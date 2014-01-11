@@ -25,11 +25,8 @@ object Furnace {
   }
 
   object Item {
-
-    var ID: Int = _
-    var item: Item = new Item(ID)
-    RecipeRegistration.AddShapelessRecipe(new ItemStack(item), new ItemStack(Block.furnaceIdle), "boatOak")
-
+    var item: Item = _
+    //RecipeRegistration.AddShapelessRecipe(new ItemStack(item), new ItemStack(Block.furnaceIdle), "boatOak")
   }
 
   class Item(id: Int) extends ItemCustomBoat(id) {
