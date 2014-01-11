@@ -23,7 +23,7 @@ object Boat {
 
   case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double) extends EntityBoat(world, x, y, z)
 
-  abstract class EntityBoatContainer(par1World: World) extends EntityCustomBoat(par1World) with IInventory {
+  abstract class EntityBoatContainer(world: World, x: Double, y: Double, z: Double) extends EntityCustomBoat(world, x, y, z) with IInventory {
 
     private var boatContainerItems: Array[ItemStack] = new Array[ItemStack](36)
 
@@ -104,19 +104,6 @@ object Boat {
       par1NBTTagCompound.setTag("Items", nbttaglist)
     }
 
-    override protected def readEntityFromNBT(par1NBTTagCompound: NBTTagCompound) {
-      super.readEntityFromNBT(par1NBTTagCompound)
-      val nbttaglist = par1NBTTagCompound.getTagList("Items")
-      this.boatContainerItems = Array.ofDim[ItemStack](this.getSizeInventory)
-      for (i <- 0 until nbttaglist.tagCount()) {
-        val nbttagcompound1 = nbttaglist.tagAt(i).asInstanceOf[NBTTagCompound]
-        val j = nbttagcompound1.getByte("Slot") & 255
-        if (j >= 0 && j < this.boatContainerItems.length) {
-          this.boatContainerItems(j) = ItemStack.loadItemStackFromNBT(nbttagcompound1)
-        }
-      }
-    }
-
     override def interactFirst(player: EntityPlayer): Boolean = {
       if (player.isSneaking) {
         return false
@@ -141,7 +128,7 @@ object Boat {
             }
             itemstack.stackSize -= j
             val entityitem = new EntityItem(this.worldObj, this.posX + f.toDouble, this.posY + f1.toDouble,
-              this.posZ + f2.toDouble, new ItemStack(itemstack.itemID, j, itemstack.getItemDamage))
+              this.posZ + f2.toDouble, new ItemStack(itemstack, j, itemstack.getItemDamage))
             val f3 = 0.05F
             entityitem.motionX = (this.rand.nextGaussian().toFloat * f3).toDouble
             entityitem.motionY = (this.rand.nextGaussian().toFloat * f3 + 0.2F).toDouble
@@ -157,20 +144,12 @@ object Boat {
       var k: Int = 0
       k = 0
       while (k < 3) {
-        if (isCustomBoat) {
-          this.entityDropItem(customPlank(), 0.0F)
-        } else {
-          this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F)
-        }
+        this.dropItemWithOffset(Block.planks.blockID, 1, 0.0F)
         k
       }
       k = 0
       while (k < 2) {
-        if (isCustomBoat) {
-          this.entityDropItem(customStick(), 0.0F)
-        } else {
-          this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F)
-        }
+        this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F)
         k
       }
       if (doesBoatContainBlock()) {
