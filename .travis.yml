@@ -14,8 +14,6 @@ env:
 
 install:
   - ./gradlew setupCIWorkspace
-  
-script: ./gradlew buildNeeded
 
 after_success:
 - ./gradlew cobertura
