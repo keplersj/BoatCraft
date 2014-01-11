@@ -15,105 +15,11 @@ import net.minecraft.entity.item.EntityBoat
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.util.MathHelper
 import net.minecraft.world.World
 
 object Boat {
 
-  class ItemCustomBoat(par1: Int) extends ItemBoat(par1) {
-
-    override def onItemRightClick(par1ItemStack: ItemStack, par2World: World, par3EntityPlayer: EntityPlayer): ItemStack = {
-      val f = 1.0F
-      val f1 = par3EntityPlayer.prevRotationPitch +
-        (par3EntityPlayer.rotationPitch - par3EntityPlayer.prevRotationPitch) *
-          f
-      val f2 = par3EntityPlayer.prevRotationYaw +
-        (par3EntityPlayer.rotationYaw - par3EntityPlayer.prevRotationYaw) *
-          f
-      val d0 = par3EntityPlayer.prevPosX +
-        (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) *
-          f.toDouble
-      val d1 = par3EntityPlayer.prevPosY +
-        (par3EntityPlayer.posY - par3EntityPlayer.prevPosY) *
-          f.toDouble +
-        1.62D -
-        par3EntityPlayer.yOffset.toDouble
-      val d2 = par3EntityPlayer.prevPosZ +
-        (par3EntityPlayer.posZ - par3EntityPlayer.prevPosZ) *
-          f.toDouble
-      val vec3 = par2World.getWorldVec3Pool.getVecFromPool(d0, d1, d2)
-      val f3 = MathHelper.cos(-f2 * 0.017453292F - Math.PI.toFloat)
-      val f4 = MathHelper.sin(-f2 * 0.017453292F - Math.PI.toFloat)
-      val f5 = -MathHelper.cos(-f1 * 0.017453292F)
-      val f6 = MathHelper.sin(-f1 * 0.017453292F)
-      val f7 = f4 * f5
-      val f8 = f3 * f5
-      val d3 = 5.0D
-      val vec31 = vec3.addVector(f7.toDouble * d3, f6.toDouble * d3, f8.toDouble * d3)
-      val movingobjectposition = par2World.clip(vec3, vec31, true)
-      if (movingobjectposition == null) {
-        par1ItemStack
-      } else {
-        val vec32 = par3EntityPlayer.getLook(f)
-        var flag = false
-        val f9 = 1.0F
-        val list = par2World.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.boundingBox.addCoord(vec32.xCoord * d3,
-          vec32.yCoord * d3, vec32.zCoord * d3)
-          .expand(f9.toDouble, f9.toDouble, f9.toDouble))
-        var i: Int = 0
-        i = 0
-        while (i < list.size) {
-          val entity = list.get(i).asInstanceOf[Entity]
-          if (entity.canBeCollidedWith()) {
-            val f10 = entity.getCollisionBorderSize
-            val axisalignedbb = entity.boundingBox.expand(f10.toDouble, f10.toDouble, f10.toDouble)
-            if (axisalignedbb.isVecInside(vec3)) {
-              flag = true
-            }
-          }
-          i
-        }
-        if (flag) {
-          par1ItemStack
-        } else {
-          if (movingobjectposition.typeOfHit == EnumMovingObjectType.TILE) {
-            i = movingobjectposition.blockX
-            val j = movingobjectposition.blockY
-            val k = movingobjectposition.blockZ
-            if (par2World.getBlockId(i, j, k) == Block.snow.blockID) {
-              j
-            }
-            val entityboat = getEntity(par2World, i, j, k)
-            entityboat.rotationYaw = (((MathHelper.floor_double((par3EntityPlayer.rotationYaw * 4.0F / 360.0F).toDouble +
-              0.5D) &
-              3) -
-              1) *
-              90).toFloat
-            if (!par2World.getCollidingBoundingBoxes(entityboat, entityboat.boundingBox.expand(-0.1D, -0.1D,
-              -0.1D))
-              .isEmpty) {
-              return par1ItemStack
-            }
-            if (!par2World.isRemote) {
-              par2World.spawnEntityInWorld(entityboat)
-            }
-            if (!par3EntityPlayer.capabilities.isCreativeMode) {
-              par1ItemStack.stackSize
-            }
-          }
-          par1ItemStack
-        }
-      }
-    }
-
-    def getEntity(world: World,
-                  x: Int,
-                  y: Int,
-                  z: Int): EntityCustomBoat = {
-      val entity = new EntityCustomBoat(world, (x.toFloat + 0.5F).toDouble, (y.toFloat + 1.0F).toDouble, (z.toFloat + 0.5F).toDouble)
-      entity
-    }
-  }
+  class ItemCustomBoat extends ItemBoat
 
   case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double) extends EntityBoat(world, x, y, z)
 
