@@ -1,13 +1,13 @@
 package k2b6s9j.BoatCraft.registry
 
 import k2b6s9j.BoatCraft.boat.wood._
-import net.minecraft.item.Item
+import net.minecraft.item.ItemBoat
 
 object LanguageRegistry {
 
     def RegisterName() {
 
-      cpw.mods.fml.common.registry.LanguageRegistry.addName(Item.boat, "Vanilla Boat")
+      cpw.mods.fml.common.registry.LanguageRegistry.addName(ItemBoat, "Vanilla Boat")
 
       cpw.mods.fml.common.registry.LanguageRegistry.addName(oak.Empty.Item.item, "Oak Wood Boat")
       cpw.mods.fml.common.registry.LanguageRegistry.addName(oak.Chest.Item.item, "Chest Oak Wood Boat")
