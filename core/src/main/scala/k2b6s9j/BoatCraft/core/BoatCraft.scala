@@ -5,7 +5,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 
-import k2b6s9j.BoatCraft.utilities.log.ModLogger
 import cpw.mods.fml.common.{SidedProxy, Mod}
 import k2b6s9j.BoatCraft.core.Proxy.CommonProxy
 
@@ -18,9 +17,9 @@ object BoatCraft
     @EventHandler
 	  def PreInit (event:FMLPreInitializationEvent)
 	  {
-      ModLogger.info("BoatCraft")
-      ModLogger.info("Copyright Kepler Sticka-Jones 2013")
-      ModLogger.info("http://k2b6s9j.com/projects/minecraft/BoatCraft")
+      Logger.info("BoatCraft")
+      Logger.info("Copyright Kepler Sticka-Jones 2013")
+      Logger.info("http://k2b6s9j.com/projects/minecraft/BoatCraft")
 
       //Entity Registration
       proxy.registerRenderers()
