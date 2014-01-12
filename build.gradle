@@ -63,3 +63,9 @@ project(':forestry') {
         compile project(':core')
     }
 }
+
+project(':thaumcraft') {
+    dependencies {
+        compile project(':core')
+    }
+}
