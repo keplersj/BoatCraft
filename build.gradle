@@ -47,14 +47,14 @@ allprojects {
     tasks.withType(ScalaCompile) {
         scalaCompileOptions.useAnt = false
     }
-    
-    cobertura.coverageFormats = ['html', 'xml']
 }
 
 cobertura {
    rootProject.subprojects.each {
      coverageDirs << file("${it.name}/build/classes/main")
    }
+   coverageFormats = ['html', 'xml']
+   coverageIgnoreTrivial = true;
 }
 
 project(':vanilla') {
