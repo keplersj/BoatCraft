@@ -57,6 +57,10 @@ Rails had their turn, now out to the Minecraftian seas. Out there we will inteac
 - Adds Wenge Wood
 - Adds Willow Wood
 
+#### ThaumCraft: Materials
+- Adds Silverwood
+- Add Greatwood
+
 ### Special Thanks
 - SeargeDP, for creating ModJam and giving me the perfect oppurtunity to make this mod
 - CiderCraft, for creating his CiderBoats addon for IC2 and giving me and inspiration
