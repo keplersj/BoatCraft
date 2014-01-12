@@ -10,19 +10,10 @@ jdk:
   - openjdk6
 
 env:
-- TERM=dumb
-
-
-before_install:
-  - chmod +x gradlew
+  - TERM=dumb
 
 install:
-  - true
-
-before_script:
   - ./gradlew setupCIWorkspace
-
-script: ./gradlew buildNeeded
 
 after_success:
 - ./gradlew cobertura
