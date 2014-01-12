@@ -59,7 +59,7 @@ Rails had their turn, now out to the Minecraftian seas. Out there we will inteac
 
 #### ThaumCraft: Materials
 - Adds Silverwood
-- Add Greatwood
+- Adds Greatwood
 
 ### Special Thanks
 - SeargeDP, for creating ModJam and giving me the perfect oppurtunity to make this mod
