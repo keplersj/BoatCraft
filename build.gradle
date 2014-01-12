@@ -1,3 +1,6 @@
+apply plugin: 'cobertura'
+apply plugin: 'coveralls'
+
 buildscript {
     repositories {
         mavenCentral()
@@ -20,9 +23,6 @@ buildscript {
 allprojects {
     apply plugin: 'forge'
     apply plugin: 'scala'
-    apply plugin: 'java'
-    apply plugin: 'cobertura'
-    apply plugin: 'coveralls'
 
     group = 'k2b6s9j.BoatCraft'
     version = '2.0'
