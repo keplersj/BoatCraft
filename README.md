@@ -17,6 +17,7 @@ Rails had their turn, now out to the Minecraftian seas. Out there we will inteac
 - Creates an Empty Materials Matrix for submodules to add too.
 - Creates an Empty Modifiers Matric for submodiles to add too.
 - Handles Lead Based Docking
+- Handles Name Tags
 
 #### Vanilla: Materials
 - Adds Oak Wood
