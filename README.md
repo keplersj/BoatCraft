@@ -30,6 +30,7 @@ Rails had their turn, now out to the Minecraftian seas. Out there we will inteac
 - Adds Furnaces
 - Adds TNT
 - Adds Hoppers
+- Adds Crafting Bench
 
 #### Forestry: Materials
 - Adds Acacia Wood
