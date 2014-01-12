@@ -13,8 +13,7 @@ env:
   - TERM=dumb
 
 install:
-  - ./gradlew setupCIWorkspace
+  - gradle setupCIWorkspace
 
 after_success:
-- ./gradlew cobertura
-- ./gradlew coveralls
+  - gradle cobertura coveralls
