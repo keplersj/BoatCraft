@@ -47,9 +47,10 @@ allprojects {
     tasks.withType(ScalaCompile) {
         scalaCompileOptions.useAnt = false
     }
+    
+    cobertura.coverageFormats = ['html', 'xml']
 }
 
-cobertura.coverageFormats = ['html', 'xml']
 cobertura.coverageSourceDirs = sourceSets.main.scala.srcDirs
 
 project(':vanilla') {
