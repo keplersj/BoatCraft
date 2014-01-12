@@ -14,46 +14,48 @@ Rails had their turn, now out to the Minecraftian seas. Out there we will inteac
 - Handles Rendering of all of the Boats
 - Handles Piecing all of the content modules together in the Boat Matrix
 - Handles Basic Mod Mechanics
+- Creates an Empty Materials Matrix for submodules to add too.
+- Creates an Empty Modifiers Matric for submodiles to add too.
 
 #### Vanilla: Materials
-- Adds Oak Wood to the Boat Material Matrix
-- Adds Spruce Wood to the Boat Material Matrix
-- Adds Birch Wood to the Boat Material Matrix
-- Adds Jungle Wood to the Boat Material Matrix
-- Adds Acacia Wood to the Boat Material Matrix
-- Adds Dark Oak Wood to the Boat Material Matrix
+- Adds Oak Wood
+- Adds Spruce Wood
+- Adds Birch Wood
+- Adds Jungle Wood
+- Adds Acacia Wood
+- Adds Dark Oak Wood
 
 #### Vanilla: Modifiers
-- Adds Chests to the Boat Modifier Matrix
-- Adds Furnaces to the Boat Modifier Matrix
-- Adds TNT to the Boat Modifier Matrix
-- Adds Hoppers to the Boat Modifier Matrix
+- Adds Chests
+- Adds Furnaces
+- Adds TNT
+- Adds Hoppers
 
 #### Forestry: Materials
-- Adds Acacia Wood to the Boat Material Matrix
-- Adds Balsa Wood to the Boat Material Matrix
-- Adds Baobob Wood to the Boat Material Matrix
-- Adds Cherry Wood to the Boat Material Matrix
-- Adds Chestnut Wood to the Boat Material Matrix
-- Adds Citrus Wood to the Boat Material Matrix
-- Adds Ebony Wood to the Boat Material Matrix
-- Adds Greenheart Wood to the Boat Material Matrix
-- Adds Kapok Wood to the Boat Material Matrix
-- Adds Larch Wood to the Boat Material Matrix
-- Adds Lime Wood to the Boat Material Matrix
-- Adds Mahoe Wood to the Boat Material Matrix
-- Adds Mahogany Wood to the Boat Material Matrix
-- Adds Maple Wood to the Boat Material Matrix
-- Adds Palm Wood to the Boat Material Matrix
-- Adds Papaya Wood to the Boat Material Matrix
-- Adds Pine Wood to the Boat Material Matrix
-- Adds Plum Wood to the Boat Material Matrix
-- Adds Poplar Wood to the Boat Material Matrix
-- Adds Sequoia Wood to the Boat Material Matrix
-- Adds Teak Wood to the Boat Material Matrix
-- Adds Walnut Wood to the Boat Material Matrix
-- Adds Wenge Wood to the Boat Material Matrix
-- Adds Willow Wood to the Boat Material Matrix
+- Adds Acacia Wood
+- Adds Balsa Wood
+- Adds Baobob Wood
+- Adds Cherry Wood
+- Adds Chestnut Wood
+- Adds Citrus Wood
+- Adds Ebony Wood
+- Adds Greenheart Wood
+- Adds Kapok Wood
+- Adds Larch Wood
+- Adds Lime Wood
+- Adds Mahoe Wood
+- Adds Mahogany Wood
+- Adds Maple Wood
+- Adds Palm Wood
+- Adds Papaya Wood
+- Adds Pine Wood
+- Adds Plum Wood
+- Adds Poplar Wood
+- Adds Sequoia Wood
+- Adds Teak Wood
+- Adds Walnut Wood
+- Adds Wenge Wood
+- Adds Willow Wood
 
 ### Special Thanks
 - SeargeDP, for creating ModJam and giving me the perfect oppurtunity to make this mod
