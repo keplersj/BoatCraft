@@ -13,8 +13,8 @@ object BoatCraft
 {
 	@SidedProxy(clientSide="k2b6s9j.BoatCraft.Proxy$ClientProxy", serverSide="k2b6s9j.BoatCraft.Proxy$CommonProxy")
 	var proxy: CommonProxy = null
-
-    	@EventHandler
+	
+	@EventHandler
 	def PreInit (event:FMLPreInitializationEvent) {
       		Log.info("BoatCraft")
       		Log.info("Copyright Kepler Sticka-Jones 2013")
