@@ -1,8 +1,6 @@
 package k2b6s9j.BoatCraft.core
 
 import cpw.mods.fml.common.Mod.EventHandler
-import cpw.mods.fml.common.event.FMLInitializationEvent
-import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 
 import cpw.mods.fml.common.{SidedProxy, Mod}
@@ -23,5 +21,5 @@ object BoatCraft
       		//Entity Registration
       		proxy.registerRenderers()
 	}
-  
+
 }
