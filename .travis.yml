@@ -11,6 +11,14 @@ jdk:
 
 env:
   - TERM=dumb
+  - PROJECT=Core
+  - PROJECT=Compatibility:BinniesMods:ExtraTrees:Materials:Wood
+  - PROJECT=Compatibility:BiomesOPlenty:Materials:Wood
+  - PROJECT=Compatibility:ExtraBiomesXL:Materials:Wood
+  - PROJECT=Compatibility:Forestry:Materials:Wood
+  - PROJECT=Compatibility:Natura:Materials:Wood
+  - PROJECT=Compatibility:Thaumcraft:Materials:Wood
+  - PROJECT=Compatibility:Vanilla:Materials:Wood
 
 install:
   - gradle setupCIWorkspace
