@@ -1,0 +1,3 @@
+rootProject.name = 'Compatibility'
+
+include 'BiomesOPlenty', 'ExtraBiomesXL', 'Forestry', 'Thaumcraft', 'Vanilla'

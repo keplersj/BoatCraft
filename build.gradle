@@ -56,32 +56,10 @@ allprojects {
     }
 }
 
-project(':vanilla') {
-    dependencies {
-        compile project(':core')
-    }
-}
-
-project(':BiomesOPlenty') {
-    dependencies {
-        compile project(':core')
-    }
-}
-
-project(':ExtraBiomesXL') {
-    dependencies {
-        compile project(':core')
-    }
-}
-
-project(':forestry') {
-    dependencies {
-        compile project(':core')
-    }
-}
-
-project(':thaumcraft') {
-    dependencies {
-        compile project(':core')
+project (':Compatibility') {
+    allprojects {
+        dependencies {
+            compile project (':Core')
+        }
     }
 }

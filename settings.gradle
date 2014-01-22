@@ -1,3 +1,3 @@
 rootProject.name = 'BoatCraft'
 
-include 'core', 'vanilla', 'BiomesOPlenty', 'ExtraBiomesXL', 'forestry', 'thaumcraft'
+include 'Core', 'Compatibility'
