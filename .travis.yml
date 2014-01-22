@@ -21,9 +21,9 @@ env:
   - PROJECT=Compatibility:Vanilla:Materials:Wood
 
 install:
-  - gradle setupCIWorkspace
+  - gradle :$PROJECT:setupCIWorkspace
 
-script: gradle buildNeeded
+script: gradle :$PROJECT:assemble
 
 after_success:
-  - gradle :Core:cobertura :Core:coveralls
+  - gradle :$PROJECT:cobertura :$PROJECT:coveralls
