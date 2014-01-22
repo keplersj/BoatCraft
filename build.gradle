@@ -68,6 +68,12 @@ project(':forestry') {
     }
 }
 
+project(':BiomesOPlenty') {
+    dependencies {
+        compile project(':core')
+    }
+}
+
 project(':thaumcraft') {
     dependencies {
         compile project(':core')
