@@ -15,5 +15,7 @@ env:
 install:
   - gradle setupCIWorkspace
 
+script: gradle buildNeeded
+
 after_success:
   - gradle :Core:cobertura :Core:coveralls
