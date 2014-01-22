@@ -1,3 +1,4 @@
 rootProject.name = 'BoatCraft'
 
-include 'Core', 'Compatibility'
+include 'Core'
+include 'Compatibility'
