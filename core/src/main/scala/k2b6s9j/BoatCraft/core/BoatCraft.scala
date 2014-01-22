@@ -14,12 +14,16 @@ object BoatCraft
 	
 	@EventHandler
 	def PreInit (event:FMLPreInitializationEvent) {
-      		Log.info("BoatCraft")
-      		Log.info("Copyright Kepler Sticka-Jones 2013-2014")
-      		Log.info("http://k2b6s9j.com/projects/minecraft/BoatCraft")
+    PrintModInfo
 
-      		//Entity Registration
-      		proxy.registerRenderers()
+    //Entity Registration
+    proxy.registerRenderers()
 	}
+
+  private def PrintModInfo {
+    Log.info("BoatCraft")
+    Log.info("Copyright Kepler Sticka-Jones 2013-2014")
+    Log.info("http://k2b6s9j.com/projects/minecraft/BoatCraft")
+  }
 
 }
