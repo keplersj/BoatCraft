@@ -63,7 +63,7 @@ object Materials {
     trait Jacaranda {
 
     }
-    
+
   }
 
 }

@@ -62,13 +62,19 @@ project(':vanilla') {
     }
 }
 
-project(':forestry') {
+project(':BiomesOPlenty') {
     dependencies {
         compile project(':core')
     }
 }
 
-project(':BiomesOPlenty') {
+project(':ExtraBiomesXL') {
+    dependencies {
+        compile project(':core')
+    }
+}
+
+project(':forestry') {
     dependencies {
         compile project(':core')
     }
