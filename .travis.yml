@@ -16,4 +16,4 @@ install:
   - gradle setupCIWorkspace
 
 after_success:
-  - gradle coveralls
+  - gradle cobertura coveralls
