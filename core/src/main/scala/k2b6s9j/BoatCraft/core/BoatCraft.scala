@@ -23,14 +23,5 @@ object BoatCraft
       		//Entity Registration
       		proxy.registerRenderers()
 	}
-
-	@EventHandler
-	def Init (event:FMLInitializationEvent) {
-	
-	}
-
-	@EventHandler
-	def PostInit (event:FMLPostInitializationEvent) {
-
-	}
+  
 }
