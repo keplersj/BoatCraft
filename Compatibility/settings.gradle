@@ -1,7 +1,0 @@
-project.name = 'Compatibility'
-
-include 'BiomesOPlenty'
-include 'ExtraBiomesXL'
-include 'Forestry'
-include 'Thaumcraft'
-include 'Vanilla'
