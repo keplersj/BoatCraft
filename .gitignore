@@ -28,6 +28,9 @@ out
 *.log
 *.log.lck
 
+# xcode
+*.xcodeproj
+
 #minecraft
 minecraft
 config
