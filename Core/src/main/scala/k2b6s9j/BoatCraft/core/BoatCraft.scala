@@ -6,7 +6,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.{SidedProxy, Mod}
 import k2b6s9j.BoatCraft.core.Proxy.CommonProxy
 
-@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", modLanguage = "scala",dependencies="after:Forestry;")
+@Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", modLanguage = "scala")
 object BoatCraft
 {
 	@SidedProxy(clientSide="k2b6s9j.BoatCraft.Proxy$ClientProxy", serverSide="k2b6s9j.BoatCraft.Proxy$CommonProxy")
