@@ -12,16 +12,16 @@ object Recipes {
     val recipes = CraftingManager.getInstance.getRecipeList.asInstanceOf[util.ArrayList[Any]]
     for (scan <- 0 until recipes.size) {
       val tmpRecipe = recipes.get(scan).asInstanceOf[IRecipe]
-      if (tmpRecipe.isInstanceOf[ShapedRecipes])
-      {
-        val recipe: ShapedRecipes = tmpRecipe.asInstanceOf[ShapedRecipes]
-        recipeResult = recipe.getRecipeOutput
+      tmpRecipe match {
+        case recipe: ShapedRecipes =>
+          recipeResult = recipe.getRecipeOutput
+        case _ =>
       }
 
-      if (tmpRecipe.isInstanceOf[ShapelessRecipes])
-      {
-        val recipe: ShapelessRecipes = tmpRecipe.asInstanceOf[ShapelessRecipes]
-        recipeResult = recipe.getRecipeOutput
+      tmpRecipe match {
+        case recipe: ShapelessRecipes =>
+          recipeResult = recipe.getRecipeOutput
+        case _ =>
       }
 
       if (ItemStack.areItemStacksEqual(resultItem, recipeResult))
