@@ -16,6 +16,7 @@ env:
   - TERM=dumb PROJECT=Compatibility:Natura:Materials:Wood
   - TERM=dumb PROJECT=Compatibility:Thaumcraft:Materials:Wood
   - TERM=dumb PROJECT=Compatibility:Vanilla:Materials:Wood
+  - TERM=dumb PROJECT=SeaCraft
 
 install:
   - gradle :$PROJECT:setupCIWorkspace
