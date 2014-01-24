@@ -13,7 +13,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
 
-object Boat {
+class Boat {
 
   class ItemCustomBoat extends ItemBoat
 
