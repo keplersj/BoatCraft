@@ -5,7 +5,7 @@ import net.minecraft.item.crafting.{ShapelessRecipes, ShapedRecipes, CraftingMan
 import java.util
 import k2b6s9j.BoatCraft.core.BoatCraft
 
-object Recipies {
+object Recipes {
 
   def RemoveRecipe(resultItem: ItemStack) {
     var recipeResult: ItemStack = null
