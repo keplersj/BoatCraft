@@ -25,3 +25,15 @@ out
 *.iml
 *.ipr
 *.iws
+*.log
+*.log.lck
+
+# xcode
+*.xcodeproj
+
+#minecraft
+minecraft
+config
+crash-reports
+saves
+stats
