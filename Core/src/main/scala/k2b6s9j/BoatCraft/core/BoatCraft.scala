@@ -26,7 +26,7 @@ object BoatCraft
     PrintModInfo
 
     //All Boat Materials should be atleast rideable
-    ModifierRegistry.addModifier(asInstanceOf[Empty])
+    ModifierRegistry.addModifier(new Empty {})
 
     BuildMatrix
 

@@ -11,12 +11,12 @@ object Mod {
 
   @EventHandler
   def preInit(event: FMLPreInitializationEvent) {
-    MaterialRegistry.addMaterial(asInstanceOf[Oak])
-    MaterialRegistry.addMaterial(asInstanceOf[Spruce])
-    MaterialRegistry.addMaterial(asInstanceOf[Birch])
-    MaterialRegistry.addMaterial(asInstanceOf[Jungle])
-    MaterialRegistry.addMaterial(asInstanceOf[Acacia])
-    MaterialRegistry.addMaterial(asInstanceOf[DarkOak])
+    MaterialRegistry.addMaterial(new Oak {} )
+    MaterialRegistry.addMaterial(new Spruce {} )
+    MaterialRegistry.addMaterial(new Birch {} )
+    MaterialRegistry.addMaterial(new Jungle {} )
+    MaterialRegistry.addMaterial(new Acacia {} )
+    MaterialRegistry.addMaterial(new DarkOak {} )
   }
 
 }
