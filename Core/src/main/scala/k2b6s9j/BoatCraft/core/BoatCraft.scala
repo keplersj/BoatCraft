@@ -14,7 +14,7 @@ import k2b6s9j.BoatCraft.core.Boat.ItemCustomBoat
 @Mod(modid = "BoatCraft", name = "BoatCraft", version = "2.0", modLanguage = "scala")
 object BoatCraft
 {
-	@SidedProxy(clientSide="k2b6s9j.BoatCraft.Proxy$ClientProxy", serverSide="k2b6s9j.BoatCraft.Proxy$CommonProxy")
+	@SidedProxy(clientSide="k2b6s9j.BoatCraft.core.Proxy$ClientProxy", serverSide="k2b6s9j.BoatCraft.core.Proxy$CommonProxy")
 	var proxy: CommonProxy = null
 
   var log: Logger = null
