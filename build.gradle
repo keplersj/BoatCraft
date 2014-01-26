@@ -54,18 +54,18 @@ allprojects {
     }
 }
 
-project (':Minecraft' {
-    project (':Forge') {
+project (':Minecraft') {
+    project (':Minecraft:Forge') {
         apply plugin: 'forge'
     
         minecraft {
             version = '1.7.2-10.12.0.1012'
         }
     
-        project (':Forge:Compatibility') {
+        project (':Minecraft:Forge:Compatibility') {
             allprojects {
                 dependencies {
-                    compile project (':Forge:Core')
+                    compile project (':Minecraft:Forge:Core')
                 }
             }
         }
