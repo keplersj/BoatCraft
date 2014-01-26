@@ -8,14 +8,14 @@ jdk:
   - openjdk6
 
 env:
-  - TERM=dumb PROJECT=Forge:Core
-  - TERM=dumb PROJECT=Forge:Compatibility:BinniesMods:ExtraTrees:Materials:Wood
-  - TERM=dumb PROJECT=Forge:Compatibility:BiomesOPlenty:Materials:Wood
-  - TERM=dumb PROJECT=Forge:Compatibility:ExtraBiomesXL:Materials:Wood
-  - TERM=dumb PROJECT=Forge:Compatibility:Forestry:Materials:Wood
-  - TERM=dumb PROJECT=Forge:Compatibility:Natura:Materials:Wood
-  - TERM=dumb PROJECT=Forge:Compatibility:Thaumcraft:Materials:Wood
-  - TERM=dumb PROJECT=Forge:Compatibility:Vanilla:Materials:Wood
+  - TERM=dumb PROJECT=Minecraft:Forge:Core
+  - TERM=dumb PROJECT=Minecraft:Forge:Compatibility:BinniesMods:ExtraTrees:Materials:Wood
+  - TERM=dumb PROJECT=Minecraft:Forge:Compatibility:BiomesOPlenty:Materials:Wood
+  - TERM=dumb PROJECT=Minecraft:Forge:Compatibility:ExtraBiomesXL:Materials:Wood
+  - TERM=dumb PROJECT=Minecraft:Forge:Compatibility:Forestry:Materials:Wood
+  - TERM=dumb PROJECT=Minecraft:Forge:Compatibility:Natura:Materials:Wood
+  - TERM=dumb PROJECT=Minecraft:Forge:Compatibility:Thaumcraft:Materials:Wood
+  - TERM=dumb PROJECT=Minecraft:Forge:Compatibility:Vanilla:Materials:Wood
 
 install:
   - gradle :$PROJECT:setupCIWorkspace

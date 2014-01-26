@@ -32,7 +32,6 @@ out
 *.xcodeproj
 
 #minecraft
-minecraft
 config
 crash-reports
 saves
