@@ -15,6 +15,8 @@ env:
   - TERM=dumb PROJECT=Minecraft:Forge:Compatibility:Natura:Materials:Wood
   - TERM=dumb PROJECT=Minecraft:Forge:Compatibility:Thaumcraft:Materials:Wood
   - TERM=dumb PROJECT=Minecraft:Forge:Compatibility:Vanilla:Materials:Wood
+  
+install: true
 
 script: gradle :$PROJECT:assemble
 
