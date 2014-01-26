@@ -22,6 +22,8 @@ allprojects {
     apply plugin: 'scala'
     apply plugin: 'cobertura'
     apply plugin: 'coveralls'
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
 
     group = 'k2b6s9j.BoatCraft'
     version = '2.0'
@@ -59,10 +61,10 @@ project (':Forge') {
         version = '1.7.2-10.12.0.1012'
     }
     
-    project (':Compatibility') {
+    project (':Forge:Compatibility') {
         allprojects {
             dependencies {
-                compile project (':Core')
+                compile project (':Forge:Core')
             }
         }
     }
