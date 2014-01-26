@@ -2,18 +2,14 @@ package k2b6s9j.BoatCraft.core
 
 import net.minecraft.item.ItemBoat
 import net.minecraft.util._
-import net.minecraft.entity.item.EntityItem
 import net.minecraft.inventory.IInventory
 import java.lang.String
-import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import net.minecraftforge.client.IItemRenderer
 import net.minecraft.client.renderer.entity.RenderBoat
 import net.minecraftforge.client.IItemRenderer.{ItemRendererHelper, ItemRenderType}
-import net.minecraft.block.Block
 import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityBoat
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
 
