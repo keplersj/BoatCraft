@@ -17,9 +17,6 @@ env:
   - TERM=dumb PROJECT=Minecraft:Forge:Compatibility:Thaumcraft:Materials:Wood
   - TERM=dumb PROJECT=Minecraft:Forge:Compatibility:Vanilla:Materials:Wood
 
-install:
-  - gradle :$PROJECT:setupCIWorkspace
-
 script: gradle :$PROJECT:assemble
 
 after_success:
