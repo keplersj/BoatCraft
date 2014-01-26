@@ -1,7 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'scala'
-apply plugin: 'cobertura'
-apply plugin: 'coveralls'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 
@@ -25,6 +23,9 @@ buildscript {
 }
 
 allprojects {
+    apply plugin: 'cobertura'
+    apply plugin: 'coveralls'
+
     group = 'k2b6s9j.BoatCraft'
     version = '2.0'
 
