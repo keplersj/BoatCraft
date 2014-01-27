@@ -54,21 +54,21 @@ allprojects {
         coverageIgnoreTrivial = true;
     }
 }
-
-project (':Minecraft') {
-    project (':Minecraft:Forge') {
-        apply plugin: 'forge'
+project (':Minecraft:Forge') {
     
+    allprojects {
+        apply plugin: 'forge'
+        
         minecraft {
             version = '1.7.2-10.12.0.1012'
         }
-    
-        project (':Minecraft:Forge:Compatibility') {
-            allprojects {
-                dependencies {
-                    compile project (':Minecraft:Forge:Core')
-                }
-            }
+    }
+}
+
+project (':Minecraft:Forge:Compatibility') {
+    allprojects {
+        dependencies {
+            compile project (':Minecraft:Forge:Core')
         }
     }
 }

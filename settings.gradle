@@ -1,6 +1,9 @@
 rootProject.name = 'BoatCraft'
 
+include 'Minecraft'
+include 'Minecraft:Forge'
 include 'Minecraft:Forge:Core'
+include 'Minecraft:Forge:Compatibility'
 include 'Minecraft:Forge:Compatibility:BinniesMods:ExtraTrees:Materials:Wood'
 include 'Minecraft:Forge:Compatibility:BiomesOPlenty:Materials:Wood'
 include 'Minecraft:Forge:Compatibility:ExtraBiomesXL:Materials:Wood'
