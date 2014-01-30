@@ -22,11 +22,12 @@ buildscript {
     }
 }
 
+group = 'k2b6s9j.BoatCraft'
+
 allprojects {
     apply plugin: 'cobertura'
     apply plugin: 'coveralls'
 
-    group = 'k2b6s9j.BoatCraft'
     version = '2.0-SNAPSHOT'
 
     repositories {
@@ -60,8 +61,6 @@ project (':Minecraft:Forge') {
     allprojects {
         apply plugin: 'forge'
         
-        group = 'k2b6s9j.BoatCraft.Minecraft.Forge'
-        
         minecraft {
             version = '1.7.2-10.12.0.1012'
         }
@@ -70,8 +69,6 @@ project (':Minecraft:Forge') {
 
 project (':Minecraft:Forge:Compatibility') {
     allprojects {
-        group = 'k2b6s9j.BoatCraft.Minecraft.Forge.Compatibility'
-        
         dependencies {
             compile project (':Minecraft:Forge:Core')
         }
