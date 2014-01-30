@@ -1,1 +1,3 @@
-group = 'k2b6s9j.Minecraft.Forge.Compatibility.BinniesMods'
+allprojects {
+  group = 'k2b6s9j.Minecraft.Forge.Compatibility.BinniesMods'
+}
