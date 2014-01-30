@@ -27,7 +27,7 @@ allprojects {
     apply plugin: 'coveralls'
 
     group = 'k2b6s9j.BoatCraft'
-    version = '2.0'
+    version = '2.0-SNAPSHOT'
 
     repositories {
         mavenCentral()
