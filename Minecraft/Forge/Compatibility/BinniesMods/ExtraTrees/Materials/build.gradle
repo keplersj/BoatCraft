@@ -1,3 +1,1 @@
-allprojects {
-  group = 'k2b6s9j.BoatCraft.Minecraft.Forge.Compatibility.BinniesMods.ExtraTrees.Materials'
-}
+group = 'k2b6s9j.BoatCraft.Minecraft.Forge.Compatibility.BinniesMods.ExtraTrees'
