@@ -14,20 +14,17 @@ buildscript {
             name = "Sonatype Snapshots"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
-        maven { url 'http://dl.bintray.com/jfrog/jfrog-jars' }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.1-SNAPSHOT'
         classpath 'net.saliman:gradle-cobertura-plugin:2.2.2'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.2.4'
-        classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '2.1.0')
     }
 }
 
 allprojects {
     apply plugin: 'cobertura'
     apply plugin: 'coveralls'
-    apply plugin: 'artifactory'
 
     group = 'k2b6s9j.BoatCraft'
     version = '2.0-SNAPSHOT'
