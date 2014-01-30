@@ -26,6 +26,7 @@ allprojects {
     apply plugin: 'cobertura'
     apply plugin: 'coveralls'
 
+    group = 'k2b6s9j.BoatCraft'
     version = '2.0-SNAPSHOT'
 
     repositories {
@@ -53,6 +54,7 @@ allprojects {
         coverageIgnoreTrivial = true;
     }
 }
+
 project (':Minecraft:Forge') {
     
     allprojects {
