@@ -22,7 +22,7 @@ buildscript {
     }
 }
 
-group = 'k2b6s9j.BoatCraft'
+group = 'k2b6s9j'
 
 allprojects {
     apply plugin: 'cobertura'
