@@ -5,7 +5,9 @@ import net.minecraft.util.ResourceLocation
 
 trait Spruce extends Material {
 
-	override def texture: ResourceLocation = new ResourceLocation("boatcraft:compatibility/vanilla/textures/boats/wood/spruce.png")
+	override def texture: ResourceLocation = 
+		new ResourceLocation("boatcraft",
+				"textures/model/boat/vanilla/wood/spruce.png")
 	override def name: String = "Spruce"
 
 }

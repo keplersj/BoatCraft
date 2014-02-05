@@ -1,26 +1,33 @@
 package k2b6s9j.boatcraft.core.registry
 
+import java.util.{Map, HashMap, List}
 import k2b6s9j.boatcraft.core.traits.Modifier
 import k2b6s9j.boatcraft.core.BoatCraft
+import net.minecraft.item.ItemStack
+import scala.collection.JavaConversions._
 
-object ModifierRegistry {
-
-	var modifiers: Array[Modifier] = new Array[Modifier](0)
-
-	def addModifier(newModifier: Modifier)
+object ModifierRegistry
+{
+	var modifiers: Map[String, Modifier] = new HashMap[String, Modifier]
+	
+	def addModifier(newMaterial: Modifier)
 	{
-		modifiers :+= newModifier
-		BoatCraft.log.info("Added " + newModifier.name + " to the Modifier array.")
+		modifiers put(newMaterial toString, newMaterial)
+		BoatCraft.log.info("Added " + newMaterial.name + " to the Modifier set.")
 	}
 
-	def addModifiers(newModifiers: Array[Modifier])
+	def addModifiers(newMaterials: List[Modifier])
 	{
-		modifiers ++= newModifiers
-		for (modifier: Modifier <- newModifiers)
-			BoatCraft.log.info("Added " + modifier.name + " to the Modifier array.")
+		for (modifier: Modifier <- newMaterials)
+		{
+			modifiers put(modifier toString, modifier)
+			BoatCraft.log.info("Added " + modifier.name + " to the Modifier set.")
+		}
 	}
 
-	def getModifier(meta: Int): Modifier =
-		modifiers(meta & (1 << 8 - 1))
+	def getModifier(name: String): Modifier =
+		modifiers get name
 
+	def getModifier(stack: ItemStack): Modifier =
+		modifiers get stack.stackTagCompound.getString("modifier")
 }

@@ -5,7 +5,9 @@ import net.minecraft.util.ResourceLocation
 
 trait Jungle extends Material {
 
-	override def texture: ResourceLocation = new ResourceLocation("boatcraft:compatibility/vanilla/textures/boats/wood/jungle.png")
+	override def texture: ResourceLocation = 
+		new ResourceLocation("boatcraft",
+				"textures/model/boat/vanilla/wood/jungle.png")
 	override def name: String = "Jungle"
 
 }

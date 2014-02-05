@@ -1,8 +1,7 @@
 package k2b6s9j.boatcraft.core
 
-import cpw.mods.fml.common.Mod.EventHandler
-import cpw.mods.fml.common.event.{FMLPreInitializationEvent, FMLPostInitializationEvent}
-
+import cpw.mods.fml.common.Mod.{EventHandler, Instance}
+import cpw.mods.fml.common.event._
 import cpw.mods.fml.common.{SidedProxy, Mod}
 import cpw.mods.fml.common.registry.GameRegistry
 import k2b6s9j.boatcraft.core.Proxy.CommonProxy
@@ -15,47 +14,41 @@ import k2b6s9j.boatcraft.core.Boat.ItemCustomBoat
 @Mod(modid = "boatcraft", name = "BoatCraft", version = "2.0", modLanguage = "scala")
 object BoatCraft
 {
-	@SidedProxy(clientSide="k2b6s9j.boatcraft.core.Proxy$ClientProxy",
-	    serverSide="k2b6s9j.boatcraft.core.Proxy$CommonProxy")
+	@SidedProxy(modId = "boatcraft",
+		clientSide = "k2b6s9j.boatcraft.core.Proxy$ClientProxy",
+	    serverSide = "k2b6s9j.boatcraft.core.Proxy$CommonProxy")
 	var proxy: CommonProxy = null
-
-	var log: Logger = null
 	
-	var itemBoat: ItemCustomBoat = null
+	var log: Logger = null
 
+	var itemBoat: ItemCustomBoat = null
+	
 	@EventHandler
 	def preInit(event: FMLPreInitializationEvent)
 	{
-		log = event.getModLog
+		BoatCraft.log = event.getModLog
 
 		printModInfo
 		
 		//All Boat Materials should be at least rideable
-		ModifierRegistry.addModifier(new Empty {})
+		ModifierRegistry addModifier new Empty {}
 		
-		itemBoat = new ItemCustomBoat()
+		BoatCraft.itemBoat = new ItemCustomBoat()
 		
-		GameRegistry registerItem(itemBoat, "customBoat")
-
-		//Entity Registration
-		proxy registerRenderers
+		GameRegistry registerItem(BoatCraft.itemBoat, "customBoat")
 	}
-
-	private def printModInfo {
-		log.info("BoatCraft")
-		log.info("Copyright Kepler Sticka-Jones 2013-2014")
-		log.info("http://k2b6s9j.com/projects/minecraft/BoatCraft")
-	}
-
-	private def buildMatrix
+	
+	@EventHandler
+	def init(event: FMLInitializationEvent)
 	{
-		for (material: Material <- MaterialRegistry.materials)
-		{
-			for (modifier: Modifier <- ModifierRegistry.modifiers)
-			{
-				log.info(material.name + " " + modifier.name)
-			}
-		}
+		BoatCraft.proxy.registerEntities
+		BoatCraft.proxy.registerRenderers
+	}
+	
+	private def printModInfo {
+		BoatCraft.log.info("BoatCraft")
+		BoatCraft.log.info("Copyright Kepler Sticka-Jones 2013-2014")
+		BoatCraft.log.info("http://k2b6s9j.com/projects/minecraft/BoatCraft")
 	}
 
 }

@@ -5,7 +5,9 @@ import net.minecraft.util.ResourceLocation
 
 trait DarkOak extends Material {
 
-	override def texture: ResourceLocation = new ResourceLocation("boatcraft:compatibility/vanilla/textures/boats/wood/dark_oak.png")
+	override def texture: ResourceLocation = 
+		new ResourceLocation("boatcraft",
+				"textures/model/boat/vanilla/wood/dark_oak.png")
 	override def name: String = "Dark Oak"
 
 }

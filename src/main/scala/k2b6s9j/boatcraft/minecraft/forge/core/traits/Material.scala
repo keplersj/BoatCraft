@@ -6,6 +6,6 @@ trait Material
 {
 	def texture: ResourceLocation = null
 	def name: String = null
-
+	
 	override def toString: String = name.replaceAll(" ", "");
 }

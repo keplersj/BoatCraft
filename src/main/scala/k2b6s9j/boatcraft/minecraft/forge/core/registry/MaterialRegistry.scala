@@ -1,25 +1,33 @@
 package k2b6s9j.boatcraft.core.registry
 
+import java.util.{Map, HashMap, List}
 import k2b6s9j.boatcraft.core.traits.Material
 import k2b6s9j.boatcraft.core.BoatCraft
+import net.minecraft.item.ItemStack
+import scala.collection.JavaConversions._
 
 object MaterialRegistry
 {
-	var materials: Array[Material] = new Array[Material](0)
-
+	var materials: Map[String, Material] = new HashMap[String, Material]
+	
 	def addMaterial(newMaterial: Material)
 	{
-		materials :+= newMaterial
-		BoatCraft.log.info("Added " + newMaterial.name + " to the Material array.")
+		materials put(newMaterial toString, newMaterial)
+		BoatCraft.log.info("Added " + newMaterial.name + " to the Material set.")
 	}
 
-	def addMaterials(newMaterials: Array[Material])
+	def addMaterials(newMaterials: List[Material])
 	{
-		materials ++= newMaterials
 		for (material: Material <- newMaterials)
-			BoatCraft.log.info("Added " + material.name + " to the Material array.")
+		{
+			materials put(material toString, material)
+			BoatCraft.log.info("Added " + material.name + " to the Material set.")
+		}
 	}
 
-	def getMaterial(meta: Int): Material =
-		materials(meta >> 8)
+	def getMaterial(name: String): Material =
+		materials get name
+
+	def getMaterial(stack: ItemStack): Material =
+		materials get stack.stackTagCompound.getString("material")
 }
