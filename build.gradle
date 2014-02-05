@@ -1,5 +1,10 @@
 apply plugin: 'idea'
 apply plugin: 'eclipse'
+apply plugin: 'cobertura'
+apply plugin: 'coveralls'
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'forge'
 
 buildscript {
     repositories {
@@ -12,6 +17,10 @@ buildscript {
             name = "Sonatype Snapshots"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
+		maven {
+			name = "Sonatype Releases"
+			url = "https://oss.sonatype.org/content/repositories/releases/"
+		}
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.1-SNAPSHOT'
@@ -22,56 +31,23 @@ buildscript {
 
 group = 'k2b6s9j.boatcraft'
 
-allprojects {
-    apply plugin: 'cobertura'
-    apply plugin: 'coveralls'
-	apply plugin: 'java'
-	apply plugin: 'scala'
+version = '2.0-SNAPSHOT'
 
-    version = '2.0-SNAPSHOT'
-
-    repositories {
-        mavenCentral()
-        maven {
-            name = "Sonatype Releases"
-            url = "https://oss.sonatype.org/content/repositories/releases/"
-        }
-    }
-
-    dependencies {
-        testCompile 'junit:junit:4.11'
-        testCompile 'org.scalatest:scalatest_2.10:2.0'
-    }
-
-    tasks.withType(ScalaCompile) {
-        scalaCompileOptions.useAnt = false
-    }
-    
-    cobertura {
-        rootProject.subprojects.each {
-            coverageDirs << file("${it.name}/build/classes/main")
-        }
-        coverageFormats = ['html', 'xml']
-        coverageIgnoreTrivial = true;
-    }
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.useAnt = false
 }
 
-project (':Minecraft:Forge') {
+dependencies {
+	testCompile 'junit:junit:4.11'
+	testCompile 'org.scalatest:scalatest_2.10:2.0'
+}
     
-    allprojects {
-        apply plugin: 'forge'
-        
-        minecraft {
-            version = '1.7.2-10.12.0.1012'
-			mcpVersion = '9.03'
-        }
-    }
+cobertura {
+    coverageFormats = ['html', 'xml']
+    coverageIgnoreTrivial = true;
 }
 
-project (':Minecraft:Forge:Compatibility') {
-    allprojects {
-        dependencies {
-            compile project (':Minecraft:Forge:Core')
-        }
-    }
+minecraft {
+	version = '1.7.2-10.12.0.1012'
+	mcpVersion = '9.03'
 }
