@@ -15,6 +15,7 @@ gradle-app.setting
 .settings
 .metadata
 .classpath
+.cache
 .project
 bin
 eclipse
