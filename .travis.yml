@@ -4,11 +4,7 @@ scala: 2.10.3
 
 jdk: openjdk7
 
-env:
-  
-install: true
-
-script: gradle buildNeeded
+env: term=DUMB
 
 after_success:
   - gradle cobertura
