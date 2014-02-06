@@ -31,8 +31,11 @@ import net.minecraftforge.client.IItemRenderer.ItemRendererHelper
 import cpw.mods.fml.relauncher.Side
 import org.lwjgl.opengl.GL11
 import scala.collection.JavaConversions._
+import k2b6s9j.boatcraft.core.packets.PacketBoatInfo
+import cpw.mods.fml.common.network.FMLOutboundHandler
 
-object Boat {
+object Boat
+{
 	class ItemCustomBoat extends ItemBoat
 	{
 		hasSubtypes = true;
@@ -135,7 +138,13 @@ object Boat {
 							return stack
 						
 						if (!world.isRemote)
+						{
 							world.spawnEntityInWorld(boat)
+							BoatCraft.channels get Side.SERVER attr FMLOutboundHandler.FML_MESSAGETARGET set
+								FMLOutboundHandler.OutboundTarget.ALL
+							BoatCraft.channels get Side.SERVER writeOutbound
+								PacketBoatInfo(boat.material toString, boat.modifier toString, boat getUniqueID)
+						}
 							
 						if (!player.capabilities.isCreativeMode)
 							stack.stackSize = stack.stackSize - 1
@@ -149,7 +158,9 @@ object Boat {
 	case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double,
 		var material: Material, var modifier: Modifier)
 		extends EntityBoat(world, x, y, z)
-	{		
+	{
+		def this(world: World) = this(world, 0, 0, 0, null, null)
+		
 		override protected def writeEntityToNBT(tag: NBTTagCompound)
 		{
 			tag setString("material", material toString)
