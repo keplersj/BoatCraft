@@ -1,7 +1,6 @@
 BoatCraft
 =========
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/k2b6s9j/BoatCraft/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 [![Travis CI Build Status](https://travis-ci.org/k2b6s9j/BoatCraft.png?branch=master)](https://travis-ci.org/k2b6s9j/BoatCraft)
 [![Coverage Status](https://coveralls.io/repos/k2b6s9j/BoatCraft/badge.png)](https://coveralls.io/r/k2b6s9j/BoatCraft)
 [![Stories in Ready](https://badge.waffle.io/k2b6s9j/BoatCraft.png?label=in%20progress)](https://waffle.io/k2b6s9j/BoatCraft)
