@@ -64,7 +64,7 @@ object Boat {
 		override def getItemStackDisplayName(stack: ItemStack): String =
 			MaterialRegistry.getMaterial(stack).name + " " +
 				ModifierRegistry.getModifier(stack).name +
-				" Boat"
+				" Dinghy"
 
 		override def onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack =
 		{
