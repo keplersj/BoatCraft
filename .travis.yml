@@ -4,7 +4,7 @@ scala: 2.10.3
 
 jdk: openjdk7
 
-env: term=DUMB
+env: TERM=dumb
 
 after_success:
   - gradle cobertura
