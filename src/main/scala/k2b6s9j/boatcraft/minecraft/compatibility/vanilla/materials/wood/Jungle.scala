@@ -7,7 +7,7 @@ trait Jungle extends Material {
 
 	override def texture: ResourceLocation = 
 		new ResourceLocation("boatcraft",
-				"textures/model/boat/vanilla/wood/jungle.png")
+				"textures/entity/boat/vanilla/wood/jungle.png")
 	override def name: String = "Jungle"
 
 }

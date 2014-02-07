@@ -7,7 +7,7 @@ trait DarkOak extends Material {
 
 	override def texture: ResourceLocation = 
 		new ResourceLocation("boatcraft",
-				"textures/model/boat/vanilla/wood/dark_oak.png")
+				"textures/entity/boat/vanilla/wood/dark_oak.png")
 	override def name: String = "Dark Oak"
 
 }

@@ -7,7 +7,7 @@ trait Spruce extends Material {
 
 	override def texture: ResourceLocation = 
 		new ResourceLocation("boatcraft",
-				"textures/model/boat/vanilla/wood/spruce.png")
+				"textures/entity/boat/vanilla/wood/spruce.png")
 	override def name: String = "Spruce"
 
 }

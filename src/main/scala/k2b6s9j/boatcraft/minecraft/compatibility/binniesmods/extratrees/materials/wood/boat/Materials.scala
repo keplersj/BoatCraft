@@ -2,8 +2,8 @@ package k2b6s9j.boatcraft.compatibility.binniesMods.extraTrees.boat
 
 object Materials {
 
-  object Wood {
-
+  object Wood
+  {
     trait Fir
     trait Fig
     trait Hornbeam

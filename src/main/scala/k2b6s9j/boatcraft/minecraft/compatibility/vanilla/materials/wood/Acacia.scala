@@ -7,7 +7,7 @@ trait Acacia extends Material {
 
 	override def texture: ResourceLocation = 
 		new ResourceLocation("boatcraft",
-				"textures/model/boat/vanilla/wood/acacia.png")
+				"textures/entity/boat/vanilla/wood/acacia.png")
 	override def name: String = "Acacia"
 
 }

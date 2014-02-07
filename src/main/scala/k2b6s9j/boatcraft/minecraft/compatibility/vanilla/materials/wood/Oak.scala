@@ -7,6 +7,6 @@ trait Oak extends Material
 {
 	override def texture: ResourceLocation =
 		new ResourceLocation("boatcraft",
-				"textures/model/boat/vanilla/wood/oak.png")
+				"textures/entity/boat/vanilla/wood/oak.png")
 	override def name: String = "Oak"
 }

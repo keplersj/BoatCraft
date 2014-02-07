@@ -6,5 +6,5 @@ trait Modifier
 	def containsBlock: Boolean = false
 	def name: String = null
 	
-	override def toString: String = name.replaceAll(" ", "");
+	override def toString: String = name replaceAll(" ", "") toLowerCase
 }

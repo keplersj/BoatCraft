@@ -128,8 +128,9 @@ object Boat
 						if (world.func_147439_a(i, j, k) == Blocks.snow_layer)
 							j = j - 1
 							
-						val boat: EntityCustomBoat = EntityCustomBoat(world, i + 0.5, j + 1.0, k + 0.5,
-							MaterialRegistry getMaterial stack, ModifierRegistry getModifier stack)
+						val boat: EntityCustomBoat = EntityCustomBoat(world, i + 0.5, j + 1.0, k + 0.5)
+						boat setMaterial(MaterialRegistry getMaterial stack toString)
+						boat setModifier(ModifierRegistry getModifier stack toString)
 						boat.rotationYaw =
 							((MathHelper.floor_double(player.rotationYaw * 4.0 / 360.0 + 0.5) & 3) - 1) * 90
 						
@@ -139,11 +140,12 @@ object Boat
 						
 						if (!world.isRemote)
 						{
-							world.spawnEntityInWorld(boat)
-							BoatCraft.channels get Side.SERVER attr FMLOutboundHandler.FML_MESSAGETARGET set
+							world spawnEntityInWorld boat
+							/*BoatCraft.channels get Side.SERVER attr FMLOutboundHandler.FML_MESSAGETARGET set
 								FMLOutboundHandler.OutboundTarget.ALL
 							BoatCraft.channels get Side.SERVER writeOutbound
-								PacketBoatInfo(boat.material toString, boat.modifier toString, boat getUniqueID)
+								PacketBoatInfo(boat getMaterial() toString, boat getModifier() toString, boat getUniqueID)
+							BoatCraft.log info(boat getUniqueID)*/
 						}
 							
 						if (!player.capabilities.isCreativeMode)
@@ -155,23 +157,45 @@ object Boat
 		}
 	}
 	
-	case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double,
-		var material: Material, var modifier: Modifier)
+	case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		extends EntityBoat(world, x, y, z)
 	{
-		def this(world: World) = this(world, 0, 0, 0, null, null)
+		def this(world: World) = this(world, 0, 0, 0/*, null, null*/)
+		
+		override protected def entityInit()
+		{
+			super.entityInit
+			dataWatcher addObject(20, "")
+			dataWatcher addObject(21, "")
+		}
 		
 		override protected def writeEntityToNBT(tag: NBTTagCompound)
 		{
-			tag setString("material", material toString)
-			tag setString("modifier", modifier toString)
+			tag setString("material", dataWatcher getWatchableObjectString 20)
+			tag setString("modifier", dataWatcher getWatchableObjectString 21)
 		}
 
 		override protected def readEntityFromNBT(tag: NBTTagCompound)
 		{
-			material = MaterialRegistry getMaterial(tag getString("material"))
-			modifier = ModifierRegistry getModifier(tag getString("modifier"))
+			dataWatcher updateObject(20, MaterialRegistry getMaterial(tag getString("material")))
+			dataWatcher updateObject(21, ModifierRegistry getModifier(tag getString("modifier")))
 		}
+		
+		def setMaterial(material: String)
+		{
+			dataWatcher updateObject(20, material)
+		}
+		
+		def setModifier(modifier: String)
+		{
+			dataWatcher updateObject(21, modifier)
+		}
+		
+		def getMaterial(): Material =
+			MaterialRegistry getMaterial(dataWatcher getWatchableObjectString 20)
+		
+		def getModifier(): Modifier =
+			ModifierRegistry getModifier(dataWatcher getWatchableObjectString 21)
 	}
 
 	/*class EntityBoatContainer(world: World, x: Double, y: Double, z: Double,
@@ -212,19 +236,17 @@ object Boat
 
 		def doRender(boat: EntityCustomBoat, x: Double, y: Double, z: Double, f0: Float, f1: Float)
 		{
-			BoatCraft.log info "rendering"
-			
 			GL11 glPushMatrix()
 			GL11 glTranslatef(x.asInstanceOf[Float], y.asInstanceOf[Float], z.asInstanceOf[Float])
 			GL11 glRotatef(180.0F - f0, 0.0F, 1.0F, 0.0F)
-			var f2: Float = boat.getTimeSinceHit() - f1
-			var f3: Float = boat.getDamageTaken() - f1
+			var f2: Float = boat.getTimeSinceHit - f1
+			var f3: Float = boat.getDamageTaken - f1
 
 			if (f3 < 0.0F)
 				f3 = 0.0F
 
 			if (f2 > 0.0F)
-				GL11 glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * boat.getForwardDirection(),
+				GL11 glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * boat.getForwardDirection,
 						1.0F, 0.0F, 0.0F)
 
 			val f4 = 0.75F
@@ -237,7 +259,7 @@ object Boat
 		}
 
 		override def getEntityTexture(entity: Entity): ResourceLocation =
-			entity.asInstanceOf[EntityCustomBoat].material texture
+			entity.asInstanceOf[EntityCustomBoat] getMaterial() texture
 
 		def handleRenderType(stack: ItemStack, t: ItemRenderType): Boolean = true
 
@@ -252,8 +274,8 @@ object Boat
 			GL11 glScalef(f4, f4, f4)
 			GL11 glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4)
 			Minecraft.getMinecraft.getTextureManager bindTexture
-				MaterialRegistry.getMaterial(stack).texture
-			GL11.glScalef(-1.0F, -1.0F, 1.0F)
+				(MaterialRegistry getMaterial stack texture)
+			GL11 glScalef(-1.0F, -1.0F, 1.0F)
 			modelBoat render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)
 			GL11 glPopMatrix
 		}
