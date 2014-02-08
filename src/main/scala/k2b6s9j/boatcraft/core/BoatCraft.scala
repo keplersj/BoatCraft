@@ -19,6 +19,7 @@ import k2b6s9j.boatcraft.core.packets.ChannelHandler
 import net.minecraft.item.Item
 import net.minecraft.init.Items
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin
+import k2b6s9j.boatcraft.core.utilities.Recipes
 
 @Mod(modid = "boatcraft", name = "BoatCraft", version = "2.0", modLanguage = "scala")
 object BoatCraft
@@ -54,8 +55,10 @@ object BoatCraft
 	@EventHandler
 	def init(event: FMLInitializationEvent)
 	{
-		BoatCraft.proxy.registerEntities
-		BoatCraft.proxy.registerRenderers
+		proxy.registerEntities
+		proxy.registerRenderers
+		
+		Recipes addBoatRecipes
 	}
 	
 	private def printModInfo

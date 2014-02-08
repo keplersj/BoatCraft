@@ -2,30 +2,28 @@ package k2b6s9j.boatcraft.core
 
 import java.lang.String
 import java.util.List
-
 import scala.collection.JavaConversions.mapAsScalaMap
-
 import org.lwjgl.opengl.GL11
-
+import cpw.mods.fml.common.Mod
 import cpw.mods.fml.relauncher.{Side, SideOnly}
-import k2b6s9j.boatcraft.core.registry._
-import k2b6s9j.boatcraft.core.traits._
+import k2b6s9j.boatcraft.core.registry.{MaterialRegistry, ModifierRegistry}
+import k2b6s9j.boatcraft.core.traits.{Material, Modifier}
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.entity.RenderBoat
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.Entity
-import net.minecraft.entity.item.EntityBoat
-import net.minecraft.entity.item.EntityItem
+import net.minecraft.entity.item.{EntityBoat, EntityItem}
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init._
-import net.minecraft.item.Item
-import net.minecraft.item.ItemBoat
-import net.minecraft.item.ItemStack
+import net.minecraft.init.{Blocks, Items}
+import net.minecraft.item.{Item, ItemBoat, ItemStack}
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util._
+import net.minecraft.util.{AxisAlignedBB, MathHelper, MovingObjectPosition, ResourceLocation, Vec3}
 import net.minecraft.world.World
 import net.minecraftforge.client.IItemRenderer
-import net.minecraftforge.client.IItemRenderer._
+import net.minecraftforge.client.IItemRenderer.{ItemRenderType, ItemRendererHelper}
+import net.minecraft.inventory.IInventory
+import net.minecraft.client.renderer.texture.TextureMap
+import net.minecraft.block.Block
 
 object Boat
 {
@@ -36,16 +34,16 @@ object Boat
 		@SideOnly(Side.CLIENT)
 		override def func_150895_a(item: Item, tab: CreativeTabs, list: List[_])
 		{
-			var stack: ItemStack = new ItemStack(item)
+			var stack = new ItemStack(item)
 			stack.stackTagCompound = new NBTTagCompound
 			for ((nameMat: String, material: Material) <-
 					MaterialRegistry.materials)
 			{
-				stack.stackTagCompound.setString("material", nameMat)
+				stack.stackTagCompound setString("material", nameMat)
 				for ((nameMod: String, modifier: Modifier) <-
 						ModifierRegistry.modifiers)
 				{
-					stack.stackTagCompound.setString("modifier", nameMod)
+					stack.stackTagCompound setString("modifier", nameMod)
 					list.asInstanceOf[List[ItemStack]] add stack.copy
 				}
 			}
@@ -120,15 +118,23 @@ object Boat
 						
 						if (world.func_147439_a(i, j, k) == Blocks.snow_layer)
 							j = j - 1
-							
-						val boat: EntityCustomBoat = EntityCustomBoat(world, i + 0.5, j + 1.0, k + 0.5)
-						boat setMaterial(MaterialRegistry getMaterial stack toString)
-						boat setModifier(ModifierRegistry getModifier stack toString)
+						
+						var boat: EntityCustomBoat = null
+						val material = MaterialRegistry getMaterial stack
+						val modifier = ModifierRegistry getModifier stack
+						if (modifier.getInventory != null)
+						{
+							boat = new EntityBoatContainer(world, i + 0.5, j + 1.0, k + 0.5,
+									modifier getInventory)
+						}
+						else boat = EntityCustomBoat(world, i + 0.5, j + 1.0, k + 0.5)
+						boat setMaterial(material toString)
+						boat setModifier(modifier toString)
 						boat.rotationYaw =
 							((MathHelper.floor_double(player.rotationYaw * 4.0 / 360.0 + 0.5) & 3) - 1) * 90
 						
 						if (!world.getCollidingBoundingBoxes(boat,
-								boat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
+								boat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty)
 							return stack
 						
 						if (!world.isRemote)
@@ -190,8 +196,8 @@ object Boat
 		
 		override def interactFirst(player: EntityPlayer): Boolean =
 		{
-			if (getModifier containsBlock) true
-			super.interactFirst(player)
+			if (getModifier isRideable) super.interactFirst(player)
+			true
 		}
 		
 		def setMaterial(material: String)
@@ -211,35 +217,45 @@ object Boat
 			ModifierRegistry getModifier(dataWatcher getWatchableObjectString 21)
 	}
 
-	/*class EntityBoatContainer(world: World, x: Double, y: Double, z: Double,
-		material: Material, modifier: Modifier)
-		extends EntityCustomBoat(world, x, y, z, material, modifier) with IInventory {
-		def getSizeInventory: Int = 0
+	class EntityBoatContainer(world: World, x: Double, y: Double, z: Double,
+			private var _inv: IInventory)
+		extends EntityCustomBoat(world, x, y, z) with IInventory
+	{		
+		override def getSizeInventory: Int = _inv getSizeInventory
 
-		def getStackInSlot(p1: Int): ItemStack = null
+		override def getStackInSlot(slot: Int): ItemStack = _inv getStackInSlot slot
 
-		def decrStackSize(p1: Int, p2: Int): ItemStack = null
+		override def decrStackSize(slot: Int, count: Int): ItemStack = _inv decrStackSize(slot, count)
 
-		def getStackInSlotOnClosing(p1: Int): ItemStack = null
+		override def getStackInSlotOnClosing(slot: Int): ItemStack = _inv getStackInSlotOnClosing slot
 
-		def setInventorySlotContents(p1: Int, p2: ItemStack) {}
+		override def setInventorySlotContents(slot: Int, stack: ItemStack) =
+			_inv setInventorySlotContents(slot, stack)
 
-		def func_145825_b(): String = "something"
+		override def func_145825_b: String = _inv func_145825_b
 
-		def func_145818_k_(): Boolean = true
+		override def func_145818_k_ : Boolean = _inv func_145818_k_
 
-		def getInventoryStackLimit: Int = 0
+		override def getInventoryStackLimit: Int = _inv getInventoryStackLimit
 
-		def onInventoryChanged() {}
+		override def onInventoryChanged = _inv onInventoryChanged
 
-		def isUseableByPlayer(p1: EntityPlayer): Boolean = true
+		override def isUseableByPlayer(player: EntityPlayer): Boolean = _inv isUseableByPlayer player
 
-		def openChest() {}
+		override def openChest = _inv openChest
 
-		def closeChest() = {}
+		override def closeChest = _inv closeChest
 
-		def isItemValidForSlot(p1: Int, p2: ItemStack): Boolean = true
-	}*/
+		override def isItemValidForSlot(slot: Int, stack: ItemStack): Boolean =
+			_inv isItemValidForSlot(slot, stack)
+		
+		override def interactFirst(player: EntityPlayer): Boolean =
+		{
+			if (getModifier isRideable) super.interactFirst(player)
+			getModifier openGUI player
+			true
+		}
+	}
 
 	class RenderCustomBoat
 		extends RenderBoat with IItemRenderer
@@ -261,8 +277,30 @@ object Boat
 			if (f2 > 0.0F)
 				GL11 glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * boat.getForwardDirection,
 						1.0F, 0.0F, 0.0F)
-
+			
 			val f4 = 0.75F
+			
+			val block = boat.getModifier getBlock
+			val meta = boat.getModifier getMeta
+			
+			if (block.func_149645_b != -1)
+			{
+				GL11 glPushMatrix()
+				
+				bindTexture(TextureMap.locationBlocksTexture)
+				GL11 glScalef(f4, f4, f4)
+				val f5 = boat getBrightness f1
+				
+				GL11 glTranslatef(0.0F, 6F / 16.0F, 0.0F)
+				
+				GL11 glPushMatrix()
+				field_147909_c func_147800_a(block, meta, f5)
+        		GL11 glPopMatrix()
+				
+				GL11 glPopMatrix()
+				GL11 glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
+			}
+			
 			GL11 glScalef(f4, f4, f4)
 			GL11 glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4)
 			this bindEntityTexture boat
@@ -283,13 +321,39 @@ object Boat
 		{
 			GL11 glPushMatrix()
 			GL11 glTranslatef(.5F, .5F, .5F)
+			
 			val f4 = 0.75F
+			
+			val block = ModifierRegistry getModifier stack getBlock
+			val meta = ModifierRegistry getModifier stack getMeta
+			
+			if (block.func_149645_b != -1)
+			{
+				GL11 glPushMatrix()
+				
+				Minecraft.getMinecraft.getTextureManager bindTexture
+					TextureMap.locationBlocksTexture
+				GL11 glScalef(f4, f4, f4)
+				
+				GL11 glTranslatef(0.0F, 6F / 16.0F, 0.0F)
+				
+				GL11 glPushMatrix()
+				field_147909_c func_147800_a(block, meta, 15)
+        		GL11 glPopMatrix()
+				
+				GL11 glPopMatrix()
+				GL11 glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
+			}
+			
 			GL11 glScalef(f4, f4, f4)
 			GL11 glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4)
+			
 			Minecraft.getMinecraft.getTextureManager bindTexture
 				(MaterialRegistry getMaterial stack getTexture)
+			
 			GL11 glScalef(-1.0F, -1.0F, 1.0F)
 			modelBoat render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)
+			
 			GL11 glPopMatrix
 		}
 	}

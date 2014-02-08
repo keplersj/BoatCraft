@@ -1,4 +1,4 @@
-package k2b6s9j.boatcraft.compatibility.vanilla.boat.wood
+package k2b6s9j.boatcraft.compatibility.vanilla.materials.wood
 
 import k2b6s9j.boatcraft.core.traits.Material
 import net.minecraft.util.ResourceLocation
