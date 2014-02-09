@@ -15,6 +15,8 @@ object Proxy
 		{
 			EntityRegistry.registerModEntity(classOf[Boat.EntityCustomBoat],
 					"customBoat", 0, BoatCraft, 66, 10, true)
+			EntityRegistry.registerModEntity(classOf[Boat.EntityBoatContainer],
+					"containerBoat", 1, BoatCraft, 66, 10, true)
 		}
 	}
 
@@ -26,6 +28,8 @@ object Proxy
 			RenderingRegistry registerEntityRenderingHandler(classOf[Boat.EntityCustomBoat],
 					new Boat.RenderCustomBoat())
 			MinecraftForgeClient registerItemRenderer(BoatCraft.itemBoat, new Boat.RenderCustomBoat)
+			RenderingRegistry registerEntityRenderingHandler(classOf[Boat.EntityBoatContainer],
+					new Boat.RenderCustomBoat())
 		}
 	}
 }

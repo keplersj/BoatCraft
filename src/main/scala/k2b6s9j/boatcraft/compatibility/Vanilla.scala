@@ -1,7 +1,6 @@
 package k2b6s9j.boatcraft.compatibility
 
 import org.apache.logging.log4j.Logger
-
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
@@ -14,6 +13,8 @@ import k2b6s9j.boatcraft.core.utilities.Recipes
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
+import cpw.mods.fml.common.network.NetworkRegistry
+import k2b6s9j.boatcraft.compatibility.vanilla.VanillaGuiHandler
 
 @Mod(name = "boatcraft:compatibility:vanilla:materials:wood",
 	modid = "BoatCraft Compatibility, Vanilla Materials, Wood",
@@ -33,6 +34,8 @@ object Vanilla
 		registerModifiers
 		
 		replaceBoatRecipe
+		
+		NetworkRegistry.INSTANCE registerGuiHandler(this, new VanillaGuiHandler)
 	}
 
 	private def printModInfo
@@ -54,7 +57,7 @@ object Vanilla
 
 	private def registerModifiers
 	{
-		ModifierRegistry addModifier new Chest {}
+		ModifierRegistry addModifier new Chest
 	}
 	
 	private def replaceBoatRecipe
