@@ -51,12 +51,12 @@ class Furnace extends Modifier
                 		ItemStack loadItemStackFromNBT _tag)
             }
         }
-
+		
         inventory.furnaceBurnTime = tag.getShort("BurnTime");
         inventory.furnaceCookTime = tag.getShort("CookTime");
         inventory.currentItemBurnTime = TileEntityFurnace getItemBurnTime
         		(inventory getStackInSlot 1)
-
+        
         if (tag hasKey("CustomName", 8))
         {
             //inventory.field_145958_o = p_145839_1_.getString("CustomName");

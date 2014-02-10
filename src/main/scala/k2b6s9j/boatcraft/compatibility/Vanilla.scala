@@ -17,14 +17,16 @@ import cpw.mods.fml.common.network.NetworkRegistry
 import k2b6s9j.boatcraft.compatibility.vanilla.VanillaGuiHandler
 import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.Workbench
 import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.Furnace
+import k2b6s9j.boatcraft.compatibility.vanilla.materials.metal.Iron
+import k2b6s9j.boatcraft.compatibility.vanilla.materials.metal.Gold
 
 @Mod(name = "boatcraft:compatibility:vanilla",
-	modid = "BoatCraft Compatibility, Vanilla",
+	modid = "BoatCraft Vanilla Compatibility",
 	modLanguage = "scala", dependencies = "required-after:boatcraft")
 object Vanilla
 {
 	var log: Logger = null
-
+	
 	@EventHandler
 	def preInit(event: FMLPreInitializationEvent)
 	{
@@ -39,14 +41,14 @@ object Vanilla
 		
 		NetworkRegistry.INSTANCE registerGuiHandler(this, new VanillaGuiHandler)
 	}
-
+	
 	private def printModInfo
 	{
-		log info "BoatCraft:Compatibility:Vanilla:Materials:Wood"
+		log info "BoatCraft Vanilla Compatibility"
 		log info "Adds Vanilla Woods to the BoatCraft Material Matrix"
 		log info "Copyright Kepler Sticka-Jones 2014"
 	}
-
+	
 	private def registerMaterials
 	{
 		MaterialRegistry addMaterial new Oak
@@ -54,9 +56,11 @@ object Vanilla
 		MaterialRegistry addMaterial new Birch
 		MaterialRegistry addMaterial new Jungle
 		MaterialRegistry addMaterial new Acacia
-		MaterialRegistry addMaterial new DarkOak
+		
+		MaterialRegistry addMaterial new Iron
+		MaterialRegistry addMaterial new Gold
 	}
-
+	
 	private def registerModifiers
 	{
 		ModifierRegistry addModifier new Chest

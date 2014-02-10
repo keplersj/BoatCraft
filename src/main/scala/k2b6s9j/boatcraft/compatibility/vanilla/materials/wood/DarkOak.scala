@@ -8,12 +8,12 @@ import net.minecraft.init.Blocks
 
 class DarkOak extends Material
 {
-	override def getTexture: ResourceLocation = 
+	override def getTexture = 
 		new ResourceLocation("boatcraft",
 				"textures/entity/boat/vanilla/wood/dark_oak.png")
 	
-	override def getName: String = "Dark Oak"
+	override def getName = "Dark Oak"
 	
-	override def getItem: ItemStack = new ItemStack(Blocks.planks, 1, 5)
-	override def getStick: ItemStack = new ItemStack(Items.stick)
+	override def getItem = new ItemStack(Blocks.planks, 1, 5)
+	override def getStick = new ItemStack(Items.stick)
 }

@@ -2,12 +2,16 @@ package k2b6s9j.boatcraft.core
 
 import java.lang.String
 import java.util.List
+
 import scala.collection.JavaConversions.mapAsScalaMap
+
 import org.lwjgl.opengl.GL11
+
+import cpw.mods.fml.common.Mod
+import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
 import k2b6s9j.boatcraft.core.registry.{MaterialRegistry, ModifierRegistry}
 import k2b6s9j.boatcraft.core.traits.{Material, Modifier}
-import net.minecraft.block.Block
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.entity.RenderBoat
 import net.minecraft.client.renderer.texture.TextureMap
@@ -18,13 +22,11 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.{Blocks, Items}
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.{Item, ItemBoat, ItemStack}
-import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.{AxisAlignedBB, MathHelper, MovingObjectPosition, ResourceLocation, Vec3}
 import net.minecraft.world.World
 import net.minecraftforge.client.IItemRenderer
 import net.minecraftforge.client.IItemRenderer.{ItemRenderType, ItemRendererHelper}
-import net.minecraftforge.common.util.Constants
-import cpw.mods.fml.relauncher.Side
 
 object Boat
 {
@@ -50,13 +52,13 @@ object Boat
 			}
 		}
 
-		override def getUnlocalizedName(stack: ItemStack): String =
+		override def getUnlocalizedName(stack: ItemStack) =
 			"boat." +
 				MaterialRegistry.getMaterial(stack) +
 				"." +
 				ModifierRegistry.getModifier(stack)
 
-		override def getItemStackDisplayName(stack: ItemStack): String =
+		override def getItemStackDisplayName(stack: ItemStack) =
 			MaterialRegistry.getMaterial(stack).getName + " " +
 				ModifierRegistry.getModifier(stack).getName +
 				" Dinghy"
@@ -156,7 +158,7 @@ object Boat
 	{
 		def this(world: World) = this(world, 0, 0, 0/*, null, null*/)
 		
-		override protected def entityInit()
+		override protected def entityInit
 		{
 			super.entityInit
 			dataWatcher addObject(20, "")
@@ -196,7 +198,7 @@ object Boat
 			else null
 		}
 		
-		override def interactFirst(player: EntityPlayer): Boolean =
+		override def interactFirst(player: EntityPlayer) =
 		{
 			if (getModifier isRideable) super.interactFirst(player)
 			getModifier interact(player, this)
@@ -205,7 +207,8 @@ object Boat
 		
 		override def setDead
 		{
-			if (!world.isRemote) entityDropItem(getModifier getContent, 0F)
+			if (!world.isRemote && getModifier.getContent != null)
+				entityDropItem(getModifier getContent, 0F)
 			super.setDead
 		}
 		
@@ -219,16 +222,16 @@ object Boat
 			dataWatcher updateObject(21, modifier)
 		}
 		
-		def getMaterial: Material =
+		def getMaterial =
 			MaterialRegistry getMaterial(dataWatcher getWatchableObjectString 20)
 		
-		def getModifier: Modifier =
+		def getModifier =
 			ModifierRegistry getModifier(dataWatcher getWatchableObjectString 21)
 		
-		def getMaterialName: String =
+		def getMaterialName =
 			dataWatcher getWatchableObjectString 20
 		
-		def getModifierName: String =
+		def getModifierName =
 			dataWatcher getWatchableObjectString 21
 	}
 
@@ -237,41 +240,41 @@ object Boat
 	{
 		def this(world: World) = this(world, 0, 0, 0)
 		
-		override def getSizeInventory: Int =
+		override def getSizeInventory =
 			getInventory getSizeInventory
 		
-		override def getStackInSlot(slot: Int): ItemStack =
+		override def getStackInSlot(slot: Int) =
 			getInventory getStackInSlot slot
 		
-		override def decrStackSize(slot: Int, count: Int): ItemStack =
+		override def decrStackSize(slot: Int, count: Int) =
 			getInventory decrStackSize(slot, count)
 		
-		override def getStackInSlotOnClosing(slot: Int): ItemStack =
+		override def getStackInSlotOnClosing(slot: Int) =
 			getInventory getStackInSlotOnClosing slot
 		
 		override def setInventorySlotContents(slot: Int, stack: ItemStack) =
 			getInventory setInventorySlotContents(slot, stack)
 		
-		override def getInventoryName: String =
+		override def getInventoryName =
 			getInventory getInventoryName
 		
-		override def hasCustomInventoryName: Boolean =
+		override def hasCustomInventoryName =
 			getInventory hasCustomInventoryName
 		
-		override def getInventoryStackLimit: Int =
+		override def getInventoryStackLimit =
 			getInventory getInventoryStackLimit
 		
 		override def markDirty =
 			getInventory markDirty
 		
-		override def isUseableByPlayer(player: EntityPlayer): Boolean =
+		override def isUseableByPlayer(player: EntityPlayer) =
 			getDistanceSqToEntity(player) <= 64
 		
 		override def openInventory = getInventory.openInventory
 		
 		override def closeInventory = getInventory.closeInventory
 		
-		override def isItemValidForSlot(slot: Int, stack: ItemStack): Boolean =
+		override def isItemValidForSlot(slot: Int, stack: ItemStack) =
 			getInventory.isItemValidForSlot(slot, stack)
 		
 		override def setDead
@@ -314,7 +317,7 @@ object Boat
 		
 		private var inventory: IInventory = null
 		
-		private[boatcraft] def getInventory: IInventory =
+		private[boatcraft] def getInventory =
 		{
 			if (inventory == null) inventory = getModifier getInventory this
 			inventory
@@ -373,14 +376,17 @@ object Boat
 			modelBoat render(boat, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)
 			GL11 glPopMatrix
 		}
+		
+		override def getEntityTexture(entity: Entity) =
+			if (!entity.isInstanceOf[EntityCustomBoat] ||
+					entity.asInstanceOf[EntityCustomBoat].getMaterial == null)
+				new ResourceLocation("missingno")
+			else entity.asInstanceOf[EntityCustomBoat].getMaterial.getTexture
 
-		override def getEntityTexture(entity: Entity): ResourceLocation =
-			entity.asInstanceOf[EntityCustomBoat].getMaterial.getTexture
-
-		def handleRenderType(stack: ItemStack, t: ItemRenderType): Boolean = true
+		def handleRenderType(stack: ItemStack, t: ItemRenderType) = true
 
 		def shouldUseRenderHelper(renderType: ItemRenderType, stack: ItemStack,
-				helper: ItemRendererHelper): Boolean = true
+				helper: ItemRendererHelper) = true
 
 		def renderItem(renderType: ItemRenderType, stack: ItemStack, objects: AnyRef*)
 		{

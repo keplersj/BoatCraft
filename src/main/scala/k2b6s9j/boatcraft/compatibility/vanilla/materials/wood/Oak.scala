@@ -8,12 +8,12 @@ import net.minecraft.init.Items
 
 class Oak extends Material
 {
-	override def getTexture: ResourceLocation =
+	override def getTexture =
 		new ResourceLocation("boatcraft",
 				"textures/entity/boat/vanilla/wood/oak.png")
 	
-	override def getName: String = "Oak"
+	override def getName = "Oak"
 	
-	override def getItem: ItemStack = new ItemStack(Blocks.planks)
-	override def getStick: ItemStack = new ItemStack(Items.stick)
+	override def getItem = new ItemStack(Blocks.planks)
+	override def getStick = new ItemStack(Items.stick)
 }
