@@ -38,14 +38,14 @@ object BoatCraft
 	@EventHandler
 	def preInit(event: FMLPreInitializationEvent)
 	{
-		log = event.getModLog
+		log = event getModLog
 		
 		channels = NetworkRegistry.INSTANCE.newChannel("boatcraft", new ChannelHandler());
 		
 		printModInfo
 		
 		//All Boat Materials should be at least rideable
-		ModifierRegistry addModifier new Empty {}
+		ModifierRegistry addModifier new Empty
 		
 		itemBoat = new ItemCustomBoat()
 		
@@ -55,8 +55,9 @@ object BoatCraft
 	@EventHandler
 	def init(event: FMLInitializationEvent)
 	{
-		proxy.registerEntities
-		proxy.registerRenderers
+		proxy registerEntities
+		
+		proxy registerRenderers
 		
 		Recipes addBoatRecipes
 	}

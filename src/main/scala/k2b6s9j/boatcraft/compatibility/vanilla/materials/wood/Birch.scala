@@ -6,12 +6,14 @@ import net.minecraft.item.ItemStack
 import net.minecraft.init.Items
 import net.minecraft.init.Blocks
 
-trait Birch extends Material
+class Birch extends Material
 {
 	override def getTexture: ResourceLocation = 
 		new ResourceLocation("boatcraft",
 				"textures/entity/boat/vanilla/wood/birch.png")
+	
 	override def getName: String = "Birch"
+	
 	override def getItem: ItemStack = new ItemStack(Blocks.planks, 1,  2)
 	override def getStick: ItemStack = new ItemStack(Items.stick)
 }

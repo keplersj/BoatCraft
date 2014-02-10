@@ -15,9 +15,11 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import cpw.mods.fml.common.network.NetworkRegistry
 import k2b6s9j.boatcraft.compatibility.vanilla.VanillaGuiHandler
+import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.Workbench
+import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.Furnace
 
-@Mod(name = "boatcraft:compatibility:vanilla:materials:wood",
-	modid = "BoatCraft Compatibility, Vanilla Materials, Wood",
+@Mod(name = "boatcraft:compatibility:vanilla",
+	modid = "BoatCraft Compatibility, Vanilla",
 	modLanguage = "scala", dependencies = "required-after:boatcraft")
 object Vanilla
 {
@@ -26,7 +28,7 @@ object Vanilla
 	@EventHandler
 	def preInit(event: FMLPreInitializationEvent)
 	{
-		log = event.getModLog
+		log = event getModLog
 
 		printModInfo
 
@@ -47,22 +49,24 @@ object Vanilla
 
 	private def registerMaterials
 	{
-		MaterialRegistry addMaterial new Oak {}
-		MaterialRegistry addMaterial new Spruce {}
-		MaterialRegistry addMaterial new Birch {}
-		MaterialRegistry addMaterial new Jungle {}
-		MaterialRegistry addMaterial new Acacia {}
-		MaterialRegistry addMaterial new DarkOak {}
+		MaterialRegistry addMaterial new Oak
+		MaterialRegistry addMaterial new Spruce
+		MaterialRegistry addMaterial new Birch
+		MaterialRegistry addMaterial new Jungle
+		MaterialRegistry addMaterial new Acacia
+		MaterialRegistry addMaterial new DarkOak
 	}
 
 	private def registerModifiers
 	{
 		ModifierRegistry addModifier new Chest
+		ModifierRegistry addModifier new Furnace
+		ModifierRegistry addModifier new Workbench
 	}
 	
 	private def replaceBoatRecipe
 	{
-		Recipes.removeRecipe(new ItemStack(Items.boat))
+		Recipes removeRecipe new ItemStack(Items.boat)
 		
 		var stack = new ItemStack(BoatCraft.itemBoat)
 		

@@ -4,7 +4,7 @@ import java.lang.String
 import java.util.List
 import scala.collection.JavaConversions.mapAsScalaMap
 import org.lwjgl.opengl.GL11
-import cpw.mods.fml.relauncher.{Side, SideOnly}
+import cpw.mods.fml.relauncher.SideOnly
 import k2b6s9j.boatcraft.core.registry.{MaterialRegistry, ModifierRegistry}
 import k2b6s9j.boatcraft.core.traits.{Material, Modifier}
 import net.minecraft.block.Block
@@ -18,13 +18,13 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.{Blocks, Items}
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.{Item, ItemBoat, ItemStack}
-import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import net.minecraft.util.{AxisAlignedBB, MathHelper, MovingObjectPosition, ResourceLocation, Vec3}
 import net.minecraft.world.World
 import net.minecraftforge.client.IItemRenderer
 import net.minecraftforge.client.IItemRenderer.{ItemRenderType, ItemRendererHelper}
-import net.minecraft.nbt.NBTTagList
 import net.minecraftforge.common.util.Constants
+import cpw.mods.fml.relauncher.Side
 
 object Boat
 {
@@ -84,7 +84,7 @@ object Boat
 			val movingobjectposition: MovingObjectPosition =
 				world rayTraceBlocks(vec3, vec31, true)
 			if (movingobjectposition == null)
-				return stack
+				stack
 			else
 			{
 				val vec32: Vec3 = player.getLook(f)
@@ -110,13 +110,14 @@ object Boat
 				}
 				
 				if (flag)
-					return stack
+					stack
 				else
 				{
-					if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+					if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+					{
 						i = movingobjectposition.blockX
-						var j: Int = movingobjectposition.blockY
-						var k: Int = movingobjectposition.blockZ
+						var j = movingobjectposition.blockY
+						var k = movingobjectposition.blockZ
 						
 						if (world.getBlock(i, j, k) == Blocks.snow_layer)
 							j = j - 1
@@ -125,7 +126,7 @@ object Boat
 						val material = MaterialRegistry getMaterial stack
 						val modifier = ModifierRegistry getModifier stack
 						
-						if (modifier.getInventory != null)
+						if (modifier hasInventory)
 							boat = new EntityBoatContainer(world, i + 0.5, j + 1.0, k + 0.5)
 						else boat = EntityCustomBoat(world, i + 0.5, j + 1.0, k + 0.5)
 						boat setMaterial(material toString)
@@ -144,7 +145,7 @@ object Boat
 						if (!player.capabilities.isCreativeMode)
 							stack.stackSize = stack.stackSize - 1
 					}
-					return stack
+					stack
 				}
 			}
 		}
@@ -198,7 +199,14 @@ object Boat
 		override def interactFirst(player: EntityPlayer): Boolean =
 		{
 			if (getModifier isRideable) super.interactFirst(player)
+			getModifier interact(player, this)
 			true
+		}		
+		
+		override def setDead
+		{
+			if (!world.isRemote) entityDropItem(getModifier getContent, 0F)
+			super.setDead
 		}
 		
 		def setMaterial(material: String)
@@ -266,18 +274,11 @@ object Boat
 		override def isItemValidForSlot(slot: Int, stack: ItemStack): Boolean =
 			getInventory.isItemValidForSlot(slot, stack)
 		
-		override def interactFirst(player: EntityPlayer): Boolean =
-		{
-			if (getModifier isRideable) super.interactFirst(player)
-			getModifier openGUI(player, this)
-			true
-		}
-		
 		override def setDead
 		{
 			for (i: Int <- 0 until getSizeInventory)
-				entityDropItem(getStackInSlotOnClosing(i), 0F)
-			entityDropItem(getModifier getContent, 0F)
+				if (getStackInSlot(i) != null)
+					entityDropItem(getStackInSlotOnClosing(i), 0F)
 			super.setDead
 		}
 		
@@ -287,51 +288,38 @@ object Boat
 			super.setModifier(modifier)
 			
 			if (prev == null || prev != modifier || inventory == null)
-				inventory = getModifier getInventory
+				inventory = getModifier getInventory this
 		}
 		
 		override protected def writeEntityToNBT(tag: NBTTagCompound)
 		{
 			super.writeEntityToNBT(tag)
 			
-			if (inventory == null) inventory = getModifier getInventory
-			
-			var list = new NBTTagList
-			for (i: Int <- 0 until inventory.getSizeInventory)
-			{
-				if (inventory.getStackInSlot(i) != null)
-				{
-					var _tag = new NBTTagCompound
-					inventory.getStackInSlot(i) writeToNBT _tag
-					_tag setByte ("Slot", i.asInstanceOf[Byte])
-					list appendTag _tag
-				}
-			}
-			tag.setTag("Items", list)
+			getModifier writeStateToNBT(this, tag)
 		}
 
 		override protected def readEntityFromNBT(tag: NBTTagCompound)
 		{
 			super.readEntityFromNBT(tag)
 			
-			if (inventory == null) inventory = getModifier getInventory
+			getModifier readStateFromNBT(this, tag)
+		}
+		
+		override def onUpdate
+		{
+			super.onUpdate
 			
-			var list = tag.getTagList("Items", Constants.NBT.TAG_COMPOUND)
-			for (i: Int <- 0 until list.tagCount)
-			{
-				val _tag = list getCompoundTagAt i
-				inventory setInventorySlotContents(_tag getByte "Slot",
-					ItemStack loadItemStackFromNBT _tag)
-			}
+			getModifier update this
 		}
 		
 		private var inventory: IInventory = null
 		
-		protected def getInventory: IInventory =
+		private[boatcraft] def getInventory: IInventory =
 		{
-			if (inventory == null) inventory = getModifier.getInventory
+			if (inventory == null) inventory = getModifier getInventory this
 			inventory
 		}
+		
 	}
 
 	class RenderCustomBoat
@@ -415,7 +403,7 @@ object Boat
 				GL11 glTranslatef(0.0F, 6F / 16.0F, 0.0F)
 				
 				GL11 glPushMatrix()
-				field_147909_c renderBlockAsItem(block, meta, 15)
+				field_147909_c renderBlockAsItem(block, meta, 8)
         		GL11 glPopMatrix()
 				
 				GL11 glPopMatrix()
