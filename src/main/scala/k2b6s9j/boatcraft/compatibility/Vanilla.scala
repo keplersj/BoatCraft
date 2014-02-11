@@ -20,9 +20,10 @@ import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.Furnace
 import k2b6s9j.boatcraft.compatibility.vanilla.materials.metal.Iron
 import k2b6s9j.boatcraft.compatibility.vanilla.materials.metal.Gold
 
-@Mod(name = "boatcraft:compatibility:vanilla",
-	modid = "BoatCraft Vanilla Compatibility",
-	modLanguage = "scala", dependencies = "required-after:boatcraft")
+@Mod(modid = "boatcraft:compatibility:vanilla",
+	name = "BoatCraft Vanilla Compatibility",
+	modLanguage = "scala", dependencies = "required-after:boatcraft",
+	version = "2.0")
 object Vanilla
 {
 	var log: Logger = null

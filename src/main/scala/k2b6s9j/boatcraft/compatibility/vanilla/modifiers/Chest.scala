@@ -11,10 +11,13 @@ import net.minecraft.tileentity.TileEntityChest
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
 import net.minecraftforge.common.util.Constants
+import cpw.mods.fml.relauncher.ReflectionHelper
+import java.lang.reflect.Field
+import k2b6s9j.boatcraft.core.BoatCraft
 
 class Chest extends Modifier
 {
-	override def getBlock = Blocks.chest
+	override def getBlock: Block = Blocks.chest
 	override def getMeta = 0
 
 	override def hasInventory = true
@@ -63,9 +66,16 @@ class Chest extends Modifier
 
 object Chest
 {
-	private[Chest] class Inventory(boat: EntityBoatContainer) extends TileEntityChest
+	private[compatibility] class Inventory(boat: EntityBoatContainer, size: Int) extends TileEntityChest
 	{
 		worldObj = boat.worldObj
+		
+		ReflectionHelper setPrivateValue(classOf[TileEntityChest], this,
+				new Array[ItemStack](size), "chestContents")
+		
+		def this(boat: EntityBoatContainer) = this(boat, 27)
+		
+		override def getSizeInventory = size
 		
 		override def getInventoryName = "Chest Boat"
 		
