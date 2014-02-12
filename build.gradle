@@ -143,7 +143,10 @@ uploadArchives {
                             developer {
                                 id 'k2b6s9j'
                                 name 'Kepler Sticka-Jones'
-                                roles { role 'developer' }
+                                roles {
+                                	role 'developer'
+                                	role 'creator'
+                                }
                             }
                             developer {
                                 id 'viliml'
