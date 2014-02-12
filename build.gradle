@@ -134,7 +134,7 @@ uploadArchives {
                         licenses {
                             license {
                                 name 'The MIT License (MIT)'
-                                url 'https://github.com/Open-Code-Developers/BoatCraft/blob/master/LICENSE'
+                                url 'https://raw.github.com/Open-Code-Developers/BoatCraft/master/LICENSE'
                                 distribution 'repo'
                             }
                         }
