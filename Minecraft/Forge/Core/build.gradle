@@ -1,0 +1,6 @@
+jar {
+	manifest {
+		attributes("FMLCorePlugin": "k2b6s9j.boatcraft.core.asm.BoatCraftFMLLoadingPlugin",
+			"Created-By": "1.7.0 (Oracle Corporation)")
+	}
+}

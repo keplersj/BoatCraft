@@ -1,1 +1,3 @@
 rootProject.name = 'BoatCraft'
+
+include 'Minecraft:Forge:Core'
