@@ -17,16 +17,15 @@ buildscript {
             name = "Sonatype Snapshots"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
-		maven {
-			name = "Sonatype Releases"
-			url = "https://oss.sonatype.org/content/repositories/releases/"
-		}
+        maven {
+            name = "Sonatype Releases"
+            url = "https://oss.sonatype.org/content/repositories/releases/"
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.1-SNAPSHOT'
         classpath 'net.saliman:gradle-cobertura-plugin:2.2.2'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.2.4'
-        classpath 'cpw.mods:ironchest:1.7.2-6.0.4.713'
     }
 }
 
@@ -39,8 +38,9 @@ tasks.withType(ScalaCompile) {
 }
 
 dependencies {
-	testCompile 'junit:junit:4.11'
-	testCompile 'org.scalatest:scalatest_2.10:2.0'
+        compile 'cpw.mods:ironchest:1.7.2-6.0.4.713'
+        testCompile 'junit:junit:4.11'
+        testCompile 'org.scalatest:scalatest_2.10:2.0'
 }
     
 cobertura {
@@ -54,8 +54,8 @@ minecraft {
 }
 
 jar {
-	manifest {
-		attributes("FMLCorePlugin": "k2b6s9j.boatcraft.core.asm.BoatCraftFMLLoadingPlugin",
-			"Created-By": "1.7.0 (Oracle Corporation)")
-	}
+    manifest {
+        attributes("FMLCorePlugin": "k2b6s9j.boatcraft.core.asm.BoatCraftFMLLoadingPlugin",
+            "Created-By": "1.7.0 (Oracle Corporation)")
+    }
 }
