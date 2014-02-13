@@ -13,5 +13,3 @@ Rails had their turn, now out to the Minecraftian seas. Out there we will inteac
 - Sargunster, for creating his Better than Wolves boat addon and giving me huge inspiration
 - CovertJaguar, for creating Railcraft and being one of the biggest inspiractions.
 - #ModJam on Espernet and everyone over there, for just being awesome!
-
-[![MCStats Statistics](http://api.mcstats.org/signature/BoatCraft.png)](http://mcstats.org/plugin/BoatCraft)
