@@ -1,12 +1,14 @@
 package k2b6s9j.boatcraft.compatibility
 
 import org.apache.logging.log4j.Logger
-import cpw.mods.fml.common.{Mod, Optional}
-import cpw.mods.fml.common.event.FMLPreInitializationEvent
-import k2b6s9j.boatcraft.compatibility.ironchest.Iron_Chest
-import k2b6s9j.boatcraft.core.registry.ModifierRegistry
+import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.Mod.EventHandler
-import k2b6s9j.boatcraft.compatibility.ironchest._
+import cpw.mods.fml.common.Optional
+import cpw.mods.fml.common.event.FMLPreInitializationEvent
+import k2b6s9j.boatcraft.api.registry.ModifierRegistry
+import k2b6s9j.boatcraft.compatibility.ironchest.modifiers._
+import cpw.mods.fml.common.network.NetworkRegistry
+import k2b6s9j.boatcraft.compatibility.ironchest.IronChestsGuiHandler
 
 @Mod(modid = "boatcraft:compatibility:IronChest", name = "BoatCraft Iron Chests 2 Compatibility",
 		version = "2.0", dependencies = "required-after:boatcraft;after:IronChest", modLanguage = "scala")
@@ -21,7 +23,11 @@ object IronChests
 		
 		printModInfo
 		
-		try addModifiers
+		try
+		{
+			addModifiers
+			NetworkRegistry.INSTANCE registerGuiHandler(this, IronChestsGuiHandler)
+		}
 		catch
 		{
 			case thr: Throwable => thr printStackTrace

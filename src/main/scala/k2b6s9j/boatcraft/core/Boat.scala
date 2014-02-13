@@ -8,10 +8,9 @@ import scala.collection.JavaConversions.mapAsScalaMap
 import org.lwjgl.opengl.GL11
 
 import cpw.mods.fml.common.Mod
-import cpw.mods.fml.relauncher.Side
-import cpw.mods.fml.relauncher.SideOnly
-import k2b6s9j.boatcraft.core.registry.{MaterialRegistry, ModifierRegistry}
-import k2b6s9j.boatcraft.core.traits.{Material, Modifier}
+import cpw.mods.fml.relauncher.{Side, SideOnly}
+import k2b6s9j.boatcraft.api.registry.{MaterialRegistry, ModifierRegistry}
+import k2b6s9j.boatcraft.api.traits.{Material, Modifier}
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.entity.RenderBoat
 import net.minecraft.client.renderer.texture.TextureMap

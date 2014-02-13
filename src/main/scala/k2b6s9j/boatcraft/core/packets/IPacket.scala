@@ -4,6 +4,6 @@ import io.netty.buffer.ByteBuf;
 
 trait IPacket
 {
-	def readBytes(buffeR: ByteBuf)
-	def writeBytes(buffeR: ByteBuf)
+	def readBytes(buffer: ByteBuf)
+	def writeBytes(buffer: ByteBuf)
 }

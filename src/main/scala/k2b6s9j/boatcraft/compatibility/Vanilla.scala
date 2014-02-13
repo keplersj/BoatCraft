@@ -1,24 +1,22 @@
 package k2b6s9j.boatcraft.compatibility
 
 import org.apache.logging.log4j.Logger
+
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
+import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.registry.GameRegistry
-import k2b6s9j.boatcraft.compatibility.vanilla.materials.wood.{Acacia, Birch, DarkOak, Jungle, Oak, Spruce}
-import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.Chest
+import k2b6s9j.boatcraft.api.registry.{MaterialRegistry, ModifierRegistry}
+import k2b6s9j.boatcraft.compatibility.vanilla.VanillaGuiHandler
+import k2b6s9j.boatcraft.compatibility.vanilla.materials.metal.{Gold, Iron}
+import k2b6s9j.boatcraft.compatibility.vanilla.materials.wood.{Acacia, Birch, Jungle, Oak, Spruce}
+import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.{Chest, Furnace, Workbench}
 import k2b6s9j.boatcraft.core.BoatCraft
-import k2b6s9j.boatcraft.core.registry.{MaterialRegistry, ModifierRegistry}
 import k2b6s9j.boatcraft.core.utilities.Recipes
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import cpw.mods.fml.common.network.NetworkRegistry
-import k2b6s9j.boatcraft.compatibility.vanilla.VanillaGuiHandler
-import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.Workbench
-import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.Furnace
-import k2b6s9j.boatcraft.compatibility.vanilla.materials.metal.Iron
-import k2b6s9j.boatcraft.compatibility.vanilla.materials.metal.Gold
 
 @Mod(modid = "boatcraft:compatibility:vanilla",
 	name = "BoatCraft Vanilla Compatibility",

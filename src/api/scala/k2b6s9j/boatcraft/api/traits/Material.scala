@@ -1,4 +1,4 @@
-package k2b6s9j.boatcraft.core.traits
+package k2b6s9j.boatcraft.api.traits
 
 import net.minecraft.util.ResourceLocation
 import net.minecraft.item.ItemStack

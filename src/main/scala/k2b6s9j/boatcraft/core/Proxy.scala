@@ -22,14 +22,14 @@ object Proxy
 
 	class ClientProxy extends CommonProxy
 	{
-		override def registerRenderers()
+		override def registerRenderers
 		{
 			BoatCraft.log info "Registering Renderes"
 			RenderingRegistry registerEntityRenderingHandler(classOf[Boat.EntityCustomBoat],
-					new Boat.RenderCustomBoat())
+					new Boat.RenderCustomBoat)
 			MinecraftForgeClient registerItemRenderer(BoatCraft.itemBoat, new Boat.RenderCustomBoat)
 			RenderingRegistry registerEntityRenderingHandler(classOf[Boat.EntityBoatContainer],
-					new Boat.RenderCustomBoat())
+					new Boat.RenderCustomBoat)
 		}
 	}
 }

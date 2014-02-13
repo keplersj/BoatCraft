@@ -1,7 +1,7 @@
 package k2b6s9j.boatcraft.compatibility.vanilla.modifiers
 
 import k2b6s9j.boatcraft.core.Boat.{EntityCustomBoat, EntityBoatContainer}
-import k2b6s9j.boatcraft.core.traits.Modifier
+import k2b6s9j.boatcraft.api.traits.Modifier
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
@@ -66,16 +66,9 @@ class Chest extends Modifier
 
 object Chest
 {
-	private[compatibility] class Inventory(boat: EntityBoatContainer, size: Int) extends TileEntityChest
+	private class Inventory(boat: EntityBoatContainer) extends TileEntityChest
 	{
 		worldObj = boat.worldObj
-		
-		ReflectionHelper setPrivateValue(classOf[TileEntityChest], this,
-				new Array[ItemStack](size), "chestContents")
-		
-		def this(boat: EntityBoatContainer) = this(boat, 27)
-		
-		override def getSizeInventory = size
 		
 		override def getInventoryName = "Chest Boat"
 		
