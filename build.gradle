@@ -68,11 +68,6 @@ cobertura {
 jar {
     classifier = 'universal'
     version = "${project.minecraft.version}-${project.version}"
-    
-    manifest {
-        attributes("FMLCorePlugin": "k2b6s9j.boatcraft.core.asm.BoatCraftFMLLoadingPlugin",
-            "Created-By": "1.7.0 (Oracle Corporation)")
-    }
 }
 
 // Add in a source jar for people, should they desire to download such a thing
