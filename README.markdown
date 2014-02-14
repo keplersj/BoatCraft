@@ -10,7 +10,7 @@ Rails had their turn, now out to the Minecraftian seas. Out there we will inteac
 ### Build Instructions
 With Gradle, building mods have never easier!
 
-Just fork the repo, open a command window in that foler, and run "gradlew assemble" or "gradlew.bat assemble" (depending on your system)!
+Just checkout the repo, open a command window in that foler, and run "gradlew assemble" or "gradlew.bat assemble" (depending on your system)!
 
 The output will be in build/libs, called BoatCraft-(minecraft version)-(mod version)-universal.jar
 
