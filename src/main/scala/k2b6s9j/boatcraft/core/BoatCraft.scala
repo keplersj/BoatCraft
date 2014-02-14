@@ -14,6 +14,7 @@ import k2b6s9j.boatcraft.core.materials.Empty
 import k2b6s9j.boatcraft.core.packets.ChannelHandler
 import k2b6s9j.boatcraft.core.utilities.Recipes
 import k2b6s9j.boatcraft.api.Boat
+import net.minecraft.item.Item
 
 @Mod(modid = "boatcraft", name = "BoatCraft", version = "2.0", modLanguage = "scala")
 object BoatCraft
@@ -44,6 +45,8 @@ object BoatCraft
 		itemBoat = new Boat.ItemCustomBoat
 		
 		GameRegistry registerItem(itemBoat, "customBoat")
+		
+		log info (Item.itemRegistry getNameForObject itemBoat)
 	}
 	
 	@EventHandler

@@ -174,13 +174,20 @@ object Boat
 			setModifier(tag getString "modifier")
 		}
 		
+		override def onUpdate
+		{
+			super.onUpdate
+			
+			getModifier update this
+		}
+		
 		override def func_145778_a(item: Item, count: Int, f: Float): EntityItem =
 		{
 			var stack: ItemStack = new ItemStack(item, count)
 			
 			if (item == Items.boat)
 			{
-				stack = new ItemStack(Item.itemRegistry.getObject("boatcraft:customBoat").asInstanceOf[Item], count)
+				stack = new ItemStack(getItemCustomBoat, count)
 				stack.stackTagCompound = new NBTTagCompound
 				stack.stackTagCompound setString("material", dataWatcher getWatchableObjectString 20)
 				stack.stackTagCompound setString("modifier", dataWatcher getWatchableObjectString 21)
@@ -303,13 +310,6 @@ object Boat
 			super.readEntityFromNBT(tag)
 			
 			getModifier readStateFromNBT(this, tag)
-		}
-		
-		override def onUpdate
-		{
-			super.onUpdate
-			
-			getModifier update this
 		}
 		
 		private var inventory: IInventory = null
