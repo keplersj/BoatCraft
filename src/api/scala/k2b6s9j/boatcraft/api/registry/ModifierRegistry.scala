@@ -1,11 +1,11 @@
 package k2b6s9j.boatcraft.api.registry
 
-import java.util.{Map, HashMap, List}
+import java.util.{HashMap, List, Map}
+
+import scala.collection.JavaConversions.asScalaBuffer
+
 import k2b6s9j.boatcraft.api.traits.Modifier
-import k2b6s9j.boatcraft.core.BoatCraft
 import net.minecraft.item.ItemStack
-import scala.collection.JavaConversions._
-import cpw.mods.fml.common.Mod
 
 object ModifierRegistry
 {
@@ -14,16 +14,12 @@ object ModifierRegistry
 	def addModifier(newMaterial: Modifier)
 	{
 		modifiers put(newMaterial toString, newMaterial)
-		BoatCraft.log info "Added " + newMaterial.getName + " to the Modifier set."
 	}
 
 	def addModifiers(newMaterials: List[Modifier])
 	{
-		for (modifier: Modifier <- newMaterials)
-		{
+		for (modifier <- newMaterials)
 			modifiers put(modifier toString, modifier)
-			BoatCraft.log info "Added " + modifier.getName + " to the Modifier set."
-		}
 	}
 
 	def getModifier(name: String) =

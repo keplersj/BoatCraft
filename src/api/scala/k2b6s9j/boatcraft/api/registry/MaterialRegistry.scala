@@ -1,11 +1,11 @@
 package k2b6s9j.boatcraft.api.registry
 
-import java.util.{Map, HashMap, List}
+import java.util.{HashMap, List, Map}
+
+import scala.collection.JavaConversions.asScalaBuffer
+
 import k2b6s9j.boatcraft.api.traits.Material
-import k2b6s9j.boatcraft.core.BoatCraft
 import net.minecraft.item.ItemStack
-import scala.collection.JavaConversions._
-import cpw.mods.fml.common.Mod
 
 object MaterialRegistry
 {
@@ -14,16 +14,12 @@ object MaterialRegistry
 	def addMaterial(newMaterial: Material)
 	{
 		materials put(newMaterial toString, newMaterial)
-		BoatCraft.log info "Added " + newMaterial.getName + " to the Material set."
 	}
 
 	def addMaterials(newMaterials: List[Material])
 	{
 		for (material <- newMaterials)
-		{
 			materials put(material toString, material)
-			BoatCraft.log info "Added " + material.getName + " to the Material set."
-		}
 	}
 
 	def getMaterial(name: String) =

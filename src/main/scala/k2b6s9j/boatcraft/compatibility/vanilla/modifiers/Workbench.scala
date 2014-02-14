@@ -1,6 +1,6 @@
 package k2b6s9j.boatcraft.compatibility.vanilla.modifiers
 
-import k2b6s9j.boatcraft.core.Boat.EntityCustomBoat
+import k2b6s9j.boatcraft.api.Boat.EntityCustomBoat
 import k2b6s9j.boatcraft.api.traits.Modifier
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer

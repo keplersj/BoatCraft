@@ -3,6 +3,7 @@ package k2b6s9j.boatcraft.core
 import cpw.mods.fml.client.registry.RenderingRegistry
 import cpw.mods.fml.common.registry.EntityRegistry
 import net.minecraftforge.client.MinecraftForgeClient
+import k2b6s9j.boatcraft.api.Boat
 
 object Proxy
 {

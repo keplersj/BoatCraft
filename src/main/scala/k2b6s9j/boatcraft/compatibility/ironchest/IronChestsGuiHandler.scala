@@ -5,9 +5,10 @@ import cpw.mods.ironchest.{ContainerIronChest, IronChestType}
 import cpw.mods.ironchest.client.GUIChest
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.world.World
-import k2b6s9j.boatcraft.core.Boat
+import k2b6s9j.boatcraft.api.Boat
 import net.minecraft.util.AxisAlignedBB
 import cpw.mods.ironchest.TileEntityIronChest
+import k2b6s9j.boatcraft.api.Boat
 
 object IronChestsGuiHandler extends IGuiHandler
 {

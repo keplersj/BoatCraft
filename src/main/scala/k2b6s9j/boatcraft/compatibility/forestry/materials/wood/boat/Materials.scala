@@ -1,6 +1,6 @@
 package k2b6s9j.boatcraft.compatibility.forestry.boat
 
-import k2b6s9j.boatcraft.core.Boat.{RenderCustomBoat, EntityCustomBoat}
+import k2b6s9j.boatcraft.api.Boat.{RenderCustomBoat, EntityCustomBoat}
 
 object Materials {
 

@@ -1,9 +1,7 @@
 package k2b6s9j.boatcraft.core
 
 import java.util.EnumMap
-
 import org.apache.logging.log4j.Logger
-
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.SidedProxy
@@ -15,6 +13,7 @@ import k2b6s9j.boatcraft.api.registry.ModifierRegistry
 import k2b6s9j.boatcraft.core.materials.Empty
 import k2b6s9j.boatcraft.core.packets.ChannelHandler
 import k2b6s9j.boatcraft.core.utilities.Recipes
+import k2b6s9j.boatcraft.api.Boat
 
 @Mod(modid = "boatcraft", name = "BoatCraft", version = "2.0", modLanguage = "scala")
 object BoatCraft

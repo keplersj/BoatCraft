@@ -1,4 +1,4 @@
-package k2b6s9j.boatcraft.core
+package k2b6s9j.boatcraft.api
 
 import java.lang.String
 import java.util.List
@@ -7,10 +7,8 @@ import scala.collection.JavaConversions.mapAsScalaMap
 
 import org.lwjgl.opengl.GL11
 
-import cpw.mods.fml.common.Mod
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import k2b6s9j.boatcraft.api.registry.{MaterialRegistry, ModifierRegistry}
-import k2b6s9j.boatcraft.api.traits.{Material, Modifier}
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.entity.RenderBoat
 import net.minecraft.client.renderer.texture.TextureMap
@@ -38,11 +36,11 @@ object Boat
 		{
 			var stack = new ItemStack(item)
 			stack.stackTagCompound = new NBTTagCompound
-			for ((nameMat: String, material: Material) <-
+			for ((nameMat, material) <-
 					MaterialRegistry.materials)
 			{
 				stack.stackTagCompound setString("material", nameMat)
-				for ((nameMod: String, modifier: Modifier) <-
+				for ((nameMod, modifier) <-
 						ModifierRegistry.modifiers)
 				{
 					stack.stackTagCompound setString("modifier", nameMod)
@@ -182,7 +180,7 @@ object Boat
 			
 			if (item == Items.boat)
 			{
-				stack = new ItemStack(BoatCraft.itemBoat, count)
+				stack = new ItemStack(Item.itemRegistry.getObject("boatcraft:customBoat").asInstanceOf[Item], count)
 				stack.stackTagCompound = new NBTTagCompound
 				stack.stackTagCompound setString("material", dataWatcher getWatchableObjectString 20)
 				stack.stackTagCompound setString("modifier", dataWatcher getWatchableObjectString 21)

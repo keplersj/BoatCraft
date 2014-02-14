@@ -1,7 +1,7 @@
 package k2b6s9j.boatcraft.compatibility.ironchest.modifiers
 
 import cpw.mods.ironchest.{IronChestType, TileEntityGoldChest}
-import k2b6s9j.boatcraft.core.Boat.EntityBoatContainer
+import k2b6s9j.boatcraft.api.Boat.EntityBoatContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.IInventory
 
