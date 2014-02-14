@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.init.Items
 import net.minecraftforge.oredict.OreDictionary
 
-class Iron extends Material
+object Iron extends Material
 {
 	override def getTexture = 
 		new ResourceLocation("boatcraft",

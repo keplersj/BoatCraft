@@ -6,7 +6,7 @@ import net.minecraft.world.World
 import net.minecraft.client.gui.inventory.GuiChest
 import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.Workbench
 
-class VanillaGuiHandler extends IGuiHandler
+object VanillaGuiHandler extends IGuiHandler
 {
 	override def getClientGuiElement(id: Int, player: EntityPlayer, world: World,
 		x: Int, y: Int, z: Int): AnyRef =

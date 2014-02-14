@@ -6,29 +6,18 @@ import net.minecraft.inventory.IInventory
 import cpw.mods.ironchest.TileEntityDirtChest
 import net.minecraft.entity.player.EntityPlayer
 
-class DirtChest9000 extends Iron_Chest
+object DirtChest9000 extends GenericIronChest
 {
-	override def getMeta = IronChestType.DIRTCHEST9000 ordinal
+	override def getMeta = IronChestType.CRYSTAL ordinal
 	
 	override def getName = "DirtChest9000"
 	
 	override def getInventory(boat: EntityBoatContainer): IInventory =
-		new DirtChest9000.Inventory(boat)
-}
-
-object DirtChest9000
-{
-	private class Inventory(boat: EntityBoatContainer) extends TileEntityDirtChest
+		new Inventory(boat)
+	
+	private class Inventory(boat: EntityBoatContainer)
+		extends GenericIronChest.Inventory(boat, IronChestType.DIRTCHEST9000)
 	{
 		override def getInventoryName = "DirtBoat9000!"
-		
-		override def hasCustomInventoryName = false
-		
-		override def isUseableByPlayer(player: EntityPlayer) =
-			(player getDistanceSqToEntity boat) <= 64
-		
-		//TODO make it render it on the boat
-		override def openInventory {}
-		override def closeInventory {}
 	}
 }

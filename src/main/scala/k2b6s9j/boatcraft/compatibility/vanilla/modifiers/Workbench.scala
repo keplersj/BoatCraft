@@ -13,7 +13,7 @@ import k2b6s9j.boatcraft.compatibility.Vanilla
 import net.minecraft.client.gui.inventory.GuiCrafting
 import net.minecraft.client.resources.I18n
 
-class Workbench extends Modifier
+object Workbench extends Modifier
 {
 	override def getBlock: Block = Blocks.crafting_table
 	override def getMeta: Int = 0
@@ -28,10 +28,7 @@ class Workbench extends Modifier
 		player openGui(Vanilla, 0,
 				boat.worldObj, boat.posX toInt, boat.posY toInt, boat.posZ toInt)
 	}
-}
-
-object Workbench
-{
+	
 	private[vanilla] class Container(inventoryPlayer: InventoryPlayer, world: World,
 			x: Int, y: Int, z: Int)
 		extends ContainerWorkbench(inventoryPlayer, world, x, y, z)

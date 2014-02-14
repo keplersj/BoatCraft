@@ -44,13 +44,13 @@ object IronChests
 	@Optional.Method(modid = "IronChest")
 	private def addModifiers
 	{
-		ModifierRegistry addModifier new Iron_Chest
-		ModifierRegistry addModifier new Gold_Chest
-		ModifierRegistry addModifier new Diamond_Chest
-		ModifierRegistry addModifier new Copper_Chest
-		ModifierRegistry addModifier new Silver_Chest
-		ModifierRegistry addModifier new Crystal_Chest
-		ModifierRegistry addModifier new Obsidian_Chest
-		ModifierRegistry addModifier new DirtChest9000
+		ModifierRegistry addModifier Iron_Chest
+		ModifierRegistry addModifier Gold_Chest
+		ModifierRegistry addModifier Diamond_Chest
+		ModifierRegistry addModifier Copper_Chest
+		ModifierRegistry addModifier Silver_Chest
+		ModifierRegistry addModifier Crystal_Chest
+		ModifierRegistry addModifier Obsidian_Chest
+		ModifierRegistry addModifier DirtChest9000
 	}
 }

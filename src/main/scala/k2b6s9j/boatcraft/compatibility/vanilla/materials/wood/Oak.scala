@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 
-class Oak extends Material
+object Oak extends Material
 {
 	override def getTexture =
 		new ResourceLocation("boatcraft",

@@ -21,7 +21,7 @@ object IronChestsGuiHandler extends IGuiHandler
 	
 	private def getBoat(world: World, x: Int, y: Int, z: Int) =
 		world.getEntitiesWithinAABB(classOf[Boat.EntityBoatContainer],
-				AxisAlignedBB getBoundingBox(x - .5, y - .5, z - .5, x + .5, y + .5, z + .5))
+				AxisAlignedBB getBoundingBox(x, y, z, x + 1, y + 1, z + 1))
 				.get(0)
 				.asInstanceOf[Boat.EntityBoatContainer]
 }

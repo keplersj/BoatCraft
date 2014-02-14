@@ -15,6 +15,7 @@ import k2b6s9j.boatcraft.core.packets.ChannelHandler
 import k2b6s9j.boatcraft.core.utilities.Recipes
 import k2b6s9j.boatcraft.api.Boat
 import net.minecraft.item.Item
+import net.minecraftforge.common.config.Configuration
 
 @Mod(modid = "boatcraft", name = "BoatCraft", version = "2.0", modLanguage = "scala")
 object BoatCraft
@@ -24,9 +25,11 @@ object BoatCraft
 	    serverSide = "k2b6s9j.boatcraft.core.Proxy$CommonProxy")
 	var proxy: Proxy.CommonProxy = null
 	
+	private[boatcraft] var config: Configuration = null
+	
 	var channels: EnumMap[Side, FMLEmbeddedChannel] = null
 	
-	var log: Logger = null
+	private[boatcraft] var log: Logger = null
 
 	var itemBoat: Boat.ItemCustomBoat = null
 	
@@ -34,6 +37,8 @@ object BoatCraft
 	def preInit(event: FMLPreInitializationEvent)
 	{
 		log = event getModLog
+		
+		config = new Configuration(event getSuggestedConfigurationFile)
 		
 		channels = NetworkRegistry.INSTANCE newChannel("boatcraft", ChannelHandler);
 		

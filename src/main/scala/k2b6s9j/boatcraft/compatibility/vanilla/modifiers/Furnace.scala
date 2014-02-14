@@ -12,7 +12,7 @@ import net.minecraft.item.crafting.FurnaceRecipes
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
 
-class Furnace extends Modifier
+object Furnace extends Modifier
 {
 	override def getBlock = Blocks.lit_furnace
 	override def getMeta = 0
@@ -90,11 +90,8 @@ class Furnace extends Modifier
 			//tag setString("CustomName", inventory.field_145958_o);
 		}
 	}
-}
-
-object Furnace
-{
-	private[Furnace] class Inventory(boat: EntityBoatContainer) extends TileEntityFurnace
+	
+	private class Inventory(boat: EntityBoatContainer) extends TileEntityFurnace
 	{
 		worldObj = boat.worldObj
 		

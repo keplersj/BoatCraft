@@ -13,11 +13,11 @@ import net.minecraft.nbt.NBTTagList
 import net.minecraftforge.common.util.Constants
 import cpw.mods.fml.relauncher.ReflectionHelper
 import java.lang.reflect.Field
+import k2b6s9j.boatcraft.core.utilities.NBTHelper
 
-class Chest extends Modifier
+object Chest extends Modifier
 {
 	override def getBlock: Block = Blocks.chest
-	override def getMeta = 0
 
 	override def hasInventory = true
 	override def getInventory(boat: EntityBoatContainer): IInventory =
@@ -30,41 +30,12 @@ class Chest extends Modifier
 		//player openGui(Vanilla, 0, player.worldObj, 0, 0, 0)
 		player displayGUIChest boat.asInstanceOf[IInventory]
 	
-	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound)
-	{
-		var container = boat.asInstanceOf[EntityBoatContainer]
-		
-		var list = new NBTTagList
-		for (i: Int <- 0 until container.getInventory.getSizeInventory)
-		{
-			if (container.getInventory.getStackInSlot(i) != null)
-			{
-				var _tag = new NBTTagCompound
-				container.getInventory.getStackInSlot(i) writeToNBT _tag
-				_tag setByte ("Slot", i.toByte)
-				list appendTag _tag
-			}
-		}
-		tag.setTag("Items", list)
-	}
+	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
+		NBTHelper writeChestToNBT(boat.asInstanceOf[IInventory], tag)
 	
+	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
+		NBTHelper readChestFromNBT(boat.asInstanceOf[IInventory], tag)
 	
-	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound)
-	{
-		var list = tag.getTagList("Items", Constants.NBT.TAG_COMPOUND)
-		
-		for (i: Int <- 0 until list.tagCount)
-		{
-			val _tag = list getCompoundTagAt i
-			boat.asInstanceOf[EntityBoatContainer] setInventorySlotContents(
-				_tag getByte "Slot",
-				ItemStack loadItemStackFromNBT _tag)
-		}
-	}
-}
-
-object Chest
-{
 	private class Inventory(boat: EntityBoatContainer) extends TileEntityChest
 	{
 		worldObj = boat.worldObj
