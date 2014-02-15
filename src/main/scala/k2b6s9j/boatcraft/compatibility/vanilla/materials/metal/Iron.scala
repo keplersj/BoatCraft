@@ -18,5 +18,5 @@ object Iron extends Material
 	override def getStick =
 		if ((OreDictionary getOres "nuggetIron") isEmpty)
 			null
-		else (OreDictionary getOres "nuggetIron") get 0
+		else new ItemStack(((OreDictionary getOres "nuggetIron") get 0) getItem, 4)
 }

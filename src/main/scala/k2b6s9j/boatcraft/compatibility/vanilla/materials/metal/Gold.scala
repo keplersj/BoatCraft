@@ -15,5 +15,5 @@ object Gold extends Material
 	override def getName = "Gold"
 	
 	override def getItem = new ItemStack(Items.gold_ingot)
-	override def getStick = new ItemStack(Items.gold_nugget)
+	override def getStick = new ItemStack(Items.gold_nugget, 4)
 }

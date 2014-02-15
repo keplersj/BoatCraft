@@ -12,6 +12,7 @@ import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.registry.GameRegistry
 import k2b6s9j.boatcraft.api.registry.{MaterialRegistry, ModifierRegistry}
 import k2b6s9j.boatcraft.compatibility.vanilla.VanillaGuiHandler
+import k2b6s9j.boatcraft.compatibility.vanilla.materials.crystal.{Diamond, Emerald, Obsidian}
 import k2b6s9j.boatcraft.compatibility.vanilla.materials.metal.{Gold, Iron}
 import k2b6s9j.boatcraft.compatibility.vanilla.materials.wood._
 import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.{Chest, Furnace, Workbench}
@@ -117,6 +118,10 @@ object Vanilla
 		
 		MaterialRegistry addMaterial Iron
 		MaterialRegistry addMaterial Gold
+		
+		MaterialRegistry addMaterial Obsidian
+		MaterialRegistry addMaterial Diamond
+		MaterialRegistry addMaterial Emerald
 	}
 	
 	private def registerModifiers

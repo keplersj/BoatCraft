@@ -189,13 +189,17 @@ object Boat
 			{
 				stack = new ItemStack(getItemCustomBoat, count)
 				stack.stackTagCompound = new NBTTagCompound
-				stack.stackTagCompound setString("material", dataWatcher getWatchableObjectString 20)
-				stack.stackTagCompound setString("modifier", dataWatcher getWatchableObjectString 21)
+				stack.stackTagCompound setString("material", getMaterialName)
+				stack.stackTagCompound setString("modifier", getModifierName)
 			}
 			else if (item == Item.getItemFromBlock(Blocks.planks))
 				stack = getMaterial getItem
 			else if (item == Items.stick)
+			{
 				stack = getMaterial getStick
+				
+				if (stack == null && rand.nextBoolean) stack = getMaterial getItem
+			}
 			else return super.func_145778_a(item, count, f)
 			
 			if (stack != null) entityDropItem(stack, f)
