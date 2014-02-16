@@ -31,9 +31,19 @@ object MaterialRegistry
 			materials put(material toString, material)
 	}
 
+  /** Returns a registered Material associated with a certain name.
+    *
+    * @param name name of registered Material
+    * @return registered Material
+    */
 	def getMaterial(name: String) =
 		materials get name
 
+  /** Returns a registered Material associated with a certain ItemStack.
+    *
+    * @param stack ItemStack of registered Material
+    * @return registered Material
+    */
 	def getMaterial(stack: ItemStack) =
 		materials get (stack.stackTagCompound getString "material")
 }
