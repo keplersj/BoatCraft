@@ -7,6 +7,7 @@ import scala.collection.JavaConversions.asScalaBuffer
 import k2b6s9j.boatcraft.api.traits.Material
 import net.minecraft.item.ItemStack
 
+/** Contains the methods needed to register Materials with BoatCraft:Core. */
 object MaterialRegistry
 {
 	var materials: Map[String, Material] = new HashMap[String, Material]

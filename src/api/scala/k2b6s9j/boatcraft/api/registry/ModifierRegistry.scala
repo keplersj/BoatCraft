@@ -7,6 +7,7 @@ import scala.collection.JavaConversions.asScalaBuffer
 import k2b6s9j.boatcraft.api.traits.Modifier
 import net.minecraft.item.ItemStack
 
+/** Contains the methods needed to register Materials with BoatCraft:Core. */
 object ModifierRegistry
 {
 	var modifiers: Map[String, Modifier] = new HashMap[String, Modifier]
