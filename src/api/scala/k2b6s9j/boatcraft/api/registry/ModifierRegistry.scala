@@ -11,15 +11,23 @@ import net.minecraft.item.ItemStack
 object ModifierRegistry
 {
 	var modifiers: Map[String, Modifier] = new HashMap[String, Modifier]
-	
-	def addModifier(newMaterial: Modifier)
+
+  /** Adds a single Modifier to the Map used by BoatCraft:Core for boat creation.
+    *
+    * @param newModifier the Modifier being registered
+    */
+  def addModifier(newModifier: Modifier)
 	{
-		modifiers put(newMaterial toString, newMaterial)
+		modifiers put(newModifier toString, newModifier)
 	}
 
-	def addModifiers(newMaterials: List[Modifier])
+  /** Adds a List of Modifiers to the Map used by BoatCraft:Core for boat creation.
+    *
+    * @param newModifiers list of Modifiers being registered
+    */
+	def addModifiers(newModifiers: List[Modifier])
 	{
-		for (modifier <- newMaterials)
+		for (modifier <- newModifiers)
 			modifiers put(modifier toString, modifier)
 	}
 
