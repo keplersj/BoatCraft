@@ -1,4 +1,4 @@
-package k2b6s9j.boatcraft.api.test
+package k2b6s9j.boatcraft.api.registry.test
 
 import org.scalatest._
 import org.scalatest.junit.JUnitRunner
