@@ -61,6 +61,7 @@ dependencies {
 cobertura {
     coverageFormats = ['html', 'xml']
     coverageIgnoreTrivial = true;
+    coverageSourceDirs = sourceSets.api.scala.srcDirs
 }
 
 // this sets our output jar to have a 'tag' of 'universal' on it
