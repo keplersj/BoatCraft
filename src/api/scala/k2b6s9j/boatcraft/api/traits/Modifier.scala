@@ -82,6 +82,10 @@ abstract class Modifier
     * @param tag the NBT data tag being read
     */
 	def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) {}
-	
-	override def toString = getName replaceAll(" ", "") toLowerCase
+
+  /** Method is overridden to return the Modifier's actual name.
+    *
+    * @return name of the Modifier
+    */
+  override def toString = getName replaceAll(" ", "") toLowerCase
 }

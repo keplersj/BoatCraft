@@ -33,6 +33,10 @@ abstract class Material
     * @return the secondary drop of the boat
     */
 	def getStick: ItemStack = null
-	
-	override def toString = getName replaceAll(" ", "") toLowerCase
+
+  /** Method is overridden to return the Material's actual name.
+   *
+   * @return name of the Material
+   */
+  override def toString = getName replaceAll(" ", "") toLowerCase
 }
