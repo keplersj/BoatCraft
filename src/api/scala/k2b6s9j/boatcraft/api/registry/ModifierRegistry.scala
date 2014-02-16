@@ -31,9 +31,19 @@ object ModifierRegistry
 			modifiers put(modifier toString, modifier)
 	}
 
+  /** Returns a registered Modifier associated with a certain name.
+    *
+    * @param name name of registered Modifier
+    * @return registered Modifier
+    */
 	def getModifier(name: String) =
 		modifiers get name
 
+  /** Returns a registered Modifier associated with a certain ItemStack.
+   *
+   * @param stack ItemStack of registered Modifier
+   * @return registered Modifier
+   */
 	def getModifier(stack: ItemStack) =
 		modifiers get (stack.stackTagCompound getString "modifier")
 }
