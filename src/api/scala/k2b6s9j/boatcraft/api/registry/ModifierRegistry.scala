@@ -10,7 +10,8 @@ import net.minecraft.item.ItemStack
 /** Contains the methods needed to register Materials with BoatCraft:Core. */
 object ModifierRegistry
 {
-	var modifiers: Map[String, Modifier] = new HashMap[String, Modifier]
+  /** The Map containing all of the registered Modifiers for BoatCraft:Core to create boats with. */
+  var modifiers: Map[String, Modifier] = new HashMap[String, Modifier]
 
   /** Adds a single Modifier to the Map used by BoatCraft:Core for boat creation.
     *

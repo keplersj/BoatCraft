@@ -10,7 +10,8 @@ import net.minecraft.item.ItemStack
 /** Contains the methods needed to register Materials with BoatCraft:Core. */
 object MaterialRegistry
 {
-	var materials: Map[String, Material] = new HashMap[String, Material]
+  /** The Map containing all of the registered Materials for BoatCraft:Core to create boats with. */
+  var materials: Map[String, Material] = new HashMap[String, Material]
 	
   /** Adds a single Material to the Map used by BoatCraft:Core for boat creation.
     *
