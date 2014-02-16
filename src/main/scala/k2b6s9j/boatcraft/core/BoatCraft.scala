@@ -97,7 +97,7 @@ object BoatCraft
 
   /**
    * Method used to print mod name, copyright information, and miscellaneous mod information to the console and log.
-
+  */
   def printModInfo
 	{
 		log info "BoatCraft"
