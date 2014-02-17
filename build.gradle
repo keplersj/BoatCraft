@@ -44,10 +44,6 @@ tasks.withType(ScalaCompile) {
     scalaCompileOptions.useAnt = false
 }
 
-sourceSets {
-    api
-}
-
 dependencies {
         compile(group: 'cpw.mods', name: 'ironchest', version: '1.7.2-6.0.4.713') {
       	    artifact {
@@ -56,8 +52,7 @@ dependencies {
                 classifier = 'deobf'
             }
         }
-        
-        testCompile sourceSets.api.output
+
         testCompile 'junit:junit:4.11'
         testCompile 'org.scalatest:scalatest_2.10:2.0'
 }
@@ -65,7 +60,6 @@ dependencies {
 cobertura {
     coverageFormats = ['html', 'xml']
     coverageIgnoreTrivial = true;
-    coverageDirs = [sourceSets.main.output] + [sourceSets.api.output]
 }
 
 // this sets our output jar to have a 'tag' of 'universal' on it
