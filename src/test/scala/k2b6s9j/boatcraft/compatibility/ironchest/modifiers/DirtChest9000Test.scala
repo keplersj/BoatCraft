@@ -1,5 +1,10 @@
 package k2b6s9j.boatcraft.compatibility.ironchest.modifiers
 
-class DirtChest9000Test {
+import org.junit.runner.RunWith
+import org.scalatest.junit.JUnitRunner
+import org.scalatest.{BeforeAndAfter, Matchers, FlatSpec}
+
+@RunWith(classOf[JUnitRunner])
+class DirtChest9000Test extends FlatSpec with Matchers with BeforeAndAfter {
 
 }
