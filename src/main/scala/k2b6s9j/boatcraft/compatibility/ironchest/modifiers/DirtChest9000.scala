@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer
 
 object DirtChest9000 extends GenericIronChest
 {
-	override def getMeta = IronChestType.CRYSTAL ordinal
+	override def getMeta = IronChestType.DIRTCHEST9000 ordinal
 	
 	override def getName = "DirtChest9000"
 	
