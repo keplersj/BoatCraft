@@ -12,9 +12,9 @@ With Gradle, building mods has never easier!
 
 Just checkout the repo, open a command-line window in that foler, and run 
 
-``` gradlew assemble ``` on Windows-based systems or 
+``` gradlew.bat assemble ``` on Windows-based systems or 
 
-``` ./gradlew.bat assemble ``` on *nix-based systems.
+``` ./gradlew assemble ``` on *nix-based systems.
 
 The output will be in build/libs, called ``` BoatCraft-(minecraft version)-(mod version)-universal.jar ```
 
