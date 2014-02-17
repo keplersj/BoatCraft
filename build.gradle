@@ -44,6 +44,10 @@ tasks.withType(ScalaCompile) {
     scalaCompileOptions.useAnt = false
 }
 
+sourceSets {
+    api
+}
+
 dependencies {
         compile(group: 'cpw.mods', name: 'ironchest', version: '1.7.2-6.0.4.713') {
       	    artifact {
@@ -61,7 +65,7 @@ dependencies {
 cobertura {
     coverageFormats = ['html', 'xml']
     coverageIgnoreTrivial = true;
-    coverageSourceDirs = sourceSets.api.scala.srcDirs + sourceSets.main.scala.srcDirs
+    coverageDirs = [sourceSets.main.output] + [sourceSets.api.output]
 }
 
 // this sets our output jar to have a 'tag' of 'universal' on it
