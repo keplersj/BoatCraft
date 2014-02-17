@@ -15,7 +15,7 @@ class Obsidian_ChestTest extends FlatSpec with Matchers with BeforeAndAfter {
     modifier = Obsidian_Chest
   }
 
-  "The Chest Modifier" should "be a modifier." in {
+  "The Obsidian Chest Modifier" should "be a modifier." in {
     modifier shouldBe a [Modifier]
   }
 

@@ -15,7 +15,7 @@ class Iron_ChestTest extends FlatSpec with Matchers with BeforeAndAfter {
     modifier = Iron_Chest
   }
 
-  "The Chest Modifier" should "be a modifier." in {
+  "The Iron Chest Modifier" should "be a modifier." in {
     modifier shouldBe a [Modifier]
   }
 

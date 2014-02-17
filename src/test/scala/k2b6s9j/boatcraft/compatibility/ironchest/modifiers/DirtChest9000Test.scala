@@ -15,7 +15,7 @@ class DirtChest9000Test extends FlatSpec with Matchers with BeforeAndAfter {
     modifier = DirtChest9000
   }
 
-  "The Chest Modifier" should "be a modifier." in {
+  "The DirtChest9000 Modifier" should "be a modifier." in {
     modifier shouldBe a [Modifier]
   }
 
