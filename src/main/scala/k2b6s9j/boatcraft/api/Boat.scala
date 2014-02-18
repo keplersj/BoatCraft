@@ -25,10 +25,23 @@ import net.minecraft.world.World
 import net.minecraftforge.client.IItemRenderer
 import net.minecraftforge.client.IItemRenderer.{ItemRenderType, ItemRendererHelper}
 
+/**
+ * The object containing all of the code needed for Boats to function.
+ * Such as the Item, Entity, and Render.
+ */
 object Boat
 {
+
+  /**
+   * The Item Class used for all items that can be deployed like a Boat.
+   * Extends ItemBoat from Vanilla Minecraft.
+   */
 	class ItemCustomBoat extends ItemBoat
 	{
+    /**
+     * Boolean defining whether or not the Item has subtypes.
+     * Such as Material and Modifier.
+     */
 		hasSubtypes = true;
 		
 		@SideOnly(Side.CLIENT)
@@ -49,18 +62,39 @@ object Boat
 			}
 		}
 
-		override def getUnlocalizedName(stack: ItemStack) =
+    /**
+     * Gives ItemStacks their unlocalized name.
+     *
+     * @param stack The ItemStack being named.
+     * @return The unlocalized name of the ItemStack.
+     */
+    override def getUnlocalizedName(stack: ItemStack) =
 			"boat." +
 				MaterialRegistry.getMaterial(stack) +
 				"." +
 				ModifierRegistry.getModifier(stack)
 
-		override def getItemStackDisplayName(stack: ItemStack) =
+    /**
+     * Gives ItemStacks their display name.
+     * This is used when the user hovers over the item.
+     * Also by mods like WAILA.
+     *
+     * @param stack The ItemStack being named
+     * @return The name of the ItemStack.
+     */
+    override def getItemStackDisplayName(stack: ItemStack) =
 			MaterialRegistry.getMaterial(stack).getName + " " +
 				ModifierRegistry.getModifier(stack).getName +
 				" Dinghy"
 
-		override def onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack =
+    /**
+     * Called when the player right clicks while holding the item.
+     *
+     * @param stack The ItemStack being right clicked.
+     * @param world The World the ItemStack is being right clicked in.
+     * @param player The Player that is right clicking the ItemStack.
+     */
+    override def onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack =
 		{
 			val f: Float = 1.0F
 			val f1: Float = player.prevRotationPitch +
@@ -149,8 +183,8 @@ object Boat
 			}
 		}
 	}
-	
-	case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
+
+  case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		extends EntityBoat(world, x, y, z)
 	{
 		def this(world: World) = this(world, 0, 0, 0/*, null, null*/)
