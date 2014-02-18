@@ -4,16 +4,45 @@ import java.util.Map
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin
 import k2b6s9j.boatcraft.core.BoatCraft
 
+//TODO: Fill Documentation
+/**
+ *
+ */
 class BoatCraftFMLLoadingPlugin extends IFMLLoadingPlugin
 {
-	override def getASMTransformerClass =
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return
+   */
+  override def getASMTransformerClass =
 		Array(classOf[BoatCraftClassTransformer] getName)
-	
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return
+   */
 	override def getModContainerClass = BoatCraft.getClass getName
-	
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return
+   */
 	override def getSetupClass: String = null
-	
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param data
+   */
 	override def injectData(data: Map[String, AnyRef]) {}
 
-    override def getAccessTransformerClass: String = null
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return
+   */
+  override def getAccessTransformerClass: String = null
 }

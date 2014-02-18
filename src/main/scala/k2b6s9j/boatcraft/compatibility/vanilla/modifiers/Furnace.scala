@@ -14,25 +14,75 @@ import net.minecraft.nbt.NBTTagList
 
 object Furnace extends Modifier
 {
-	override def getBlock = Blocks.lit_furnace
-	override def getMeta = 0
-	
-	override def getName = "Furnace"
-	
-	override def getContent = new ItemStack(Blocks.furnace)
-	
-	override def hasInventory = true
-	override def getInventory(boat: EntityBoatContainer): IInventory =
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return block used for rendering
+   */
+  override def getBlock = Blocks.lit_furnace
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return the metadata of the block being rendering in the boat
+   */
+  override def getMeta = 0
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return the name of the Modifier
+   */
+  override def getName = "Furnace"
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return the ItemStack used when crafting
+   */
+  override def getContent = new ItemStack(Blocks.furnace)
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return boolean representing if a boat has an inventory
+   */
+  override def hasInventory = true
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param boat the boat container object
+   * @return the inventory associated with the boat container
+   */
+  override def getInventory(boat: EntityBoatContainer): IInventory =
 		new Furnace.Inventory(boat)
-	
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param player the player interacting with the Boat
+   * @param boat the Boat being interacted with
+   */
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
 		player func_146101_a(boat.asInstanceOf[EntityBoatContainer]
 							.getInventory.asInstanceOf[Furnace.Inventory])
-	
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param boat the boat being updated
+   */
 	override def update(boat: EntityCustomBoat) =
 		(boat.asInstanceOf[EntityBoatContainer].getInventory.asInstanceOf[Furnace.Inventory]
 			updateEntity)
-	
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param boat the boat entity NBT data is being read from
+   * @param tag the NBT data tag being read
+   */
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 	{
 		var inventory = boat.asInstanceOf[EntityBoatContainer]
@@ -62,7 +112,13 @@ object Furnace extends Modifier
             //inventory.field_145958_o = p_145839_1_.getString("CustomName");
         }
 	}
-	
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param boat the boat entity NBT data is being written to
+   * @param tag the NBT data tag being written
+   */
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 	{
 		var inventory = boat.asInstanceOf[EntityBoatContainer]
@@ -90,17 +146,41 @@ object Furnace extends Modifier
 			//tag setString("CustomName", inventory.field_145958_o);
 		}
 	}
-	
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param boat
+   */
 	private class Inventory(boat: EntityBoatContainer) extends TileEntityFurnace
 	{
-		worldObj = boat.worldObj
-		
-		override def getInventoryName: String = "Furnace Boat"
-		
-		override def isUseableByPlayer(player: EntityPlayer): Boolean =
+    //TODO: Fill Documentation
+    /**
+     *
+     */
+    worldObj = boat.worldObj
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @return
+     */
+    override def getInventoryName: String = "Furnace Boat"
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param player
+     * @return
+     */
+    override def isUseableByPlayer(player: EntityPlayer): Boolean =
 			(player getDistanceSqToEntity boat) <= 64
-		
-		override def updateEntity
+
+    //TODO: Fill Documentation
+    /**
+     *
+     */
+    override def updateEntity
 		{
 			var flag = furnaceBurnTime > 0
 
@@ -143,8 +223,13 @@ object Furnace extends Modifier
 					furnaceCookTime = 0
 			}
 		}
-		
-		private def canSmelt: Boolean =
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @return
+     */
+    private def canSmelt: Boolean =
 		{
 			if (getStackInSlot(0) == null)
 				false

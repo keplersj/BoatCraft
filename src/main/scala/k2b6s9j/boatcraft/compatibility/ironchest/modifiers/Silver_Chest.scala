@@ -6,18 +6,48 @@ import net.minecraft.inventory.IInventory
 import cpw.mods.ironchest.TileEntitySilverChest
 import net.minecraft.entity.player.EntityPlayer
 
+//TODO: Fill Documentation
+/**
+ *
+ */
 object Silver_Chest extends GenericIronChest
 {
-	override def getMeta = IronChestType.SILVER ordinal
-	
-	override def getName = "Silver Chest"
-	
-	override def getInventory(boat: EntityBoatContainer): IInventory =
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return the metadata of the block being rendering in the boat
+   */
+  override def getMeta = IronChestType.SILVER ordinal
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return the name of the Modifier
+   */
+  override def getName = "Silver Chest"
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param boat the boat container object
+   * @return the inventory associated with the boat container
+   */
+  override def getInventory(boat: EntityBoatContainer): IInventory =
 		new Inventory(boat)
-	
-	private class Inventory(boat: EntityBoatContainer)
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param boat
+   */
+  private class Inventory(boat: EntityBoatContainer)
 		extends GenericIronChest.Inventory(boat, IronChestType.SILVER)
 	{
-		override def getInventoryName = getName + " Boat"
+    //TODO: Fill Documentation
+    /**
+     *
+     * @return
+     */
+    override def getInventoryName = getName + " Boat"
 	}
 }

@@ -10,16 +10,51 @@ import net.minecraft.util.AxisAlignedBB
 import cpw.mods.ironchest.TileEntityIronChest
 import k2b6s9j.boatcraft.api.Boat
 
+//TODO: Fill Documentation
+/**
+ *
+ */
 object IronChestsGuiHandler extends IGuiHandler
 {
-	override def getClientGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int) =
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param ID
+   * @param player
+   * @param world
+   * @param x
+   * @param y
+   * @param z
+   * @return
+   */
+  override def getClientGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int) =
 		GUIChest.GUI.buildGUI(IronChestType.values()(ID), player.inventory,
 				getBoat(world, x, y, z).getInventory.asInstanceOf[TileEntityIronChest])
 
-	override def getServerGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int) =
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param ID
+   * @param player
+   * @param world
+   * @param x
+   * @param y
+   * @param z
+   * @return
+   */
+  override def getServerGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int) =
 		new ContainerIronChest(player.inventory, getBoat(world, x, y, z), IronChestType.values()(ID), 0, 0)
-	
-	private def getBoat(world: World, x: Int, y: Int, z: Int) =
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param world
+   * @param x
+   * @param y
+   * @param z
+   * @return
+   */
+  private def getBoat(world: World, x: Int, y: Int, z: Int) =
 		world.getEntitiesWithinAABB(classOf[Boat.EntityBoatContainer],
 				AxisAlignedBB getBoundingBox(x, y, z, x + 1, y + 1, z + 1))
 				.get(0)

@@ -5,10 +5,37 @@ import net.minecraft.item.ItemStack
 import net.minecraft.init.Blocks
 import net.minecraft.block.Block
 
+//TODO: Fill Documentation
+/**
+ *
+ */
 class Empty extends Modifier
 {
-	override def isRideable = true
-	override def getBlock = Blocks.air
-	override def getName = "Empty"
-	override def getContent: ItemStack = null
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return boolean representing if a Boat is mountable
+   */
+  override def isRideable = true
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return block used for rendering
+   */
+  override def getBlock = Blocks.air
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return the name of the Modifier
+   */
+  override def getName = "Empty"
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return the ItemStack used when crafting
+   */
+  override def getContent: ItemStack = null
 }

@@ -7,9 +7,19 @@ import k2b6s9j.boatcraft.api.Boat
 import net.minecraft.item.ItemStack
 import net.minecraft.inventory.IInventory
 
+//TODO: Fill Documentation
+/**
+ *
+ */
 object NBTHelper
 {
-	def writeChestToNBT(inv: IInventory, tag: NBTTagCompound)
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param inv
+   * @param tag
+   */
+  def writeChestToNBT(inv: IInventory, tag: NBTTagCompound)
 	{
 		var list = new NBTTagList
 		for (i <- 0 until inv.getSizeInventory)
@@ -24,8 +34,14 @@ object NBTHelper
 		}
 		tag.setTag("Items", list)
 	}
-	
-	def readChestFromNBT(inv: IInventory, tag: NBTTagCompound)
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param inv
+   * @param tag
+   */
+  def readChestFromNBT(inv: IInventory, tag: NBTTagCompound)
 	{
 		var list = tag getTagList("Items", Constants.NBT.TAG_COMPOUND)
 		
