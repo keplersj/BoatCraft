@@ -10,32 +10,28 @@ import k2b6s9j.boatcraft.core.materials.Empty
 import net.minecraft.init.Blocks
 
 @RunWith(classOf[JUnitRunner])
-class EmptyTest extends FlatSpec with Matchers with BeforeAndAfter {
+class EmptyTest extends FlatSpec with Matchers
+{
+	private val rideable = 'rideable
+	
+	it should "be rideable." in
+	{
+		Empty shouldBe rideable
+	}
 
-  var modifier: Empty = null
+	it should "contain the Air block." in
+	{
+		Empty.getBlock shouldBe Blocks.air
+	}
 
-  before {
-    modifier = new Empty
-  }
+	it should "be called \"Empty\"." in
+	{
+		Empty.getName shouldBe "Empty"
+	}
 
-  "The Empty Modifier" should "be a modifier." in {
-    modifier shouldBe a [Modifier]
-  }
-
-  it should "be rideable." in {
-    modifier.isRideable shouldBe true
-  }
-
-  it should "contain the Air block." in {
-    modifier.getBlock shouldBe Blocks.air
-  }
-
-  it should "be called \"Empty\"." in {
-    modifier.getName shouldBe "Empty"
-  }
-
-  it should "not have any content." in {
-    modifier.getContent shouldBe null
-  }
+	it should "not have any content." in
+	{
+		Empty.getContent shouldBe null
+	}
 
 }

@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.init.Blocks
 import net.minecraft.block.Block
 
-class Empty extends Modifier
+object Empty extends Modifier
 {
 	override def isRideable = true
 	override def getBlock = Blocks.air

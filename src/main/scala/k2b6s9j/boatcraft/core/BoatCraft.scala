@@ -45,7 +45,7 @@ object BoatCraft
 		printModInfo
 		
 		//All Boat Materials should be at least rideable
-		ModifierRegistry addModifier new Empty
+		ModifierRegistry addModifier Empty
 		
 		itemBoat = new Boat.ItemCustomBoat
 		
