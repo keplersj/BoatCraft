@@ -6,47 +6,53 @@ import net.minecraft.inventory.IInventory
 import cpw.mods.ironchest.TileEntitySilverChest
 import net.minecraft.entity.player.EntityPlayer
 
-//TODO: Fill Documentation
 /**
- *
+ * The Modifier for the Silver Chest from the Iron Chests mod.
+ * @author Vilim Lendvaj
  */
 object Silver_Chest extends GenericIronChest
 {
-  //TODO: Fill Documentation
   /**
+   * The metadata of the Silver Chest as defined by the Iron Chests mod.
    *
-   * @return the metadata of the block being rendering in the boat
+   * @author Vilim Lendvaj
+   * @return the metadata of the Silver Chest
    */
   override def getMeta = IronChestType.SILVER ordinal
 
-  //TODO: Fill Documentation
   /**
+   * The name of the Silver Chest
    *
-   * @return the name of the Modifier
+   * @author Vilim Lendvaj
+   * @return the name of the Silver Chest
    */
   override def getName = "Silver Chest"
 
-  //TODO: Fill Documentation
   /**
+   * The Inventory of the Silver Chest
    *
+   * @author Vilim Lendvaj
    * @param boat the boat container object
    * @return the inventory associated with the boat container
    */
   override def getInventory(boat: EntityBoatContainer): IInventory =
 		new Inventory(boat)
 
-  //TODO: Fill Documentation
   /**
+   * The Inventory of the Silver Chest
    *
-   * @param boat
+   * @author Vilim Lendvaj
+   * @param boat the boat container object
    */
   private class Inventory(boat: EntityBoatContainer)
 		extends GenericIronChest.Inventory(boat, IronChestType.SILVER)
 	{
-    //TODO: Fill Documentation
     /**
+     * The name of the Inventory in the boat.
+     * What's displayed in the Inventories GUI.
      *
-     * @return
+     * @author Vilim Lendvaj
+     * @return the name of the inventory
      */
     override def getInventoryName = getName + " Boat"
 	}

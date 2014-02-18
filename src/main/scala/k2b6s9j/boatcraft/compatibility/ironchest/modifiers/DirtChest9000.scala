@@ -6,47 +6,53 @@ import net.minecraft.inventory.IInventory
 import cpw.mods.ironchest.TileEntityDirtChest
 import net.minecraft.entity.player.EntityPlayer
 
-//TODO: Fill Documentation
 /**
- *
+ * The Modifier for the DirtChest9000 from the Iron Chests mod.
+ * @author Vilim Lendvaj
  */
 object DirtChest9000 extends GenericIronChest
 {
-  //TODO: Fill Documentation
   /**
+   * The metadata of the DirtChest9000 as defined by the Iron Chests mod.
    *
-   * @return the metadata of the block being rendering in the boat
+   * @author Vilim Lendvaj
+   * @return the metadata of the DirtChest9000
    */
   override def getMeta = IronChestType.DIRTCHEST9000 ordinal
 
-  //TODO: Fill Documentation
   /**
+   * The name of the DirtChest9000
    *
-   * @return the name of the Modifier
+   * @author Vilim Lendvaj
+   * @return the name of the DirtChest9000
    */
 	override def getName = "DirtChest9000"
 
-  //TODO: Fill Documentation
   /**
+   * The Inventory of the DirtChest9000
    *
+   * @author Vilim Lendvaj
    * @param boat the boat container object
    * @return the inventory associated with the boat container
    */
 	override def getInventory(boat: EntityBoatContainer): IInventory =
 		new Inventory(boat)
 
-  //TODO: Fill Documentation
   /**
+   * The Inventory of the DirtChest9000
    *
-   * @param boat
+   * @author Vilim Lendvaj
+   * @param boat the boat container object
    */
 	private class Inventory(boat: EntityBoatContainer)
 		extends GenericIronChest.Inventory(boat, IronChestType.DIRTCHEST9000)
 	{
-    //TODO: Fill Documentation
     /**
+     * The name of the Inventory in the boat.
+     * What's displayed in the Inventories GUI.
      *
-     * @return
+     * @author Vilim Lendvaj
+     * @return the name of the inventory
      */
 		override def getInventoryName = "DirtBoat9000!"
 	}

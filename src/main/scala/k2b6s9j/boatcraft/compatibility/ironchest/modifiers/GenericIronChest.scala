@@ -14,15 +14,16 @@ import net.minecraft.item.ItemStack
 import cpw.mods.ironchest.TileEntityIronChest
 import cpw.mods.ironchest.IronChestType
 
-//TODO: Fill Documentation
 /**
- *
+ * The modifier front end for all Iron Chests.
+ * @author Vilim Lendvaj
  */
 class GenericIronChest extends Modifier
 {
   //TODO: Fill Documentation
   /**
    *
+   * @author Vilim Lendvaj
    * @return block used for rendering
    */
 	override def getBlock: Block = IronChest.ironChestBlock
@@ -30,6 +31,7 @@ class GenericIronChest extends Modifier
   //TODO: Fill Documentation
   /**
    *
+   * @author Vilim Lendvaj
    * @return the ItemStack used when crafting
    */
 	override def getContent = new ItemStack(getBlock, 1, getMeta)
@@ -37,6 +39,7 @@ class GenericIronChest extends Modifier
   //TODO: Fill Documentation
   /**
    *
+   * @author Vilim Lendvaj
    * @return boolean representing if a boat has an inventory
    */
 	override def hasInventory = true
@@ -44,6 +47,7 @@ class GenericIronChest extends Modifier
   //TODO: Fill Documentation
   /**
    *
+   * @author Vilim Lendvaj
    * @param boat the boat entity NBT data is being written to
    * @param tag the NBT data tag being written
    */
@@ -53,6 +57,7 @@ class GenericIronChest extends Modifier
   //TODO: Fill Documentation
   /**
    *
+   * @author Vilim Lendvaj
    * @param boat the boat entity NBT data is being read from
    * @param tag the NBT data tag being read
    */
@@ -62,6 +67,7 @@ class GenericIronChest extends Modifier
   //TODO: Fill Documentation
   /**
    *
+   * @author Vilim Lendvaj
    * @param player the player interacting with the Boat
    * @param boat the Boat being interacted with
    */
@@ -70,15 +76,16 @@ class GenericIronChest extends Modifier
 				boat.posX.floor toInt, boat.posY.floor toInt, boat.posZ.floor toInt)
 }
 
-//TODO: Fill Documentation
 /**
- *
+ * Object containing common classes and methods for all the Iron Chest modifiers.
+ * @author Vilim Lendvaj
  */
 object GenericIronChest
 {
   //TODO: Fill Documentation
   /**
    *
+   * @author Vilim Lendvaj
    * @param boat
    * @param t
    */
@@ -88,12 +95,14 @@ object GenericIronChest
     //TODO: Fill Documentation
     /**
      *
+     * @author Vilim Lendvaj
      */
     worldObj = boat.worldObj
 
     //TODO: Fill Documentation
     /**
      *
+     * @author Vilim Lendvaj
      * @return
      */
 		override def hasCustomInventoryName = false
@@ -101,6 +110,7 @@ object GenericIronChest
     //TODO: Fill Documentation
     /**
      *
+     * @author Vilim Lendvaj
      * @param player
      * @return
      */
@@ -111,12 +121,14 @@ object GenericIronChest
     //TODO: Fill Documentation
     /**
      *
+     * @author Vilim Lendvaj
      */
 		override def openInventory {}
 
     //TODO: Fill Documentation
     /**
      *
+     * @author Vilim Lendvaj
      */
     override def closeInventory {}
 	}
