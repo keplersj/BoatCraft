@@ -1,4 +1,4 @@
-package k2b6s9j.boatcraft.api.traits.examples
+package k2b6s9j.boatcraft.test.api.traits.examples
 
 import k2b6s9j.boatcraft.api.traits.Modifier
 import net.minecraft.block.Block

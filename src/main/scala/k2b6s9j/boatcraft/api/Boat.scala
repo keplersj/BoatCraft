@@ -394,6 +394,8 @@ object Boat
 			GL11 glPushMatrix()
 			GL11 glTranslatef(.5F, .5F, .5F)
 			
+			if (renderType == ItemRenderType.ENTITY) GL11.glScaled(.5, .5, .5)
+			
 			val f4 = 0.75F
 			
 			val block = ModifierRegistry getModifier stack getBlock

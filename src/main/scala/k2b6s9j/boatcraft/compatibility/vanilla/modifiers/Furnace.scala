@@ -15,7 +15,7 @@ import net.minecraft.nbt.NBTTagList
 object Furnace extends Modifier
 {
 	override def getBlock = Blocks.lit_furnace
-	override def getMeta = 0
+	override def getMeta = 2
 	
 	override def getName = "Furnace"
 	
