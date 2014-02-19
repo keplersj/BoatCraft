@@ -39,7 +39,7 @@ class WorkbenchTest extends FlatSpec with Matchers with BeforeAndAfter
 	}
 
 	/* TODO: Find way to test ItemStack.
-  it should "contain a Workbench." in
+  	it should "contain a Workbench." in
 	{
 		modifier.getContent shouldBe new ItemStack(Blocks.crafting_table)
 	}

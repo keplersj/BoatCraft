@@ -2,11 +2,8 @@ package k2b6s9j.boatcraft.api
 
 import java.lang.String
 import java.util.List
-
 import scala.collection.JavaConversions.mapAsScalaMap
-
 import org.lwjgl.opengl.GL11
-
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import k2b6s9j.boatcraft.api.registry.{MaterialRegistry, ModifierRegistry}
 import net.minecraft.client.Minecraft
@@ -24,6 +21,8 @@ import net.minecraft.util.{AxisAlignedBB, MathHelper, MovingObjectPosition, Reso
 import net.minecraft.world.World
 import net.minecraftforge.client.IItemRenderer
 import net.minecraftforge.client.IItemRenderer.{ItemRenderType, ItemRendererHelper}
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher
+import net.minecraft.tileentity.TileEntity
 
 object Boat
 {
@@ -334,15 +333,17 @@ object Boat
 
 		def doRender(boat: EntityCustomBoat, x: Double, y: Double, z: Double, f0: Float, f1: Float)
 		{
-			GL11 glPushMatrix()
-			GL11 glTranslatef(x.asInstanceOf[Float], y.asInstanceOf[Float], z.asInstanceOf[Float])
+			GL11 glPushMatrix
+			
+			GL11 glTranslated(x, y, z)
 			GL11 glRotatef(180.0F - f0, 0.0F, 1.0F, 0.0F)
+			
 			var f2: Float = boat.getTimeSinceHit - f1
 			var f3: Float = boat.getDamageTaken - f1
-
+			
 			if (f3 < 0.0F)
 				f3 = 0.0F
-
+			
 			if (f2 > 0.0F)
 				GL11 glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * boat.getForwardDirection,
 						1.0F, 0.0F, 0.0F)
@@ -352,20 +353,44 @@ object Boat
 			val block = boat.getModifier getBlock
 			val meta = boat.getModifier getMeta
 			
-			if (block.getRenderType != -1)
+			/*if (boat.isInstanceOf[EntityBoatContainer]
+				&& boat.asInstanceOf[EntityBoatContainer].getInventory.isInstanceOf[TileEntity]
+				&& (TileEntityRendererDispatcher.instance hasSpecialRenderer
+					boat.asInstanceOf[EntityBoatContainer].getInventory.asInstanceOf[TileEntity]))
 			{
 				GL11 glPushMatrix()
+				GL11 glScalef(f4, f4, f4)
+				
+				val f5 = boat getBrightness f1
+				
+				GL11 glTranslatef(0.0F, 6F / 16.0F, 0.0F)
+				GL11 glPushMatrix
+				
+				TileEntityRendererDispatcher.instance renderTileEntityAt(
+						boat.asInstanceOf[EntityBoatContainer].getInventory.asInstanceOf[TileEntity],
+						0, 0, 0, f5)
+				
+        		GL11 glPopMatrix()
+				GL11 glPopMatrix()
+				GL11 glColor4f(1, 1, 1, 1)
+				
+			}
+			else */if (block.getRenderType != -1)
+			{
+				GL11 glPushMatrix
 				
 				bindTexture(TextureMap.locationBlocksTexture)
 				GL11 glScalef(f4, f4, f4)
+				
 				val f5 = boat getBrightness f1
 				
 				GL11 glTranslatef(0.0F, 6F / 16.0F, 0.0F)
 				
-				GL11 glPushMatrix()
-				field_147909_c renderBlockAsItem(block, meta, f5)
-        		GL11 glPopMatrix()
+				GL11 glPushMatrix
 				
+				field_147909_c renderBlockAsItem(block, meta, f5)
+				
+        		GL11 glPopMatrix()
 				GL11 glPopMatrix()
 				GL11 glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
 			}
@@ -391,12 +416,17 @@ object Boat
 
 		def renderItem(renderType: ItemRenderType, stack: ItemStack, objects: AnyRef*)
 		{
-			GL11 glPushMatrix()
-			GL11 glTranslatef(.5F, .5F, .5F)
+			GL11 glPushMatrix
 			
-			if (renderType == ItemRenderType.ENTITY) GL11.glScaled(.5, .5, .5)
+			GL11 glTranslated(.5, .5, .5)
 			
-			val f4 = 0.75F
+			if (renderType == ItemRenderType.ENTITY)
+			{
+				GL11 glScaled(.5, .5, .5)
+				GL11 glTranslated(-.5, 0, -.5)
+			}
+			
+			val f4 = .75F
 			
 			val block = ModifierRegistry getModifier stack getBlock
 			val meta = ModifierRegistry getModifier stack getMeta
@@ -409,23 +439,25 @@ object Boat
 					TextureMap.locationBlocksTexture
 				GL11 glScalef(f4, f4, f4)
 				
-				GL11 glTranslatef(0.0F, 6F / 16.0F, 0.0F)
+				GL11 glTranslated(0, 6. / 16., 0.)
 				
-				GL11 glPushMatrix()
+				GL11 glPushMatrix
+				
 				field_147909_c renderBlockAsItem(block, meta, 8)
-        		GL11 glPopMatrix()
+        		GL11 glPopMatrix
 				
-				GL11 glPopMatrix()
-				GL11 glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
+				GL11 glPopMatrix
+				
+				GL11 glColor4f(1, 1, 1, 1)
 			}
 			
 			GL11 glScalef(f4, f4, f4)
-			GL11 glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4)
+			GL11 glScalef(1F / f4, 1F / f4, 1F / f4)
 			
 			Minecraft.getMinecraft.getTextureManager bindTexture
 				(MaterialRegistry getMaterial stack getTexture)
 			
-			GL11 glScalef(-1.0F, -1.0F, 1.0F)
+			GL11 glScalef(-1, -1, 1)
 			modelBoat render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)
 			
 			GL11 glPopMatrix

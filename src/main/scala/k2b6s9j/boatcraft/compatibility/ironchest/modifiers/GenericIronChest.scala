@@ -14,12 +14,18 @@ import net.minecraft.item.ItemStack
 import cpw.mods.ironchest.TileEntityIronChest
 import cpw.mods.ironchest.IronChestType
 
-class GenericIronChest extends Modifier
+abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 {
 	override def getBlock: Block = IronChest.ironChestBlock
+	override def getMeta = chestType ordinal
+	
 	override def getContent = new ItemStack(getBlock, 1, getMeta)
 	
+	override def getName = chestType friendlyName
+	
 	override def hasInventory = true
+	override def getInventory(boat: Boat.EntityBoatContainer): IInventory =
+		new GenericIronChest.Inventory(boat, chestType)
 	
 	override def writeStateToNBT(boat: Boat.EntityCustomBoat, tag: NBTTagCompound) =
 		NBTHelper writeChestToNBT(boat.asInstanceOf[IInventory], tag)
@@ -34,12 +40,14 @@ class GenericIronChest extends Modifier
 
 object GenericIronChest
 {
-	private[modifiers] class Inventory(boat: Boat.EntityBoatContainer, t: IronChestType)
+	private class Inventory(boat: Boat.EntityBoatContainer, t: IronChestType)
 		extends TileEntityIronChest(t)
 	{
 		worldObj = boat.worldObj
 		
 		override def hasCustomInventoryName = false
+		
+		override def getInventoryName = t.friendlyName + " Boat"
 		
 		override def isUseableByPlayer(player: EntityPlayer) =
 			(player getDistanceSqToEntity boat) <= 64
