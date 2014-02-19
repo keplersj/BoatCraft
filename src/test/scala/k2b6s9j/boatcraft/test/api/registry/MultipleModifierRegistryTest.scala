@@ -1,16 +1,15 @@
-package k2b6s9j.boatcraft.api.registry.test
+package k2b6s9j.boatcraft.test.api.registry
 
 import java.util
-import java.util.Arrays
 
-import scala.collection.JavaConversions.mapAsScalaMap
+import scala.collection.JavaConversions._
 
 import org.junit.runner.RunWith
-import org.scalatest.{BeforeAndAfter, FlatSpec, Matchers}
+import org.scalatest._
 import org.scalatest.junit.JUnitRunner
 
 import k2b6s9j.boatcraft.api.registry.ModifierRegistry
-import k2b6s9j.boatcraft.test.api.traits.examples.{ExampleModifier, ExampleModifier2}
+import k2b6s9j.boatcraft.test.api.traits.examples._
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 
@@ -19,13 +18,13 @@ class MultipleModifierRegistryTest extends FlatSpec with Matchers with BeforeAnd
 {
 	before
 	{
-		ModifierRegistry addModifiers (Arrays.asList(ExampleModifier, ExampleModifier2))
+		ModifierRegistry addModifiers util.Arrays.asList(ExampleModifier, ExampleModifier2)
 	}
 	
 	"All Modifiers" should "be added to the registered Modifiers map." in
 	{
-		ModifierRegistry.modifiers.asInstanceOf[util.HashMap[AnyRef, AnyRef]].toMap should contain("test", ExampleModifier)
-		ModifierRegistry.modifiers.asInstanceOf[util.HashMap[AnyRef, AnyRef]].toMap should contain("test2", ExampleModifier2)
+		ModifierRegistry.modifiers.toMap should contain("test", ExampleModifier)
+		ModifierRegistry.modifiers.toMap should contain("test2", ExampleModifier2)
 	}
 	
 	they should "be returned when searched by name." in

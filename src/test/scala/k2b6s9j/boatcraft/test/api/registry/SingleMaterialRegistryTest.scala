@@ -1,13 +1,14 @@
-package k2b6s9j.boatcraft.test.api.registry.test
+package k2b6s9j.boatcraft.test.api.registry
 
 import org.junit.runner.RunWith
-import org.scalatest.{BeforeAndAfter, FlatSpec, Matchers}
+import org.scalatest._
 import org.scalatest.junit.JUnitRunner
 
 import k2b6s9j.boatcraft.api.registry.MaterialRegistry
-import k2b6s9j.boatcraft.test.api.traits.examples.ExampleMaterial
+import k2b6s9j.boatcraft.test.api.traits.examples._
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
+import scala.collection.JavaConversions._
 
 @RunWith(classOf[JUnitRunner])
 class SingleMaterialRegistryTest extends FlatSpec with Matchers with BeforeAndAfter
@@ -19,7 +20,7 @@ class SingleMaterialRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 
 	"A Material" should "be added to the registered Materials map." in
 	{
-		MaterialRegistry.materials should contain("test", ExampleMaterial)
+		MaterialRegistry.materials.toMap should contain("test", ExampleMaterial)
 	}
 
 	it should "be returned when searched by name." in

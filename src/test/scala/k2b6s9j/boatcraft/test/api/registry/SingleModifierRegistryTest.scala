@@ -1,14 +1,15 @@
-package k2b6s9j.boatcraft.api.registry.test
+package k2b6s9j.boatcraft.test.api.registry
 
 import org.junit.runner.RunWith
-import org.scalatest.{BeforeAndAfter, FlatSpec, Matchers}
+import org.scalatest._
 import org.scalatest.junit.JUnitRunner
 
 import k2b6s9j.boatcraft.api.registry.ModifierRegistry
-import k2b6s9j.boatcraft.test.api.traits.examples.ExampleModifier
+import k2b6s9j.boatcraft.test.api.traits.examples._
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
+import scala.collection.JavaConversions._
 
 @RunWith(classOf[JUnitRunner])
 class SingleModifierRegistryTest extends FlatSpec with Matchers with BeforeAndAfter
@@ -20,7 +21,7 @@ class SingleModifierRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 
 	"A Modifier" should "be added to the registered Modifiers map." in
 	{
-		ModifierRegistry.modifiers should contain("test", ExampleModifier)
+		ModifierRegistry.modifiers.toMap should contain("test", ExampleModifier)
 	}
 
 	it should "be returned when searched by name." in
