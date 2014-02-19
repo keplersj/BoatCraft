@@ -10,6 +10,7 @@ import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import scala.collection.JavaConversions._
+import k2b6s9j.boatcraft.core.materials.Empty
 
 @RunWith(classOf[JUnitRunner])
 class SingleModifierRegistryTest extends FlatSpec with Matchers with BeforeAndAfter
@@ -36,5 +37,10 @@ class SingleModifierRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 		stack.stackTagCompound setString ("modifier", "test")
 		ModifierRegistry getModifier stack shouldBe ExampleModifier
 	}
+
+  it should "fallback to an Empty modifier if no modifier is defined." in {
+    val stack = new ItemStack(Blocks.bedrock)
+    ModifierRegistry getModifier stack shouldBe Empty
+  }
 
 }
