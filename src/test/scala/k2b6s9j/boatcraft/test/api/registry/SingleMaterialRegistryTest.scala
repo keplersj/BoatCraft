@@ -18,17 +18,17 @@ class SingleMaterialRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 	{
 		MaterialRegistry addMaterial ExampleMaterial
 	}
-
+	
 	"A Material" should "be added to the registered Materials map." in
 	{
 		MaterialRegistry.materials.toMap should contain("test", ExampleMaterial)
 	}
-
+	
 	it should "be returned when searched by name." in
 	{
 		MaterialRegistry getMaterial "test" shouldBe ExampleMaterial
 	}
-
+	
 	it should "be returned when searched by ItemStack." in
 	{
 		val stack = new ItemStack(net.minecraft.init.Items.chainmail_helmet)
@@ -36,10 +36,12 @@ class SingleMaterialRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 		stack.stackTagCompound setString ("material", "test")
 		MaterialRegistry getMaterial stack shouldBe ExampleMaterial
 	}
-
-  it should "fallback to a Vanilla Boat texture if no Material is defined." in {
-    val stack = new ItemStack(net.minecraft.init.Items.chainmail_helmet)
-    (MaterialRegistry getMaterial stack).getTexture shouldBe new ResourceLocation("minecraft", "textures/entity/boat.png")
-  }
+	
+	it should "fallback to a Vanilla Boat texture if no Material is defined." in
+	{
+		val stack = new ItemStack(net.minecraft.init.Items.chainmail_helmet)
+		(MaterialRegistry getMaterial stack) should have (
+				'texture (new ResourceLocation("minecraft", "textures/entity/boat.png")))
+	}
 
 }

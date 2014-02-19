@@ -29,27 +29,18 @@ class Copper_ChestTest extends FlatSpec with Matchers with BeforeAndAfter {
 	{
 		modifier should not be 'rideable
 	}
-
-	it should "contain the Iron Chest block." in 
+	
+	it should "have it's properties correct" in
 	{
-		modifier.getBlock shouldBe IronChest.ironChestBlock
+		modifier should have(
+			'block (IronChest.ironChestBlock),
+			'meta (IronChestType.COPPER.ordinal),
+			'name ("Copper Chest"))
 	}
 
-	it should "have the metadata of a Copper Chest" in 
-	{
-		modifier.getMeta shouldBe IronChestType.COPPER.ordinal
-	}
-
-	it should "be called \"Copper Chest\"." in
-	{
-		modifier.getName shouldBe "Copper Chest"
-	}
-
-  /* TODO: Find way to test ItemStack
+	/* TODO: Find way to test ItemStack
 	it should "contain an Iron Chest block." in
 	{
 		modifier.getContent shouldBe new ItemStack(IronChest.ironChestBlock)
-	}
-	*/
-
+	}*/
 }

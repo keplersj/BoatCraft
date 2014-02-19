@@ -38,9 +38,9 @@ class SingleModifierRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 		ModifierRegistry getModifier stack shouldBe ExampleModifier
 	}
 
-  it should "fallback to an Empty modifier if no modifier is defined." in {
-    val stack = new ItemStack(Blocks.bedrock)
-    ModifierRegistry getModifier stack shouldBe Empty
-  }
-
+	it should "fallback to an Empty modifier if no modifier is defined." in
+	{
+		val stack = new ItemStack(Blocks.bedrock)
+		ModifierRegistry getModifier stack shouldBe Empty
+	}
 }

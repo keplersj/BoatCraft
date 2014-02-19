@@ -9,8 +9,7 @@ import net.minecraft.init.Items
 object OreDict_Wood extends Material
 {
 	override def getTexture =
-		new ResourceLocation("boatcraft",
-				"textures/entity/boat/vanilla/wood/oak.png")
+		new ResourceLocation("minecraft", "textures/entity/boat.png")
 	
 	override def getName = "Wood"
 	
