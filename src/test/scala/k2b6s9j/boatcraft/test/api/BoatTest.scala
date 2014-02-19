@@ -7,6 +7,8 @@ import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import k2b6s9j.boatcraft.api.Boat
+import k2b6s9j.boatcraft.api.registry._
+import k2b6s9j.boatcraft.test.api.traits.examples._
 
 object BoatTest
 {
@@ -19,6 +21,8 @@ object BoatTest
     before
     {
       item = new Boat.ItemCustomBoat
+      MaterialRegistry addMaterial ExampleMaterial
+      ModifierRegistry addModifier ExampleModifier
     }
 
     "A Boat Item" should "have an unlocalized name based on it's Material and Modifier." in
