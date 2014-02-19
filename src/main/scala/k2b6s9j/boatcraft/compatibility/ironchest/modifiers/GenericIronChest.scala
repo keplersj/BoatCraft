@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.item.ItemStack
 import cpw.mods.ironchest.TileEntityIronChest
 import cpw.mods.ironchest.IronChestType
+import cpw.mods.ironchest.ItemChestChanger
 
 abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 {
@@ -33,14 +34,37 @@ abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 	override def readStateFromNBT(boat: Boat.EntityCustomBoat, tag: NBTTagCompound) =
 		NBTHelper readChestFromNBT(boat.asInstanceOf[IInventory], tag)
 	
-	override def interact(player: EntityPlayer, boat: Boat.EntityCustomBoat) =
-		player openGui(IronChests, getMeta, player.worldObj,
+	override def interact(player: EntityPlayer, boat: Boat.EntityCustomBoat)
+	{
+		val stack = player.getCurrentEquippedItem
+		
+		if (stack != null && stack.getItem.isInstanceOf[ItemChestChanger])
+		{
+			val changer = stack.getItem.asInstanceOf[ItemChestChanger]
+			
+			if (changer.getType canUpgrade chestType)
+			{
+				val newTE = (boat.asInstanceOf[Boat.EntityBoatContainer] getInventory)
+							.asInstanceOf[GenericIronChest.Inventory] applyUpgradeItem changer
+				
+				boat.setModifier((IronChestType.values()(changer getTargetChestOrdinal chestType.ordinal))
+						.friendlyName replaceAll(" ", "") toLowerCase)
+				
+				for (i <- 0 until newTE.getSizeInventory)
+				{
+					boat.asInstanceOf[Boat.EntityBoatContainer] setInventorySlotContents(
+							i, newTE getStackInSlot i)
+				}
+			}
+		}
+		else player openGui(IronChests, getMeta, player.worldObj,
 				boat.posX.floor toInt, boat.posY.floor toInt, boat.posZ.floor toInt)
+	}
 }
 
 object GenericIronChest
 {
-	private class Inventory(boat: Boat.EntityBoatContainer, t: IronChestType)
+	private[ironchest] class Inventory(boat: Boat.EntityBoatContainer, t: IronChestType)
 		extends TileEntityIronChest(t)
 	{
 		worldObj = boat.worldObj
@@ -55,5 +79,27 @@ object GenericIronChest
 		//TODO make it render it on the boat
 		override def openInventory {}
 		override def closeInventory {}
+		
+		override def applyUpgradeItem(changer: ItemChestChanger): TileEntityIronChest =
+		{
+			if (!(changer.getType canUpgrade getType))
+				return null;
+			
+			var newEntity = new Inventory(boat,
+					IronChestType.values()(changer getTargetChestOrdinal getType.ordinal))
+			val newSize = newEntity.chestContents.length
+			
+			System arraycopy(chestContents, 0,
+					newEntity.chestContents, 0,
+					Math min(newSize, chestContents.length))
+			
+			var block = IronChest.ironChestBlock
+			block dropContent(newSize, this, worldObj,
+					boat.posX.floor.toInt, boat.posY.floor.toInt, boat.posZ.floor.toInt)
+			
+			newEntity markDirty
+			
+			newEntity
+		}
 	}
 }

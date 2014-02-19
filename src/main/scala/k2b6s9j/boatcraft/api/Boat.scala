@@ -317,7 +317,7 @@ object Boat
 		
 		private var inventory: IInventory = null
 		
-		private[boatcraft] def getInventory =
+		protected[boatcraft] def getInventory =
 		{
 			if (inventory == null) inventory = getModifier getInventory this
 			inventory
@@ -353,29 +353,7 @@ object Boat
 			val block = boat.getModifier getBlock
 			val meta = boat.getModifier getMeta
 			
-			/*if (boat.isInstanceOf[EntityBoatContainer]
-				&& boat.asInstanceOf[EntityBoatContainer].getInventory.isInstanceOf[TileEntity]
-				&& (TileEntityRendererDispatcher.instance hasSpecialRenderer
-					boat.asInstanceOf[EntityBoatContainer].getInventory.asInstanceOf[TileEntity]))
-			{
-				GL11 glPushMatrix()
-				GL11 glScalef(f4, f4, f4)
-				
-				val f5 = boat getBrightness f1
-				
-				GL11 glTranslatef(0.0F, 6F / 16.0F, 0.0F)
-				GL11 glPushMatrix
-				
-				TileEntityRendererDispatcher.instance renderTileEntityAt(
-						boat.asInstanceOf[EntityBoatContainer].getInventory.asInstanceOf[TileEntity],
-						0, 0, 0, f5)
-				
-        		GL11 glPopMatrix()
-				GL11 glPopMatrix()
-				GL11 glColor4f(1, 1, 1, 1)
-				
-			}
-			else */if (block.getRenderType != -1)
+			if (block.getRenderType != -1)
 			{
 				GL11 glPushMatrix
 				
@@ -393,6 +371,27 @@ object Boat
         		GL11 glPopMatrix()
 				GL11 glPopMatrix()
 				GL11 glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
+			}
+			else if (boat.isInstanceOf[EntityBoatContainer]
+				&& boat.asInstanceOf[EntityBoatContainer].getInventory.isInstanceOf[TileEntity]
+				&& (TileEntityRendererDispatcher.instance hasSpecialRenderer
+					boat.asInstanceOf[EntityBoatContainer].getInventory.asInstanceOf[TileEntity]))
+			{
+				GL11 glPushMatrix()
+				GL11 glScalef(f4, f4, f4)
+				
+				val f5 = boat getBrightness f1
+				
+				GL11 glTranslated(-.5, 6/16.-.5, 0)
+				GL11 glPushMatrix
+				
+				TileEntityRendererDispatcher.instance renderTileEntityAt(
+						boat.asInstanceOf[EntityBoatContainer].getInventory.asInstanceOf[TileEntity],
+						0, 0, 0, f5)
+				
+        		GL11 glPopMatrix()
+				GL11 glPopMatrix()
+				GL11 glColor4f(1, 1, 1, 1)
 			}
 			
 			GL11 glScalef(f4, f4, f4)

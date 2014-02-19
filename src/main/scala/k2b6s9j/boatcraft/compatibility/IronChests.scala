@@ -1,14 +1,16 @@
 package k2b6s9j.boatcraft.compatibility
 
 import org.apache.logging.log4j.Logger
+
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
-import k2b6s9j.boatcraft.api.registry.ModifierRegistry
-import k2b6s9j.boatcraft.compatibility.ironchest.modifiers._
 import cpw.mods.fml.common.network.NetworkRegistry
-import k2b6s9j.boatcraft.compatibility.ironchest.IronChestsGuiHandler
+import k2b6s9j.boatcraft.api.registry.ModifierRegistry
+import k2b6s9j.boatcraft.compatibility.ironchest.{IronChestsEventHandler, IronChestsGuiHandler}
+import k2b6s9j.boatcraft.compatibility.ironchest.modifiers.{Copper_Chest, Crystal_Chest, Diamond_Chest, DirtChest9000, Gold_Chest, Iron_Chest, Obsidian_Chest, Silver_Chest}
+import net.minecraftforge.common.MinecraftForge
 
 @Mod(modid = "boatcraft:compatibility:IronChest", name = "BoatCraft Iron Chests 2 Compatibility",
 		version = "2.0", dependencies = "required-after:boatcraft;after:IronChest", modLanguage = "scala")
@@ -27,10 +29,14 @@ object IronChests
 		{
 			addModifiers
 			NetworkRegistry.INSTANCE registerGuiHandler(this, IronChestsGuiHandler)
+			MinecraftForge.EVENT_BUS register IronChestsEventHandler
 		}
 		catch
 		{
-			case thr: Throwable => thr printStackTrace
+			case ex: NoClassDefFoundError =>			//That's OK
+			case err: NoSuchMethodError =>				//Fine
+			case ex: NoSuchMethodException =>			//No problem
+			case thr: Throwable => thr printStackTrace	//Weird...
 		}
 	}
 	
