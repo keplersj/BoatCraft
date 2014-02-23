@@ -35,12 +35,10 @@ object Boat
 		{
 			var stack = new ItemStack(item)
 			stack.stackTagCompound = new NBTTagCompound
-			for ((nameMat, material) <-
-					MaterialRegistry.materials)
+			for ((nameMat, material) <- MaterialRegistry.materials)
 			{
 				stack.stackTagCompound setString("material", nameMat)
-				for ((nameMod, modifier) <-
-						ModifierRegistry.modifiers)
+				for ((nameMod, modifier) <- ModifierRegistry.modifiers)
 				{
 					stack.stackTagCompound setString("modifier", nameMod)
 					list.asInstanceOf[List[ItemStack]] add stack.copy

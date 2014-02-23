@@ -29,7 +29,7 @@ class OakTest extends FlatSpec with Matchers with BeforeAndAfter
 			'texture (new ResourceLocation("boatcraft", "textures/entity/boat/vanilla/wood/oak.png")),
 			'name ("Oak"))
 	}
-
+	
 	/* TODO: Find a way to test ItemStack
   	it should "be made of Oak Wood Planks." in
   	{
