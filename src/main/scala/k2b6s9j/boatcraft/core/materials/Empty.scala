@@ -5,11 +5,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.init.Blocks
 import net.minecraft.block.Block
 
-//TODO: Fill Documentation
-/**
- *
- */
-class Empty extends Modifier
+object Empty extends Modifier
 {
   //TODO: Fill Documentation
   /**

@@ -14,48 +14,15 @@ import net.minecraft.nbt.NBTTagList
 
 object Furnace extends Modifier
 {
-  //TODO: Fill Documentation
-  /**
-   *
-   * @return block used for rendering
-   */
-  override def getBlock = Blocks.lit_furnace
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @return the metadata of the block being rendering in the boat
-   */
-  override def getMeta = 0
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @return the name of the Modifier
-   */
-  override def getName = "Furnace"
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @return the ItemStack used when crafting
-   */
-  override def getContent = new ItemStack(Blocks.furnace)
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @return boolean representing if a boat has an inventory
-   */
-  override def hasInventory = true
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @param boat the boat container object
-   * @return the inventory associated with the boat container
-   */
-  override def getInventory(boat: EntityBoatContainer): IInventory =
+	override def getBlock = Blocks.furnace
+	override def getMeta = 3
+	
+	override def getName = "Furnace"
+	
+	override def getContent = new ItemStack(Blocks.furnace)
+	
+	override def hasInventory = true
+	override def getInventory(boat: EntityBoatContainer): IInventory =
 		new Furnace.Inventory(boat)
 
   //TODO: Fill Documentation

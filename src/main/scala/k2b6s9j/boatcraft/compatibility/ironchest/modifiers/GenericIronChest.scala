@@ -13,123 +13,93 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.item.ItemStack
 import cpw.mods.ironchest.TileEntityIronChest
 import cpw.mods.ironchest.IronChestType
+import cpw.mods.ironchest.ItemChestChanger
 
-/**
- * The modifier front end for all Iron Chests.
- * @author Vilim Lendvaj
- */
-class GenericIronChest extends Modifier
+abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 {
-  //TODO: Fill Documentation
-  /**
-   *
-   * @author Vilim Lendvaj
-   * @return block used for rendering
-   */
 	override def getBlock: Block = IronChest.ironChestBlock
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @author Vilim Lendvaj
-   * @return the ItemStack used when crafting
-   */
+	override def getMeta = chestType ordinal
+	
 	override def getContent = new ItemStack(getBlock, 1, getMeta)
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @author Vilim Lendvaj
-   * @return boolean representing if a boat has an inventory
-   */
+	
+	override def getName = chestType friendlyName
+	
 	override def hasInventory = true
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @author Vilim Lendvaj
-   * @param boat the boat entity NBT data is being written to
-   * @param tag the NBT data tag being written
-   */
+	override def getInventory(boat: Boat.EntityBoatContainer): IInventory =
+		new GenericIronChest.Inventory(boat, chestType)
+	
 	override def writeStateToNBT(boat: Boat.EntityCustomBoat, tag: NBTTagCompound) =
 		NBTHelper writeChestToNBT(boat.asInstanceOf[IInventory], tag)
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @author Vilim Lendvaj
-   * @param boat the boat entity NBT data is being read from
-   * @param tag the NBT data tag being read
-   */
+	
 	override def readStateFromNBT(boat: Boat.EntityCustomBoat, tag: NBTTagCompound) =
 		NBTHelper readChestFromNBT(boat.asInstanceOf[IInventory], tag)
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @author Vilim Lendvaj
-   * @param player the player interacting with the Boat
-   * @param boat the Boat being interacted with
-   */
-	override def interact(player: EntityPlayer, boat: Boat.EntityCustomBoat) =
-		player openGui(IronChests, getMeta, player.worldObj,
+	
+	override def interact(player: EntityPlayer, boat: Boat.EntityCustomBoat)
+	{
+		val stack = player.getCurrentEquippedItem
+		
+		if (stack != null && stack.getItem.isInstanceOf[ItemChestChanger])
+		{
+			val changer = stack.getItem.asInstanceOf[ItemChestChanger]
+			
+			if (changer.getType canUpgrade chestType)
+			{
+				val newTE = (boat.asInstanceOf[Boat.EntityBoatContainer] getInventory)
+							.asInstanceOf[GenericIronChest.Inventory] applyUpgradeItem changer
+				
+				boat.setModifier((IronChestType.values()(changer getTargetChestOrdinal chestType.ordinal))
+						.friendlyName replaceAll(" ", "") toLowerCase)
+				
+				for (i <- 0 until newTE.getSizeInventory)
+				{
+					boat.asInstanceOf[Boat.EntityBoatContainer] setInventorySlotContents(
+							i, newTE getStackInSlot i)
+				}
+			}
+		}
+		else player openGui(IronChests, getMeta, player.worldObj,
 				boat.posX.floor toInt, boat.posY.floor toInt, boat.posZ.floor toInt)
+	}
 }
 
-/**
- * Object containing common classes and methods for all the Iron Chest modifiers.
- * @author Vilim Lendvaj
- */
 object GenericIronChest
 {
-  //TODO: Fill Documentation
-  /**
-   *
-   * @author Vilim Lendvaj
-   * @param boat
-   * @param t
-   */
-  private[modifiers] class Inventory(boat: Boat.EntityBoatContainer, t: IronChestType)
+	private[ironchest] class Inventory(boat: Boat.EntityBoatContainer, t: IronChestType)
 		extends TileEntityIronChest(t)
 	{
-    //TODO: Fill Documentation
-    /**
-     *
-     * @author Vilim Lendvaj
-     */
-    worldObj = boat.worldObj
-
-    //TODO: Fill Documentation
-    /**
-     *
-     * @author Vilim Lendvaj
-     * @return
-     */
+		worldObj = boat.worldObj
+		
 		override def hasCustomInventoryName = false
-
-    //TODO: Fill Documentation
-    /**
-     *
-     * @author Vilim Lendvaj
-     * @param player
-     * @return
-     */
+		
+		override def getInventoryName = t.friendlyName + " Boat"
+		
 		override def isUseableByPlayer(player: EntityPlayer) =
 			(player getDistanceSqToEntity boat) <= 64
-
+		
 		//TODO make it render it on the boat
-    //TODO: Fill Documentation
-    /**
-     *
-     * @author Vilim Lendvaj
-     */
 		override def openInventory {}
-
-    //TODO: Fill Documentation
-    /**
-     *
-     * @author Vilim Lendvaj
-     */
-    override def closeInventory {}
+		override def closeInventory {}
+		
+		override def applyUpgradeItem(changer: ItemChestChanger): TileEntityIronChest =
+		{
+			if (!(changer.getType canUpgrade getType))
+				return null;
+			
+			var newEntity = new Inventory(boat,
+					IronChestType.values()(changer getTargetChestOrdinal getType.ordinal))
+			val newSize = newEntity.chestContents.length
+			
+			System arraycopy(chestContents, 0,
+					newEntity.chestContents, 0,
+					Math min(newSize, chestContents.length))
+			
+			var block = IronChest.ironChestBlock
+			block dropContent(newSize, this, worldObj,
+					boat.posX.floor.toInt, boat.posY.floor.toInt, boat.posZ.floor.toInt)
+			
+			newEntity markDirty
+			
+			newEntity
+		}
 	}
 }

@@ -6,6 +6,7 @@ import scala.collection.JavaConversions.asScalaBuffer
 
 import k2b6s9j.boatcraft.api.traits.Material
 import net.minecraft.item.ItemStack
+import net.minecraft.util.ResourceLocation
 
 /** Contains the methods needed to register Materials with BoatCraft:Core. */
 object MaterialRegistry
@@ -46,5 +47,12 @@ object MaterialRegistry
     * @return registered Material
     */
 	def getMaterial(stack: ItemStack) =
-		materials get (stack.stackTagCompound getString "material")
+		if (stack.stackTagCompound == null) NoMaterial
+		else materials get (stack.stackTagCompound getString "material")
+	
+	private object NoMaterial extends Material
+	{
+		override def getTexture =
+			new ResourceLocation("minecraft", "textures/entity/boat.png")
+	}
 }

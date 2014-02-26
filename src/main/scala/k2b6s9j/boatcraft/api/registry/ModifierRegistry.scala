@@ -5,6 +5,7 @@ import java.util.{HashMap, List, Map}
 import scala.collection.JavaConversions.asScalaBuffer
 
 import k2b6s9j.boatcraft.api.traits.Modifier
+import k2b6s9j.boatcraft.core.materials.Empty
 import net.minecraft.item.ItemStack
 
 /** Contains the methods needed to register Materials with BoatCraft:Core. */
@@ -46,5 +47,6 @@ object ModifierRegistry
    * @return registered Modifier
    */
 	def getModifier(stack: ItemStack) =
-		modifiers get (stack.stackTagCompound getString "modifier")
+		if (stack.stackTagCompound == null) Empty
+		else modifiers get (stack.stackTagCompound getString "modifier")
 }
