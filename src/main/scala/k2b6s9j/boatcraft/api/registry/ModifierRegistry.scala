@@ -7,20 +7,24 @@ import scala.collection.JavaConversions.asScalaBuffer
 import k2b6s9j.boatcraft.api.traits.Modifier
 import k2b6s9j.boatcraft.core.materials.Empty
 import net.minecraft.item.ItemStack
+import k2b6s9j.boatcraft.api.Registry
 
 /** Contains the methods needed to register Materials with BoatCraft:Core. */
+@deprecated
 object ModifierRegistry
 {
   /** The Map containing all of the registered Modifiers for BoatCraft:Core to create boats with. */
-  var modifiers: Map[String, Modifier] = new HashMap[String, Modifier]
+  @deprecated
+  var modifiers: Map[String, Modifier] = Registry.modifiers
 
   /** Adds a single Modifier to the Map used by BoatCraft:Core for boat creation.
     *
     * @param newModifier the Modifier being registered
     */
+  @deprecated
   def addModifier(newModifier: Modifier)
 	{
-		modifiers put(newModifier toString, newModifier)
+		Registry register newModifier
 	}
 
   /** Adds a List of Modifiers to the Map used by BoatCraft:Core for boat creation.
@@ -29,8 +33,7 @@ object ModifierRegistry
     */
 	def addModifiers(newModifiers: List[Modifier])
 	{
-		for (modifier <- newModifiers)
-			modifiers put(modifier toString, modifier)
+		Registry register newModifiers
 	}
 
   /** Returns a registered Modifier associated with a certain name.
