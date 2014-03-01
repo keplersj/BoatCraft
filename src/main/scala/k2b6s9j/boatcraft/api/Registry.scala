@@ -19,7 +19,20 @@ object Registry {
     case _: List[Material] =>
       registrar.asInstanceOf[List[Modifier]].foreach(m => modifiers put (m.toString, m))
     case _ =>
-      BoatCraft log error("Was unable to register: " + registrar.toString)
+      BoatCraft.log.fatal("Was unable to register: " + registrar.toString)
+  }
+
+  def unregister(unregistrant: AnyRef) = unregistrant match {
+    case _: Material =>
+      materials remove unregistrant.toString
+    case _: List[Material] =>
+      unregistrant.asInstanceOf[List[Material]].foreach(m => materials remove m.toString)
+    case _: Modifier =>
+      modifiers remove unregistrant.toString
+    case _: List[Material] =>
+      unregistrant.asInstanceOf[List[Modifier]].foreach(m => modifiers remove m.toString)
+    case _ =>
+      BoatCraft.log.error("There was nothing to unregister: " + unregistrant.toString)
   }
 
 }
