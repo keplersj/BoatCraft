@@ -1,12 +1,13 @@
 package k2b6s9j.boatcraft.api
 
 import java.util.{HashMap, List, Map}
-
 import scala.collection.JavaConversions.asScalaBuffer
-
 import cpw.mods.fml.common.Mod
 import k2b6s9j.boatcraft.api.traits.{Material, Modifier}
 import k2b6s9j.boatcraft.core.BoatCraft
+import net.minecraft.item.ItemStack
+import net.minecraft.util.ResourceLocation
+import k2b6s9j.boatcraft.core.materials.Empty
 
 /** Contains the methods needed to register Materials and Modifiers with BoatCraft:Core. */
 object Registry
@@ -50,5 +51,49 @@ object Registry
 		case _ =>
 			System.err println "There was nothing to unregister: " + unregistrant.toString
 	}
+
+	/**
+	  * Returns a registered Material associated with a certain name.
+	  *
+	  * @param name name of registered Material
+	  * @return registered Material
+	  */
+	def getMaterial(name: String) =
+		materials get name
+
+	/**
+	  * Returns a registered Material associated with a certain ItemStack.
+	  *
+	  * @param stack ItemStack of registered Material
+	  * @return registered Material
+	  */
+	def getMaterial(stack: ItemStack) =
+		if (stack.stackTagCompound == null) NoMaterial
+		else materials get (stack.stackTagCompound getString "material")
+
+	private object NoMaterial extends Material
+	{
+		override def getTexture =
+			new ResourceLocation("minecraft", "textures/entity/boat.png")
+	}
+
+	/**
+	  * Returns a registered Modifier associated with a certain name.
+	  *
+	  * @param name name of registered Modifier
+	  * @return registered Modifier
+	  */
+	def getModifier(name: String) =
+		modifiers get name
+
+	/**
+	  * Returns a registered Modifier associated with a certain ItemStack.
+	  *
+	  * @param stack ItemStack of registered Modifier
+	  * @return registered Modifier
+	  */
+	def getModifier(stack: ItemStack) =
+		if (stack.stackTagCompound == null) Empty
+		else modifiers get (stack.stackTagCompound getString "modifier")
 
 }

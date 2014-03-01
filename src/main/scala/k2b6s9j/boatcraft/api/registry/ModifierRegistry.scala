@@ -32,6 +32,7 @@ object ModifierRegistry {
 	  *
 	  * @param newModifiers list of Modifiers being registered
 	  */
+	@deprecated
 	def addModifiers(newModifiers: List[Modifier]) 
 	{
 		Registry register newModifiers
@@ -43,6 +44,7 @@ object ModifierRegistry {
 	  * @param name name of registered Modifier
 	  * @return registered Modifier
 	  */
+	@deprecated
 	def getModifier(name: String) =
 		modifiers get name
 
@@ -52,6 +54,7 @@ object ModifierRegistry {
 	  * @param stack ItemStack of registered Modifier
 	  * @return registered Modifier
 	  */
+	@deprecated
 	def getModifier(stack: ItemStack) =
 		if (stack.stackTagCompound == null) Empty
 		else modifiers get (stack.stackTagCompound getString "modifier")

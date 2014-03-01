@@ -43,6 +43,7 @@ object MaterialRegistry
 	  * @param name name of registered Material
 	  * @return registered Material
 	  */
+	@deprecated
 	def getMaterial(name: String) =
 		materials get name
 
@@ -52,11 +53,14 @@ object MaterialRegistry
 	  * @param stack ItemStack of registered Material
 	  * @return registered Material
 	  */
+	@deprecated
 	def getMaterial(stack: ItemStack) =
 		if (stack.stackTagCompound == null) NoMaterial
 		else materials get (stack.stackTagCompound getString "material")
-
-	private object NoMaterial extends Material {
+	
+	@deprecated
+	private object NoMaterial extends Material
+	{
 		override def getTexture =
 			new ResourceLocation("minecraft", "textures/entity/boat.png")
 	}
