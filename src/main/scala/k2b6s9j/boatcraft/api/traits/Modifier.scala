@@ -1,6 +1,7 @@
 package k2b6s9j.boatcraft.api.traits
 
-import k2b6s9j.boatcraft.api.Boat.{EntityCustomBoat, EntityBoatContainer}
+import k2b6s9j.boatcraft.api.boat.EntityBoatContainer
+import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.IInventory

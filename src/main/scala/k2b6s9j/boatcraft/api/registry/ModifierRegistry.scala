@@ -11,9 +11,9 @@ import k2b6s9j.boatcraft.api.Registry
 
 /** Contains the methods needed to register Materials with BoatCraft:Core. */
 @deprecated
-object ModifierRegistry {
+object ModifierRegistry
+{
 	/** The Map containing all of the registered Modifiers for BoatCraft:Core to create boats with. */
-	@deprecated
 	var modifiers: Map[String, Modifier] = Registry.modifiers
 
 	/**
@@ -21,7 +21,6 @@ object ModifierRegistry {
 	  *
 	  * @param newModifier the Modifier being registered
 	  */
-	@deprecated
 	def addModifier(newModifier: Modifier) 
 	{
 		Registry register newModifier
@@ -32,7 +31,6 @@ object ModifierRegistry {
 	  *
 	  * @param newModifiers list of Modifiers being registered
 	  */
-	@deprecated
 	def addModifiers(newModifiers: List[Modifier]) 
 	{
 		Registry register newModifiers
@@ -44,7 +42,6 @@ object ModifierRegistry {
 	  * @param name name of registered Modifier
 	  * @return registered Modifier
 	  */
-	@deprecated
 	def getModifier(name: String) =
 		modifiers get name
 
@@ -54,7 +51,6 @@ object ModifierRegistry {
 	  * @param stack ItemStack of registered Modifier
 	  * @return registered Modifier
 	  */
-	@deprecated
 	def getModifier(stack: ItemStack) =
 		if (stack.stackTagCompound == null) Empty
 		else modifiers get (stack.stackTagCompound getString "modifier")

@@ -1,19 +1,19 @@
 package k2b6s9j.boatcraft.compatibility.ironchest.modifiers
 
-import cpw.mods.fml.common.Mod
 import cpw.mods.ironchest.IronChest
-import k2b6s9j.boatcraft.api.Boat
+import cpw.mods.ironchest.IronChestType
+import cpw.mods.ironchest.ItemChestChanger
+import cpw.mods.ironchest.TileEntityIronChest
+import k2b6s9j.boatcraft.api.boat.EntityBoatContainer
+import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
 import k2b6s9j.boatcraft.api.traits.Modifier
 import k2b6s9j.boatcraft.compatibility.IronChests
 import k2b6s9j.boatcraft.core.utilities.NBTHelper
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.IInventory
-import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.item.ItemStack
-import cpw.mods.ironchest.TileEntityIronChest
-import cpw.mods.ironchest.IronChestType
-import cpw.mods.ironchest.ItemChestChanger
+import net.minecraft.nbt.NBTTagCompound
 
 abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 {
@@ -25,16 +25,16 @@ abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 	override def getName = chestType friendlyName
 	
 	override def hasInventory = true
-	override def getInventory(boat: Boat.EntityBoatContainer): IInventory =
+	override def getInventory(boat: EntityBoatContainer): IInventory =
 		new GenericIronChest.Inventory(boat, chestType)
 	
-	override def writeStateToNBT(boat: Boat.EntityCustomBoat, tag: NBTTagCompound) =
+	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 		NBTHelper writeChestToNBT(boat.asInstanceOf[IInventory], tag)
 	
-	override def readStateFromNBT(boat: Boat.EntityCustomBoat, tag: NBTTagCompound) =
+	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 		NBTHelper readChestFromNBT(boat.asInstanceOf[IInventory], tag)
 	
-	override def interact(player: EntityPlayer, boat: Boat.EntityCustomBoat)
+	override def interact(player: EntityPlayer, boat: EntityCustomBoat)
 	{
 		val stack = player.getCurrentEquippedItem
 		
@@ -44,7 +44,7 @@ abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 			
 			if (changer.getType canUpgrade chestType)
 			{
-				val newTE = (boat.asInstanceOf[Boat.EntityBoatContainer] getInventory)
+				val newTE = (boat.asInstanceOf[EntityBoatContainer] getInventory)
 							.asInstanceOf[GenericIronChest.Inventory] applyUpgradeItem changer
 				
 				boat.setModifier((IronChestType.values()(changer getTargetChestOrdinal chestType.ordinal))
@@ -52,7 +52,7 @@ abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 				
 				for (i <- 0 until newTE.getSizeInventory)
 				{
-					boat.asInstanceOf[Boat.EntityBoatContainer] setInventorySlotContents(
+					boat.asInstanceOf[EntityBoatContainer] setInventorySlotContents(
 							i, newTE getStackInSlot i)
 				}
 			}
@@ -64,7 +64,7 @@ abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 
 object GenericIronChest
 {
-	private[ironchest] class Inventory(boat: Boat.EntityBoatContainer, t: IronChestType)
+	private[ironchest] class Inventory(boat: EntityBoatContainer, t: IronChestType)
 		extends TileEntityIronChest(t)
 	{
 		worldObj = boat.worldObj

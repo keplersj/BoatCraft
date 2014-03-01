@@ -13,8 +13,8 @@ import cpw.mods.fml.common.network.FMLEmbeddedChannel
 import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
-import k2b6s9j.boatcraft.api.Boat
 import k2b6s9j.boatcraft.api.Registry
+import k2b6s9j.boatcraft.api.boat.ItemCustomBoat
 import k2b6s9j.boatcraft.core.materials.Empty
 import k2b6s9j.boatcraft.core.packets.ChannelHandler
 import k2b6s9j.boatcraft.core.utilities.Recipes
@@ -55,7 +55,7 @@ object BoatCraft
 	/**
 	  * Variable referencing the Boat Item.
 	  */
-	var itemBoat: Boat.ItemCustomBoat = null
+	var itemBoat: ItemCustomBoat = null
 	
 	/**
 	  * Method used by Forge Mod Loader in the Pre-Initialization phase.
@@ -76,7 +76,7 @@ object BoatCraft
 		//All Boat Materials should be at least rideable
 		Registry register Empty
 		
-		itemBoat = new Boat.ItemCustomBoat
+		itemBoat = new ItemCustomBoat
 		
 		GameRegistry registerItem (itemBoat, "customBoat")
 		

@@ -1,16 +1,17 @@
 package k2b6s9j.boatcraft.compatibility.vanilla.modifiers
 
-import k2b6s9j.boatcraft.api.Boat.{EntityCustomBoat, EntityBoatContainer}
+import k2b6s9j.boatcraft.api.boat.EntityBoatContainer
+import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
 import k2b6s9j.boatcraft.api.traits.Modifier
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.tileentity.TileEntityFurnace
 import net.minecraft.item.crafting.FurnaceRecipes
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
+import net.minecraft.tileentity.TileEntityFurnace
 
 object Furnace extends Modifier
 {

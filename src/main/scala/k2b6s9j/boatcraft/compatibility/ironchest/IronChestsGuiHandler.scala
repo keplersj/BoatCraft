@@ -1,14 +1,14 @@
 package k2b6s9j.boatcraft.compatibility.ironchest
 
 import cpw.mods.fml.common.network.IGuiHandler
-import cpw.mods.ironchest.{ContainerIronChest, IronChestType}
-import cpw.mods.ironchest.client.GUIChest
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.world.World
-import k2b6s9j.boatcraft.api.Boat
-import net.minecraft.util.AxisAlignedBB
+import cpw.mods.ironchest.ContainerIronChest
+import cpw.mods.ironchest.IronChestType
 import cpw.mods.ironchest.TileEntityIronChest
-import k2b6s9j.boatcraft.api.Boat
+import cpw.mods.ironchest.client.GUIChest
+import k2b6s9j.boatcraft.api.boat.EntityBoatContainer
+import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.util.AxisAlignedBB
+import net.minecraft.world.World
 
 //TODO: Fill Documentation
 /**
@@ -55,8 +55,8 @@ object IronChestsGuiHandler extends IGuiHandler
    * @return
    */
   private def getBoat(world: World, x: Int, y: Int, z: Int) =
-		world.getEntitiesWithinAABB(classOf[Boat.EntityBoatContainer],
+		world.getEntitiesWithinAABB(classOf[EntityBoatContainer],
 				AxisAlignedBB getBoundingBox(x, y, z, x + 1, y + 1, z + 1))
 				.get(0)
-				.asInstanceOf[Boat.EntityBoatContainer]
+				.asInstanceOf[EntityBoatContainer]
 }

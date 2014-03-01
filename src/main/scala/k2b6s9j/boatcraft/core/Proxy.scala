@@ -2,8 +2,10 @@ package k2b6s9j.boatcraft.core
 
 import cpw.mods.fml.client.registry.RenderingRegistry
 import cpw.mods.fml.common.registry.EntityRegistry
+import k2b6s9j.boatcraft.api.boat.EntityBoatContainer
+import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
+import k2b6s9j.boatcraft.api.boat.RenderCustomBoat
 import net.minecraftforge.client.MinecraftForgeClient
-import k2b6s9j.boatcraft.api.Boat
 
 /** Contains the Proxy classes needed for the Minecraft Client and Server to function properly. */
 object Proxy
@@ -27,9 +29,9 @@ object Proxy
       */
     def registerEntities
 		{
-			EntityRegistry.registerModEntity(classOf[Boat.EntityCustomBoat],
+			EntityRegistry.registerModEntity(classOf[EntityCustomBoat],
 					"customBoat", 0, BoatCraft, 66, 10, true)
-			EntityRegistry.registerModEntity(classOf[Boat.EntityBoatContainer],
+			EntityRegistry.registerModEntity(classOf[EntityBoatContainer],
 					"containerBoat", 1, BoatCraft, 66, 10, true)
 		}
 	}
@@ -43,11 +45,11 @@ object Proxy
     override def registerRenderers
 		{
 			BoatCraft.log info "Registering Renderes"
-			RenderingRegistry registerEntityRenderingHandler(classOf[Boat.EntityCustomBoat],
-					new Boat.RenderCustomBoat)
-			MinecraftForgeClient registerItemRenderer(BoatCraft.itemBoat, new Boat.RenderCustomBoat)
-			RenderingRegistry registerEntityRenderingHandler(classOf[Boat.EntityBoatContainer],
-					new Boat.RenderCustomBoat)
+			RenderingRegistry registerEntityRenderingHandler(classOf[EntityCustomBoat],
+					new RenderCustomBoat)
+			MinecraftForgeClient registerItemRenderer(BoatCraft.itemBoat, new RenderCustomBoat)
+			RenderingRegistry registerEntityRenderingHandler(classOf[EntityBoatContainer],
+					new RenderCustomBoat)
 		}
 	}
 }

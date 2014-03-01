@@ -12,7 +12,6 @@ import net.minecraft.util.ResourceLocation
 object MaterialRegistry
 {
 	/** The Map containing all of the registered Materials for BoatCraft:Core to create boats with. */
-	@deprecated
 	var materials: Map[String, Material] = Registry.materials
 
 	/**
@@ -20,7 +19,6 @@ object MaterialRegistry
 	  *
 	  * @param newMaterial the Material being registered
 	  */
-	@deprecated
 	def addMaterial(newMaterial: Material) 
 	{
 		Registry register newMaterial
@@ -31,7 +29,6 @@ object MaterialRegistry
 	  *
 	  * @param newMaterials list of Materials being registered
 	  */
-	@deprecated
 	def addMaterials(newMaterials: List[Material])
 	{
 		Registry register newMaterials
@@ -43,7 +40,6 @@ object MaterialRegistry
 	  * @param name name of registered Material
 	  * @return registered Material
 	  */
-	@deprecated
 	def getMaterial(name: String) =
 		materials get name
 
@@ -53,12 +49,10 @@ object MaterialRegistry
 	  * @param stack ItemStack of registered Material
 	  * @return registered Material
 	  */
-	@deprecated
 	def getMaterial(stack: ItemStack) =
 		if (stack.stackTagCompound == null) NoMaterial
 		else materials get (stack.stackTagCompound getString "material")
 	
-	@deprecated
 	private object NoMaterial extends Material
 	{
 		override def getTexture =
