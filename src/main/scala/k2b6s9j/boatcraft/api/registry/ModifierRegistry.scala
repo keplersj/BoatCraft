@@ -10,18 +10,20 @@ import net.minecraft.item.ItemStack
 import k2b6s9j.boatcraft.api.Registry
 
 /** Contains the methods needed to register Materials with BoatCraft:Core. */
-@deprecated
+@deprecated("Use the Universal Registry.")
 object ModifierRegistry
 {
 	/** The Map containing all of the registered Modifiers for BoatCraft:Core to create boats with. */
-	var modifiers: Map[String, Modifier] = Registry.modifiers
+	@deprecated("Use the Universal Registry Modifier Map.")
+  var modifiers: Map[String, Modifier] = Registry.modifiers
 
 	/**
 	  * Adds a single Modifier to the Map used by BoatCraft:Core for boat creation.
 	  *
 	  * @param newModifier the Modifier being registered
 	  */
-	def addModifier(newModifier: Modifier) 
+	@deprecated("Use the Universal Registry \"register\" function.")
+  def addModifier(newModifier: Modifier)
 	{
 		Registry register newModifier
 	}
@@ -31,7 +33,8 @@ object ModifierRegistry
 	  *
 	  * @param newModifiers list of Modifiers being registered
 	  */
-	def addModifiers(newModifiers: List[Modifier]) 
+	@deprecated("Use the Universal Registry \"register\" function.")
+  def addModifiers(newModifiers: List[Modifier])
 	{
 		Registry register newModifiers
 	}
@@ -42,8 +45,9 @@ object ModifierRegistry
 	  * @param name name of registered Modifier
 	  * @return registered Modifier
 	  */
-	def getModifier(name: String) =
-		modifiers get name
+	@deprecated("Use the Universal Registry \"find\" function.")
+  def getModifier(name: String) =
+		Registry find name
 
 	/**
 	  * Returns a registered Modifier associated with a certain ItemStack.

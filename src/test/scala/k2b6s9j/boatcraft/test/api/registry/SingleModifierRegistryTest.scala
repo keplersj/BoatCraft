@@ -27,7 +27,7 @@ class SingleModifierRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 
 	it should "be returned when searched by name." in
 	{
-		Registry getModifier "test" shouldBe ExampleModifier
+		Registry find "test" shouldBe ExampleModifier
 	}
 
 	it should "be returned when searched by ItemStack." in
@@ -43,4 +43,9 @@ class SingleModifierRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 		val stack = new ItemStack(Blocks.bedrock)
 		Registry getModifier stack shouldBe Empty
 	}
+
+  after
+  {
+    Registry unregister ExampleModifier
+  }
 }

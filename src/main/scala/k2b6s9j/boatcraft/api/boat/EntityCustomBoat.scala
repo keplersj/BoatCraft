@@ -11,6 +11,7 @@ import net.minecraft.world.World
 import net.minecraft.init.Items
 import net.minecraft.init.Blocks
 import k2b6s9j.boatcraft.api.getItemCustomBoat
+import k2b6s9j.boatcraft.api.traits.{Material, Modifier}
 
 //TODO: Fill Documentation
 /**
@@ -113,16 +114,16 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	  *
 	  * @return
 	  */
-	def getMaterial =
-		Registry getMaterial (dataWatcher getWatchableObjectString 20)
+	def getMaterial: Material =
+    (Registry find (dataWatcher getWatchableObjectString 20)).asInstanceOf[Material]
 
 	//TODO: Fill Documentation
 	/**
 	  *
 	  * @return
 	  */
-	def getModifier =
-		Registry getModifier (dataWatcher getWatchableObjectString 21)
+	def getModifier: Modifier =
+    (Registry find (dataWatcher getWatchableObjectString 21)).asInstanceOf[Modifier]
 
 	//TODO: Fill Documentation
 	/**

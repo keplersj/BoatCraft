@@ -38,7 +38,7 @@ object Registry
 	/**
 	  * Removes materials or modifiers from the Map used by BoatCraft:Core for boat creation.
 	  *
-	  * @param registrar the object being unregistered
+	  * @param unregistrant the object being unregistered
 	  */
 	def unregister(unregistrant: Any): Unit = unregistrant match
 	{
@@ -52,14 +52,21 @@ object Registry
 			System.err println "There was nothing to unregister: " + unregistrant.toString
 	}
 
-	/**
-	  * Returns a registered Material associated with a certain name.
-	  *
-	  * @param name name of registered Material
-	  * @return registered Material
-	  */
-	def getMaterial(name: String) =
-		materials get name
+  /**
+   * Returns a registered object associated with a certain name.
+   *
+   * @param name name of registered object
+   * @return registered object
+   */
+  def find(name: String) = name match
+  {
+    case x if materials.containsKey(name) =>
+      (materials get name).asInstanceOf[Material]
+    case x if modifiers.containsKey(name) =>
+      (modifiers get name).asInstanceOf[Modifier]
+    case _ =>
+      System.err println "Could not find: " + name
+  }
 
 	/**
 	  * Returns a registered Material associated with a certain ItemStack.
@@ -76,15 +83,6 @@ object Registry
 		override def getTexture =
 			new ResourceLocation("minecraft", "textures/entity/boat.png")
 	}
-
-	/**
-	  * Returns a registered Modifier associated with a certain name.
-	  *
-	  * @param name name of registered Modifier
-	  * @return registered Modifier
-	  */
-	def getModifier(name: String) =
-		modifiers get name
 
 	/**
 	  * Returns a registered Modifier associated with a certain ItemStack.

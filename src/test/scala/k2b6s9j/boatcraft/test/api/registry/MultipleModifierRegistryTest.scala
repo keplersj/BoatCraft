@@ -27,8 +27,8 @@ class MultipleModifierRegistryTest extends FlatSpec with Matchers with BeforeAnd
 	
 	they should "be returned when searched by name." in
 	{
-		Registry getModifier "test" shouldBe ExampleModifier
-		Registry getModifier "test2" shouldBe ExampleModifier2
+		Registry find "test" shouldBe ExampleModifier
+		Registry find "test2" shouldBe ExampleModifier2
 	}
 	
 	they should "be returned when searched by ItemStack." in
@@ -42,4 +42,9 @@ class MultipleModifierRegistryTest extends FlatSpec with Matchers with BeforeAnd
 		stack.stackTagCompound setString ("modifier", "test2")
 		Registry getModifier stack shouldBe ExampleModifier2
 	}
+
+  after
+  {
+    Registry unregister util.Arrays.asList(ExampleModifier, ExampleModifier2)
+  }
 }

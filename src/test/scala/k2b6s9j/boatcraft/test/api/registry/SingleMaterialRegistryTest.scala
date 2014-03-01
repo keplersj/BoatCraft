@@ -26,7 +26,7 @@ class SingleMaterialRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 	
 	it should "be returned when searched by name." in
 	{
-		Registry getMaterial "test" shouldBe ExampleMaterial
+		Registry find "test" shouldBe ExampleMaterial
 	}
 	
 	it should "be returned when searched by ItemStack." in
@@ -43,5 +43,10 @@ class SingleMaterialRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 		(Registry getMaterial stack) should have (
 				'texture (new ResourceLocation("minecraft", "textures/entity/boat.png")))
 	}
+
+  after
+  {
+    Registry unregister ExampleMaterial
+  }
 
 }

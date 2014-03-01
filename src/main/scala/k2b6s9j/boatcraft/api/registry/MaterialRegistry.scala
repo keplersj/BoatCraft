@@ -8,18 +8,20 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 
 /** Contains the methods needed to register Materials with BoatCraft:Core. */
-@deprecated
+@deprecated("Use the Universal Registry.")
 object MaterialRegistry
 {
 	/** The Map containing all of the registered Materials for BoatCraft:Core to create boats with. */
-	var materials: Map[String, Material] = Registry.materials
+	@deprecated("Use the Universal Registry Material Map.")
+  var materials: Map[String, Material] = Registry.materials
 
 	/**
 	  * Adds a single Material to the Map used by BoatCraft:Core for boat creation.
 	  *
 	  * @param newMaterial the Material being registered
 	  */
-	def addMaterial(newMaterial: Material) 
+	@deprecated("Use the Universal Registry \"add\" function.")
+  def addMaterial(newMaterial: Material)
 	{
 		Registry register newMaterial
 	}
@@ -29,7 +31,8 @@ object MaterialRegistry
 	  *
 	  * @param newMaterials list of Materials being registered
 	  */
-	def addMaterials(newMaterials: List[Material])
+	@deprecated("Use the Universal Registry \"add\" functions.")
+  def addMaterials(newMaterials: List[Material])
 	{
 		Registry register newMaterials
 	}
@@ -40,7 +43,8 @@ object MaterialRegistry
 	  * @param name name of registered Material
 	  * @return registered Material
 	  */
-	def getMaterial(name: String) =
+	@deprecated("Use the Universal Registry \"find\" function.")
+  def getMaterial(name: String) =
 		materials get name
 
 	/**
