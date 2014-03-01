@@ -2,34 +2,54 @@ package k2b6s9j.boatcraft.core
 
 import cpw.mods.fml.client.registry.RenderingRegistry
 import cpw.mods.fml.common.registry.EntityRegistry
+import k2b6s9j.boatcraft.api.boat.EntityBoatContainer
+import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
+import k2b6s9j.boatcraft.api.boat.RenderCustomBoat
 import net.minecraftforge.client.MinecraftForgeClient
 
+/** Contains the Proxy classes needed for the Minecraft Client and Server to function properly. */
 object Proxy
 {
-	class CommonProxy
+  /**
+    * The base proxy class.
+    * Used for the Minecraft Server.
+    */
+  class CommonProxy
 	{
-		def registerRenderers
+    /**
+      * The register renderers method.
+      * Not used client-side, but it needs to be here so that the client functions correctly.
+      */
+    def registerRenderers
 		{}
-		
-		def registerEntities
+
+    /**
+      * The register entities method.
+      * Used to register the entities created by the mod with Minecraft Forge, which configures the entity for both server and client.
+      */
+    def registerEntities
 		{
-			EntityRegistry.registerModEntity(classOf[Boat.EntityCustomBoat],
+			EntityRegistry.registerModEntity(classOf[EntityCustomBoat],
 					"customBoat", 0, BoatCraft, 66, 10, true)
-			EntityRegistry.registerModEntity(classOf[Boat.EntityBoatContainer],
+			EntityRegistry.registerModEntity(classOf[EntityBoatContainer],
 					"containerBoat", 1, BoatCraft, 66, 10, true)
 		}
 	}
 
-	class ClientProxy extends CommonProxy
+  /** The client proxy class, extending the base proxy. */
+  class ClientProxy extends CommonProxy
 	{
-		override def registerRenderers()
+    /**
+     * The overridden register renderers method, used to register special rendering done by the mod with the client.
+     */
+    override def registerRenderers
 		{
 			BoatCraft.log info "Registering Renderes"
-			RenderingRegistry registerEntityRenderingHandler(classOf[Boat.EntityCustomBoat],
-					new Boat.RenderCustomBoat())
-			MinecraftForgeClient registerItemRenderer(BoatCraft.itemBoat, new Boat.RenderCustomBoat)
-			RenderingRegistry registerEntityRenderingHandler(classOf[Boat.EntityBoatContainer],
-					new Boat.RenderCustomBoat())
+			RenderingRegistry registerEntityRenderingHandler(classOf[EntityCustomBoat],
+					new RenderCustomBoat)
+			MinecraftForgeClient registerItemRenderer(BoatCraft.itemBoat, new RenderCustomBoat)
+			RenderingRegistry registerEntityRenderingHandler(classOf[EntityBoatContainer],
+					new RenderCustomBoat)
 		}
 	}
 }

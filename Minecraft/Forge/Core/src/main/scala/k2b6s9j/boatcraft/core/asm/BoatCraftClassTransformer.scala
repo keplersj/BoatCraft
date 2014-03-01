@@ -8,12 +8,12 @@ import net.minecraft.launchwrapper.IClassTransformer
 import net.minecraft.item.ItemPiston
 
 class BoatCraftClassTransformer extends IClassTransformer {
-	override def transform(className: String, str: String, bytes: Array[Byte]): Array[Byte] =
+	override def transform(className: String, str: String, bytes: Array[Byte]) =
 	{
 		bytes
 	}
 	
-	def patchClassASM(name: String, bytes: Array[Byte], obfuscated: Boolean): Array[Byte] =
+	def patchClassASM(name: String, bytes: Array[Byte], obfuscated: Boolean) =
 	{		
 		bytes
 	}

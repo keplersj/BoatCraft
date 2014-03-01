@@ -1,91 +1,135 @@
 package k2b6s9j.boatcraft.compatibility.vanilla.modifiers
 
-import k2b6s9j.boatcraft.core.Boat.{EntityCustomBoat, EntityBoatContainer}
-import k2b6s9j.boatcraft.core.traits.Modifier
+import k2b6s9j.boatcraft.api.boat.EntityBoatContainer
+import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
+import k2b6s9j.boatcraft.api.traits.Modifier
+import k2b6s9j.boatcraft.core.utilities.NBTHelper
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.tileentity.TileEntityChest
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.nbt.NBTTagList
-import net.minecraftforge.common.util.Constants
-import cpw.mods.fml.relauncher.ReflectionHelper
-import java.lang.reflect.Field
-import k2b6s9j.boatcraft.core.BoatCraft
+import net.minecraft.tileentity.TileEntityChest
 
-class Chest extends Modifier
+//TODO: Fill Documentation
+/**
+ *
+ */
+object Chest extends Modifier
 {
-	override def getBlock: Block = Blocks.chest
-	override def getMeta = 0
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return block used for rendering
+   */
+  override def getBlock: Block = Blocks.chest
 
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return boolean representing if a boat has an inventory
+   */
 	override def hasInventory = true
-	override def getInventory(boat: EntityBoatContainer): IInventory =
-		new Chest.Inventory(boat)
-	
-	override def getName = "Chest"
-	override def getContent = new ItemStack(Blocks.chest)
 
-	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param boat the boat container object
+   * @return the inventory associated with the boat container
+   */
+  override def getInventory(boat: EntityBoatContainer): IInventory =
+		new Chest.Inventory(boat)
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return the name of the Modifier
+   */
+	override def getName = "Chest"
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return the ItemStack used when crafting
+   */
+  override def getContent = new ItemStack(Blocks.chest)
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param player the player interacting with the Boat
+   * @param boat the Boat being interacted with
+   */
+  override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
 		//player openGui(Vanilla, 0, player.worldObj, 0, 0, 0)
 		player displayGUIChest boat.asInstanceOf[IInventory]
-	
-	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound)
-	{
-		var container = boat.asInstanceOf[EntityBoatContainer]
-		
-		var list = new NBTTagList
-		for (i: Int <- 0 until container.getInventory.getSizeInventory)
-		{
-			if (container.getInventory.getStackInSlot(i) != null)
-			{
-				var _tag = new NBTTagCompound
-				container.getInventory.getStackInSlot(i) writeToNBT _tag
-				_tag setByte ("Slot", i.toByte)
-				list appendTag _tag
-			}
-		}
-		tag.setTag("Items", list)
-	}
-	
-	
-	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound)
-	{
-		var list = tag.getTagList("Items", Constants.NBT.TAG_COMPOUND)
-		
-		for (i: Int <- 0 until list.tagCount)
-		{
-			val _tag = list getCompoundTagAt i
-			boat.asInstanceOf[EntityBoatContainer] setInventorySlotContents(
-				_tag getByte "Slot",
-				ItemStack loadItemStackFromNBT _tag)
-		}
-	}
-}
 
-object Chest
-{
-	private[compatibility] class Inventory(boat: EntityBoatContainer, size: Int) extends TileEntityChest
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param boat the boat entity NBT data is being written to
+   * @param tag the NBT data tag being written
+   */
+  override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
+		NBTHelper writeChestToNBT(boat.asInstanceOf[IInventory], tag)
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param boat the boat entity NBT data is being read from
+   * @param tag the NBT data tag being read
+   */
+  override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
+		NBTHelper readChestFromNBT(boat.asInstanceOf[IInventory], tag)
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param boat
+   */
+  private class Inventory(boat: EntityBoatContainer) extends TileEntityChest
 	{
-		worldObj = boat.worldObj
-		
-		ReflectionHelper setPrivateValue(classOf[TileEntityChest], this,
-				new Array[ItemStack](size), "chestContents")
-		
-		def this(boat: EntityBoatContainer) = this(boat, 27)
-		
-		override def getSizeInventory = size
-		
-		override def getInventoryName = "Chest Boat"
-		
-		override def hasCustomInventoryName = false
-		
+    //TODO: Fill Documentation
+    /**
+     *
+     */
+    worldObj = boat.worldObj
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @return
+     */
+    override def getInventoryName = "Chest Boat"
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @return
+     */
+    override def hasCustomInventoryName = false
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param player
+     * @return
+     */
 		override def isUseableByPlayer(player: EntityPlayer) =
 			(player getDistanceSqToEntity boat) <= 64
 		
 		//TODO make it render it on the boat
-		override def openInventory {}
-		override def closeInventory {}
+    //TODO: Fill Documentation
+    /**
+     *
+     */
+    override def openInventory {}
+
+    //TODO: Fill Documentation
+    /**
+     *
+     */
+    override def closeInventory {}
 	}
 }
