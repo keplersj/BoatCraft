@@ -5,24 +5,38 @@ import net.minecraft.item.ItemStack
 
 abstract class Material
 {
-	/**
-	 * The texture path for rendering the Boat in the world
-	 */
+  /** The texture path for rendering the Boat in the world
+    *
+    * @return base texture of the Material
+    */
 	def getTexture: ResourceLocation = null
-	/**
-	 * The human-readable name of this Material.
-	 * The {@link Material#toString} will make it computer-readable
-	 */
+
+  /** The human-readable name of this Material.
+    * The {@link Material#toString} will make it computer-readable
+    *
+    * @return name of the Material
+    */
 	def getName: String = null
-	/**
-	 * The item used in the crafting recipe.
-	 * Also the primary drop when the boat crashes
-	 */
+
+  /** The item used in the crafting recipe.
+    * Also the primary drop when the boat crashes
+    *
+    * @return the ItemStack representing the Material
+    */
 	def getItem: ItemStack = null
-	/**
-	 * The secondary drop
-	 */
+
+  /** The secondary drop when the boat crashes
+    * For Wood-based boats, this is the associated wood's sticks.
+    * For Metallic boats, this is the nugget form of the metal.
+    * For other Material types is either null or the small tier of the base material (ie: stone rods, diamond nuggets, flint, etc)
+    *
+    * @return the secondary drop of the boat
+    */
 	def getStick: ItemStack = null
-	
-	override def toString = getName replaceAll(" ", "") toLowerCase
+
+  /** Method is overridden to return the Material's actual name.
+   *
+   * @return name of the Material
+   */
+  override def toString = getName replaceAll(" ", "") toLowerCase
 }

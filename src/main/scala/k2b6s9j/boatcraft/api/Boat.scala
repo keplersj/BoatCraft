@@ -24,13 +24,33 @@ import net.minecraftforge.client.IItemRenderer.{ItemRenderType, ItemRendererHelp
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher
 import net.minecraft.tileentity.TileEntity
 
+/**
+ * The object containing all of the code needed for Boats to function.
+ * Such as the Item, Entity, and Render.
+ */
 object Boat
 {
+
+  /**
+   * The Item Class used for all items that can be deployed like a Boat.
+   * Extends ItemBoat from Vanilla Minecraft.
+   */
 	class ItemCustomBoat extends ItemBoat
 	{
+    /**
+     * Boolean defining whether or not the Item has subtypes.
+     * Such as Material and Modifier.
+     */
 		hasSubtypes = true;
-		
-		@SideOnly(Side.CLIENT)
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param item
+     * @param tab
+     * @param list
+     */
+    @SideOnly(Side.CLIENT)
 		override def getSubItems(item: Item, tab: CreativeTabs, list: List[_])
 		{
 			var stack = new ItemStack(item)
@@ -46,18 +66,39 @@ object Boat
 			}
 		}
 
-		override def getUnlocalizedName(stack: ItemStack) =
+    /**
+     * Gives ItemStacks their unlocalized name.
+     *
+     * @param stack The ItemStack being named.
+     * @return The unlocalized name of the ItemStack.
+     */
+    override def getUnlocalizedName(stack: ItemStack) =
 			"boat." +
 				MaterialRegistry.getMaterial(stack) +
 				"." +
 				ModifierRegistry.getModifier(stack)
 
-		override def getItemStackDisplayName(stack: ItemStack) =
+    /**
+     * Gives ItemStacks their display name.
+     * This is used when the user hovers over the item.
+     * Also by mods like WAILA.
+     *
+     * @param stack The ItemStack being named
+     * @return The name of the ItemStack.
+     */
+    override def getItemStackDisplayName(stack: ItemStack) =
 			MaterialRegistry.getMaterial(stack).getName + " " +
 				ModifierRegistry.getModifier(stack).getName +
 				" Dinghy"
 
-		override def onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack =
+    /**
+     * Called when the player right clicks while holding the item.
+     *
+     * @param stack The ItemStack being right clicked.
+     * @param world The World the ItemStack is being right clicked in.
+     * @param player The Player that is right clicking the ItemStack.
+     */
+    override def onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack =
 		{
 			val f: Float = 1.0F
 			val f1: Float = player.prevRotationPitch +
@@ -146,39 +187,79 @@ object Boat
 			}
 		}
 	}
-	
-	case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param world
+   * @param x
+   * @param y
+   * @param z
+   */
+  case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		extends EntityBoat(world, x, y, z)
 	{
-		def this(world: World) = this(world, 0, 0, 0/*, null, null*/)
-		
-		override protected def entityInit
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param world
+     * @return
+     */
+    def this(world: World) = this(world, 0, 0, 0/*, null, null*/)
+
+    //TODO: Fill Documentation
+    /**
+     *
+     */
+    override protected def entityInit
 		{
 			super.entityInit
 			dataWatcher addObject(20, "")
 			dataWatcher addObject(21, "")
 		}
-		
-		override protected def writeEntityToNBT(tag: NBTTagCompound)
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param tag
+     */
+    override protected def writeEntityToNBT(tag: NBTTagCompound)
 		{
 			tag setString("material", getMaterialName)
 			tag setString("modifier", getModifierName)
 		}
 
-		override protected def readEntityFromNBT(tag: NBTTagCompound)
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param tag
+     */
+    override protected def readEntityFromNBT(tag: NBTTagCompound)
 		{
 			setMaterial(tag getString "material")
 			setModifier(tag getString "modifier")
 		}
-		
-		override def onUpdate
+
+    //TODO: Fill Documentation
+    /**
+     *
+     */
+    override def onUpdate
 		{
 			super.onUpdate
 			
 			getModifier update this
 		}
-		
-		override def func_145778_a(item: Item, count: Int, f: Float): EntityItem =
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param item
+     * @param count
+     * @param f
+     * @return
+     */
+    override def func_145778_a(item: Item, count: Int, f: Float): EntityItem =
 		{
 			var stack: ItemStack = new ItemStack(item, count)
 			
@@ -202,86 +283,214 @@ object Boat
 			if (stack != null) entityDropItem(stack, f)
 			else null
 		}
-		
-		override def interactFirst(player: EntityPlayer) =
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param player
+     * @return
+     */
+    override def interactFirst(player: EntityPlayer) =
 		{
 			if (getModifier isRideable) super.interactFirst(player)
 			getModifier interact(player, this)
 			true
-		}		
-		
-		override def setDead
+		}
+
+    //TODO: Fill Documentation
+    /**
+     *
+     */
+    override def setDead
 		{
 			if (!world.isRemote && getModifier.getContent != null)
 				entityDropItem(getModifier getContent, 0F)
 			super.setDead
 		}
-		
-		def setMaterial(material: String)
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param material
+     */
+    def setMaterial(material: String)
 		{
 			dataWatcher updateObject(20, material)
 		}
-		
-		def setModifier(modifier: String)
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param modifier
+     */
+    def setModifier(modifier: String)
 		{
 			dataWatcher updateObject(21, modifier)
 		}
-		
-		def getMaterial =
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @return
+     */
+    def getMaterial =
 			MaterialRegistry getMaterial(dataWatcher getWatchableObjectString 20)
-		
-		def getModifier =
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @return
+     */
+    def getModifier =
 			ModifierRegistry getModifier(dataWatcher getWatchableObjectString 21)
-		
-		def getMaterialName =
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @return
+     */
+    def getMaterialName =
 			dataWatcher getWatchableObjectString 20
-		
-		def getModifierName =
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @return
+     */
+    def getModifierName =
 			dataWatcher getWatchableObjectString 21
 	}
 
-	class EntityBoatContainer(world: World, x: Double, y: Double, z: Double)
+  //TODO: Fill Documentation
+  /**
+   *
+   * @param world
+   * @param x
+   * @param y
+   * @param z
+   */
+  class EntityBoatContainer(world: World, x: Double, y: Double, z: Double)
 		extends EntityCustomBoat(world, x, y, z) with IInventory
 	{
-		def this(world: World) = this(world, 0, 0, 0)
-		
-		override def getSizeInventory =
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param world
+     * @return
+     */
+    def this(world: World) = this(world, 0, 0, 0)
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @return
+     */
+    override def getSizeInventory =
 			getInventory getSizeInventory
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param slot
+     * @return
+     */
 		override def getStackInSlot(slot: Int) =
 			getInventory getStackInSlot slot
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param slot
+     * @param count
+     * @return
+     */
 		override def decrStackSize(slot: Int, count: Int) =
 			getInventory decrStackSize(slot, count)
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param slot
+     * @return
+     */
 		override def getStackInSlotOnClosing(slot: Int) =
 			getInventory getStackInSlotOnClosing slot
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param slot
+     * @param stack
+     */
 		override def setInventorySlotContents(slot: Int, stack: ItemStack) =
 			getInventory setInventorySlotContents(slot, stack)
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @return
+     */
 		override def getInventoryName =
 			getInventory getInventoryName
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @return
+     */
 		override def hasCustomInventoryName =
 			getInventory hasCustomInventoryName
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @return
+     */
 		override def getInventoryStackLimit =
 			getInventory getInventoryStackLimit
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     */
 		override def markDirty =
 			getInventory markDirty
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param player
+     * @return
+     */
 		override def isUseableByPlayer(player: EntityPlayer) =
 			getDistanceSqToEntity(player) <= 64
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     */
 		override def openInventory = getInventory.openInventory
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     */
 		override def closeInventory = getInventory.closeInventory
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param slot
+     * @param stack
+     * @return
+     */
 		override def isItemValidForSlot(slot: Int, stack: ItemStack) =
 			getInventory.isItemValidForSlot(slot, stack)
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     */
 		override def setDead
 		{
 			for (i: Int <- 0 until getSizeInventory)
@@ -289,7 +498,12 @@ object Boat
 					entityDropItem(getStackInSlotOnClosing(i), 0F)
 			super.setDead
 		}
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param modifier
+     */
 		override def setModifier(modifier: String)
 		{
 			val prev = getModifierName
@@ -298,7 +512,12 @@ object Boat
 			if (prev == null || prev != modifier || inventory == null)
 				inventory = getModifier getInventory this
 		}
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param tag
+     */
 		override protected def writeEntityToNBT(tag: NBTTagCompound)
 		{
 			super.writeEntityToNBT(tag)
@@ -306,13 +525,22 @@ object Boat
 			getModifier writeStateToNBT(this, tag)
 		}
 
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param tag
+     */
 		override protected def readEntityFromNBT(tag: NBTTagCompound)
 		{
 			super.readEntityFromNBT(tag)
 			
 			getModifier readStateFromNBT(this, tag)
 		}
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     */
 		private var inventory: IInventory = null
 		
 		protected[boatcraft] def getInventory =
@@ -323,12 +551,36 @@ object Boat
 		
 	}
 
-	class RenderCustomBoat
+  /**
+   * The Render Class used to render dinghies.
+   * This includes the deployed entity, the item while held, in inventory, and on display.
+   */
+  class RenderCustomBoat
 		extends RenderBoat with IItemRenderer
 	{
-		override def doRender(entity: Entity, x: Double, y: Double, z: Double, f0: Float, f1: Float) =
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param entity
+     * @param x
+     * @param y
+     * @param z
+     * @param f0
+     * @param f1
+     */
+    override def doRender(entity: Entity, x: Double, y: Double, z: Double, f0: Float, f1: Float) =
 			doRender(entity.asInstanceOf[EntityCustomBoat], x, y, z, f0, f1)
 
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param boat
+     * @param x
+     * @param y
+     * @param z
+     * @param f0
+     * @param f1
+     */
 		def doRender(boat: EntityCustomBoat, x: Double, y: Double, z: Double, f0: Float, f1: Float)
 		{
 			GL11 glPushMatrix
@@ -399,18 +651,46 @@ object Boat
 			modelBoat render(boat, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)
 			GL11 glPopMatrix
 		}
-		
+
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param entity
+     * @return
+     */
 		override def getEntityTexture(entity: Entity) =
 			if (!entity.isInstanceOf[EntityCustomBoat] ||
 					entity.asInstanceOf[EntityCustomBoat].getMaterial == null)
 				new ResourceLocation("missingno")
 			else entity.asInstanceOf[EntityCustomBoat].getMaterial.getTexture
 
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param stack
+     * @param t
+     * @return
+     */
 		def handleRenderType(stack: ItemStack, t: ItemRenderType) = true
 
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param renderType
+     * @param stack
+     * @param helper
+     * @return
+     */
 		def shouldUseRenderHelper(renderType: ItemRenderType, stack: ItemStack,
 				helper: ItemRendererHelper) = true
 
+    //TODO: Fill Documentation
+    /**
+     *
+     * @param renderType
+     * @param stack
+     * @param objects
+     */
 		def renderItem(renderType: ItemRenderType, stack: ItemStack, objects: AnyRef*)
 		{
 			GL11 glPushMatrix

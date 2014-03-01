@@ -6,16 +6,41 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.init.Items
 import net.minecraftforge.oredict.OreDictionary
 
+//TODO: Fill Documentation
+/**
+ *
+ */
 object Iron extends Material
 {
-	override def getTexture = 
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return base texture of the Material
+   */
+  override def getTexture =
 		new ResourceLocation("boatcraft",
 			"textures/entity/boat/vanilla/metal/iron.png")
-	
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return name of the Material
+   */
 	override def getName = "Iron"
-	
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return the ItemStack representing the Material
+   */
 	override def getItem = new ItemStack(Items.iron_ingot)
-	override def getStick =
+
+  //TODO: Fill Documentation
+  /**
+   *
+   * @return the secondary drop of the boat
+   */
+  override def getStick =
 		if ((OreDictionary getOres "nuggetIron") isEmpty)
 			null
 		else new ItemStack(((OreDictionary getOres "nuggetIron") get 0) getItem, 4)

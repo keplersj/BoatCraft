@@ -13,9 +13,18 @@ import k2b6s9j.boatcraft.api.registry.ModifierRegistry
 import k2b6s9j.boatcraft.api.traits.Modifier
 import cpw.mods.fml.common.registry.GameRegistry
 
+/**
+ * Contains miscellaneous methods used throughout the mod related to crafting.
+ */
 object Recipes
 {
-	def removeRecipe(resultItem: ItemStack)
+  /**
+   * Removes recipes from the master crafting recipe list.
+   * Primarily used to remove the vanilla boat recipe from the game.
+   *
+   * @param resultItem the item whose recipe is being removed
+   */
+  def removeRecipe(resultItem: ItemStack)
 	{
 		var toRemove = new ArrayList[IRecipe]
 
@@ -33,7 +42,10 @@ object Recipes
 		CraftingManager.getInstance.getRecipeList removeAll toRemove
 	}
 
-	def addBoatRecipes
+  /**
+   * Adds recipes and NBT tag compounds for all registered boats.
+   */
+  def addBoatRecipes
 	{
 		var stack = new ItemStack(BoatCraft.itemBoat)
 		stack.stackTagCompound = new NBTTagCompound
