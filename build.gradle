@@ -84,9 +84,17 @@ classifier = 'deobf'
     version = "${project.minecraft.version}-${project.version}"
 }
 
+// Add in a jar containing the ScalaDocs.
+task docs(type: Jar) {
+    dependsOn ':scaladoc'
+    from scaladoc.destinationDir
+    classifier = 'docs'
+    version = "${project.minecraft.version}-${project.version}"
+}
+
 // Tell the artifact system about our extra jars
 artifacts {
-    archives sourceJar, deobfJar
+    archives sourceJar, deobfJar, docs
 }
 
 // Configure an upload task. this is setup for uploading to files.minecraftforge.net. There are other examples around
