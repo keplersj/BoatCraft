@@ -1,5 +1,5 @@
 rootProject.name = 'BoatCraft'
 
 include 'Minecraft:Forge:Core'
-include 'Minecraft:Forge:Compatibility:IronChest'
+//include 'Minecraft:Forge:Compatibility:IronChest' Disabled temporarilly until I find a way to get the source cleanly.
 include 'Minecraft:Forge:Compatibility:Vanilla'
