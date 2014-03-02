@@ -10,8 +10,9 @@ import net.minecraft.item.Item
 class apiTest extends FlatSpec with Matchers with BeforeAndAfter
 {
 
-  "The Custom Boat item" should "be returned." in {
-    api.getItemCustomBoat shouldBe Item.itemRegistry.getObject("boatcraft:customBoat")
-  }
+	"The Custom Boat item" should "be returned." in
+	{
+		api.getItemCustomBoat shouldBe Item.itemRegistry.getObject("boatcraft:customBoat")
+	}
 
 }

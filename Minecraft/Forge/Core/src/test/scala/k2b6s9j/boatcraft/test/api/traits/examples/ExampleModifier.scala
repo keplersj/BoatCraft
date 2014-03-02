@@ -5,7 +5,7 @@ import net.minecraft.block.Block
 
 object ExampleModifier extends Modifier {
 
-  override def getName: String = "Test"
+  override def getName: String = "Test Modifier"
   override def getBlock: Block = net.minecraft.init.Blocks.bedrock
 
 }

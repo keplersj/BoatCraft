@@ -22,19 +22,19 @@ class SingleModifierRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 
 	"A Modifier" should "be added to the registered Modifiers map." in
 	{
-		Registry.modifiers.toMap should contain("test", ExampleModifier)
+		Registry.modifiers.toMap should contain(ExampleModifier toString, ExampleModifier)
 	}
 
 	it should "be returned when searched by name." in
 	{
-		Registry find "test" shouldBe ExampleModifier
+		Registry find ExampleModifier.toString shouldBe ExampleModifier
 	}
 
 	it should "be returned when searched by ItemStack." in
 	{
 		val stack = new ItemStack(Blocks.bedrock)
 		stack.stackTagCompound = new NBTTagCompound
-		stack.stackTagCompound setString ("modifier", "test")
+		stack.stackTagCompound setString ("modifier", ExampleModifier toString)
 		Registry getModifier stack shouldBe ExampleModifier
 	}
 
@@ -44,8 +44,10 @@ class SingleModifierRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 		Registry getModifier stack shouldBe Empty
 	}
 
-  after
-  {
-    Registry unregister ExampleModifier
-  }
+	after
+	{
+		Registry unregister ExampleModifier
+		
+        Registry.modifiers.toMap should not contain(ExampleModifier toString, ExampleModifier)
+	}
 }

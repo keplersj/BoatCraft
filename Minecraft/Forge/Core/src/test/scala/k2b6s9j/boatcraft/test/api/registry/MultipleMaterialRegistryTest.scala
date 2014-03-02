@@ -21,14 +21,14 @@ class MultipleMaterialRegistryTest extends FlatSpec with Matchers with BeforeAnd
 	
 	"All Materials" should "be added to the registered Materials map." in
 	{
-		Registry.materials.toMap should contain("test", ExampleMaterial)
-		Registry.materials.toMap should contain("test2", ExampleMaterial2)
+		Registry.materials.toMap should contain(ExampleMaterial toString, ExampleMaterial)
+		Registry.materials.toMap should contain(ExampleMaterial2 toString, ExampleMaterial2)
 	}
 
 	they should "be returned when searched by name." in
 	{
-		Registry find "test" shouldBe ExampleMaterial
-		Registry find "test2" shouldBe ExampleMaterial2
+		Registry find ExampleMaterial.toString shouldBe ExampleMaterial
+		Registry find ExampleMaterial2.toString shouldBe ExampleMaterial2
 	}
 
 	they should "be returned when searched by ItemStack." in
@@ -36,16 +36,19 @@ class MultipleMaterialRegistryTest extends FlatSpec with Matchers with BeforeAnd
 		val stack = new ItemStack(net.minecraft.init.Items.chainmail_helmet)
 		stack.stackTagCompound = new NBTTagCompound
 
-		stack.stackTagCompound setString ("material", "test")
+		stack.stackTagCompound setString ("material", ExampleMaterial toString)
 		Registry getMaterial stack shouldBe ExampleMaterial
 
-		stack.stackTagCompound setString ("material", "test2")
+		stack.stackTagCompound setString ("material", ExampleMaterial2 toString)
 		Registry getMaterial stack shouldBe ExampleMaterial2
 	}
-
-  after
-  {
-    Registry unregister util.Arrays.asList(ExampleMaterial, ExampleMaterial2)
-  }
+	
+	after
+	{
+		Registry unregister util.Arrays.asList(ExampleMaterial, ExampleMaterial2)
+		
+        Registry.materials.toMap should not contain(ExampleMaterial toString, ExampleMaterial)
+        Registry.materials.toMap should not contain(ExampleMaterial2 toString, ExampleMaterial2)
+	}
 
 }

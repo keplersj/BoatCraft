@@ -16,32 +16,34 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 
 @RunWith(classOf[JUnitRunner])
-class BoatTest extends FlatSpec with Matchers with BeforeAndAfter
-{
+class BoatTest extends FlatSpec with Matchers with BeforeAndAfter {
 	//ItemCustomBoatTest
 	var item: ItemCustomBoat = null
-	
-	before 
-	{
+
+	before {
 		item = new ItemCustomBoat
 		Registry register ExampleMaterial
 		Registry register ExampleModifier
 	}
-	
+
 	"A Boat Item" should "have an unlocalized name based on it's Material and Modifier." in
-	{
-		val stack = new ItemStack(item)
-		stack.stackTagCompound = new NBTTagCompound
-		stack.stackTagCompound setString ("material", "test")
-		stack.stackTagCompound setString ("modifier", "test")
-		item getUnlocalizedName stack shouldBe "boat.test.test"
-	}
-	
+		{
+			val stack = new ItemStack(item)
+			stack.stackTagCompound = new NBTTagCompound
+			stack.stackTagCompound setString ("material", ExampleMaterial toString)
+			stack.stackTagCompound setString ("modifier", ExampleModifier toString)
+			item getUnlocalizedName stack shouldBe
+				"boat." +
+				ExampleMaterial.toString +
+				"." +
+				ExampleModifier.toString
+		}
+
 	it should "register all it's subitems" in
-	{
-		val list = new ArrayList[ItemStack]
-		item getSubItems(item, CreativeTabs.tabTransport, list)
-		/* At least Code coverage
+		{
+			val list = new ArrayList[ItemStack]
+			item getSubItems (item, CreativeTabs.tabTransport, list)
+			/* At least Code coverage
 		var stack = new ItemStack(item)
 		stack.stackTagCompound = new NBTTagCompound
 		for ((nameMat, material) <- MaterialRegistry.materials)
@@ -53,12 +55,12 @@ class BoatTest extends FlatSpec with Matchers with BeforeAndAfter
 				list should contain (stack)
 			}
 		}*/
-	}
-	
+		}
+
 	//EntityCustomBoatTest
-	
+
 	//EntityBoatContainerTest
-	
+
 	//RenderCustomBoatTest
 
 }

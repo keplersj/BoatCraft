@@ -21,14 +21,14 @@ class MultipleModifierRegistryTest extends FlatSpec with Matchers with BeforeAnd
 	
 	"All Modifiers" should "be added to the registered Modifiers map." in
 	{
-		Registry.modifiers.toMap should contain("test", ExampleModifier)
-		Registry.modifiers.toMap should contain("test2", ExampleModifier2)
+		Registry.modifiers.toMap should contain(ExampleModifier toString, ExampleModifier)
+		Registry.modifiers.toMap should contain(ExampleModifier2 toString, ExampleModifier2)
 	}
 	
 	they should "be returned when searched by name." in
 	{
-		Registry find "test" shouldBe ExampleModifier
-		Registry find "test2" shouldBe ExampleModifier2
+		Registry find ExampleModifier.toString shouldBe ExampleModifier
+		Registry find ExampleModifier2.toString shouldBe ExampleModifier2
 	}
 	
 	they should "be returned when searched by ItemStack." in
@@ -36,15 +36,18 @@ class MultipleModifierRegistryTest extends FlatSpec with Matchers with BeforeAnd
 		val stack = new ItemStack(net.minecraft.init.Blocks.bedrock)
 		stack.stackTagCompound = new NBTTagCompound
 		
-		stack.stackTagCompound setString ("modifier", "test")
+		stack.stackTagCompound setString ("modifier", ExampleModifier toString)
 		Registry getModifier stack shouldBe ExampleModifier
 
-		stack.stackTagCompound setString ("modifier", "test2")
+		stack.stackTagCompound setString ("modifier", ExampleModifier2 toString)
 		Registry getModifier stack shouldBe ExampleModifier2
 	}
-
-  after
-  {
-    Registry unregister util.Arrays.asList(ExampleModifier, ExampleModifier2)
-  }
+	
+	after
+	{
+		Registry unregister util.Arrays.asList(ExampleModifier, ExampleModifier2)
+		
+        Registry.modifiers.toMap should not contain(ExampleModifier toString, ExampleModifier)
+        Registry.modifiers.toMap should not contain(ExampleModifier2 toString, ExampleModifier2)
+	}
 }
