@@ -1,4 +1,4 @@
-subprojects {
+allprojects {
 	
 	apply plugin: 'forge'
 	
@@ -25,15 +25,17 @@ subprojects {
 	
 	// Add in a source jar for people, should they desire to download such a thing
 	task sourceJar(type: Jar) {
-	from sourceSets.main.allSource
-	classifier = 'src'
+		dependsOn subprojects.build
+		from allprojects.sourceSets.main.allSource
+		classifier = 'src'
 		version = "${project.minecraft.version}-${project.version}"
 	}
 	
 	// Add in an mcp named jar, for those who wish to run in a development environment (assuming mcp naming matches)
 	task deobfJar(type: Jar) {
-	from sourceSets.main.output
-	classifier = 'deobf'
+		dependsOn subprojects.build
+		from allprojects.sourceSets.main.output
+		classifier = 'deobf'
 		version = "${project.minecraft.version}-${project.version}"
 	}
 	
