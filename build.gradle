@@ -1,10 +1,5 @@
 apply plugin: 'idea'
 apply plugin: 'eclipse'
-apply plugin: 'cobertura'
-apply plugin: 'coveralls'
-apply plugin: 'java'
-apply plugin: 'scala'
-apply plugin: 'forge'
 
 buildscript {
     repositories {
@@ -33,140 +28,41 @@ group = 'k2b6s9j'
 
 archivesBaseName = 'BoatCraft'
 
-version = '2.0-SNAPSHOT'
-
-minecraft {
-	version = '1.7.2-10.12.0.1024'
-	mcpVersion = '9.03'
-}
-
-tasks.withType(ScalaCompile) {
-    scalaCompileOptions.useAnt = false
-}
-
-dependencies {
-        compile(group: 'cpw.mods', name: 'ironchest', version: '1.7.2-6.0.4.713') {
-      	    artifact {
-                name = 'ironchest'
-                type = 'jar'
-                classifier = 'deobf'
-            }
-        }
-
-        testCompile 'junit:junit:4.11'
-        testCompile 'org.scalatest:scalatest_2.10:2.0'
-}
+allprojects {
     
-cobertura {
-    coverageFormats = ['html', 'xml']
-    coverageIgnoreTrivial = true;
-}
-
-// this sets our output jar to have a 'tag' of 'universal' on it
-// It also adds the minecraft version in a custom version name
-// The result is files named <projectname>-<mcversion>-<version>-universal.jar
-jar {
-    classifier = 'universal'
-    version = "${project.minecraft.version}-${project.version}"
-}
-
-// Add in a source jar for people, should they desire to download such a thing
-task sourceJar(type: Jar) {
-from sourceSets.main.allSource
-classifier = 'src'
-    version = "${project.minecraft.version}-${project.version}"
-}
-
-// Add in an mcp named jar, for those who wish to run in a development environment (assuming mcp naming matches)
-task deobfJar(type: Jar) {
-from sourceSets.main.output
-classifier = 'deobf'
-    version = "${project.minecraft.version}-${project.version}"
-}
-
-// Add in a jar containing the ScalaDocs.
-task docs(type: Jar) {
-    dependsOn ':scaladoc'
-    from scaladoc.destinationDir
-    classifier = 'docs'
-    version = "${project.minecraft.version}-${project.version}"
-}
-
-// Tell the artifact system about our extra jars
-artifacts {
-    archives sourceJar, deobfJar, docs
-}
-
-// Configure an upload task. this is setup for uploading to files.minecraftforge.net. There are other examples around
-uploadArchives {
-    dependsOn 'reobf'
+    apply plugin: 'cobertura'
+    apply plugin: 'coveralls'
+    apply plugin: 'java'
+    apply plugin: 'scala'
+    
     repositories {
-        if (project.hasProperty("filesmaven")) {
-            logger.info('Publishing to files server')
-            
-            mavenDeployer {
-                configuration = configurations.deployJars
+        mavenCentral()
+        maven {
+            name = "Sonatype Releases"
+            url = "https://oss.sonatype.org/content/repositories/releases/"
+        }
+    }
 
-                repository(url: project.filesmaven.url) {
-                    authentication(userName: project.filesmaven.username, privateKey: project.filesmaven.key)
-                }
-                
-                // This is just the pom data for the maven repo
-                pom {
-                    groupId = project.group
-                    // Force the maven upload to use the <mcversion>-<version> syntax preferred at files
-                    version = "${project.minecraft.version}-${project.version}"
-                    artifactId = project.archivesBaseName
-                    project {
-                        name project.archivesBaseName
-                        packaging 'jar'
-                        description 'Rails had their turn, now out to the Minecraftian seas.'
-                        url 'https://github.com/Open-Code-Developers/BoatCraft.git'
+    tasks.withType(ScalaCompile) {
+        scalaCompileOptions.useAnt = false
+    }
+    
+    dependencies {
+            testCompile 'junit:junit:4.11'
+            testCompile 'org.scalatest:scalatest_2.10:2.0'
+    }
+    
+    cobertura {
+        coverageFormats = ['html', 'xml']
+        coverageIgnoreTrivial = true;
+    }
+    
+}
 
-                        scm {
-                            url 'https://github.com/Open-Code-Developers/BoatCraft'
-                            connection 'scm:git:git://github.com/Open-Code-Developers/BoatCraft.git'
-                            developerConnection 'scm:git:git@github.com:Open-Code-Developers/BoatCraft.git'
-                        }
-
-                        issueManagement {
-                            system 'github'
-                            url 'https://github.com/Open-Code-Developers/BoatCraft/issues'
-                        }
-
-                        licenses {
-                            license {
-                                name 'The MIT License (MIT)'
-                                url 'https://raw.github.com/Open-Code-Developers/BoatCraft/master/LICENSE'
-                                distribution 'repo'
-                            }
-                        }
-
-                        developers {
-                            developer {
-                                id 'k2b6s9j'
-                                name 'Kepler Sticka-Jones'
-                                roles {
-                                	role 'developer'
-                                	role 'creator'
-                                }
-                            }
-                            developer {
-                                id 'viliml'
-                                name 'Vilim Lendvaj'
-                                roles { role 'developer' }
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            logger.info('Publishing to repo folder')
-            
-            mavenDeployer {
-                pom.version = "${project.minecraft.version}-${project.version}"
-                repository(url: 'file://localhost/' + project.file('repo').getAbsolutePath())
-            }
+project (':Minecraft:Forge:Compatibility') {
+    subprojects {
+        dependencies {
+            compile project(':Minecraft:Forge:Core')
         }
     }
 }

@@ -1,0 +1,5 @@
+rootProject.name = 'BoatCraft'
+
+include 'Minecraft:Forge:Core'
+include 'Minecraft:Forge:Compatibility:IronChest'
+include 'Minecraft:Forge:Compatibility:Vanilla'
