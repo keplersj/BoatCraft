@@ -13,7 +13,6 @@ import cpw.mods.fml.relauncher.Side
 import k2b6s9j.boatcraft.api.Registry
 import k2b6s9j.boatcraft.api.boat.ItemCustomBoat
 import k2b6s9j.boatcraft.core.materials.Empty
-import k2b6s9j.boatcraft.core.packets.ChannelHandler
 import k2b6s9j.boatcraft.core.utilities.Recipes
 import net.minecraft.item.Item
 import java.util.logging.Logger

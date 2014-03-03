@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.client.IItemRenderer.ItemRendererHelper
 import net.minecraft.util.MathHelper
 import net.minecraft.client.renderer.texture.TextureMap
+import net.minecraft.client.renderer.RenderBlocks
 
 /**
   * The Render Class used to render dinghies.
@@ -21,7 +22,10 @@ import net.minecraft.client.renderer.texture.TextureMap
 class RenderCustomBoat
 	extends RenderBoat with IItemRenderer
 {
-	override def doRender(entity: Entity, x: Double, y: Double, z: Double, f0: Float, f1: Float) =
+
+  protected val renderBlocks: RenderBlocks
+
+  override def doRender(entity: Entity, x: Double, y: Double, z: Double, f0: Float, f1: Float) =
 		doRender(entity.asInstanceOf[EntityCustomBoat], x, y, z, f0, f1)
 	
 	def doRender(boat: EntityCustomBoat, x: Double, y: Double, z: Double, f0: Float, f1: Float)
@@ -58,7 +62,7 @@ class RenderCustomBoat
 
 			GL11 glPushMatrix
 
-			field_147909_c renderBlockAsItem (block, meta, f5)
+			renderBlocks renderBlockAsItem (block, meta, f5)
 
 			GL11 glPopMatrix ()
 			GL11 glPopMatrix ()
@@ -104,8 +108,8 @@ class RenderCustomBoat
 	
 	def shouldUseRenderHelper(renderType: ItemRenderType, stack: ItemStack,
 		helper: ItemRendererHelper) = true
-	
-	def renderItem(renderType: ItemRenderType, stack: ItemStack, objects: AnyRef*) {
+
+  def renderItem(renderType: ItemRenderType, stack: ItemStack, objects: AnyRef*) {
 		GL11 glPushMatrix
 
 		GL11 glTranslated (.5, .5, .5)
@@ -133,7 +137,7 @@ class RenderCustomBoat
 
 			GL11 glPushMatrix
 
-			field_147909_c renderBlockAsItem(block, meta, 8)
+      renderBlocks renderBlockAsItem(block, meta, 8)
 			GL11 glPopMatrix
 
 			GL11 glPopMatrix

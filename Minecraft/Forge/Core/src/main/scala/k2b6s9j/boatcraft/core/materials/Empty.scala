@@ -17,7 +17,7 @@ object Empty extends Modifier
    *
    * @return block used for rendering
    */
-  override def getBlock = Blocks.air
+  override def getBlock = null
 
   //TODO: Fill Documentation
   /**
