@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11
 import net.minecraftforge.client.IItemRenderer.ItemRenderType
 import net.minecraft.util.ResourceLocation
 import net.minecraft.entity.Entity
-import net.minecraft.tileentity.TileEntity
 import net.minecraftforge.client.IItemRenderer
 import net.minecraft.client.renderer.entity.RenderBoat
 import k2b6s9j.boatcraft.api.Registry
@@ -13,8 +12,6 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.client.IItemRenderer.ItemRendererHelper
 import net.minecraft.util.MathHelper
 import net.minecraft.client.renderer.texture.TextureMap
-import net.minecraft.client.renderer.RenderBlocks
-
 /**
   * The Render Class used to render dinghies.
   * This includes the deployed entity, the item while held, in inventory, and on display.
@@ -22,8 +19,6 @@ import net.minecraft.client.renderer.RenderBlocks
 class RenderCustomBoat
 	extends RenderBoat with IItemRenderer
 {
-
-  protected val renderBlocks: RenderBlocks
 
   override def doRender(entity: Entity, x: Double, y: Double, z: Double, f0: Float, f1: Float) =
 		doRender(entity.asInstanceOf[EntityCustomBoat], x, y, z, f0, f1)
@@ -68,6 +63,8 @@ class RenderCustomBoat
 			GL11 glPopMatrix ()
 			GL11 glColor4f (1.0F, 1.0F, 1.0F, 1.0F)
 		}
+
+    /*
 		else if (boat.isInstanceOf[EntityBoatContainer]
 			&& boat.asInstanceOf[EntityBoatContainer].getInventory.isInstanceOf[TileEntity]
 			&& (TileEntityRendererDispatcher.instance hasSpecialRenderer
@@ -89,6 +86,7 @@ class RenderCustomBoat
 			GL11 glPopMatrix()
 			GL11 glColor4f (1, 1, 1, 1)
 		}
+		*/
 
 		GL11 glScalef(f4, f4, f4)
 		GL11 glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4)
