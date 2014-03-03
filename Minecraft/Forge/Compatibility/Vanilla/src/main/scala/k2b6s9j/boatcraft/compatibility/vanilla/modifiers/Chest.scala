@@ -100,14 +100,14 @@ object Chest extends Modifier
      *
      * @return
      */
-    override def getInventoryName = "Chest Boat"
+    //override def getInventoryName = "Chest Boat"
 
     //TODO: Fill Documentation
     /**
      *
      * @return
      */
-    override def hasCustomInventoryName = false
+    //override def hasCustomInventoryName = false
 
     //TODO: Fill Documentation
     /**
@@ -123,12 +123,12 @@ object Chest extends Modifier
     /**
      *
      */
-    override def openInventory {}
+    //override def openInventory {}
 
     //TODO: Fill Documentation
     /**
      *
      */
-    override def closeInventory {}
+    //override def closeInventory {}
 	}
 }

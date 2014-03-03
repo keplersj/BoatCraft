@@ -108,8 +108,8 @@ object Workbench extends Modifier
      */
     override protected def drawGuiContainerForegroundLayer(arg1: Int, arg2: Int)
 		{
-			fontRendererObj.drawString(I18n.format("boatcraft.container.crafting", Array()), 28, 6, 4210752)
-			fontRendererObj.drawString(I18n.format("container.inventory", Array()), 8, ySize - 96 + 2, 4210752)
+			fontRenderer.drawString(I18n.getStringParams("boatcraft.container.crafting", Array()), 28, 6, 4210752)
+			fontRenderer.drawString(I18n.getStringParams("container.inventory", Array()), 8, ySize - 96 + 2, 4210752)
 		}
 	}
 }

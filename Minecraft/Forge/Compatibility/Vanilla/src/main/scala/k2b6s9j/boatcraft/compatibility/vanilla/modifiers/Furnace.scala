@@ -32,7 +32,7 @@ object Furnace extends Modifier
    * @param boat the Boat being interacted with
    */
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
-		player func_146101_a(boat.asInstanceOf[EntityBoatContainer]
+		player displayGUIFurnace(boat.asInstanceOf[EntityBoatContainer]
 							.getInventory.asInstanceOf[Furnace.Inventory])
 
   //TODO: Fill Documentation
@@ -55,11 +55,11 @@ object Furnace extends Modifier
 		var inventory = boat.asInstanceOf[EntityBoatContainer]
 						.getInventory.asInstanceOf[Furnace.Inventory]
 		
-        val nbttaglist = tag getTagList("Items", 10)
+        val nbttaglist = tag getTagList "Items"
 
         for (i <- 0 until nbttaglist.tagCount)
         {
-            val _tag = nbttaglist getCompoundTagAt i
+            val _tag = (nbttaglist tagAt i).asInstanceOf[NBTTagCompound]
             val b0 = _tag getByte "Slot"
 
             if (b0 >= 0 && b0 < inventory.getSizeInventory)
@@ -69,12 +69,12 @@ object Furnace extends Modifier
             }
         }
 		
-        inventory.furnaceBurnTime = tag.getShort("BurnTime");
-        inventory.furnaceCookTime = tag.getShort("CookTime");
+        inventory.furnaceBurnTime = tag.getShort("BurnTime")
+        inventory.furnaceCookTime = tag.getShort("CookTime")
         inventory.currentItemBurnTime = TileEntityFurnace getItemBurnTime
         		(inventory getStackInSlot 1)
         
-        if (tag hasKey("CustomName", 8))
+        if (tag hasKey "CustomName")
         {
             //inventory.field_145958_o = p_145839_1_.getString("CustomName");
         }
@@ -106,12 +106,14 @@ object Furnace extends Modifier
 			}
 		}
 
-		tag setTag("Items", list);
+		tag setTag("Items", list)
 
-		if (inventory hasCustomInventoryName)
+		/*
+    if (inventory.hasCustomInventoryName)
 		{
 			//tag setString("CustomName", inventory.field_145958_o);
 		}
+		*/
 	}
 
   //TODO: Fill Documentation
@@ -132,7 +134,7 @@ object Furnace extends Modifier
      *
      * @return
      */
-    override def getInventoryName: String = "Furnace Boat"
+    //override def getInventoryName: String = "Furnace Boat"
 
     //TODO: Fill Documentation
     /**
@@ -169,8 +171,7 @@ object Furnace extends Modifier
 
 							if (getStackInSlot(1).stackSize == 0)
 							{
-								setInventorySlotContents(1,
-									getStackInSlot(1).getItem getContainerItem getStackInSlot(1))
+								setInventorySlotContents(1, getStackInSlot(1))
 							}
 						}
 					}
