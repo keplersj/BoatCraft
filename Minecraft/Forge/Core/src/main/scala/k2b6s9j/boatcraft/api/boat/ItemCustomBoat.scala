@@ -13,12 +13,10 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemBoat
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.AxisAlignedBB
-import net.minecraft.util.MathHelper
-import net.minecraft.util.MovingObjectPosition
-import net.minecraft.util.Vec3
+import net.minecraft.util._
 import net.minecraft.world.World
 import net.minecraft.block.Block
+import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
 
 /**
   * The Item Class used for all items that can be deployed like a Boat.
