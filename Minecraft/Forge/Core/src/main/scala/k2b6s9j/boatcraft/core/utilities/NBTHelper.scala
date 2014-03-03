@@ -39,10 +39,10 @@ object NBTHelper
 	  */
 	def readChestFromNBT(inv: IInventory, tag: NBTTagCompound)
 	{
-		var list = tag getTagList ("Items", Constants.NBT.TAG_COMPOUND)
+		val list: NBTTagList = tag getTagList ("Items")
 
 		for (i <- 0 until list.tagCount) {
-			val _tag = list getCompoundTagAt i
+			val _tag: NBTTagCompound = (list tagAt i).asInstanceOf[NBTTagCompound]
 			inv setInventorySlotContents (_tag getByte "Slot", ItemStack loadItemStackFromNBT _tag)
 		}
 	}
