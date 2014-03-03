@@ -57,7 +57,7 @@ object BoatCraft
   /**
    * The Item ID for the Boat Item
    */
-  var itemBoatID: Int = 25500
+  var itemBoatID: Int = 333
 	
 	/**
 	  * Method used by Forge Mod Loader in the Pre-Initialization phase.
@@ -114,8 +114,8 @@ object BoatCraft
 
   private def readConfig
   {
-    itemBoatID = config get ("Core.IDs", "itemBoatID", 25500,
-      "The Item ID used for all Boats created by BoatCraft:Core.") getInt 25500
+    itemBoatID = config get ("Core.IDs", "itemBoatID", 333,
+      "The Item ID used for all Boats created by BoatCraft:Core.") getInt 333
 
     if (BoatCraft.config hasChanged)
       BoatCraft.config save
