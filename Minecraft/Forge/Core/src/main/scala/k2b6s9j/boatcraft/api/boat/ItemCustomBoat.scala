@@ -9,7 +9,6 @@ import k2b6s9j.boatcraft.api.Registry
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Blocks
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBoat
 import net.minecraft.item.ItemStack
@@ -24,7 +23,7 @@ import net.minecraft.world.World
   * The Item Class used for all items that can be deployed like a Boat.
   * Extends ItemBoat from Vanilla Minecraft.
   */
-class ItemCustomBoat extends ItemBoat
+class ItemCustomBoat(id: Int) extends ItemBoat(id)
 {
 	/**
 	  * Boolean defining whether or not the Item has subtypes.

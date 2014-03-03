@@ -1,7 +1,6 @@
 package k2b6s9j.boatcraft
 
-import k2b6s9j.boatcraft.api.boat.ItemCustomBoat
-import net.minecraft.item.Item
+import k2b6s9j.boatcraft.core.BoatCraft
 
 /** The main API used by all BoatCraft Content Modules and Add-ons.
   *
@@ -10,5 +9,5 @@ import net.minecraft.item.Item
 package object api
 {
 	def getItemCustomBoat =
-		Item.itemRegistry.getObject("boatcraft:customBoat").asInstanceOf[ItemCustomBoat]
+		BoatCraft.itemBoat
 }

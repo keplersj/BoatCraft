@@ -2,9 +2,7 @@ package k2b6s9j.boatcraft.api
 
 import java.util.{HashMap, List, Map}
 import scala.collection.JavaConversions.asScalaBuffer
-import cpw.mods.fml.common.Mod
 import k2b6s9j.boatcraft.api.traits.{Material, Modifier}
-import k2b6s9j.boatcraft.core.BoatCraft
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import k2b6s9j.boatcraft.core.materials.Empty

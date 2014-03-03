@@ -8,8 +8,6 @@ import net.minecraft.item.Item
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
-import net.minecraft.init.Items
-import net.minecraft.init.Blocks
 import k2b6s9j.boatcraft.api.getItemCustomBoat
 import k2b6s9j.boatcraft.api.traits.{Material, Modifier}
 

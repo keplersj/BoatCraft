@@ -1,8 +1,8 @@
 package k2b6s9j.boatcraft.core.packets
 
-import cpw.mods.fml.common.network.FMLIndexedMessageToMessageCodec;
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
+
+
+
 
 //TODO: Fill Documentation
 /**

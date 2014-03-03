@@ -1,8 +1,7 @@
 package k2b6s9j.boatcraft.api.registry
 
-import java.util.{ HashMap, List, Map }
+import java.util.{ List, Map }
 
-import scala.collection.JavaConversions.asScalaBuffer
 
 import k2b6s9j.boatcraft.api.traits.Modifier
 import k2b6s9j.boatcraft.core.materials.Empty

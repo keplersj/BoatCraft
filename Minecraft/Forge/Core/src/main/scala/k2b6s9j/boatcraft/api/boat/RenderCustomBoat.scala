@@ -5,7 +5,6 @@ import net.minecraftforge.client.IItemRenderer.ItemRenderType
 import net.minecraft.util.ResourceLocation
 import net.minecraft.entity.Entity
 import net.minecraft.tileentity.TileEntity
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher
 import net.minecraftforge.client.IItemRenderer
 import net.minecraft.client.renderer.entity.RenderBoat
 import k2b6s9j.boatcraft.api.Registry

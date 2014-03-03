@@ -2,14 +2,11 @@ package k2b6s9j.boatcraft.core
 
 import java.util.EnumMap
 
-import org.apache.logging.log4j.Logger
-
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.SidedProxy
 import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
-import cpw.mods.fml.common.network.FMLEmbeddedChannel
 import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
@@ -19,7 +16,8 @@ import k2b6s9j.boatcraft.core.materials.Empty
 import k2b6s9j.boatcraft.core.packets.ChannelHandler
 import k2b6s9j.boatcraft.core.utilities.Recipes
 import net.minecraft.item.Item
-import net.minecraftforge.common.config.Configuration
+import java.util.logging.Logger
+import net.minecraftforge.common.Configuration
 
 /**
   * The main BoatCraft object.
