@@ -4,7 +4,7 @@ import java.util.ArrayList
 import scala.collection.JavaConversions._
 import k2b6s9j.boatcraft.core.BoatCraft
 import k2b6s9j.boatcraft.api.registry.MaterialRegistry
-import net.minecraft.item.ItemStack
+import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.item.crafting.{CraftingManager, IRecipe}
 import net.minecraft.nbt.NBTTagCompound
 import k2b6s9j.boatcraft.api.registry.ModifierRegistry
@@ -29,7 +29,7 @@ object Recipes
 		{
 			if (recipe.isInstanceOf[IRecipe]
 				&& (recipe.asInstanceOf[IRecipe].getRecipeOutput != null)
-				&& (recipe.asInstanceOf[IRecipe].getRecipeOutput.getItem equals Items.boat))
+				&& (recipe.asInstanceOf[IRecipe].getRecipeOutput.getItem equals Item.boat))
 			{
 				toRemove add recipe.asInstanceOf[IRecipe]
 				BoatCraft.log info "Removed vanilla Boat recipe: " + recipe
