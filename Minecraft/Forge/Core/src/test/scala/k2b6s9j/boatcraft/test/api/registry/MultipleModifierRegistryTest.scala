@@ -9,6 +9,7 @@ import k2b6s9j.boatcraft.test.api.traits.examples._
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import k2b6s9j.boatcraft.api.Registry
+import net.minecraft.block.Block
 
 @RunWith(classOf[JUnitRunner])
 class MultipleModifierRegistryTest extends FlatSpec with Matchers with BeforeAndAfter
@@ -32,7 +33,7 @@ class MultipleModifierRegistryTest extends FlatSpec with Matchers with BeforeAnd
 	
 	they should "be returned when searched by ItemStack." in
 	{
-		val stack = new ItemStack(net.minecraft.init.Blocks.bedrock)
+		val stack = new ItemStack(Block.bedrock)
 		stack.stackTagCompound = new NBTTagCompound
 		
 		stack.stackTagCompound setString ("modifier", ExampleModifier toString)

@@ -21,7 +21,7 @@ class BoatTest extends FlatSpec with Matchers with BeforeAndAfter {
 	var item: ItemCustomBoat = null
 
 	before {
-		item = new ItemCustomBoat
+		item = new ItemCustomBoat(333)
 		Registry register ExampleMaterial
 		Registry register ExampleModifier
 	}
@@ -39,7 +39,8 @@ class BoatTest extends FlatSpec with Matchers with BeforeAndAfter {
 				ExampleModifier.toString
 		}
 
-	it should "register all it's subitems" in
+	/*
+  it should "register all it's subitems" in
 		{
 			val list = new ArrayList[ItemStack]
 			item getSubItems (item, CreativeTabs.tabTransport, list)
@@ -56,6 +57,7 @@ class BoatTest extends FlatSpec with Matchers with BeforeAndAfter {
 			}
 		}*/
 		}
+	*/
 
 	//EntityCustomBoatTest
 

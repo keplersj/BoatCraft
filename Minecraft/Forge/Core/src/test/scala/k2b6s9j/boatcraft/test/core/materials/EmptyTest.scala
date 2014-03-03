@@ -7,7 +7,6 @@ import org.junit.runner.RunWith
 
 import k2b6s9j.boatcraft.api.traits.Modifier
 import k2b6s9j.boatcraft.core.materials.Empty
-import net.minecraft.init.Blocks
 
 @RunWith(classOf[JUnitRunner])
 class EmptyTest extends FlatSpec with Matchers with BeforeAndAfter
@@ -31,7 +30,7 @@ class EmptyTest extends FlatSpec with Matchers with BeforeAndAfter
 
 	it should "contain the Air block." in
 	{
-		modifier.getBlock shouldBe Blocks.air
+		modifier.getBlock shouldBe null
 	}
 
 	it should "be called \"Empty\"." in

@@ -6,6 +6,6 @@ import net.minecraft.block.Block
 object ExampleModifier2 extends Modifier {
 
   override def getName: String = "Test Modifier2"
-  override def getBlock: Block = net.minecraft.init.Blocks.air
+  override def getBlock: Block = null
 
 }

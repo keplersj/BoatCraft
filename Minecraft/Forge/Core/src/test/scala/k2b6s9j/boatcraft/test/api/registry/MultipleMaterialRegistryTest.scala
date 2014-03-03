@@ -5,7 +5,7 @@ import org.junit.runner.RunWith
 import org.scalatest._
 import org.scalatest.junit.JUnitRunner
 import k2b6s9j.boatcraft.test.api.traits.examples._
-import net.minecraft.item.ItemStack
+import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.nbt.NBTTagCompound
 import java.util
 import k2b6s9j.boatcraft.api.Registry
@@ -32,7 +32,7 @@ class MultipleMaterialRegistryTest extends FlatSpec with Matchers with BeforeAnd
 
 	they should "be returned when searched by ItemStack." in
 	{
-		val stack = new ItemStack(net.minecraft.init.Items.chainmail_helmet)
+		val stack = new ItemStack(Item.helmetChain)
 		stack.stackTagCompound = new NBTTagCompound
 
 		stack.stackTagCompound setString ("material", ExampleMaterial toString)

@@ -4,12 +4,12 @@ import org.junit.runner.RunWith
 import org.scalatest._
 import org.scalatest.junit.JUnitRunner
 import k2b6s9j.boatcraft.test.api.traits.examples._
-import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import scala.collection.JavaConversions._
 import k2b6s9j.boatcraft.core.materials.Empty
 import k2b6s9j.boatcraft.api.Registry
+import net.minecraft.block.Block
 
 @RunWith(classOf[JUnitRunner])
 class SingleModifierRegistryTest extends FlatSpec with Matchers with BeforeAndAfter
@@ -31,7 +31,7 @@ class SingleModifierRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 
 	it should "be returned when searched by ItemStack." in
 	{
-		val stack = new ItemStack(Blocks.bedrock)
+		val stack = new ItemStack(Block.bedrock)
 		stack.stackTagCompound = new NBTTagCompound
 		stack.stackTagCompound setString ("modifier", ExampleModifier toString)
 		Registry getModifier stack shouldBe ExampleModifier
@@ -39,7 +39,7 @@ class SingleModifierRegistryTest extends FlatSpec with Matchers with BeforeAndAf
 
 	it should "fallback to an Empty modifier if no modifier is defined." in
 	{
-		val stack = new ItemStack(Blocks.bedrock)
+		val stack = new ItemStack(Block.bedrock)
 		Registry getModifier stack shouldBe Empty
 	}
 
