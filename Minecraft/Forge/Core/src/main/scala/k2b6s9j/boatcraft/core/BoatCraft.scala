@@ -43,7 +43,7 @@ object BoatCraft
 	/**
 	  * Variable referencing the Side being run on, and the channels associated with it.
 	  */
-	var channels: EnumMap[Side, FMLEmbeddedChannel] = null
+	//var channels: EnumMap[Side, FMLEmbeddedChannel] = null
 	
 	/**
 	  *  Variable referencing the Logger provided by Forge Mod Loader.
@@ -54,6 +54,11 @@ object BoatCraft
 	  * Variable referencing the Boat Item.
 	  */
 	var itemBoat: ItemCustomBoat = null
+
+  /**
+   * The Item ID for the Boat Item
+   */
+  var itemBoatID: Int = 25500
 	
 	/**
 	  * Method used by Forge Mod Loader in the Pre-Initialization phase.
@@ -64,21 +69,23 @@ object BoatCraft
 	def preInit(event: FMLPreInitializationEvent)
 	{
 		log = event getModLog
+
+    readConfig
 		
 		config = new Configuration(event getSuggestedConfigurationFile)
 		
-		channels = NetworkRegistry.INSTANCE newChannel ("boatcraft", ChannelHandler);
+		//channels = NetworkRegistry.instance() newChannel ("boatcraft", ChannelHandler)
 		
 		printModInfo
 		
 		//All Boat Materials should be at least rideable
 		Registry register Empty
 		
-		itemBoat = new ItemCustomBoat
+		itemBoat = new ItemCustomBoat(itemBoatID)
 		
 		GameRegistry registerItem (itemBoat, "customBoat")
 		
-		log info (Item.itemRegistry getNameForObject itemBoat)
+		//log info (Item.itemRegistry getNameForObject itemBoat)
 	}
 
 	/**
@@ -105,5 +112,14 @@ object BoatCraft
 		log info "Copyright Kepler Sticka-Jones 2013-2014"
 		log info "http://k2b6s9j.com/projects/minecraft/BoatCraft"
 	}
+
+  private def readConfig
+  {
+    itemBoatID = config get ("Core.IDs", "itemBoatID", 25500,
+      "The Item ID used for all Boats created by BoatCraft:Core.") getInt 25500
+
+    if (BoatCraft.config hasChanged)
+      BoatCraft.config save
+  }
 }
 
