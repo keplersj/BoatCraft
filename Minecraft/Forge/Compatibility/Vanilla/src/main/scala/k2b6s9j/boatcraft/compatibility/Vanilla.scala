@@ -2,12 +2,10 @@ package k2b6s9j.boatcraft.compatibility
 
 import java.util.ArrayList
 import scala.collection.JavaConversions.{ asScalaBuffer, mapAsScalaMap }
-import org.apache.logging.log4j.Logger
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.event.{ FMLPostInitializationEvent, FMLPreInitializationEvent }
 import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.registry.GameRegistry
-import k2b6s9j.boatcraft.api.registry.{ MaterialRegistry, ModifierRegistry }
 import k2b6s9j.boatcraft.compatibility.vanilla.VanillaGuiHandler
 import k2b6s9j.boatcraft.compatibility.vanilla.materials.crystal.{ Diamond, Emerald, Obsidian }
 import k2b6s9j.boatcraft.compatibility.vanilla.materials.metal.{ Gold, Iron }
@@ -15,12 +13,12 @@ import k2b6s9j.boatcraft.compatibility.vanilla.materials.wood._
 import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.{ Chest, Furnace, Workbench }
 import k2b6s9j.boatcraft.core.BoatCraft
 import k2b6s9j.boatcraft.core.utilities.Recipes
-import net.minecraft.init.Items
-import net.minecraft.item.ItemStack
+import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.item.crafting.{ CraftingManager, IRecipe }
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.oredict.ShapedOreRecipe
 import k2b6s9j.boatcraft.api.Registry
+import java.util.logging.Logger
 
 //TODO: Fill Documentation
 /**
@@ -63,7 +61,7 @@ object Vanilla
 
 		replaceBoatRecipe
 
-		NetworkRegistry.INSTANCE registerGuiHandler (this, VanillaGuiHandler)
+		NetworkRegistry.instance() registerGuiHandler (this, VanillaGuiHandler)
 	}
 
 	//TODO: Fill Documentation
@@ -117,8 +115,6 @@ object Vanilla
 			Registry register Spruce
 			Registry register Birch
 			Registry register Jungle
-			Registry register Acacia
-			Registry register DarkOak
 		}
 		else
 		{
@@ -167,7 +163,7 @@ object Vanilla
 	  */
 	private def replaceBoatRecipe
 	{
-		Recipes removeRecipe new ItemStack(Items.boat)
+		Recipes removeRecipe new ItemStack(Item.boat)
 
 		var stack = new ItemStack(BoatCraft.itemBoat)
 
@@ -175,7 +171,7 @@ object Vanilla
 		stack.stackTagCompound setString ("material", "oak")
 		stack.stackTagCompound setString ("modifier", "empty")
 
-		GameRegistry addShapelessRecipe (stack, Items.boat)
+		GameRegistry addShapelessRecipe (stack, Item.boat)
 	}
 
 	//TODO: Fill Documentation

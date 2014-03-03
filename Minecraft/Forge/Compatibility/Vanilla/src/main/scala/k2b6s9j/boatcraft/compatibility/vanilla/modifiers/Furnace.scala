@@ -5,7 +5,6 @@ import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
 import k2b6s9j.boatcraft.api.traits.Modifier
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Blocks
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.FurnaceRecipes
@@ -15,12 +14,12 @@ import net.minecraft.tileentity.TileEntityFurnace
 
 object Furnace extends Modifier
 {
-	override def getBlock = Blocks.furnace
+	override def getBlock = Block.furnaceIdle
 	override def getMeta = 3
 	
 	override def getName = "Furnace"
 	
-	override def getContent = new ItemStack(Blocks.furnace)
+	override def getContent = new ItemStack(Block.furnaceIdle)
 	
 	override def hasInventory = true
 	override def getInventory(boat: EntityBoatContainer): IInventory =

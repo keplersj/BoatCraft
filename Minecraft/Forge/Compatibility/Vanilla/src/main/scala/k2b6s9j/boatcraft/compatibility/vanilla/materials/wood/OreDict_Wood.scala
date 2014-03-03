@@ -2,9 +2,8 @@ package k2b6s9j.boatcraft.compatibility.vanilla.materials.wood
 
 import k2b6s9j.boatcraft.api.traits.Material
 import net.minecraft.util.ResourceLocation
-import net.minecraft.item.ItemStack
-import net.minecraft.init.Blocks
-import net.minecraft.init.Items
+import net.minecraft.item.{Item, ItemStack}
+import net.minecraft.block.Block
 
 //TODO: Fill Documentation
 /**
@@ -17,6 +16,6 @@ object OreDict_Wood extends Material
 	
 	override def getName = "Wood"
 	
-	override def getItem = new ItemStack(Blocks.planks)
-	override def getStick = new ItemStack(Items.stick)
+	override def getItem = new ItemStack(Block.planks)
+	override def getStick = new ItemStack(Item.stick)
 }

@@ -2,9 +2,8 @@ package k2b6s9j.boatcraft.compatibility.vanilla.materials.wood
 
 import k2b6s9j.boatcraft.api.traits.Material
 import net.minecraft.util.ResourceLocation
-import net.minecraft.item.ItemStack
-import net.minecraft.init.Items
-import net.minecraft.init.Blocks
+import net.minecraft.item.{Item, ItemStack}
+import net.minecraft.block.Block
 
 //TODO: Fill Documentation
 /**
@@ -33,12 +32,12 @@ object Jungle extends Material
    *
    * @return the ItemStack representing the Material
    */
-  override def getItem = new ItemStack(Blocks.planks, 1,  3)
+  override def getItem = new ItemStack(Block.planks, 1,  3)
 
   //TODO: Fill Documentation
   /**
    *
    * @return the secondary drop of the boat
    */
-  override def getStick = new ItemStack(Items.stick)
+  override def getStick = new ItemStack(Item.stick)
 }

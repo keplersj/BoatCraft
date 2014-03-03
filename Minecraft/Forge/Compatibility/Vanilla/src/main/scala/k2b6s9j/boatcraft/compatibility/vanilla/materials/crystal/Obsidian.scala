@@ -1,9 +1,9 @@
 package k2b6s9j.boatcraft.compatibility.vanilla.materials.crystal
 
 import k2b6s9j.boatcraft.api.traits.Material
-import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
+import net.minecraft.block.Block
 
 //TODO: Fill Documentation
 /**
@@ -32,7 +32,7 @@ object Obsidian extends Material
    *
    * @return the ItemStack representing the Material
    */
-	override def getItem = new ItemStack(Blocks.obsidian)
+	override def getItem = new ItemStack(Block.obsidian)
 
   //TODO: Fill Documentation
   /**

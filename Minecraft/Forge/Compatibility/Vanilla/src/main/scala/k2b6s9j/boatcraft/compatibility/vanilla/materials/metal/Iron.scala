@@ -1,9 +1,8 @@
 package k2b6s9j.boatcraft.compatibility.vanilla.materials.metal
 
 import k2b6s9j.boatcraft.api.traits.Material
-import net.minecraft.item.ItemStack
+import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.util.ResourceLocation
-import net.minecraft.init.Items
 import net.minecraftforge.oredict.OreDictionary
 
 //TODO: Fill Documentation
@@ -33,7 +32,7 @@ object Iron extends Material
    *
    * @return the ItemStack representing the Material
    */
-	override def getItem = new ItemStack(Items.iron_ingot)
+	override def getItem = new ItemStack(Item.ingotIron)
 
   //TODO: Fill Documentation
   /**

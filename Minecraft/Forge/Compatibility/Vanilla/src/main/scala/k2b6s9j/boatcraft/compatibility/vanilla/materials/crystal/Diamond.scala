@@ -2,9 +2,8 @@ package k2b6s9j.boatcraft.compatibility.vanilla.materials.crystal
 
 import k2b6s9j.boatcraft.api.traits.Material
 import net.minecraftforge.oredict.OreDictionary
-import net.minecraft.item.ItemStack
+import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.util.ResourceLocation
-import net.minecraft.init.Items
 
 //TODO: Fill Documentation
 /**
@@ -33,7 +32,7 @@ object Diamond extends Material
    *
    * @return the ItemStack representing the Material
    */
-  override def getItem = new ItemStack(Items.diamond)
+  override def getItem = new ItemStack(Item.diamond)
 
   //TODO: Fill Documentation
   /**

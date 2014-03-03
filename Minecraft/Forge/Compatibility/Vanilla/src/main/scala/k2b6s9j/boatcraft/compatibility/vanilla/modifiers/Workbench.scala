@@ -3,7 +3,6 @@ package k2b6s9j.boatcraft.compatibility.vanilla.modifiers
 import k2b6s9j.boatcraft.api.traits.Modifier
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.inventory.ContainerWorkbench
 import net.minecraft.entity.player.InventoryPlayer
@@ -24,7 +23,7 @@ object Workbench extends Modifier
    *
    * @return block used for rendering
    */
-  override def getBlock: Block = Blocks.crafting_table
+  override def getBlock: Block = Block.workbench
 
   //TODO: Fill Documentation
   /**
@@ -45,7 +44,7 @@ object Workbench extends Modifier
    *
    * @return the ItemStack used when crafting
    */
-  override def getContent: ItemStack = new ItemStack(Blocks.crafting_table)
+  override def getContent: ItemStack = new ItemStack(Block.workbench)
 
   //TODO: Fill Documentation
   /**

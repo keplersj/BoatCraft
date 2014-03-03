@@ -6,7 +6,6 @@ import k2b6s9j.boatcraft.api.traits.Modifier
 import k2b6s9j.boatcraft.core.utilities.NBTHelper
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Blocks
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -23,7 +22,7 @@ object Chest extends Modifier
    *
    * @return block used for rendering
    */
-  override def getBlock: Block = Blocks.chest
+  override def getBlock: Block = Block.chest
 
   //TODO: Fill Documentation
   /**
@@ -53,7 +52,7 @@ object Chest extends Modifier
    *
    * @return the ItemStack used when crafting
    */
-  override def getContent = new ItemStack(Blocks.chest)
+  override def getContent = new ItemStack(Block.chest)
 
   //TODO: Fill Documentation
   /**
