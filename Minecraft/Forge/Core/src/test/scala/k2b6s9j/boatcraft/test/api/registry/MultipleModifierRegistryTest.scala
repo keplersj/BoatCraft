@@ -5,7 +5,6 @@ import scala.collection.JavaConversions._
 import org.junit.runner.RunWith
 import org.scalatest._
 import org.scalatest.junit.JUnitRunner
-import k2b6s9j.boatcraft.api.registry.ModifierRegistry
 import k2b6s9j.boatcraft.test.api.traits.examples._
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound

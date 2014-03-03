@@ -3,7 +3,6 @@ package k2b6s9j.boatcraft.test.api.registry
 import org.junit.runner.RunWith
 import org.scalatest._
 import org.scalatest.junit.JUnitRunner
-import k2b6s9j.boatcraft.api.registry.ModifierRegistry
 import k2b6s9j.boatcraft.test.api.traits.examples._
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack

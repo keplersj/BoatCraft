@@ -3,12 +3,11 @@ package k2b6s9j.boatcraft.core.utilities
 import java.util.ArrayList
 import scala.collection.JavaConversions._
 import k2b6s9j.boatcraft.core.BoatCraft
-import k2b6s9j.boatcraft.api.registry.MaterialRegistry
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.item.crafting.{CraftingManager, IRecipe}
 import net.minecraft.nbt.NBTTagCompound
-import k2b6s9j.boatcraft.api.registry.ModifierRegistry
 import cpw.mods.fml.common.registry.GameRegistry
+import k2b6s9j.boatcraft.api.Registry
 
 /**
  * Contains miscellaneous methods used throughout the mod related to crafting.
@@ -46,10 +45,10 @@ object Recipes
 	{
 		var stack = new ItemStack(BoatCraft.itemBoat)
 		stack.stackTagCompound = new NBTTagCompound
-		for ((nameMat, material) <- MaterialRegistry.materials)
+		for ((nameMat, material) <- Registry.materials)
 		{
 			stack.stackTagCompound.setString("material", nameMat)
-			for ((nameMod, modifier) <- ModifierRegistry.modifiers)
+			for ((nameMod, modifier) <- Registry.modifiers)
 			{
 				stack.stackTagCompound.setString("modifier", nameMod)
 				if (modifier.getContent != null)
