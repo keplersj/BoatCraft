@@ -18,6 +18,7 @@ import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.util.Vec3
 import net.minecraft.world.World
+import net.minecraft.block.Block
 
 /**
   * The Item Class used for all items that can be deployed like a Boat.
@@ -31,13 +32,7 @@ class ItemCustomBoat(id: Int) extends ItemBoat(id)
 	  */
 	hasSubtypes = true;
 
-	//TODO: Fill Documentation
-	/**
-	  *
-	  * @param item
-	  * @param tab
-	  * @param list
-	  */
+  /*
 	@SideOnly(Side.CLIENT)
 	override def getSubItems(item: Item, tab: CreativeTabs, list: List[_])
 	{
@@ -53,6 +48,7 @@ class ItemCustomBoat(id: Int) extends ItemBoat(id)
 			}
 		}
 	}
+	*/
 
 	/**
 	  * Gives ItemStacks their unlocalized name.
@@ -107,7 +103,7 @@ class ItemCustomBoat(id: Int) extends ItemBoat(id)
 										f6.toDouble * d3,
 										f8.toDouble * d3)
 		val movingobjectposition: MovingObjectPosition =
-			world rayTraceBlocks (vec3, vec31, true)
+			world rayTraceBlocks_do_do (vec3, vec31, true, true)
 		if (movingobjectposition == null)
 			stack
 		else
@@ -143,7 +139,7 @@ class ItemCustomBoat(id: Int) extends ItemBoat(id)
 					var j = movingobjectposition.blockY
 					var k = movingobjectposition.blockZ
 					
-					if (world.getBlock(i, j, k) == Blocks.snow_layer)
+					if (world.getBlockId(i, j, k) == Block.snow.blockID)
 						j = j - 1
 					
 					var boat: EntityCustomBoat = null
