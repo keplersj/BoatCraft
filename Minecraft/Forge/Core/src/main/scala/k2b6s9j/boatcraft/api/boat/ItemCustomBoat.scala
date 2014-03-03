@@ -134,14 +134,14 @@ class ItemCustomBoat(id: Int) extends ItemBoat(id)
 				stack
 			else
 			{
-				if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+				if (movingobjectposition.typeOfHit == EnumMovingObjectType.TILE) {
 					i = movingobjectposition.blockX
 					var j = movingobjectposition.blockY
 					var k = movingobjectposition.blockZ
-					
+
 					if (world.getBlockId(i, j, k) == Block.snow.blockID)
 						j = j - 1
-					
+
 					var boat: EntityCustomBoat = null
 					val material = Registry getMaterial stack
 					val modifier = Registry getModifier stack

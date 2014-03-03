@@ -50,7 +50,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		getModifier update this
 	}
 	
-	override def func_145778_a(item: Item, count: Int, f: Float): EntityItem =
+	/*
+  override def func_145778_a(item: Item, count: Int, f: Float): EntityItem =
 	{
 		var stack: ItemStack = new ItemStack(item, count)
 
@@ -74,6 +75,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		if (stack != null) entityDropItem(stack, f)
 		else null
 	}
+	*/
 	
 	override def interactFirst(player: EntityPlayer) =
 	{

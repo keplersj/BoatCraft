@@ -34,24 +34,18 @@ class EntityBoatContainer(world: World, x: Double, y: Double, z: Double)
 	override def setInventorySlotContents(slot: Int, stack: ItemStack) =
 		getInventory setInventorySlotContents (slot, stack)
 
-	override def getInventoryName =
-		getInventory getInventoryName
-
-	override def hasCustomInventoryName =
-		getInventory hasCustomInventoryName
+	override def getInvName =
+		getInventory getInvName
 
 	override def getInventoryStackLimit =
 		getInventory getInventoryStackLimit
 	
-	override def markDirty =
-		getInventory markDirty
-	
 	override def isUseableByPlayer(player: EntityPlayer) =
 		getDistanceSqToEntity(player) <= 64
 	
-	override def openInventory = getInventory.openInventory
+	override def openChest = getInventory.openChest
 	
-	override def closeInventory = getInventory.closeInventory
+	override def closeChest = getInventory.closeChest
 	
 	override def isItemValidForSlot(slot: Int, stack: ItemStack) =
 		getInventory.isItemValidForSlot(slot, stack)
@@ -104,4 +98,7 @@ class EntityBoatContainer(world: World, x: Double, y: Double, z: Double)
 		inventory
 	}
 
+  override def onInventoryChanged(): Unit = getInventory.onInventoryChanged()
+
+  override def isInvNameLocalized: Boolean = getInventory.isInvNameLocalized
 }
