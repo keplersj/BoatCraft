@@ -4,9 +4,8 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{ BeforeAndAfter, Matchers, FlatSpec }
 import k2b6s9j.boatcraft.api.traits.Modifier
-import net.minecraft.init.Blocks
-import net.minecraft.item.ItemStack
 import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.Furnace
+import net.minecraft.block.Block
 
 @RunWith(classOf[JUnitRunner])
 class FurnaceTest extends FlatSpec with Matchers with BeforeAndAfter
@@ -30,7 +29,7 @@ class FurnaceTest extends FlatSpec with Matchers with BeforeAndAfter
 
 	it should "contain the Furnace block." in
   {
-		modifier.getBlock shouldBe Blocks.furnace
+		modifier.getBlock shouldBe Block.furnaceIdle
   }
 
 	it should "be called \"Furnace\"." in

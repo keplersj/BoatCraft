@@ -4,9 +4,8 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest._
 import k2b6s9j.boatcraft.api.traits.Modifier
-import net.minecraft.init.Blocks
-import net.minecraft.item.ItemStack
 import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.Workbench
+import net.minecraft.block.Block
 
 @RunWith(classOf[JUnitRunner])
 class WorkbenchTest extends FlatSpec with Matchers with BeforeAndAfter
@@ -30,7 +29,7 @@ class WorkbenchTest extends FlatSpec with Matchers with BeforeAndAfter
 
 	it should "contain the Workbench block." in
 	{
-		modifier.getBlock shouldBe Blocks.crafting_table
+		modifier.getBlock shouldBe Block.workbench
 	}
 
 	it should "be called \"Workbench\"." in 

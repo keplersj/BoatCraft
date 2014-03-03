@@ -4,9 +4,8 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{ BeforeAndAfter, Matchers, FlatSpec }
 import k2b6s9j.boatcraft.api.traits.Modifier
-import net.minecraft.init.Blocks
-import net.minecraft.item.ItemStack
 import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.Chest
+import net.minecraft.block.Block
 
 @RunWith(classOf[JUnitRunner])
 class ChestTest extends FlatSpec with Matchers with BeforeAndAfter
@@ -30,7 +29,7 @@ class ChestTest extends FlatSpec with Matchers with BeforeAndAfter
 	
 	it should "contain the Chest block." in
 	{
-		modifier.getBlock shouldBe Blocks.chest
+		modifier.getBlock shouldBe Block.chest
 	}
 	
 	it should "be called \"Chest\"." in
