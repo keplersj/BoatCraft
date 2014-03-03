@@ -47,7 +47,7 @@ object Proxy
 			BoatCraft.log info "Registering Renderes"
 			RenderingRegistry registerEntityRenderingHandler(classOf[EntityCustomBoat],
 					new RenderCustomBoat)
-			MinecraftForgeClient registerItemRenderer(BoatCraft.itemBoat, new RenderCustomBoat)
+			MinecraftForgeClient registerItemRenderer(BoatCraft.itemBoatID, new RenderCustomBoat)
 			RenderingRegistry registerEntityRenderingHandler(classOf[EntityBoatContainer],
 					new RenderCustomBoat)
 		}
