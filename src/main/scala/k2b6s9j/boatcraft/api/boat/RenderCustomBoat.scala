@@ -47,7 +47,8 @@ class RenderCustomBoat
 		val block = boat.getModifier getBlock
 		val meta = boat.getModifier getMeta
 
-		if (block.getRenderType != -1) {
+		if (block.getRenderType != -1)
+		{
 			GL11 glPushMatrix
 
 			bindTexture(TextureMap.locationBlocksTexture)
@@ -61,16 +62,15 @@ class RenderCustomBoat
 
 			field_147909_c renderBlockAsItem (block, meta, f5)
 
-			GL11 glPopMatrix ()
-			GL11 glPopMatrix ()
+			GL11 glPopMatrix()
+			GL11 glPopMatrix()
 			GL11 glColor4f (1.0F, 1.0F, 1.0F, 1.0F)
 		}
-		else if (boat.isInstanceOf[EntityBoatContainer]
-			&& boat.asInstanceOf[EntityBoatContainer].getInventory.isInstanceOf[TileEntity]
+		else if (boat.getInventory.isInstanceOf[TileEntity]
 			&& (TileEntityRendererDispatcher.instance hasSpecialRenderer
-				boat.asInstanceOf[EntityBoatContainer].getInventory.asInstanceOf[TileEntity]))
+				boat.getInventory.asInstanceOf[TileEntity]))
 		{
-			GL11 glPushMatrix ()
+			GL11 glPushMatrix()
 			GL11 glScalef (f4, f4, f4)
 
 			val f5 = boat getBrightness f1
@@ -79,7 +79,7 @@ class RenderCustomBoat
 			GL11 glPushMatrix
 
 			TileEntityRendererDispatcher.instance renderTileEntityAt (
-				boat.asInstanceOf[EntityBoatContainer].getInventory.asInstanceOf[TileEntity],
+				boat.getInventory.asInstanceOf[TileEntity],
 				0, 0, 0, f5)
 
 			GL11 glPopMatrix()

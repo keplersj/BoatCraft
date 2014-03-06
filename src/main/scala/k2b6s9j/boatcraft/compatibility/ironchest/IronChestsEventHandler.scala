@@ -2,9 +2,8 @@ package k2b6s9j.boatcraft.compatibility.ironchest
 
 import cpw.mods.fml.common.ObfuscationReflectionHelper
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
-import cpw.mods.ironchest.IronChestType
-import cpw.mods.ironchest.ItemChestChanger
-import k2b6s9j.boatcraft.api.boat.EntityBoatContainer
+import cpw.mods.ironchest.{IronChestType, ItemChestChanger}
+import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntityChest
 import net.minecraftforge.event.entity.player.EntityInteractEvent
@@ -14,9 +13,9 @@ object IronChestsEventHandler
 	@SubscribeEvent
 	def interact(e: EntityInteractEvent)
 	{
-		if (!e.target.isInstanceOf[EntityBoatContainer]) return
+		if (!e.target.isInstanceOf[EntityCustomBoat]) return
 		
-		var boat = e.target.asInstanceOf[EntityBoatContainer]
+		var boat = e.target.asInstanceOf[EntityCustomBoat]
 		val stack = e.entityPlayer.getCurrentEquippedItem
 		
 		if (stack != null && stack.getItem.isInstanceOf[ItemChestChanger])
@@ -38,8 +37,7 @@ object IronChestsEventHandler
 				
 				for (i <- 0 until newTE.getSizeInventory)
 				{
-					boat.asInstanceOf[EntityBoatContainer] setInventorySlotContents(
-							i, newTE getStackInSlot i)
+					boat setInventorySlotContents(i, newTE getStackInSlot i)
 				}
 			}
 		}

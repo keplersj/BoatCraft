@@ -73,13 +73,13 @@ object Workbench extends Modifier
 			x: Int, y: Int, z: Int)
 		extends ContainerWorkbench(inventoryPlayer, world, x, y, z)
 	{
-    //TODO: Fill Documentation
-    /**
-     *
-     * @param player
-     * @return
-     */
-    override def canInteractWith(player: EntityPlayer) = true
+	//TODO: Fill Documentation
+	/**
+	 *
+	 * @param player
+	 * @return
+	 */
+	override def canInteractWith(player: EntityPlayer) = true
 	}
 
   //TODO: Fill Documentation
@@ -95,19 +95,19 @@ object Workbench extends Modifier
 			x: Int, y: Int, z: Int)
 		extends GuiCrafting(inventoryPlayer, world, x, y, z)
 	{
-    //TODO: Fill Documentation
-    /**
-     *
-     */
-    inventorySlots = new Container(inventoryPlayer, world, x, y, z)
+	//TODO: Fill Documentation
+	/**
+	 *
+	 */
+	inventorySlots = new Container(inventoryPlayer, world, x, y, z)
 
-    //TODO: Fill Documentation
-    /**
-     *
-     * @param arg1
-     * @param arg2
-     */
-    override protected def drawGuiContainerForegroundLayer(arg1: Int, arg2: Int)
+	//TODO: Fill Documentation
+	/**
+	 *
+	 * @param arg1
+	 * @param arg2
+	 */
+	override protected def drawGuiContainerForegroundLayer(arg1: Int, arg2: Int)
 		{
 			fontRendererObj.drawString(I18n.format("boatcraft.container.crafting", Array()), 28, 6, 4210752)
 			fontRendererObj.drawString(I18n.format("container.inventory", Array()), 8, ySize - 96 + 2, 4210752)

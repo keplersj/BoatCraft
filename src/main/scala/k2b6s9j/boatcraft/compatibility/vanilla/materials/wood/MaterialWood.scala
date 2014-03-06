@@ -1,15 +1,11 @@
-package k2b6s9j.boatcraft.compatibility.vanilla.materials.metal
+package k2b6s9j.boatcraft.compatibility.vanilla.materials.wood
 
 import k2b6s9j.boatcraft.api.traits.Material
-import net.minecraft.init.Items
+import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 
-//TODO: Fill Documentation
-/**
-  *
-  */
-object Gold extends Material
+class MaterialWood(meta: Int, name: String) extends Material
 {
 	//TODO: Fill Documentation
 	/**
@@ -18,29 +14,27 @@ object Gold extends Material
 	  */
 	override def getTexture =
 		new ResourceLocation("boatcraft",
-			"textures/entity/boat/vanilla/metal/gold.png")
+			"textures/entity/boat/vanilla/wood/" +
+			name.toLowerCase.replace(' ', '_') + ".png")
 
 	//TODO: Fill Documentation
 	/**
 	  *
 	  * @return name of the Material
 	  */
-	override def getName = "Gold"
+	override def getName = name
 
 	//TODO: Fill Documentation
 	/**
 	  *
 	  * @return the ItemStack representing the Material
 	  */
-	override def getItem = new ItemStack(Items.gold_ingot)
+	override def getItem = new ItemStack(Blocks.planks, 1, meta)
 
 	//TODO: Fill Documentation
 	/**
 	  *
 	  * @return the secondary drop of the boat
 	  */
-	override def getStick = new ItemStack(Items.gold_nugget, 4)
-
-	//TODO Balance
-	override def getHardness = 1.5
+	override def getStick = new ItemStack(Items.stick)
 }

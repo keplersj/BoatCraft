@@ -5,7 +5,7 @@ import java.util.{ HashMap, List, Map }
 import scala.collection.JavaConversions.asScalaBuffer
 
 import k2b6s9j.boatcraft.api.traits.Modifier
-import k2b6s9j.boatcraft.core.materials.Empty
+import k2b6s9j.boatcraft.core.modifiers.Empty
 import net.minecraft.item.ItemStack
 import k2b6s9j.boatcraft.api.Registry
 

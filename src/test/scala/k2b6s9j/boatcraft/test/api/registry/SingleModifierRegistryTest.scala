@@ -9,7 +9,7 @@ import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import scala.collection.JavaConversions._
-import k2b6s9j.boatcraft.core.materials.Empty
+import k2b6s9j.boatcraft.core.modifiers.Empty
 import k2b6s9j.boatcraft.api.Registry
 
 @RunWith(classOf[JUnitRunner])

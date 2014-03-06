@@ -18,9 +18,9 @@ object ChannelHandler extends FMLIndexedMessageToMessageCodec[IPacket]
    * @param data
    */
   override def encodeInto(ctx: ChannelHandlerContext, packet: IPacket, data: ByteBuf)
-    {
-        packet writeBytes data
-    }
+	{
+		packet writeBytes data
+	}
 
   //TODO: Fill Documentation
   /**
@@ -29,8 +29,8 @@ object ChannelHandler extends FMLIndexedMessageToMessageCodec[IPacket]
    * @param data
    * @param packet
    */
-    override def decodeInto(ctx: ChannelHandlerContext, data: ByteBuf, packet: IPacket)
-    {
-        packet readBytes data
-    }
+	override def decodeInto(ctx: ChannelHandlerContext, data: ByteBuf, packet: IPacket)
+	{
+		packet readBytes data
+	}
 }

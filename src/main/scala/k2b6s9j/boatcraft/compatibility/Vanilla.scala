@@ -1,26 +1,28 @@
 package k2b6s9j.boatcraft.compatibility
 
 import java.util.ArrayList
-import scala.collection.JavaConversions.{ asScalaBuffer, mapAsScalaMap }
+
+import scala.collection.JavaConversions.{asScalaBuffer, mapAsScalaMap}
+
 import org.apache.logging.log4j.Logger
+
 import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.event.{ FMLPostInitializationEvent, FMLPreInitializationEvent }
+import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLPreInitializationEvent}
 import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.registry.GameRegistry
-import k2b6s9j.boatcraft.api.registry.{ MaterialRegistry, ModifierRegistry }
+import k2b6s9j.boatcraft.api.Registry
 import k2b6s9j.boatcraft.compatibility.vanilla.VanillaGuiHandler
-import k2b6s9j.boatcraft.compatibility.vanilla.materials.crystal.{ Diamond, Emerald, Obsidian }
-import k2b6s9j.boatcraft.compatibility.vanilla.materials.metal.{ Gold, Iron }
-import k2b6s9j.boatcraft.compatibility.vanilla.materials.wood._
-import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.{ Chest, Furnace, Workbench }
+import k2b6s9j.boatcraft.compatibility.vanilla.materials.crystal.{Diamond, Emerald, Obsidian}
+import k2b6s9j.boatcraft.compatibility.vanilla.materials.metal.{Gold, Iron}
+import k2b6s9j.boatcraft.compatibility.vanilla.materials.wood.{Acacia, Birch, DarkOak, Jungle, Oak, OreDict_Wood, Spruce}
+import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.{Chest, Furnace, Workbench}
 import k2b6s9j.boatcraft.core.BoatCraft
 import k2b6s9j.boatcraft.core.utilities.Recipes
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.{ CraftingManager, IRecipe }
+import net.minecraft.item.crafting.{CraftingManager, IRecipe}
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.oredict.ShapedOreRecipe
-import k2b6s9j.boatcraft.api.Registry
 
 //TODO: Fill Documentation
 /**

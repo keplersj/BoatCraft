@@ -1,16 +1,13 @@
 package k2b6s9j.boatcraft.compatibility.vanilla.modifiers
 
-import k2b6s9j.boatcraft.api.boat.EntityBoatContainer
 import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
 import k2b6s9j.boatcraft.api.traits.Modifier
-import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.FurnaceRecipes
-import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.nbt.NBTTagList
+import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import net.minecraft.tileentity.TileEntityFurnace
 
 object Furnace extends Modifier
@@ -22,8 +19,7 @@ object Furnace extends Modifier
 	
 	override def getContent = new ItemStack(Blocks.furnace)
 	
-	override def hasInventory = true
-	override def getInventory(boat: EntityBoatContainer): IInventory =
+	override def getInventory(boat: EntityCustomBoat): IInventory =
 		new Furnace.Inventory(boat)
 
   //TODO: Fill Documentation
@@ -33,7 +29,7 @@ object Furnace extends Modifier
    * @param boat the Boat being interacted with
    */
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
-		player func_146101_a(boat.asInstanceOf[EntityBoatContainer]
+		player func_146101_a(boat.asInstanceOf[EntityCustomBoat]
 							.getInventory.asInstanceOf[Furnace.Inventory])
 
   //TODO: Fill Documentation
@@ -42,7 +38,7 @@ object Furnace extends Modifier
    * @param boat the boat being updated
    */
 	override def update(boat: EntityCustomBoat) =
-		(boat.asInstanceOf[EntityBoatContainer].getInventory.asInstanceOf[Furnace.Inventory]
+		(boat.asInstanceOf[EntityCustomBoat].getInventory.asInstanceOf[Furnace.Inventory]
 			updateEntity)
 
   //TODO: Fill Documentation
@@ -53,32 +49,32 @@ object Furnace extends Modifier
    */
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 	{
-		var inventory = boat.asInstanceOf[EntityBoatContainer]
+		var inventory = boat.asInstanceOf[EntityCustomBoat]
 						.getInventory.asInstanceOf[Furnace.Inventory]
 		
-        val nbttaglist = tag getTagList("Items", 10)
+		val nbttaglist = tag getTagList("Items", 10)
 
-        for (i <- 0 until nbttaglist.tagCount)
-        {
-            val _tag = nbttaglist getCompoundTagAt i
-            val b0 = _tag getByte "Slot"
+		for (i <- 0 until nbttaglist.tagCount)
+		{
+			val _tag = nbttaglist getCompoundTagAt i
+			val b0 = _tag getByte "Slot"
 
-            if (b0 >= 0 && b0 < inventory.getSizeInventory)
-            {
-                inventory setInventorySlotContents(b0,
-                		ItemStack loadItemStackFromNBT _tag)
-            }
-        }
+			if (b0 >= 0 && b0 < inventory.getSizeInventory)
+			{
+				inventory setInventorySlotContents(b0,
+						ItemStack loadItemStackFromNBT _tag)
+			}
+		}
 		
-        inventory.furnaceBurnTime = tag.getShort("BurnTime");
-        inventory.furnaceCookTime = tag.getShort("CookTime");
-        inventory.currentItemBurnTime = TileEntityFurnace getItemBurnTime
-        		(inventory getStackInSlot 1)
-        
-        if (tag hasKey("CustomName", 8))
-        {
-            //inventory.field_145958_o = p_145839_1_.getString("CustomName");
-        }
+		inventory.furnaceBurnTime = tag.getShort("BurnTime");
+		inventory.furnaceCookTime = tag.getShort("CookTime");
+		inventory.currentItemBurnTime = TileEntityFurnace getItemBurnTime
+				(inventory getStackInSlot 1)
+		
+		if (tag hasKey("CustomName", 8))
+		{
+			//inventory.field_145958_o = p_145839_1_.getString("CustomName");
+		}
 	}
 
   //TODO: Fill Documentation
@@ -89,7 +85,7 @@ object Furnace extends Modifier
    */
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 	{
-		var inventory = boat.asInstanceOf[EntityBoatContainer]
+		var inventory = boat.asInstanceOf[EntityCustomBoat]
 						.getInventory.asInstanceOf[Furnace.Inventory]
 		
 		tag setShort("BurnTime", inventory.furnaceBurnTime toShort)
@@ -120,35 +116,35 @@ object Furnace extends Modifier
    *
    * @param boat
    */
-	private class Inventory(boat: EntityBoatContainer) extends TileEntityFurnace
+	private class Inventory(boat: EntityCustomBoat) extends TileEntityFurnace
 	{
-    //TODO: Fill Documentation
-    /**
-     *
-     */
-    worldObj = boat.worldObj
+	//TODO: Fill Documentation
+	/**
+	 *
+	 */
+	worldObj = boat.worldObj
 
-    //TODO: Fill Documentation
-    /**
-     *
-     * @return
-     */
-    override def getInventoryName: String = "Furnace Boat"
+	//TODO: Fill Documentation
+	/**
+	 *
+	 * @return
+	 */
+	override def getInventoryName: String = "Furnace Boat"
 
-    //TODO: Fill Documentation
-    /**
-     *
-     * @param player
-     * @return
-     */
-    override def isUseableByPlayer(player: EntityPlayer): Boolean =
+	//TODO: Fill Documentation
+	/**
+	 *
+	 * @param player
+	 * @return
+	 */
+	override def isUseableByPlayer(player: EntityPlayer): Boolean =
 			(player getDistanceSqToEntity boat) <= 64
 
-    //TODO: Fill Documentation
-    /**
-     *
-     */
-    override def updateEntity
+	//TODO: Fill Documentation
+	/**
+	 *
+	 */
+	override def updateEntity
 		{
 			var flag = furnaceBurnTime > 0
 
@@ -192,12 +188,12 @@ object Furnace extends Modifier
 			}
 		}
 
-    //TODO: Fill Documentation
-    /**
-     *
-     * @return
-     */
-    private def canSmelt: Boolean =
+	//TODO: Fill Documentation
+	/**
+	 *
+	 * @return
+	 */
+	private def canSmelt: Boolean =
 		{
 			if (getStackInSlot(0) == null)
 				false
@@ -222,7 +218,7 @@ object Furnace extends Modifier
 	}
 	
 	private[vanilla] class Container(inventoryPlayer: InventoryPlayer,
-			boat: EntityBoatContainer)
+			boat: EntityCustomBoat)
 		extends ContainerFurnace(inventoryPlayer, null)
 	{
 		inventorySlots.clear
@@ -240,7 +236,7 @@ object Furnace extends Modifier
 	}
 	
 	private[vanilla] class Gui(inventoryPlayer: InventoryPlayer,
-			boat: EntityBoatContainer) extends GuiFurnace(inventoryPlayer, null)
+			boat: EntityCustomBoat) extends GuiFurnace(inventoryPlayer, null)
 	{
 		protected override def drawGuiContainerForegroundLayer(arg1: Int, arg2: Int)
 		{

@@ -7,7 +7,7 @@ import k2b6s9j.boatcraft.api.traits.{Material, Modifier}
 import k2b6s9j.boatcraft.core.BoatCraft
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
-import k2b6s9j.boatcraft.core.materials.Empty
+import k2b6s9j.boatcraft.core.modifiers.Empty
 
 /** Contains the methods needed to register Materials and Modifiers with BoatCraft:Core. */
 object Registry
@@ -60,12 +60,12 @@ object Registry
    */
   def find(name: String) = name match
   {
-    case x if materials.containsKey(name) =>
-      (materials get name).asInstanceOf[Material]
-    case x if modifiers.containsKey(name) =>
-      (modifiers get name).asInstanceOf[Modifier]
-    case _ =>
-      System.err println "Could not find: " + name
+	case x if materials.containsKey(name) =>
+	  (materials get name).asInstanceOf[Material]
+	case x if modifiers.containsKey(name) =>
+	  (modifiers get name).asInstanceOf[Modifier]
+	case _ =>
+	  System.err println "Could not find: " + name
   }
 
 	/**

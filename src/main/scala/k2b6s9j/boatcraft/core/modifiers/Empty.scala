@@ -1,9 +1,8 @@
-package k2b6s9j.boatcraft.core.materials
+package k2b6s9j.boatcraft.core.modifiers
 
 import k2b6s9j.boatcraft.api.traits.Modifier
 import net.minecraft.item.ItemStack
 import net.minecraft.init.Blocks
-import net.minecraft.block.Block
 
 object Empty extends Modifier
 {

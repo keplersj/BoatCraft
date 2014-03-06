@@ -6,7 +6,7 @@ import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 
 import k2b6s9j.boatcraft.api.traits.Modifier
-import k2b6s9j.boatcraft.core.materials.Empty
+import k2b6s9j.boatcraft.core.modifiers.Empty
 import net.minecraft.init.Blocks
 
 @RunWith(classOf[JUnitRunner])

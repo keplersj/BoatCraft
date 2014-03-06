@@ -1,10 +1,7 @@
 package k2b6s9j.boatcraft.compatibility.ironchest.modifiers
 
-import cpw.mods.ironchest.IronChest
-import cpw.mods.ironchest.IronChestType
-import cpw.mods.ironchest.ItemChestChanger
-import cpw.mods.ironchest.TileEntityIronChest
-import k2b6s9j.boatcraft.api.boat.EntityBoatContainer
+import cpw.mods.fml.common.Mod
+import cpw.mods.ironchest.{IronChest, IronChestType, ItemChestChanger, TileEntityIronChest}
 import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
 import k2b6s9j.boatcraft.api.traits.Modifier
 import k2b6s9j.boatcraft.compatibility.IronChests
@@ -24,8 +21,7 @@ abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 	
 	override def getName = chestType friendlyName
 	
-	override def hasInventory = true
-	override def getInventory(boat: EntityBoatContainer): IInventory =
+	override def getInventory(boat: EntityCustomBoat): IInventory =
 		new GenericIronChest.Inventory(boat, chestType)
 	
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
@@ -44,7 +40,7 @@ abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 			
 			if (changer.getType canUpgrade chestType)
 			{
-				val newTE = (boat.asInstanceOf[EntityBoatContainer] getInventory)
+				val newTE = (boat.asInstanceOf[EntityCustomBoat] getInventory)
 							.asInstanceOf[GenericIronChest.Inventory] applyUpgradeItem changer
 				
 				boat.setModifier((IronChestType.values()(changer getTargetChestOrdinal chestType.ordinal))
@@ -52,7 +48,7 @@ abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 				
 				for (i <- 0 until newTE.getSizeInventory)
 				{
-					boat.asInstanceOf[EntityBoatContainer] setInventorySlotContents(
+					boat.asInstanceOf[EntityCustomBoat] setInventorySlotContents(
 							i, newTE getStackInSlot i)
 				}
 			}
@@ -64,7 +60,7 @@ abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 
 object GenericIronChest
 {
-	private[ironchest] class Inventory(boat: EntityBoatContainer, t: IronChestType)
+	private[ironchest] class Inventory(boat: EntityCustomBoat, t: IronChestType)
 		extends TileEntityIronChest(t)
 	{
 		worldObj = boat.worldObj

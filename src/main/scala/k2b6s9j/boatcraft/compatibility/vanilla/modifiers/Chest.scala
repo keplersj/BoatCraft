@@ -1,6 +1,5 @@
 package k2b6s9j.boatcraft.compatibility.vanilla.modifiers
 
-import k2b6s9j.boatcraft.api.boat.EntityBoatContainer
 import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
 import k2b6s9j.boatcraft.api.traits.Modifier
 import k2b6s9j.boatcraft.core.utilities.NBTHelper
@@ -28,17 +27,10 @@ object Chest extends Modifier
   //TODO: Fill Documentation
   /**
    *
-   * @return boolean representing if a boat has an inventory
-   */
-	override def hasInventory = true
-
-  //TODO: Fill Documentation
-  /**
-   *
    * @param boat the boat container object
    * @return the inventory associated with the boat container
    */
-  override def getInventory(boat: EntityBoatContainer): IInventory =
+  override def getInventory(boat: EntityCustomBoat): IInventory =
 		new Chest.Inventory(boat)
 
   //TODO: Fill Documentation
@@ -88,48 +80,48 @@ object Chest extends Modifier
    *
    * @param boat
    */
-  private class Inventory(boat: EntityBoatContainer) extends TileEntityChest
+  private class Inventory(boat: EntityCustomBoat) extends TileEntityChest
 	{
-    //TODO: Fill Documentation
-    /**
-     *
-     */
-    worldObj = boat.worldObj
+	//TODO: Fill Documentation
+	/**
+	 *
+	 */
+	worldObj = boat.worldObj
 
-    //TODO: Fill Documentation
-    /**
-     *
-     * @return
-     */
-    override def getInventoryName = "Chest Boat"
+	//TODO: Fill Documentation
+	/**
+	 *
+	 * @return
+	 */
+	override def getInventoryName = "Chest Boat"
 
-    //TODO: Fill Documentation
-    /**
-     *
-     * @return
-     */
-    override def hasCustomInventoryName = false
+	//TODO: Fill Documentation
+	/**
+	 *
+	 * @return
+	 */
+	override def hasCustomInventoryName = false
 
-    //TODO: Fill Documentation
-    /**
-     *
-     * @param player
-     * @return
-     */
+	//TODO: Fill Documentation
+	/**
+	 *
+	 * @param player
+	 * @return
+	 */
 		override def isUseableByPlayer(player: EntityPlayer) =
 			(player getDistanceSqToEntity boat) <= 64
 		
 		//TODO make it render it on the boat
-    //TODO: Fill Documentation
-    /**
-     *
-     */
-    override def openInventory {}
+	//TODO: Fill Documentation
+	/**
+	 *
+	 */
+	override def openInventory {}
 
-    //TODO: Fill Documentation
-    /**
-     *
-     */
-    override def closeInventory {}
+	//TODO: Fill Documentation
+	/**
+	 *
+	 */
+	override def closeInventory {}
 	}
 }

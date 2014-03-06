@@ -135,8 +135,7 @@ class ItemCustomBoat extends ItemBoat
 				}
 			}
 
-			if (flag)
-				stack
+			if (flag) return stack
 			else
 			{
 				if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
@@ -151,9 +150,7 @@ class ItemCustomBoat extends ItemBoat
 					val material = Registry getMaterial stack
 					val modifier = Registry getModifier stack
 
-					if (modifier hasInventory)
-						boat = new EntityBoatContainer(world, i + 0.5, j + 1.0, k + 0.5)
-					else boat = EntityCustomBoat(world, i + 0.5, j + 1.0, k + 0.5)
+					boat = EntityCustomBoat(world, i + 0.5, j + 1.0, k + 0.5)
 					boat setMaterial (material toString)
 
 					boat setModifier (modifier toString)
