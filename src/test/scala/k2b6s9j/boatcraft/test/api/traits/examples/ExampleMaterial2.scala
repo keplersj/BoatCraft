@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack
 
 object ExampleMaterial2 extends Material {
 
-  override def getName: String = "Test2"
+  override def getName: String = "Test Material 2"
   override def getItem: ItemStack = new ItemStack(net.minecraft.init.Items.chainmail_boots)
 
 }

@@ -32,9 +32,10 @@ class BoatTest extends FlatSpec with Matchers with BeforeAndAfter
 	{
 		val stack = new ItemStack(item)
 		stack.stackTagCompound = new NBTTagCompound
-		stack.stackTagCompound setString ("material", "test")
-		stack.stackTagCompound setString ("modifier", "test")
-		item getUnlocalizedName stack shouldBe "boat.test.test"
+		stack.stackTagCompound setString ("material", ExampleMaterial toString)
+		stack.stackTagCompound setString ("modifier", ExampleModifier toString)
+		item getUnlocalizedName stack shouldBe
+		        "boat." + ExampleMaterial.toString + '.' + ExampleModifier.toString
 	}
 	
 	it should "register all it's subitems" in
