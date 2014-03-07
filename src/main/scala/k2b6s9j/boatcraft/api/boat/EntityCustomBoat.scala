@@ -60,28 +60,37 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		
 		ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this,
 			getMaterial.getSpeedMultiplier * ObfuscationReflectionHelper.getPrivateValue(
-				classOf[EntityBoat], this, "speedMultiplier").asInstanceOf[Double],
-				"speedMultiplier")
+				classOf[EntityBoat], this,
+				"speedMultiplier", "field_70276_b").asInstanceOf[Double],
+				"speedMultiplier", "field_70276_b")
 	}
 
 	private def doUpdate
 	{
 		val isBoatEmpty: Boolean = ObfuscationReflectionHelper getPrivateValue(
-				classOf[EntityBoat], this, "isBoatEmpty")
+				classOf[EntityBoat], this,
+				"isBoatEmpty", "field_70279_a")
 		val boatPosRotationIncrements: Int = ObfuscationReflectionHelper getPrivateValue(
-				classOf[EntityBoat], this, "boatPosRotationIncrements")
+				classOf[EntityBoat], this,
+				"boatPosRotationIncrements", "field_70277_c")
 		val boatX: Double = ObfuscationReflectionHelper getPrivateValue(
-				classOf[EntityBoat], this, "boatX")
+				classOf[EntityBoat], this,
+				"boatX", "field_70274_d")
 		val boatY: Double = ObfuscationReflectionHelper getPrivateValue(
-				classOf[EntityBoat], this, "boatY")
+				classOf[EntityBoat], this,
+				"boatY", "field_70275_e")
 		val boatZ: Double = ObfuscationReflectionHelper getPrivateValue(
-				classOf[EntityBoat], this, "boatZ")
+				classOf[EntityBoat], this,
+				"boatZ", "field_70272_f")
 		val boatYaw: Double = ObfuscationReflectionHelper getPrivateValue(
-				classOf[EntityBoat], this, "boatYaw")
+				classOf[EntityBoat], this,
+				"boatYaw", "field_70273_g")
 		val boatPitch: Double = ObfuscationReflectionHelper getPrivateValue(
-				classOf[EntityBoat], this, "boatPitch")
+				classOf[EntityBoat], this,
+				"boatPitch", "field_70281_h")
 		val speedMultiplier: Double = ObfuscationReflectionHelper getPrivateValue(
-				classOf[EntityBoat], this, "speedMultiplier")
+				classOf[EntityBoat], this,
+				"speedMultiplier", "field_70276_b")
 		
 		if (getTimeSinceHit > 0)
 			setTimeSinceHit(getTimeSinceHit - 1)
