@@ -32,15 +32,26 @@ abstract class Material
 	  * The secondary drop when the boat crashes
 	  * For Wood-based boats, this is the associated wood's sticks.
 	  * For Metallic boats, this is the nugget form of the metal.
-	  * For other Material types is either null or the small tier of the base material (ie: stone rods, diamond nuggets, flint, etc)
+	  * For other Material types is either null or the small tier of the base material
+	  * (ie: stone rods, diamond nuggets, flint, etc)
 	  *
 	  * @return the secondary drop of the boat
 	  */
 	def getStick: ItemStack = null
 	
+	/**
+	 * This function allows a material to be faster or slower than normal
+	 * 
+	 * @return the multiplier to appy to the speed of the boat
+	 */
 	def getSpeedMultiplier = 1.0
 	
-	def getHardness = 1.0
+	/**
+	 * This function allows a material to act more resistant or more fragile
+	 * 
+	 * @return the multiplier to apply to the boat's default crash resistance
+	 */ 
+	def getCrashResistance = 1.0
 
 	/**
 	  * Method is overridden to return the Material's actual name.

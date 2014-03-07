@@ -1,15 +1,16 @@
 package k2b6s9j.boatcraft.test.api.registry
 
+import scala.collection.JavaConversions._
+
 import org.junit.runner.RunWith
 import org.scalatest._
 import org.scalatest.junit.JUnitRunner
-import k2b6s9j.boatcraft.api.registry.MaterialRegistry
+
+import k2b6s9j.boatcraft.api.Registry
 import k2b6s9j.boatcraft.test.api.traits.examples._
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import scala.collection.JavaConversions._
 import net.minecraft.util.ResourceLocation
-import k2b6s9j.boatcraft.api.Registry
 
 @RunWith(classOf[JUnitRunner])
 class SingleMaterialRegistryTest extends FlatSpec with Matchers with BeforeAndAfter

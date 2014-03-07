@@ -6,18 +6,8 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
 import net.minecraftforge.common.util.Constants
 
-//TODO: Fill Documentation
-/**
-  *
-  */
 object NBTHelper
 {
-	//TODO: Fill Documentation
-	/**
-	  *
-	  * @param inv
-	  * @param tag
-	  */
 	def writeChestToNBT(inv: IInventory, tag: NBTTagCompound)
 	{
 		var list = new NBTTagList
@@ -31,13 +21,7 @@ object NBTHelper
 		}
 		tag.setTag("Items", list)
 	}
-
-	//TODO: Fill Documentation
-	/**
-	  *
-	  * @param inv
-	  * @param tag
-	  */
+	
 	def readChestFromNBT(inv: IInventory, tag: NBTTagCompound)
 	{
 		var list = tag getTagList ("Items", Constants.NBT.TAG_COMPOUND)

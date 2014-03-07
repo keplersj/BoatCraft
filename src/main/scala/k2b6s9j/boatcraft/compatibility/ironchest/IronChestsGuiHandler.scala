@@ -8,23 +8,8 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.world.World
 
-//TODO: Fill Documentation
-/**
-  *
-  */
 object IronChestsGuiHandler extends IGuiHandler
 {
-	//TODO: Fill Documentation
-	/**
-	  *
-	  * @param ID
-	  * @param player
-	  * @param world
-	  * @param x
-	  * @param y
-	  * @param z
-	  * @return
-	  */
 	override def getClientGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): AnyRef =
 		try
 	    {
@@ -35,18 +20,7 @@ object IronChestsGuiHandler extends IGuiHandler
 		{
 			case _: IndexOutOfBoundsException => return null
 		}
-
-	//TODO: Fill Documentation
-	/**
-	  *
-	  * @param ID
-	  * @param player
-	  * @param world
-	  * @param x
-	  * @param y
-	  * @param z
-	  * @return
-	  */
+	
 	override def getServerGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): AnyRef =
 		try
 	    {
@@ -56,16 +30,7 @@ object IronChestsGuiHandler extends IGuiHandler
         {
             case _: IndexOutOfBoundsException => return null
         }
-
-	//TODO: Fill Documentation
-	/**
-	  *
-	  * @param world
-	  * @param x
-	  * @param y
-	  * @param z
-	  * @return
-	  */
+	
 	@throws(classOf[IndexOutOfBoundsException])
 	private def getBoat(world: World, x: Int, y: Int, z: Int) =
 		world.getEntitiesWithinAABB(classOf[EntityCustomBoat],

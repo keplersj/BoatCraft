@@ -9,6 +9,11 @@ import net.minecraft.item.Item
   */
 package object api
 {
+	/**
+	 * The function used to retrieve the custom boat item
+	 * 
+	 * @return the custom boat item
+	 */
 	def getItemCustomBoat =
 		Item.itemRegistry.getObject("boatcraft:customBoat").asInstanceOf[ItemCustomBoat]
 }

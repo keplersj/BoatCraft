@@ -26,19 +26,8 @@ import net.minecraft.world.World
   */
 class ItemCustomBoat extends ItemBoat
 {
-	/**
-	  * Boolean defining whether or not the Item has subtypes.
-	  * Such as Material and Modifier.
-	  */
 	hasSubtypes = true;
 
-	//TODO: Fill Documentation
-	/**
-	  *
-	  * @param item
-	  * @param tab
-	  * @param list
-	  */
 	@SideOnly(Side.CLIENT)
 	override def getSubItems(item: Item, tab: CreativeTabs, list: List[_])
 	{
@@ -54,39 +43,18 @@ class ItemCustomBoat extends ItemBoat
 			}
 		}
 	}
-
-	/**
-	  * Gives ItemStacks their unlocalized name.
-	  *
-	  * @param stack The ItemStack being named.
-	  * @return The unlocalized name of the ItemStack.
-	  */
+	
 	override def getUnlocalizedName(stack: ItemStack) =
 		"boat." +
 		Registry.getMaterial(stack) +
 		"." +
 		Registry.getModifier(stack)
-
-	/**
-	  * Gives ItemStacks their display name.
-	  * This is used when the user hovers over the item.
-	  * Also by mods like WAILA.
-	  *
-	  * @param stack The ItemStack being named
-	  * @return The name of the ItemStack.
-	  */
+	
 	override def getItemStackDisplayName(stack: ItemStack) =
 		Registry.getMaterial(stack).getName + " " +
 		Registry.getModifier(stack).getName +
 		" Dinghy"
-
-	/**
-	  * Called when the player right clicks while holding the item.
-	  *
-	  * @param stack The ItemStack being right clicked.
-	  * @param world The World the ItemStack is being right clicked in.
-	  * @param player The Player that is right clicking the ItemStack.
-	  */
+	
 	override def onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack =
 	{
 		val f: Float = 1.0F

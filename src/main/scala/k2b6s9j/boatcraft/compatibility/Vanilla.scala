@@ -34,23 +34,10 @@ import net.minecraftforge.oredict.ShapedOreRecipe
 	version = "2.0")
 object Vanilla
 {
-	//TODO: Fill Documentation
-	/**
-	  *
-	  */
 	private[boatcraft] var log: Logger = null
-
-	//TODO: Fill Documentation
-	/**
-	  *
-	  */
+	
 	private var useOreDictWood = false
-
-	//TODO: Fill Documentation
-	/**
-	  *
-	  * @param event
-	  */
+	
 	@Mod.EventHandler
 	def preInit(event: FMLPreInitializationEvent)
 	{
@@ -67,12 +54,7 @@ object Vanilla
 
 		NetworkRegistry.INSTANCE registerGuiHandler (this, VanillaGuiHandler)
 	}
-
-	//TODO: Fill Documentation
-	/**
-	  *
-	  * @param event
-	  */
+	
 	@Mod.EventHandler
 	def postInit(event: FMLPostInitializationEvent)
 	{
@@ -95,22 +77,14 @@ object Vanilla
 
 		CraftingManager.getInstance.getRecipeList removeAll toRemove
 	}
-
-	//TODO: Fill Documentation
-	/**
-	  *
-	  */
+	
 	private def printModInfo
 	{
 		log info "BoatCraft Vanilla Compatibility"
 		log info "Adds Vanilla Woods to the BoatCraft Material Matrix"
 		log info "Copyright Kepler Sticka-Jones 2014"
 	}
-
-	//TODO: Fill Documentation
-	/**
-	  *
-	  */
+	
 	private def registerMaterials
 	{
 		if (!useOreDictWood)
@@ -151,22 +125,14 @@ object Vanilla
 		Registry register Diamond
 		Registry register Emerald
 	}
-
-	//TODO: Fill Documentation
-	/**
-	  *
-	  */
+	
 	private def registerModifiers
 	{
 		Registry register Chest
 		Registry register Furnace
 		Registry register Workbench
 	}
-
-	//TODO: Fill Documentation
-	/**
-	  *
-	  */
+	
 	private def replaceBoatRecipe
 	{
 		Recipes removeRecipe new ItemStack(Items.boat)
@@ -179,11 +145,7 @@ object Vanilla
 
 		GameRegistry addShapelessRecipe (stack, Items.boat)
 	}
-
-	//TODO: Fill Documentation
-	/**
-	  *
-	  */
+	
 	private def readConfig
 	{
 		useOreDictWood = BoatCraft.config get ("Vanilla.General", "useOreDictWoods", false,

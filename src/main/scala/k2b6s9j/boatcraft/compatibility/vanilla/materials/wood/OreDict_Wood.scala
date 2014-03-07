@@ -6,10 +6,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 
-//TODO: Fill Documentation
-/**
- *
- */
 object OreDict_Wood extends Material
 {
 	override def getTexture =

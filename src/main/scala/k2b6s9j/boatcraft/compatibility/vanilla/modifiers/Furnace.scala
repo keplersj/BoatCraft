@@ -21,32 +21,15 @@ object Furnace extends Modifier
 	
 	override def getInventory(boat: EntityCustomBoat): IInventory =
 		new Furnace.Inventory(boat)
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @param player the player interacting with the Boat
-   * @param boat the Boat being interacted with
-   */
+	
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
 		player func_146101_a(boat.asInstanceOf[EntityCustomBoat]
 							.getInventory.asInstanceOf[Furnace.Inventory])
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @param boat the boat being updated
-   */
+	
 	override def update(boat: EntityCustomBoat) =
 		(boat.asInstanceOf[EntityCustomBoat].getInventory.asInstanceOf[Furnace.Inventory]
 			updateEntity)
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @param boat the boat entity NBT data is being read from
-   * @param tag the NBT data tag being read
-   */
+	
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 	{
 		var inventory = boat.asInstanceOf[EntityCustomBoat]
@@ -76,13 +59,7 @@ object Furnace extends Modifier
 			//inventory.field_145958_o = p_145839_1_.getString("CustomName");
 		}
 	}
-
-  //TODO: Fill Documentation
-  /**
-   *
-   * @param boat the boat entity NBT data is being written to
-   * @param tag the NBT data tag being written
-   */
+	
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 	{
 		var inventory = boat.asInstanceOf[EntityCustomBoat]
@@ -111,40 +88,16 @@ object Furnace extends Modifier
 		}
 	}
 
-  //TODO: Fill Documentation
-  /**
-   *
-   * @param boat
-   */
 	private class Inventory(boat: EntityCustomBoat) extends TileEntityFurnace
 	{
-	//TODO: Fill Documentation
-	/**
-	 *
-	 */
-	worldObj = boat.worldObj
-
-	//TODO: Fill Documentation
-	/**
-	 *
-	 * @return
-	 */
-	override def getInventoryName: String = "Furnace Boat"
-
-	//TODO: Fill Documentation
-	/**
-	 *
-	 * @param player
-	 * @return
-	 */
-	override def isUseableByPlayer(player: EntityPlayer): Boolean =
-			(player getDistanceSqToEntity boat) <= 64
-
-	//TODO: Fill Documentation
-	/**
-	 *
-	 */
-	override def updateEntity
+    	worldObj = boat.worldObj
+    	
+    	override def getInventoryName: String = "Furnace Boat"
+    	
+    	override def isUseableByPlayer(player: EntityPlayer): Boolean =
+    			(player getDistanceSqToEntity boat) <= 64
+    	
+    	override def updateEntity
 		{
 			var flag = furnaceBurnTime > 0
 
@@ -183,20 +136,13 @@ object Furnace extends Modifier
 						smeltItem
 					}
 				}
-				else
-					furnaceCookTime = 0
+				else furnaceCookTime = 0
 			}
 		}
 
-	//TODO: Fill Documentation
-	/**
-	 *
-	 * @return
-	 */
-	private def canSmelt: Boolean =
+    	private def canSmelt: Boolean =
 		{
-			if (getStackInSlot(0) == null)
-				false
+			if (getStackInSlot(0) == null) false
 			else
 			{
 				val itemstack = FurnaceRecipes.smelting.getSmeltingResult(getStackInSlot(0))
@@ -204,67 +150,10 @@ object Furnace extends Modifier
 				if (getStackInSlot(2) == null) return true
 				if (!getStackInSlot(2).isItemEqual(itemstack)) return false
 				val result = getStackInSlot(2).stackSize + itemstack.stackSize
+				
 				result <= getInventoryStackLimit &&
 					result <= getStackInSlot(2).getMaxStackSize
 			}
 		}
 	}
-	/*
-	object Inventory
-	{
-		private final val slotsTop = Array(0)
-		private final val slotsBottom = Array(2, 1)
-		private final val slotsSides = Array(1)
-	}
-	
-	private[vanilla] class Container(inventoryPlayer: InventoryPlayer,
-			boat: EntityCustomBoat)
-		extends ContainerFurnace(inventoryPlayer, null)
-	{
-		inventorySlots.clear
-		
-		addSlotToContainer(new Slot(boat, 0, 56, 17))
-		addSlotToContainer(new Slot(boat, 1, 56, 53))
-		addSlotToContainer(new SlotFurnace(inventoryPlayer.player, boat, 2, 116, 35))
-		
-		for (i <- 0 until 3) for (j <- 0 until 9)
-			addSlotToContainer(new Slot(inventoryPlayer,
-				j + i * 9 + 9, 8 + j * 18, 84 + i * 18))
-		
-		for (i <- 0 until 9)
-			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142))
-	}
-	
-	private[vanilla] class Gui(inventoryPlayer: InventoryPlayer,
-			boat: EntityCustomBoat) extends GuiFurnace(inventoryPlayer, null)
-	{
-		protected override def drawGuiContainerForegroundLayer(arg1: Int, arg2: Int)
-		{
-			val s = /*boat.hasCustomInventoryName() ? boat.getInventoryName() : */
-				I18n format(boat getInventoryName, Array())
-			fontRendererObj drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752)
-			fontRendererObj drawString(I18n format("container.inventory", Array()), 8, ySize - 96 + 2, 4210752)
-		}
-		
-		protected override def drawGuiContainerBackgroundLayer(p_146976_1_ : Float, p_146976_2_ : Int, p_146976_3_ : Int)
-		{
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
-			mc getTextureManager() bindTexture furnaceGuiTextures
-			int k = (width - xSize) / 2
-			int l = (height - ySize) / 2
-			drawTexturedModalRect(k, l, 0, 0, xSize, ySize)
-			int i1
-			
-			if (boat.getInventory.asInstanceOf[Inventory].isBurning)
-			{
-				i1 = tileFurnace.getBurnTimeRemainingScaled(12)
-				drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 2)
-			}
-		
-			i1 = tileFurnace.getCookProgressScaled(24)
-			drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16)
-		}
-	}
-	
-	private final val furnaceGuiTextures = new ResourceLocation("textures/gui/container/furnace.png")*/
 }

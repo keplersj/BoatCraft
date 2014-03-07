@@ -261,7 +261,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 				motionZ *= 0.5D
 			}
 			moveEntity(motionX, motionY, motionZ)
-			if (isCollidedHorizontally && d10 > (getMaterial.getHardness * 0.2D))
+			if (isCollidedHorizontally && d10 > (getMaterial.getCrashResistance * 0.2D))
 			{
 				if (!worldObj.isRemote && !isDead)
 				{
