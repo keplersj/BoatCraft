@@ -226,19 +226,21 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 			{
 				ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this,
 						speedMultiplier + (0.35D - speedMultiplier) / 35.0D,
-						"speedMultiplier")
+						"speedMultiplier", "field_70276_b")
 				if (speedMultiplier > 0.35D)
 					ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this,
-						0.35D, "speedMultiplier")
+						0.35D,
+						"speedMultiplier", "field_70276_b")
 			}
 			else
 			{
 				ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this,
 						speedMultiplier - (speedMultiplier - 0.07D) / 35.0D,
-						"speedMultiplier")
+						"speedMultiplier", "field_70276_b")
 				if (speedMultiplier < 0.07D)
 					ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this,
-						0.07D, "speedMultiplier")
+						0.07D,
+						"speedMultiplier", "field_70276_b")
 			}
 			var l: Int = 0
 			l = 0
