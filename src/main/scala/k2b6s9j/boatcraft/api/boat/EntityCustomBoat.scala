@@ -167,7 +167,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 				ObfuscationReflectionHelper setPrivateValue(
 						classOf[EntityBoat], this,
 						boatPosRotationIncrements - 1,
-						"boatPosRotationIncrements")
+						"boatPosRotationIncrements", "field_70277_c")
 				setPosition(d2, d4, d11)
 				setRotation(rotationYaw, rotationPitch)
 			}
