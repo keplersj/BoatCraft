@@ -24,7 +24,7 @@ object Furnace extends Modifier
 	
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
 		player func_146101_a(boat.asInstanceOf[EntityCustomBoat]
-							.getInventory.asInstanceOf[Furnace.Inventory])
+							.getInventory.asInstanceOf[Inventory])
 	
 	override def update(boat: EntityCustomBoat) =
 		(boat.asInstanceOf[EntityCustomBoat].getInventory.asInstanceOf[Furnace.Inventory]

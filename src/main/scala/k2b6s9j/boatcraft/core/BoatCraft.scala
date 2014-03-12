@@ -35,8 +35,6 @@ object BoatCraft
 	
 	private[boatcraft] var log: Logger = null
 	
-	var itemBoat: ItemCustomBoat = null
-	
 	@EventHandler
 	def preInit(event: FMLPreInitializationEvent)
 	{
@@ -51,11 +49,7 @@ object BoatCraft
 		//All Boat Materials should be at least rideable
 		Registry register Empty
 		
-		itemBoat = new ItemCustomBoat
-		
-		GameRegistry registerItem (itemBoat, "customBoat")
-		
-		log info (Item.itemRegistry getNameForObject itemBoat)
+        GameRegistry registerItem (ItemCustomBoat, "customBoat")
 	}
 	
 	@EventHandler

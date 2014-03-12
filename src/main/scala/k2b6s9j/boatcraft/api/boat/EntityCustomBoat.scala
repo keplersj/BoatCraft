@@ -1,7 +1,7 @@
 package k2b6s9j.boatcraft.api.boat
 
 import cpw.mods.fml.common.ObfuscationReflectionHelper
-import k2b6s9j.boatcraft.api.{Registry, getItemCustomBoat, traits}
+import k2b6s9j.boatcraft.api.{Registry, getCustomBoat, traits}
 import net.minecraft.block.material.Material
 import net.minecraft.entity.{Entity, EntityLivingBase}
 import net.minecraft.entity.item.{EntityBoat, EntityItem}
@@ -10,10 +10,9 @@ import net.minecraft.init.{Blocks, Items}
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.{AxisAlignedBB, MathHelper}
+import net.minecraft.util.{AxisAlignedBB, MathHelper, MovingObjectPosition}
 import net.minecraft.world.World
-import net.minecraftforge.common.ForgeHooks
-import net.minecraft.util.MovingObjectPosition
+import net.minecraft.util.DamageSource
 
 //TODO: Fill Documentation
 /**
@@ -26,6 +25,8 @@ import net.minecraft.util.MovingObjectPosition
 case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	extends EntityBoat(world, x, y, z) with IInventory
 {
+	//TODO var linkedTo: EntityCustomBoat = null
+	
 	def this(world: World) = this(world, 0, 0, 0)
 	
 	override protected def entityInit
@@ -52,10 +53,53 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		getModifier readStateFromNBT(this, tag)
 	}
 	
+	override def attackEntityFrom(par1DamageSource: DamageSource, par2: Float): Boolean =
+    {
+        if (isEntityInvulnerable)
+            return false
+        else if (!worldObj.isRemote && !isDead)
+        {
+            setForwardDirection(-getForwardDirection)
+            setTimeSinceHit(10)
+            setDamageTaken(getDamageTaken + par2 * 10)
+            setBeenAttacked
+            val flag = par1DamageSource.getEntity.isInstanceOf[EntityPlayer] &&
+            (par1DamageSource.getEntity.asInstanceOf[EntityPlayer]).capabilities.isCreativeMode
+            
+            if (flag || getDamageTaken > 40)
+            {
+                if (riddenByEntity != null)
+                    riddenByEntity mountEntity this
+                
+                if (!flag)
+                    func_145778_a(Items.boat, 1, 0)
+                
+                setDead
+            }
+
+            return true
+        }
+        else
+            return true
+    }
+	
 	override def onUpdate
 	{
 //		super.onUpdate
 		doUpdate
+//TODO  
+//		val vX = posX - linkedTo.posX
+//		val vY = posY - linkedTo.posY
+//		val vZ = posZ - linkedTo.posZ
+//		val magV = Math sqrt (vX * vX + vY * vY + vZ * vZ)
+//		val aX = linkedTo.posX + vX / magV
+//		val aY = linkedTo.posY + vY / magV
+//		val aZ = linkedTo.posZ + vZ / magV
+//		var fix = 0
+//		if (vX < 0) fix = 180
+//		else if (vY < 0) fix = 360
+//		val jaw = Math.atan(vY / vX) + fix
+//		setPositionAndRotation2(aX, aY, aZ, jaw toFloat, rotationPitch, 3)
 		
 		getModifier update this
 		
@@ -330,12 +374,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		var stack: ItemStack = new ItemStack(item, count)
 
 		if (item == Items.boat)
-		{
-			stack = new ItemStack(getItemCustomBoat, count)
-			stack.stackTagCompound = new NBTTagCompound
-			stack.stackTagCompound setString ("material", getMaterialName)
-			stack.stackTagCompound setString ("modifier", getModifierName)
-		}
+			stack = getCustomBoat(getMaterialName, getModifierName)
 		else if (item == Item.getItemFromBlock(Blocks.planks))
 			stack = getMaterial getItem
 		else if (item == Items.stick)
@@ -357,22 +396,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		true
 	}
 	
-	override def setDead
-	{
-		if (!world.isRemote && getModifier.getContent != null)
-			entityDropItem(getModifier getContent, 0F)
-		super.setDead
-	}
-	
 	override def getPickedResult(target: MovingObjectPosition) =
-	{
-		var stack = new ItemStack(getItemCustomBoat)
-		stack.stackTagCompound = new NBTTagCompound
-		stack.stackTagCompound setString ("material", getMaterialName)
-		stack.stackTagCompound setString ("modifier", getModifierName)
-		
-		stack
-	}
+        getCustomBoat(getMaterialName, getModifierName)
 	
 	//TODO: Fill Documentation
 	/**

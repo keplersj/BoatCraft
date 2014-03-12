@@ -4,6 +4,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry
 import cpw.mods.fml.common.registry.EntityRegistry
 import k2b6s9j.boatcraft.api.boat.{EntityCustomBoat, RenderCustomBoat}
 import net.minecraftforge.client.MinecraftForgeClient
+import k2b6s9j.boatcraft.api.boat.ItemCustomBoat
 
 object Proxy
 {
@@ -27,7 +28,7 @@ object Proxy
 			RenderingRegistry registerEntityRenderingHandler (classOf[EntityCustomBoat],
 				new RenderCustomBoat)
 			
-			MinecraftForgeClient registerItemRenderer (BoatCraft.itemBoat, new RenderCustomBoat)
+			MinecraftForgeClient registerItemRenderer (ItemCustomBoat, new RenderCustomBoat)
 		}
 	}
 }

@@ -1,11 +1,8 @@
 package k2b6s9j.boatcraft.compatibility
 
 import java.util.ArrayList
-
 import scala.collection.JavaConversions.{asScalaBuffer, mapAsScalaMap}
-
 import org.apache.logging.log4j.Logger
-
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLPreInitializationEvent}
 import cpw.mods.fml.common.network.NetworkRegistry
@@ -23,6 +20,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{CraftingManager, IRecipe}
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.oredict.ShapedOreRecipe
+import k2b6s9j.boatcraft.api.boat.ItemCustomBoat
+import k2b6s9j.boatcraft.core.modifiers.Empty
 
 //TODO: Fill Documentation
 /**
@@ -100,7 +99,7 @@ object Vanilla
 		{
 			Registry register OreDict_Wood
 
-			var stack = new ItemStack(BoatCraft.itemBoat)
+			var stack = new ItemStack(ItemCustomBoat)
 			stack.stackTagCompound = new NBTTagCompound
 			stack.stackTagCompound setString ("material", OreDict_Wood toString)
 
@@ -136,13 +135,13 @@ object Vanilla
 	private def replaceBoatRecipe
 	{
 		Recipes removeRecipe new ItemStack(Items.boat)
-
-		var stack = new ItemStack(BoatCraft.itemBoat)
-
+		
+		var stack = new ItemStack(ItemCustomBoat)
+		
 		stack.stackTagCompound = new NBTTagCompound
-		stack.stackTagCompound setString ("material", "oak")
-		stack.stackTagCompound setString ("modifier", "empty")
-
+		stack.stackTagCompound setString ("material", Oak toString)
+		stack.stackTagCompound setString ("modifier", Empty toString)
+		
 		GameRegistry addShapelessRecipe (stack, Items.boat)
 	}
 	

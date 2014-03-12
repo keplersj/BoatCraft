@@ -128,10 +128,10 @@ class ItemCustomBoat extends ItemBoat
 					if (!world.getCollidingBoundingBoxes(boat,
 						boat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty)
 						return stack
-
+					
 					if (!world.isRemote)
 						world spawnEntityInWorld boat
-
+                    
 					if (!player.capabilities.isCreativeMode)
 						stack.stackSize = stack.stackSize - 1
 				}
@@ -140,3 +140,5 @@ class ItemCustomBoat extends ItemBoat
 		}
 	}
 }
+
+object ItemCustomBoat extends ItemCustomBoat {}
