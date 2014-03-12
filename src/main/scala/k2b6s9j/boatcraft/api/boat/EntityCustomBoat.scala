@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.{AxisAlignedBB, MathHelper}
 import net.minecraft.world.World
 import net.minecraftforge.common.ForgeHooks
+import net.minecraft.util.MovingObjectPosition
 
 //TODO: Fill Documentation
 /**
@@ -361,6 +362,16 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		if (!world.isRemote && getModifier.getContent != null)
 			entityDropItem(getModifier getContent, 0F)
 		super.setDead
+	}
+	
+	override def getPickedResult(target: MovingObjectPosition) =
+	{
+		var stack = new ItemStack(getItemCustomBoat)
+		stack.stackTagCompound = new NBTTagCompound
+		stack.stackTagCompound setString ("material", getMaterialName)
+		stack.stackTagCompound setString ("modifier", getModifierName)
+		
+		stack
 	}
 	
 	//TODO: Fill Documentation
