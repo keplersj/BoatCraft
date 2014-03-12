@@ -47,7 +47,7 @@ object Vanilla
 		printModInfo
 
 		registerMaterials
-		registerModifiers
+		//registerModifiers
 
 		replaceBoatRecipe
 
