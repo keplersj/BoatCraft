@@ -21,17 +21,15 @@ import scala.collection.JavaConversions._
   * A test class to test dynamic compilation API.
   *
   */
-class Thingy
+class Thingy(TEName: String)
 {
 	final var logger = Logger.getLogger(classOf[Thingy] getName)
 
 	/**Java source code to be compiled dynamically*/
-	val sourceCode = "package com.accordess.ca" +
-		"class DynamicCompilationHelloWorld{" +
-		"public static void main (String args[]){" +
-		"System.out.println (\"Hello, dynamic compilation world!\")" +
-		"}" +
-		"}"
+	val sourceCode =
+		"package k2b6s9j.boatcraft.core.modifiers.dynamic\n\n" +
+		"public static class " + TEName + "Boat extends " + TEName + "{\n" +
+		"public"
 
 	/**
 	  * Does the required object initialization and compilation.
@@ -93,9 +91,13 @@ class Thingy
   *
   */
 class DynamicJavaSourceCodeObject(var qualifiedName: String, var sourceCode: String)
-	extends SimpleJavaFileObject(URI.create("string:///" + qualifiedName.replaceAll("\\.", "/") + Kind.SOURCE.extension), Kind.SOURCE)
+	extends SimpleJavaFileObject(
+			URI.create(
+				"string:///"
+				+ qualifiedName.replaceAll("\\.", "/")
+				+ Kind.SOURCE.extension),
+			Kind.SOURCE)
 {
-
 	@throws(classOf[IOException])
 	override def getCharContent(ignoreEncodingErrors: Boolean) = sourceCode
 
