@@ -8,20 +8,22 @@ import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLPreInitializati
 import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.registry.GameRegistry
 import k2b6s9j.boatcraft.api.Registry
+import k2b6s9j.boatcraft.api.boat.ItemCustomBoat
 import k2b6s9j.boatcraft.compatibility.vanilla.VanillaGuiHandler
 import k2b6s9j.boatcraft.compatibility.vanilla.materials.crystal.{Diamond, Emerald, Obsidian}
 import k2b6s9j.boatcraft.compatibility.vanilla.materials.metal.{Gold, Iron}
 import k2b6s9j.boatcraft.compatibility.vanilla.materials.wood.{Acacia, Birch, DarkOak, Jungle, Oak, OreDict_Wood, Spruce}
-import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.{Chest, Furnace, Workbench}
+import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.{Furnace, Workbench}
 import k2b6s9j.boatcraft.core.BoatCraft
+import k2b6s9j.boatcraft.core.modifiers.{DynamicModifier, Empty}
 import k2b6s9j.boatcraft.core.utilities.Recipes
-import net.minecraft.init.Items
+import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{CraftingManager, IRecipe}
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.oredict.ShapedOreRecipe
-import k2b6s9j.boatcraft.api.boat.ItemCustomBoat
-import k2b6s9j.boatcraft.core.modifiers.Empty
+import net.minecraft.client.gui.inventory.GuiChest
+import net.minecraft.inventory.ContainerChest
 
 //TODO: Fill Documentation
 /**
@@ -47,7 +49,7 @@ object Vanilla
 		printModInfo
 
 		registerMaterials
-		//registerModifiers
+		/*// */registerModifiers
 
 		replaceBoatRecipe
 
@@ -127,9 +129,13 @@ object Vanilla
 	
 	private def registerModifiers
 	{
-		Registry register Chest
+		/*Registry register Chest
 		Registry register Furnace
-		Registry register Workbench
+		Registry register Workbench*/
+		Registry register new DynamicModifier(Blocks.chest, 0,
+			classOf[GuiChest].getName, classOf[ContainerChest].getName)
+        //Registry register new DynamicModifier(Blocks.furnace, 0)
+        //Registry register new DynamicModifier(Blocks.crafting_table, 0)
 	}
 	
 	private def replaceBoatRecipe
