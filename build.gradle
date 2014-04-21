@@ -52,6 +52,13 @@ dependencies {
                 classifier = 'deobf'
             }
         }
+        compile(group: 'codechicken', name: 'ForgeMultipart', version: '1.7.2-1.1.0.268') {
+            artifact {
+                name = 'ForgeMultipart'
+                type = 'jar'
+                classifier = 'dev'
+            }
+        }
 
         testCompile 'junit:junit:4.11'
         testCompile 'org.scalatest:scalatest_2.10:2.0'
@@ -105,7 +112,7 @@ uploadArchives {
             logger.info('Publishing to files server')
             
             mavenDeployer {
-                configuration = configurations.deployJars
+                //configuration = configurations.deployJars
 
                 repository(url: project.filesmaven.url) {
                     authentication(userName: project.filesmaven.username, privateKey: project.filesmaven.key)
