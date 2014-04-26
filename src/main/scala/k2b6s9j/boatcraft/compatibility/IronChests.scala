@@ -27,7 +27,7 @@ object IronChests
 
 		try
 		{
-			addModifiers
+			//addModifiers
 			NetworkRegistry.INSTANCE registerGuiHandler (this, IronChestsGuiHandler)
 			MinecraftForge.EVENT_BUS register IronChestsEventHandler
 		}
