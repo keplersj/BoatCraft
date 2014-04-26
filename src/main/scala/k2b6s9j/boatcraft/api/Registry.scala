@@ -29,6 +29,8 @@ object Registry
 			materials put (registrar.toString, registrar.asInstanceOf[Material])
 		case _: Modifier =>
 			modifiers put (registrar.toString, registrar.asInstanceOf[Modifier])
+    case x: Array[_] =>
+      x foreach (obj => register(obj))
 		case x: List[_] =>
 			x foreach (obj => register(obj))
 		case _ =>
