@@ -26,7 +26,7 @@ import net.minecraft.world.World
   */
 class ItemCustomBoat extends ItemBoat
 {
-	hasSubtypes = true;
+	hasSubtypes = true
 
 	@SideOnly(Side.CLIENT)
 	override def getSubItems(item: Item, tab: CreativeTabs, list: List[_])
