@@ -44,26 +44,24 @@ tasks.withType(ScalaCompile) {
     scalaCompileOptions.useAnt = false
 }
 
-dependencies {
-        compile(group: 'cpw.mods', name: 'ironchest', version: '1.7.2-6.0.4.713') {
-      	    artifact {
-                name = 'ironchest'
-                type = 'jar'
-                classifier = 'deobf'
-            }
-        }
-        compile(group: 'codechicken', name: 'ForgeMultipart', version: '1.7.2-1.1.0.268') {
-            artifact {
-                name = 'ForgeMultipart'
-                type = 'jar'
-                classifier = 'dev'
-            }
-        }
-
-        testCompile 'junit:junit:4.11'
-        testCompile 'org.scalatest:scalatest_2.10:2.0'
+repositories {
+    ivy {
+        name = 'ChickenBones'
+        artifactPattern 'http://www.chickenbones.craftsaddle.org/Files/New_Versions/1.7.2/[module]-[revision].[ext]'
+    }
 }
-    
+
+dependencies {
+    compile 'cpw.mods:ironchest:1.7.2-6.0.4.713:deobf'
+    compile 'codechicken:CodeChickenLib:1.7.2-1.1.0.73:dev'
+    compile 'codechicken:ForgeMultipart:1.7.2-1.1.0.268:dev'
+
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.scalatest:scalatest_2.10:2.0'
+
+    runtime 'codechicken:NotEnoughItems:1.7.2-rc2'
+}
+
 cobertura {
     coverageFormats = ['html', 'xml']
     coverageIgnoreTrivial = true;
@@ -79,21 +77,20 @@ jar {
 
 // Add in a source jar for people, should they desire to download such a thing
 task sourceJar(type: Jar) {
-from sourceSets.main.allSource
-classifier = 'src'
+    from sourceSets.main.allSource
+    classifier = 'src'
     version = "${project.minecraft.version}-${project.version}"
 }
 
 // Add in an mcp named jar, for those who wish to run in a development environment (assuming mcp naming matches)
 task deobfJar(type: Jar) {
-from sourceSets.main.output
-classifier = 'deobf'
+    from sourceSets.main.output
+    classifier = 'deobf'
     version = "${project.minecraft.version}-${project.version}"
 }
 
 // Add in a jar containing the ScalaDocs.
 task docs(type: Jar) {
-    dependsOn ':scaladoc'
     from scaladoc.destinationDir
     classifier = 'docs'
     version = "${project.minecraft.version}-${project.version}"
@@ -106,73 +103,74 @@ artifacts {
 
 // Configure an upload task. this is setup for uploading to files.minecraftforge.net. There are other examples around
 uploadArchives {
-    dependsOn 'reobf'
-    repositories {
-        if (project.hasProperty("filesmaven")) {
-            logger.info('Publishing to files server')
-            
-            mavenDeployer {
-                //configuration = configurations.deployJars
+    doLast {
+        repositories {
+            if (project.hasProperty("filesmaven")) {
+                logger.info('Publishing to files server')
 
-                repository(url: project.filesmaven.url) {
-                    authentication(userName: project.filesmaven.username, privateKey: project.filesmaven.key)
-                }
-                
-                // This is just the pom data for the maven repo
-                pom {
-                    groupId = project.group
-                    // Force the maven upload to use the <mcversion>-<version> syntax preferred at files
-                    version = "${project.minecraft.version}-${project.version}"
-                    artifactId = project.archivesBaseName
-                    project {
-                        name project.archivesBaseName
-                        packaging 'jar'
-                        description 'Rails had their turn, now out to the Minecraftian seas.'
-                        url 'https://github.com/Open-Code-Developers/BoatCraft.git'
+                mavenDeployer {
+                    configuration = configurations.deployJars
 
-                        scm {
-                            url 'https://github.com/Open-Code-Developers/BoatCraft'
-                            connection 'scm:git:git://github.com/Open-Code-Developers/BoatCraft.git'
-                            developerConnection 'scm:git:git@github.com:Open-Code-Developers/BoatCraft.git'
-                        }
+                    repository(url: project.filesmaven.url) {
+                        authentication(userName: project.filesmaven.username, privateKey: project.filesmaven.key)
+                    }
 
-                        issueManagement {
-                            system 'github'
-                            url 'https://github.com/Open-Code-Developers/BoatCraft/issues'
-                        }
+                    // This is just the pom data for the maven repo
+                    pom {
+                        groupId = project.group
+                        // Force the maven upload to use the <mcversion>-<version> syntax preferred at files
+                        version = "${project.minecraft.version}-${project.version}"
+                        artifactId = project.archivesBaseName
+                        project {
+                            name project.archivesBaseName
+                            packaging 'jar'
+                            description 'Rails had their turn, now out to the Minecraftian seas.'
+                            url 'https://github.com/Open-Code-Developers/BoatCraft.git'
 
-                        licenses {
-                            license {
-                                name 'The MIT License (MIT)'
-                                url 'https://raw.github.com/Open-Code-Developers/BoatCraft/master/LICENSE'
-                                distribution 'repo'
+                            scm {
+                                url 'https://github.com/Open-Code-Developers/BoatCraft'
+                                connection 'scm:git:git://github.com/Open-Code-Developers/BoatCraft.git'
+                                developerConnection 'scm:git:git@github.com:Open-Code-Developers/BoatCraft.git'
                             }
-                        }
 
-                        developers {
-                            developer {
-                                id 'k2b6s9j'
-                                name 'Kepler Sticka-Jones'
-                                roles {
-                                	role 'developer'
-                                	role 'creator'
+                            issueManagement {
+                                system 'github'
+                                url 'https://github.com/Open-Code-Developers/BoatCraft/issues'
+                            }
+
+                            licenses {
+                                license {
+                                    name 'The MIT License (MIT)'
+                                    url 'https://raw.github.com/Open-Code-Developers/BoatCraft/master/LICENSE'
+                                    distribution 'repo'
                                 }
                             }
-                            developer {
-                                id 'viliml'
-                                name 'Vilim Lendvaj'
-                                roles { role 'developer' }
+
+                            developers {
+                                developer {
+                                    id 'k2b6s9j'
+                                    name 'Kepler Sticka-Jones'
+                                    roles {
+                                        role 'developer'
+                                        role 'creator'
+                                    }
+                                }
+                                developer {
+                                    id 'viliml'
+                                    name 'Vilim Lendvaj'
+                                    roles { role 'developer' }
+                                }
                             }
                         }
                     }
                 }
-            }
-        } else {
-            logger.info('Publishing to repo folder')
-            
-            mavenDeployer {
-                pom.version = "${project.minecraft.version}-${project.version}"
-                repository(url: 'file://localhost/' + project.file('repo').getAbsolutePath())
+            } else {
+                logger.info('Publishing to repo folder')
+
+                mavenDeployer {
+                    pom.version = "${project.minecraft.version}-${project.version}"
+                    repository(url: 'file://localhost/' + project.file('repo').getAbsolutePath())
+                }
             }
         }
     }
