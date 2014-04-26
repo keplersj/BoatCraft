@@ -9,9 +9,6 @@ import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.registry.GameRegistry
 import k2b6s9j.boatcraft.api.Registry
 import k2b6s9j.boatcraft.compatibility.vanilla.VanillaGuiHandler
-import k2b6s9j.boatcraft.compatibility.vanilla.materials.crystal.{Diamond, Emerald, Obsidian}
-import k2b6s9j.boatcraft.compatibility.vanilla.materials.metal.{Gold, Iron}
-import k2b6s9j.boatcraft.compatibility.vanilla.materials.wood.{Acacia, Birch, DarkOak, Jungle, Oak, OreDict_Wood, Spruce}
 import k2b6s9j.boatcraft.compatibility.vanilla.modifiers.{Chest, Furnace, Workbench}
 import k2b6s9j.boatcraft.core.BoatCraft
 import k2b6s9j.boatcraft.core.utilities.Recipes
@@ -46,7 +43,6 @@ object Vanilla
 
 		printModInfo
 
-		registerMaterials
 		registerModifiers
 
 		replaceBoatRecipe
@@ -65,12 +61,9 @@ object Vanilla
 				&& !recipe.isInstanceOf[ShapedOreRecipe]
 				&& recipe.asInstanceOf[IRecipe].getRecipeOutput != null
 				&& recipe.asInstanceOf[IRecipe].getRecipeOutput.stackTagCompound != null
-				&& recipe.asInstanceOf[IRecipe].getRecipeOutput.stackTagCompound.getString("material")
-				!= null
-				&& recipe.asInstanceOf[IRecipe].getRecipeOutput.stackTagCompound.getString("material")
-				.equals(OreDict_Wood toString)) {
+				&& recipe.asInstanceOf[IRecipe].getRecipeOutput.stackTagCompound.getString("material") != null) {
 				toRemove add recipe.asInstanceOf[IRecipe]
-				log info "Removed non-oredict ore-dict wood boat recipe: " + recipe
+				log info "Removed Vanilla Boat Recipe: " + recipe
 			}
 		}
 
@@ -82,47 +75,6 @@ object Vanilla
 		log info "BoatCraft Vanilla Compatibility"
 		log info "Adds Vanilla Woods to the BoatCraft Material Matrix"
 		log info "Copyright Kepler Sticka-Jones 2014"
-	}
-	
-	private def registerMaterials
-	{
-		if (!useOreDictWood)
-		{
-			Registry register Oak
-			Registry register Spruce
-			Registry register Birch
-			Registry register Jungle
-			Registry register Acacia
-			Registry register DarkOak
-		}
-		else
-		{
-			Registry register OreDict_Wood
-
-			var stack = new ItemStack(ItemCustomBoat)
-			stack.stackTagCompound = new NBTTagCompound
-			stack.stackTagCompound setString ("material", OreDict_Wood toString)
-
-			for ((name, modifier) <- Registry.modifiers) {
-				stack.stackTagCompound setString ("modifier", name)
-				if (modifier.getContent != null)
-					GameRegistry.addRecipe(new ShapedOreRecipe(stack,
-						"wmw", "www",
-						Character valueOf 'w', "planksWood",
-						Character valueOf 'm', modifier getContent))
-				else
-					GameRegistry.addRecipe(new ShapedOreRecipe(stack,
-						"w w", "www",
-						Character valueOf 'w', "planksWood"))
-			}
-		}
-
-		Registry register Iron
-		Registry register Gold
-
-		Registry register Obsidian
-		Registry register Diamond
-		Registry register Emerald
 	}
 	
 	private def registerModifiers
@@ -139,7 +91,8 @@ object Vanilla
 		var stack = new ItemStack(ItemCustomBoat)
 		
 		stack.stackTagCompound = new NBTTagCompound
-		stack.stackTagCompound setString ("material", Oak toString)
+		//Default Boat Material will be made of Oak Wood Planks when the ForgeMultiPart upgrade is completed.
+		//stack.stackTagCompound setString ("material", Oak toString)
 		stack.stackTagCompound setString ("modifier", Empty toString)
 		
 		GameRegistry addShapelessRecipe (stack, Items.boat)
@@ -147,10 +100,6 @@ object Vanilla
 	
 	private def readConfig
 	{
-		useOreDictWood = BoatCraft.config get ("Vanilla.General", "useOreDictWoods", false,
-			"If set to true, the different wood types will not be generated.\n" +
-			"Instead, there will be only one \"wood\" Boat") getBoolean false
-
 		if (BoatCraft.config hasChanged)
 			BoatCraft.config save
 	}
