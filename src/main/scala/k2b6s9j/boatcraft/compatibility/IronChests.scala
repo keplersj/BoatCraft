@@ -8,8 +8,8 @@ import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.network.NetworkRegistry
 import k2b6s9j.boatcraft.api.Registry
-import k2b6s9j.boatcraft.compatibility.ironchest.{IronChestsEventHandler, IronChestsGuiHandler}
-import k2b6s9j.boatcraft.compatibility.ironchest.modifiers.{Copper_Chest, Crystal_Chest, Diamond_Chest, DirtChest9000, Gold_Chest, Iron_Chest, Obsidian_Chest, Silver_Chest}
+import k2b6s9j.boatcraft.compatibility.ironchest._
+import k2b6s9j.boatcraft.compatibility.ironchest.modifiers._
 import net.minecraftforge.common.MinecraftForge
 
 @Mod(modid = "boatcraft:compatibility:IronChest", name = "BoatCraft Iron Chests 2 Compatibility",
@@ -19,6 +19,7 @@ object IronChests
 	var log: Logger = null
 	
 	@EventHandler
+    @Optional.Method(modid = "IronChest")
 	def preInit(e: FMLPreInitializationEvent)
 	{
 		log = e getModLog
