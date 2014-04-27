@@ -14,6 +14,8 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.client.IItemRenderer.ItemRendererHelper
 import net.minecraft.util.MathHelper
 import net.minecraft.client.renderer.texture.TextureMap
+import net.minecraft.block.Block
+import net.minecraft.init.Blocks
 
 /**
   * The Render Class used to render dinghies.
@@ -119,8 +121,24 @@ class RenderCustomBoat
 
 		val f4 = 0.75F
 
-		val block = Registry getModifier stack getBlock
-		val meta = Registry getModifier stack getMeta
+    var block: Block = null
+    var meta: Int = 0
+
+		try {
+      block = Registry getModifier stack getBlock
+    } catch {
+      case e: Exception =>
+        e.printStackTrace()
+        block = Blocks.air
+    }
+
+    try {
+      meta = Registry getModifier stack getMeta
+    } catch {
+      case e: Exception =>
+        e.printStackTrace()
+        meta = 0
+    }
 
 		if (block.getRenderType != -1)
 		{
