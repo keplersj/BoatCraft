@@ -163,8 +163,13 @@ class RenderCustomBoat
 		GL11 glScalef (f4, f4, f4)
 		GL11 glScalef (1F / f4, 1F / f4, 1F / f4)
 
-		Minecraft.getMinecraft.getTextureManager bindTexture
-			(Registry getMaterial stack getTexture)
+		Minecraft.getMinecraft.getTextureManager bindTexture (
+      try {
+        Registry getMaterial stack getTexture
+      }	catch {
+        case e: Exception =>new ResourceLocation("minecraft", "textures/entity/boat.png")
+      }
+    )
 
 		GL11 glScalef (-1, -1, 1)
 		modelBoat render (null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)
