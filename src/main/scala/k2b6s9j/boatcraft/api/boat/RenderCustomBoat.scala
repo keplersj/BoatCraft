@@ -14,6 +14,8 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.client.IItemRenderer.ItemRendererHelper
 import net.minecraft.util.MathHelper
 import net.minecraft.client.renderer.texture.TextureMap
+import net.minecraft.block.Block
+import net.minecraft.init.Blocks
 
 /**
   * The Render Class used to render dinghies.
@@ -56,7 +58,7 @@ class RenderCustomBoat
 
 			val f5 = boat getBrightness f1
 
-			GL11 glTranslatef (0.0F, 6F / 16.0F, 0.0F)
+			GL11 glTranslatef (0, 6F / 16F, 0)
 
 			GL11 glPushMatrix
 
@@ -64,7 +66,7 @@ class RenderCustomBoat
 
 			GL11 glPopMatrix()
 			GL11 glPopMatrix()
-			GL11 glColor4f (1.0F, 1.0F, 1.0F, 1.0F)
+			GL11 glColor4f (1, 1, 1, 1)
 		}
 		else if (boat.getInventory.isInstanceOf[TileEntity]
 			&& (TileEntityRendererDispatcher.instance hasSpecialRenderer
@@ -75,7 +77,7 @@ class RenderCustomBoat
 
 			val f5 = boat getBrightness f1
 
-			GL11 glTranslated (-.5, 6 / 16. - .5, 0)
+			GL11 glTranslatef (-0.5F, 6F / 16F - 0.5F, 0)
 			GL11 glPushMatrix
 
 			TileEntityRendererDispatcher.instance renderTileEntityAt (
@@ -88,10 +90,10 @@ class RenderCustomBoat
 		}
 
 		GL11 glScalef(f4, f4, f4)
-		GL11 glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4)
+		GL11 glScalef(1F / f4, 1F / f4, 1F / f4)
 		this bindEntityTexture boat
-		GL11 glScalef(-1.0F, -1.0F, 1.0F)
-		modelBoat render (boat, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)
+		GL11 glScalef(-1, -1, 1)
+		modelBoat render (boat, 0, 0, -0.1F, 0, 0F, 0.0625F)
 		GL11 glPopMatrix
 	}
 	
@@ -109,18 +111,34 @@ class RenderCustomBoat
 	def renderItem(renderType: ItemRenderType, stack: ItemStack, objects: AnyRef*) {
 		GL11 glPushMatrix
 
-		GL11 glTranslated (.5, .5, .5)
+		GL11 glTranslatef (0.5F, 0.5F, 0.5F)
 
 		if (renderType == ItemRenderType.ENTITY)
 		{
-			GL11 glScaled (.5, .5, .5)
-			GL11 glTranslated (-.5, 0, -.5)
+			GL11 glScalef (0.5F, 0.5F, 0.5F)
+			GL11 glTranslatef (-0.5F, 0, -0.5F)
 		}
 
-		val f4 = .75F
+		val f4 = 0.75F
 
-		val block = Registry getModifier stack getBlock
-		val meta = Registry getModifier stack getMeta
+    var block: Block = null
+    var meta: Int = 0
+
+		try {
+      block = Registry getModifier stack getBlock
+    } catch {
+      case e: Exception =>
+        e.printStackTrace()
+        block = Blocks.air
+    }
+
+    try {
+      meta = Registry getModifier stack getMeta
+    } catch {
+      case e: Exception =>
+        e.printStackTrace()
+        meta = 0
+    }
 
 		if (block.getRenderType != -1)
 		{
@@ -130,7 +148,7 @@ class RenderCustomBoat
 				TextureMap.locationBlocksTexture
 			GL11 glScalef (f4, f4, f4)
 
-			GL11 glTranslated (0, 6. / 16., 0.)
+			GL11 glTranslatef (0, 6F / 16F, 0)
 
 			GL11 glPushMatrix
 
@@ -145,8 +163,13 @@ class RenderCustomBoat
 		GL11 glScalef (f4, f4, f4)
 		GL11 glScalef (1F / f4, 1F / f4, 1F / f4)
 
-		Minecraft.getMinecraft.getTextureManager bindTexture
-			(Registry getMaterial stack getTexture)
+		Minecraft.getMinecraft.getTextureManager bindTexture (
+      try {
+        Registry getMaterial stack getTexture
+      }	catch {
+        case e: Exception =>new ResourceLocation("minecraft", "textures/entity/boat.png")
+      }
+    )
 
 		GL11 glScalef (-1, -1, 1)
 		modelBoat render (null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)

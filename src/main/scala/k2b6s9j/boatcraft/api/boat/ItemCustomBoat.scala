@@ -19,6 +19,7 @@ import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.util.Vec3
 import net.minecraft.world.World
+import k2b6s9j.boatcraft.core.modifiers.Empty
 
 /**
   * The Item Class used for all items that can be deployed like a Boat.
@@ -50,11 +51,15 @@ class ItemCustomBoat extends ItemBoat
 		"." +
 		Registry.getModifier(stack)
 	
-	override def getItemStackDisplayName(stack: ItemStack) =
-		Registry.getMaterial(stack).getName + " " +
-		Registry.getModifier(stack).getName +
-		" Dinghy"
-	
+	override def getItemStackDisplayName(stack: ItemStack): String = stack match {
+    case x if Registry.getModifier(stack).==(Empty) =>
+      Registry.getMaterial(stack).getName + " Dinghy"
+    case x if Registry.getModifier(stack).!=(null) =>
+      Registry.getMaterial(stack).getName + " Dinghy with " + Registry.getModifier(stack).getName
+    case _ =>
+      "Dinghy"
+  }
+
 	override def onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack =
 	{
 		val f: Float = 1.0F

@@ -19,7 +19,7 @@ package object api
 	 * the specified material and modifier
 	 * 
      * @param mat the Material
-     * @param mat the Modifier
+     * @param mod the Modifier
 	 * 
 	 * @return the custom boat itemstack
 	 */
@@ -31,7 +31,7 @@ package object api
      * the specified material and modifier
      * 
      * @param mat the Material
-     * @param mat the Modifier
+     * @param mod the Modifier
      * 
      * @return the custom boat itemstack
      */
