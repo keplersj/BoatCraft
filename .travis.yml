@@ -6,10 +6,6 @@ jdk: openjdk7
 
 env: TERM=dumb
 
-after_success:
-  - gradle cobertura
-  - gradle coveralls
-
 notifications:
   webhooks:
     urls:
