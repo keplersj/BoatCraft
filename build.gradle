@@ -44,27 +44,8 @@ tasks.withType(ScalaCompile) {
     scalaCompileOptions.useAnt = false
 }
 
-repositories {
-    ivy {
-        name = 'ChickenBones'
-        artifactPattern 'http://www.chickenbones.craftsaddle.org/Files/New_Versions/1.7.2/[module]-[revision].[ext]'
-    }
-}
-
 dependencies {
     compile 'cpw.mods:ironchest:1.7.2-6.0.4.713:deobf'
-    compile 'codechicken:CodeChickenLib:1.7.2-1.1.0.73:dev'
-    compile 'codechicken:ForgeMultipart:1.7.2-1.1.0.268:dev'
-
-    testCompile 'junit:junit:4.11'
-    testCompile 'org.scalatest:scalatest_2.10:2.0'
-
-    runtime 'codechicken:NotEnoughItems:1.7.2-rc2'
-}
-
-cobertura {
-    coverageFormats = ['html', 'xml']
-    coverageIgnoreTrivial = true;
 }
 
 // this sets our output jar to have a 'tag' of 'universal' on it
