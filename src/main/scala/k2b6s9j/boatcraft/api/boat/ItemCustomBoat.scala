@@ -55,7 +55,7 @@ class ItemCustomBoat extends ItemBoat
     case x if Registry.getModifier(stack).==(Empty) =>
       Registry.getMaterial(stack).getName + " Dinghy"
     case x if Registry.getModifier(stack).!=(null) =>
-      Registry.getMaterial(stack).getName + " Dinghy with" + Registry.getModifier(stack).getName
+      Registry.getMaterial(stack).getName + " Dinghy with " + Registry.getModifier(stack).getName
     case _ =>
       "Dinghy"
   }
