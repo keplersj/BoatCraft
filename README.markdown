@@ -1,7 +1,7 @@
 BoatCraft
 =========
 
-[![Travis CI Build Status](https://travis-ci.org/Open-Code-Developers/BoatCraft.png?branch=master)](https://travis-ci.org/Open-Code-Developers/BoatCraft)
+[![Build Status](https://drone.io/github.com/Open-Code-Developers/BoatCraft/status.png)](https://drone.io/github.com/Open-Code-Developers/BoatCraft/master)
 [![Coverage Status](https://coveralls.io/repos/Open-Code-Developers/BoatCraft/badge.png)](https://coveralls.io/r/Open-Code-Developers/BoatCraft)
 [![Stories in Ready](https://badge.waffle.io/Open-Code-Developers/BoatCraft.png?label=in%20progress)](https://waffle.io/Open-Code-Developers/BoatCraft)
 [![Gitter chat](https://badges.gitter.im/Open-Code-Developers/BoatCraft.png)](https://gitter.im/Open-Code-Developers/BoatCraft)
