@@ -1,10 +1,10 @@
-package k2b6s9j.boatcraft.core
+package boatcraft.core
 
 import cpw.mods.fml.client.registry.RenderingRegistry
 import cpw.mods.fml.common.registry.EntityRegistry
-import k2b6s9j.boatcraft.api.boat.{EntityCustomBoat, RenderCustomBoat}
+import boatcraft.api.boat.{EntityCustomBoat, RenderCustomBoat}
 import net.minecraftforge.client.MinecraftForgeClient
-import k2b6s9j.boatcraft.api.boat.ItemCustomBoat
+import boatcraft.api.boat.ItemCustomBoat
 
 object Proxy
 {

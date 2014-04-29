@@ -1,11 +1,11 @@
-package k2b6s9j.boatcraft.compatibility.ironchest.modifiers
+package boatcraft.compatibility.ironchest.modifiers
 
 import cpw.mods.fml.common.Mod
 import cpw.mods.ironchest.{IronChest, IronChestType, ItemChestChanger, TileEntityIronChest}
-import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
-import k2b6s9j.boatcraft.api.traits.Modifier
-import k2b6s9j.boatcraft.compatibility.IronChests
-import k2b6s9j.boatcraft.core.utilities.NBTHelper
+import boatcraft.api.boat.EntityCustomBoat
+import boatcraft.api.traits.Modifier
+import boatcraft.compatibility.IronChests
+import boatcraft.core.utilities.NBTHelper
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.IInventory

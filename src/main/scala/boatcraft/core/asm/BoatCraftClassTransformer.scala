@@ -1,4 +1,4 @@
-package k2b6s9j.boatcraft.core.asm
+package boatcraft.core.asm
 
 import java.util.Iterator
 import scala.util.control.Breaks.break

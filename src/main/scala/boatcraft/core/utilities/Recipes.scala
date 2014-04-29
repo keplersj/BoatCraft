@@ -1,15 +1,15 @@
-package k2b6s9j.boatcraft.core.utilities
+package boatcraft.core.utilities
 
 import java.util.ArrayList
 import scala.collection.JavaConversions.{ asScalaBuffer, mapAsScalaMap }
 import cpw.mods.fml.common.registry.GameRegistry
-import k2b6s9j.boatcraft.api.Registry
-import k2b6s9j.boatcraft.core.BoatCraft
+import boatcraft.api.Registry
+import boatcraft.core.BoatCraft
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{ CraftingManager, IRecipe }
 import net.minecraft.nbt.NBTTagCompound
-import k2b6s9j.boatcraft.api.boat.ItemCustomBoat
+import boatcraft.api.boat.ItemCustomBoat
 
 /**
   * Contains miscellaneous methods used throughout the mod related to crafting.

@@ -1,6 +1,6 @@
-package k2b6s9j.boatcraft.core.modifiers
+package boatcraft.core.modifiers
 
-import k2b6s9j.boatcraft.api.traits.Modifier
+import boatcraft.api.traits.Modifier
 import net.minecraft.item.ItemStack
 import net.minecraft.init.Blocks
 

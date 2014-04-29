@@ -1,11 +1,11 @@
-package k2b6s9j.boatcraft.api.boat
+package boatcraft.api.boat
 
 import java.util.List
 
 import scala.collection.JavaConversions.mapAsScalaMap
 
 import cpw.mods.fml.relauncher.{Side, SideOnly}
-import k2b6s9j.boatcraft.api.Registry
+import boatcraft.api.Registry
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
@@ -19,7 +19,7 @@ import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.util.Vec3
 import net.minecraft.world.World
-import k2b6s9j.boatcraft.core.modifiers.Empty
+import boatcraft.core.modifiers.Empty
 
 /**
   * The Item Class used for all items that can be deployed like a Boat.

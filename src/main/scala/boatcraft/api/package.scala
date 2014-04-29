@@ -1,9 +1,9 @@
-package k2b6s9j.boatcraft
+package boatcraft
 
-import k2b6s9j.boatcraft.api.boat.ItemCustomBoat
+import boatcraft.api.boat.ItemCustomBoat
 import net.minecraft.item.Item
-import k2b6s9j.boatcraft.api.traits.Modifier
-import k2b6s9j.boatcraft.api.traits.Material
+import boatcraft.api.traits.Modifier
+import boatcraft.api.traits.Material
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 

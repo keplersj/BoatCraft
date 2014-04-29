@@ -1,4 +1,4 @@
-package k2b6s9j.boatcraft.compatibility.ironchest
+package boatcraft.compatibility.ironchest
 
 import cpw.mods.ironchest.IronChestType
 

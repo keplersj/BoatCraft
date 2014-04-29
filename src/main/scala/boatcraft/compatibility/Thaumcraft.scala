@@ -1,4 +1,4 @@
-package k2b6s9j.boatcraft.compatibility
+package boatcraft.compatibility
 
 import scala.collection.JavaConversions.mapAsScalaMap
 
@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger
 
 import cpw.mods.fml.common.{Mod, Optional}
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
-import k2b6s9j.boatcraft.api.{Registry, getCustomBoat}
+import boatcraft.api.{Registry, getCustomBoat}
 import net.minecraft.nbt.NBTTagString
 import thaumcraft.api.ThaumcraftApi
 import thaumcraft.api.ThaumcraftApi.EntityTagsNBT

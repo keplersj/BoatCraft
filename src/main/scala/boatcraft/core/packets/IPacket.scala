@@ -1,4 +1,4 @@
-package k2b6s9j.boatcraft.core.packets
+package boatcraft.core.packets
 
 import io.netty.buffer.ByteBuf;
 

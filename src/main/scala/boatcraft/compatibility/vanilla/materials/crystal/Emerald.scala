@@ -1,6 +1,6 @@
-package k2b6s9j.boatcraft.compatibility.vanilla.materials.crystal
+package boatcraft.compatibility.vanilla.materials.crystal
 
-import k2b6s9j.boatcraft.api.traits.Material
+import boatcraft.api.traits.Material
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation

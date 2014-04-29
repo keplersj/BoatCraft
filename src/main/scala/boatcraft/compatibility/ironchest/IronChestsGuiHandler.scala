@@ -1,9 +1,9 @@
-package k2b6s9j.boatcraft.compatibility.ironchest
+package boatcraft.compatibility.ironchest
 
 import cpw.mods.fml.common.network.IGuiHandler
 import cpw.mods.ironchest.{ ContainerIronChest, IronChestType, TileEntityIronChest }
 import cpw.mods.ironchest.client.GUIChest
-import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
+import boatcraft.api.boat.EntityCustomBoat
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.world.World

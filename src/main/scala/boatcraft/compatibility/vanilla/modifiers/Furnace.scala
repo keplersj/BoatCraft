@@ -1,7 +1,7 @@
-package k2b6s9j.boatcraft.compatibility.vanilla.modifiers
+package boatcraft.compatibility.vanilla.modifiers
 
-import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
-import k2b6s9j.boatcraft.api.traits.Modifier
+import boatcraft.api.boat.EntityCustomBoat
+import boatcraft.api.traits.Modifier
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.inventory.IInventory

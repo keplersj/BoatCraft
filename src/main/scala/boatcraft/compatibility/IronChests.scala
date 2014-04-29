@@ -1,4 +1,4 @@
-package k2b6s9j.boatcraft.compatibility
+package boatcraft.compatibility
 
 import org.apache.logging.log4j.Logger
 
@@ -7,9 +7,9 @@ import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.network.NetworkRegistry
-import k2b6s9j.boatcraft.api.Registry
-import k2b6s9j.boatcraft.compatibility.ironchest._
-import k2b6s9j.boatcraft.compatibility.ironchest.modifiers._
+import boatcraft.api.Registry
+import boatcraft.compatibility.ironchest._
+import boatcraft.compatibility.ironchest.modifiers._
 import net.minecraftforge.common.MinecraftForge
 
 @Mod(modid = "boatcraft:compatibility:IronChest", name = "BoatCraft Iron Chests 2 Compatibility",

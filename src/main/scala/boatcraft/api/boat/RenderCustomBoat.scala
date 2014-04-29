@@ -1,4 +1,4 @@
-package k2b6s9j.boatcraft.api.boat
+package boatcraft.api.boat
 
 import org.lwjgl.opengl.GL11
 import net.minecraftforge.client.IItemRenderer.ItemRenderType
@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher
 import net.minecraftforge.client.IItemRenderer
 import net.minecraft.client.renderer.entity.RenderBoat
-import k2b6s9j.boatcraft.api.Registry
+import boatcraft.api.Registry
 import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 import net.minecraftforge.client.IItemRenderer.ItemRendererHelper

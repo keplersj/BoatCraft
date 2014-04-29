@@ -1,6 +1,6 @@
-package k2b6s9j.boatcraft.compatibility.vanilla.materials.wood
+package boatcraft.compatibility.vanilla.materials.wood
 
-import k2b6s9j.boatcraft.api.traits.Material
+import boatcraft.api.traits.Material
 import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation

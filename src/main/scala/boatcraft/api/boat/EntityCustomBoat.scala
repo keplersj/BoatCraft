@@ -1,7 +1,7 @@
-package k2b6s9j.boatcraft.api.boat
+package boatcraft.api.boat
 
 import cpw.mods.fml.common.ObfuscationReflectionHelper
-import k2b6s9j.boatcraft.api.{Registry, getCustomBoat, traits}
+import boatcraft.api.{Registry, getCustomBoat, traits}
 import net.minecraft.block.material.Material
 import net.minecraft.entity.{Entity, EntityLivingBase}
 import net.minecraft.entity.item.{EntityBoat, EntityItem}

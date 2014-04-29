@@ -1,9 +1,9 @@
-package k2b6s9j.boatcraft.compatibility.ironchest
+package boatcraft.compatibility.ironchest
 
 import cpw.mods.fml.common.ObfuscationReflectionHelper
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.ironchest.{IronChestType, ItemChestChanger}
-import k2b6s9j.boatcraft.api.boat.EntityCustomBoat
+import boatcraft.api.boat.EntityCustomBoat
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntityChest
 import net.minecraftforge.event.entity.player.EntityInteractEvent

@@ -1,8 +1,8 @@
-package k2b6s9j.boatcraft.core.asm
+package boatcraft.core.asm
 
 import java.util.Map
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin
-import k2b6s9j.boatcraft.core.BoatCraft
+import boatcraft.core.BoatCraft
 
 //TODO: Fill Documentation
 /**

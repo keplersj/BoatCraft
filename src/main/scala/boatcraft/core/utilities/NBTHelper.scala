@@ -1,4 +1,4 @@
-package k2b6s9j.boatcraft.core.utilities
+package boatcraft.core.utilities
 
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
