@@ -16,8 +16,6 @@ import net.minecraft.util.MathHelper
 import net.minecraft.client.renderer.texture.TextureMap
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
-import net.minecraft.client.renderer.Tessellator
-import net.minecraft.client.renderer.OpenGlHelper
 
 /**
   * The Render Class used to render dinghies.
@@ -100,47 +98,14 @@ class RenderCustomBoat
 		//Render the name
 		if (boat hasName)
 		{
-		    val d0 = boat.lastTickPosX + (boat.posX - boat.lastTickPosX) * f1
-		    val d1 = boat.lastTickPosY + (boat.posY - boat.lastTickPosY) * f1
-		    val d2 = boat.lastTickPosZ + (boat.posZ - boat.lastTickPosZ) * f1
+		    val d0 = boat.lastTickPosX + (boat.posX - boat.lastTickPosX) * f1;
+		    val d1 = boat.lastTickPosY + (boat.posY - boat.lastTickPosY) * f1;
+		    val d2 = boat.lastTickPosZ + (boat.posZ - boat.lastTickPosZ) * f1;
 		    
 		    println("Rendered name " + boat.getName + " at " + d0 + ", " + d1 + ", " + d2)
 		    println(boat.getDistanceSqToEntity(renderManager.livingPlayer) + " away from player")
 		    
-			var fontrenderer = this.getFontRendererFromRenderManager()
-            val f = 1.6F
-            val f2 = 0.016666668F * f
-            GL11.glPushMatrix()
-            GL11.glTranslatef(d0.toFloat, d1.toFloat + boat.height + 0.5F, d2.toFloat)
-            GL11.glNormal3f(0.0F, 1.0F, 0.0F)
-            GL11.glRotatef(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F)
-            GL11.glRotatef(this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F)
-            GL11.glScalef(-f2, -f2, f2)
-            GL11.glDisable(GL11.GL_LIGHTING)
-            GL11.glDepthMask(false)
-            GL11.glDisable(GL11.GL_DEPTH_TEST)
-            GL11.glEnable(GL11.GL_BLEND)
-            OpenGlHelper.glBlendFunc(770, 771, 1, 0)
-            var tessellator = Tessellator.instance
-
-            GL11.glDisable(GL11.GL_TEXTURE_2D)
-            tessellator.startDrawingQuads()
-            val j = fontrenderer.getStringWidth(boat.getName) / 2
-            tessellator.setColorRGBA_F(0, 0, 0, 0.25F)
-            tessellator.addVertex(-j - 1, -1, 0)
-            tessellator.addVertex(-j - 1, 8, 0)
-            tessellator.addVertex(j + 1, 8, 0)
-            tessellator.addVertex(j + 1, -1, 0)
-            tessellator.draw()
-            GL11.glEnable(GL11.GL_TEXTURE_2D)
-            fontrenderer.drawString(boat.getName, -fontrenderer.getStringWidth(boat.getName) / 2, 0, 553648127)
-            GL11.glEnable(GL11.GL_DEPTH_TEST)
-            GL11.glDepthMask(true)
-            fontrenderer.drawString(boat.getName, -fontrenderer.getStringWidth(boat.getName) / 2, 0, -1)
-            GL11 glEnable GL11.GL_LIGHTING
-            GL11 glDisable GL11.GL_BLEND
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
-            GL11 glPopMatrix
+			func_147906_a(boat, boat.getName, d0, d1, d2, 64)
 		}
 		
 		GL11 glPopMatrix
