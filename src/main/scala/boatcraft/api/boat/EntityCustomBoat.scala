@@ -34,7 +34,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		super.entityInit
 		
 		dataWatcher addObject (20, "")
-		dataWatcher addObject (21, "")
+        dataWatcher addObject (21, "")
+        dataWatcher addObject (22, "")
 	}
 	
 	override protected def writeEntityToNBT(tag: NBTTagCompound)
@@ -389,69 +390,74 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		else null
 	}
 	
-	override def interactFirst(player: EntityPlayer) =
+	override def interactFirst(player: EntityPlayer): Boolean =
 	{
-		if (getModifier isRideable) super.interactFirst(player)
+		if (player.getCurrentEquippedItem.getItem == Items.name_tag
+			&& player.getCurrentEquippedItem.hasDisplayName)
+		{
+			setName(player.getCurrentEquippedItem.getDisplayName)
+			println("Set the name to " + player.getCurrentEquippedItem.getDisplayName)
+			return false
+		}
+		if (getModifier isRideable) return super.interactFirst(player)
 		getModifier interact (player, this)
-		true
+		return true
 	}
 	
 	override def getPickedResult(target: MovingObjectPosition) =
         getCustomBoat(getMaterialName, getModifierName)
 	
-	//TODO: Fill Documentation
 	/**
-	  *
-	  * @param material
+	  * A setter for the boat's material
+	  * @param material the new material
 	  */
-	def setMaterial(material: String)
-	{
+	def setMaterial(material: String) =
 		dataWatcher updateObject (20, material)
-	}
 
-	//TODO: Fill Documentation
 	/**
-	  *
-	  * @param modifier
+	  * A setter for the boat's modifier
+	  * @param modifier the new modifier
 	  */
-	def setModifier(modifier: String)
-	{
+	def setModifier(modifier: String) =
 		dataWatcher updateObject (21, modifier)
-	}
+    
+    def setName(name: String) =
+        dataWatcher updateObject(22, name)
+	
+	def hasName = !(dataWatcher getWatchableObjectString 22).isEmpty()
 
-	//TODO: Fill Documentation
 	/**
-	  *
-	  * @return
+      * A getter for the boat's material
+	  * @return the boat's material
 	  */
 	def getMaterial: traits.Material =
 	        (Registry find (dataWatcher getWatchableObjectString 20))
 	        .asInstanceOf[traits.Material]
 
-	//TODO: Fill Documentation
 	/**
-	  *
-	  * @return
+      * A getter for the boat's modifier
+	  * @return the boat's modifier
 	  */
 	def getModifier: traits.Modifier =
 	    (Registry find (dataWatcher getWatchableObjectString 21))
 	    .asInstanceOf[traits.Modifier]
 
-	//TODO: Fill Documentation
 	/**
-	  *
-	  * @return
+	  * A getter for the name of the boat's material
+	  * @return the name of the boat's material
 	  */
 	def getMaterialName =
 		dataWatcher getWatchableObjectString 20
 
-	//TODO: Fill Documentation
 	/**
-	  *
-	  * @return
+	  * A getter fo the name of the boat's modifier
+	  * @return the name of the boat's modifier
 	  */
 	def getModifierName =
 		dataWatcher getWatchableObjectString 21
+    
+    def getName =
+        dataWatcher getWatchableObjectString 22
 	
 	//IInventory implementation
 	override def getSizeInventory =
