@@ -26,18 +26,13 @@ import net.minecraft.item.crafting.{CraftingManager, IRecipe}
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.oredict.ShapedOreRecipe
 
-@Mod(modid = "boatcraft:compatibility:vanilla",
-	name = "BoatCraft Vanilla Compatibility",
-	modLanguage = "scala", dependencies = "required-after:boatcraft",
-	version = "2.0")
-object Vanilla
+object Vanilla extends CompatModule("FML", "Forge Mod Loader")
 {
 	private[boatcraft] var log: Logger = null
 	
 	private var useOreDictWood = false
 	
-	@Mod.EventHandler
-	def preInit(event: FMLPreInitializationEvent)
+	override def preInit(event: FMLPreInitializationEvent)
 	{
 		log = event getModLog
 
@@ -51,8 +46,7 @@ object Vanilla
 		NetworkRegistry.INSTANCE registerGuiHandler (this, VanillaGuiHandler)
 	}
 	
-	@Mod.EventHandler
-	def postInit(event: FMLPostInitializationEvent)
+	override def postInit(event: FMLPostInitializationEvent)
 	{
 		var toRemove = new ArrayList[IRecipe]
 

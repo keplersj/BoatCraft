@@ -11,15 +11,12 @@ import boatcraft.api.Registry
 import boatcraft.compatibility.ic2.Carbon
 import boatcraft.compatibility.ic2.Rubber
 
-@Mod(modid = "boatcraft:compatibility:IC2", name = "BoatCraft IndustrialCraft^2 Compatibility",
-	version = "2.0", dependencies = "required-after:boatcraft;after:IC2", modLanguage = "scala")
-object IC2
+object IC2 extends CompatModule("IC2", "IndustrialCraft2")
 {
 	var log: Logger = null
 	
-	@EventHandler
 	@Optional.Method(modid = "IC2")
-	def preInit(e: FMLPreInitializationEvent)
+	override def preInit(e: FMLPreInitializationEvent)
 	{
 		log = e getModLog
 
@@ -37,9 +34,8 @@ object IC2
 		}
 	}
 	
-	@EventHandler
 	@Optional.Method(modid = "IC2")
-	def postInit(e: FMLPostInitializationEvent)
+	override def postInit(e: FMLPostInitializationEvent)
 	{
 		try
 		{

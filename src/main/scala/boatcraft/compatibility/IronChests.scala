@@ -12,15 +12,12 @@ import boatcraft.compatibility.ironchest._
 import boatcraft.compatibility.ironchest.modifiers._
 import net.minecraftforge.common.MinecraftForge
 
-@Mod(modid = "boatcraft:compatibility:IronChest", name = "BoatCraft Iron Chests Compatibility",
-	version = "2.0", dependencies = "required-after:boatcraft;after:IronChest", modLanguage = "scala")
-object IronChests
+object IronChests extends CompatModule("IronChest", "Iron Chest")
 {
 	var log: Logger = null
 	
-	@EventHandler
 	@Optional.Method(modid = "IronChest")
-	def preInit(e: FMLPreInitializationEvent)
+	override def preInit(e: FMLPreInitializationEvent)
 	{
 		log = e getModLog
 

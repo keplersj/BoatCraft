@@ -13,19 +13,14 @@ import thaumcraft.api.ThaumcraftApi.EntityTagsNBT
 import thaumcraft.api.ThaumcraftApiHelper
 import thaumcraft.api.aspects.{Aspect, AspectList}
 
-@Mod(modid = "boatcraft:compatibility:thaumcraft",
-	name = "BoatCraft Vanilla Compatibility",
-	modLanguage = "scala", dependencies = "required-after:boatcraft;after:thaumcraft",
-	version = "2.0")
-object Thaumcraft
+object Thaumcraft extends CompatModule("thaumcraft", "Thaumcraft")
 {
 	var log: Logger = null
 
 	val boatAspects = (new AspectList).add(Aspect.MOTION, 2).add(Aspect.WATER, 2)
 
-	@Mod.EventHandler
 	@Optional.Method(modid = "thaumcraft")
-	def preInit(e: FMLPreInitializationEvent)
+	override def preInit(e: FMLPreInitializationEvent)
 	{
 		log = e getModLog
 		
