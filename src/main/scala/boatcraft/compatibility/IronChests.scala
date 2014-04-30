@@ -12,19 +12,17 @@ import boatcraft.compatibility.ironchest._
 import boatcraft.compatibility.ironchest.modifiers._
 import net.minecraftforge.common.MinecraftForge
 
-@Mod(modid = "boatcraft:compatibility:IronChest", name = "BoatCraft Iron Chests 2 Compatibility",
+@Mod(modid = "boatcraft:compatibility:IronChest", name = "BoatCraft Iron Chests Compatibility",
 	version = "2.0", dependencies = "required-after:boatcraft;after:IronChest", modLanguage = "scala")
 object IronChests
 {
 	var log: Logger = null
 	
 	@EventHandler
-    @Optional.Method(modid = "IronChest")
+	@Optional.Method(modid = "IronChest")
 	def preInit(e: FMLPreInitializationEvent)
 	{
 		log = e getModLog
-
-		printModInfo
 
 		try
 		{
@@ -37,15 +35,9 @@ object IronChests
 			case ex: NoClassDefFoundError => //That's OK
 			case err: NoSuchMethodError => //Fine
 			case ex: NoSuchMethodException => //No problem
+            case ex: NullPointerException => //Sure
 			case thr: Throwable => thr printStackTrace //Weird...
 		}
-	}
-    
-	private def printModInfo
-	{
-		log info "BoatCraft Iron Chests 2 Compatibility"
-		log info "Adds Iron Chests 2 Chests to the BoatCraft Modifier Matrix"
-		log info "Copyright Vilim Lendvaj 2014"
 	}
 	
 	@Optional.Method(modid = "IronChest")

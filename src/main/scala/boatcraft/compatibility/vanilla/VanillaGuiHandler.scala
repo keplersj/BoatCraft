@@ -9,7 +9,7 @@ import boatcraft.compatibility.vanilla.modifiers.Workbench
 object VanillaGuiHandler extends IGuiHandler
 {
 	override def getClientGuiElement(id: Int, player: EntityPlayer, world: World,
-	        x: Int, y: Int, z: Int): AnyRef =
+			x: Int, y: Int, z: Int): AnyRef =
 		id match
 		{
 			case 0 => new Workbench.Gui(player.inventory, world, x, y, z)
@@ -17,7 +17,7 @@ object VanillaGuiHandler extends IGuiHandler
 		}
 	
 	override def getServerGuiElement(id: Int, player: EntityPlayer, world: World,
-	        x: Int, y: Int, z: Int): AnyRef =
+			x: Int, y: Int, z: Int): AnyRef =
 		id match
 		{
 			case 0 => new Workbench.Container(player.inventory, world, x, y, z)

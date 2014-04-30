@@ -43,8 +43,6 @@ object Vanilla
 
 		readConfig
 
-		printModInfo
-
 		registerMaterials
 		registerModifiers
 
@@ -74,13 +72,6 @@ object Vanilla
 		}
 
 		CraftingManager.getInstance.getRecipeList removeAll toRemove
-	}
-	
-	private def printModInfo
-	{
-		log info "BoatCraft Vanilla Compatibility"
-		log info "Adds Vanilla Woods to the BoatCraft Material Matrix"
-		log info "Copyright Kepler Sticka-Jones 2014"
 	}
 	
 	private def registerMaterials

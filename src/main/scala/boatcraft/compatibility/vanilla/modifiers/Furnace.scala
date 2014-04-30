@@ -90,14 +90,14 @@ object Furnace extends Modifier
 
 	private class Inventory(boat: EntityCustomBoat) extends TileEntityFurnace
 	{
-    	worldObj = boat.worldObj
-    	
-    	override def getInventoryName: String = "Furnace Boat"
-    	
-    	override def isUseableByPlayer(player: EntityPlayer): Boolean =
-    			(player getDistanceSqToEntity boat) <= 64
-    	
-    	override def updateEntity
+		worldObj = boat.worldObj
+		
+		override def getInventoryName: String = "Furnace Boat"
+		
+		override def isUseableByPlayer(player: EntityPlayer): Boolean =
+				(player getDistanceSqToEntity boat) <= 64
+		
+		override def updateEntity
 		{
 			var flag = furnaceBurnTime > 0
 
@@ -140,7 +140,7 @@ object Furnace extends Modifier
 			}
 		}
 
-    	private def canSmelt: Boolean =
+		private def canSmelt: Boolean =
 		{
 			if (getStackInSlot(0) == null) false
 			else

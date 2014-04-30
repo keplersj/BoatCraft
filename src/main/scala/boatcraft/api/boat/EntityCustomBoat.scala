@@ -34,8 +34,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		super.entityInit
 		
 		dataWatcher addObject (20, "")
-        dataWatcher addObject (21, "")
-        dataWatcher addObject (22, "")
+		dataWatcher addObject (21, "")
+		dataWatcher addObject (22, "")
 	}
 	
 	override protected def writeEntityToNBT(tag: NBTTagCompound)
@@ -55,34 +55,34 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	}
 	
 	override def attackEntityFrom(par1DamageSource: DamageSource, par2: Float): Boolean =
-    {
-        if (isEntityInvulnerable)
-            return false
-        else if (!worldObj.isRemote && !isDead)
-        {
-            setForwardDirection(-getForwardDirection)
-            setTimeSinceHit(10)
-            setDamageTaken(getDamageTaken + par2 * 10)
-            setBeenAttacked
-            val flag = par1DamageSource.getEntity.isInstanceOf[EntityPlayer] &&
-            (par1DamageSource.getEntity.asInstanceOf[EntityPlayer]).capabilities.isCreativeMode
-            
-            if (flag || getDamageTaken > 40)
-            {
-                if (riddenByEntity != null)
-                    riddenByEntity mountEntity this
-                
-                if (!flag)
-                    func_145778_a(Items.boat, 1, 0)
-                
-                setDead
-            }
+	{
+		if (isEntityInvulnerable)
+			return false
+		else if (!worldObj.isRemote && !isDead)
+		{
+			setForwardDirection(-getForwardDirection)
+			setTimeSinceHit(10)
+			setDamageTaken(getDamageTaken + par2 * 10)
+			setBeenAttacked
+			val flag = par1DamageSource.getEntity.isInstanceOf[EntityPlayer] &&
+			(par1DamageSource.getEntity.asInstanceOf[EntityPlayer]).capabilities.isCreativeMode
+			
+			if (flag || getDamageTaken > 40)
+			{
+				if (riddenByEntity != null)
+					riddenByEntity mountEntity this
+				
+				if (!flag)
+					func_145778_a(Items.boat, 1, 0)
+				
+				setDead
+			}
 
-            return true
-        }
-        else
-            return true
-    }
+			return true
+		}
+		else
+			return true
+	}
 	
 	override def onUpdate
 	{
@@ -405,7 +405,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	}
 	
 	override def getPickedResult(target: MovingObjectPosition) =
-        getCustomBoat(getMaterialName, getModifierName)
+		getCustomBoat(getMaterialName, getModifierName)
 	
 	/**
 	  * A setter for the boat's material
@@ -420,27 +420,27 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	  */
 	def setModifier(modifier: String) =
 		dataWatcher updateObject (21, modifier)
-    
-    def setName(name: String) =
-        dataWatcher updateObject(22, name)
 	
-	def hasName = !(dataWatcher getWatchableObjectString 22).isEmpty()
+	def setName(name: String) =
+		dataWatcher updateObject(22, name)
+	
+	def hasName = !(dataWatcher getWatchableObjectString 22).isEmpty
 
 	/**
-      * A getter for the boat's material
+	  * A getter for the boat's material
 	  * @return the boat's material
 	  */
 	def getMaterial: traits.Material =
-	        (Registry find (dataWatcher getWatchableObjectString 20))
-	        .asInstanceOf[traits.Material]
+			(Registry find (dataWatcher getWatchableObjectString 20))
+			.asInstanceOf[traits.Material]
 
 	/**
-      * A getter for the boat's modifier
+	  * A getter for the boat's modifier
 	  * @return the boat's modifier
 	  */
 	def getModifier: traits.Modifier =
-	    (Registry find (dataWatcher getWatchableObjectString 21))
-	    .asInstanceOf[traits.Modifier]
+		(Registry find (dataWatcher getWatchableObjectString 21))
+		.asInstanceOf[traits.Modifier]
 
 	/**
 	  * A getter for the name of the boat's material
@@ -455,9 +455,9 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	  */
 	def getModifierName =
 		dataWatcher getWatchableObjectString 21
-    
-    def getName =
-        dataWatcher getWatchableObjectString 22
+	
+	def getName =
+		dataWatcher getWatchableObjectString 22
 	
 	//IInventory implementation
 	override def getSizeInventory =

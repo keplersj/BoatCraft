@@ -17,7 +17,7 @@ object Chest extends Modifier
 	
 	override def getInventory(boat: EntityCustomBoat): IInventory =
 		new Chest.Inventory(boat)
-    
+	
 	override def getName = "Chest"
 	
 	override def getContent = new ItemStack(Blocks.chest)

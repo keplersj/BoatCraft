@@ -52,12 +52,12 @@ class ItemCustomBoat extends ItemBoat
 		Registry.getModifier(stack)
 	
 	override def getItemStackDisplayName(stack: ItemStack): String = stack match {
-    case x if Registry.getModifier(stack).==(Empty) =>
-      Registry.getMaterial(stack).getName + " Dinghy"
-    case x if Registry.getModifier(stack).!=(null) =>
-      Registry.getMaterial(stack).getName + " Dinghy with " + Registry.getModifier(stack).getName
-    case _ =>
-      "Dinghy"
+	case x if Registry.getModifier(stack).==(Empty) =>
+	  Registry.getMaterial(stack).getName + " Dinghy"
+	case x if Registry.getModifier(stack).!=(null) =>
+	  Registry.getMaterial(stack).getName + " Dinghy with " + Registry.getModifier(stack).getName
+	case _ =>
+	  "Dinghy"
   }
 
 	override def onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack =
@@ -136,7 +136,7 @@ class ItemCustomBoat extends ItemBoat
 					
 					if (!world.isRemote)
 						world spawnEntityInWorld boat
-                    
+					
 					if (!player.capabilities.isCreativeMode)
 						stack.stackSize = stack.stackSize - 1
 				}

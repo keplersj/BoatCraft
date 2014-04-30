@@ -42,7 +42,7 @@ abstract class Material
 	/**
 	 * This function allows a material to be faster or slower than normal
 	 * 
-	 * @return the multiplier to appy to the speed of the boat
+	 * @return the multiplier to apply to the speed of the boat
 	 */
 	def getSpeedMultiplier = 1.0
 	

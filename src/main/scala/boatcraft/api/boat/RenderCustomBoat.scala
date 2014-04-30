@@ -98,13 +98,13 @@ class RenderCustomBoat
 		//Render the name
 		if (boat hasName)
 		{
-		    val d0 = boat.lastTickPosX + (boat.posX - boat.lastTickPosX) * f1;
-		    val d1 = boat.lastTickPosY + (boat.posY - boat.lastTickPosY) * f1;
-		    val d2 = boat.lastTickPosZ + (boat.posZ - boat.lastTickPosZ) * f1;
-		    
-		    println("Rendered name " + boat.getName + " at " + d0 + ", " + d1 + ", " + d2)
-		    println(boat.getDistanceSqToEntity(renderManager.livingPlayer) + " away from player")
-		    
+			val d0 = boat.lastTickPosX + (boat.posX - boat.lastTickPosX) * f1;
+			val d1 = boat.lastTickPosY + (boat.posY - boat.lastTickPosY) * f1;
+			val d2 = boat.lastTickPosZ + (boat.posZ - boat.lastTickPosZ) * f1;
+			
+			println("Rendered name " + boat.getName + " at " + d0 + ", " + d1 + ", " + d2)
+			println(boat.getDistanceSqToEntity(renderManager.livingPlayer) + " away from player")
+			
 			func_147906_a(boat, boat.getName, d0, d1, d2, 64)
 		}
 		
@@ -135,24 +135,24 @@ class RenderCustomBoat
 
 		val f4 = 0.75F
 
-    var block: Block = null
-    var meta: Int = 0
+	var block: Block = null
+	var meta: Int = 0
 
 		try {
-      block = Registry getModifier stack getBlock
-    } catch {
-      case e: Exception =>
-        e.printStackTrace()
-        block = Blocks.air
-    }
+	  block = Registry getModifier stack getBlock
+	} catch {
+	  case e: Exception =>
+		e.printStackTrace()
+		block = Blocks.air
+	}
 
-    try {
-      meta = Registry getModifier stack getMeta
-    } catch {
-      case e: Exception =>
-        e.printStackTrace()
-        meta = 0
-    }
+	try {
+	  meta = Registry getModifier stack getMeta
+	} catch {
+	  case e: Exception =>
+		e.printStackTrace()
+		meta = 0
+	}
 
 		if (block.getRenderType != -1)
 		{
@@ -178,12 +178,12 @@ class RenderCustomBoat
 		GL11 glScalef (1F / f4, 1F / f4, 1F / f4)
 
 		Minecraft.getMinecraft.getTextureManager bindTexture (
-      try {
-        Registry getMaterial stack getTexture
-      }	catch {
-        case e: Exception =>new ResourceLocation("minecraft", "textures/entity/boat.png")
-      }
-    )
+	  try {
+		Registry getMaterial stack getTexture
+	  }	catch {
+		case e: Exception =>new ResourceLocation("minecraft", "textures/entity/boat.png")
+	  }
+	)
 
 		GL11 glScalef (-1, -1, 1)
 		modelBoat render (null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)

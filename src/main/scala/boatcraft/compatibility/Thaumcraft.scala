@@ -28,8 +28,6 @@ object Thaumcraft
 	def preInit(e: FMLPreInitializationEvent)
 	{
 		log = e getModLog
-
-		printModInfo
 		
 		try
 		{
@@ -37,35 +35,29 @@ object Thaumcraft
 		}
 		catch
 		{
-            case ex: NoClassDefFoundError => //Sure
-            case err: NoSuchMethodError => //No problem
-            case ex: NoSuchMethodException => //Normal
-            case thr: Throwable => thr printStackTrace //Odd...
+			case ex: NoClassDefFoundError => //Sure
+			case err: NoSuchMethodError => //No problem
+			case ex: NoSuchMethodException => //Normal
+            case ex: NullPointerException => //If that's how you wanna roll...
+			case thr: Throwable => thr printStackTrace //Odd...
 		}
 	}
 
-    @Optional.Method(modid = "thaumcraft")
+	@Optional.Method(modid = "thaumcraft")
 	private def registerAspects
 	{
-        for ((matName, material) <- Registry.materials)
-            for ((modName, modifier) <- Registry.modifiers)
-        {
-            ThaumcraftApi.registerComplexObjectTag(getCustomBoat(matName, modName), boatAspects)
-        }
-        for ((matName, material) <- Registry.materials)
-            for ((modName, modifier) <- Registry.modifiers)
-        {
-            ThaumcraftApi.registerEntityTag("customBoat",
-            	ThaumcraftApiHelper.getObjectAspects(getCustomBoat(matName, modName)),
-            		new EntityTagsNBT("material", new NBTTagString(matName)),
-            		new EntityTagsNBT("modifier", new NBTTagString(modName)))
-        }
-	}
-
-	private def printModInfo
-	{
-		log info "BoatCraft Thaumcraft Compatibility"
-		log info "Adds Boatcraft aspects to BoatCraft boats"
-		log info "Copyright Vilim Lendvaj 2014"
+		for ((matName, material) <- Registry.materials)
+			for ((modName, modifier) <- Registry.modifiers)
+		{
+			ThaumcraftApi.registerComplexObjectTag(getCustomBoat(matName, modName), boatAspects)
+		}
+		for ((matName, material) <- Registry.materials)
+			for ((modName, modifier) <- Registry.modifiers)
+		{
+			ThaumcraftApi.registerEntityTag("customBoat",
+				ThaumcraftApiHelper.getObjectAspects(getCustomBoat(matName, modName)),
+					new EntityTagsNBT("material", new NBTTagString(matName)),
+					new EntityTagsNBT("modifier", new NBTTagString(modName)))
+		}
 	}
 }

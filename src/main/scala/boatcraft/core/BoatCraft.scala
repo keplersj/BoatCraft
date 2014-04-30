@@ -49,7 +49,7 @@ object BoatCraft
 		//All Boat Materials should be at least rideable
 		Registry register Empty
 		
-        GameRegistry registerItem (ItemCustomBoat, "customBoat")
+		GameRegistry registerItem (ItemCustomBoat, "customBoat")
 	}
 	
 	@EventHandler

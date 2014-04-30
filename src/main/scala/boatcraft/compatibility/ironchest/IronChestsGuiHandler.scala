@@ -12,7 +12,7 @@ object IronChestsGuiHandler extends IGuiHandler
 {
 	override def getClientGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): AnyRef =
 		try
-	    {
+		{
 			return GUIChest.GUI.buildGUI(IronChestType.values()(ID), player.inventory,
 				getBoat(world, x, y, z).getInventory.asInstanceOf[TileEntityIronChest])
 		}
@@ -23,13 +23,13 @@ object IronChestsGuiHandler extends IGuiHandler
 	
 	override def getServerGuiElement(ID: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): AnyRef =
 		try
-	    {
-	        return new ContainerIronChest(player.inventory, getBoat(world, x, y, z), IronChestType.values()(ID), 0, 0)
-        }
-        catch
-        {
-            case _: IndexOutOfBoundsException => return null
-        }
+		{
+			return new ContainerIronChest(player.inventory, getBoat(world, x, y, z), IronChestType.values()(ID), 0, 0)
+		}
+		catch
+		{
+			case _: IndexOutOfBoundsException => return null
+		}
 	
 	@throws(classOf[IndexOutOfBoundsException])
 	private def getBoat(world: World, x: Int, y: Int, z: Int) =

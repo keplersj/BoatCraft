@@ -18,30 +18,30 @@ package object api
 	 * The function used to retrieve a boat item with
 	 * the specified material and modifier
 	 * 
-     * @param mat the Material
-     * @param mod the Modifier
+	 * @param mat the Material
+	 * @param mod the Modifier
 	 * 
 	 * @return the custom boat itemstack
 	 */
-    def getCustomBoat(mat: Material, mod: Modifier): ItemStack =
-        getCustomBoat(mat toString, mod toString)
-    
-    /**
-     * The function used to retrieve a boat item with
-     * the specified material and modifier
-     * 
-     * @param mat the Material
-     * @param mod the Modifier
-     * 
-     * @return the custom boat itemstack
-     */
-    def getCustomBoat(mat: String, mod: String) =
-    {
-    	var stack = new ItemStack(ItemCustomBoat)
-    	stack.stackTagCompound = new NBTTagCompound
-        stack.stackTagCompound.setString("material", mat)
-        stack.stackTagCompound.setString("modifier", mod)
-        
-        stack
-    }
+	def getCustomBoat(mat: Material, mod: Modifier): ItemStack =
+		getCustomBoat(mat toString, mod toString)
+	
+	/**
+	 * The function used to retrieve a boat item with
+	 * the specified material and modifier
+	 * 
+	 * @param mat the Material
+	 * @param mod the Modifier
+	 * 
+	 * @return the custom boat itemstack
+	 */
+	def getCustomBoat(mat: String, mod: String) =
+	{
+		var stack = new ItemStack(ItemCustomBoat)
+		stack.stackTagCompound = new NBTTagCompound
+		stack.stackTagCompound.setString("material", mat)
+		stack.stackTagCompound.setString("modifier", mod)
+		
+		stack
+	}
 }
