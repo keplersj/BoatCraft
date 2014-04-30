@@ -12,18 +12,21 @@ import thaumcraft.api.ThaumcraftApi
 import thaumcraft.api.ThaumcraftApi.EntityTagsNBT
 import thaumcraft.api.ThaumcraftApiHelper
 import thaumcraft.api.aspects.{Aspect, AspectList}
+import java.util
 
-object Thaumcraft extends CompatModule("thaumcraft", "Thaumcraft")
+object Thaumcraft extends CompatModule("Thaumcraft", "Thaumcraft")
 {
 	var log: Logger = null
 
-	val boatAspects = (new AspectList).add(Aspect.MOTION, 2).add(Aspect.WATER, 2)
+	var boatAspects:AnyRef = null
 
 	@Optional.Method(modid = "thaumcraft")
 	override def preInit(e: FMLPreInitializationEvent)
 	{
 		log = e getModLog
-		
+
+    boatAspects = (new AspectList).add(Aspect.MOTION, 2).add(Aspect.WATER, 2)
+
 		try
 		{
 			registerAspects
@@ -44,7 +47,7 @@ object Thaumcraft extends CompatModule("thaumcraft", "Thaumcraft")
 		for ((matName, material) <- Registry.materials)
 			for ((modName, modifier) <- Registry.modifiers)
 		{
-			ThaumcraftApi.registerComplexObjectTag(getCustomBoat(matName, modName), boatAspects)
+			ThaumcraftApi.registerComplexObjectTag(getCustomBoat(matName, modName), boatAspects.asInstanceOf[AspectList])
 		}
 		for ((matName, material) <- Registry.materials)
 			for ((modName, modifier) <- Registry.modifiers)

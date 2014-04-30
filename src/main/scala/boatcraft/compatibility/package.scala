@@ -14,24 +14,26 @@ package object compatibility {
 
   def preInit(event: FMLPreInitializationEvent) {
     for (module <- mods) {
-      if (Loader isModLoaded module.modName)
+      if (Loader isModLoaded module.modName) {
         module.preInit(event)
+      }
     }
   }
 
   def init(event: FMLInitializationEvent) {
     for (module <- mods) {
-      if (Loader isModLoaded module.modName)
+      if (Loader isModLoaded module.modName) {
         module.init(event)
+      }
     }
   }
 
   def postInit(event: FMLPostInitializationEvent) {
     for (module <- mods) {
-      if (Loader isModLoaded module.modName)
+      if (Loader isModLoaded module.modName) {
         module.postInit(event)
+      }
     }
-
   }
 
 }
