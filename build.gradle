@@ -40,10 +40,6 @@ minecraft {
 	mcpVersion = '9.03'
 }
 
-tasks.withType(ScalaCompile) {
-    scalaCompileOptions.useAnt = false
-}
-
 repositories {
     ivy {
         name = 'IndustrialCraft2 Jenkins'
