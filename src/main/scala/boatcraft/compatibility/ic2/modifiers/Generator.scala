@@ -1,64 +1,33 @@
 package boatcraft.compatibility.ic2.modifiers
 
+import boatcraft.api.boat.EntityCustomBoat
+import boatcraft.api.traits.Modifier
+import ic2.api.item.IC2Items
+import ic2.core.block.generator.tileentity.TileEntityGenerator
 import net.minecraft.inventory.IInventory
-import boatcraft.compatibility.ic2.modifiers.types.AbstractEnergySourceMod
-import net.minecraft.item.ItemStack
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraftforge.common.ForgeHooks
-import net.minecraft.tileentity.TileEntityFurnace
-import ic2.api.item.IElectricItem
+import net.minecraft.item.{ItemBlock, ItemStack}
+import net.minecraft.nbt.NBTTagCompound
+import net.minecraftforge.common.util.ForgeDirection
 
-object Generator extends AbstractEnergySourceMod(4000, 1) with IInventory
+object Generator extends Modifier
 {
-	var fuel: ItemStack = null
-	var charge: ItemStack = null
+	override def getContent = IC2Items.getItem("generator")
 	
-	def decrStackSize(slot: Int, count: Int) =
-		if (slot == 0) fuel splitStack count
-		else if (slot == 1) charge splitStack count
-		else null
+	override def getBlock = getContent.getItem.asInstanceOf[ItemBlock].field_150939_a
 	
-	def getInventoryName = "Generator on a Boat"
-	
-	def getInventoryStackLimit = 64
-	
-	def getSizeInventory = 2
-	
-	def getStackInSlot(slot: Int): ItemStack =
-		if (slot == 0) fuel
-        else if (slot == 1) charge
-        else null
-	
-	def getStackInSlotOnClosing(slot: Int): ItemStack =
-        if (slot == 0) fuel
-        else if (slot == 1) charge
-        else null
-	
-	def hasCustomInventoryName: Boolean = false
-	
-	def isItemValidForSlot(slot: Int, stack: ItemStack): Boolean =
-        if (slot == 0) TileEntityFurnace isItemFuel stack
-        else if (slot == 1) stack.getItem.isInstanceOf[IElectricItem]
-        else false
-	
-	def isUseableByPlayer(player: EntityPlayer): Boolean = true
-	
-	def markDirty
-	{}
-	
-	def openInventory
-    {}
-	
-    def closeInventory
-    {}
+	override def getInventory(boat: EntityCustomBoat): IInventory = new Inventory(boat)
     
-    def setInventorySlotContents(slot: Int, stack: ItemStack)
-    {
-    	if (slot == 0) fuel = stack
-        else if (slot == 1) charge = stack
-    }
+    override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
+        boat.getInventory.asInstanceOf[Inventory] readFromNBT tag
     
-    override def getOfferedEnergy =
-    	if (energySource.getOfferedEnergy >= 10) 10
-    	else 0
+    override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
+        boat.getInventory.asInstanceOf[Inventory] writeToNBT tag
+	
+	//Facing
+	override def getMeta = ForgeDirection.NORTH.ordinal
+	
+	private[ic2] class Inventory(boat: EntityCustomBoat) extends TileEntityGenerator
+	{
+		worldObj = boat.worldObj
+	}
 }
