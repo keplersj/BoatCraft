@@ -18,12 +18,12 @@ object Generator extends Modifier
 	override def getBlock = getContent.getItem.asInstanceOf[ItemBlock].field_150939_a
 	
 	override def getInventory(boat: EntityCustomBoat): IInventory = new Inventory(boat)
-    
-    override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-        boat.getInventory.asInstanceOf[Inventory] readFromNBT tag
-    
-    override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-        boat.getInventory.asInstanceOf[Inventory] writeToNBT tag
+	
+	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
+		boat.getInventory.asInstanceOf[Inventory] readFromNBT tag
+	
+	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
+		boat.getInventory.asInstanceOf[Inventory] writeToNBT tag
 	
 	private[ic2] class Inventory(boat: EntityCustomBoat) extends TileEntityGenerator
 	{

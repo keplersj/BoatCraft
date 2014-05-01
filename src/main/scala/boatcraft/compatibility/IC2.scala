@@ -49,17 +49,17 @@ object IC2 extends CompatModule
 			case thr: Throwable => thr printStackTrace //Weird...
 		}
 	}
-    
-    @Optional.Method(modid = "IC2")
-    private def addMaterials
-    {
-        Registry register Rubber
-        Registry register Carbon
-    }
-    
-    @Optional.Method(modid = "IC2")
-    private def addModifiers
-    {
-        Registry register Generator
-    }
+	
+	@Optional.Method(modid = "IC2")
+	private def addMaterials
+	{
+		Registry register Rubber
+		Registry register Carbon
+	}
+	
+	@Optional.Method(modid = "IC2")
+	private def addModifiers
+	{
+		Registry register Generator
+	}
 }
