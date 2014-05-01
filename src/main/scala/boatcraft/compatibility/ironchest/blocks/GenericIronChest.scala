@@ -1,20 +1,19 @@
-package boatcraft.compatibility.ironchest.modifiers
+package boatcraft.compatibility.ironchest.blocks
 
 import cpw.mods.fml.common.Mod
 import cpw.mods.ironchest.{IronChest, IronChestType, ItemChestChanger, TileEntityIronChest}
 import boatcraft.api.boat.EntityCustomBoat
-import boatcraft.api.traits.Modifier
+import boatcraft.api.traits.Block
 import boatcraft.compatibility.IronChests
 import boatcraft.core.utilities.NBTHelper
-import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 
-abstract class GenericIronChest(chestType: IronChestType) extends Modifier
+abstract class GenericIronChest(chestType: IronChestType) extends Block
 {
-	override def getBlock: Block = IronChest.ironChestBlock
+	override def getBlock = IronChest.ironChestBlock
 	override def getMeta = chestType ordinal
 	
 	override def getContent = new ItemStack(getBlock, 1, getMeta)

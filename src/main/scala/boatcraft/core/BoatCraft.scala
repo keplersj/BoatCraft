@@ -14,7 +14,7 @@ import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
-import boatcraft.core.modifiers.Empty
+import boatcraft.core.blocks.Empty
 import boatcraft.core.packets.ChannelHandler
 import boatcraft.core.utilities.Recipes
 import boatcraft.compatibility

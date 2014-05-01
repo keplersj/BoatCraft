@@ -1,19 +1,18 @@
-package boatcraft.compatibility.vanilla.modifiers
+package boatcraft.compatibility.vanilla.blocks
 
 import boatcraft.api.boat.EntityCustomBoat
-import boatcraft.api.traits.Modifier
 import boatcraft.core.utilities.NBTHelper
-import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntityChest
+import boatcraft.api.traits.Block
 
-object Chest extends Modifier
+object Chest extends Block
 {
-	override def getBlock: Block = Blocks.chest
+	override def getBlock = Blocks.chest
 	
 	override def getInventory(boat: EntityCustomBoat): IInventory =
 		new Chest.Inventory(boat)

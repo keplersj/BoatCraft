@@ -9,7 +9,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.network.NetworkRegistry
 import boatcraft.api.Registry
 import boatcraft.compatibility.ironchest._
-import boatcraft.compatibility.ironchest.modifiers._
+import boatcraft.compatibility.ironchest.blocks._
 import net.minecraftforge.common.MinecraftForge
 import boatcraft.core.BoatCraft
 

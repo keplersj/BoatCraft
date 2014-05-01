@@ -2,7 +2,7 @@ package boatcraft.compatibility.ironchest
 
 import cpw.mods.ironchest.IronChestType
 
-package object modifiers
+package object blocks
 {
 	object Copper_Chest extends GenericIronChest(IronChestType.COPPER)
 

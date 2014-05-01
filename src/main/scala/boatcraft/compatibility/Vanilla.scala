@@ -16,9 +16,9 @@ import boatcraft.compatibility.vanilla.VanillaGuiHandler
 import boatcraft.compatibility.vanilla.materials.crystal._
 import boatcraft.compatibility.vanilla.materials.metal._
 import boatcraft.compatibility.vanilla.materials.wood._
-import boatcraft.compatibility.vanilla.modifiers._
+import boatcraft.compatibility.vanilla.blocks._
 import boatcraft.core.BoatCraft
-import boatcraft.core.modifiers.Empty
+import boatcraft.core.blocks.Empty
 import boatcraft.core.utilities.Recipes
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack

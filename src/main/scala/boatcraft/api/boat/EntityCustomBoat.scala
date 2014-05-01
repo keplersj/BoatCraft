@@ -438,9 +438,9 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	  * A getter for the boat's modifier
 	  * @return the boat's modifier
 	  */
-	def getModifier: traits.Modifier =
+	def getModifier: traits.Block =
 		(Registry find (dataWatcher getWatchableObjectString 21))
-		.asInstanceOf[traits.Modifier]
+		.asInstanceOf[traits.Block]
 
 	/**
 	  * A getter for the name of the boat's material

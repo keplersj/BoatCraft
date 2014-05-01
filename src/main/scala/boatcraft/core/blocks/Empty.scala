@@ -1,10 +1,10 @@
-package boatcraft.core.modifiers
+package boatcraft.core.blocks
 
-import boatcraft.api.traits.Modifier
+import boatcraft.api.traits.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.init.Blocks
 
-object Empty extends Modifier
+object Empty extends Block
 {
 	override def isRideable = true
 	

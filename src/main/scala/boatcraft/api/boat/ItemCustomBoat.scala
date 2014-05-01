@@ -19,7 +19,7 @@ import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.util.Vec3
 import net.minecraft.world.World
-import boatcraft.core.modifiers.Empty
+import boatcraft.core.blocks.Empty
 
 /**
   * The Item Class used for all items that can be deployed like a Boat.
