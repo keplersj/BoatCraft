@@ -52,8 +52,6 @@ object BoatCraft
 		
 		//All Boat Materials should be at least rideable
 		Registry register Empty
-		
-		GameRegistry registerItem (ItemCustomBoat, "customBoat")
 
     compatibility.preInit(event)
 	}
@@ -61,6 +59,8 @@ object BoatCraft
 	@EventHandler
 	def init(event: FMLInitializationEvent) 
 	{
+    GameRegistry registerItem (ItemCustomBoat, "customBoat")
+
 		proxy registerEntities
 
 		proxy registerRenderers

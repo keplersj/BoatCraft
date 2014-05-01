@@ -11,8 +11,9 @@ import boatcraft.api.Registry
 import boatcraft.compatibility.ironchest._
 import boatcraft.compatibility.ironchest.modifiers._
 import net.minecraftforge.common.MinecraftForge
+import boatcraft.core.BoatCraft
 
-object IronChests extends CompatModule("IronChest", "Iron Chest")
+object IronChests extends CompatModule
 {
 	var log: Logger = null
 	
@@ -24,7 +25,7 @@ object IronChests extends CompatModule("IronChest", "Iron Chest")
 		try
 		{
 			addModifiers
-			NetworkRegistry.INSTANCE registerGuiHandler (this, IronChestsGuiHandler)
+			NetworkRegistry.INSTANCE registerGuiHandler (BoatCraft, IronChestsGuiHandler)
 			MinecraftForge.EVENT_BUS register IronChestsEventHandler
 		}
 		catch

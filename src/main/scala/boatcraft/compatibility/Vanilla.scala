@@ -26,7 +26,7 @@ import net.minecraft.item.crafting.{CraftingManager, IRecipe}
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.oredict.ShapedOreRecipe
 
-object Vanilla extends CompatModule("FML", "Forge Mod Loader")
+object Vanilla extends CompatModule
 {
 	private[boatcraft] var log: Logger = null
 	
@@ -43,7 +43,7 @@ object Vanilla extends CompatModule("FML", "Forge Mod Loader")
 
 		replaceBoatRecipe
 
-		NetworkRegistry.INSTANCE registerGuiHandler (this, VanillaGuiHandler)
+		NetworkRegistry.INSTANCE registerGuiHandler (BoatCraft, VanillaGuiHandler)
 	}
 	
 	override def postInit(event: FMLPostInitializationEvent)

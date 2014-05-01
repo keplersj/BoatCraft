@@ -11,7 +11,7 @@ import boatcraft.api.Registry
 import boatcraft.compatibility.ic2.Carbon
 import boatcraft.compatibility.ic2.Rubber
 
-object IC2 extends CompatModule("IC2", "IndustrialCraft2")
+object IC2 extends CompatModule
 {
 	var log: Logger = null
 	

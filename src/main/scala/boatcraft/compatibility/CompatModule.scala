@@ -2,10 +2,7 @@ package boatcraft.compatibility
 
 import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLInitializationEvent, FMLPreInitializationEvent}
 
-class CompatModule(compatModId:String, compatModName:String) {
-
-  val modId = compatModId
-  val modName = compatModName
+abstract class CompatModule {
 
   def preInit(event: FMLPreInitializationEvent) {
 

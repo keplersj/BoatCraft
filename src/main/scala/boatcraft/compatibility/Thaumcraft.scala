@@ -14,7 +14,7 @@ import thaumcraft.api.ThaumcraftApiHelper
 import thaumcraft.api.aspects.{Aspect, AspectList}
 import java.util
 
-object Thaumcraft extends CompatModule("Thaumcraft", "Thaumcraft")
+object Thaumcraft extends CompatModule
 {
 	var log: Logger = null
 
