@@ -11,7 +11,7 @@ package object compatibility {
     ("", Vanilla),
     ("IronChest", IronChests),
     ("Thaumcraft", Thaumcraft),
-    ("IndustrialCraft 2", IC2)
+    ("IC2", IC2)
   )
 
   def preInit(event: FMLPreInitializationEvent) {
