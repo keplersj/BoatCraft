@@ -33,7 +33,7 @@ object IronChests extends CompatModule
 			case ex: NoClassDefFoundError => //That's OK
 			case err: NoSuchMethodError => //Fine
 			case ex: NoSuchMethodException => //No problem
-            case ex: NullPointerException => //Sure
+			case ex: NullPointerException => //Sure
 			case thr: Throwable => thr printStackTrace //Weird...
 		}
 	}

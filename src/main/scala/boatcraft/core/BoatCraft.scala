@@ -53,13 +53,13 @@ object BoatCraft
 		//All Boat Materials should be at least rideable
 		Registry register Empty
 
-    compatibility.preInit(event)
+	compatibility.preInit(event)
 	}
 	
 	@EventHandler
 	def init(event: FMLInitializationEvent) 
 	{
-    GameRegistry registerItem (ItemCustomBoat, "customBoat")
+	GameRegistry registerItem (ItemCustomBoat, "customBoat")
 
 		proxy registerEntities
 
@@ -67,12 +67,12 @@ object BoatCraft
 
 		Recipes addBoatRecipes
 
-    compatibility.init(event)
+	compatibility.init(event)
 	}
 
   @EventHandler
   def postInit(event: FMLPostInitializationEvent) {
-    compatibility.postInit(event)
+	compatibility.postInit(event)
   }
 	
 	def printModInfo

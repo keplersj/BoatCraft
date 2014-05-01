@@ -1,15 +1,11 @@
 package boatcraft.compatibility
 
 import org.apache.logging.log4j.Logger
-import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.Mod.EventHandler
-import cpw.mods.fml.common.Optional
-import cpw.mods.fml.common.event.FMLPreInitializationEvent
-import cpw.mods.fml.common.event.FMLPostInitializationEvent
-import boatcraft.core.utilities.Recipes
+
 import boatcraft.api.Registry
-import boatcraft.compatibility.ic2.Carbon
-import boatcraft.compatibility.ic2.Rubber
+import boatcraft.compatibility.ic2.materials._
+import cpw.mods.fml.common.Optional
+import cpw.mods.fml.common.event._
 
 object IC2 extends CompatModule
 {
@@ -39,6 +35,7 @@ object IC2 extends CompatModule
 	{
 		try
 		{
+			//TODO for some reason I can't access the IC2Items class from here, investigate
 			//Recipes.removeRecipe(IC2Items getItem "boatRubber")
 			//Recipes.removeRecipe(IC2Items getItem "boatCarbon")
 		}
@@ -47,7 +44,7 @@ object IC2 extends CompatModule
 			case ex: NoClassDefFoundError => //That's OK
 			case err: NoSuchMethodError => //Fine
 			case ex: NoSuchMethodException => //No problem
-            case ex: NullPointerException => //Sure
+			case ex: NullPointerException => //Sure
 			case thr: Throwable => thr printStackTrace //Weird...
 		}
 	}
@@ -55,7 +52,7 @@ object IC2 extends CompatModule
 	@Optional.Method(modid = "IC2")
 	private def addMaterials
 	{
-        Registry register Rubber
-        Registry register Carbon
+		Registry register Rubber
+		Registry register Carbon
 	}
 }
