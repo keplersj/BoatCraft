@@ -24,7 +24,7 @@ import net.minecraftforge.common.config.Configuration
   name = "BoatCraft",
   version = "2.0",
   modLanguage = "scala",
-  dependencies = "after:IronChest, Thaumcraft, IC2")
+  dependencies = "after:IronChest;after:Thaumcraft;after:IC2")
 object BoatCraft
 {
 	@SidedProxy(modId = "boatcraft",

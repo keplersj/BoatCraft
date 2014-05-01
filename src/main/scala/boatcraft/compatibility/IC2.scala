@@ -1,11 +1,11 @@
 package boatcraft.compatibility
 
 import org.apache.logging.log4j.Logger
-
 import boatcraft.api.Registry
 import boatcraft.compatibility.ic2.materials._
 import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event._
+import boatcraft.compatibility.ic2.modifiers.Generator
 
 object IC2 extends CompatModule
 {
@@ -19,6 +19,7 @@ object IC2 extends CompatModule
 		try
 		{
 			addMaterials
+			addModifiers
 		}
 		catch
 		{
@@ -48,11 +49,17 @@ object IC2 extends CompatModule
 			case thr: Throwable => thr printStackTrace //Weird...
 		}
 	}
-	
-	@Optional.Method(modid = "IC2")
-	private def addMaterials
-	{
-		Registry register Rubber
-		Registry register Carbon
-	}
+    
+    @Optional.Method(modid = "IC2")
+    private def addMaterials
+    {
+        Registry register Rubber
+        Registry register Carbon
+    }
+    
+    @Optional.Method(modid = "IC2")
+    private def addModifiers
+    {
+        Registry register Generator
+    }
 }

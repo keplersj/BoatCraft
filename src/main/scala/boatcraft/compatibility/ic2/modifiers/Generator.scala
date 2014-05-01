@@ -11,6 +11,8 @@ import net.minecraftforge.common.util.ForgeDirection
 
 object Generator extends Modifier
 {
+	override def getName = "Generator"
+	
 	override def getContent = IC2Items.getItem("generator")
 	
 	override def getBlock = getContent.getItem.asInstanceOf[ItemBlock].field_150939_a
@@ -22,9 +24,6 @@ object Generator extends Modifier
     
     override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
         boat.getInventory.asInstanceOf[Inventory] writeToNBT tag
-	
-	//Facing
-	override def getMeta = ForgeDirection.NORTH.ordinal
 	
 	private[ic2] class Inventory(boat: EntityCustomBoat) extends TileEntityGenerator
 	{
