@@ -1,4 +1,4 @@
-package boatcraft.compatibility.ic2.materials
+package boatcraft.compatibility.industrialcraft.materials
 
 import boatcraft.api.traits.Material
 import net.minecraft.util.ResourceLocation

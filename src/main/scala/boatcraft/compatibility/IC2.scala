@@ -2,10 +2,12 @@ package boatcraft.compatibility
 
 import org.apache.logging.log4j.Logger
 import boatcraft.api.Registry
-import boatcraft.compatibility.ic2.materials._
+import boatcraft.compatibility.industrialcraft.materials._
 import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event._
-import boatcraft.compatibility.ic2.modifiers.Generator
+import boatcraft.compatibility.industrialcraft.modifiers.Generator
+import boatcraft.core.utilities.Recipes
+import ic2.api.item.IC2Items
 
 object IC2 extends CompatModule
 {
@@ -36,9 +38,8 @@ object IC2 extends CompatModule
 	{
 		try
 		{
-			//TODO for some reason I can't access the IC2Items class from here, investigate
-			//Recipes.removeRecipe(IC2Items getItem "boatRubber")
-			//Recipes.removeRecipe(IC2Items getItem "boatCarbon")
+			Recipes.removeRecipe(IC2Items getItem "boatRubber")
+			Recipes.removeRecipe(IC2Items getItem "boatCarbon")
 		}
 		catch
 		{

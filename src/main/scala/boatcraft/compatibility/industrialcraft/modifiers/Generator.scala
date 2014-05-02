@@ -1,4 +1,4 @@
-package boatcraft.compatibility.ic2.modifiers
+package boatcraft.compatibility.industrialcraft.modifiers
 
 import boatcraft.api.boat.EntityCustomBoat
 import boatcraft.api.traits.Modifier
@@ -25,7 +25,7 @@ object Generator extends Modifier
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 		boat.getInventory.asInstanceOf[Inventory] writeToNBT tag
 	
-	private[ic2] class Inventory(boat: EntityCustomBoat) extends TileEntityGenerator
+	private[industrialcraft] class Inventory(boat: EntityCustomBoat) extends TileEntityGenerator
 	{
 		worldObj = boat.worldObj
 	}
