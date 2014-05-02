@@ -19,7 +19,7 @@ import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.util.Vec3
 import net.minecraft.world.World
-import boatcraft.core.modifiers.Empty
+import boatcraft.core.blocks.Empty
 
 /**
   * The Item Class used for all items that can be deployed like a Boat.
@@ -37,9 +37,9 @@ class ItemCustomBoat extends ItemBoat
 		for ((nameMat, material) <- Registry.materials)
 		{
 			stack.stackTagCompound setString ("material", nameMat)
-			for ((nameMod, modifier) <- Registry.modifiers)
+			for ((nameBlock, block) <- Registry.blocks)
 			{
-				stack.stackTagCompound setString ("modifier", nameMod)
+				stack.stackTagCompound setString ("modifier", nameBlock)
 				list.asInstanceOf[List[ItemStack]] add stack.copy
 			}
 		}
@@ -49,13 +49,13 @@ class ItemCustomBoat extends ItemBoat
 		"boat." +
 		Registry.getMaterial(stack) +
 		"." +
-		Registry.getModifier(stack)
+		Registry.getBlock(stack)
 	
 	override def getItemStackDisplayName(stack: ItemStack): String = stack match {
-	case x if Registry.getModifier(stack).==(Empty) =>
+	case x if Registry.getBlock(stack).==(Empty) =>
 	  Registry.getMaterial(stack).getName + " Dinghy"
-	case x if Registry.getModifier(stack).!=(null) =>
-	  Registry.getMaterial(stack).getName + " Dinghy with " + Registry.getModifier(stack).getName
+	case x if Registry.getBlock(stack).!=(null) =>
+	  Registry.getMaterial(stack).getName + " Dinghy with " + Registry.getBlock(stack).getName
 	case _ =>
 	  "Dinghy"
   }
@@ -121,12 +121,12 @@ class ItemCustomBoat extends ItemBoat
 					
 					var boat: EntityCustomBoat = null
 					val material = Registry getMaterial stack
-					val modifier = Registry getModifier stack
+					val block = Registry getBlock stack
 
 					boat = EntityCustomBoat(world, i + 0.5, j + 1.0, k + 0.5)
 					boat setMaterial (material toString)
 
-					boat setModifier (modifier toString)
+					boat setModifier (block toString)
 					boat.rotationYaw =
 						((MathHelper.floor_double(player.rotationYaw * 4.0 / 360.0 + 0.5) & 3) - 1) * 90
 

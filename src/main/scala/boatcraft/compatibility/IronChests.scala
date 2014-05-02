@@ -9,7 +9,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.network.NetworkRegistry
 import boatcraft.api.Registry
 import boatcraft.compatibility.ironchest._
-import boatcraft.compatibility.ironchest.modifiers._
+import boatcraft.compatibility.ironchest.blocks._
 import net.minecraftforge.common.MinecraftForge
 import boatcraft.core.BoatCraft
 
@@ -24,7 +24,7 @@ object IronChests extends CompatModule
 
 		try
 		{
-			addModifiers
+			addBlocks
 			NetworkRegistry.INSTANCE registerGuiHandler (BoatCraft, IronChestsGuiHandler)
 			MinecraftForge.EVENT_BUS register IronChestsEventHandler
 		}
@@ -39,7 +39,7 @@ object IronChests extends CompatModule
 	}
 	
 	@Optional.Method(modid = "IronChest")
-	private def addModifiers
+	private def addBlocks
 	{
 		Registry register Iron_Chest
 		Registry register Gold_Chest

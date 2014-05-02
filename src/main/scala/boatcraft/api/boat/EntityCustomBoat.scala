@@ -41,17 +41,19 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	override protected def writeEntityToNBT(tag: NBTTagCompound)
 	{
 		tag setString ("material", getMaterialName)
-		tag setString ("modifier", getModifierName)
+		tag setString ("modifier", getBlockName)
 		
-		getModifier writeStateToNBT(this, tag)
+		getMaterial writeStateToNBT (this, tag)
+    getBlock writeStateToNBT(this, tag)
 	}
 	
 	override protected def readEntityFromNBT(tag: NBTTagCompound)
 	{
 		setMaterial(tag getString "material")
-		setModifier(tag getString "modifier")
+		setModifier(tag getString "block")
 		
-		getModifier readStateFromNBT(this, tag)
+		getMaterial readStateFromNBT (this, tag)
+    getBlock readStateFromNBT(this, tag)
 	}
 	
 	override def attackEntityFrom(par1DamageSource: DamageSource, par2: Float): Boolean =
@@ -102,7 +104,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 //		val jaw = Math.atan(vY / vX) + fix
 //		setPositionAndRotation2(aX, aY, aZ, jaw toFloat, rotationPitch, 3)
 		
-		getModifier update this
+		getMaterial update this
+    getBlock update this
 		
 		ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this,
 			getMaterial.getSpeedMultiplier * ObfuscationReflectionHelper.getPrivateValue(
@@ -375,7 +378,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		var stack: ItemStack = new ItemStack(item, count)
 
 		if (item == Items.boat)
-			stack = getCustomBoat(getMaterialName, getModifierName)
+			stack = getCustomBoat(getMaterialName, getBlockName)
 		else if (item == Item.getItemFromBlock(Blocks.planks))
 			stack = getMaterial getItem
 		else if (item == Items.stick)
@@ -399,13 +402,13 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 			println("Set the name to " + player.getCurrentEquippedItem.getDisplayName)
 			return false
 		}
-		if (getModifier isRideable) return super.interactFirst(player)
-		getModifier interact (player, this)
+		if (getBlock isRideable) return super.interactFirst(player)
+		getBlock interact (player, this)
 		return true
 	}
 	
 	override def getPickedResult(target: MovingObjectPosition) =
-		getCustomBoat(getMaterialName, getModifierName)
+		getCustomBoat(getMaterialName, getBlockName)
 	
 	/**
 	  * A setter for the boat's material
@@ -435,12 +438,12 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 			.asInstanceOf[traits.Material]
 
 	/**
-	  * A getter for the boat's modifier
-	  * @return the boat's modifier
+	  * A getter for the boat's block
+	  * @return the boat's block
 	  */
-	def getModifier: traits.Modifier =
+	def getBlock: traits.Block =
 		(Registry find (dataWatcher getWatchableObjectString 21))
-		.asInstanceOf[traits.Modifier]
+		.asInstanceOf[traits.Block]
 
 	/**
 	  * A getter for the name of the boat's material
@@ -450,10 +453,10 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		dataWatcher getWatchableObjectString 20
 
 	/**
-	  * A getter fo the name of the boat's modifier
-	  * @return the name of the boat's modifier
+	  * A getter fo the name of the boat's block
+	  * @return the name of the boat's block
 	  */
-	def getModifierName =
+	def getBlockName =
 		dataWatcher getWatchableObjectString 21
 	
 	def getName =
@@ -501,7 +504,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	
 	protected[boatcraft] def getInventory =
 	{
-		if (inventory == null) inventory = getModifier getInventory this
+		if (inventory == null) inventory = getBlock getInventory this
 		inventory
 	}
 }

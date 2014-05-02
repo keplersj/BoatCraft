@@ -5,7 +5,7 @@ import boatcraft.api.Registry
 import boatcraft.compatibility.industrialcraft.materials._
 import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event._
-import boatcraft.compatibility.industrialcraft.modifiers.Generator
+import boatcraft.compatibility.industrialcraft.blocks.Generator
 import boatcraft.core.utilities.Recipes
 import ic2.api.item.IC2Items
 
@@ -21,7 +21,7 @@ object IC2 extends CompatModule
 		try
 		{
 			addMaterials
-			addModifiers
+			addBlocks
 		}
 		catch
 		{
@@ -59,7 +59,7 @@ object IC2 extends CompatModule
 	}
 	
 	@Optional.Method(modid = "IC2")
-	private def addModifiers
+	private def addBlocks
 	{
 		Registry register Generator
 	}

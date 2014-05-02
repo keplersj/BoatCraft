@@ -4,7 +4,7 @@ import cpw.mods.fml.common.network.IGuiHandler
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.world.World
 import net.minecraft.client.gui.inventory.GuiChest
-import boatcraft.compatibility.vanilla.modifiers.Workbench
+import boatcraft.compatibility.vanilla.blocks.Workbench
 
 object VanillaGuiHandler extends IGuiHandler
 {

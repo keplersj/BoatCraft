@@ -1,7 +1,6 @@
-package boatcraft.compatibility.vanilla.modifiers
+package boatcraft.compatibility.vanilla.blocks
 
-import boatcraft.api.traits.Modifier
-import net.minecraft.block.Block
+import boatcraft.api.traits.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
@@ -13,9 +12,9 @@ import net.minecraft.client.gui.inventory.GuiCrafting
 import net.minecraft.client.resources.I18n
 import boatcraft.api.boat.EntityCustomBoat
 
-object Workbench extends Modifier
+object Workbench extends Block
 {
-	override def getBlock: Block = Blocks.crafting_table
+	override def getBlock = Blocks.crafting_table
 	
 	override def getMeta: Int = 0
 	

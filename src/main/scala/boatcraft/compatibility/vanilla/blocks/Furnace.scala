@@ -1,7 +1,7 @@
-package boatcraft.compatibility.vanilla.modifiers
+package boatcraft.compatibility.vanilla.blocks
 
 import boatcraft.api.boat.EntityCustomBoat
-import boatcraft.api.traits.Modifier
+import boatcraft.api.traits.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.inventory.IInventory
@@ -10,7 +10,7 @@ import net.minecraft.item.crafting.FurnaceRecipes
 import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import net.minecraft.tileentity.TileEntityFurnace
 
-object Furnace extends Modifier
+object Furnace extends Block
 {
 	override def getBlock = Blocks.furnace
 	override def getMeta = 3
