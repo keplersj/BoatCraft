@@ -25,7 +25,7 @@ object Thaumcraft extends CompatModule
 	{
 		log = e getModLog
 
-    boatAspects = (new AspectList).add(Aspect.MOTION, 2).add(Aspect.WATER, 2)
+	boatAspects = (new AspectList).add(Aspect.MOTION, 2).add(Aspect.WATER, 2)
 
 		try
 		{
@@ -36,7 +36,7 @@ object Thaumcraft extends CompatModule
 			case ex: NoClassDefFoundError => //Sure
 			case err: NoSuchMethodError => //No problem
 			case ex: NoSuchMethodException => //Normal
-            case ex: NullPointerException => //If that's how you wanna roll...
+			case ex: NullPointerException => //If that's how you wanna roll...
 			case thr: Throwable => thr printStackTrace //Odd...
 		}
 	}

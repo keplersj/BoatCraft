@@ -1,7 +1,5 @@
 apply plugin: 'idea'
 apply plugin: 'eclipse'
-apply plugin: 'cobertura'
-apply plugin: 'coveralls'
 apply plugin: 'java'
 apply plugin: 'scala'
 apply plugin: 'forge'
@@ -24,8 +22,6 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-        classpath 'net.saliman:gradle-cobertura-plugin:2.2.2'
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.2.4'
     }
 }
 
@@ -37,7 +33,6 @@ version = '2.0-SNAPSHOT'
 
 minecraft {
 	version = '1.7.2-10.12.1.1060'
-	mcpVersion = '9.03'
 }
 
 repositories {
