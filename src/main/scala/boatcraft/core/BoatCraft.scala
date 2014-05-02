@@ -1,9 +1,7 @@
 package boatcraft.core
 
 import java.util.EnumMap
-
 import org.apache.logging.log4j.Logger
-
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.SidedProxy
@@ -19,63 +17,68 @@ import boatcraft.core.packets.ChannelHandler
 import boatcraft.core.utilities.Recipes
 import boatcraft.compatibility
 import net.minecraftforge.common.config.Configuration
+import cpw.mods.fml.common.FMLCommonHandler
 
 @Mod(modid = "boatcraft",
-  name = "BoatCraft",
-  version = "2.0",
-  modLanguage = "scala",
-  dependencies = "after:IronChest;after:Thaumcraft;after:IC2")
+	name = "BoatCraft",
+	version = "2.0",
+	modLanguage = "scala",
+	dependencies = "after:IronChest;after:Thaumcraft;after:IC2")
 object BoatCraft
 {
 	@SidedProxy(modId = "boatcraft",
-		clientSide = "boatcraft.core.Proxy$ClientProxy",
-		serverSide = "boatcraft.core.Proxy$CommonProxy")
+			clientSide = "boatcraft.core.Proxy$ClientProxy",
+			serverSide = "boatcraft.core.Proxy$CommonProxy")
 	var proxy: Proxy.CommonProxy = null
-	
+
 	private[boatcraft] var config: Configuration = null
-	
+
 	var channels: EnumMap[Side, FMLEmbeddedChannel] = null
-	
+
 	private[boatcraft] var log: Logger = null
 
-
-  @EventHandler
+	@EventHandler
 	def preInit(event: FMLPreInitializationEvent)
 	{
+		
 		log = event getModLog
 		
 		config = new Configuration(event getSuggestedConfigurationFile)
 		
 		channels = NetworkRegistry.INSTANCE newChannel ("boatcraft", ChannelHandler);
 		
+        NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
+        
 		printModInfo
-		
+
 		//All Boat Materials should be at least rideable
 		Registry register Empty
-
-	compatibility.preInit(event)
+		
+		compatibility preInit event
 	}
 	
 	@EventHandler
 	def init(event: FMLInitializationEvent) 
 	{
-	GameRegistry registerItem (ItemCustomBoat, "customBoat")
-
+        
+		GameRegistry registerItem (ItemCustomBoat, "customBoat")
+		
 		proxy registerEntities
-
+		
 		proxy registerRenderers
-
+		
 		Recipes addBoatRecipes
-
-	compatibility.init(event)
+		
+		compatibility init event
 	}
 
-  @EventHandler
-  def postInit(event: FMLPostInitializationEvent) {
-	compatibility.postInit(event)
-  }
-	
-	def printModInfo
+	@EventHandler
+	def postInit(event: FMLPostInitializationEvent)
+	{
+		compatibility postInit event
+	}
+
+	private def printModInfo
 	{
 		log info "BoatCraft"
 		log info "Copyright Kepler Sticka-Jones 2013-2014"

@@ -1,12 +1,13 @@
 package boatcraft.compatibility
 
 import org.apache.logging.log4j.Logger
+
 import boatcraft.api.Registry
-import boatcraft.compatibility.industrialcraft.materials._
-import cpw.mods.fml.common.Optional
-import cpw.mods.fml.common.event._
-import boatcraft.compatibility.industrialcraft.modifiers.Generator
+import boatcraft.compatibility.industrialcraft2.materials.{Carbon, Rubber}
+import boatcraft.compatibility.industrialcraft2.modifiers.Generator
 import boatcraft.core.utilities.Recipes
+import cpw.mods.fml.common.Optional
+import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLPreInitializationEvent}
 import ic2.api.item.IC2Items
 
 object IC2 extends CompatModule

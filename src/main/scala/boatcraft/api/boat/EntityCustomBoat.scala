@@ -392,7 +392,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	
 	override def interactFirst(player: EntityPlayer): Boolean =
 	{
-		if (player.getCurrentEquippedItem.getItem == Items.name_tag
+		if (player.getCurrentEquippedItem != null
+			&& player.getCurrentEquippedItem.getItem == Items.name_tag
 			&& player.getCurrentEquippedItem.hasDisplayName)
 		{
 			setName(player.getCurrentEquippedItem.getDisplayName)
@@ -419,7 +420,11 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	  * @param modifier the new modifier
 	  */
 	def setModifier(modifier: String) =
+	{
 		dataWatcher updateObject (21, modifier)
+		//Reset it so it gets updated when getInventory is called again
+		inventory = null
+	}
 	
 	def setName(name: String) =
 		dataWatcher updateObject(22, name)

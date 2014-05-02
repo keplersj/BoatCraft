@@ -4,6 +4,10 @@ import cpw.mods.fml.common.event._
 
 abstract class CompatModule
 {
+	val code = maxID
+	
+	maxID = maxID + 1
+	
 	def preInit(event: FMLPreInitializationEvent)
 	{
 	}

@@ -1,16 +1,16 @@
 package boatcraft.compatibility.ironchest.modifiers
 
-import cpw.mods.fml.common.Mod
-import cpw.mods.ironchest.{IronChest, IronChestType, ItemChestChanger, TileEntityIronChest}
 import boatcraft.api.boat.EntityCustomBoat
 import boatcraft.api.traits.Modifier
 import boatcraft.compatibility.IronChests
 import boatcraft.core.utilities.NBTHelper
+import cpw.mods.ironchest.{IronChest, IronChestType, ItemChestChanger, TileEntityIronChest}
 import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
+import cpw.mods.fml.common.FMLCommonHandler
 
 abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 {
@@ -53,8 +53,14 @@ abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 				}
 			}
 		}
-		else player openGui(IronChests, getMeta, player.worldObj,
-				boat.posX.floor toInt, boat.posY.floor toInt, boat.posZ.floor toInt)
+		else
+		{
+			player openGui("boatcraft", (IronChests.code << 6) | getMeta, boat.worldObj,
+				boat.getEntityId, -1, 0)
+			IronChests.log info "Sent openGUI request: " +
+			    FMLCommonHandler.instance.findContainerFor("boatcraft") +
+			    ", " + ((IronChests.code << 6) | getMeta) + ", " + boat.getEntityId
+        }
 	}
 }
 
@@ -95,7 +101,7 @@ object GenericIronChest
 			
 			newEntity markDirty
 			
-			newEntity
+			return newEntity
 		}
 	}
 }

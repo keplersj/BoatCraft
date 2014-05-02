@@ -1,17 +1,16 @@
 package boatcraft.compatibility
 
 import org.apache.logging.log4j.Logger
-
-import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.Mod.EventHandler
-import cpw.mods.fml.common.Optional
+import boatcraft.api.Registry
+import boatcraft.compatibility.ironchest.{IronChestsEventHandler, IronChestsGuiHandler}
+import boatcraft.compatibility.ironchest.modifiers.{Copper_Chest, Crystal_Chest, Diamond_Chest, DirtChest9000, Gold_Chest, Iron_Chest, Obsidian_Chest, Silver_Chest}
+import boatcraft.core.BoatCraft
+import cpw.mods.fml.common.{DummyModContainer, Mod, Optional}
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.network.NetworkRegistry
-import boatcraft.api.Registry
-import boatcraft.compatibility.ironchest._
-import boatcraft.compatibility.ironchest.modifiers._
 import net.minecraftforge.common.MinecraftForge
-import boatcraft.core.BoatCraft
+import cpw.mods.fml.common.ModMetadata
+import boatcraft.core.GUIHandler
 
 object IronChests extends CompatModule
 {
@@ -25,8 +24,8 @@ object IronChests extends CompatModule
 		try
 		{
 			addModifiers
-			NetworkRegistry.INSTANCE registerGuiHandler (BoatCraft, IronChestsGuiHandler)
-			MinecraftForge.EVENT_BUS register IronChestsEventHandler
+			GUIHandler.handlerMap.put(code, IronChestsGuiHandler)
+			//MinecraftForge.EVENT_BUS register IronChestsEventHandler
 		}
 		catch
 		{
