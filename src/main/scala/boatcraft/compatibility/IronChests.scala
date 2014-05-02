@@ -24,7 +24,7 @@ object IronChests extends CompatModule
 
 		try
 		{
-			addModifiers
+			addBlocks
 			NetworkRegistry.INSTANCE registerGuiHandler (BoatCraft, IronChestsGuiHandler)
 			MinecraftForge.EVENT_BUS register IronChestsEventHandler
 		}
@@ -39,7 +39,7 @@ object IronChests extends CompatModule
 	}
 	
 	@Optional.Method(modid = "IronChest")
-	private def addModifiers
+	private def addBlocks
 	{
 		Registry register Iron_Chest
 		Registry register Gold_Chest

@@ -15,11 +15,11 @@ object Registry
 	/** The Map containing all of the registered Materials for BoatCraft:Core to create boats with. */
 	var materials: Map[String, Material] = new HashMap[String, Material]
 	
-	/** The Map containing all of the registered Modifiers for BoatCraft:Core to create boats with. */
-	var modifiers: Map[String, Block] = new HashMap[String, Block]
+	/** The Map containing all of the registered Blocks for BoatCraft:Core to create boats with. */
+	var blocks: Map[String, Block] = new HashMap[String, Block]
 	
 	/**
-	  * Adds materials or modifiers to the Map used by BoatCraft:Core for boat creation.
+	  * Adds materials or blocks to the Map used by BoatCraft:Core for boat creation.
 	  *
 	  * @param registrar the object being registered
 	  */
@@ -28,7 +28,7 @@ object Registry
 		case _: Material =>
 			materials put (registrar.toString, registrar.asInstanceOf[Material])
 		case _: Block =>
-			modifiers put (registrar.toString, registrar.asInstanceOf[Block])
+			blocks put (registrar.toString, registrar.asInstanceOf[Block])
 		case x: List[_] =>
 			x foreach (obj => register(obj))
 		case _ =>
@@ -45,7 +45,7 @@ object Registry
 		case _: Material =>
 			materials remove unregistrant.toString
 		case _: Block =>
-			modifiers remove unregistrant.toString
+			blocks remove unregistrant.toString
 		case x: List[_] =>
 			x foreach (obj => unregister(obj))
 		case _ =>
@@ -62,8 +62,8 @@ object Registry
   {
 	case x if materials.containsKey(name) =>
 	  (materials get name).asInstanceOf[Material]
-	case x if modifiers.containsKey(name) =>
-	  (modifiers get name).asInstanceOf[Block]
+	case x if blocks.containsKey(name) =>
+	  (blocks get name).asInstanceOf[Block]
 	case _ =>
 	  System.err println "Could not find: " + name
   }
@@ -90,8 +90,8 @@ object Registry
 	  * @param stack ItemStack of registered Block
 	  * @return registered Block
 	  */
-	def getModifier(stack: ItemStack) =
+	def getBlock(stack: ItemStack) =
 		if (stack.stackTagCompound == null) Empty
-		else modifiers get (stack.stackTagCompound getString "modifier")
+		else blocks get (stack.stackTagCompound getString "block")
 
 }

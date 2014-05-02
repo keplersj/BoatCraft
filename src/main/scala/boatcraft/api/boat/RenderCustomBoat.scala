@@ -46,8 +46,8 @@ class RenderCustomBoat
 
 		val f4 = 0.75F
 
-		val block = boat.getModifier getBlock
-		val meta = boat.getModifier getMeta
+		val block = boat.getBlock getBlock
+		val meta = boat.getBlock getMeta
 
 		if (block.getRenderType != -1)
 		{
@@ -139,7 +139,7 @@ class RenderCustomBoat
 	var meta: Int = 0
 
 		try {
-	  block = Registry getModifier stack getBlock
+	  block = Registry getBlock stack getBlock
 	} catch {
 	  case e: Exception =>
 		e.printStackTrace()
@@ -147,7 +147,7 @@ class RenderCustomBoat
 	}
 
 	try {
-	  meta = Registry getModifier stack getMeta
+	  meta = Registry getBlock stack getMeta
 	} catch {
 	  case e: Exception =>
 		e.printStackTrace()

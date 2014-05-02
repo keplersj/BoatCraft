@@ -45,17 +45,17 @@ object Thaumcraft extends CompatModule
 	private def registerAspects
 	{
 		for ((matName, material) <- Registry.materials)
-			for ((modName, modifier) <- Registry.modifiers)
+			for ((blockName, block) <- Registry.blocks)
 		{
-			ThaumcraftApi.registerComplexObjectTag(getCustomBoat(matName, modName), boatAspects.asInstanceOf[AspectList])
+			ThaumcraftApi.registerComplexObjectTag(getCustomBoat(matName, blockName), boatAspects.asInstanceOf[AspectList])
 		}
 		for ((matName, material) <- Registry.materials)
-			for ((modName, modifier) <- Registry.modifiers)
+			for ((blockName, block) <- Registry.blocks)
 		{
 			ThaumcraftApi.registerEntityTag("customBoat",
-				ThaumcraftApiHelper.getObjectAspects(getCustomBoat(matName, modName)),
+				ThaumcraftApiHelper.getObjectAspects(getCustomBoat(matName, blockName)),
 					new EntityTagsNBT("material", new NBTTagString(matName)),
-					new EntityTagsNBT("modifier", new NBTTagString(modName)))
+					new EntityTagsNBT("block", new NBTTagString(blockName)))
 		}
 	}
 }

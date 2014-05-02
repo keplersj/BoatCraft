@@ -39,7 +39,7 @@ object Vanilla extends CompatModule
 		readConfig
 
 		registerMaterials
-		registerModifiers
+		registerBlocks
 
 		replaceBoatRecipe
 
@@ -87,13 +87,13 @@ object Vanilla extends CompatModule
 			stack.stackTagCompound = new NBTTagCompound
 			stack.stackTagCompound setString ("material", OreDict_Wood toString)
 
-			for ((name, modifier) <- Registry.modifiers) {
-				stack.stackTagCompound setString ("modifier", name)
-				if (modifier.getContent != null)
+			for ((name, block) <- Registry.blocks) {
+				stack.stackTagCompound setString ("block", name)
+				if (block.getContent != null)
 					GameRegistry.addRecipe(new ShapedOreRecipe(stack,
 						"wmw", "www",
 						Character valueOf 'w', "planksWood",
-						Character valueOf 'm', modifier getContent))
+						Character valueOf 'm', block getContent))
 				else
 					GameRegistry.addRecipe(new ShapedOreRecipe(stack,
 						"w w", "www",
@@ -109,7 +109,7 @@ object Vanilla extends CompatModule
 		Registry register Emerald
 	}
 	
-	private def registerModifiers
+	private def registerBlocks
 	{
 		Registry register Chest
 		Registry register Furnace

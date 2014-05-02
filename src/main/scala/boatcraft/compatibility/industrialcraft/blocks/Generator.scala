@@ -1,7 +1,7 @@
-package boatcraft.compatibility.industrialcraft.modifiers
+package boatcraft.compatibility.industrialcraft.blocks
 
 import boatcraft.api.boat.EntityCustomBoat
-import boatcraft.api.traits.Modifier
+import boatcraft.api.traits.{Block, Modifier}
 import ic2.api.item.IC2Items
 import ic2.core.block.generator.tileentity.TileEntityGenerator
 import net.minecraft.inventory.IInventory
@@ -9,7 +9,7 @@ import net.minecraft.item.{ItemBlock, ItemStack}
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection
 
-object Generator extends Modifier
+object Generator extends Block
 {
 	override def getName = "Generator"
 	

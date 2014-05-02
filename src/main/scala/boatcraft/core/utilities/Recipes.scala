@@ -50,15 +50,15 @@ object Recipes
 		for ((nameMat, material) <- Registry.materials)
 		{
 			stack.stackTagCompound.setString("material", nameMat)
-			for ((nameMod, modifier) <- Registry.modifiers)
+			for ((blockName, block) <- Registry.blocks)
 			{
-				stack.stackTagCompound.setString("modifier", nameMod)
-				if (modifier.getContent != null)
+				stack.stackTagCompound.setString("block", blockName)
+				if (block.getContent != null)
 					GameRegistry addRecipe (stack copy,
 						"MmM",
 						"MMM",
 						'M': Character, material getItem,
-						'm': Character, modifier getContent)
+						'm': Character, block getContent)
 				else GameRegistry addRecipe (stack copy,
 					"M M",
 					"MMM",
