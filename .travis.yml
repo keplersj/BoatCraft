@@ -1,12 +1,15 @@
-language: java
-jdk:
-  - oraclejdk7
-  - openjdk7
-  - openjdk6
-before_install:
-  - chmod +x gradlew
-install:
-  - true
-before_script:
-  ./gradlew setupCIWorkspace
-script: ./gradlew buildNeeded
+language: scala
+
+scala: 2.10.3
+
+jdk: openjdk7
+
+env: TERM=dumb
+
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/1efa01c1be5952beb05a
+    on_success: always  # options: [always|never|change] default: always
+    on_failure: always  # options: [always|never|change] default: always
+    on_start: false     # default: false

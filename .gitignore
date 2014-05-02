@@ -15,6 +15,7 @@ gradle-app.setting
 .settings
 .metadata
 .classpath
+.cache
 .project
 bin
 eclipse
@@ -25,3 +26,16 @@ out
 *.iml
 *.ipr
 *.iws
+*.log
+*.log.lck
+
+# xcode
+*.xcodeproj
+
+#minecraft
+config
+crash-reports
+saves
+stats
+classes
+run
