@@ -25,7 +25,7 @@ buildscript {
     }
 }
 
-group = 'open-code-developer' //If you are not Open Code Developers, but are maintaining this project, please change this to your name.
+group = 'open-code-developers' //If you are not Open Code Developers, but are maintaining this project, please change this to your name.
 
 archivesBaseName = 'BoatCraft'
 
