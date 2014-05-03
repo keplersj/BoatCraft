@@ -29,8 +29,12 @@ object Registry
 			materials put (registrar.toString, registrar.asInstanceOf[Material])
 		case _: Modifier =>
 			modifiers put (registrar.toString, registrar.asInstanceOf[Modifier])
-		case x: List[_] =>
+		case x: java.util.List[_] =>
 			x foreach (obj => register(obj))
+    case x: scala.Array[_] =>
+      x foreach (obj => register(obj))
+    case x: scala.List[_] =>
+      x foreach (obj => register(obj))
 		case _ =>
 			System.err println "Was unable to register: " + registrar.toString
 	}
@@ -46,8 +50,12 @@ object Registry
 			materials remove unregistrant.toString
 		case _: Modifier =>
 			modifiers remove unregistrant.toString
-		case x: List[_] =>
-			x foreach (obj => unregister(obj))
+    case x: java.util.List[_] =>
+      x foreach (obj => unregister(obj))
+    case x: scala.Array[_] =>
+      x foreach (obj => unregister(obj))
+    case x: scala.List[_] =>
+      x foreach (obj => unregister(obj))
 		case _ =>
 			System.err println "There was nothing to unregister: " + unregistrant.toString
 	}
