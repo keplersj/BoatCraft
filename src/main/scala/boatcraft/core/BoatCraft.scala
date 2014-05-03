@@ -1,23 +1,23 @@
 package boatcraft.core
 
 import java.util.EnumMap
+
 import org.apache.logging.log4j.Logger
-import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.Mod.EventHandler
-import cpw.mods.fml.common.SidedProxy
-import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLInitializationEvent, FMLPreInitializationEvent}
-import cpw.mods.fml.common.network.FMLEmbeddedChannel
-import cpw.mods.fml.common.network.NetworkRegistry
-import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.Side
+
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
+import boatcraft.compatibility
 import boatcraft.core.modifiers.Empty
 import boatcraft.core.packets.ChannelHandler
 import boatcraft.core.utilities.Recipes
-import boatcraft.compatibility
+import cpw.mods.fml.common.Mod
+import cpw.mods.fml.common.Mod.EventHandler
+import cpw.mods.fml.common.SidedProxy
+import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
+import cpw.mods.fml.common.network.{FMLEmbeddedChannel, NetworkRegistry}
+import cpw.mods.fml.common.registry.GameRegistry
+import cpw.mods.fml.relauncher.Side
 import net.minecraftforge.common.config.Configuration
-import cpw.mods.fml.common.FMLCommonHandler
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
@@ -40,19 +40,21 @@ object BoatCraft
 	@EventHandler
 	def preInit(event: FMLPreInitializationEvent)
 	{
-		
 		log = event getModLog
 		
 		config = new Configuration(event getSuggestedConfigurationFile)
 		
 		channels = NetworkRegistry.INSTANCE newChannel ("boatcraft", ChannelHandler);
 		
-        NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
-        
+		NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
+		
 		printModInfo
-
-		//All Boat Materials should be at least rideable
+		
 		Registry register Empty
+		
+		compatibility addMaterialsAndModifiers
+		
+		GameRegistry registerItem (ItemCustomBoat, "customBoat")
 		
 		compatibility preInit event
 	}
@@ -60,9 +62,6 @@ object BoatCraft
 	@EventHandler
 	def init(event: FMLInitializationEvent) 
 	{
-        
-		GameRegistry registerItem (ItemCustomBoat, "customBoat")
-		
 		proxy registerEntities
 		
 		proxy registerRenderers

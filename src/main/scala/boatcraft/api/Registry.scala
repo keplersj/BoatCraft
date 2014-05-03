@@ -1,13 +1,13 @@
 package boatcraft.api
 
 import java.util.{HashMap, List, Map}
+
 import scala.collection.JavaConversions.asScalaBuffer
-import cpw.mods.fml.common.Mod
+
 import boatcraft.api.traits.{Material, Modifier}
-import boatcraft.core.BoatCraft
+import boatcraft.core.modifiers.Empty
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
-import boatcraft.core.modifiers.Empty
 
 /** Contains the methods needed to register Materials and Modifiers with BoatCraft:Core. */
 object Registry

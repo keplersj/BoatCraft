@@ -1,41 +1,18 @@
 package boatcraft.compatibility
 
-import org.apache.logging.log4j.Logger
+import java.util.{Arrays, List}
 
-import boatcraft.api.Registry
+import boatcraft.api.traits.{Material, Modifier}
 import boatcraft.compatibility.industrialcraft2.materials.{Carbon, Rubber}
 import boatcraft.compatibility.industrialcraft2.modifiers.Generator
 import boatcraft.core.utilities.Recipes
 import cpw.mods.fml.common.Optional
-import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLPreInitializationEvent}
+import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import ic2.api.item.IC2Items
 
 object IC2 extends CompatModule
 {
-	var log: Logger = null
-	
-	@Optional.Method(modid = "IC2")
-	override def preInit(e: FMLPreInitializationEvent)
-	{
-		log = e getModLog
-
-		try
-		{
-			addMaterials
-			addModifiers
-		}
-		catch
-		{
-			case ex: NoClassDefFoundError => //That's OK
-			case err: NoSuchMethodError => //Fine
-			case ex: NoSuchMethodException => //No problem
-			case ex: NullPointerException => //Sure
-			case thr: Throwable => thr printStackTrace //Weird...
-		}
-	}
-	
-	@Optional.Method(modid = "IC2")
-	override def postInit(e: FMLPostInitializationEvent)
+	override protected def doPostInit(e: FMLPostInitializationEvent)
 	{
 		try
 		{
@@ -53,15 +30,10 @@ object IC2 extends CompatModule
 	}
 	
 	@Optional.Method(modid = "IC2")
-	private def addMaterials
-	{
-		Registry register Rubber
-		Registry register Carbon
-	}
+	override protected def getMaterials: List[Material] =
+		Arrays asList(Rubber, Carbon)
 	
 	@Optional.Method(modid = "IC2")
-	private def addModifiers
-	{
-		Registry register Generator
-	}
+	override protected def getModifiers: List[Modifier] =
+		Arrays asList Generator
 }

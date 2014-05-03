@@ -1,7 +1,7 @@
 package boatcraft.api.boat
 
-import cpw.mods.fml.common.ObfuscationReflectionHelper
 import boatcraft.api.{Registry, getCustomBoat, traits}
+import cpw.mods.fml.common.ObfuscationReflectionHelper
 import net.minecraft.block.material.Material
 import net.minecraft.entity.{Entity, EntityLivingBase}
 import net.minecraft.entity.item.{EntityBoat, EntityItem}
@@ -10,9 +10,8 @@ import net.minecraft.init.{Blocks, Items}
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.{AxisAlignedBB, MathHelper, MovingObjectPosition}
+import net.minecraft.util.{AxisAlignedBB, DamageSource, MathHelper, MovingObjectPosition}
 import net.minecraft.world.World
-import net.minecraft.util.DamageSource
 
 //TODO: Fill Documentation
 /**

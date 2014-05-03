@@ -11,6 +11,8 @@ import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import cpw.mods.fml.common.FMLCommonHandler
+import cpw.mods.fml.common.network.internal.FMLNetworkHandler
+import net.minecraft.entity.player.EntityPlayerMP
 
 abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 {
@@ -25,10 +27,10 @@ abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 		new GenericIronChest.Inventory(boat, chestType)
 	
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper writeChestToNBT(boat.asInstanceOf[IInventory], tag)
+		NBTHelper writeChestToNBT(boat.getInventory, tag)
 	
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper readChestFromNBT(boat.asInstanceOf[IInventory], tag)
+		NBTHelper readChestFromNBT(boat.getInventory, tag)
 	
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat)
 	{
@@ -53,14 +55,9 @@ abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 				}
 			}
 		}
-		else
-		{
+		else if (player.isInstanceOf[EntityPlayerMP])
 			player openGui("boatcraft", (IronChests.code << 6) | getMeta, boat.worldObj,
 				boat.getEntityId, -1, 0)
-			IronChests.log info "Sent openGUI request: " +
-			    FMLCommonHandler.instance.findContainerFor("boatcraft") +
-			    ", " + ((IronChests.code << 6) | getMeta) + ", " + boat.getEntityId
-        }
 	}
 }
 

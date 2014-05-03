@@ -1,25 +1,23 @@
 package boatcraft.compatibility
 
-import java.util.ArrayList
+import java.util.{ArrayList, Arrays, List}
 
 import scala.collection.JavaConversions.{asScalaBuffer, mapAsScalaMap}
 
-import org.apache.logging.log4j.Logger
-
-import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLPreInitializationEvent}
-import cpw.mods.fml.common.network.NetworkRegistry
-import cpw.mods.fml.common.registry.GameRegistry
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
+import boatcraft.api.traits.{Material, Modifier}
 import boatcraft.compatibility.vanilla.VanillaGuiHandler
-import boatcraft.compatibility.vanilla.materials.crystal._
-import boatcraft.compatibility.vanilla.materials.metal._
-import boatcraft.compatibility.vanilla.materials.wood._
-import boatcraft.compatibility.vanilla.modifiers._
-import boatcraft.core.BoatCraft
+import boatcraft.compatibility.vanilla.materials.crystal.{Diamond, Emerald, Obsidian}
+import boatcraft.compatibility.vanilla.materials.metal.{Gold, Iron}
+import boatcraft.compatibility.vanilla.materials.wood.{Acacia, Birch, DarkOak, Jungle, Oak, OreDict_Wood, Spruce}
+import boatcraft.compatibility.vanilla.modifiers.{Chest, Furnace, Workbench}
+import boatcraft.core.{BoatCraft, GUIHandler}
 import boatcraft.core.modifiers.Empty
 import boatcraft.core.utilities.Recipes
+import cpw.mods.fml.common.Mod
+import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLPreInitializationEvent}
+import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{CraftingManager, IRecipe}
@@ -28,28 +26,21 @@ import net.minecraftforge.oredict.ShapedOreRecipe
 
 object Vanilla extends CompatModule
 {
-	private[boatcraft] var log: Logger = null
-	
 	private var useOreDictWood = false
 	
-	override def preInit(event: FMLPreInitializationEvent)
+	override def doPreInit(event: FMLPreInitializationEvent)
 	{
-		log = event getModLog
-
 		readConfig
-
-		registerMaterials
-		registerModifiers
-
+		
 		replaceBoatRecipe
-
-		NetworkRegistry.INSTANCE registerGuiHandler (BoatCraft, VanillaGuiHandler)
+		
+		GUIHandler.handlerMap.put(code, VanillaGuiHandler)
 	}
 	
-	override def postInit(event: FMLPostInitializationEvent)
+	override def doPostInit(event: FMLPostInitializationEvent)
 	{
 		var toRemove = new ArrayList[IRecipe]
-
+		
 		for (recipe <- CraftingManager.getInstance getRecipeList)
 		{
 			if (recipe.isInstanceOf[IRecipe]
@@ -68,20 +59,21 @@ object Vanilla extends CompatModule
 		CraftingManager.getInstance.getRecipeList removeAll toRemove
 	}
 	
-	private def registerMaterials
+	override protected def getMaterials: List[Material] =
 	{
+		var result = new ArrayList[Material]
 		if (!useOreDictWood)
 		{
-			Registry register Oak
-			Registry register Spruce
-			Registry register Birch
-			Registry register Jungle
-			Registry register Acacia
-			Registry register DarkOak
+			result add Oak
+			result add Spruce
+			result add Birch
+			result add Jungle
+			result add Acacia
+			result add DarkOak
 		}
 		else
 		{
-			Registry register OreDict_Wood
+			result add OreDict_Wood
 
 			var stack = new ItemStack(ItemCustomBoat)
 			stack.stackTagCompound = new NBTTagCompound
@@ -101,20 +93,21 @@ object Vanilla extends CompatModule
 			}
 		}
 
-		Registry register Iron
-		Registry register Gold
+		result add Iron
+		result add Gold
 
-		Registry register Obsidian
-		Registry register Diamond
-		Registry register Emerald
+		result add Obsidian
+		result add Diamond
+		result add Emerald
+		
+		return result
 	}
 	
-	private def registerModifiers
-	{
-		Registry register Chest
-		Registry register Furnace
-		Registry register Workbench
-	}
+	override protected def getModifiers: List[Modifier] =
+		Arrays.asList(
+				Chest,
+				Furnace,
+				Workbench)
 	
 	private def replaceBoatRecipe
 	{
