@@ -25,11 +25,11 @@ buildscript {
     }
 }
 
-group = 'open-code-developer' //If you are not Open Code Developers, but are maintaining this project, please change this to your name.
+group = 'open-code-developers' //If you are not Open Code Developers, but are maintaining this project, please change this to your name.
 
 archivesBaseName = 'BoatCraft'
 
-version = '2.0-SNAPSHOT'
+version = getVersionName()
 
 minecraft {
 	version = '1.7.2-10.12.1.1060'
@@ -154,4 +154,14 @@ uploadArchives {
             }
         }
     }
+}
+    
+def getVersionName()
+{
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--tags'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
 }

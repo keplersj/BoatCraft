@@ -11,6 +11,8 @@ import boatcraft.compatibility.Vanilla
 import net.minecraft.client.gui.inventory.GuiCrafting
 import net.minecraft.client.resources.I18n
 import boatcraft.api.boat.EntityCustomBoat
+import net.minecraft.entity.player.EntityPlayerMP
+import boatcraft.core.BoatCraft
 
 object Workbench extends Block
 {
@@ -22,10 +24,10 @@ object Workbench extends Block
 	
 	override def getContent: ItemStack = new ItemStack(Blocks.crafting_table)
 	
-	override def interact(player: EntityPlayer, boat: EntityCustomBoat) {
-		//player displayGUIWorkbench(boat.x toInt, boat.y toInt, boat.z toInt)
-		player openGui (Vanilla, 0,
-			boat.worldObj, boat.posX toInt, boat.posY toInt, boat.posZ toInt)
+	override def interact(player: EntityPlayer, boat: EntityCustomBoat)
+	{
+		if (player.isInstanceOf[EntityPlayerMP])
+			player openGui ("boatcraft", Vanilla.code << 6, boat.worldObj, boat.getEntityId, -1, 0)
 	}
 	
 	private[vanilla] class Container(inventoryPlayer: InventoryPlayer, world: World,

@@ -1,7 +1,7 @@
-package boatcraft.compatibility.industrialcraft.blocks
+package boatcraft.compatibility.industrialcraft2.modifiers
 
 import boatcraft.api.boat.EntityCustomBoat
-import boatcraft.api.traits.{Block, Modifier}
+import boatcraft.api.traits.Modifier
 import ic2.api.item.IC2Items
 import ic2.core.block.generator.tileentity.TileEntityGenerator
 import net.minecraft.inventory.IInventory
@@ -9,7 +9,7 @@ import net.minecraft.item.{ItemBlock, ItemStack}
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection
 
-object Generator extends Block
+object Generator extends Modifier
 {
 	override def getName = "Generator"
 	
@@ -25,7 +25,7 @@ object Generator extends Block
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 		boat.getInventory.asInstanceOf[Inventory] writeToNBT tag
 	
-	private[industrialcraft] class Inventory(boat: EntityCustomBoat) extends TileEntityGenerator
+	private[industrialcraft2] class Inventory(boat: EntityCustomBoat) extends TileEntityGenerator
 	{
 		worldObj = boat.worldObj
 	}

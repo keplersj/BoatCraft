@@ -1,19 +1,22 @@
-package boatcraft.compatibility.ironchest.blocks
+package boatcraft.compatibility.ironchest.modifiers
 
-import cpw.mods.fml.common.Mod
-import cpw.mods.ironchest.{IronChest, IronChestType, ItemChestChanger, TileEntityIronChest}
 import boatcraft.api.boat.EntityCustomBoat
-import boatcraft.api.traits.Block
+import boatcraft.api.traits.Modifier
 import boatcraft.compatibility.IronChests
 import boatcraft.core.utilities.NBTHelper
+import cpw.mods.ironchest.{IronChest, IronChestType, ItemChestChanger, TileEntityIronChest}
+import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
+import cpw.mods.fml.common.FMLCommonHandler
+import cpw.mods.fml.common.network.internal.FMLNetworkHandler
+import net.minecraft.entity.player.EntityPlayerMP
 
-abstract class GenericIronChest(chestType: IronChestType) extends Block
+abstract class GenericIronChest(chestType: IronChestType) extends Modifier
 {
-	override def getBlock = IronChest.ironChestBlock
+	override def getBlock: Block = IronChest.ironChestBlock
 	override def getMeta = chestType ordinal
 	
 	override def getContent = new ItemStack(getBlock, 1, getMeta)
@@ -24,10 +27,10 @@ abstract class GenericIronChest(chestType: IronChestType) extends Block
 		new GenericIronChest.Inventory(boat, chestType)
 	
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper writeChestToNBT(boat.asInstanceOf[IInventory], tag)
+		NBTHelper writeChestToNBT(boat.getInventory, tag)
 	
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper readChestFromNBT(boat.asInstanceOf[IInventory], tag)
+		NBTHelper readChestFromNBT(boat.getInventory, tag)
 	
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat)
 	{
@@ -52,8 +55,9 @@ abstract class GenericIronChest(chestType: IronChestType) extends Block
 				}
 			}
 		}
-		else player openGui(IronChests, getMeta, player.worldObj,
-				boat.posX.floor toInt, boat.posY.floor toInt, boat.posZ.floor toInt)
+		else if (player.isInstanceOf[EntityPlayerMP])
+			player openGui("boatcraft", (IronChests.code << 6) | getMeta, boat.worldObj,
+				boat.getEntityId, -1, 0)
 	}
 }
 
@@ -94,7 +98,7 @@ object GenericIronChest
 			
 			newEntity markDirty
 			
-			newEntity
+			return newEntity
 		}
 	}
 }

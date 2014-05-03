@@ -1,4 +1,4 @@
-package boatcraft.compatibility.industrialcraft
+package boatcraft.compatibility.industrialcraft2
 
 import cpw.mods.fml.common.network.IGuiHandler
 import net.minecraft.entity.player.EntityPlayer

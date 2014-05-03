@@ -1,7 +1,7 @@
 package boatcraft.api.boat
 
-import cpw.mods.fml.common.ObfuscationReflectionHelper
 import boatcraft.api.{Registry, getCustomBoat, traits}
+import cpw.mods.fml.common.ObfuscationReflectionHelper
 import net.minecraft.block.material.Material
 import net.minecraft.entity.{Entity, EntityLivingBase}
 import net.minecraft.entity.item.{EntityBoat, EntityItem}
@@ -10,9 +10,8 @@ import net.minecraft.init.{Blocks, Items}
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.{AxisAlignedBB, MathHelper, MovingObjectPosition}
+import net.minecraft.util.{AxisAlignedBB, DamageSource, MathHelper, MovingObjectPosition}
 import net.minecraft.world.World
-import net.minecraft.util.DamageSource
 
 //TODO: Fill Documentation
 /**
@@ -395,7 +394,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	
 	override def interactFirst(player: EntityPlayer): Boolean =
 	{
-		if (player.getCurrentEquippedItem.getItem == Items.name_tag
+		if (player.getCurrentEquippedItem != null
+			&& player.getCurrentEquippedItem.getItem == Items.name_tag
 			&& player.getCurrentEquippedItem.hasDisplayName)
 		{
 			setName(player.getCurrentEquippedItem.getDisplayName)
@@ -422,7 +422,11 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	  * @param modifier the new modifier
 	  */
 	def setModifier(modifier: String) =
+	{
 		dataWatcher updateObject (21, modifier)
+		//Reset it so it gets updated when getInventory is called again
+		inventory = null
+	}
 	
 	def setName(name: String) =
 		dataWatcher updateObject(22, name)

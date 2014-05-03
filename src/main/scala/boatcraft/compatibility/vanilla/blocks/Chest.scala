@@ -1,18 +1,20 @@
-package boatcraft.compatibility.vanilla.blocks
+package boatcraft.compatibility.vanilla.modifiers
 
 import boatcraft.api.boat.EntityCustomBoat
+import boatcraft.api.traits.Modifier
 import boatcraft.core.utilities.NBTHelper
+import net.minecraft.block.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntityChest
-import boatcraft.api.traits.Block
+import net.minecraft.entity.player.EntityPlayerMP
 
-object Chest extends Block
+object Chest extends Modifier
 {
-	override def getBlock = Blocks.chest
+	override def getBlock: Block = Blocks.chest
 	
 	override def getInventory(boat: EntityCustomBoat): IInventory =
 		new Chest.Inventory(boat)
@@ -22,14 +24,13 @@ object Chest extends Block
 	override def getContent = new ItemStack(Blocks.chest)
 	
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
-		//player openGui(Vanilla, 0, player.worldObj, 0, 0, 0)
-		player displayGUIChest boat.asInstanceOf[IInventory]
+		if (player.isInstanceOf[EntityPlayerMP]) player displayGUIChest boat.getInventory
 	
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper writeChestToNBT (boat.asInstanceOf[IInventory], tag)
+		NBTHelper writeChestToNBT (boat.getInventory, tag)
 	
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper readChestFromNBT (boat.asInstanceOf[IInventory], tag)
+		NBTHelper readChestFromNBT (boat.getInventory, tag)
 	
 	private class Inventory(boat: EntityCustomBoat) extends TileEntityChest
 	{
