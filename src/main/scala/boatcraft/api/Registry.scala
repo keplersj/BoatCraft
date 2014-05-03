@@ -1,13 +1,13 @@
 package boatcraft.api
 
 import java.util.{HashMap, List, Map}
-
 import scala.collection.JavaConversions.asScalaBuffer
-
-import boatcraft.api.traits.{Material, Modifier}
-import boatcraft.core.modifiers.Empty
+import cpw.mods.fml.common.Mod
+import boatcraft.api.traits.{Material, Block}
+import boatcraft.core.BoatCraft
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
+import boatcraft.core.blocks.Empty
 
 /** Contains the methods needed to register Materials and Modifiers with BoatCraft:Core. */
 object Registry
@@ -15,11 +15,11 @@ object Registry
 	/** The Map containing all of the registered Materials for BoatCraft:Core to create boats with. */
 	var materials: Map[String, Material] = new HashMap[String, Material]
 	
-	/** The Map containing all of the registered Modifiers for BoatCraft:Core to create boats with. */
-	var modifiers: Map[String, Modifier] = new HashMap[String, Modifier]
+	/** The Map containing all of the registered Blocks for BoatCraft:Core to create boats with. */
+	var blocks: Map[String, Block] = new HashMap[String, Block]
 	
 	/**
-	  * Adds materials or modifiers to the Map used by BoatCraft:Core for boat creation.
+	  * Adds materials or blocks to the Map used by BoatCraft:Core for boat creation.
 	  *
 	  * @param registrar the object being registered
 	  */
@@ -27,8 +27,9 @@ object Registry
 	{
 		case _: Material =>
 			materials put (registrar.toString, registrar.asInstanceOf[Material])
-		case _: Modifier =>
-			modifiers put (registrar.toString, registrar.asInstanceOf[Modifier])
+		case _: Block =>
+			blocks put (registrar.toString, registrar.asInstanceOf[Block])
+		case x: List[_] =>
 		case x: java.util.List[_] =>
 			x foreach (obj => register(obj))
     case x: scala.Array[_] =>
@@ -48,8 +49,10 @@ object Registry
 	{
 		case _: Material =>
 			materials remove unregistrant.toString
-		case _: Modifier =>
-			modifiers remove unregistrant.toString
+		case _: Block =>
+			blocks remove unregistrant.toString
+		case x: List[_] =>
+			x foreach (obj => unregister(obj))
     case x: java.util.List[_] =>
       x foreach (obj => unregister(obj))
     case x: scala.Array[_] =>
@@ -70,8 +73,8 @@ object Registry
   {
 	case x if materials.containsKey(name) =>
 	  (materials get name).asInstanceOf[Material]
-	case x if modifiers.containsKey(name) =>
-	  (modifiers get name).asInstanceOf[Modifier]
+	case x if blocks.containsKey(name) =>
+	  (blocks get name).asInstanceOf[Block]
 	case _ =>
 	  System.err println "Could not find: " + name
   }
@@ -93,13 +96,13 @@ object Registry
 	}
 
 	/**
-	  * Returns a registered Modifier associated with a certain ItemStack.
+	  * Returns a registered Block associated with a certain ItemStack.
 	  *
-	  * @param stack ItemStack of registered Modifier
-	  * @return registered Modifier
+	  * @param stack ItemStack of registered Block
+	  * @return registered Block
 	  */
-	def getModifier(stack: ItemStack) =
+	def getBlock(stack: ItemStack) =
 		if (stack.stackTagCompound == null) Empty
-		else modifiers get (stack.stackTagCompound getString "modifier")
+		else blocks get (stack.stackTagCompound getString "block")
 
 }
