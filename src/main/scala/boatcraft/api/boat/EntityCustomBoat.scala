@@ -47,7 +47,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		setMaterial(tag getString "material")
 		//Legacy
 		//TODO Remove in 2.1
-		if (tag.hasKey("block")) setBlock(tag getString "block")
+		if (tag hasKey "block") setBlock(tag getString "block")
 		else setBlock(tag getString "modifier")
 
 		getMaterial readStateFromNBT(this, tag)

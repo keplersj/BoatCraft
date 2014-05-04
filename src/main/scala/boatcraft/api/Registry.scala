@@ -93,6 +93,7 @@ object Registry {
 	 */
 	def getBlock(stack: ItemStack) =
 		if (stack.stackTagCompound == null) Empty
-		else blocks get (stack.stackTagCompound getString "block")
+		else if (stack.stackTagCompound hasKey "block") blocks get (stack.stackTagCompound getString "block")
+		else blocks get (stack.stackTagCompound getString "modifier")
 
 }
