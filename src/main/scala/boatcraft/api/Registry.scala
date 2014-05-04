@@ -8,48 +8,43 @@ import net.minecraft.util.ResourceLocation
 import boatcraft.core.blocks.Empty
 
 /** Contains the methods needed to register Materials and Modifiers with BoatCraft:Core. */
-object Registry {
-  /** The Map containing all of the registered Materials for BoatCraft:Core to create boats with. */
-  var materials: Map[String, Material] = new HashMap[String, Material]
-
-  /** The Map containing all of the registered Blocks for BoatCraft:Core to create boats with. */
-  var blocks: Map[String, Block] = new HashMap[String, Block]
-
-  /**
-   * Adds materials or blocks to the Map used by BoatCraft:Core for boat creation.
-   *
-   * @param registrar the object being registered
-   */
-  def register(registrar: Any): Unit = registrar match {
-    case _: Material =>
-      materials put(registrar.toString, registrar.asInstanceOf[Material])
-    case _: Block =>
-      blocks put(registrar.toString, registrar.asInstanceOf[Block])
-    case x: java.util.List[_] =>
+object Registry
+{
+	/** The Map containing all of the registered Materials for BoatCraft:Core to create boats with. */
+	var materials: Map[String, Material] = new HashMap[String, Material]
+	
+	/** The Map containing all of the registered Modifiers for BoatCraft:Core to create boats with. */
+	var blocks: Map[String, Block] = new HashMap[String, Block]
+	
+	/**
+	  * Adds materials or modifiers to the Map used by BoatCraft:Core for boat creation.
+	  *
+	  * @param registrar the object being registered
+	  */
+	def register(registrar: Any): Unit = registrar match
+	{
+		case _: Material =>
+			materials put (registrar.toString, registrar.asInstanceOf[Material])
+		case _: Block =>
+			blocks put (registrar.toString, registrar.asInstanceOf[Block])
+    case x: java.util.List[_] | scala.List | scala.Array =>
       x foreach (obj => register(obj))
-    case x: scala.Array[_] =>
-      x foreach (obj => register(obj))
-    case x: scala.List[_] =>
-      x foreach (obj => register(obj))
-    case _ =>
-      System.err println "Was unable to register: " + registrar.toString
-  }
-
-  /**
-   * Removes materials or modifiers from the Map used by BoatCraft:Core for boat creation.
-   *
-   * @param unregistrant the object being unregistered
-   */
-  def unregister(unregistrant: Any): Unit = unregistrant match {
-    case _: Material =>
-      materials remove unregistrant.toString
-    case _: Block =>
-      blocks remove unregistrant.toString
-    case x: java.util.List[_] =>
-      x foreach (obj => unregister(obj))
-    case x: scala.Array[_] =>
-      x foreach (obj => unregister(obj))
-    case x: scala.List[_] =>
+		case _ =>
+			System.err println "Was unable to register: " + registrar.toString
+	}
+	
+	/**
+	  * Removes materials or modifiers from the Map used by BoatCraft:Core for boat creation.
+	  *
+	  * @param unregistrant the object being unregistered
+	  */
+	def unregister(unregistrant: Any): Unit = unregistrant match
+	{
+		case _: Material =>
+			materials remove unregistrant.toString
+		case _: Block =>
+			blocks remove unregistrant.toString
+    case x: java.util.List[_] | scala.List | scala.Array =>
       x foreach (obj => unregister(obj))
     case _ =>
       System.err println "There was nothing to unregister: " + unregistrant.toString
