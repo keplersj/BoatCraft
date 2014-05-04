@@ -37,7 +37,7 @@ object Workbench extends Block {
 		inventorySlots = new Container(inventoryPlayer, world, x, y, z)
 
 		override protected def drawGuiContainerForegroundLayer(arg1: Int, arg2: Int) {
-			fontRendererObj.drawString(I18n.format("boatcraft.container.crafting", Array()), 28, 6, 4210752)
+			fontRendererObj.drawString(I18n.format("vanilla.modifiers.workbench.gui.title", Array()), 28, 6, 4210752)
 			fontRendererObj.drawString(I18n.format("container.inventory", Array()), 8, ySize - 96 + 2, 4210752)
 		}
 	}

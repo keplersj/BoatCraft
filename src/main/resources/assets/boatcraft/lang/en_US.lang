@@ -1,4 +1,4 @@
-boatcraft.container.crafting=Crafting on a Boat
+core.forms.dinghy.name=Dinghy
 
 vanilla.materials.wood.oredict.name=Wood
 
@@ -15,3 +15,25 @@ vanilla.materials.metal.gold.name=Gold
 vanilla.materials.crystal.obsidian.name=Obsidian
 vanilla.materials.crystal.diamond.name=Diamond
 vanilla.materials.crystal.emerald.name=Emerald
+
+vanilla.blocks.chest.name=Chest
+vanilla.blocks.furnace.name=Furnace
+vanilla.blocks.workbench.name=Workbench
+vanilla.blocks.tnt.name=TNT
+
+vanilla.blocks.workbench.gui.title=Crafting on a Boat
+
+ironchests.blocks.ironchest.name=Iron Chest
+ironchests.blocks.goldchest.name=Gold Chest
+ironchests.blocks.diamondchest.name=Diamond Chest
+ironchests.blocks.copperchest.name=Copper Chest
+ironchests.blocks.silverchest.name=Silver Chest
+ironchests.blocks.crystalchest.name=Crystal Chest
+ironchests.blocks.obsidianchest.name=Obsidian Chest
+ironchests.blocks.dirtchest.name=DirtChest9000!!!
+
+industrialcraft2.materials.rubber.name=Rubber
+industrialcraft2.materials.carbon.name=Carbon Fiber
+
+industrialcraft2.blocks.generator.name=Generator
+industrialcraft2.blocks.nuke.name=Nuke
