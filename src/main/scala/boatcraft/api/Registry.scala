@@ -30,7 +30,7 @@ object Registry
 		case _: Modifier =>
 			modifiers put (registrar.toString, registrar.asInstanceOf[Modifier])
 		case x: java.util.List[_] | scala.List | scala.Array =>
-			x foreach (obj => register(obj)
+			x foreach (obj => register(obj))
 		case _ =>
 			System.err println "Was unable to register: " + registrar.toString
 	}
