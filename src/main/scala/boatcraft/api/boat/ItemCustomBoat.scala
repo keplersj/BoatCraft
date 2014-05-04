@@ -19,6 +19,7 @@ import net.minecraft.util.Vec3
 import net.minecraft.world.World
 import boatcraft.core.blocks.Empty
 import java.util
+import net.minecraft.client.resources.I18n
 
 /**
  * The Item Class used for all items that can be deployed like a Boat.
@@ -48,11 +49,11 @@ class ItemCustomBoat extends ItemBoat {
 
 	override def getItemStackDisplayName(stack: ItemStack): String = stack match {
 		case x if Registry.getBlock(stack).==(Empty) =>
-			Registry.getMaterial(stack).getName + " Dinghy"
+			I18n.format(Registry.getMaterial(stack).getLocalizedName, Array()) + " " + I18n.format("core.forms.dinghy.name", Array())
 		case x if Registry.getBlock(stack).!=(null) =>
-			Registry.getMaterial(stack).getName + " Dinghy with " + Registry.getBlock(stack).getName
+      I18n.format(Registry.getMaterial(stack).getLocalizedName, Array()) + " " + I18n.format("core.forms.dinghy.name", Array()) +  " " + I18n.format("core.module.linkingword", Array()) + " " + I18n.format(Registry.getBlock(stack).getLocalizedName, Array())
 		case _ =>
-			"Dinghy"
+      I18n.format("core.forms.dinghy.name", Array())
 	}
 
 	override def onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack = {

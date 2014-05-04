@@ -8,11 +8,26 @@ abstract class Modifier {
 
 	/**
 	 * The human-readable name of this Boat.
-	 * The `@link Block#toString` will make it computer-readable
+	 * The `@link Modifier#toString` will make it computer-readable
 	 *
-	 * @return the name of the Block
+	 * @return the name of the Modifier
 	 */
-	def getName: String = null
+	@deprecated("All modifiers must set both localized and unlocalized strings now.", "BoatCraft 2.0.1")
+  def getName: String = getUnlocalizedName
+
+  /**
+   * The name used by `@link Modifier#toString` for computer-reading
+   *
+   * @return the unlocalized string
+   */
+  def getUnlocalizedName: String = ""
+
+  /**
+   * The human-readable name of the Boat.
+   *
+   * @return the localization string.
+   */
+  def getLocalizedName: String = getUnlocalizedName
 
 	/**
 	 * This function allows a material to be faster or slower than normal

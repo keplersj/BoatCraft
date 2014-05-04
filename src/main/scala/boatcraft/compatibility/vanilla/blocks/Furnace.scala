@@ -19,7 +19,9 @@ object Furnace extends Block {
 
 	override def getMeta = 3
 
-	override def getName = "Furnace"
+	override def getUnlocalizedName = "Furnace"
+
+  override def getLocalizedName = "vanilla.blocks.furnace.name"
 
 	override def getContent = new ItemStack(Blocks.furnace)
 

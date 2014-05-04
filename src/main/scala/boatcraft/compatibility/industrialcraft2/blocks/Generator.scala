@@ -9,7 +9,9 @@ import net.minecraft.item.ItemBlock
 import net.minecraft.nbt.NBTTagCompound
 
 object Generator extends Block {
-	override def getName = "Generator"
+	override def getUnlocalizedName = "Generator"
+
+  override def getLocalizedName = "industrialcraft2.blocks.generator.name"
 
 	override def getContent = IC2Items.getItem("generator")
 

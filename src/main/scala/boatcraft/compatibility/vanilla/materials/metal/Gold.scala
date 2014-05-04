@@ -10,7 +10,9 @@ object Gold extends Material {
 		new ResourceLocation("boatcraft",
 			"textures/entity/boat/vanilla/metal/gold.png")
 
-	override def getName = "Gold"
+	override def getUnlocalizedName = "Gold"
+
+  override def getLocalizedName = "vanilla.materials.metal.gold.name"
 
 	override def getItem = new ItemStack(Items.gold_ingot)
 

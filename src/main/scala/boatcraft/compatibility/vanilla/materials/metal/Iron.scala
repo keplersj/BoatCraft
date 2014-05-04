@@ -11,7 +11,9 @@ object Iron extends Material {
 		new ResourceLocation("boatcraft",
 			"textures/entity/boat/vanilla/metal/iron.png")
 
-	override def getName = "Iron"
+	override def getUnlocalizedName = "Iron"
+
+  override def getLocalizedName = "vanilla.materials.metal.iron.name"
 
 	override def getItem = new ItemStack(Items.iron_ingot)
 

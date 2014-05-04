@@ -17,7 +17,9 @@ object Chest extends Block {
 	override def getBlockData(boat: EntityCustomBoat): AnyRef =
 		new Chest.Inventory(boat)
 
-	override def getName = "Chest"
+	override def getUnlocalizedName = "Chest"
+
+  override def getLocalizedName = "vanilla.blocks.chest.name"
 
 	override def getContent = new ItemStack(Blocks.chest)
 

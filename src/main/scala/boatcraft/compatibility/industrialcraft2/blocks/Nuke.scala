@@ -21,7 +21,9 @@ object Nuke extends Block {
 	
 	override def getBlock = IC2Items.getItem("nuke").getItem.asInstanceOf[ItemBlock].field_150939_a
 
-	override def getName: String = "Nuke"
+  override def getUnlocalizedName = "Nuke"
+
+  override def getLocalizedName = "industrialcraft2.blocks.nuke.name"
 
 	override def getContent: ItemStack = IC2Items.getItem("nuke")
 	

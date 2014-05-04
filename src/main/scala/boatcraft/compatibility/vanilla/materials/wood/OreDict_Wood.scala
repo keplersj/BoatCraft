@@ -10,7 +10,9 @@ object OreDict_Wood extends Material {
 	override def getTexture =
 		new ResourceLocation("minecraft", "textures/entity/boat.png")
 
-	override def getName = "Wood"
+	override def getUnlocalizedName = "Wood"
+
+  override def getLocalizedName = "vanilla.materials.wood.oredict.name"
 
 	override def getItem = new ItemStack(Blocks.planks)
 

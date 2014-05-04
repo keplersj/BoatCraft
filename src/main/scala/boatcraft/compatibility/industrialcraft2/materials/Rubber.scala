@@ -7,7 +7,9 @@ import ic2.api.item.IC2Items
 object Rubber extends Material {
 	override def getTexture = new ResourceLocation("ic2", "textures/models/boatRubber.png")
 
-	override def getName = "Rubber"
+  override def getUnlocalizedName = "Rubber"
+
+  override def getLocalizedName = "industrialcraft2.materials.rubber.name"
 
 	override def getItem = IC2Items getItem "rubber"
 
