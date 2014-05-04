@@ -22,6 +22,9 @@ object TNT extends Block {
         if (player.getCurrentEquippedItem().getItem() == Items.flint_and_steel
         	|| player.getCurrentEquippedItem().getItem() == Items.fire_charge) {
             boat.getBlockData.asInstanceOf[TNTFuse].fuse = 80
+            if (player.getCurrentEquippedItem().getItem() == Items.flint_and_steel) {
+              player.getCurrentEquippedItem().setItemDamage(player.getCurrentEquippedItem().getItemDamage() + 1)
+            }
         }
     }
 
