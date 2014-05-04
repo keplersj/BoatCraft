@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.compatibility
-import boatcraft.core.modifiers.Empty
 import boatcraft.core.packets.ChannelHandler
 import boatcraft.core.utilities.Recipes
 import cpw.mods.fml.common.Mod
@@ -18,70 +17,66 @@ import cpw.mods.fml.common.network.{FMLEmbeddedChannel, NetworkRegistry}
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import net.minecraftforge.common.config.Configuration
+import boatcraft.core.blocks.Empty
 
 @Mod(modid = "boatcraft",
-	name = "BoatCraft",
-	version = "2.0",
-	modLanguage = "scala",
-	dependencies = "after:IronChest;after:Thaumcraft;after:IC2")
-object BoatCraft
-{
-	@SidedProxy(modId = "boatcraft",
-			clientSide = "boatcraft.core.Proxy$ClientProxy",
-			serverSide = "boatcraft.core.Proxy$CommonProxy")
-	var proxy: Proxy.CommonProxy = null
+  name = "BoatCraft",
+  version = "2.0",
+  modLanguage = "scala",
+  dependencies = "after:IronChest;after:Thaumcraft;after:IC2")
+object BoatCraft {
+  @SidedProxy(modId = "boatcraft",
+    clientSide = "boatcraft.core.Proxy$ClientProxy",
+    serverSide = "boatcraft.core.Proxy$CommonProxy")
+  var proxy: Proxy.CommonProxy = null
 
-	private[boatcraft] var config: Configuration = null
+  private[boatcraft] var config: Configuration = null
 
-	var channels: EnumMap[Side, FMLEmbeddedChannel] = null
+  var channels: EnumMap[Side, FMLEmbeddedChannel] = null
 
-	private[boatcraft] var log: Logger = null
+  private[boatcraft] var log: Logger = null
 
-	@EventHandler
-	def preInit(event: FMLPreInitializationEvent)
-	{
-		log = event getModLog
-		
-		config = new Configuration(event getSuggestedConfigurationFile)
-		
-		channels = NetworkRegistry.INSTANCE newChannel ("boatcraft", ChannelHandler);
-		
-		NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
-		
-		printModInfo
-		
-		Registry register Empty
-		
-		compatibility addMaterialsAndModifiers
-		
-		GameRegistry registerItem (ItemCustomBoat, "customBoat")
-		
-		compatibility preInit event
-	}
-	
-	@EventHandler
-	def init(event: FMLInitializationEvent) 
-	{
-		proxy registerEntities
-		
-		proxy registerRenderers
-		
-		Recipes addBoatRecipes
-		
-		compatibility init event
-	}
+  @EventHandler
+  def preInit(event: FMLPreInitializationEvent) {
+    log = event getModLog
 
-	@EventHandler
-	def postInit(event: FMLPostInitializationEvent)
-	{
-		compatibility postInit event
-	}
+    config = new Configuration(event getSuggestedConfigurationFile)
 
-	private def printModInfo
-	{
-		log info "BoatCraft"
-		log info "Copyright Kepler Sticka-Jones 2013-2014"
-		log info "http://k2b6s9j.com/projects/minecraft/BoatCraft"
-	}
+    channels = NetworkRegistry.INSTANCE newChannel("boatcraft", ChannelHandler)
+
+    NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
+
+    printModInfo
+
+    Registry register Empty
+
+    compatibility addMaterialsAndModifiers
+
+    GameRegistry registerItem(ItemCustomBoat, "customBoat")
+
+    compatibility preInit event
+  }
+
+  @EventHandler
+  def init(event: FMLInitializationEvent) {
+    proxy registerEntities
+
+    proxy registerRenderers
+
+    Recipes addBoatRecipes
+
+    compatibility init event
+  }
+
+  @EventHandler
+  def postInit(event: FMLPostInitializationEvent) {
+    compatibility postInit event
+  }
+
+  private def printModInfo {
+    log info "BoatCraft"
+    log info "Copyright Kepler Sticka-Jones 2013-2014"
+    log info "http://k2b6s9j.com/projects/minecraft/BoatCraft"
+  }
 }
 

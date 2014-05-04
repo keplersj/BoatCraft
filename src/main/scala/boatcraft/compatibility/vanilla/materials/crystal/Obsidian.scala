@@ -9,30 +9,29 @@ import net.minecraft.util.ResourceLocation
 /**
  *
  */
-object Obsidian extends Material
-{
+object Obsidian extends Material {
   //TODO: Fill Documentation
   /**
    *
    * @return base texture of the Material
    */
   override def getTexture =
-		new ResourceLocation("boatcraft",
-			"textures/entity/boat/vanilla/crystal/obsidian.png")
+    new ResourceLocation("boatcraft",
+      "textures/entity/boat/vanilla/crystal/obsidian.png")
 
   //TODO: Fill Documentation
   /**
    *
    * @return name of the Material
    */
-	override def getName = "Obsidian"
+  override def getName = "Obsidian"
 
   //TODO: Fill Documentation
   /**
    *
    * @return the ItemStack representing the Material
    */
-	override def getItem = new ItemStack(Blocks.obsidian)
+  override def getItem = new ItemStack(Blocks.obsidian)
 
   //TODO: Fill Documentation
   /**

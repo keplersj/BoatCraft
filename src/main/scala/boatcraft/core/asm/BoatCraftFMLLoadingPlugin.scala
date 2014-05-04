@@ -8,36 +8,35 @@ import boatcraft.core.BoatCraft
 /**
  *
  */
-class BoatCraftFMLLoadingPlugin extends IFMLLoadingPlugin
-{
+class BoatCraftFMLLoadingPlugin extends IFMLLoadingPlugin {
   //TODO: Fill Documentation
   /**
    *
    * @return
    */
   override def getASMTransformerClass =
-		Array(classOf[BoatCraftClassTransformer] getName)
+    Array(classOf[BoatCraftClassTransformer] getName)
 
   //TODO: Fill Documentation
   /**
    *
    * @return
    */
-	override def getModContainerClass = BoatCraft.getClass getName
+  override def getModContainerClass = BoatCraft.getClass getName
 
   //TODO: Fill Documentation
   /**
    *
    * @return
    */
-	override def getSetupClass: String = null
+  override def getSetupClass: String = null
 
   //TODO: Fill Documentation
   /**
    *
    * @param data
    */
-	override def injectData(data: Map[String, AnyRef]) {}
+  override def injectData(data: Map[String, AnyRef]) {}
 
   //TODO: Fill Documentation
   /**

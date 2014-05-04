@@ -1,23 +1,24 @@
 package boatcraft.compatibility.ironchest
 
 import cpw.mods.ironchest.IronChestType
+import boatcraft.compatibility.ironchest.modifiers.GenericIronChest
 
-package object blocks
-{
-	object Copper_Chest extends GenericIronChest(IronChestType.COPPER)
+package object blocks {
 
-	object Crystal_Chest extends GenericIronChest(IronChestType.CRYSTAL)
+  object Copper_Chest extends GenericIronChest(IronChestType.COPPER)
 
-	object Diamond_Chest extends GenericIronChest(IronChestType.DIAMOND)
+  object Crystal_Chest extends GenericIronChest(IronChestType.CRYSTAL)
 
-	object DirtChest9000 extends GenericIronChest(IronChestType.DIRTCHEST9000)
+  object Diamond_Chest extends GenericIronChest(IronChestType.DIAMOND)
 
-	object Gold_Chest extends GenericIronChest(IronChestType.GOLD)
+  object DirtChest9000 extends GenericIronChest(IronChestType.DIRTCHEST9000)
 
-	object Iron_Chest extends GenericIronChest(IronChestType.IRON)
+  object Gold_Chest extends GenericIronChest(IronChestType.GOLD)
 
-	object Silver_Chest extends GenericIronChest(IronChestType.SILVER)
+  object Iron_Chest extends GenericIronChest(IronChestType.IRON)
 
-	object Obsidian_Chest extends GenericIronChest(IronChestType.OBSIDIAN)
+  object Silver_Chest extends GenericIronChest(IronChestType.SILVER)
+
+  object Obsidian_Chest extends GenericIronChest(IronChestType.OBSIDIAN)
 
 }

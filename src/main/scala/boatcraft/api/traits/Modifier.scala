@@ -4,7 +4,7 @@ import boatcraft.api.boat.EntityCustomBoat
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
 
-trait Modifier {
+abstract class Modifier {
 
   /**
    * The human-readable name of this Boat.
@@ -64,6 +64,6 @@ trait Modifier {
    *
    * @return name of the Material
    */
-  override def toString = getName replaceAll (" ", "") toLowerCase
+  override def toString = getName replaceAll(" ", "") toLowerCase
 
 }
