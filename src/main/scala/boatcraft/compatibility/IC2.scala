@@ -9,28 +9,28 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import ic2.api.item.IC2Items
 
 object IC2 extends CompatModule {
-  override protected def doPostInit(e: FMLPostInitializationEvent) {
-    try {
-      Recipes.removeRecipe(IC2Items getItem "boatRubber")
-      Recipes.removeRecipe(IC2Items getItem "boatCarbon")
-    }
-    catch {
-      case ex: NoClassDefFoundError => //That's OK
-      case err: NoSuchMethodError => //Fine
-      case ex: NoSuchMethodException => //No problem
-      case ex: NullPointerException => //Sure
-      case thr: Throwable => thr printStackTrace() //Weird...
-    }
-  }
+	override protected def doPostInit(e: FMLPostInitializationEvent) {
+		try {
+			Recipes.removeRecipe(IC2Items getItem "boatRubber")
+			Recipes.removeRecipe(IC2Items getItem "boatCarbon")
+		}
+		catch {
+			case ex: NoClassDefFoundError => //That's OK
+			case err: NoSuchMethodError => //Fine
+			case ex: NoSuchMethodException => //No problem
+			case ex: NullPointerException => //Sure
+			case thr: Throwable => thr printStackTrace() //Weird...
+		}
+	}
 
-  @Optional.Method(modid = "IC2")
-  override protected def getMaterials: List[Material] = List[Material](
-    Rubber,
-    Carbon
-  )
+	@Optional.Method(modid = "IC2")
+	override protected def getMaterials: List[Material] = List[Material](
+		Rubber,
+		Carbon
+	)
 
-  @Optional.Method(modid = "IC2")
-  override protected def getBlocks: List[Block] = List[Block](
-    Generator
-  )
+	@Optional.Method(modid = "IC2")
+	override protected def getBlocks: List[Block] = List[Block](
+		Generator
+	)
 }

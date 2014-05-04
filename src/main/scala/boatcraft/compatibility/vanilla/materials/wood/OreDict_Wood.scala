@@ -7,12 +7,12 @@ import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 
 object OreDict_Wood extends Material {
-  override def getTexture =
-    new ResourceLocation("minecraft", "textures/entity/boat.png")
+	override def getTexture =
+		new ResourceLocation("minecraft", "textures/entity/boat.png")
 
-  override def getName = "Wood"
+	override def getName = "Wood"
 
-  override def getItem = new ItemStack(Blocks.planks)
+	override def getItem = new ItemStack(Blocks.planks)
 
-  override def getStick = new ItemStack(Items.stick)
+	override def getStick = new ItemStack(Items.stick)
 }

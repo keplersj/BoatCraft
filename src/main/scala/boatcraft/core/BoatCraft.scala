@@ -19,63 +19,63 @@ import boatcraft.core.blocks.Empty
 import java.util
 
 @Mod(modid = "boatcraft",
-  name = "BoatCraft",
-  version = "2.0",
-  modLanguage = "scala",
-  dependencies = "after:IronChest;after:Thaumcraft;after:IC2")
+	name = "BoatCraft",
+	version = "2.0",
+	modLanguage = "scala",
+	dependencies = "after:IronChest;after:Thaumcraft;after:IC2")
 object BoatCraft {
-  @SidedProxy(modId = "boatcraft",
-    clientSide = "boatcraft.core.Proxy$ClientProxy",
-    serverSide = "boatcraft.core.Proxy$CommonProxy")
-  var proxy: Proxy.CommonProxy = null
+	@SidedProxy(modId = "boatcraft",
+		clientSide = "boatcraft.core.Proxy$ClientProxy",
+		serverSide = "boatcraft.core.Proxy$CommonProxy")
+	var proxy: Proxy.CommonProxy = null
 
-  private[boatcraft] var config: Configuration = null
+	private[boatcraft] var config: Configuration = null
 
-  var channels: util.EnumMap[Side, FMLEmbeddedChannel] = null
+	var channels: util.EnumMap[Side, FMLEmbeddedChannel] = null
 
-  private[boatcraft] var log: Logger = null
+	private[boatcraft] var log: Logger = null
 
-  @EventHandler
-  def preInit(event: FMLPreInitializationEvent) {
-    log = event.getModLog
+	@EventHandler
+	def preInit(event: FMLPreInitializationEvent) {
+		log = event.getModLog
 
-    config = new Configuration(event getSuggestedConfigurationFile)
+		config = new Configuration(event getSuggestedConfigurationFile)
 
-    channels = NetworkRegistry.INSTANCE newChannel("boatcraft", ChannelHandler)
+		channels = NetworkRegistry.INSTANCE newChannel("boatcraft", ChannelHandler)
 
-    NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
+		NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
 
-    printModInfo()
+		printModInfo()
 
-    compatibility preInit event
+		compatibility preInit event
 
-    Registry register Empty
+		Registry register Empty
 
-    compatibility registerModifiers()
+		compatibility registerModifiers()
 
-    GameRegistry registerItem(ItemCustomBoat, "customBoat")
-  }
+		GameRegistry registerItem(ItemCustomBoat, "customBoat")
+	}
 
-  @EventHandler
-  def init(event: FMLInitializationEvent) {
-    proxy registerEntities()
+	@EventHandler
+	def init(event: FMLInitializationEvent) {
+		proxy registerEntities()
 
-    proxy registerRenders()
+		proxy registerRenders()
 
-    Recipes addBoatRecipes()
+		Recipes addBoatRecipes()
 
-    compatibility init event
-  }
+		compatibility init event
+	}
 
-  @EventHandler
-  def postInit(event: FMLPostInitializationEvent) {
-    compatibility postInit event
-  }
+	@EventHandler
+	def postInit(event: FMLPostInitializationEvent) {
+		compatibility postInit event
+	}
 
-  private def printModInfo() {
-    log info "BoatCraft"
-    log info "Copyright Kepler Sticka-Jones 2013-2014"
-    log info "http://k2b6s9j.com/projects/minecraft/BoatCraft"
-  }
+	private def printModInfo() {
+		log info "BoatCraft"
+		log info "Copyright Kepler Sticka-Jones 2013-2014"
+		log info "http://k2b6s9j.com/projects/minecraft/BoatCraft"
+	}
 }
 

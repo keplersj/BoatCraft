@@ -12,38 +12,38 @@ import net.minecraft.tileentity.TileEntityChest
 import net.minecraft.entity.player.EntityPlayerMP
 
 object Chest extends Block {
-  override def getBlock = Blocks.chest
+	override def getBlock = Blocks.chest
 
-  override def getInventory(boat: EntityCustomBoat): IInventory =
-    new Chest.Inventory(boat)
+	override def getInventory(boat: EntityCustomBoat): IInventory =
+		new Chest.Inventory(boat)
 
-  override def getName = "Chest"
+	override def getName = "Chest"
 
-  override def getContent = new ItemStack(Blocks.chest)
+	override def getContent = new ItemStack(Blocks.chest)
 
-  override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
-    if (player.isInstanceOf[EntityPlayerMP]) player displayGUIChest boat.getInventory
+	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
+		if (player.isInstanceOf[EntityPlayerMP]) player displayGUIChest boat.getInventory
 
-  override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-    NBTHelper writeChestToNBT(boat.getInventory, tag)
+	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
+		NBTHelper writeChestToNBT(boat.getInventory, tag)
 
-  override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-    NBTHelper readChestFromNBT(boat.getInventory, tag)
+	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
+		NBTHelper readChestFromNBT(boat.getInventory, tag)
 
-  private class Inventory(boat: EntityCustomBoat) extends TileEntityChest {
-    worldObj = boat.worldObj
+	private class Inventory(boat: EntityCustomBoat) extends TileEntityChest {
+		worldObj = boat.worldObj
 
-    override def getInventoryName = "Chest Boat"
+		override def getInventoryName = "Chest Boat"
 
-    override def hasCustomInventoryName = false
+		override def hasCustomInventoryName = false
 
-    override def isUseableByPlayer(player: EntityPlayer) =
-      (player getDistanceSqToEntity boat) <= 64
+		override def isUseableByPlayer(player: EntityPlayer) =
+			(player getDistanceSqToEntity boat) <= 64
 
-    //TODO make it render it on the boat
-    override def openInventory() {}
+		//TODO make it render it on the boat
+		override def openInventory() {}
 
-    override def closeInventory() {}
-  }
+		override def closeInventory() {}
+	}
 
 }
