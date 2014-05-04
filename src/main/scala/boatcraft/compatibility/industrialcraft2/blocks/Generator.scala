@@ -1,4 +1,4 @@
-package boatcraft.compatibility.industrialcraft2.modifiers
+package boatcraft.compatibility.industrialcraft2.blocks
 
 import boatcraft.api.boat.EntityCustomBoat
 import boatcraft.api.traits.Block

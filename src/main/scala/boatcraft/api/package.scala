@@ -31,10 +31,10 @@ package object api {
    * @param mat the Material
    * @param mod the Block inside the Boat
    *
-   * @return the custom boat itemstack
+   * @return the custom boat ItemStack
    */
   def getCustomBoat(mat: String, mod: String) = {
-    var stack = new ItemStack(ItemCustomBoat)
+    val stack = new ItemStack(ItemCustomBoat)
     stack.stackTagCompound = new NBTTagCompound
     stack.stackTagCompound.setString("material", mat)
     stack.stackTagCompound.setString("modifier", mod)

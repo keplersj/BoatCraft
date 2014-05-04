@@ -27,12 +27,12 @@ class RenderCustomBoat
     doRender(entity.asInstanceOf[EntityCustomBoat], x, y, z, f0, f1)
 
   def doRender(boat: EntityCustomBoat, x: Double, y: Double, z: Double, f0: Float, f1: Float) {
-    GL11 glPushMatrix
+    GL11 glPushMatrix()
 
     GL11 glTranslated(x, y, z)
     GL11 glRotatef(180.0F - f0, 0.0F, 1.0F, 0.0F)
 
-    var f2: Float = boat.getTimeSinceHit - f1
+    val f2: Float = boat.getTimeSinceHit - f1
     var f3: Float = boat.getDamageTaken - f1
 
     if (f3 < 0.0F)
@@ -44,11 +44,11 @@ class RenderCustomBoat
 
     val f4 = 0.75F
 
-    val block = boat.getBlock getBlock
-    val meta = boat.getBlock getMeta
+    val block = boat.getBlock.getBlock
+    val meta = boat.getBlock.getMeta
 
     if (block.getRenderType != -1) {
-      GL11 glPushMatrix
+      GL11 glPushMatrix()
 
       bindTexture(TextureMap.locationBlocksTexture)
       GL11 glScalef(f4, f4, f4)
@@ -57,7 +57,7 @@ class RenderCustomBoat
 
       GL11 glTranslatef(0, 6F / 16F, 0)
 
-      GL11 glPushMatrix
+      GL11 glPushMatrix()
 
       field_147909_c renderBlockAsItem(block, meta, f5)
 
@@ -65,24 +65,25 @@ class RenderCustomBoat
       GL11 glPopMatrix()
       GL11 glColor4f(1, 1, 1, 1)
     }
-    else if (boat.getInventory.isInstanceOf[TileEntity]
-      && (TileEntityRendererDispatcher.instance hasSpecialRenderer
-      boat.getInventory.asInstanceOf[TileEntity])) {
-      GL11 glPushMatrix()
-      GL11 glScalef(f4, f4, f4)
+    else boat.getInventory match {
+      case entity: TileEntity if TileEntityRendererDispatcher.instance hasSpecialRenderer
+        entity =>
+        GL11 glPushMatrix()
+        GL11 glScalef(f4, f4, f4)
 
-      val f5 = boat getBrightness f1
+        val f5 = boat getBrightness f1
 
-      GL11 glTranslatef(-0.5F, 6F / 16F - 0.5F, 0)
-      GL11 glPushMatrix
+        GL11 glTranslatef(-0.5F, 6F / 16F - 0.5F, 0)
+        GL11 glPushMatrix()
 
-      TileEntityRendererDispatcher.instance renderTileEntityAt(
-        boat.getInventory.asInstanceOf[TileEntity],
-        0, 0, 0, f5)
+        TileEntityRendererDispatcher.instance renderTileEntityAt(
+          entity,
+          0, 0, 0, f5)
 
-      GL11 glPopMatrix()
-      GL11 glPopMatrix()
-      GL11 glColor4f(1, 1, 1, 1)
+        GL11 glPopMatrix()
+        GL11 glPopMatrix()
+        GL11 glColor4f(1, 1, 1, 1)
+      case _ =>
     }
 
     GL11 glScalef(f4, f4, f4)
@@ -92,10 +93,10 @@ class RenderCustomBoat
     modelBoat render(boat, 0, 0, -0.1F, 0, 0F, 0.0625F)
 
     //Render the name
-    if (boat hasName) {
-      val d0 = boat.lastTickPosX + (boat.posX - boat.lastTickPosX) * f1;
-      val d1 = boat.lastTickPosY + (boat.posY - boat.lastTickPosY) * f1;
-      val d2 = boat.lastTickPosZ + (boat.posZ - boat.lastTickPosZ) * f1;
+    if (boat.hasName) {
+      val d0 = boat.lastTickPosX + (boat.posX - boat.lastTickPosX) * f1
+      val d1 = boat.lastTickPosY + (boat.posY - boat.lastTickPosY) * f1
+      val d2 = boat.lastTickPosZ + (boat.posZ - boat.lastTickPosZ) * f1
 
       println("Rendered name " + boat.getName + " at " + d0 + ", " + d1 + ", " + d2)
       println(boat.getDistanceSqToEntity(renderManager.livingPlayer) + " away from player")
@@ -103,7 +104,7 @@ class RenderCustomBoat
       func_147906_a(boat, boat.getName, d0, d1, d2, 64)
     }
 
-    GL11 glPopMatrix
+    GL11 glPopMatrix()
   }
 
   override def getEntityTexture(entity: Entity) =
@@ -118,7 +119,7 @@ class RenderCustomBoat
                             helper: ItemRendererHelper) = true
 
   def renderItem(renderType: ItemRenderType, stack: ItemStack, objects: AnyRef*) {
-    GL11 glPushMatrix
+    GL11 glPushMatrix()
 
     GL11 glTranslatef(0.5F, 0.5F, 0.5F)
 
@@ -133,7 +134,7 @@ class RenderCustomBoat
     var meta: Int = 0
 
     try {
-      block = Registry getBlock stack getBlock
+      block = (Registry getBlock stack).getBlock
     } catch {
       case e: Exception =>
         e.printStackTrace()
@@ -141,7 +142,7 @@ class RenderCustomBoat
     }
 
     try {
-      meta = Registry getBlock stack getMeta
+      meta = (Registry getBlock stack).getMeta
     } catch {
       case e: Exception =>
         e.printStackTrace()
@@ -149,7 +150,7 @@ class RenderCustomBoat
     }
 
     if (block.getRenderType != -1) {
-      GL11 glPushMatrix
+      GL11 glPushMatrix()
 
       Minecraft.getMinecraft.getTextureManager bindTexture
         TextureMap.locationBlocksTexture
@@ -157,12 +158,12 @@ class RenderCustomBoat
 
       GL11 glTranslatef(0, 6F / 16F, 0)
 
-      GL11 glPushMatrix
+      GL11 glPushMatrix()
 
       field_147909_c renderBlockAsItem(block, meta, 8)
-      GL11 glPopMatrix
+      GL11 glPopMatrix()
 
-      GL11 glPopMatrix
+      GL11 glPopMatrix()
 
       GL11 glColor4f(1, 1, 1, 1)
     }
@@ -172,7 +173,7 @@ class RenderCustomBoat
 
     Minecraft.getMinecraft.getTextureManager bindTexture (
       try {
-        Registry getMaterial stack getTexture
+        (Registry getMaterial stack).getTexture
       } catch {
         case e: Exception => new ResourceLocation("minecraft", "textures/entity/boat.png")
       }
@@ -181,6 +182,6 @@ class RenderCustomBoat
     GL11 glScalef(-1, -1, 1)
     modelBoat render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)
 
-    GL11 glPopMatrix
+    GL11 glPopMatrix()
   }
 }

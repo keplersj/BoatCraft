@@ -41,9 +41,9 @@ object Chest extends Block {
       (player getDistanceSqToEntity boat) <= 64
 
     //TODO make it render it on the boat
-    override def openInventory {}
+    override def openInventory() {}
 
-    override def closeInventory {}
+    override def closeInventory() {}
   }
 
 }

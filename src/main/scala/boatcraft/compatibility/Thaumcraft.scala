@@ -16,10 +16,10 @@ object Thaumcraft extends CompatModule {
   override protected def doPreInit(e: FMLPreInitializationEvent) {
     boatAspects = (new AspectList).add(Aspect.MOTION, 2).add(Aspect.WATER, 2)
 
-    registerAspects
+    registerAspects()
   }
 
-  private def registerAspects {
+  private def registerAspects() {
     for ((matName, material) <- Registry.materials)
       for ((blockName, block) <- Registry.blocks) {
         ThaumcraftApi.registerComplexObjectTag(getCustomBoat(matName, blockName), boatAspects.asInstanceOf[AspectList])

@@ -1,7 +1,6 @@
 package boatcraft.compatibility.ironchest
 
 import cpw.mods.ironchest.IronChestType
-import boatcraft.compatibility.ironchest.modifiers.GenericIronChest
 
 package object blocks {
 

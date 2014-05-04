@@ -2,7 +2,7 @@ package boatcraft.compatibility
 
 import boatcraft.api.traits.{Block, Material, Modifier}
 import boatcraft.compatibility.industrialcraft2.materials.{Carbon, Rubber}
-import boatcraft.compatibility.industrialcraft2.modifiers.Generator
+import boatcraft.compatibility.industrialcraft2.blocks.Generator
 import boatcraft.core.utilities.Recipes
 import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
@@ -19,7 +19,7 @@ object IC2 extends CompatModule {
       case err: NoSuchMethodError => //Fine
       case ex: NoSuchMethodException => //No problem
       case ex: NullPointerException => //Sure
-      case thr: Throwable => thr printStackTrace //Weird...
+      case thr: Throwable => thr printStackTrace() //Weird...
     }
   }
 
@@ -30,7 +30,7 @@ object IC2 extends CompatModule {
   )
 
   @Optional.Method(modid = "IC2")
-  override protected def getModifiers: List[Modifier] = List[Block](
+  override protected def getBlocks: List[Block] = List[Block](
     Generator
   )
 }

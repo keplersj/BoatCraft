@@ -5,7 +5,7 @@ import boatcraft.core.GUIHandler
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.common.MinecraftForge
 import boatcraft.compatibility.ironchest.blocks._
-import boatcraft.api.traits.{Material, Block}
+import boatcraft.api.traits.Block
 
 object IronChests extends CompatModule {
   override protected def doPreInit(e: FMLPreInitializationEvent) {
@@ -13,7 +13,7 @@ object IronChests extends CompatModule {
     MinecraftForge.EVENT_BUS register IronChestsEventHandler
   }
 
-  override protected def getModifiers: List[Block] =
+  override protected def getBlocks: List[Block] =
     List[Block](
       Iron_Chest,
       Gold_Chest,

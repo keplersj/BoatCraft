@@ -1,7 +1,5 @@
 package boatcraft.core
 
-import java.util.EnumMap
-
 import org.apache.logging.log4j.Logger
 
 import boatcraft.api.Registry
@@ -18,6 +16,7 @@ import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import net.minecraftforge.common.config.Configuration
 import boatcraft.core.blocks.Empty
+import java.util
 
 @Mod(modid = "boatcraft",
   name = "BoatCraft",
@@ -32,13 +31,13 @@ object BoatCraft {
 
   private[boatcraft] var config: Configuration = null
 
-  var channels: EnumMap[Side, FMLEmbeddedChannel] = null
+  var channels: util.EnumMap[Side, FMLEmbeddedChannel] = null
 
   private[boatcraft] var log: Logger = null
 
   @EventHandler
   def preInit(event: FMLPreInitializationEvent) {
-    log = event getModLog
+    log = event.getModLog
 
     config = new Configuration(event getSuggestedConfigurationFile)
 
@@ -46,24 +45,24 @@ object BoatCraft {
 
     NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
 
-    printModInfo
+    printModInfo()
+
+    compatibility preInit event
 
     Registry register Empty
 
-    compatibility addMaterialsAndModifiers
+    compatibility registerModifiers()
 
     GameRegistry registerItem(ItemCustomBoat, "customBoat")
-
-    compatibility preInit event
   }
 
   @EventHandler
   def init(event: FMLInitializationEvent) {
-    proxy registerEntities
+    proxy registerEntities()
 
-    proxy registerRenderers
+    proxy registerRenders()
 
-    Recipes addBoatRecipes
+    Recipes addBoatRecipes()
 
     compatibility init event
   }
@@ -73,7 +72,7 @@ object BoatCraft {
     compatibility postInit event
   }
 
-  private def printModInfo {
+  private def printModInfo() {
     log info "BoatCraft"
     log info "Copyright Kepler Sticka-Jones 2013-2014"
     log info "http://k2b6s9j.com/projects/minecraft/BoatCraft"

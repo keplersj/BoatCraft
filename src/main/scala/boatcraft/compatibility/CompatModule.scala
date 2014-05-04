@@ -3,7 +3,7 @@ package boatcraft.compatibility
 import org.apache.logging.log4j.Logger
 
 import boatcraft.api.Registry
-import boatcraft.api.traits.{Material, Modifier}
+import boatcraft.api.traits.{Block, Material, Modifier}
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
 
 abstract class CompatModule {
@@ -13,14 +13,14 @@ abstract class CompatModule {
 
   maxID = maxID + 1
 
-  final def addMaterialsAndModifiers {
+  final def registerModifiers() {
     Registry register getMaterials
-    Registry register getModifiers
+    Registry register getBlocks
   }
 
   protected def getMaterials: List[Material] = List[Material]()
 
-  protected def getModifiers: List[Modifier] = List[Material]()
+  protected def getBlocks: List[Block] = List[Block]()
 
   final def preInit(event: FMLPreInitializationEvent) {
     log = event.getModLog

@@ -1,7 +1,5 @@
 package boatcraft.api.boat
 
-import java.util.List
-
 import scala.collection.JavaConversions.mapAsScalaMap
 
 import cpw.mods.fml.relauncher.{Side, SideOnly}
@@ -20,23 +18,24 @@ import net.minecraft.util.MovingObjectPosition
 import net.minecraft.util.Vec3
 import net.minecraft.world.World
 import boatcraft.core.blocks.Empty
+import java.util
 
 /**
  * The Item Class used for all items that can be deployed like a Boat.
  * Extends ItemBoat from Vanilla Minecraft.
  */
 class ItemCustomBoat extends ItemBoat {
-  hasSubtypes = true;
+  hasSubtypes = true
 
   @SideOnly(Side.CLIENT)
-  override def getSubItems(item: Item, tab: CreativeTabs, list: List[_]) {
-    var stack = new ItemStack(item)
+  override def getSubItems(item: Item, tab: CreativeTabs, list: util.List[_]) {
+    val stack = new ItemStack(item)
     stack.stackTagCompound = new NBTTagCompound
     for ((nameMat, material) <- Registry.materials) {
       stack.stackTagCompound setString("material", nameMat)
       for ((nameBlock, block) <- Registry.blocks) {
-        stack.stackTagCompound setString("modifier", nameBlock)
-        list.asInstanceOf[List[ItemStack]] add stack.copy
+        stack.stackTagCompound setString("block", nameBlock)
+        list.asInstanceOf[util.List[ItemStack]] add stack.copy
       }
     }
   }
@@ -64,7 +63,7 @@ class ItemCustomBoat extends ItemBoat {
     val d0: Double = player.prevPosX + (player.posX - player.prevPosX) * f.asInstanceOf[Double]
     val d1: Double = player.prevPosY + (player.posY - player.prevPosY) * f + 1.62D - player.yOffset
     val d2: Double = player.prevPosZ + (player.posZ - player.prevPosZ) * f.asInstanceOf[Double]
-    val vec3: Vec3 = world.getWorldVec3Pool().getVecFromPool(d0, d1, d2)
+    val vec3: Vec3 = world.getWorldVec3Pool.getVecFromPool(d0, d1, d2)
     val f3: Float = MathHelper.cos(-f2 * 0.017453292F - Math.PI.asInstanceOf[Float])
     val f4: Float = MathHelper.sin(-f2 * 0.017453292F - Math.PI.asInstanceOf[Float])
     val f5: Float = -MathHelper.cos(-f1 * 0.017453292F)
@@ -83,15 +82,15 @@ class ItemCustomBoat extends ItemBoat {
       val vec32: Vec3 = player getLook f
       var flag: Boolean = false
       val f9: Float = 1.0F
-      val list: List[_] = world.getEntitiesWithinAABBExcludingEntity(player,
+      val list: util.List[_] = world.getEntitiesWithinAABBExcludingEntity(player,
         player.boundingBox addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3)
           expand(f9.asInstanceOf[Double], f9.asInstanceOf[Double], f9.asInstanceOf[Double]))
       var i: Int = 0
       for (i <- 0 until list.size()) {
         val entity: Entity = list.get(i).asInstanceOf[Entity]
 
-        if (entity.canBeCollidedWith()) {
-          val f10: Float = entity.getCollisionBorderSize()
+        if (entity.canBeCollidedWith) {
+          val f10: Float = entity.getCollisionBorderSize
           val axisalignedbb: AxisAlignedBB = entity.boundingBox.
             expand(f10 toDouble, f10 toDouble, f10 toDouble)
 
@@ -100,12 +99,12 @@ class ItemCustomBoat extends ItemBoat {
         }
       }
 
-      if (flag) return stack
+      if (flag) stack
       else {
         if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
           i = movingobjectposition.blockX
           var j = movingobjectposition.blockY
-          var k = movingobjectposition.blockZ
+          val k = movingobjectposition.blockZ
 
           if (world.getBlock(i, j, k) == Blocks.snow_layer)
             j = j - 1
@@ -131,7 +130,7 @@ class ItemCustomBoat extends ItemBoat {
           if (!player.capabilities.isCreativeMode)
             stack.stackSize = stack.stackSize - 1
         }
-        return stack
+        stack
       }
     }
   }

@@ -14,11 +14,11 @@ package object compatibility {
     ("Thaumcraft", Thaumcraft),
     ("IC2", IC2))
 
-  def addMaterialsAndModifiers {
+  def registerModifiers() {
     for (module <- mods) {
       if (module._1.isEmpty || Loader.isModLoaded(module._1))
-        module._2.addMaterialsAndModifiers
-      else BoatCraft.log warn "Could not add Materials and Modifiers for module:" + module._1
+        module._2.registerModifiers()
+      else BoatCraft.log warn "Could not register additions for module:" + module._1
     }
   }
 

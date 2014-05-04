@@ -8,7 +8,7 @@ abstract class Modifier {
 
   /**
    * The human-readable name of this Boat.
-   * The {@link Block#toString} will make it computer-readable
+   * The `@link Block#toString` will make it computer-readable
    *
    * @return the name of the Block
    */
@@ -29,7 +29,7 @@ abstract class Modifier {
   def getCrashResistance = 1.0
 
   /**
-   * Open's the corresponding GUI for this Modifier, if any
+   * Opens the corresponding GUI for this Modifier, if any
    *
    * @param player the player interacting with the Boat
    * @param boat the Boat being interacted with
@@ -64,6 +64,6 @@ abstract class Modifier {
    *
    * @return name of the Material
    */
-  override def toString = getName replaceAll(" ", "") toLowerCase
+  override def toString = (getName replaceAll(" ", "")).toLowerCase
 
 }

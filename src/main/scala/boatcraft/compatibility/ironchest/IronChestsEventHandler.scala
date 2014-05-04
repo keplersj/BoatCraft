@@ -13,7 +13,7 @@ object IronChestsEventHandler {
   def interact(e: EntityInteractEvent) {
     if (!e.target.isInstanceOf[EntityCustomBoat]) return
 
-    var boat = e.target.asInstanceOf[EntityCustomBoat]
+    val boat = e.target.asInstanceOf[EntityCustomBoat]
     val stack = e.entityPlayer.getCurrentEquippedItem
 
     if (stack != null && stack.getItem.isInstanceOf[ItemChestChanger]) {
@@ -28,7 +28,7 @@ object IronChestsEventHandler {
           newTE.chestContents, 0,
           Math.min(newSize, chestContents.length))
 
-        boat.setModifier((IronChestType.values()(changer getTargetChestOrdinal IronChestType.WOOD.ordinal))
+        boat.setModifier(IronChestType.values()(changer getTargetChestOrdinal IronChestType.WOOD.ordinal)
           .friendlyName replaceAll(" ", "") toLowerCase)
 
         for (i <- 0 until newTE.getSizeInventory) {

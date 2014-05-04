@@ -25,12 +25,12 @@ object Furnace extends Block {
 
   override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
     if (player.isInstanceOf[EntityPlayerMP])
-      player func_146101_a (boat.asInstanceOf[EntityCustomBoat]
-        .getInventory.asInstanceOf[Inventory])
+      player func_146101_a boat.asInstanceOf[EntityCustomBoat]
+        .getInventory.asInstanceOf[Inventory]
 
   override def update(boat: EntityCustomBoat) =
     (boat.asInstanceOf[EntityCustomBoat].getInventory.asInstanceOf[Inventory]
-      updateEntity)
+      updateEntity())
 
   override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
     boat.asInstanceOf[EntityCustomBoat].getInventory.asInstanceOf[Inventory] readFromNBT tag
@@ -48,7 +48,7 @@ object Furnace extends Block {
     override def isUseableByPlayer(player: EntityPlayer) =
       (player getDistanceSqToEntity boat) <= 64
 
-    override def updateEntity {
+    override def updateEntity() {
       if (furnaceBurnTime > 0)
         furnaceBurnTime = furnaceBurnTime - 1
 
@@ -74,7 +74,7 @@ object Furnace extends Block {
 
           if (furnaceCookTime == 200) {
             furnaceCookTime = 0
-            smeltItem
+            smeltItem()
           }
         }
         else furnaceCookTime = 0

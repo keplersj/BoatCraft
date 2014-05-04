@@ -8,10 +8,10 @@ import net.minecraftforge.common.util.Constants
 
 object NBTHelper {
   def writeChestToNBT(inv: IInventory, tag: NBTTagCompound) {
-    var list = new NBTTagList
+    val list = new NBTTagList
     for (i <- 0 until inv.getSizeInventory) {
       if (inv.getStackInSlot(i) != null) {
-        var _tag = new NBTTagCompound
+        val _tag = new NBTTagCompound
         (inv getStackInSlot i) writeToNBT _tag
         _tag setByte("Slot", i.toByte)
         list appendTag _tag
@@ -21,7 +21,7 @@ object NBTHelper {
   }
 
   def readChestFromNBT(inv: IInventory, tag: NBTTagCompound) {
-    var list = tag getTagList("Items", Constants.NBT.TAG_COMPOUND)
+    val list = tag getTagList("Items", Constants.NBT.TAG_COMPOUND)
 
     for (i <- 0 until list.tagCount) {
       val _tag = list getCompoundTagAt i

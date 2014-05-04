@@ -39,7 +39,7 @@ object Diamond extends Material {
    *
    */
   override def getStick = //Translocator mod
-    if ((OreDictionary getOres "diamondNugget") isEmpty)
+    if ((OreDictionary getOres "diamondNugget").isEmpty)
       null
     else (OreDictionary getOres "diamondNugget") get 0
 }

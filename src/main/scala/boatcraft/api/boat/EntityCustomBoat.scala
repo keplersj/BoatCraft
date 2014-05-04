@@ -16,10 +16,10 @@ import net.minecraft.world.World
 //TODO: Fill Documentation
 /**
  *
- * @param world
- * @param x
- * @param y
- * @param z
+ * @param world The instance of the Minecraft world the Boat Entity exists in.
+ * @param x The X position of the Boat Entity in the world.
+ * @param y The Y position of the Boat Entity in the world.
+ * @param z The Z position of the Boat Entity in the world.
  */
 case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
   extends EntityBoat(world, x, y, z) with IInventory {
@@ -27,8 +27,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 
   def this(world: World) = this(world, 0, 0, 0)
 
-  override protected def entityInit {
-    super.entityInit
+  override protected def entityInit() {
+    super.entityInit()
 
     dataWatcher addObject(20, "")
     dataWatcher addObject(21, "")
@@ -53,14 +53,14 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 
   override def attackEntityFrom(par1DamageSource: DamageSource, par2: Float): Boolean = {
     if (isEntityInvulnerable)
-      return false
+      false
     else if (!worldObj.isRemote && !isDead) {
       setForwardDirection(-getForwardDirection)
       setTimeSinceHit(10)
       setDamageTaken(getDamageTaken + par2 * 10)
-      setBeenAttacked
+      setBeenAttacked()
       val flag = par1DamageSource.getEntity.isInstanceOf[EntityPlayer] &&
-        (par1DamageSource.getEntity.asInstanceOf[EntityPlayer]).capabilities.isCreativeMode
+        par1DamageSource.getEntity.asInstanceOf[EntityPlayer].capabilities.isCreativeMode
 
       if (flag || getDamageTaken > 40) {
         if (riddenByEntity != null)
@@ -69,18 +69,18 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
         if (!flag)
           func_145778_a(Items.boat, 1, 0)
 
-        setDead
+        setDead()
       }
 
-      return true
+      true
     }
     else
-      return true
+      true
   }
 
-  override def onUpdate {
+  override def onUpdate() {
     //		super.onUpdate
-    doUpdate
+    doUpdate()
     //TODO
     //		val vX = posX - linkedTo.posX
     //		val vY = posY - linkedTo.posY
@@ -105,7 +105,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
       "speedMultiplier", "field_70276_b")
   }
 
-  private def doUpdate {
+  private def doUpdate() {
     val isBoatEmpty: Boolean = ObfuscationReflectionHelper getPrivateValue(
       classOf[EntityBoat], this,
       "isBoatEmpty", "field_70279_a")
@@ -167,7 +167,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
         val d6 = (rand.nextInt(2) * 2 - 1).toDouble * 0.7D
         var d8: Double = 0.0
         var d9: Double = 0.0
-        if (rand nextBoolean) {
+        if (rand.nextBoolean) {
           d8 = posX - d2 * d5 * 0.8D + d4 * d6
           d9 = posZ - d4 * d5 * 0.8D - d2 * d6
           worldObj.spawnParticle("splash", d8, posY - 0.125D, d9, motionX, motionY,
@@ -291,7 +291,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
       moveEntity(motionX, motionY, motionZ)
       if (isCollidedHorizontally && d10 > (getMaterial.getCrashResistance * 0.2D)) {
         if (!worldObj.isRemote && !isDead) {
-          setDead
+          setDead()
 
           for (l <- 0 until 3)
             func_145778_a(Item.getItemFromBlock(Blocks.planks), 1, 0.0F)
@@ -341,11 +341,11 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
     if (item == Items.boat)
       stack = getCustomBoat(getMaterialName, getBlockName)
     else if (item == Item.getItemFromBlock(Blocks.planks))
-      stack = getMaterial getItem
+      stack = getMaterial.getItem
     else if (item == Items.stick) {
-      stack = getMaterial getStick
+      stack = getMaterial.getStick
 
-      if (stack == null && rand.nextBoolean) stack = getMaterial getItem
+      if (stack == null && rand.nextBoolean) stack = getMaterial.getItem
     }
     else return super.func_145778_a(item, count, f)
 
@@ -361,9 +361,9 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
       println("Set the name to " + player.getCurrentEquippedItem.getDisplayName)
       return false
     }
-    if (getBlock isRideable) return super.interactFirst(player)
+    if (getBlock.isRideable) return super.interactFirst(player)
     getBlock interact(player, this)
-    return true
+    true
   }
 
   override def getPickedResult(target: MovingObjectPosition) =
@@ -426,7 +426,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 
   //IInventory implementation
   override def getSizeInventory =
-    getInventory getSizeInventory
+    getInventory.getSizeInventory
 
   override def getStackInSlot(slot: Int) =
     getInventory getStackInSlot slot
@@ -441,23 +441,23 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
     getInventory setInventorySlotContents(slot, stack)
 
   override def getInventoryName =
-    getInventory getInventoryName
+    getInventory.getInventoryName
 
   override def hasCustomInventoryName =
-    getInventory hasCustomInventoryName
+    getInventory.hasCustomInventoryName
 
   override def getInventoryStackLimit =
-    getInventory getInventoryStackLimit
+    getInventory.getInventoryStackLimit
 
-  override def markDirty =
-    getInventory markDirty
+  override def markDirty() =
+    getInventory markDirty()
 
   override def isUseableByPlayer(player: EntityPlayer) =
     getDistanceSqToEntity(player) <= 64
 
-  override def openInventory = getInventory.openInventory
+  override def openInventory() = getInventory.openInventory()
 
-  override def closeInventory = getInventory.closeInventory
+  override def closeInventory() = getInventory.closeInventory()
 
   override def isItemValidForSlot(slot: Int, stack: ItemStack) =
     getInventory.isItemValidForSlot(slot, stack)
@@ -489,13 +489,13 @@ object EntityCustomBoat {
 
     override def getInventoryStackLimit = 0
 
-    override def markDirty {}
+    override def markDirty() {}
 
     override def isUseableByPlayer(player: EntityPlayer) = false
 
-    override def openInventory {}
+    override def openInventory() {}
 
-    override def closeInventory {}
+    override def closeInventory() {}
 
     override def isItemValidForSlot(slot: Int, stack: ItemStack) = false
   }

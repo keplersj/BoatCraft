@@ -1,4 +1,4 @@
-package boatcraft.compatibility.ironchest.modifiers
+package boatcraft.compatibility.ironchest.blocks
 
 import boatcraft.api.boat.EntityCustomBoat
 import boatcraft.compatibility.IronChests
@@ -14,11 +14,11 @@ import boatcraft.api.traits.Block
 abstract class GenericIronChest(chestType: IronChestType) extends Block {
   override def getBlock = IronChest.ironChestBlock
 
-  override def getMeta = chestType ordinal
+  override def getMeta = chestType.ordinal
 
   override def getContent = new ItemStack(getBlock, 1, getMeta)
 
-  override def getName = chestType friendlyName
+  override def getName = chestType.friendlyName
 
   override def getInventory(boat: EntityCustomBoat): IInventory =
     new GenericIronChest.Inventory(boat, chestType)
@@ -39,7 +39,7 @@ abstract class GenericIronChest(chestType: IronChestType) extends Block {
         val newTE = (boat.asInstanceOf[EntityCustomBoat] getInventory)
           .asInstanceOf[GenericIronChest.Inventory] applyUpgradeItem changer
 
-        boat.setModifier((IronChestType.values()(changer getTargetChestOrdinal chestType.ordinal))
+        boat.setModifier(IronChestType.values()(changer getTargetChestOrdinal chestType.ordinal)
           .friendlyName replaceAll(" ", "") toLowerCase)
 
         for (i <- 0 until newTE.getSizeInventory) {
@@ -68,15 +68,15 @@ object GenericIronChest {
       (player getDistanceSqToEntity boat) <= 64
 
     //TODO make it render it on the boat
-    override def openInventory {}
+    override def openInventory() {}
 
-    override def closeInventory {}
+    override def closeInventory() {}
 
     override def applyUpgradeItem(changer: ItemChestChanger): TileEntityIronChest = {
       if (!(changer.getType canUpgrade getType))
-        return null;
+        return null
 
-      var newEntity = new Inventory(boat,
+      val newEntity = new Inventory(boat,
         IronChestType.values()(changer getTargetChestOrdinal getType.ordinal))
       val newSize = newEntity.chestContents.length
 
@@ -84,13 +84,13 @@ object GenericIronChest {
         newEntity.chestContents, 0,
         Math min(newSize, chestContents.length))
 
-      var block = IronChest.ironChestBlock
+      val block = IronChest.ironChestBlock
       block dropContent(newSize, this, worldObj,
         boat.posX.floor.toInt, boat.posY.floor.toInt, boat.posZ.floor.toInt)
 
-      newEntity markDirty
+      newEntity markDirty()
 
-      return newEntity
+      newEntity
     }
   }
 

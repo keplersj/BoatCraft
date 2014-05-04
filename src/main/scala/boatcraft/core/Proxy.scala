@@ -9,17 +9,17 @@ import boatcraft.api.boat.ItemCustomBoat
 object Proxy {
 
   class CommonProxy {
-    def registerRenderers {}
+    def registerRenders() {}
 
-    def registerEntities {
+    def registerEntities() {
       EntityRegistry.registerModEntity(classOf[EntityCustomBoat],
         "customBoat", 0, BoatCraft, 66, 10, true)
     }
   }
 
   class ClientProxy extends CommonProxy {
-    override def registerRenderers {
-      BoatCraft.log info "Registering Renderes"
+    override def registerRenders() {
+      BoatCraft.log info "Registering Renders"
 
       RenderingRegistry registerEntityRenderingHandler(classOf[EntityCustomBoat],
         new RenderCustomBoat)

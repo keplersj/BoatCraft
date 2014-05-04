@@ -1,6 +1,5 @@
 package boatcraft.core.utilities
 
-import java.util.ArrayList
 import scala.collection.JavaConversions.{asScalaBuffer, mapAsScalaMap}
 import cpw.mods.fml.common.registry.GameRegistry
 import boatcraft.api.Registry
@@ -10,6 +9,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.{CraftingManager, IRecipe}
 import net.minecraft.nbt.NBTTagCompound
 import boatcraft.api.boat.ItemCustomBoat
+import java.util
 
 /**
  * Contains miscellaneous methods used throughout the mod related to crafting.
@@ -22,14 +22,14 @@ object Recipes {
    * @param resultItem the item whose recipe is being removed
    */
   def removeRecipe(resultItem: ItemStack) {
-    var toRemove = new ArrayList[IRecipe]
+    val toRemove = new util.ArrayList[IRecipe]
 
-    for (recipe <- CraftingManager.getInstance getRecipeList) {
-      if (recipe.isInstanceOf[IRecipe]
-        && (recipe.asInstanceOf[IRecipe].getRecipeOutput != null)
-        && (recipe.asInstanceOf[IRecipe].getRecipeOutput.getItem == Items.boat)) {
-        toRemove add recipe.asInstanceOf[IRecipe]
-        BoatCraft.log info "Removed vanilla Boat recipe: " + recipe
+    for (recipe <- CraftingManager.getInstance.getRecipeList) {
+      recipe match {
+        case recipe: IRecipe if (recipe.getRecipeOutput != null) && (recipe.getRecipeOutput.getItem == Items.boat) =>
+          toRemove add recipe
+          BoatCraft.log info "Removed vanilla Boat recipe: " + recipe
+        case _ =>
       }
     }
 
@@ -39,23 +39,23 @@ object Recipes {
   /**
    * Adds recipes and NBT tag compounds for all registered boats.
    */
-  def addBoatRecipes {
-    var stack = new ItemStack(ItemCustomBoat)
+  def addBoatRecipes() {
+    val stack = new ItemStack(ItemCustomBoat)
     stack.stackTagCompound = new NBTTagCompound
     for ((nameMat, material) <- Registry.materials) {
       stack.stackTagCompound.setString("material", nameMat)
       for ((blockName, block) <- Registry.blocks) {
         stack.stackTagCompound.setString("block", blockName)
         if (block.getContent != null)
-          GameRegistry addRecipe(stack copy,
+          GameRegistry addRecipe(stack.copy,
             "MmM",
             "MMM",
-            'M': Character, material getItem,
-            'm': Character, block getContent)
-        else GameRegistry addRecipe(stack copy,
+            'M': Character, material.getItem,
+            'm': Character, block.getContent)
+        else GameRegistry addRecipe(stack.copy,
           "M M",
           "MMM",
-          'M': Character, material getItem)
+          'M': Character, material.getItem)
       }
     }
   }
