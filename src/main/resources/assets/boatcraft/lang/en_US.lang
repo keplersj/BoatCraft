@@ -1,1 +1,17 @@
 boatcraft.container.crafting=Crafting on a Boat
+
+vanilla.materials.wood.oredict.name=Wood
+
+vanilla.materials.wood.oak.name=Oak Wood
+vanilla.materials.wood.spruce.name=Spruce Wood
+vanilla.materials.wood.birch.name=Birch Wood
+vanilla.materials.wood.jungle.name=Jungle Wood
+vanilla.materials.wood.acacia.name=Acaica Wood
+vanilla.materials.wood.darkoak.name=Dark Oak Wood
+
+vanilla.materials.metal.iron.name=Iron
+vanilla.materials.metal.gold.name=Gold
+
+vanilla.materials.crystal.obsidian.name=Obsidian
+vanilla.materials.crystal.diamond.name=Diamond
+vanilla.materials.crystal.emerald.name=Emerald
