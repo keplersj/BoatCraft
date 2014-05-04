@@ -29,7 +29,7 @@ Have an idea you want to share with us? We'd love to hear it! Create an issue on
 
 ### License
 
-As per the MIT License that BoatCraft is licensed under you are permitted you use BoatCraft for commerical use, distribute it freely, modifiy it, and use it privately. You are required to show the BoatCraft License and Copyright when you interact with BoatCraft. And above all you may not hold anyone covered by the BoatCraft License and Copyright liable for damages inflicted while using BoatCraft.
+As per the MIT License that BoatCraft is licensed under you are permitted you use BoatCraft for commercial use, distribute it freely, modify it, and use it privately. You are required to show the BoatCraft License and Copyright when you interact with BoatCraft. And above all you may not hold anyone covered by the BoatCraft License and Copyright liable for damages inflicted while using BoatCraft.
 
 For information on the MIT License, and what it means for you, please visit [this page](http://choosealicense.com/licenses/mit/).
 
