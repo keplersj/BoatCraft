@@ -65,7 +65,7 @@ class RenderCustomBoat
 			GL11 glPopMatrix()
 			GL11 glColor4f(1, 1, 1, 1)
 		}
-		else boat.getInventory match {
+		else boat.getBlockData match {
 			case entity: TileEntity if TileEntityRendererDispatcher.instance hasSpecialRenderer
 				entity =>
 				GL11 glPushMatrix()

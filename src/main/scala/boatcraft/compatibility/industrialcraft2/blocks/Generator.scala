@@ -15,13 +15,13 @@ object Generator extends Block {
 
 	override def getBlock = getContent.getItem.asInstanceOf[ItemBlock].field_150939_a
 
-	override def getInventory(boat: EntityCustomBoat): IInventory = new Inventory(boat)
+	override def getBlockData(boat: EntityCustomBoat): AnyRef = new Inventory(boat)
 
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		boat.getInventory.asInstanceOf[Inventory] readFromNBT tag
+		boat.getBlockData.asInstanceOf[Inventory] readFromNBT tag
 
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		boat.getInventory.asInstanceOf[Inventory] writeToNBT tag
+		boat.getBlockData.asInstanceOf[Inventory] writeToNBT tag
 
 	private[industrialcraft2] class Inventory(boat: EntityCustomBoat) extends TileEntityGenerator {
 		worldObj = boat.worldObj

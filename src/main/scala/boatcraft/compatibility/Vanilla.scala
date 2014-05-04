@@ -19,6 +19,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.oredict.ShapedOreRecipe
 import boatcraft.core.blocks.Empty
 import java.util
+import boatcraft.compatibility.vanilla.blocks.TNT
 
 object Vanilla extends CompatModule {
 
@@ -86,7 +87,8 @@ object Vanilla extends CompatModule {
 		List[Block](
 			Chest,
 			Furnace,
-			Workbench)
+			Workbench,
+			TNT)
 
 	private def replaceBoatRecipe() {
 		Recipes removeRecipe new ItemStack(Items.boat)

@@ -14,7 +14,7 @@ import net.minecraft.entity.player.EntityPlayerMP
 object Chest extends Block {
 	override def getBlock = Blocks.chest
 
-	override def getInventory(boat: EntityCustomBoat): IInventory =
+	override def getBlockData(boat: EntityCustomBoat): AnyRef =
 		new Chest.Inventory(boat)
 
 	override def getName = "Chest"
@@ -22,13 +22,14 @@ object Chest extends Block {
 	override def getContent = new ItemStack(Blocks.chest)
 
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
-		if (player.isInstanceOf[EntityPlayerMP]) player displayGUIChest boat.getInventory
+		if (player.isInstanceOf[EntityPlayerMP])
+			player displayGUIChest boat.getBlockData.asInstanceOf[Inventory]
 
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper writeChestToNBT(boat.getInventory, tag)
+		NBTHelper writeChestToNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
 
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper readChestFromNBT(boat.getInventory, tag)
+		NBTHelper readChestFromNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
 
 	private class Inventory(boat: EntityCustomBoat) extends TileEntityChest {
 		worldObj = boat.worldObj

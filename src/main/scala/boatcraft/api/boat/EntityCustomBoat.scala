@@ -385,8 +385,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	 */
 	def setBlock(block: String) = {
 		dataWatcher updateObject(21, block)
-		//Reset it so it gets updated when getInventory is called again
-		inventory = null
+		//Reset it so it gets updated when getBlockData is called again
+		blockData = null
 	}
 
 	def setName(name: String) =
@@ -427,11 +427,11 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	def getName =
 		dataWatcher getWatchableObjectString 22
 
-	private var inventory: IInventory = null
+	private var blockData: AnyRef = null
 
-	protected[boatcraft] def getInventory = {
-		if (inventory == null) inventory = getBlock getInventory this
-		inventory
+	protected[boatcraft] def getBlockData = {
+		if (blockData == null) blockData = getBlock getBlockData this
+		blockData
 	}
 }
 

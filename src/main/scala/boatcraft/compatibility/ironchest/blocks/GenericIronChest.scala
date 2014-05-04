@@ -12,6 +12,8 @@ import net.minecraft.entity.player.EntityPlayerMP
 import boatcraft.api.traits.Block
 
 abstract class GenericIronChest(chestType: IronChestType) extends Block {
+	import GenericIronChest.Inventory
+	
 	override def getBlock = IronChest.ironChestBlock
 
 	override def getMeta = chestType.ordinal
@@ -20,14 +22,14 @@ abstract class GenericIronChest(chestType: IronChestType) extends Block {
 
 	override def getName = chestType.friendlyName
 
-	override def getInventory(boat: EntityCustomBoat): IInventory =
-		new GenericIronChest.Inventory(boat, chestType)
+	override def getBlockData(boat: EntityCustomBoat): AnyRef =
+		new Inventory(boat, chestType)
 
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper writeChestToNBT(boat.getInventory, tag)
+		NBTHelper writeChestToNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
 
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper readChestFromNBT(boat.getInventory, tag)
+		NBTHelper readChestFromNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
 
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) {
 		val stack = player.getCurrentEquippedItem
@@ -36,14 +38,14 @@ abstract class GenericIronChest(chestType: IronChestType) extends Block {
 			val changer = stack.getItem.asInstanceOf[ItemChestChanger]
 
 			if (changer.getType canUpgrade chestType) {
-				val newTE = (boat.asInstanceOf[EntityCustomBoat] getInventory)
-					.asInstanceOf[GenericIronChest.Inventory] applyUpgradeItem changer
+				val newTE = boat.asInstanceOf[EntityCustomBoat].getBlockData
+					.asInstanceOf[Inventory] applyUpgradeItem changer
 
 				boat.setBlock(IronChestType.values()(changer getTargetChestOrdinal chestType.ordinal)
 					.friendlyName replaceAll(" ", "") toLowerCase)
 
 				for (i <- 0 until newTE.getSizeInventory) {
-					boat.asInstanceOf[EntityCustomBoat].getInventory setInventorySlotContents(
+					boat.asInstanceOf[EntityCustomBoat].getBlockData.asInstanceOf[Inventory] setInventorySlotContents(
 						i, newTE getStackInSlot i)
 				}
 			}

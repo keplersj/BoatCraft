@@ -16,8 +16,6 @@ import net.minecraft.entity.player.EntityPlayerMP
 object Workbench extends Block {
 	override def getBlock = Blocks.crafting_table
 
-	override def getMeta: Int = 0
-
 	override def getName: String = "Workbench"
 
 	override def getContent: ItemStack = new ItemStack(Blocks.crafting_table)

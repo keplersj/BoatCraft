@@ -34,8 +34,7 @@ abstract class Block extends Modifier {
 	 * @param boat the boat container object
 	 * @return the inventory associated with the boat container
 	 */
-	def getInventory(boat: EntityCustomBoat): IInventory =
-		EntityCustomBoat.NoInventory
+	def getBlockData(boat: EntityCustomBoat): AnyRef = Nil
 
 	/**
 	 * The item used to craft a boat with this Block
