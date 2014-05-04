@@ -10,8 +10,11 @@ import net.minecraft.item.crafting.FurnaceRecipes
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntityFurnace
 import net.minecraft.entity.player.EntityPlayerMP
+import net.minecraft.tileentity.TileEntity
 
 object Furnace extends Block {
+    TileEntity.addMapping(classOf[Inventory], "boatFurnace")
+    
 	override def getBlock = Blocks.furnace
 
 	override def getMeta = 3

@@ -7,37 +7,48 @@ import net.minecraft.entity.player.EntityPlayer
 import boatcraft.api.boat.EntityCustomBoat
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.init.Items
+import net.minecraft.nbt.NBTTagCompound
 
 object TNT extends Block {
-    
-    override def getBlock = Blocks.tnt
+	
+	override def getBlock = Blocks.tnt
 
-    override def getName: String = "TNT"
+	override def getName: String = "TNT"
 
-    override def getContent: ItemStack = new ItemStack(Blocks.tnt)
-    
-    override def getBlockData(boat: EntityCustomBoat): AnyRef = new TNTFuse
+	override def getContent: ItemStack = new ItemStack(Blocks.tnt)
+	
+	override def getBlockData(boat: EntityCustomBoat): AnyRef = new TNTFuse
 
-    override def interact(player: EntityPlayer, boat: EntityCustomBoat) {
-        if (player.getCurrentEquippedItem().getItem() == Items.flint_and_steel
-        	|| player.getCurrentEquippedItem().getItem() == Items.fire_charge) {
-            boat.getBlockData.asInstanceOf[TNTFuse].fuse = 80
-            if (player.getCurrentEquippedItem().getItem() == Items.flint_and_steel) {
-              player.getCurrentEquippedItem().setItemDamage(player.getCurrentEquippedItem().getItemDamage() + 1)
-            }
-        }
-    }
+	override def interact(player: EntityPlayer, boat: EntityCustomBoat) {
+		if (player.getCurrentEquippedItem() != null
+			&& player.getCurrentEquippedItem().getItem() == Items.flint_and_steel) {
+			boat.getBlockData.asInstanceOf[TNTFuse].fuse = 80
+			player.getCurrentEquippedItem.damageItem(1, player)
+		}
+	}
 
-    override def update(boat: EntityCustomBoat) {
-        var data = boat.getBlockData.asInstanceOf[TNTFuse]
-        if (data.fuse > 0) boat.getBlockData.asInstanceOf[TNTFuse].fuse -= 1
-        else {
-        	boat.setDead()
-        	boat.worldObj.createExplosion(boat, boat.posX, boat.posY, boat.posZ, 4, true)
-        }
-    }
-    
-    private class TNTFuse {
-    	private[TNT] var fuse = -1
-    }
+	override def update(boat: EntityCustomBoat) {
+		var data = boat.getBlockData.asInstanceOf[TNTFuse]
+		
+		if (data.fuse == -1) return
+		
+		if (data.fuse == 0) {
+			boat.setDead()
+			boat.worldObj.createExplosion(boat, boat.posX, boat.posY, boat.posZ, 4, true)
+		}
+		else {
+			data.fuse -= 1
+			boat.worldObj.spawnParticle("smoke", boat.posX, boat.posY + 0.5, boat.posZ, 0, 0, 0)
+		}
+	}
+	
+	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
+		tag.setByte("Fuse", boat.getBlockData.asInstanceOf[TNTFuse].fuse.toByte)
+	
+	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
+		boat.getBlockData.asInstanceOf[TNTFuse].fuse = tag.getByte("Fuse")
+	
+	private class TNTFuse {
+		private[TNT] var fuse = -1
+	}
 }

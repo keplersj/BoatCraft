@@ -16,7 +16,7 @@ object IronChestsEventHandler {
 
 		val boat = e.target.asInstanceOf[EntityCustomBoat]
 		
-        if (boat.getBlockName != "chest") return
+		if (boat.getBlockName != "chest") return
 		
 		val stack = e.entityPlayer.getCurrentEquippedItem
 
