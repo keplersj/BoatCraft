@@ -338,7 +338,15 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		}
 	}
 
-	override def func_145778_a(item: Item, count: Int, f: Float): EntityItem = {
+  /**
+   * This function is used by the entity's update code to drop item's on death/
+   *
+   * @param item The item being dropped upon death.
+   * @param count How many of `@link item` are being dropped
+   * @param f How far from death spot should `@link item` be dropped
+   * @return The entity of the item
+   */
+  override def func_145778_a(item: Item, count: Int, f: Float): EntityItem = {
 		var stack: ItemStack = new ItemStack(item, count)
 
 		if (item == Items.boat)
@@ -356,7 +364,13 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		else null
 	}
 
-	override def interactFirst(player: EntityPlayer): Boolean = {
+  /**
+   * This function is called when the player (real of fake) interacts with the boat entity.
+   *
+   * @param player The player attempting to interact with the entity.
+   * @return Boolean stating if the player's attempt are successful.
+   */
+  override def interactFirst(player: EntityPlayer): Boolean = {
 		if (player.getCurrentEquippedItem != null
 			&& player.getCurrentEquippedItem.getItem == Items.name_tag
 			&& player.getCurrentEquippedItem.hasDisplayName) {
@@ -369,7 +383,14 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		true
 	}
 
-	override def getPickedResult(target: MovingObjectPosition) =
+  /**
+   * This function is called when the player attempts to pick block the entity.
+   * As well when mods like WAILA (What am I Looking At?) retrieve information about the entity.
+   *
+   * @param target The entity being talked about.
+   * @return The ItemStack the entity represents.
+   */
+  override def getPickedResult(target: MovingObjectPosition) =
 		getCustomBoat(getMaterialName, getBlockName)
 
 	/**
@@ -381,7 +402,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 
 	/**
 	 * A setter for the boat's modifier
-	 * @param modifier the new modifier
+	 * @param block the new modifier
 	 */
 	def setBlock(block: String) = {
 		dataWatcher updateObject(21, block)
