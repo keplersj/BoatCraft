@@ -25,15 +25,6 @@ vanilla.blocks.tnt.name=TNT
 
 vanilla.blocks.workbench.gui.title=Crafting on a Boat
 
-ironchests.blocks.ironchest.name=Iron Chest
-ironchests.blocks.goldchest.name=Gold Chest
-ironchests.blocks.diamondchest.name=Diamond Chest
-ironchests.blocks.copperchest.name=Copper Chest
-ironchests.blocks.silverchest.name=Silver Chest
-ironchests.blocks.crystalchest.name=Crystal Chest
-ironchests.blocks.obsidianchest.name=Obsidian Chest
-ironchests.blocks.dirtchest.name=DirtChest9000!!!
-
 industrialcraft2.materials.rubber.name=Rubber
 industrialcraft2.materials.carbon.name=Carbon Fiber
 
