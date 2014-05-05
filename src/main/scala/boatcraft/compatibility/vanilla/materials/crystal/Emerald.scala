@@ -41,6 +41,4 @@ object Emerald extends Material {
 	 * @return the secondary drop of the boat
 	 */
 	override def getStick: ItemStack = null
-
-  override def getCrashResistance = 1070
 }

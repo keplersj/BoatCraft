@@ -22,5 +22,6 @@ object Iron extends Material {
 			null
 		else new ItemStack(((OreDictionary getOres "nuggetIron") get 0) getItem, 4)
 
-	override def getCrashResistance = 251
+	//TODO Balance
+	override def getCrashResistance = 2.0
 }
