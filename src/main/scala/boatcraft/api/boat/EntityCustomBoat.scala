@@ -25,6 +25,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	extends EntityBoat(world, x, y, z) {
 	//TODO var linkedTo: EntityCustomBoat = null
 
+  val speedMultiplier: Double = (getMaterial.getSpeedMultiplier + getBlock.getSpeedMultiplier) / 2
+
 	def this(world: World) = this(world, 0, 0, 0)
 
 	override protected def entityInit() {
@@ -33,6 +35,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		dataWatcher addObject(20, "")
 		dataWatcher addObject(21, "")
 		dataWatcher addObject(22, "")
+
+    ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this, "speedMultiplier", "field_70276_b")
 	}
 
 	override protected def writeEntityToNBT(tag: NBTTagCompound) {

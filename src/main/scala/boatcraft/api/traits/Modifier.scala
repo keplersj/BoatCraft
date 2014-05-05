@@ -34,10 +34,10 @@ abstract class Modifier {
 	 *
 	 * @return the multiplier to apply to the speed of the boat
 	 */
-	def getSpeedMultiplier = 1.0
+	def getSpeedMultiplier: Double = 0.07
 
-	/**
-	 * This function allows a material to act more resistant or more fragile
+  /**
+   * This function allows a material to act more resistant or more fragile
 	 *
 	 * @return the multiplier to apply to the boat's default crash resistance
 	 */
