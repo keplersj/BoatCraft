@@ -15,7 +15,7 @@ import net.minecraft.world.World
 
 
 /**
- * The man Boat entity class
+ * The main Boat entity class
  * @param world The instance of the Minecraft world the Boat Entity exists in.
  * @param x The X position of the Boat Entity in the world.
  * @param y The Y position of the Boat Entity in the world.
@@ -23,6 +23,9 @@ import net.minecraft.world.World
  */
 case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	extends EntityBoat(world, x, y, z) {
+	
+	import EntityCustomBoat.{MATERIAL, BLOCK, NAME}
+	
 	//TODO var linkedTo: EntityCustomBoat = null
 
 	def this(world: World) = this(world, 0, 0, 0)
@@ -30,9 +33,9 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	override protected def entityInit() {
 		super.entityInit()
 
-		dataWatcher addObject(20, "")
-		dataWatcher addObject(21, "")
-		dataWatcher addObject(22, "")
+		dataWatcher addObject(MATERIAL, "")
+		dataWatcher addObject(BLOCK, "")
+		dataWatcher addObject(NAME, "")
 	}
 
 	override protected def writeEntityToNBT(tag: NBTTagCompound) {
@@ -54,37 +57,36 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		getBlock readStateFromNBT(this, tag)
 	}
 
-	override def attackEntityFrom(par1DamageSource: DamageSource, par2: Float): Boolean = {
+	override def attackEntityFrom(source: DamageSource, amount: Float): Boolean =
 		if (isEntityInvulnerable)
 			false
 		else if (!worldObj.isRemote && !isDead) {
 			setForwardDirection(-getForwardDirection)
 			setTimeSinceHit(10)
-			setDamageTaken(getDamageTaken + par2 * 10)
+			setDamageTaken(getDamageTaken + amount * 10)
 			setBeenAttacked()
-			val flag = par1DamageSource.getEntity.isInstanceOf[EntityPlayer] &&
-				par1DamageSource.getEntity.asInstanceOf[EntityPlayer].capabilities.isCreativeMode
-
-			if (flag || getDamageTaken > 40) {
+			val flag = source.getEntity.isInstanceOf[EntityPlayer] &&
+				source.getEntity.asInstanceOf[EntityPlayer].capabilities.isCreativeMode
+			
+			if (flag || getDamageTaken > 40 * getCrashResistance) {
 				if (riddenByEntity != null)
 					riddenByEntity mountEntity this
-
+				
 				if (!flag)
 					func_145778_a(Items.boat, 1, 0)
-
-				setDead()
+				
+				setDead
 			}
-
+			
 			true
 		}
 		else
 			true
-	}
 
-	override def onUpdate() {
+	override def onUpdate {
 		//		super.onUpdate
-		doUpdate()
-		//TODO
+		doUpdate
+		//TODO linking
 		//		val vX = posX - linkedTo.posX
 		//		val vY = posY - linkedTo.posY
 		//		val vZ = posZ - linkedTo.posZ
@@ -102,7 +104,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		getBlock update this
 
 		ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this,
-			getMaterial.getSpeedMultiplier * ObfuscationReflectionHelper.getPrivateValue(
+			getSpeedMultiplier * ObfuscationReflectionHelper.getPrivateValue(
 				classOf[EntityBoat], this,
 				"speedMultiplier", "field_70276_b").asInstanceOf[Double],
 			"speedMultiplier", "field_70276_b")
@@ -136,8 +138,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 
 		if (getTimeSinceHit > 0)
 			setTimeSinceHit(getTimeSinceHit - 1)
-		if (getDamageTaken > 0.0F)
-			setDamageTaken(getDamageTaken - 1.0F)
+		if (getDamageTaken > 0)
+			setDamageTaken(getDamageTaken - 1)
 		prevPosX = posX
 		prevPosY = posY
 		prevPosZ = posZ
@@ -155,21 +157,21 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 			val axisalignedbb = AxisAlignedBB.getAABBPool.getAABB(boundingBox.minX, d1, boundingBox.minZ,
 				boundingBox.maxX, d3, boundingBox.maxZ)
 			if (worldObj.isAABBInMaterial(axisalignedbb, Material.water))
-				d0 += 1.0D / b0.toDouble
+				d0 += 1.0 / b0.toDouble
 		}
 		val d10 = Math.sqrt(motionX * motionX + motionZ * motionZ)
-		var d2: Double = 0.0
-		var d4: Double = 0.0
-		var j: Int = 0
+		var d2 = 0.0
+		var d4 = 0.0
+		var j = 0
 		if (d10 > 0.26249999999999996D) {
 			d2 = Math cos rotationYaw.toDouble * Math.PI / 180.0D
 			d4 = Math sin rotationYaw.toDouble * Math.PI / 180.0D
 			j = 0
 			while (j.toDouble < 1.0D + d10 * 60.0D) {
-				val d5 = (rand.nextFloat() * 2.0F - 1.0F).toDouble
+				val d5 = (rand.nextFloat * 2.0F - 1.0F).toDouble
 				val d6 = (rand.nextInt(2) * 2 - 1).toDouble * 0.7D
-				var d8: Double = 0.0
-				var d9: Double = 0.0
+				var d8 = 0.0
+				var d9 = 0.0
 				if (rand.nextBoolean) {
 					d8 = posX - d2 * d5 * 0.8D + d4 * d6
 					d9 = posZ - d4 * d5 * 0.8D - d2 * d6
@@ -185,8 +187,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 				j = j + 1
 			}
 		}
-		var d11: Double = 0.0
-		var d12: Double = 0.0
+		var d11 = 0.0
+		var d12 = 0.0
 		if (worldObj.isRemote && isBoatEmpty) {
 			if (boatPosRotationIncrements > 0) {
 				d2 = posX +
@@ -212,35 +214,35 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 				d11 = posZ + motionZ
 				setPosition(d2, d4, d11)
 				if (onGround) {
-					motionX *= 0.5D
-					motionY *= 0.5D
-					motionZ *= 0.5D
+					motionX *= 0.5
+					motionY *= 0.5
+					motionZ *= 0.5
 				}
-				motionX *= 0.9900000095367432D
-				motionY *= 0.949999988079071D
-				motionZ *= 0.9900000095367432D
+				motionX *= 0.9900000095367432
+				motionY *= 0.949999988079071
+				motionZ *= 0.9900000095367432
 			}
 		}
 		else {
-			if (d0 < 1.0D) {
-				d2 = d0 * 2.0D - 1.0D
-				motionY += 0.03999999910593033D * d2
+			if (d0 < 1) {
+				d2 = d0 * 2.0 - 1.0
+				motionY += 0.03999999910593033 * d2
 			}
 			else {
-				if (motionY < 0.0D) {
-					motionY /= 2.0D
+				if (motionY < 0) {
+					motionY /= 2
 				}
-				motionY += 0.007000000216066837D
+				motionY += 0.007000000216066837
 			}
 			if (riddenByEntity != null && riddenByEntity.isInstanceOf[EntityLivingBase]) {
 				val entitylivingbase = riddenByEntity.asInstanceOf[EntityLivingBase]
 				val f = riddenByEntity.rotationYaw + -entitylivingbase.moveStrafing * 90.0F
 				motionX += -Math.sin((f * Math.PI.toFloat / 180.0F).toDouble) * speedMultiplier *
 					entitylivingbase.moveForward.toDouble *
-					0.05000000074505806D
+					0.05000000074505806
 				motionZ += Math.cos((f * Math.PI.toFloat / 180.0F).toDouble) * speedMultiplier *
 					entitylivingbase.moveForward.toDouble *
-					0.05000000074505806D
+					0.05000000074505806
 			}
 			d2 = Math.sqrt(motionX * motionX + motionZ * motionZ)
 			if (d2 > 0.35D) {
@@ -249,29 +251,29 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 				motionZ *= d4
 				d2 = 0.35D
 			}
-			if (d2 > d10 && speedMultiplier < 0.35D) {
+			if (d2 > d10 && speedMultiplier < 0.35) {
 				ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this,
-					speedMultiplier + (0.35D - speedMultiplier) / 35.0D,
+					speedMultiplier + (0.35 - speedMultiplier) / 35.0D,
 					"speedMultiplier", "field_70276_b")
-				if (speedMultiplier > 0.35D)
+				if (speedMultiplier > 0.35)
 					ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this,
-						0.35D,
+						0.35,
 						"speedMultiplier", "field_70276_b")
 			}
 			else {
 				ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this,
-					speedMultiplier - (speedMultiplier - 0.07D) / 35.0D,
+					speedMultiplier - (speedMultiplier - 0.07) / 35.0,
 					"speedMultiplier", "field_70276_b")
-				if (speedMultiplier < 0.07D)
+				if (speedMultiplier < 0.07)
 					ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this,
-						0.07D,
+						0.07,
 						"speedMultiplier", "field_70276_b")
 			}
 			var l: Int = 0
 			l = 0
 			while (l < 4) {
-				val i1 = MathHelper.floor_double(posX + ((l % 2).toDouble - 0.5D) * 0.8D)
-				j = MathHelper.floor_double(posZ + ((l / 2).toDouble - 0.5D) * 0.8D)
+				val i1 = MathHelper.floor_double(posX + ((l % 2).toDouble - 0.5) * 0.8)
+				j = MathHelper.floor_double(posZ + ((l / 2).toDouble - 0.5) * 0.8)
 				for (j1 <- 0 until 2) {
 					val k = MathHelper.floor_double(posY) + j1
 					val block = worldObj.getBlock(i1, k, j)
@@ -287,26 +289,26 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 				l = l + 1
 			}
 			if (onGround) {
-				motionX *= 0.5D
-				motionY *= 0.5D
-				motionZ *= 0.5D
+				motionX *= 0.5
+				motionY *= 0.5
+				motionZ *= 0.5
 			}
 			moveEntity(motionX, motionY, motionZ)
-			if (isCollidedHorizontally && d10 > (getMaterial.getCrashResistance * 0.2D)) {
+			if (isCollidedHorizontally && d10 > (getMaterial.getCrashResistance * 0.2)) {
 				if (!worldObj.isRemote && !isDead) {
 					setDead()
 
 					for (l <- 0 until 3)
-						func_145778_a(Item.getItemFromBlock(Blocks.planks), 1, 0.0F)
+						func_145778_a(Item.getItemFromBlock(Blocks.planks), 1, 0)
 
 					for (l <- 0 until 2)
-						func_145778_a(Items.stick, 1, 0.0F)
+						func_145778_a(Items.stick, 1, 0)
 				}
 			}
 			else {
-				motionX *= 0.9900000095367432D
-				motionY *= 0.949999988079071D
-				motionZ *= 0.9900000095367432D
+				motionX *= 0.9900000095367432
+				motionY *= 0.949999988079071
+				motionZ *= 0.9900000095367432
 			}
 			rotationPitch = 0.0F
 			d4 = rotationYaw.toDouble
@@ -398,37 +400,36 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	 * @param material the new material
 	 */
 	def setMaterial(material: String) =
-		dataWatcher updateObject(20, material)
+		dataWatcher updateObject(MATERIAL, material)
 
 	/**
 	 * A setter for the boat's modifier
 	 * @param block the new modifier
 	 */
 	def setBlock(block: String) = {
-		dataWatcher updateObject(21, block)
+		dataWatcher updateObject(BLOCK, block)
 		//Reset it so it gets updated when getBlockData is called again
 		blockData = null
 	}
 
 	def setName(name: String) =
-		dataWatcher updateObject(22, name)
+		dataWatcher updateObject(NAME, name)
 
-	def hasName = !(dataWatcher getWatchableObjectString 22).isEmpty
+	def hasName = !(dataWatcher getWatchableObjectString NAME).isEmpty
 
 	/**
 	 * A getter for the boat's material
 	 * @return the boat's material
 	 */
 	def getMaterial: traits.Material =
-		(Registry find (dataWatcher getWatchableObjectString 20))
-			.asInstanceOf[traits.Material]
+		(Registry find getMaterialName).asInstanceOf[traits.Material]
 
 	/**
 	 * A getter for the boat's block
 	 * @return the boat's block
 	 */
 	def getBlock: traits.Block =
-		(Registry find (dataWatcher getWatchableObjectString 21))
+		(Registry find (dataWatcher getWatchableObjectString BLOCK))
 			.asInstanceOf[traits.Block]
 
 	/**
@@ -436,17 +437,17 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	 * @return the name of the boat's material
 	 */
 	def getMaterialName =
-		dataWatcher getWatchableObjectString 20
+		dataWatcher getWatchableObjectString MATERIAL
 
 	/**
 	 * A getter fo the name of the boat's block
 	 * @return the name of the boat's block
 	 */
 	def getBlockName =
-		dataWatcher getWatchableObjectString 21
+		dataWatcher getWatchableObjectString BLOCK
 
 	def getName =
-		dataWatcher getWatchableObjectString 22
+		dataWatcher getWatchableObjectString NAME
 
 	private var blockData: AnyRef = null
 
@@ -454,9 +455,17 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		if (blockData == null) blockData = getBlock getBlockData this
 		blockData
 	}
+    
+    def getSpeedMultiplier = getMaterial.getSpeedMultiplier * getBlock.getSpeedMultiplier
+    
+    def getCrashResistance = getMaterial.getCrashResistance * getBlock.getCrashResistance
 }
 
 object EntityCustomBoat {
+	
+	private val MATERIAL = 20
+	private val BLOCK = 21
+	private val NAME = 22
 
 	private[api] object NoInventory extends IInventory {
 		override def getSizeInventory = 0
