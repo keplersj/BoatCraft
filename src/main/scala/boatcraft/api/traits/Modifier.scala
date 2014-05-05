@@ -41,7 +41,7 @@ abstract class Modifier {
 	 *
 	 * @return the multiplier to apply to the boat's default crash resistance
 	 */
-	def getCrashResistance = 1.0
+	def getCrashResistance = 60
 
 	/**
 	 * Opens the corresponding GUI for this Modifier, if any

@@ -18,6 +18,5 @@ object Gold extends Material {
 
 	override def getStick = new ItemStack(Items.gold_nugget, 4)
 
-	//TODO Balance
-	override def getCrashResistance = 1.5
+	override def getCrashResistance = 33
 }

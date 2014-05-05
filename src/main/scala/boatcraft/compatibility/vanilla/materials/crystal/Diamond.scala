@@ -44,4 +44,6 @@ object Diamond extends Material {
 		if ((OreDictionary getOres "diamondNugget").isEmpty)
 			null
 		else (OreDictionary getOres "diamondNugget") get 0
+
+  override def getCrashResistance = 1562
 }

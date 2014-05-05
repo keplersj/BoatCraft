@@ -16,5 +16,5 @@ object Carbon extends Material {
 	override def getStick = IC2Items getItem "coalDust"
 
 	//TODO Balance! These are completely meaningless numbers, someone PLEASE balance it!
-	override def getCrashResistance = 2
+	override def getCrashResistance = 2036
 }

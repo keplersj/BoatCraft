@@ -16,7 +16,7 @@ object Rubber extends Material {
 	override def getStick = IC2Items getItem "resin"
 
 	//TODO Balance! These are completely meaningless numbers, someone PLEASE balance it!
-	override def getCrashResistance = 0.5
+	override def getCrashResistance = 1325
 
 	override def getSpeedMultiplier = 2
 }

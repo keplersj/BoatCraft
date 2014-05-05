@@ -65,7 +65,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 			val flag = par1DamageSource.getEntity.isInstanceOf[EntityPlayer] &&
 				par1DamageSource.getEntity.asInstanceOf[EntityPlayer].capabilities.isCreativeMode
 
-			if (flag || getDamageTaken > 40) {
+			if (flag || getDamageTaken > getMaterial.getCrashResistance) {
 				if (riddenByEntity != null)
 					riddenByEntity mountEntity this
 
