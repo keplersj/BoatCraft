@@ -4,8 +4,8 @@ build:
   # The steps that will be executed on build
   steps:
     - script:
-      name: Setup JVM options
-      code: DEFAULT_JVM_OPTS=" -XX:MaxPermSize=128m"
+        name: Setup JVM args
+        code: DEFAULT_JVM_OPTS=" -XX:MaxPermSize=128m"
     # A step that executes `gradle build` command
     - script:
         name: run gradle
