@@ -1,13 +1,11 @@
 box: wercker/android
 # Build definition
-env:
-  DEFAULT_JVM_OPTS=" -XX:MaxPermSize=512M"
 build:
   # The steps that will be executed on build
   steps:
     - script:
         name: Setup JVM args
-        code: DEFAULT_JVM_OPTS=" -XX:MaxPermSize=1024m"
+        code: export DEFAULT_JVM_OPTS = " -XX:MaxPermSize=512m"
     # A step that executes `gradle build` command
     - script:
         name: run gradle
