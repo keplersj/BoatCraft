@@ -12,7 +12,7 @@ object OreDict_Wood extends Material {
 
 	override def getUnlocalizedName = "Wood"
 
-  override def getLocalizedName = "vanilla.materials.wood.oredict.name"
+	override def getLocalizedName = "vanilla.materials.wood.oredict.name"
 
 	override def getItem = new ItemStack(Blocks.planks)
 

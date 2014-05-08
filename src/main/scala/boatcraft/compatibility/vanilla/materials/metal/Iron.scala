@@ -13,7 +13,7 @@ object Iron extends Material {
 
 	override def getUnlocalizedName = "Iron"
 
-  override def getLocalizedName = "vanilla.materials.metal.iron.name"
+	override def getLocalizedName = "vanilla.materials.metal.iron.name"
 
 	override def getItem = new ItemStack(Items.iron_ingot)
 

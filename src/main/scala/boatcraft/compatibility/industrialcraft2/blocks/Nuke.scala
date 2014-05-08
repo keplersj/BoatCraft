@@ -21,9 +21,9 @@ object Nuke extends Block {
 	
 	override def getBlock = IC2Items.getItem("nuke").getItem.asInstanceOf[ItemBlock].field_150939_a
 
-  override def getUnlocalizedName = "Nuke"
+	override def getUnlocalizedName = "Nuke"
 
-  override def getLocalizedName = "industrialcraft2.blocks.nuke.name"
+	override def getLocalizedName = "industrialcraft2.blocks.nuke.name"
 
 	override def getContent: ItemStack = IC2Items.getItem("nuke")
 	
@@ -36,7 +36,7 @@ object Nuke extends Block {
 			boat.getBlockData.asInstanceOf[NukeFuse].fuse = 300
 		}
 		else if (player.isInstanceOf[EntityPlayerMP]) {
-            IC2.log info "Sent GUI request for GUI " + ((IC2.code << 6) | 1) + " and entity " + boat.getEntityId
+			IC2.log info "Sent GUI request for GUI " + ((IC2.code << 6) | 1) + " and entity " + boat.getEntityId
 			player.openGui("boatcraft", (IC2.code << 6) | 1, boat.worldObj, boat.getEntityId, -1, 0)
 		}
 	}

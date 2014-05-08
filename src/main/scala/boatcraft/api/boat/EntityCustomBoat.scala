@@ -41,15 +41,19 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	override protected def writeEntityToNBT(tag: NBTTagCompound) {
 		tag setString("material", getMaterialName)
 		tag setString("block", getBlockName)
-
+		
+		val id = tag getString "id"
+		
 		getMaterial writeStateToNBT(this, tag)
 		getBlock writeStateToNBT(this, tag)
+		
+		tag setString("id", id)
 	}
 
 	override protected def readEntityFromNBT(tag: NBTTagCompound) {
 		setMaterial(tag getString "material")
 		//Legacy
-		//TODO Remove in 2.1
+		//TODO Remove in 2.0.1
 		if (tag hasKey "block") setBlock(tag getString "block")
 		else setBlock(tag getString "modifier")
 
@@ -310,22 +314,22 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 				motionY *= 0.949999988079071
 				motionZ *= 0.9900000095367432
 			}
-			rotationPitch = 0.0F
+			rotationPitch = 0
 			d4 = rotationYaw.toDouble
 			d11 = prevPosX - posX
 			d12 = prevPosZ - posZ
-			if (d11 * d11 + d12 * d12 > 0.001D)
-				d4 = (Math.atan2(d12, d11) * 180.0D / Math.PI).toFloat.toDouble
+			if (d11 * d11 + d12 * d12 > 0.001)
+				d4 = (Math.atan2(d12, d11) * 180 / Math.PI).toFloat.toDouble
 			var d7 = MathHelper.wrapAngleTo180_double(d4 - rotationYaw.toDouble)
-			if (d7 > 20.0D)
-				d7 = 20.0D
-			else if (d7 < -20.0D)
-				d7 = -20.0D
+			if (d7 > 20)
+				d7 = 20
+			else if (d7 < -20)
+				d7 = -20
 			rotationYaw = (rotationYaw.toDouble + d7).toFloat
 			setRotation(rotationYaw, rotationPitch)
 			if (!worldObj.isRemote) {
-				val list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(0.20000000298023224D,
-					0.0D, 0.20000000298023224D))
+				val list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(0.20000000298023224,
+					0, 0.20000000298023224))
 				if (list != null && !list.isEmpty) {
 					for (k1 <- 0 until list.size) {
 						val entity = list.get(k1).asInstanceOf[Entity]
@@ -340,15 +344,15 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		}
 	}
 
-  /**
-   * This function is used by the entity's update code to drop item's on death/
-   *
-   * @param item The item being dropped upon death.
-   * @param count How many of `@link item` are being dropped
-   * @param f How far from death spot should `@link item` be dropped
-   * @return The entity of the item
-   */
-  override def func_145778_a(item: Item, count: Int, f: Float): EntityItem = {
+	/**
+	 * This function is used by the entity's update code to drop item's on death/
+	 *
+	 * @param item The item being dropped upon death.
+	 * @param count How many of `@link item` are being dropped
+	 * @param f How far from death spot should `@link item` be dropped
+	 * @return The entity of the item
+	 */
+	override def func_145778_a(item: Item, count: Int, f: Float): EntityItem = {
 		var stack: ItemStack = new ItemStack(item, count)
 
 		if (item == Items.boat)
@@ -366,13 +370,13 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		else null
 	}
 
-  /**
-   * This function is called when the player (real of fake) interacts with the boat entity.
-   *
-   * @param player The player attempting to interact with the entity.
-   * @return Boolean stating if the player's attempt are successful.
-   */
-  override def interactFirst(player: EntityPlayer): Boolean = {
+	/**
+	 * This function is called when the player (real of fake) interacts with the boat entity.
+	 *
+	 * @param player The player attempting to interact with the entity.
+	 * @return Boolean stating if the player's attempt are successful.
+	 */
+	override def interactFirst(player: EntityPlayer): Boolean = {
 		if (player.getCurrentEquippedItem != null
 			&& player.getCurrentEquippedItem.getItem == Items.name_tag
 			&& player.getCurrentEquippedItem.hasDisplayName) {
@@ -385,14 +389,14 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		true
 	}
 
-  /**
-   * This function is called when the player attempts to pick block the entity.
-   * As well when mods like WAILA (What am I Looking At?) retrieve information about the entity.
-   *
-   * @param target The entity being talked about.
-   * @return The ItemStack the entity represents.
-   */
-  override def getPickedResult(target: MovingObjectPosition) =
+	/**
+	 * This function is called when the player attempts to pick block the entity.
+	 * As well when mods like WAILA (What am I Looking At?) retrieve information about the entity.
+	 *
+	 * @param target The entity being talked about.
+	 * @return The ItemStack the entity represents.
+	 */
+	override def getPickedResult(target: MovingObjectPosition) =
 		getCustomBoat(getMaterialName, getBlockName)
 
 	/**
@@ -455,10 +459,10 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		if (blockData == null) blockData = getBlock getBlockData this
 		blockData
 	}
-    
-    def getSpeedMultiplier = getMaterial.getSpeedMultiplier * getBlock.getSpeedMultiplier
-    
-    def getCrashResistance = getMaterial.getCrashResistance * getBlock.getCrashResistance
+	
+	def getSpeedMultiplier = getMaterial.getSpeedMultiplier * getBlock.getSpeedMultiplier
+	
+	def getCrashResistance = getMaterial.getCrashResistance * getBlock.getCrashResistance
 }
 
 object EntityCustomBoat {

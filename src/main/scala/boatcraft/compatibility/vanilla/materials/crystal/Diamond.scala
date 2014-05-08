@@ -27,7 +27,7 @@ object Diamond extends Material {
 	 */
 	override def getUnlocalizedName = "Diamond"
 
-  override def getLocalizedName = "vanilla.materials.crystal.diamond.name"
+	override def getLocalizedName = "vanilla.materials.crystal.diamond.name"
 
 	//TODO: Fill Documentation
 	/**

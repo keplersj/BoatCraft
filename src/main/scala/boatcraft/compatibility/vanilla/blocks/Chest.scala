@@ -19,7 +19,7 @@ object Chest extends Block {
 
 	override def getUnlocalizedName = "Chest"
 
-  override def getLocalizedName = "vanilla.blocks.chest.name"
+	override def getLocalizedName = "vanilla.blocks.chest.name"
 
 	override def getContent = new ItemStack(Blocks.chest)
 

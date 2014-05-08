@@ -13,7 +13,7 @@ class MaterialWood(meta: Int, name: String, localizedName: String) extends Mater
 
 	override def getUnlocalizedName = name
 
-  override def getLocalizedName = localizedName
+	override def getLocalizedName = localizedName
 
 	override def getItem = new ItemStack(Blocks.planks, 1, meta)
 

@@ -51,9 +51,9 @@ class ItemCustomBoat extends ItemBoat {
 		case x if Registry.getBlock(stack).==(Empty) =>
 			I18n.format(Registry.getMaterial(stack).getLocalizedName, Array()) + " " + I18n.format("core.forms.dinghy.name", Array())
 		case x if Registry.getBlock(stack).!=(null) =>
-      I18n.format(Registry.getMaterial(stack).getLocalizedName, Array()) + " " + I18n.format("core.forms.dinghy.name", Array()) +  " " + I18n.format("core.module.linkingword", Array()) + " " + I18n.format(Registry.getBlock(stack).getLocalizedName, Array())
+		I18n.format(Registry.getMaterial(stack).getLocalizedName, Array()) + " " + I18n.format("core.forms.dinghy.name", Array()) +	" " + I18n.format("core.module.linkingword", Array()) + " " + I18n.format(Registry.getBlock(stack).getLocalizedName, Array())
 		case _ =>
-      I18n.format("core.forms.dinghy.name", Array())
+		I18n.format("core.forms.dinghy.name", Array())
 	}
 
 	override def onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack = {

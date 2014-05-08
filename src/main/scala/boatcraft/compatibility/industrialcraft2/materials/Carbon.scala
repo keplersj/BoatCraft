@@ -7,9 +7,9 @@ import ic2.api.item.IC2Items
 object Carbon extends Material {
 	override def getTexture = new ResourceLocation("ic2", "textures/models/boatCarbon.png")
 
-  override def getUnlocalizedName = "Carbon Fibre"
+	override def getUnlocalizedName = "Carbon Fibre"
 
-  override def getLocalizedName = "industrialcraft2.materials.carbon.name"
+	override def getLocalizedName = "industrialcraft2.materials.carbon.name"
 
 	override def getItem = IC2Items getItem "carbonFiber"
 

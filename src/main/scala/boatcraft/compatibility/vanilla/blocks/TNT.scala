@@ -15,7 +15,7 @@ object TNT extends Block {
 
 	override def getUnlocalizedName: String = "TNT"
 
-  override def getLocalizedName = "vanilla.blocks.tnt.name"
+	override def getLocalizedName = "vanilla.blocks.tnt.name"
 
 	override def getContent: ItemStack = new ItemStack(Blocks.tnt)
 	

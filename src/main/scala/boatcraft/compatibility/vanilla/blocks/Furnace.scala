@@ -11,17 +11,20 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntityFurnace
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.tileentity.TileEntity
+import cpw.mods.fml.common.registry.GameRegistry
+import cpw.mods.fml.common.ObfuscationReflectionHelper
+import net.minecraft.nbt.NBTTagList
 
 object Furnace extends Block {
-    TileEntity.addMapping(classOf[Inventory], "boatFurnace")
-    
+	GameRegistry.registerTileEntity(classOf[Inventory], "boatFurnace")
+	
 	override def getBlock = Blocks.furnace
 
 	override def getMeta = 3
 
 	override def getUnlocalizedName = "Furnace"
 
-  override def getLocalizedName = "vanilla.blocks.furnace.name"
+	override def getLocalizedName = "vanilla.blocks.furnace.name"
 
 	override def getContent = new ItemStack(Blocks.furnace)
 
@@ -47,8 +50,6 @@ object Furnace extends Block {
 		worldObj = boat.worldObj
 
 		override def getInventoryName = "Furnace Boat"
-
-		override def hasCustomInventoryName = true
 
 		override def isUseableByPlayer(player: EntityPlayer) =
 			(player getDistanceSqToEntity boat) <= 64
@@ -79,7 +80,7 @@ object Furnace extends Block {
 
 					if (furnaceCookTime == 200) {
 						furnaceCookTime = 0
-						smeltItem()
+						smeltItem
 					}
 				}
 				else furnaceCookTime = 0
@@ -100,5 +101,4 @@ object Furnace extends Block {
 			}
 		}
 	}
-
 }

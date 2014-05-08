@@ -22,7 +22,7 @@ abstract class GenericIronChest(chestType: IronChestType) extends Block {
 
 	override def getUnlocalizedName = chestType.friendlyName
 
-  override def getLocalizedName = chestType.friendlyName
+	override def getLocalizedName = chestType.friendlyName
 
 	override def getBlockData(boat: EntityCustomBoat): AnyRef =
 		new Inventory(boat, chestType)

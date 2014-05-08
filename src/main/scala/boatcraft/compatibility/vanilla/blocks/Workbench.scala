@@ -18,7 +18,7 @@ object Workbench extends Block {
 
 	override def getUnlocalizedName: String = "Workbench"
 
-  override def getLocalizedName = "vanilla.blocks.workbench.name"
+	override def getLocalizedName = "vanilla.blocks.workbench.name"
 
 	override def getContent: ItemStack = new ItemStack(Blocks.crafting_table)
 

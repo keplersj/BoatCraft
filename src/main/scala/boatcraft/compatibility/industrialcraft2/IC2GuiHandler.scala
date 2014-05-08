@@ -13,23 +13,23 @@ import ic2.core.block.machine.ContainerNuke
 object IC2GuiHandler extends IGuiHandler {
 	override def getClientGuiElement(id: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): AnyRef =
 	{
-        IC2.log info "Recieved client IC2 GUI request for ID " + id + ", x " + x + ", y " + y + " and z " + z
+		IC2.log info "Recieved client IC2 GUI request for ID " + id + ", x " + x + ", y " + y + " and z " + z
 		return id match {
 			case 0 => ??? //TODO Generator
 			case 1 =>
 				new GuiNuke(new ContainerNuke(player, world.getEntityByID(x).asInstanceOf[EntityCustomBoat].getBlockData.asInstanceOf[TileEntityNuke]))
-            case _ => null
+			case _ => null
 		}
-    }
+	}
 
 	override def getServerGuiElement(id: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): AnyRef =
 	{
-        IC2.log info "Recieved server IC2 GUI request for ID " + id + ", x " + x + ", y " + y + " and z " + z
+		IC2.log info "Recieved server IC2 GUI request for ID " + id + ", x " + x + ", y " + y + " and z " + z
 		return id match {
 			case 0 => ??? //TODO Generator
 			case 1 =>
 				new ContainerNuke(player, world.getEntityByID(x).asInstanceOf[EntityCustomBoat].getBlockData.asInstanceOf[TileEntityNuke])
 			case _ => null
 		}
-    }
+	}
 }

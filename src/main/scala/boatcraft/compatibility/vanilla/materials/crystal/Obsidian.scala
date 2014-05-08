@@ -26,7 +26,7 @@ object Obsidian extends Material {
 	 */
 	override def getUnlocalizedName = "Obsidian"
 
-  override def getLocalizedName = "vanilla.materials.crystal.obsidian.name"
+	override def getLocalizedName = "vanilla.materials.crystal.obsidian.name"
 
 	//TODO: Fill Documentation
 	/**

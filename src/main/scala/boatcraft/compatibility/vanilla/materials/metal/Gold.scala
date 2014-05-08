@@ -12,7 +12,7 @@ object Gold extends Material {
 
 	override def getUnlocalizedName = "Gold"
 
-  override def getLocalizedName = "vanilla.materials.metal.gold.name"
+	override def getLocalizedName = "vanilla.materials.metal.gold.name"
 
 	override def getItem = new ItemStack(Items.gold_ingot)
 
