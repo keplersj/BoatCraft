@@ -7,7 +7,7 @@ build:
     - script:
         name: run gradle
         code: |
-          gradle --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR build
+          ./gradlew --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR build
     - script:
         name: archive artifacts
         code: cp build/libs/* $WERCKER_REPORT_ARTIFACTS_DIR
@@ -15,4 +15,4 @@ deploy:
     steps:
         - script:
             name: heisenbugdev deploy
-            code: gradle --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR HeisenBugDev
+            code: ./gradlew --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR HeisenBugDev
