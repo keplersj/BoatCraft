@@ -224,5 +224,8 @@ task generateJson() { task ->
 
 // Tell the artifact system about our extra jars
 artifacts {
-    archives sourceJar, deobfJar, docs, jsonFile { builtBy generateJson }
+  archives sourceJar
+  archives deobfJar
+  archives docs
+  archives(jsonFile) { builtBy generateJson }
 }
