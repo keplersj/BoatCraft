@@ -21,13 +21,15 @@ object TNT extends Block {
 	
 	override def getBlockData(boat: EntityCustomBoat): AnyRef = new TNTFuse
 
-	override def interact(player: EntityPlayer, boat: EntityCustomBoat) {
-		if (player.getCurrentEquippedItem() != null
-			&& player.getCurrentEquippedItem().getItem() == Items.flint_and_steel) {
+	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
+		if (player.getCurrentEquippedItem != null
+			&& player.getCurrentEquippedItem.getItem == Items.flint_and_steel) {
 			boat.getBlockData.asInstanceOf[TNTFuse].fuse = 80
 			player.getCurrentEquippedItem.damageItem(1, player)
+			
+			true
 		}
-	}
+		else false
 
 	override def update(boat: EntityCustomBoat) {
 		var data = boat.getBlockData.asInstanceOf[TNTFuse]

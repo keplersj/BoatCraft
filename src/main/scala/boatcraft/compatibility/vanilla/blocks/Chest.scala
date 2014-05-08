@@ -24,8 +24,12 @@ object Chest extends Block {
 	override def getContent = new ItemStack(Blocks.chest)
 
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
+	{
 		if (player.isInstanceOf[EntityPlayerMP])
 			player displayGUIChest boat.getBlockData.asInstanceOf[Inventory]
+		
+		true
+    }
 
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 		NBTHelper writeChestToNBT(boat.getBlockData.asInstanceOf[Inventory], tag)

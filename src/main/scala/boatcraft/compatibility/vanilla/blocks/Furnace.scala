@@ -32,9 +32,13 @@ object Furnace extends Block {
 		new Inventory(boat)
 
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
+	{
 		if (player.isInstanceOf[EntityPlayerMP])
 			player func_146101_a boat.asInstanceOf[EntityCustomBoat]
 				.getBlockData.asInstanceOf[Inventory]
+		
+		true
+	}
 
 	override def update(boat: EntityCustomBoat) =
 		(boat.asInstanceOf[EntityCustomBoat].getBlockData.asInstanceOf[Inventory]
@@ -54,7 +58,7 @@ object Furnace extends Block {
 		override def isUseableByPlayer(player: EntityPlayer) =
 			(player getDistanceSqToEntity boat) <= 64
 
-		override def updateEntity() {
+		override def updateEntity {
 			if (furnaceBurnTime > 0)
 				furnaceBurnTime = furnaceBurnTime - 1
 

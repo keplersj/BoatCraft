@@ -33,7 +33,7 @@ abstract class GenericIronChest(chestType: IronChestType) extends Block {
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 		NBTHelper readChestFromNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
 
-	override def interact(player: EntityPlayer, boat: EntityCustomBoat) {
+	override def interact(player: EntityPlayer, boat: EntityCustomBoat) = {
 		val stack = player.getCurrentEquippedItem
 
 		if (stack != null && stack.getItem.isInstanceOf[ItemChestChanger]) {
@@ -55,6 +55,8 @@ abstract class GenericIronChest(chestType: IronChestType) extends Block {
 		else if (player.isInstanceOf[EntityPlayerMP])
 			player openGui("boatcraft", (IronChests.code << 6) | getMeta, boat.worldObj,
 				boat.getEntityId, -1, 0)
+		
+		true
 	}
 }
 

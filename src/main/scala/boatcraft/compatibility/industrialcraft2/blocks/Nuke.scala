@@ -29,7 +29,7 @@ object Nuke extends Block {
 	
 	override def getBlockData(boat: EntityCustomBoat): AnyRef = new NukeFuse(boat)
 
-	override def interact(player: EntityPlayer, boat: EntityCustomBoat) {
+	override def interact(player: EntityPlayer, boat: EntityCustomBoat) = {
 		if (player.getCurrentEquippedItem != null
 			&& (player.getCurrentEquippedItem.getItem == Items.flint_and_steel
 				|| player.getCurrentEquippedItem.getItem == Items.fire_charge)) {
@@ -39,6 +39,8 @@ object Nuke extends Block {
 			IC2.log info "Sent GUI request for GUI " + ((IC2.code << 6) | 1) + " and entity " + boat.getEntityId
 			player.openGui("boatcraft", (IC2.code << 6) | 1, boat.worldObj, boat.getEntityId, -1, 0)
 		}
+		
+		true
 	}
 
 	override def update(boat: EntityCustomBoat) {

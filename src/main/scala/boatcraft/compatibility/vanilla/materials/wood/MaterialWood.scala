@@ -4,6 +4,9 @@ import boatcraft.api.traits.Material
 import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
+import boatcraft.api.boat.EntityCustomBoat
+import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.util.DamageSource
 
 class MaterialWood(meta: Int, name: String, localizedName: String) extends Material {
 	override def getTexture =
@@ -18,4 +21,19 @@ class MaterialWood(meta: Int, name: String, localizedName: String) extends Mater
 	override def getItem = new ItemStack(Blocks.planks, 1, meta)
 
 	override def getStick = new ItemStack(Items.stick)
+	
+	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
+		if (player.getCurrentEquippedItem != null &&
+			player.getCurrentEquippedItem.getItem == Items.flint_and_steel)
+		{
+			boat.setFire(8)
+			
+			true
+		}
+		else false
+	
+	override def update(boat: EntityCustomBoat)
+	{
+		if (boat isBurning) boat.attackEntityFrom(DamageSource.onFire, 0.2f)
+	}
 }

@@ -22,9 +22,12 @@ object Workbench extends Block {
 
 	override def getContent: ItemStack = new ItemStack(Blocks.crafting_table)
 
-	override def interact(player: EntityPlayer, boat: EntityCustomBoat) {
+	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
+	{
 		if (player.isInstanceOf[EntityPlayerMP])
 			player openGui("boatcraft", Vanilla.code << 6, boat.worldObj, boat.getEntityId, -1, 0)
+		
+		true
 	}
 
 	private[vanilla] class Container(inventoryPlayer: InventoryPlayer, world: World,

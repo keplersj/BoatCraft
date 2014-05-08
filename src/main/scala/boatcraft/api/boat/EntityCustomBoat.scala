@@ -75,9 +75,11 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 			if (flag || getDamageTaken > 40 * getCrashResistance) {
 				if (riddenByEntity != null)
 					riddenByEntity mountEntity this
-				
 				if (!flag)
-					func_145778_a(Items.boat, 1, 0)
+				{
+					if (source isFireDamage) entityDropItem(getBlock.getContent, 0)
+					else func_145778_a(Items.boat, 1, 0)
+				}
 				
 				setDead
 			}
@@ -106,6 +108,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 
 		getMaterial update this
 		getBlock update this
+		
+		if (isWet) extinguish
 
 		ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this,
 			getSpeedMultiplier * ObfuscationReflectionHelper.getPrivateValue(
@@ -304,7 +308,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 
 					for (l <- 0 until 3)
 						func_145778_a(Item.getItemFromBlock(Blocks.planks), 1, 0)
-
+					
 					for (l <- 0 until 2)
 						func_145778_a(Items.stick, 1, 0)
 				}
@@ -361,7 +365,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 			stack = getMaterial.getItem
 		else if (item == Items.stick) {
 			stack = getMaterial.getStick
-
+		
 			if (stack == null && rand.nextBoolean) stack = getMaterial.getItem
 		}
 		else return super.func_145778_a(item, count, f)
@@ -384,9 +388,12 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 			println("Set the name to " + player.getCurrentEquippedItem.getDisplayName)
 			return false
 		}
-		if (getBlock.isRideable) return super.interactFirst(player)
-		getBlock interact(player, this)
-		true
+		
+		if (getBlock isRideable) return super.interactFirst(player)
+		
+		if (player.isSneaking || !getBlock.interact(player, this)) return getMaterial.interact(player, this)
+		
+		return true
 	}
 
 	/**

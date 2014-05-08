@@ -48,8 +48,9 @@ abstract class Modifier {
 		*
 		* @param player the player interacting with the Boat
 		* @param boat the Boat being interacted with
+		* @return whether something of importance happened or not
 		*/
-	def interact(player: EntityPlayer, boat: EntityCustomBoat) {}
+	def interact(player: EntityPlayer, boat: EntityCustomBoat) = false
 
 	/**
 		* Update the modifier's logic
