@@ -1,4 +1,4 @@
-box: mies/java7-oracle@0.0.1
+box: wercker/android
 # Build definition
 build:
   # The steps that will be executed on build
