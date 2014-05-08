@@ -5,7 +5,7 @@ build:
   steps:
     - script:
         name: Setup JVM args
-        code: export JAVA_OPTS="-XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m"
+        code: export JAVA_OPTS="-XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m"
     # A step that executes `gradle build` command
     - script:
         name: run gradle
