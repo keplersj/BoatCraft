@@ -3,6 +3,7 @@ apply plugin: 'eclipse'
 apply plugin: 'java'
 apply plugin: 'scala'
 apply plugin: 'forge'
+apply plugin: 'rest'
 
 buildscript {
     repositories {
@@ -19,9 +20,13 @@ buildscript {
             name = "Sonatype Releases"
             url = "https://oss.sonatype.org/content/repositories/releases/"
         }
+        maven {
+        	url 'http://dl.bintray.com/content/noamt/gradle-plugins'
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'org._10ne.gradle:rest-gradle-plugin:0.1'
     }
 }
 
@@ -228,4 +233,13 @@ artifacts {
   archives deobfJar
   archives docs
   archives(jsonFile) { builtBy generateJson }
+}
+
+task HeisenBugDev(type: org._10ne.gradle.rest.RestTask) {
+	httpMethod = 'post'
+    uri = 'heisenbugdev.com'
+    username = System.getenv().HBD_EMAIL_PROD
+    password = System.getenv().HBD_TOKEN_PROD
+    requestBody = [jsonFile]
+    contentType = groovyx.net.http.ContentType.JSON
 }
