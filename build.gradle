@@ -165,3 +165,64 @@ def getVersionName()
     }
     return stdout.toString().trim()
 }
+
+def getBranch()
+{
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--abbrev-ref', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+
+def getSHA()
+{
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+def jsonFile = new File(jar.destinationDir, "manifest.json")
+task generateJson() { task ->
+  def gitBranch = getBranch()
+  def gitSHA = getSHA()
+
+  // specify inputs and outputs so gradle can see if its upToDate
+  task.inputs.with {
+    property 'version', project.version // accounts for MCVersion, and all the other components
+    property 'branch', gitBranch
+    property 'commit', gitSHA
+    property 'obf', jar.archiveName
+    property 'deobf', deobfJar.archiveName
+    property 'source', sourceJar.archiveName
+    property 'javadoc', docs.archiveName
+    property 'project_name', project.archivesBaseName
+  }
+  task.outputs.file(jsonFile)
+
+  // actual work here
+  task.doLast {
+    def builder = new groovy.json.JsonBuilder()
+    def root = builder {
+      'project_name' project.archivesBaseName
+      'build_number' System.getenv().BUILD_NUMBER
+      'minecraft_version' project.minecraft.version
+      'mod_version' project.rawVersion
+      'branch' gitBranch
+      'commit' gitSHA
+      'artifacts'([
+        ['name' : 'universal', 'file' : jar.archiveName],
+        ['name' : 'deobf', 'file' : deobfJar.archiveName ],
+        ['name' : 'source', 'file' : sourceJar.archiveName ],
+        ['name' : 'javadoc', 'file' : deobfJar.archiveName ]
+      ])
+    }
+
+    jsonFile.write groovy.json.JsonOutput.prettyPrint(builder.toString())
+  }
+}
