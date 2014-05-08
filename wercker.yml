@@ -1,5 +1,7 @@
 box: wercker/android
 # Build definition
+env:
+  DEFAULT_JVM_OPTS=" -XX:MaxPermSize=512M"
 build:
   # The steps that will be executed on build
   steps:
