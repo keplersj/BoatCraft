@@ -207,7 +207,7 @@ task generateJson() { task ->
       'project_name' project.archivesBaseName
       'build_number' System.getenv().BUILD_NUMBER
       'minecraft_version' project.minecraft.version
-      'mod_version' project.getVersionName
+      'mod_version' project.version
       'branch' gitBranch
       'commit' gitSHA
       'artifacts'([
