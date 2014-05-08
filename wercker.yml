@@ -10,7 +10,7 @@ build:
     - script:
         name: run gradle
         code: |
-          ./gradlew -Sq --project-cache-dir=$WERCKER_CACHE_DIR assemble
+          ./gradlew -Sq --parallel --project-cache-dir=$WERCKER_CACHE_DIR assemble
     - script:
         name: archive artifacts
         code: cp build/libs/* $WERCKER_REPORT_ARTIFACTS_DIR
@@ -18,4 +18,4 @@ deploy:
     steps:
         - script:
             name: heisenbugdev deploy
-            code: ./gradlew -Sq --project-cache-dir=$WERCKER_CACHE_DIR HeisenBugDev
+            code: ./gradlew -Sq --parallel --project-cache-dir=$WERCKER_CACHE_DIR HeisenBugDev
