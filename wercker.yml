@@ -1,4 +1,4 @@
-box: mies/java7-oracle@0.0.1
+box: mies/openjdk7@0.0.3
 # Build definition
 build:
   # The steps that will be executed on build
@@ -10,7 +10,7 @@ build:
     - script:
         name: run gradle
         code: |
-          ./gradlew --full-stacktrace --project-cache-dir=$WERCKER_CACHE_DIR build
+          ./gradlew -Sq --project-cache-dir=$WERCKER_CACHE_DIR assemble
     - script:
         name: archive artifacts
         code: cp build/libs/* $WERCKER_REPORT_ARTIFACTS_DIR
@@ -18,4 +18,4 @@ deploy:
     steps:
         - script:
             name: heisenbugdev deploy
-            code: ./gradlew --full-stacktrace --project-cache-dir=$WERCKER_CACHE_DIR HeisenBugDev
+            code: ./gradlew -Sq --project-cache-dir=$WERCKER_CACHE_DIR HeisenBugDev
