@@ -76,11 +76,6 @@ task docs(type: Jar) {
     version = "${project.minecraft.version}-${project.version}"
 }
 
-// Tell the artifact system about our extra jars
-artifacts {
-    archives sourceJar, deobfJar, docs, jsonFile { builtBy generateJson }
-}
-
 // Configure an upload task. this is setup for uploading to files.minecraftforge.net. There are other examples around
 uploadArchives {
     doLast {
@@ -225,4 +220,9 @@ task generateJson() { task ->
 
     jsonFile.write groovy.json.JsonOutput.prettyPrint(builder.toString())
   }
+}
+
+// Tell the artifact system about our extra jars
+artifacts {
+    archives sourceJar, deobfJar, docs, jsonFile { builtBy generateJson }
 }
