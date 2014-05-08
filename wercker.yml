@@ -15,4 +15,4 @@ deploy:
     steps:
         - script:
             name: heisenbugdev deploy
-            code: ruby upload_hbd.rb
+            code: gradle --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR HeisenBugDev
