@@ -1,16 +1,16 @@
-box: wercker/android
+box: mies/java7-oracle@0.0.1
 # Build definition
 build:
   # The steps that will be executed on build
   steps:
     - script:
         name: Setup JVM args
-        code: export DEFAULT_JVM_OPTS=" -XX:MaxPermSize=1024m"
+        code: export DEFAULT_JVM_OPTS=" -XX:MaxPermSize=512m"
     # A step that executes `gradle build` command
     - script:
         name: run gradle
         code: |
-          ./gradlew --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR build
+          ./gradlew --full-stacktrace --project-cache-dir=$WERCKER_CACHE_DIR build
     - script:
         name: archive artifacts
         code: cp build/libs/* $WERCKER_REPORT_ARTIFACTS_DIR
@@ -18,4 +18,4 @@ deploy:
     steps:
         - script:
             name: heisenbugdev deploy
-            code: ./gradlew --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR HeisenBugDev
+            code: ./gradlew --full-stacktrace --project-cache-dir=$WERCKER_CACHE_DIR HeisenBugDev
