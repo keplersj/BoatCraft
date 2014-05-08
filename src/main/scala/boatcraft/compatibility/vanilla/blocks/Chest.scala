@@ -36,7 +36,7 @@ object Chest extends Block {
 	private class Inventory(boat: EntityCustomBoat) extends TileEntityChest {
 		worldObj = boat.worldObj
 
-		override def getInventoryName = "Chest Boat"
+		override def getInventoryName = "vanilla.blocks.chest.gui.title"
 
 		override def hasCustomInventoryName = false
 

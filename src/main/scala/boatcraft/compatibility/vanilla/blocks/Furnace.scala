@@ -49,7 +49,7 @@ object Furnace extends Block {
 	private class Inventory(boat: EntityCustomBoat) extends TileEntityFurnace {
 		worldObj = boat.worldObj
 
-		override def getInventoryName = "Furnace Boat"
+		override def getInventoryName = "vanilla.blocks.furnace.gui.title"
 
 		override def isUseableByPlayer(player: EntityPlayer) =
 			(player getDistanceSqToEntity boat) <= 64

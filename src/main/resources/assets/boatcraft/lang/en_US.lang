@@ -23,7 +23,9 @@ vanilla.blocks.furnace.name=Furnace
 vanilla.blocks.workbench.name=Workbench
 vanilla.blocks.tnt.name=TNT
 
-vanilla.blocks.workbench.gui.title=Crafting on a Boat
+vanilla.blocks.chest.gui.title=Chest Boat
+vanilla.blocks.furnace.gui.title=Furnace Boat
+vanilla.blocks.workbench.gui.title=Crafting Boat
 
 industrialcraft2.materials.rubber.name=Rubber
 industrialcraft2.materials.carbon.name=Carbon Fiber
