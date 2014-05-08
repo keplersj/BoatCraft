@@ -35,7 +35,44 @@ group = 'open-code-developers' //If you are not Open Code Developers, but are ma
 
 archivesBaseName = 'BoatCraft'
 
-version = getVersionName()
+/*
+ * Gets the version name from the latest Git tag
+ */
+def getVersionName()
+{
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--tags', '--abbrev=0'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+def getBranch()
+{
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--abbrev-ref', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+
+def getSHA()
+{
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+// add some stuff to the versio
+ext.rawVersion = getVersionName()
+version = "${minecraft.version}-$rawVersion.${System.getenv().BUILD_NUMBER}"
+logger.lifecycle "version = $version"
 
 minecraft {
 	version = '1.7.2-10.12.1.1060'
@@ -155,40 +192,6 @@ uploadArchives {
             }
         }
     }
-}
-    
-/*
- * Gets the version name from the latest Git tag
- */
-def getVersionName()
-{
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'describe', '--tags', '--abbrev=0'
-        standardOutput = stdout
-    }
-    return stdout.toString().trim()
-}
-
-def getBranch()
-{
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'rev-parse', '--abbrev-ref', 'HEAD'
-        standardOutput = stdout
-    }
-    return stdout.toString().trim()
-}
-
-
-def getSHA()
-{
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'rev-parse', 'HEAD'
-        standardOutput = stdout
-    }
-    return stdout.toString().trim()
 }
 
 def jsonFile = new File(jar.destinationDir, "manifest.json")
