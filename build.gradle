@@ -21,12 +21,13 @@ buildscript {
             url = "https://oss.sonatype.org/content/repositories/releases/"
         }
         maven {
-        	url 'http://dl.bintray.com/content/noamt/gradle-plugins'
+        	name = "Gradle RESTful API"
+        	url = 'http://dl.bintray.com/content/noamt/gradle-plugins'
         }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-        classpath 'org._10ne.gradle:rest-gradle-plugin:0.1'
+        classpath 'org._10ne.gradle:rest-gradle-plugin:0.1.1'
     }
 }
 
