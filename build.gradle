@@ -195,7 +195,7 @@ task generateJson() { task ->
     property 'obf', jar.archiveName
     property 'deobf', deobfJar.archiveName
     property 'source', sourceJar.archiveName
-    property 'javadoc', docs.archiveName
+    property 'scaladoc', docs.archiveName
     property 'project_name', project.archivesBaseName
   }
   task.outputs.file(jsonFile)
@@ -207,14 +207,14 @@ task generateJson() { task ->
       'project_name' project.archivesBaseName
       'build_number' System.getenv().BUILD_NUMBER
       'minecraft_version' project.minecraft.version
-      'mod_version' project.rawVersion
+      'mod_version' project.getVersionName
       'branch' gitBranch
       'commit' gitSHA
       'artifacts'([
         ['name' : 'universal', 'file' : jar.archiveName],
         ['name' : 'deobf', 'file' : deobfJar.archiveName ],
         ['name' : 'source', 'file' : sourceJar.archiveName ],
-        ['name' : 'javadoc', 'file' : deobfJar.archiveName ]
+        ['name' : 'scaladoc', 'file' : docs.archiveName ]
       ])
     }
 
