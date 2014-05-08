@@ -78,7 +78,7 @@ task docs(type: Jar) {
 
 // Tell the artifact system about our extra jars
 artifacts {
-    archives sourceJar, deobfJar, docs, archives(jsonFile) { builtBy generateJson }
+    archives sourceJar, deobfJar, docs, jsonFile { builtBy generateJson }
 }
 
 // Configure an upload task. this is setup for uploading to files.minecraftforge.net. There are other examples around
