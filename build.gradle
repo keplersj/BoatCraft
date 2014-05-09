@@ -195,7 +195,7 @@ uploadArchives {
 }
 
 def jsonFile = new File(jar.destinationDir, "manifest.json")
-task generateJson(dependsOn: jar, dependsOn: sourceJar, dependsOn: deobfJar, dependsOn: docs) { task ->
+task generateJson(dependsOn: jar) { task ->
   def gitBranch = getBranch()
   def gitSHA = getSHA()
 
