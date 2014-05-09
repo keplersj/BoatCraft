@@ -234,12 +234,10 @@ task generateJson() { task ->
   }
 }
 
-generateJson.mustRunAfter {
-  	jar,
-  	sourceJar,
-  	deobfJar,
-  	docs
-}
+generateJson.mustRunAfter jar
+generateJson.mustRunAfter sourceJar
+generateJson.mustRunAfter deobfJar
+generateJson.mustRunAfter docs
 
 // Tell the artifact system about our extra jars
 artifacts {
