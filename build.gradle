@@ -195,9 +195,16 @@ uploadArchives {
 }
 
 def jsonFile = new File(jar.destinationDir, "manifest.json")
-task generateJson(dependsOn: sourceJar) { task ->
+task generateJson() { task ->
   def gitBranch = getBranch()
   def gitSHA = getSHA()
+  
+  mustRunAfter {
+  	jar,
+  	sourceJar,
+  	deobfJar,
+  	docs
+  }
 
   // specify inputs and outputs so gradle can see if its upToDate
   task.inputs.with {
