@@ -223,7 +223,7 @@ task generateJson() { task ->
       'branch' gitBranch
       'commit' gitSHA
       'artifacts'([
-        ['name' : 'universal', 'file' : jar.archiveName, 'file_data': jar.getArchivePath().getBytes().encodeBase64().toString()],
+        //['name' : 'universal', 'file' : jar.archiveName, 'file_data': jar.getArchivePath().getBytes().encodeBase64().toString()],
         ['name' : 'deobf', 'file' : deobfJar.archiveName, 'file_data': deobfJar.getArchivePath().getBytes().encodeBase64().toString() ],
         ['name' : 'source', 'file' : sourceJar.archiveName, 'file_data': sourceJar.getArchivePath().getBytes().encodeBase64().toString() ],
         ['name' : 'scaladoc', 'file' : docs.archiveName, 'file_data': docs.getArchivePath().getBytes().encodeBase64().toString() ]
