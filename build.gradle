@@ -198,13 +198,6 @@ def jsonFile = new File(jar.destinationDir, "manifest.json")
 task generateJson() { task ->
   def gitBranch = getBranch()
   def gitSHA = getSHA()
-  
-  mustRunAfter {
-  	jar,
-  	sourceJar,
-  	deobfJar,
-  	docs
-  }
 
   // specify inputs and outputs so gradle can see if its upToDate
   task.inputs.with {
@@ -239,6 +232,13 @@ task generateJson() { task ->
 
     jsonFile.write groovy.json.JsonOutput.prettyPrint(builder.toString())
   }
+}
+
+generateJson.mustRunAfter {
+  	jar,
+  	sourceJar,
+  	deobfJar,
+  	docs
 }
 
 // Tell the artifact system about our extra jars
