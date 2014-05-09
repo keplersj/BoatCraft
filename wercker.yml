@@ -18,4 +18,4 @@ deploy:
     steps:
         - script:
             name: heisenbugdev deploy
-            code: ./gradlew -Sq --parallel --project-cache-dir=$WERCKER_CACHE_DIR HeisenBugDev
+            code: ./gradlew -Sq --parallel --info --project-cache-dir=$WERCKER_CACHE_DIR HeisenBugDev
