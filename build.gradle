@@ -239,7 +239,9 @@ artifacts {
   archives sourceJar
   archives deobfJar
   archives docs
-  archives(jsonFile) { builtBy generateJson }
+  task.doLast {
+  	archives(jsonFile) { builtBy generateJson }
+  }
 }
 
 task HeisenBugDev(type: org._10ne.gradle.rest.RestTask) {
