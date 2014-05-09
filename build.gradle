@@ -44,6 +44,7 @@ def getVersionName()
     exec {
         commandLine 'git', 'describe', '--tags', '--abbrev=0'
         standardOutput = stdout
+        ignoreExitValue = true
     }
     return stdout.toString().trim()
 }
@@ -54,6 +55,7 @@ def getBranch()
     exec {
         commandLine 'git', 'rev-parse', '--abbrev-ref', 'HEAD'
         standardOutput = stdout
+        ignoreExitValue = true
     }
     return stdout.toString().trim()
 }
@@ -65,6 +67,7 @@ def getSHA()
     exec {
         commandLine 'git', 'rev-parse', 'HEAD'
         standardOutput = stdout
+        ignoreExitValue = true
     }
     return stdout.toString().trim()
 }
