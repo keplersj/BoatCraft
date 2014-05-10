@@ -248,11 +248,11 @@ artifacts {
   archives(jsonFile) { builtBy generateJson }
 }
 
-task HeisenBugDev(type: org._10ne.gradle.rest.RestTask, dependsOn: generateJson) {
+task HeisenBugDev(type: org._10ne.gradle.rest.RestTask, dependsOn: assemble) {
 	httpMethod = 'post'
     uri = 'heisenbugdev.com'
     username = System.getenv().HBD_EMAIL_PROD
     password = System.getenv().HBD_TOKEN_PROD
-    requestBody = [jsonFile]
+    requestBody = [generateJson()]
     contentType = groovyx.net.http.ContentType.JSON
 }
