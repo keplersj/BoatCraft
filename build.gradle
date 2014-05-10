@@ -1,6 +1,5 @@
 apply plugin: 'scala'
 apply plugin: 'forge'
-apply plugin: 'rest'
 
 buildscript {
     repositories {
@@ -17,14 +16,10 @@ buildscript {
             name = "Sonatype Releases"
             url = "https://oss.sonatype.org/content/repositories/releases/"
         }
-        maven {
-        	name = "Gradle RESTful API"
-        	url = 'http://dl.bintray.com/content/noamt/gradle-plugins'
-        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-        classpath 'org._10ne.gradle:rest-gradle-plugin:0.1.1'
+        classpath "org.codehaus.groovy.modules.http-builder:http-builder:0.7.1"
     }
 }
 
@@ -194,6 +189,7 @@ def jsonFile = new File(jar.destinationDir, "manifest.json")
 task generateJson() { task ->
   def gitBranch = getBranch()
   def gitSHA = getSHA()
+  def version = getVersionName()
 
   // specify inputs and outputs so gradle can see if its upToDate
   task.inputs.with {
@@ -215,7 +211,7 @@ task generateJson() { task ->
       'project_name' project.archivesBaseName
       'build_number' System.getenv().BUILD_NUMBER
       'minecraft_version' project.minecraft.version
-      'mod_version' project.version
+      'mod_version' version
       'branch' gitBranch
       'commit' gitSHA
       'artifacts'([
@@ -244,11 +240,41 @@ artifacts {
   archives(jsonFile) { builtBy generateJson }
 }
 
-task HeisenBugDev(type: org._10ne.gradle.rest.RestTask, dependsOn: assemble) {
-	httpMethod = 'post'
-    uri = 'heisenbugdev.com'
-    username = System.getenv().HBD_EMAIL_PROD
-    password = System.getenv().HBD_TOKEN_PROD
-    requestBody = [jsonFile]
-    contentType = groovyx.net.http.ContentType.JSON
+task HeisenBugDev(dependsOn: assemble) {
+    def gitBranch = getBranch()
+    def gitSHA = getSHA()
+    def version = getVersionName()
+    
+    def http = new groovyx.net.http.HTTPBuilder( 'http://heisenbugdev.com' )
+        
+    http.request( groovyx.net.http.Method.POST, groovyx.net.http.ContentType.JSON ) { req ->
+        headers.'X-User-Email' = System.getenv().HBD_EMAIL_PROD
+        headers.'X-User-Token' = System.getenv().HBD_TOKEN_PROD
+        
+        body = [
+            'project_name': project.archivesBaseName,
+            'build_number': System.getenv().BUILD_NUMBER,
+            'minecraft_version': project.minecraft.version,
+            'mod_version': version,
+            'branch': gitBranch,
+            'commit': gitSHA,
+            'artifacts': ([
+                ['name' : 'universal', 'file' : jar.archiveName, 'file_data': jar.getArchivePath().getBytes().encodeBase64().toString()],
+                ['name' : 'deobf', 'file' : deobfJar.archiveName, 'file_data': deobfJar.getArchivePath().getBytes().encodeBase64().toString() ],
+                ['name' : 'source', 'file' : sourceJar.archiveName, 'file_data': sourceJar.getArchivePath().getBytes().encodeBase64().toString() ],
+                ['name' : 'scaladoc', 'file' : docs.archiveName, 'file_data': docs.getArchivePath().getBytes().encodeBase64().toString() ]
+            ])]
+    
+        response.'201' = {
+            // response handling here
+        }
+        
+        response.'404' = {
+            
+        }
+        
+        response.'400' = {
+            println 'This is fucking rediculous.'
+        }
+    }
 }
