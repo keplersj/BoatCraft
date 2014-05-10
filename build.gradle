@@ -253,6 +253,6 @@ task HeisenBugDev(type: org._10ne.gradle.rest.RestTask, dependsOn: assemble) {
     uri = 'heisenbugdev.com'
     username = System.getenv().HBD_EMAIL_PROD
     password = System.getenv().HBD_TOKEN_PROD
-    requestBody = [generateJson()]
+    requestBody = [jsonFile]
     contentType = groovyx.net.http.ContentType.JSON
 }
