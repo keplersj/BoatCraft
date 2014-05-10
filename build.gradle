@@ -69,14 +69,14 @@ def getSHA()
     return stdout.toString().trim()
 }
 
+minecraft {
+	version = '1.7.2-10.12.1.1060'
+}
+
 // add some stuff to the versio
 ext.rawVersion = getVersionName()
 version = "${project.minecraft.version}-$rawVersion.${System.getenv().BUILD_NUMBER}"
 logger.lifecycle "version = $version"
-
-minecraft {
-	version = '1.7.2-10.12.1.1060'
-}
 
 repositories {
     ivy {
