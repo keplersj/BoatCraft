@@ -39,7 +39,7 @@ def getVersionName()
 {
     def stdout = new ByteArrayOutputStream()
     exec {
-        commandLine 'git', 'describe', '--tags', '--abbrev=0'
+        commandLine 'git', 'describe', '--tags', '--abbrev=1'
         standardOutput = stdout
         ignoreExitValue = true
     }
@@ -75,7 +75,7 @@ minecraft {
 
 // add some stuff to the versio
 ext.rawVersion = getVersionName()
-version = "${project.minecraft.version}-$rawVersion.${System.getenv().BUILD_NUMBER}"
+version = "${project.minecraft.version}-$rawVersion"
 logger.lifecycle "version = $version"
 
 repositories {
