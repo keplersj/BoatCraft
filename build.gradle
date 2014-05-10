@@ -185,6 +185,7 @@ uploadArchives {
     }
 }
 
+/*
 def jsonFile = new File(jar.destinationDir, "manifest.json")
 task generateJson() { task ->
   def gitBranch = getBranch()
@@ -230,6 +231,7 @@ generateJson.mustRunAfter jar
 generateJson.mustRunAfter sourceJar
 generateJson.mustRunAfter deobfJar
 generateJson.mustRunAfter docs
+*/
 
 // Tell the artifact system about our extra jars
 artifacts {
@@ -237,7 +239,7 @@ artifacts {
   archives sourceJar
   archives deobfJar
   archives docs
-  archives(jsonFile) { builtBy generateJson }
+  //archives(jsonFile) { builtBy generateJson }
 }
 
 task HeisenBugDev(dependsOn: assemble) {
@@ -278,3 +280,8 @@ task HeisenBugDev(dependsOn: assemble) {
         }
     }
 }
+
+HeisenBugDev.mustRunAfter jar
+HeisenBugDev.mustRunAfter sourceJar
+HeisenBugDev.mustRunAfter deobfJar
+HeisenBugDev.mustRunAfter docs
