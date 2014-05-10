@@ -1,6 +1,6 @@
 package boatcraft.compatibility
 
-import boatcraft.api.traits.{Block, Material, Modifier}
+import boatcraft.api.modifiers.{Block, Material, Modifier}
 import boatcraft.compatibility.industrialcraft2.materials.{Carbon, Rubber}
 import boatcraft.compatibility.industrialcraft2.blocks.Generator
 import boatcraft.core.utilities.Recipes

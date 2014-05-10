@@ -9,7 +9,7 @@ import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.entity.player.EntityPlayerMP
-import boatcraft.api.traits.Block
+import boatcraft.api.modifiers.Block
 
 abstract class GenericIronChest(chestType: IronChestType) extends Block {
 	import GenericIronChest.Inventory

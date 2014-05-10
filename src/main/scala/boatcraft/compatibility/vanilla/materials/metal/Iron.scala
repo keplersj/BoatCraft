@@ -1,6 +1,6 @@
 package boatcraft.compatibility.vanilla.materials.metal
 
-import boatcraft.api.traits.Material
+import boatcraft.api.modifiers.Material
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation

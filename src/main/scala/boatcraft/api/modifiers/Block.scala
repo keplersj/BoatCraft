@@ -1,4 +1,4 @@
-package boatcraft.api.traits
+package boatcraft.api.modifiers
 
 import boatcraft.api.boat.EntityCustomBoat
 import net.minecraft.inventory.IInventory

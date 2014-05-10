@@ -1,18 +1,28 @@
 package boatcraft.api.boat
 
-import boatcraft.api.{Registry, getCustomBoat, traits}
+import boatcraft.api.Registry
+import boatcraft.api.getCustomBoat
+import boatcraft.api.modifiers
+import boatcraft.api.modifiers.ExtendedBoat
+import boatcraft.api.modifiers.Mountable
 import cpw.mods.fml.common.ObfuscationReflectionHelper
 import net.minecraft.block.material.Material
-import net.minecraft.entity.{Entity, EntityLivingBase}
-import net.minecraft.entity.item.{EntityBoat, EntityItem}
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityLivingBase
+import net.minecraft.entity.item.EntityBoat
+import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.{Blocks, Items}
+import net.minecraft.init.Blocks
+import net.minecraft.init.Items
 import net.minecraft.inventory.IInventory
-import net.minecraft.item.{Item, ItemStack}
+import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.{AxisAlignedBB, DamageSource, MathHelper, MovingObjectPosition}
+import net.minecraft.util.AxisAlignedBB
+import net.minecraft.util.DamageSource
+import net.minecraft.util.MathHelper
+import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.World
-
 
 /**
  * The main Boat entity class
@@ -52,10 +62,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 
 	override protected def readEntityFromNBT(tag: NBTTagCompound) {
 		setMaterial(tag getString "material")
-		//Legacy
-		//TODO Remove in 2.0.1
-		if (tag hasKey "block") setBlock(tag getString "block")
-		else setBlock(tag getString "modifier")
+		setBlock(tag getString "block")
 
 		getMaterial readStateFromNBT(this, tag)
 		getBlock readStateFromNBT(this, tag)
@@ -422,6 +429,9 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		//Reset it so it gets updated when getBlockData is called again
 		blockData = null
 	}
+	
+	def setMount(mount: String, pos: Mountable.Position) =
+		getExtendedProperties(ExtendedBoat.NAME).asInstanceOf[ExtendedBoat].setMount(pos, mount)
 
 	def setName(name: String) =
 		dataWatcher updateObject(NAME, name)
@@ -432,37 +442,37 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	 * A getter for the boat's material
 	 * @return the boat's material
 	 */
-	def getMaterial: traits.Material =
-		(Registry find getMaterialName).asInstanceOf[traits.Material]
-
+	def getMaterial = Registry.findOfType[modifiers.Material](getMaterialName)
+	
 	/**
 	 * A getter for the boat's block
 	 * @return the boat's block
 	 */
-	def getBlock: traits.Block =
-		(Registry find (dataWatcher getWatchableObjectString BLOCK))
-			.asInstanceOf[traits.Block]
+	def getBlock = Registry.findOfType[modifiers.Block](getBlockName)
+	
+	def getMount(pos: Mountable.Position
+			) = Registry.findOfType[Mountable](getMountName(pos))
 
 	/**
 	 * A getter for the name of the boat's material
 	 * @return the name of the boat's material
 	 */
-	def getMaterialName =
-		dataWatcher getWatchableObjectString MATERIAL
+	def getMaterialName = dataWatcher getWatchableObjectString MATERIAL
 
 	/**
-	 * A getter fo the name of the boat's block
+	 * A getter for the name of the boat's block
 	 * @return the name of the boat's block
 	 */
-	def getBlockName =
-		dataWatcher getWatchableObjectString BLOCK
+	def getBlockName = dataWatcher getWatchableObjectString BLOCK
+	
+	def getMountName(pos: Mountable.Position) =
+		getExtendedProperties(ExtendedBoat.NAME).asInstanceOf[ExtendedBoat].getMount(pos)
 
-	def getName =
-		dataWatcher getWatchableObjectString NAME
+	def getName = dataWatcher getWatchableObjectString NAME
 
 	private var blockData: AnyRef = null
 
-	protected[boatcraft] def getBlockData = {
+	def getBlockData = {
 		if (blockData == null) blockData = getBlock getBlockData this
 		blockData
 	}

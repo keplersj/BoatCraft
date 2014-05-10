@@ -1,7 +1,7 @@
 package boatcraft.compatibility.vanilla.blocks
 
 import boatcraft.api.boat.EntityCustomBoat
-import boatcraft.api.traits.Block
+import boatcraft.api.modifiers.Block
 import boatcraft.core.utilities.NBTHelper
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks

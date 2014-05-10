@@ -1,6 +1,6 @@
 package boatcraft.compatibility.vanilla.blocks
 
-import boatcraft.api.traits.Block
+import boatcraft.api.modifiers.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack

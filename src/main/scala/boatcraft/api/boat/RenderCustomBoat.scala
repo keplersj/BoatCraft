@@ -1,21 +1,22 @@
 package boatcraft.api.boat
 
 import org.lwjgl.opengl.GL11
-import net.minecraftforge.client.IItemRenderer.ItemRenderType
-import net.minecraft.util.ResourceLocation
-import net.minecraft.entity.Entity
-import net.minecraft.tileentity.TileEntity
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher
-import net.minecraftforge.client.IItemRenderer
-import net.minecraft.client.renderer.entity.RenderBoat
 import boatcraft.api.Registry
-import net.minecraft.client.Minecraft
-import net.minecraft.item.ItemStack
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper
-import net.minecraft.util.MathHelper
-import net.minecraft.client.renderer.texture.TextureMap
 import net.minecraft.block.Block
+import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.entity.RenderBoat
+import net.minecraft.client.renderer.texture.TextureMap
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher
+import net.minecraft.entity.Entity
 import net.minecraft.init.Blocks
+import net.minecraft.item.ItemStack
+import net.minecraft.tileentity.TileEntity
+import net.minecraft.util.MathHelper
+import net.minecraft.util.ResourceLocation
+import net.minecraftforge.client.IItemRenderer
+import net.minecraftforge.client.IItemRenderer.ItemRenderType
+import net.minecraftforge.client.IItemRenderer.ItemRendererHelper
+import boatcraft.api.modifiers.Mountable
 
 /**
  * The Render Class used to render dinghies.
@@ -93,7 +94,7 @@ class RenderCustomBoat
 		modelBoat render(boat, 0, 0, -0.1F, 0, 0F, 0.0625F)
 
 		//Render the name
-		if (boat.hasName) {
+		if (boat hasName) {
 			val d0 = boat.lastTickPosX + (boat.posX - boat.lastTickPosX) * f1
 			val d1 = boat.lastTickPosY + (boat.posY - boat.lastTickPosY) * f1
 			val d2 = boat.lastTickPosZ + (boat.posZ - boat.lastTickPosZ) * f1
@@ -103,6 +104,8 @@ class RenderCustomBoat
 
 			func_147906_a(boat, boat.getName, d0, d1, d2, 64)
 		}
+		
+		boat.getMount(Mountable.Position.CENTER).getModel render(boat, 0, 0, -0.1F, 0, 0F, 0.0625F)
 
 		GL11 glPopMatrix()
 	}

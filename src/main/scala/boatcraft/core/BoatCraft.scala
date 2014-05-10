@@ -1,14 +1,12 @@
 package boatcraft.core
 
 import org.apache.logging.log4j.Logger
-
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.compatibility
 import boatcraft.core.packets.ChannelHandler
 import boatcraft.core.utilities.Recipes
 import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.SidedProxy
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
 import cpw.mods.fml.common.network.{FMLEmbeddedChannel, NetworkRegistry}
@@ -17,6 +15,7 @@ import cpw.mods.fml.relauncher.Side
 import net.minecraftforge.common.config.Configuration
 import boatcraft.core.blocks.Empty
 import java.util
+import net.minecraftforge.common.MinecraftForge
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
@@ -35,28 +34,29 @@ object BoatCraft {
 
 	private[boatcraft] var log: Logger = null
 
-	@EventHandler
+	@Mod.EventHandler
 	def preInit(event: FMLPreInitializationEvent) {
 		log = event.getModLog
-
+		
 		config = new Configuration(event getSuggestedConfigurationFile)
-
+		
 		channels = NetworkRegistry.INSTANCE newChannel("boatcraft", ChannelHandler)
-
+		
 		NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
-
+		MinecraftForge.EVENT_BUS register EventHandler
+		
 		printModInfo()
-
+		
 		compatibility preInit event
-
+		
 		Registry register Empty
-
+		
 		compatibility registerModifiers()
-
+		
 		GameRegistry registerItem(ItemCustomBoat, "customBoat")
 	}
 
-	@EventHandler
+	@Mod.EventHandler
 	def init(event: FMLInitializationEvent) {
 		proxy registerEntities()
 
@@ -67,7 +67,7 @@ object BoatCraft {
 		compatibility init event
 	}
 
-	@EventHandler
+	@Mod.EventHandler
 	def postInit(event: FMLPostInitializationEvent) {
 		compatibility postInit event
 	}

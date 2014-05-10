@@ -1,8 +1,8 @@
 package boatcraft
 
 import boatcraft.api.boat.ItemCustomBoat
-import boatcraft.api.traits.Block
-import boatcraft.api.traits.Material
+import boatcraft.api.modifiers.Block
+import boatcraft.api.modifiers.Material
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 

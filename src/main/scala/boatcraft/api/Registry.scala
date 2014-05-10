@@ -1,19 +1,28 @@
 package boatcraft.api
 
-import scala.collection.JavaConversions.asScalaBuffer
-import boatcraft.api.traits.{Material, Block}
+import java.util.HashMap
+import java.util.Map
+import scala.collection.JavaConversions.iterableAsScalaIterable
+import boatcraft.api.modifiers.Block
+import boatcraft.api.modifiers.Material
+import boatcraft.api.modifiers.Mountable
+import boatcraft.core.blocks.Empty
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
-import boatcraft.core.blocks.Empty
-import java.util
+import boatcraft.api.modifiers.Modifier
+import scala.reflect.classTag
+import scala.reflect.ClassTag
 
 /** Contains the methods needed to register Materials and Modifiers with BoatCraft:Core. */
 object Registry {
 	/** The Map containing all of the registered Materials for BoatCraft:Core to create boats with. */
-	var materials: util.Map[String, Material] = new util.HashMap[String, Material]
+	var materials: Map[String, Material] = new HashMap[String, Material]
 
 	/** The Map containing all of the registered Modifiers for BoatCraft:Core to create boats with. */
-	var blocks: util.Map[String, Block] = new util.HashMap[String, Block]
+	var blocks: Map[String, Block] = new HashMap[String, Block]
+
+	/** The Map containing all of the registered Modifiers for BoatCraft:Core to create boats with. */
+	var mountables: Map[String, Mountable] = new HashMap[String, Mountable]
 
 	/**
 	 * Adds materials or modifiers to the Map used by BoatCraft:Core for boat creation.
@@ -21,15 +30,17 @@ object Registry {
 	 * @param registrar the object being registered
 	 */
 	def register(registrar: Any): Unit = registrar match {
-		case _: Material =>
-			materials put(registrar.toString, registrar.asInstanceOf[Material])
-		case _: Block =>
-			blocks put(registrar.toString, registrar.asInstanceOf[Block])
-		case x: java.util.List[_] =>
+		case material: Material =>
+			materials put(material toString, material)
+		case block: Block =>
+			blocks put(block toString, block)
+		case mount: Mountable =>
+			mountables put(mount toString, mount)
+		case x: java.lang.Iterable[_] =>
 			x foreach (obj => register(obj))
-		case x: scala.Array[_] =>
+		case x: Traversable[_] =>
 			x foreach (obj => register(obj))
-		case x: scala.List[_] =>
+		case x: Array[_] =>
 			x foreach (obj => register(obj))
 		case _ =>
 			System.err println "Was unable to register: " + registrar.toString
@@ -41,15 +52,17 @@ object Registry {
 	 * @param unregistrant the object being unregistered
 	 */
 	def unregister(unregistrant: Any): Unit = unregistrant match {
-		case _: Material =>
-			materials remove unregistrant.toString
-		case _: Block =>
-			blocks remove unregistrant.toString
-		case x: java.util.List[_] =>
+		case material: Material =>
+			materials remove material.toString
+		case block: Block =>
+			blocks remove block.toString
+		case mount: Mountable =>
+			mountables remove mount.toString
+		case x: java.lang.Iterable[_] =>
 			x foreach (obj => unregister(obj))
-		case x: scala.List[_] =>
+		case x: Traversable[_] =>
 			x foreach (obj => unregister(obj))
-		case x: scala.Array[_] =>
+		case x: Array[_] =>
 			x foreach (obj => unregister(obj))
 		case _ =>
 			System.err println "There was nothing to unregister: " + unregistrant.toString
@@ -61,14 +74,27 @@ object Registry {
 	 * @param name name of registered object
 	 * @return registered object
 	 */
-	def find(name: String) = name match {
+	def find(name: String): Modifier = name match {
 		case x if materials.containsKey(name) =>
 			materials get name
 		case x if blocks.containsKey(name) =>
 			blocks get name
 		case _ =>
-			System.err println "Could not find: " + name
+			{
+				System.err println "Could not find: " + name
+				null
+			}
 	}
+	
+	def findOfType[T <: Modifier](name: String): T =
+			try
+			{
+				return find(name).asInstanceOf[T]
+			}
+			catch
+			{
+				case ex: ClassCastException => return null.asInstanceOf[T]
+			}
 
 	/**
 	 * Returns a registered Material associated with a certain ItemStack.

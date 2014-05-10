@@ -1,6 +1,6 @@
 package boatcraft.compatibility.vanilla.materials.crystal
 
-import boatcraft.api.traits.Material
+import boatcraft.api.modifiers.Material
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation

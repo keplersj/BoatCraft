@@ -1,6 +1,6 @@
 package boatcraft.compatibility.vanilla.materials.crystal
 
-import boatcraft.api.traits.Material
+import boatcraft.api.modifiers.Material
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation

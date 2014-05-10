@@ -2,7 +2,7 @@ package boatcraft.compatibility
 
 import scala.collection.JavaConversions.asScalaBuffer
 import boatcraft.api.boat.ItemCustomBoat
-import boatcraft.api.traits.{Block, Material}
+import boatcraft.api.modifiers.{Block, Material}
 import boatcraft.compatibility.vanilla.VanillaGuiHandler
 import boatcraft.compatibility.vanilla.materials.crystal.{Diamond, Emerald, Obsidian}
 import boatcraft.compatibility.vanilla.materials.metal.{Gold, Iron}

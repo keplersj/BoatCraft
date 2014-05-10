@@ -1,6 +1,6 @@
 package boatcraft.compatibility.industrialcraft2.materials
 
-import boatcraft.api.traits.Material
+import boatcraft.api.modifiers.Material
 import net.minecraft.util.ResourceLocation
 import ic2.api.item.IC2Items
 

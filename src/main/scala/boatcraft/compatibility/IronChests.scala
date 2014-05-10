@@ -5,7 +5,7 @@ import boatcraft.core.GUIHandler
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.common.MinecraftForge
 import boatcraft.compatibility.ironchest.blocks._
-import boatcraft.api.traits.Block
+import boatcraft.api.modifiers.Block
 
 object IronChests extends CompatModule {
 	override protected def doPreInit(e: FMLPreInitializationEvent) {

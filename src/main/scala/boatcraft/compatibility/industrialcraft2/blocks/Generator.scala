@@ -1,7 +1,7 @@
 package boatcraft.compatibility.industrialcraft2.blocks
 
 import boatcraft.api.boat.EntityCustomBoat
-import boatcraft.api.traits.Block
+import boatcraft.api.modifiers.Block
 import ic2.api.item.IC2Items
 import ic2.core.block.generator.tileentity.TileEntityGenerator
 import net.minecraft.inventory.IInventory
