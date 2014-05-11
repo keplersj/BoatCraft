@@ -1,4 +1,4 @@
-box: wercker/android
+box: hunterboerner/forge-wercker@0.0.86
 # Build definition
 build:
   # The steps that will be executed on build
