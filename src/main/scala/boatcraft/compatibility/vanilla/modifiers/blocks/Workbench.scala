@@ -1,4 +1,4 @@
-package boatcraft.compatibility.vanilla.blocks
+package boatcraft.compatibility.vanilla.modifiers.blocks
 
 import boatcraft.api.modifiers.Block
 import net.minecraft.entity.player.EntityPlayer

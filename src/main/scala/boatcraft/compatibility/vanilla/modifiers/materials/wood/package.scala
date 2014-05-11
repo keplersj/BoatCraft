@@ -1,4 +1,4 @@
-package boatcraft.compatibility.vanilla.materials
+package boatcraft.compatibility.vanilla.modifiers.materials
 
 package object wood {
 

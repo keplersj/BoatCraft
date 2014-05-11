@@ -1,11 +1,10 @@
-package boatcraft.compatibility.vanilla.blocks
+package boatcraft.compatibility.vanilla.modifiers.blocks
 
 import boatcraft.api.modifiers.Block
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.entity.player.EntityPlayer
 import boatcraft.api.boat.EntityCustomBoat
-import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.init.Items
 import net.minecraft.nbt.NBTTagCompound
 

@@ -1,10 +1,9 @@
-package boatcraft.compatibility.industrialcraft2.blocks
+package boatcraft.compatibility.industrialcraft2.modifiers.blocks
 
 import boatcraft.api.boat.EntityCustomBoat
 import boatcraft.api.modifiers.Block
 import ic2.api.item.IC2Items
 import ic2.core.block.generator.tileentity.TileEntityGenerator
-import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemBlock
 import net.minecraft.nbt.NBTTagCompound
 import cpw.mods.fml.common.registry.GameRegistry

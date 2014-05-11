@@ -1,9 +1,14 @@
 package boatcraft.api.boat
 
+import java.util
+
 import scala.collection.JavaConversions.mapAsScalaMap
 
-import cpw.mods.fml.relauncher.{Side, SideOnly}
 import boatcraft.api.Registry
+import boatcraft.core.modifiers.blocks.Empty
+import cpw.mods.fml.relauncher.SideOnly
+import cpw.mods.fml.relauncher.Side
+import net.minecraft.client.resources.I18n
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
@@ -17,9 +22,6 @@ import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.util.Vec3
 import net.minecraft.world.World
-import boatcraft.core.blocks.Empty
-import java.util
-import net.minecraft.client.resources.I18n
 
 /**
  * The Item Class used for all items that can be deployed like a Boat.

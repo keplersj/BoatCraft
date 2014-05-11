@@ -1,25 +1,43 @@
 package boatcraft.compatibility
 
+import java.util
+
 import scala.collection.JavaConversions.asScalaBuffer
+
 import boatcraft.api.boat.ItemCustomBoat
-import boatcraft.api.modifiers.{Block, Material}
+import boatcraft.api.modifiers.Block
+import boatcraft.api.modifiers.Material
 import boatcraft.compatibility.vanilla.VanillaGuiHandler
-import boatcraft.compatibility.vanilla.materials.crystal.{Diamond, Emerald, Obsidian}
-import boatcraft.compatibility.vanilla.materials.metal.{Gold, Iron}
-import boatcraft.compatibility.vanilla.materials.wood.{Acacia, Birch, DarkOak, Jungle, Oak, OreDict_Wood, Spruce}
-import boatcraft.compatibility.vanilla.blocks.{Furnace, Chest, Workbench}
-import boatcraft.core.{BoatCraft, GUIHandler}
+import boatcraft.compatibility.vanilla.modifiers.blocks.Chest
+import boatcraft.compatibility.vanilla.modifiers.blocks.Furnace
+import boatcraft.compatibility.vanilla.modifiers.blocks.TNT
+import boatcraft.compatibility.vanilla.modifiers.blocks.Workbench
+import boatcraft.compatibility.vanilla.modifiers.materials.crystal.Diamond
+import boatcraft.compatibility.vanilla.modifiers.materials.crystal.Emerald
+import boatcraft.compatibility.vanilla.modifiers.materials.crystal.Obsidian
+import boatcraft.compatibility.vanilla.modifiers.materials.metal.Gold
+import boatcraft.compatibility.vanilla.modifiers.materials.metal.Iron
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Acacia
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Birch
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.DarkOak
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Jungle
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Oak
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.OreDict_Wood
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Spruce
+import boatcraft.core.BoatCraft
+import boatcraft.core.GUIHandler
+import boatcraft.core.modifiers.blocks.Empty
 import boatcraft.core.utilities.Recipes
-import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLPreInitializationEvent}
+import cpw.mods.fml.common.Mod
+import cpw.mods.fml.common.event.FMLPostInitializationEvent
+import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.{CraftingManager, IRecipe}
+import net.minecraft.item.crafting.CraftingManager
+import net.minecraft.item.crafting.IRecipe
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.oredict.ShapedOreRecipe
-import boatcraft.core.blocks.Empty
-import java.util
-import boatcraft.compatibility.vanilla.blocks.TNT
 
 object Vanilla extends CompatModule {
 

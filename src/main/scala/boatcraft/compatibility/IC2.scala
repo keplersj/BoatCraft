@@ -1,16 +1,18 @@
 package boatcraft.compatibility
 
-import boatcraft.api.modifiers.{Block, Material, Modifier}
-import boatcraft.compatibility.industrialcraft2.materials.{Carbon, Rubber}
-import boatcraft.compatibility.industrialcraft2.blocks.Generator
+import boatcraft.api.modifiers.Block
+import boatcraft.api.modifiers.Material
+import boatcraft.compatibility.industrialcraft2.IC2GuiHandler
+import boatcraft.compatibility.industrialcraft2.modifiers.blocks.Generator
+import boatcraft.compatibility.industrialcraft2.modifiers.blocks.Nuke
+import boatcraft.compatibility.industrialcraft2.modifiers.materials.Carbon
+import boatcraft.compatibility.industrialcraft2.modifiers.materials.Rubber
+import boatcraft.core.GUIHandler
 import boatcraft.core.utilities.Recipes
 import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
-import ic2.api.item.IC2Items
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
-import boatcraft.core.GUIHandler
-import boatcraft.compatibility.industrialcraft2.IC2GuiHandler
-import boatcraft.compatibility.industrialcraft2.blocks.Nuke
+import ic2.api.item.IC2Items
 
 object IC2 extends CompatModule {
 	override protected def doPreInit(e: FMLPreInitializationEvent) {

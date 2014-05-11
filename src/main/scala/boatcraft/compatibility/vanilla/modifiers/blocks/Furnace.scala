@@ -1,19 +1,15 @@
-package boatcraft.compatibility.vanilla.blocks
+package boatcraft.compatibility.vanilla.modifiers.blocks
 
 import boatcraft.api.boat.EntityCustomBoat
 import boatcraft.api.modifiers.Block
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
-import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.FurnaceRecipes
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntityFurnace
 import net.minecraft.entity.player.EntityPlayerMP
-import net.minecraft.tileentity.TileEntity
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.common.ObfuscationReflectionHelper
-import net.minecraft.nbt.NBTTagList
 
 object Furnace extends Block {
 	GameRegistry.registerTileEntity(classOf[Inventory], "boatFurnace")

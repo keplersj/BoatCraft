@@ -4,7 +4,7 @@ import boatcraft.compatibility.ironchest.{IronChestsEventHandler, IronChestsGuiH
 import boatcraft.core.GUIHandler
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.common.MinecraftForge
-import boatcraft.compatibility.ironchest.blocks._
+import boatcraft.compatibility.ironchest.modifiers.blocks._
 import boatcraft.api.modifiers.Block
 
 object IronChests extends CompatModule {

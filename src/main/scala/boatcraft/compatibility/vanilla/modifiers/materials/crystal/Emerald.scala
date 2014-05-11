@@ -1,4 +1,4 @@
-package boatcraft.compatibility.vanilla.materials.crystal
+package boatcraft.compatibility.vanilla.modifiers.materials.crystal
 
 import boatcraft.api.modifiers.Material
 import net.minecraft.item.ItemStack

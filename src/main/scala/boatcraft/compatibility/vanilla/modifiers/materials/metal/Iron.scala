@@ -1,4 +1,4 @@
-package boatcraft.compatibility.vanilla.materials.metal
+package boatcraft.compatibility.vanilla.modifiers.materials.metal
 
 import boatcraft.api.modifiers.Material
 import net.minecraft.init.Items

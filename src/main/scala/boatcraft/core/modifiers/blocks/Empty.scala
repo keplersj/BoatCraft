@@ -1,4 +1,4 @@
-package boatcraft.core.blocks
+package boatcraft.core.modifiers.blocks
 
 import boatcraft.api.modifiers.Block
 import net.minecraft.item.ItemStack

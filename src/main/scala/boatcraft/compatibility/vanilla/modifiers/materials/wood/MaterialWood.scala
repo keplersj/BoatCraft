@@ -1,4 +1,4 @@
-package boatcraft.compatibility.vanilla.materials.wood
+package boatcraft.compatibility.vanilla.modifiers.materials.wood
 
 import boatcraft.api.modifiers.Material
 import net.minecraft.init.{Blocks, Items}

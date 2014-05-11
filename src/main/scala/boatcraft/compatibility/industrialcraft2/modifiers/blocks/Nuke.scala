@@ -1,20 +1,16 @@
-package boatcraft.compatibility.industrialcraft2.blocks
-
-import boatcraft.api.modifiers.Modifier
+package boatcraft.compatibility.industrialcraft2.modifiers.blocks
 import ic2.api.item.IC2Items
 import boatcraft.api.boat.EntityCustomBoat
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Items
-import net.minecraft.init.Blocks
 import boatcraft.api.modifiers.Block
 import ic2.core.block.machine.tileentity.TileEntityNuke
 import net.minecraft.nbt.NBTTagCompound
-import boatcraft.compatibility.IC2
 import net.minecraft.entity.player.EntityPlayerMP
 import net.minecraft.tileentity.TileEntity
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler
+import boatcraft.compatibility.IC2
 
 object Nuke extends Block {
 	TileEntity.addMapping(classOf[NukeFuse], "boatNuke")

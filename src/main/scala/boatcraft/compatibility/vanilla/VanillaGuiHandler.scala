@@ -1,9 +1,9 @@
 package boatcraft.compatibility.vanilla
 
+import boatcraft.compatibility.vanilla.modifiers.blocks.Workbench
 import cpw.mods.fml.common.network.IGuiHandler
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.world.World
-import boatcraft.compatibility.vanilla.blocks.Workbench
 
 object VanillaGuiHandler extends IGuiHandler {
 	override def getClientGuiElement(id: Int, player: EntityPlayer, world: World,

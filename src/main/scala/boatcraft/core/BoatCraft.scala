@@ -13,9 +13,10 @@ import cpw.mods.fml.common.network.{FMLEmbeddedChannel, NetworkRegistry}
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.Side
 import net.minecraftforge.common.config.Configuration
-import boatcraft.core.blocks.Empty
+import boatcraft.core.modifiers.blocks.Empty
 import java.util
 import net.minecraftforge.common.MinecraftForge
+import boatcraft.core.modifiers.blocks.Empty
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
