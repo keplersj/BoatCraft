@@ -1,4 +1,4 @@
-box: hunterboerner/forge-wercker@0.0.86
+box: pjvds/scala
 # Build definition
 build:
   # The steps that will be executed on build
