@@ -1,53 +1,26 @@
 package boatcraft.compatibility
 
-import org.apache.logging.log4j.Logger
-
-import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.Mod.EventHandler
-import cpw.mods.fml.common.Optional
+import boatcraft.compatibility.ironchest.{IronChestsEventHandler, IronChestsGuiHandler}
+import boatcraft.core.GUIHandler
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
-import cpw.mods.fml.common.network.NetworkRegistry
-import boatcraft.api.Registry
-import boatcraft.compatibility.ironchest._
-import boatcraft.compatibility.ironchest.modifiers._
 import net.minecraftforge.common.MinecraftForge
-import boatcraft.core.BoatCraft
+import boatcraft.compatibility.ironchest.modifiers.blocks._
+import boatcraft.api.modifiers.Block
 
-object IronChests extends CompatModule
-{
-	var log: Logger = null
-	
-	@Optional.Method(modid = "IronChest")
-	override def preInit(e: FMLPreInitializationEvent)
-	{
-		log = e getModLog
+object IronChests extends CompatModule {
+	override protected def doPreInit(e: FMLPreInitializationEvent) {
+		GUIHandler.handlerMap.put(code, IronChestsGuiHandler)
+		MinecraftForge.EVENT_BUS register IronChestsEventHandler
+	}
 
-		try
-		{
-			addModifiers
-			NetworkRegistry.INSTANCE registerGuiHandler (BoatCraft, IronChestsGuiHandler)
-			MinecraftForge.EVENT_BUS register IronChestsEventHandler
-		}
-		catch
-		{
-			case ex: NoClassDefFoundError => //That's OK
-			case err: NoSuchMethodError => //Fine
-			case ex: NoSuchMethodException => //No problem
-            case ex: NullPointerException => //Sure
-			case thr: Throwable => thr printStackTrace //Weird...
-		}
-	}
-	
-	@Optional.Method(modid = "IronChest")
-	private def addModifiers
-	{
-		Registry register Iron_Chest
-		Registry register Gold_Chest
-		Registry register Diamond_Chest
-		Registry register Copper_Chest
-		Registry register Silver_Chest
-		Registry register Crystal_Chest
-		Registry register Obsidian_Chest
-		Registry register DirtChest9000
-	}
+	override protected def getBlocks: List[Block] =
+		List[Block](
+			Iron_Chest,
+			Gold_Chest,
+			Diamond_Chest,
+			Copper_Chest,
+			Silver_Chest,
+			Crystal_Chest,
+			Obsidian_Chest,
+			DirtChest9000)
 }

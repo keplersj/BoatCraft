@@ -1,82 +1,79 @@
 package boatcraft.core
 
-import java.util.EnumMap
-
 import org.apache.logging.log4j.Logger
-
-import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.Mod.EventHandler
-import cpw.mods.fml.common.SidedProxy
-import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLInitializationEvent, FMLPreInitializationEvent}
-import cpw.mods.fml.common.network.FMLEmbeddedChannel
-import cpw.mods.fml.common.network.NetworkRegistry
-import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.Side
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
-import boatcraft.core.modifiers.Empty
+import boatcraft.compatibility
 import boatcraft.core.packets.ChannelHandler
 import boatcraft.core.utilities.Recipes
-import boatcraft.compatibility
+import cpw.mods.fml.common.Mod
+import cpw.mods.fml.common.SidedProxy
+import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
+import cpw.mods.fml.common.network.{FMLEmbeddedChannel, NetworkRegistry}
+import cpw.mods.fml.common.registry.GameRegistry
+import cpw.mods.fml.relauncher.Side
 import net.minecraftforge.common.config.Configuration
+import boatcraft.core.modifiers.blocks.Empty
+import java.util
+import net.minecraftforge.common.MinecraftForge
+import boatcraft.core.modifiers.blocks.Empty
 
 @Mod(modid = "boatcraft",
-  name = "BoatCraft",
-  version = "2.0",
-  modLanguage = "scala",
-  dependencies = "after:IronChest, Thaumcraft, IC2")
-object BoatCraft
-{
+	name = "BoatCraft",
+	version = "2.0",
+	modLanguage = "scala",
+	dependencies = "after:IronChest;after:Thaumcraft;after:IC2")
+object BoatCraft {
 	@SidedProxy(modId = "boatcraft",
 		clientSide = "boatcraft.core.Proxy$ClientProxy",
 		serverSide = "boatcraft.core.Proxy$CommonProxy")
 	var proxy: Proxy.CommonProxy = null
-	
+
 	private[boatcraft] var config: Configuration = null
-	
-	var channels: EnumMap[Side, FMLEmbeddedChannel] = null
-	
+
+	var channels: util.EnumMap[Side, FMLEmbeddedChannel] = null
+
 	private[boatcraft] var log: Logger = null
 
-
-  @EventHandler
-	def preInit(event: FMLPreInitializationEvent)
-	{
-		log = event getModLog
+	@Mod.EventHandler
+	def preInit(event: FMLPreInitializationEvent) {
+		log = event.getModLog
 		
 		config = new Configuration(event getSuggestedConfigurationFile)
 		
-		channels = NetworkRegistry.INSTANCE newChannel ("boatcraft", ChannelHandler);
+		channels = NetworkRegistry.INSTANCE newChannel("boatcraft", ChannelHandler)
 		
-		printModInfo
+		NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
+		MinecraftForge.EVENT_BUS register EventHandler
 		
-		//All Boat Materials should be at least rideable
+		printModInfo()
+		
+		compatibility preInit event
+		
 		Registry register Empty
-
-    compatibility.preInit(event)
-	}
-	
-	@EventHandler
-	def init(event: FMLInitializationEvent) 
-	{
-    GameRegistry registerItem (ItemCustomBoat, "customBoat")
-
-		proxy registerEntities
-
-		proxy registerRenderers
-
-		Recipes addBoatRecipes
-
-    compatibility.init(event)
+		
+		compatibility registerModifiers()
+		
+		GameRegistry registerItem(ItemCustomBoat, "customBoat")
 	}
 
-  @EventHandler
-  def postInit(event: FMLPostInitializationEvent) {
-    compatibility.postInit(event)
-  }
-	
-	def printModInfo
-	{
+	@Mod.EventHandler
+	def init(event: FMLInitializationEvent) {
+		proxy registerEntities()
+
+		proxy registerRenders()
+
+		Recipes addBoatRecipes()
+
+		compatibility init event
+	}
+
+	@Mod.EventHandler
+	def postInit(event: FMLPostInitializationEvent) {
+		compatibility postInit event
+	}
+
+	private def printModInfo() {
 		log info "BoatCraft"
 		log info "Copyright Kepler Sticka-Jones 2013-2014"
 		log info "http://k2b6s9j.com/projects/minecraft/BoatCraft"

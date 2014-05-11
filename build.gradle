@@ -1,8 +1,3 @@
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-apply plugin: 'cobertura'
-apply plugin: 'coveralls'
-apply plugin: 'java'
 apply plugin: 'scala'
 apply plugin: 'forge'
 
@@ -24,21 +19,59 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-        classpath 'net.saliman:gradle-cobertura-plugin:2.2.2'
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.2.4'
+        classpath "org.codehaus.groovy.modules.http-builder:http-builder:0.7.1"
     }
 }
 
-group = 'open-code-developer' //If you are not Open Code Developers, but are maintaining this project, please change this to your name.
+group = 'open-code-developers' //If you are not Open Code Developers, but are maintaining this project, please change this to your name.
 
 archivesBaseName = 'BoatCraft'
 
-version = '2.0-SNAPSHOT'
+/*
+ * Gets the version name from the latest Git tag
+ */
+def getVersionName()
+{
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--tags', '--abbrev=1'
+        standardOutput = stdout
+        ignoreExitValue = true
+    }
+    return stdout.toString().trim()
+}
+
+def getBranch()
+{
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--abbrev-ref', 'HEAD'
+        standardOutput = stdout
+        ignoreExitValue = true
+    }
+    return stdout.toString().trim()
+}
+
+
+def getSHA()
+{
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', 'HEAD'
+        standardOutput = stdout
+        ignoreExitValue = true
+    }
+    return stdout.toString().trim()
+}
 
 minecraft {
 	version = '1.7.2-10.12.1.1060'
-	mcpVersion = '9.03'
 }
+
+// add some stuff to the versio
+ext.rawVersion = getVersionName()
+version = "${project.minecraft.version}-$rawVersion"
+logger.lifecycle "version = $version"
 
 repositories {
     ivy {
@@ -57,33 +90,24 @@ dependencies {
 // The result is files named <projectname>-<mcversion>-<version>-universal.jar
 jar {
     classifier = 'universal'
-    version = "${project.minecraft.version}-${project.version}"
 }
 
 // Add in a source jar for people, should they desire to download such a thing
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
     classifier = 'src'
-    version = "${project.minecraft.version}-${project.version}"
 }
 
 // Add in an mcp named jar, for those who wish to run in a development environment (assuming mcp naming matches)
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'deobf'
-    version = "${project.minecraft.version}-${project.version}"
 }
 
 // Add in a jar containing the ScalaDocs.
 task docs(type: Jar) {
     from scaladoc.destinationDir
     classifier = 'docs'
-    version = "${project.minecraft.version}-${project.version}"
-}
-
-// Tell the artifact system about our extra jars
-artifacts {
-    archives sourceJar, deobfJar, docs
 }
 
 // Configure an upload task. this is setup for uploading to files.minecraftforge.net. There are other examples around
@@ -160,3 +184,104 @@ uploadArchives {
         }
     }
 }
+
+/*
+def jsonFile = new File(jar.destinationDir, "manifest.json")
+task generateJson() { task ->
+  def gitBranch = getBranch()
+  def gitSHA = getSHA()
+  def version = getVersionName()
+
+  // specify inputs and outputs so gradle can see if its upToDate
+  task.inputs.with {
+    property 'version', project.version // accounts for MCVersion, and all the other components
+    property 'branch', gitBranch
+    property 'commit', gitSHA
+    property 'obf', jar.archiveName
+    property 'deobf', deobfJar.archiveName
+    property 'source', sourceJar.archiveName
+    property 'scaladoc', docs.archiveName
+    property 'project_name', project.archivesBaseName
+  }
+  task.outputs.file(jsonFile)
+
+  // actual work here
+  task.doLast {
+    def builder = new groovy.json.JsonBuilder()
+    def root = builder {
+      'project_name' project.archivesBaseName
+      'build_number' System.getenv().BUILD_NUMBER
+      'minecraft_version' project.minecraft.version
+      'mod_version' version
+      'branch' gitBranch
+      'commit' gitSHA
+      'artifacts'([
+        ['name' : 'universal', 'file' : jar.archiveName, 'file_data': jar.getArchivePath().getBytes().encodeBase64().toString()],
+        ['name' : 'deobf', 'file' : deobfJar.archiveName, 'file_data': deobfJar.getArchivePath().getBytes().encodeBase64().toString() ],
+        ['name' : 'source', 'file' : sourceJar.archiveName, 'file_data': sourceJar.getArchivePath().getBytes().encodeBase64().toString() ],
+        ['name' : 'scaladoc', 'file' : docs.archiveName, 'file_data': docs.getArchivePath().getBytes().encodeBase64().toString() ]
+      ])
+    }
+
+    jsonFile.write groovy.json.JsonOutput.prettyPrint(builder.toString())
+  }
+}
+
+generateJson.mustRunAfter jar
+generateJson.mustRunAfter sourceJar
+generateJson.mustRunAfter deobfJar
+generateJson.mustRunAfter docs
+*/
+
+// Tell the artifact system about our extra jars
+artifacts {
+  archives jar
+  archives sourceJar
+  archives deobfJar
+  archives docs
+  //archives(jsonFile) { builtBy generateJson }
+}
+
+task HeisenBugDev(dependsOn: assemble) {
+    def gitBranch = getBranch()
+    def gitSHA = getSHA()
+    def version = getVersionName()
+    
+    def http = new groovyx.net.http.HTTPBuilder( 'http://heisenbugdev.com' )
+        
+    http.request( groovyx.net.http.Method.POST, groovyx.net.http.ContentType.JSON ) { req ->
+        headers.'X-User-Email' = System.getenv().HBD_EMAIL_PROD
+        headers.'X-User-Token' = System.getenv().HBD_TOKEN_PROD
+        
+        body = [
+            'project_name': project.archivesBaseName,
+            'build_number': System.getenv().BUILD_NUMBER,
+            'minecraft_version': project.minecraft.version,
+            'mod_version': version,
+            'branch': gitBranch,
+            'commit': gitSHA,
+            /*'artifacts': ([
+                ['name' : 'universal', 'file' : jar.archiveName, 'file_data': jar.getArchivePath().getBytes().encodeBase64().toString()],
+                ['name' : 'deobf', 'file' : deobfJar.archiveName, 'file_data': deobfJar.getArchivePath().getBytes().encodeBase64().toString() ],
+                ['name' : 'source', 'file' : sourceJar.archiveName, 'file_data': sourceJar.getArchivePath().getBytes().encodeBase64().toString() ],
+                ['name' : 'scaladoc', 'file' : docs.archiveName, 'file_data': docs.getArchivePath().getBytes().encodeBase64().toString() ]
+            ])*/]
+    
+        response.'201' = {
+            // response handling here
+        }
+        
+        response.'404' = {
+            
+        }
+        
+        response.'400' = {
+            println 'This is fucking rediculous.'
+        }
+    }
+}
+
+HeisenBugDev.mustRunAfter jar
+HeisenBugDev.mustRunAfter sourceJar
+HeisenBugDev.mustRunAfter deobfJar
+HeisenBugDev.mustRunAfter docs

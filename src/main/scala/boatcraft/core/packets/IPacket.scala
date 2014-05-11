@@ -1,9 +1,9 @@
 package boatcraft.core.packets
 
-import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBuf
 
-trait IPacket
-{
+trait IPacket {
 	def readBytes(buffer: ByteBuf)
+
 	def writeBytes(buffer: ByteBuf)
 }

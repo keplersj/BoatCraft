@@ -1,1 +1,34 @@
-boatcraft.container.crafting=Crafting on a Boat
+core.module.linkingword=with
+
+core.forms.dinghy.name=Dinghy
+
+vanilla.materials.wood.oredict.name=Wood
+
+vanilla.materials.wood.oak.name=Oak Wood
+vanilla.materials.wood.spruce.name=Spruce Wood
+vanilla.materials.wood.birch.name=Birch Wood
+vanilla.materials.wood.jungle.name=Jungle Wood
+vanilla.materials.wood.acacia.name=Acaica Wood
+vanilla.materials.wood.darkoak.name=Dark Oak Wood
+
+vanilla.materials.metal.iron.name=Iron
+vanilla.materials.metal.gold.name=Gold
+
+vanilla.materials.crystal.obsidian.name=Obsidian
+vanilla.materials.crystal.diamond.name=Diamond
+vanilla.materials.crystal.emerald.name=Emerald
+
+vanilla.blocks.chest.name=Chest
+vanilla.blocks.furnace.name=Furnace
+vanilla.blocks.workbench.name=Workbench
+vanilla.blocks.tnt.name=TNT
+
+vanilla.blocks.chest.gui.title=Chest Boat
+vanilla.blocks.furnace.gui.title=Furnace Boat
+vanilla.blocks.workbench.gui.title=Crafting Boat
+
+industrialcraft2.materials.rubber.name=Rubber
+industrialcraft2.materials.carbon.name=Carbon Fiber
+
+industrialcraft2.blocks.generator.name=Generator
+industrialcraft2.blocks.nuke.name=Nuke

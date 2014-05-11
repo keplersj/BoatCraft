@@ -1,141 +1,131 @@
 package boatcraft.compatibility
 
-import java.util.ArrayList
+import java.util
 
-import scala.collection.JavaConversions.{asScalaBuffer, mapAsScalaMap}
+import scala.collection.JavaConversions.asScalaBuffer
 
-import org.apache.logging.log4j.Logger
-
-import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLPreInitializationEvent}
-import cpw.mods.fml.common.network.NetworkRegistry
-import cpw.mods.fml.common.registry.GameRegistry
-import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
+import boatcraft.api.modifiers.Block
+import boatcraft.api.modifiers.Material
 import boatcraft.compatibility.vanilla.VanillaGuiHandler
-import boatcraft.compatibility.vanilla.materials.crystal._
-import boatcraft.compatibility.vanilla.materials.metal._
-import boatcraft.compatibility.vanilla.materials.wood._
-import boatcraft.compatibility.vanilla.modifiers._
+import boatcraft.compatibility.vanilla.modifiers.blocks.Chest
+import boatcraft.compatibility.vanilla.modifiers.blocks.Furnace
+import boatcraft.compatibility.vanilla.modifiers.blocks.TNT
+import boatcraft.compatibility.vanilla.modifiers.blocks.Workbench
+import boatcraft.compatibility.vanilla.modifiers.materials.crystal.Diamond
+import boatcraft.compatibility.vanilla.modifiers.materials.crystal.Emerald
+import boatcraft.compatibility.vanilla.modifiers.materials.crystal.Obsidian
+import boatcraft.compatibility.vanilla.modifiers.materials.metal.Gold
+import boatcraft.compatibility.vanilla.modifiers.materials.metal.Iron
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Acacia
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Birch
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.DarkOak
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Jungle
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Oak
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.OreDict_Wood
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Spruce
 import boatcraft.core.BoatCraft
-import boatcraft.core.modifiers.Empty
+import boatcraft.core.GUIHandler
+import boatcraft.core.modifiers.blocks.Empty
 import boatcraft.core.utilities.Recipes
+import cpw.mods.fml.common.Mod
+import cpw.mods.fml.common.event.FMLPostInitializationEvent
+import cpw.mods.fml.common.event.FMLPreInitializationEvent
+import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.{CraftingManager, IRecipe}
+import net.minecraft.item.crafting.CraftingManager
+import net.minecraft.item.crafting.IRecipe
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.oredict.ShapedOreRecipe
 
-object Vanilla extends CompatModule
-{
-	private[boatcraft] var log: Logger = null
-	
+object Vanilla extends CompatModule {
+
 	private var useOreDictWood = false
-	
-	override def preInit(event: FMLPreInitializationEvent)
-	{
-		log = event getModLog
 
-		readConfig
+	var materials = List[Material]()
 
-		registerMaterials
-		registerModifiers
+	override def doPreInit(event: FMLPreInitializationEvent) {
+		readConfig()
 
-		replaceBoatRecipe
+		replaceBoatRecipe()
 
-		NetworkRegistry.INSTANCE registerGuiHandler (BoatCraft, VanillaGuiHandler)
+		GUIHandler.handlerMap.put(code, VanillaGuiHandler)
+
+		if (!useOreDictWood) {
+			materials = materials ++ woodMaterials
+		}
+		else {
+			materials = materials ++ List[Material](OreDict_Wood)
+		}
+		materials = materials ++ metalMaterials
+		materials = materials ++ crystalMaterials
 	}
-	
-	override def postInit(event: FMLPostInitializationEvent)
-	{
-		var toRemove = new ArrayList[IRecipe]
 
-		for (recipe <- CraftingManager.getInstance getRecipeList)
-		{
-			if (recipe.isInstanceOf[IRecipe]
-				&& !recipe.isInstanceOf[ShapedOreRecipe]
-				&& recipe.asInstanceOf[IRecipe].getRecipeOutput != null
-				&& recipe.asInstanceOf[IRecipe].getRecipeOutput.stackTagCompound != null
-				&& recipe.asInstanceOf[IRecipe].getRecipeOutput.stackTagCompound.getString("material")
-				!= null
-				&& recipe.asInstanceOf[IRecipe].getRecipeOutput.stackTagCompound.getString("material")
-				.equals(OreDict_Wood toString)) {
-				toRemove add recipe.asInstanceOf[IRecipe]
-				log info "Removed non-oredict ore-dict wood boat recipe: " + recipe
+	override def doPostInit(event: FMLPostInitializationEvent) {
+		val toRemove = new util.ArrayList[IRecipe]
+
+		for (recipe <- CraftingManager.getInstance.getRecipeList) {
+			recipe match {
+				case recipe: IRecipe if !recipe.isInstanceOf[ShapedOreRecipe] && recipe.getRecipeOutput != null && recipe.getRecipeOutput.stackTagCompound != null && recipe.getRecipeOutput.stackTagCompound.getString("material")
+					!= null && recipe.getRecipeOutput.stackTagCompound.getString("material")
+					.equals(OreDict_Wood toString) =>
+					toRemove add recipe
+					log info "Removed non-oredict ore-dict wood boat recipe: " + recipe
+				case _ =>
 			}
 		}
 
 		CraftingManager.getInstance.getRecipeList removeAll toRemove
 	}
-	
-	private def registerMaterials
-	{
-		if (!useOreDictWood)
-		{
-			Registry register Oak
-			Registry register Spruce
-			Registry register Birch
-			Registry register Jungle
-			Registry register Acacia
-			Registry register DarkOak
-		}
-		else
-		{
-			Registry register OreDict_Wood
 
-			var stack = new ItemStack(ItemCustomBoat)
-			stack.stackTagCompound = new NBTTagCompound
-			stack.stackTagCompound setString ("material", OreDict_Wood toString)
+	override protected def getMaterials: List[Material] = materials
 
-			for ((name, modifier) <- Registry.modifiers) {
-				stack.stackTagCompound setString ("modifier", name)
-				if (modifier.getContent != null)
-					GameRegistry.addRecipe(new ShapedOreRecipe(stack,
-						"wmw", "www",
-						Character valueOf 'w', "planksWood",
-						Character valueOf 'm', modifier getContent))
-				else
-					GameRegistry.addRecipe(new ShapedOreRecipe(stack,
-						"w w", "www",
-						Character valueOf 'w', "planksWood"))
-			}
-		}
+	private val woodMaterials: List[Material] = List[Material](
+		Oak,
+		Spruce,
+		Birch,
+		Jungle,
+		Acacia,
+		DarkOak
+	)
 
-		Registry register Iron
-		Registry register Gold
+	private val metalMaterials: List[Material] = List[Material](
+		Iron,
+		Gold
+	)
 
-		Registry register Obsidian
-		Registry register Diamond
-		Registry register Emerald
-	}
-	
-	private def registerModifiers
-	{
-		Registry register Chest
-		Registry register Furnace
-		Registry register Workbench
-	}
-	
-	private def replaceBoatRecipe
-	{
+	private val crystalMaterials: List[Material] = List[Material](
+		Obsidian,
+		Diamond,
+		Emerald
+	)
+
+	override protected def getBlocks: List[Block] =
+		List[Block](
+			Chest,
+			Furnace,
+			Workbench,
+			TNT)
+
+	private def replaceBoatRecipe() {
 		Recipes removeRecipe new ItemStack(Items.boat)
-		
-		var stack = new ItemStack(ItemCustomBoat)
-		
-		stack.stackTagCompound = new NBTTagCompound
-		stack.stackTagCompound setString ("material", Oak toString)
-		stack.stackTagCompound setString ("modifier", Empty toString)
-		
-		GameRegistry addShapelessRecipe (stack, Items.boat)
-	}
-	
-	private def readConfig
-	{
-		useOreDictWood = BoatCraft.config get ("Vanilla.General", "useOreDictWoods", false,
-			"If set to true, the different wood types will not be generated.\n" +
-			"Instead, there will be only one \"wood\" Boat") getBoolean false
 
-		if (BoatCraft.config hasChanged)
-			BoatCraft.config save
+		val stack = new ItemStack(ItemCustomBoat)
+
+		stack.stackTagCompound = new NBTTagCompound
+		stack.stackTagCompound setString("material", Oak.toString)
+		stack.stackTagCompound setString("block", Empty.toString)
+
+		GameRegistry addShapelessRecipe(stack, Items.boat)
+	}
+
+	private def readConfig() {
+		useOreDictWood = BoatCraft.config get("Vanilla.General", "useOreDictWoods", false,
+			"If set to true, the different wood types will not be generated.\n" +
+				"Instead, there will be only one \"wood\" Boat") getBoolean false
+
+		if (BoatCraft.config.hasChanged)
+			BoatCraft.config save()
 	}
 }
