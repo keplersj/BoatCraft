@@ -1,0 +1,34 @@
+core.module.linkingword=com
+
+core.forms.dinghy.name=Bote
+
+vanilla.materials.wood.oredict.name=Madeira
+
+vanilla.materials.wood.oak.name=Oak Wood
+vanilla.materials.wood.spruce.name=Spruce Wood
+vanilla.materials.wood.birch.name=Birch Wood
+vanilla.materials.wood.jungle.name=Jungle Wood
+vanilla.materials.wood.acacia.name=Acaica Wood
+vanilla.materials.wood.darkoak.name=Dark Oak Wood
+
+vanilla.materials.metal.iron.name=Ferro
+vanilla.materials.metal.gold.name=Ouro
+
+vanilla.materials.crystal.obsidian.name=Obsidiana
+vanilla.materials.crystal.diamond.name=Diamante
+vanilla.materials.crystal.emerald.name=Esmeralda
+
+vanilla.blocks.chest.name=Baú
+vanilla.blocks.furnace.name=Fornalha
+vanilla.blocks.workbench.name=Mesa de Trabalho
+vanilla.blocks.tnt.name=TNT
+
+vanilla.blocks.chest.gui.title=Bote Baú
+vanilla.blocks.furnace.gui.title=Bote Fornalha
+vanilla.blocks.workbench.gui.title=Bote Mesa de Trabalho
+
+industrialcraft2.materials.rubber.name=Borracha
+industrialcraft2.materials.carbon.name=Fibra de Carvão
+
+industrialcraft2.blocks.generator.name=Gerador
+industrialcraft2.blocks.nuke.name=Nuke
