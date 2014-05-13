@@ -4,18 +4,21 @@ build:
   # The steps that will be executed on build
   steps:
     - script:
-        name: Setup JVM args
-        code: export JAVA_OPTS="-XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m"
+      name: Setup JVM args
+      code: export JAVA_OPTS="-XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m"
     # A step that executes `gradle build` command
     - script:
-        name: run gradle
-        code: |
-          ./gradlew -Sq --parallel --project-cache-dir=$WERCKER_CACHE_DIR build
+      name: run gradle
+      code: |
+        ./gradlew -Sq --parallel --project-cache-dir=$WERCKER_CACHE_DIR build
     - script:
-        name: archive artifacts
-        code: cp build/libs/* $WERCKER_REPORT_ARTIFACTS_DIR
+      name: archive artifacts
+      code: cp build/libs/* $WERCKER_REPORT_ARTIFACTS_DIR
 deploy:
     steps:
-        - script:
-            name: heisenbugdev deploy
-            code: ./gradlew -Sq --parallel --info --project-cache-dir=$WERCKER_CACHE_DIR HeisenBugDev
+       - script:
+        name: Setup JVM args
+        code: export JAVA_OPTS="-XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m"
+      - script:
+        name: heisenbugdev deploy
+        code: ./gradlew -Sq --parallel --info --project-cache-dir=$WERCKER_CACHE_DIR HeisenBugDev
