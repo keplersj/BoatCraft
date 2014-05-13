@@ -289,7 +289,7 @@ task HeisenBugDev(dependsOn: assemble) { task ->
             }
             
             response.'404' = {
-                print;n '404\'d!'
+                println '404\'d!'
             }
             
             response.'400' = {
