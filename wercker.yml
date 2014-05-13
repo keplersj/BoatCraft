@@ -16,7 +16,7 @@ build:
       code: cp build/libs/* $WERCKER_REPORT_ARTIFACTS_DIR
 deploy:
     steps:
-       - script:
+      - script:
         name: Setup JVM args
         code: export JAVA_OPTS="-XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m"
       - script:
