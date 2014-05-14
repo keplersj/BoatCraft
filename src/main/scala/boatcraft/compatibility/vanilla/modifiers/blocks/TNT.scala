@@ -33,7 +33,12 @@ object TNT extends Block {
 	override def update(boat: EntityCustomBoat) {
 		var data = boat.getBlockData.asInstanceOf[TNTFuse]
 		
-		if (data.fuse == -1) return
+		if (data.fuse == -1)
+		{
+			//Needs to be less, because the boat is about to be destroyed
+			if (boat isBurning) data.fuse = 20
+			else return
+		}
 		
 		if (data.fuse == 0) {
 			boat.setDead()

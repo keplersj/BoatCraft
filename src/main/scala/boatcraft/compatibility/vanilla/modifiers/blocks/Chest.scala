@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntityChest
 import net.minecraft.entity.player.EntityPlayerMP
-import boatcraft.core.utilities.NBTHelper
+import boatcraft.core.utilities.Helper
 
 object Chest extends Block {
 	override def getBlock = Blocks.chest
@@ -31,10 +31,10 @@ object Chest extends Block {
     }
 
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper writeChestToNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
+		Helper.NBT writeChestToNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
 
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper readChestFromNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
+		Helper.NBT readChestFromNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
 
 	private class Inventory(boat: EntityCustomBoat) extends TileEntityChest {
 		worldObj = boat.worldObj

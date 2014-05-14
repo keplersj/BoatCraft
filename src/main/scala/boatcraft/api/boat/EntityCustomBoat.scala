@@ -23,6 +23,7 @@ import net.minecraft.util.DamageSource
 import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.World
+import boatcraft.core.utilities.Helper
 
 /**
  * The main Boat entity class
@@ -40,8 +41,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 
 	def this(world: World) = this(world, 0, 0, 0)
 
-	override protected def entityInit() {
-		super.entityInit()
+	override protected def entityInit {
+		super.entityInit
 
 		dataWatcher addObject(MATERIAL, "")
 		dataWatcher addObject(BLOCK, "")
@@ -84,7 +85,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 					riddenByEntity mountEntity this
 				if (!flag)
 				{
-					if (source isFireDamage) entityDropItem(getBlock.getContent, 0)
+					if (source.isFireDamage && getBlock.getContent != null)
+						entityDropItem(getBlock.getContent, 0)
 					else func_145778_a(Items.boat, 1, 0)
 				}
 				
@@ -112,11 +114,11 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		//		else if (vY < 0) fix = 360
 		//		val jaw = Math.atan(vY / vX) + fix
 		//		setPositionAndRotation2(aX, aY, aZ, jaw toFloat, rotationPitch, 3)
-
+		
 		getMaterial update this
 		getBlock update this
 		
-		if (isWet) extinguish
+		if (isWet || isImmuneToFire) extinguish
 
 		ObfuscationReflectionHelper setPrivateValue(classOf[EntityBoat], this,
 			getSpeedMultiplier * ObfuscationReflectionHelper.getPrivateValue(
@@ -125,7 +127,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 			"speedMultiplier", "field_70276_b")
 	}
 
-	private def doUpdate() {
+	private def doUpdate {
 		val isBoatEmpty: Boolean = ObfuscationReflectionHelper getPrivateValue(
 			classOf[EntityBoat], this,
 			"isBoatEmpty", "field_70279_a")
@@ -171,8 +173,12 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 				0.125D
 			val axisalignedbb = AxisAlignedBB.getAABBPool.getAABB(boundingBox.minX, d1, boundingBox.minZ,
 				boundingBox.maxX, d3, boundingBox.maxZ)
-			if (worldObj.isAABBInMaterial(axisalignedbb, Material.water))
+			if (Helper.AABB.isAABBInFluid(worldObj, axisalignedbb))
+			{
 				d0 += 1.0 / b0.toDouble
+				if (isImmuneToFire && !isBoatEmpty && worldObj.isAABBInMaterial(axisalignedbb, Material.lava))
+					riddenByEntity.extinguish
+			}
 		}
 		val d10 = Math.sqrt(motionX * motionX + motionZ * motionZ)
 		var d2 = 0.0
@@ -412,19 +418,21 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	 */
 	override def getPickedResult(target: MovingObjectPosition) =
 		getCustomBoat(getMaterialName, getBlockName)
-
+	
 	/**
 	 * A setter for the boat's material
 	 * @param material the new material
 	 */
-	def setMaterial(material: String) =
+	def setMaterial(material: String) {
 		dataWatcher updateObject(MATERIAL, material)
-
+		isImmuneToFire = Registry.findOfType[modifiers.Material](material) isImmuneToFire
+	}
+	
 	/**
 	 * A setter for the boat's modifier
 	 * @param block the new modifier
 	 */
-	def setBlock(block: String) = {
+	def setBlock(block: String) {
 		dataWatcher updateObject(BLOCK, block)
 		//Reset it so it gets updated when getBlockData is called again
 		blockData = null
@@ -435,7 +443,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 
 	def setName(name: String) =
 		dataWatcher updateObject(NAME, name)
-
+	
 	def hasName = !(dataWatcher getWatchableObjectString NAME).isEmpty
 
 	/**
@@ -449,9 +457,10 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	 * @return the boat's block
 	 */
 	def getBlock = Registry.findOfType[modifiers.Block](getBlockName)
-	
-	def getMount(pos: Mountable.Position
-			) = Registry.findOfType[Mountable](getMountName(pos))
+    
+    def getMount(pos: Mountable.Position) = Registry.findOfType[Mountable](getMountName(pos))
+    
+    def hasMount(pos: Mountable.Position) = Registry.isRegisteredMountable(getMountName(pos))
 
 	/**
 	 * A getter for the name of the boat's material
