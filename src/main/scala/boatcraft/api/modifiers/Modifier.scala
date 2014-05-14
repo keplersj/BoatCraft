@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.nbt.NBTTagCompound
 
 abstract class Modifier {
-    
+	
 	/**
 		* The human-readable name of this Boat.
 		* The `@link Modifier#toString` will make it computer-readable

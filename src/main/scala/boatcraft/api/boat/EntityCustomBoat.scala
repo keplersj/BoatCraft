@@ -457,10 +457,10 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	 * @return the boat's block
 	 */
 	def getBlock = Registry.findOfType[modifiers.Block](getBlockName)
-    
-    def getMount(pos: Mountable.Position) = Registry.findOfType[Mountable](getMountName(pos))
-    
-    def hasMount(pos: Mountable.Position) = Registry.isRegisteredMountable(getMountName(pos))
+	
+	def getMount(pos: Mountable.Position) = Registry.findOfType[Mountable](getMountName(pos))
+	
+	def hasMount(pos: Mountable.Position) = Registry.isRegisteredMountable(getMountName(pos))
 
 	/**
 	 * A getter for the name of the boat's material

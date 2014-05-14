@@ -95,12 +95,12 @@ object Registry {
 		{
 			case ex: ClassCastException => return null.asInstanceOf[T]
 		}
-    
-    def isRegisteredMaterial(name: String) = materials containsKey name
-    
-    def isRegisteredBlock(name: String) = blocks containsKey name
-    
-    def isRegisteredMountable(name: String) = mountables containsKey name
+	
+	def isRegisteredMaterial(name: String) = materials containsKey name
+	
+	def isRegisteredBlock(name: String) = blocks containsKey name
+	
+	def isRegisteredMountable(name: String) = mountables containsKey name
 
 	/**
 	 * Returns a registered Material associated with a certain ItemStack.

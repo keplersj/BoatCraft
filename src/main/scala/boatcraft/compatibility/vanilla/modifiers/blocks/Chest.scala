@@ -28,7 +28,7 @@ object Chest extends Block {
 			player displayGUIChest boat.getBlockData.asInstanceOf[Inventory]
 		
 		true
-    }
+	}
 
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 		Helper.NBT writeChestToNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
