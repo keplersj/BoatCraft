@@ -38,7 +38,8 @@ def getVersionName()
         standardOutput = stdout
         ignoreExitValue = true
     }
-    return stdout.toString().trim()
+    def parts = stdout.toString().trim().split('-')
+    return parts[0] + "-" + parts[1]
 }
 
 def getBranch()
