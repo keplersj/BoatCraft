@@ -258,7 +258,7 @@ task HeisenBugDev(dependsOn: assemble) { task ->
       property 'deobf', deobfJar.archiveName
       property 'source', sourceJar.archiveName
       property 'scaladoc', docs.archiveName
-      property 'project_name', "Don't skip"
+      property 'project_name', project.archivesBaseName
     }
     task.outputs.file(jsonFile)
     
@@ -282,9 +282,8 @@ task HeisenBugDev(dependsOn: assemble) { task ->
                     ['name' : 'source', 'file' : sourceJar.archiveName, 'file_data': sourceJar.getArchivePath().getBytes().encodeBase64().toString() ],
                     ['name' : 'scaladoc', 'file' : docs.archiveName, 'file_data': docs.getArchivePath().getBytes().encodeBase64().toString() ]
                 ]
-            ]
-            println headers
-            
+            ]       
+        
             response.'201' = {
                 println 'All is good.'
             }
@@ -296,8 +295,6 @@ task HeisenBugDev(dependsOn: assemble) { task ->
             response.'400' = {
                 println 'This is fucking rediculous.'
             }
-            
-            println response
         }
     }
 }
