@@ -23,7 +23,7 @@ object Registry {
 
 	/** The Map containing all of the registered Modifiers for BoatCraft:Core to create boats with. */
 	var mountables: Map[String, Mountable] = new HashMap[String, Mountable]
-
+	
 	/**
 	 * Adds materials or modifiers to the Map used by BoatCraft:Core for boat creation.
 	 *

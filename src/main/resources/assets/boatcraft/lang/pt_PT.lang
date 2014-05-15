@@ -2,6 +2,13 @@ core.module.linkingword=com
 
 core.forms.dinghy.name=Bote
 
+#_mat_ -> the localized material name
+#_form_ -> the localized form name
+#_link_ -> the localized linking word
+#_mod_ -> the localized modifier name
+core.forms.dinghy.format=_form_ _mat_ _link_ _mod_
+core.forms.dinghy.empty.format=_form_ _mat_
+
 vanilla.materials.wood.oredict.name=Madeira
 
 vanilla.materials.wood.oak.name=Madeira de Carvalho
