@@ -2,6 +2,13 @@ core.module.linkingword=含
 
 core.forms.dinghy.name=小船
 
+#_mat_ -> the localized material name
+#_form_ -> the localized form name
+#_link_ -> the localized linking word
+#_block_ -> the localized block name
+core.forms.dinghy.format=_mat_ _form_ _link_ _block_
+core.forms.dinghy.empty.format=_mat_ _form_
+
 vanilla.materials.wood.oredict.name=木
 
 vanilla.materials.wood.oak.name=橡木

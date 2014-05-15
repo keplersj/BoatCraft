@@ -9,16 +9,16 @@ abstract class Material extends Modifier {
 	 *
 	 * @return base texture of the Material
 	 */
-	def getTexture: ResourceLocation = null
-
+	@inline def getTexture: ResourceLocation = null
+	
 	/**
 	 * The item used in the crafting recipe.
 	 * Also the primary drop when the boat crashes
 	 *
 	 * @return the ItemStack representing the Material
 	 */
-	def getItem: ItemStack = null
-
+	@inline def getItem: ItemStack = null
+	
 	/**
 	 * The secondary drop when the boat crashes
 	 * For Wood-based boats, this is the associated wood's sticks.
@@ -28,6 +28,7 @@ abstract class Material extends Modifier {
 	 *
 	 * @return the secondary drop of the boat
 	 */
-	def getStick: ItemStack = null
-
+	@inline def getStick: ItemStack = null
+	
+	@inline def isImmuneToFire = false
 }

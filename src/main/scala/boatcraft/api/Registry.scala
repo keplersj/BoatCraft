@@ -23,7 +23,7 @@ object Registry {
 
 	/** The Map containing all of the registered Modifiers for BoatCraft:Core to create boats with. */
 	var mountables: Map[String, Mountable] = new HashMap[String, Mountable]
-
+	
 	/**
 	 * Adds materials or modifiers to the Map used by BoatCraft:Core for boat creation.
 	 *
@@ -87,14 +87,20 @@ object Registry {
 	}
 	
 	def findOfType[T <: Modifier](name: String): T =
-			try
-			{
-				return find(name).asInstanceOf[T]
-			}
-			catch
-			{
-				case ex: ClassCastException => return null.asInstanceOf[T]
-			}
+		try
+		{
+			return find(name).asInstanceOf[T]
+		}
+		catch
+		{
+			case ex: ClassCastException => return null.asInstanceOf[T]
+		}
+	
+	def isRegisteredMaterial(name: String) = materials containsKey name
+	
+	def isRegisteredBlock(name: String) = blocks containsKey name
+	
+	def isRegisteredMountable(name: String) = mountables containsKey name
 
 	/**
 	 * Returns a registered Material associated with a certain ItemStack.

@@ -1,14 +1,13 @@
 package boatcraft.compatibility.ironchest.modifiers.blocks
 
 import boatcraft.api.boat.EntityCustomBoat
-import boatcraft.core.utilities.NBTHelper
-import cpw.mods.ironchest.{IronChest, IronChestType, ItemChestChanger, TileEntityIronChest}
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.entity.player.EntityPlayerMP
 import boatcraft.api.modifiers.Block
 import boatcraft.compatibility.IronChests
+import boatcraft.core.utilities.Helper
+import cpw.mods.ironchest.{IronChest, IronChestType, ItemChestChanger, TileEntityIronChest}
+import net.minecraft.entity.player.{EntityPlayer, EntityPlayerMP}
+import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NBTTagCompound
 
 abstract class GenericIronChest(chestType: IronChestType) extends Block {
 	import GenericIronChest.Inventory
@@ -27,10 +26,10 @@ abstract class GenericIronChest(chestType: IronChestType) extends Block {
 		new Inventory(boat, chestType)
 
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper writeChestToNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
+		Helper.NBT writeChestToNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
 
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		NBTHelper readChestFromNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
+		Helper.NBT readChestFromNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
 
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) = {
 		val stack = player.getCurrentEquippedItem

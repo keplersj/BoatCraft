@@ -1,14 +1,11 @@
 package boatcraft.api.boat
 
 import java.util
-
 import scala.collection.JavaConversions.mapAsScalaMap
-
 import boatcraft.api.Registry
 import boatcraft.core.modifiers.blocks.Empty
 import cpw.mods.fml.relauncher.SideOnly
 import cpw.mods.fml.relauncher.Side
-import net.minecraft.client.resources.I18n
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
@@ -22,12 +19,15 @@ import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.util.Vec3
 import net.minecraft.world.World
+import net.minecraft.util.StatCollector
 
 /**
  * The Item Class used for all items that can be deployed like a Boat.
  * Extends ItemBoat from Vanilla Minecraft.
  */
 class ItemCustomBoat extends ItemBoat {
+	import ItemCustomBoat._
+	
 	hasSubtypes = true
 
 	@SideOnly(Side.CLIENT)
@@ -42,45 +42,55 @@ class ItemCustomBoat extends ItemBoat {
 			}
 		}
 	}
-
+	
 	override def getUnlocalizedName(stack: ItemStack) =
 		"boat." +
 			Registry.getMaterial(stack) +
 			"." +
 			Registry.getBlock(stack)
-
+	
 	override def getItemStackDisplayName(stack: ItemStack): String = stack match {
-		case x if Registry.getBlock(stack).==(Empty) =>
-			I18n.format(Registry.getMaterial(stack).getLocalizedName, Array()) + " " + I18n.format("core.forms.dinghy.name", Array())
-		case x if Registry.getBlock(stack).!=(null) =>
-		I18n.format(Registry.getMaterial(stack).getLocalizedName, Array()) + " " + I18n.format("core.forms.dinghy.name", Array()) +	" " + I18n.format("core.module.linkingword", Array()) + " " + I18n.format(Registry.getBlock(stack).getLocalizedName, Array())
+		case x if Registry.getBlock(stack) == Empty =>
+			//StatCollector.translateToLocal(Registry.getMaterial(stack).getLocalizedName) + " " + StatCollector.translateToLocal("core.forms.dinghy.name")
+			StatCollector.translateToLocalFormatted(
+					transform(StatCollector.translateToLocal("core.forms.dinghy.empty.format")),
+					StatCollector.translateToLocal(Registry.getMaterial(stack).getLocalizedName),
+					StatCollector.translateToLocal("core.forms.dinghy.name"))
+		case x if Registry.getBlock(stack) != null =>
+			//StatCollector.translateToLocal(Registry.getMaterial(stack).getLocalizedName) + " " + StatCollector.translateToLocal("core.forms.dinghy.name") +	" " + StatCollector.translateToLocal("core.module.linkingword") + " " + StatCollector.translateToLocal(Registry.getBlock(stack).getLocalizedName)
+			StatCollector.translateToLocalFormatted(
+					transform(StatCollector.translateToLocal("core.forms.dinghy.format")),
+					StatCollector.translateToLocal(Registry.getMaterial(stack).getLocalizedName),
+					StatCollector.translateToLocal("core.forms.dinghy.name"),
+					StatCollector.translateToLocal("core.module.linkingword"),
+					StatCollector.translateToLocal(Registry.getBlock(stack).getLocalizedName))
 		case _ =>
-		I18n.format("core.forms.dinghy.name", Array())
+			StatCollector.translateToLocal("core.forms.dinghy.name")
 	}
-
+	
 	override def onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack = {
-		val f: Float = 1.0F
-		val f1: Float = player.prevRotationPitch +
+		val f = 1.0F
+		val f1 = player.prevRotationPitch +
 			(player.rotationPitch - player.prevRotationPitch) * f
-		val f2: Float = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f
-		val d0: Double = player.prevPosX + (player.posX - player.prevPosX) * f.asInstanceOf[Double]
-		val d1: Double = player.prevPosY + (player.posY - player.prevPosY) * f + 1.62D - player.yOffset
-		val d2: Double = player.prevPosZ + (player.posZ - player.prevPosZ) * f.asInstanceOf[Double]
-		val vec3: Vec3 = world.getWorldVec3Pool.getVecFromPool(d0, d1, d2)
-		val f3: Float = MathHelper.cos(-f2 * 0.017453292F - Math.PI.asInstanceOf[Float])
-		val f4: Float = MathHelper.sin(-f2 * 0.017453292F - Math.PI.asInstanceOf[Float])
-		val f5: Float = -MathHelper.cos(-f1 * 0.017453292F)
-		val f6: Float = MathHelper.sin(-f1 * 0.017453292F)
-		val f7: Float = f4 * f5
-		val f8: Float = f3 * f5
-		val d3: Double = 5.0D
+		val f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f
+		val d0 = player.prevPosX + (player.posX - player.prevPosX) * f.asInstanceOf[Double]
+		val d1 = player.prevPosY + (player.posY - player.prevPosY) * f + 1.62D - player.yOffset
+		val d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * f.asInstanceOf[Double]
+		val vec3 = world.getWorldVec3Pool.getVecFromPool(d0, d1, d2)
+		val f3 = MathHelper.cos(-f2 * 0.017453292F - Math.PI.asInstanceOf[Float])
+		val f4 = MathHelper.sin(-f2 * 0.017453292F - Math.PI.asInstanceOf[Float])
+		val f5 = -MathHelper.cos(-f1 * 0.017453292F)
+		val f6 = MathHelper.sin(-f1 * 0.017453292F)
+		val f7 = f4 * f5
+		val f8 = f3 * f5
+		val d3 = 5.0
 		val vec31: Vec3 = vec3.addVector(f7.toDouble * d3,
-			f6.toDouble * d3,
-			f8.toDouble * d3)
+			f6 * d3,
+			f8 * d3)
 		val movingobjectposition: MovingObjectPosition =
 			world rayTraceBlocks(vec3, vec31, true)
 		if (movingobjectposition == null)
-			stack
+			return stack
 		else {
 			val vec32: Vec3 = player getLook f
 			var flag: Boolean = false
@@ -102,7 +112,7 @@ class ItemCustomBoat extends ItemBoat {
 				}
 			}
 
-			if (flag) stack
+			if (flag) return stack
 			else {
 				if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
 					i = movingobjectposition.blockX
@@ -133,10 +143,20 @@ class ItemCustomBoat extends ItemBoat {
 					if (!player.capabilities.isCreativeMode)
 						stack.stackSize = stack.stackSize - 1
 				}
-				stack
+				return stack
 			}
 		}
 	}
 }
 
-object ItemCustomBoat extends ItemCustomBoat {}
+object ItemCustomBoat extends ItemCustomBoat
+{
+	private def transform(str: String): String = {
+		val res = str.replace("_mat_", "%1$s")
+					.replace("_form_", "%2$s")
+					.replace("_link_", "%3$s")
+					.replace("_block_", "%4$s")
+		println(str + ": " + res)
+		return res
+	}
+}

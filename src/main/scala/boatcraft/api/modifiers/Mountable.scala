@@ -5,9 +5,9 @@ import net.minecraft.client.model.ModelBase
 abstract class Mountable extends Modifier {
 	import Mountable._
 	
-	def canMountOn(pos: Position): Boolean
+	@inline def canMountOn(pos: Position): Boolean
 	
-	def getModel: ModelBase
+	@inline def getModel: ModelBase
 }
 
 object Mountable {

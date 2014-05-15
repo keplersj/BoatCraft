@@ -9,9 +9,9 @@ import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.world.World
 import boatcraft.compatibility.Vanilla
 import net.minecraft.client.gui.inventory.GuiCrafting
-import net.minecraft.client.resources.I18n
 import boatcraft.api.boat.EntityCustomBoat
 import net.minecraft.entity.player.EntityPlayerMP
+import net.minecraft.util.StatCollector
 
 object Workbench extends Block {
 	override def getBlock = Blocks.crafting_table
@@ -42,8 +42,8 @@ object Workbench extends Block {
 		inventorySlots = new Container(inventoryPlayer, world, x, y, z)
 
 		override protected def drawGuiContainerForegroundLayer(arg1: Int, arg2: Int) {
-			fontRendererObj.drawString(I18n.format("vanilla.blocks.workbench.gui.title", Array()), 28, 6, 4210752)
-			fontRendererObj.drawString(I18n.format("container.inventory", Array()), 8, ySize - 96 + 2, 4210752)
+			fontRendererObj.drawString(StatCollector.translateToLocal("vanilla.blocks.workbench.gui.title"), 28, 6, 4210752)
+			fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752)
 		}
 	}
 

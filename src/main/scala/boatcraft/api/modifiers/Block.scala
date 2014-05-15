@@ -10,7 +10,7 @@ abstract class Block extends Modifier {
 	 *
 	 * @return boolean representing if a Boat is mountable
 	 */
-	def isRideable = false
+	@inline def isRideable = false
 
 	/**
 	 * The Block to be rendered in a Boat
@@ -18,7 +18,7 @@ abstract class Block extends Modifier {
 	 * @note NOT what's used to craft it!
 	 * @return block used for rendering
 	 */
-	def getBlock: net.minecraft.block.Block = null
+	@inline def getBlock: net.minecraft.block.Block = null
 
 	/**
 	 * The metadata of the Block to be rendered in a Boat
@@ -26,7 +26,7 @@ abstract class Block extends Modifier {
 	 * @note NOT what's used to craft it!
 	 * @return the metadata of the block being rendering in the boat
 	 */
-	def getMeta = 0
+	@inline def getMeta = 0
 
 	/**
 	 * Should return a new instance of the inventory contained in this Modifier
@@ -34,7 +34,7 @@ abstract class Block extends Modifier {
 	 * @param boat the boat container object
 	 * @return the inventory associated with the boat container
 	 */
-	def getBlockData(boat: EntityCustomBoat): AnyRef = Nil
+	@inline def getBlockData(boat: EntityCustomBoat): AnyRef = Nil
 
 	/**
 	 * The item used to craft a boat with this Block
@@ -42,5 +42,5 @@ abstract class Block extends Modifier {
 	 *
 	 * @return the ItemStack used when crafting
 	 */
-	def getContent: ItemStack = null
+	@inline def getContent: ItemStack = null
 }

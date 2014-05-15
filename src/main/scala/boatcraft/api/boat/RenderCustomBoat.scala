@@ -105,9 +105,10 @@ class RenderCustomBoat
 			func_147906_a(boat, boat.getName, d0, d1, d2, 64)
 		}
 		
-		boat.getMount(Mountable.Position.CENTER).getModel render(boat, 0, 0, -0.1F, 0, 0F, 0.0625F)
+		for (pos <- Mountable.Position.values if boat hasMount pos)
+			boat.getMount(pos).getModel render(boat, 0, 0, -0.1F, 0, 0F, 0.0625F)
 
-		GL11 glPopMatrix()
+		GL11 glPopMatrix
 	}
 
 	override def getEntityTexture(entity: Entity) =
