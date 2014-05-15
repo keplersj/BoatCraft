@@ -155,7 +155,7 @@ object ItemCustomBoat extends ItemCustomBoat
 		val res = str.replace("_mat_", "%1$s")
 					.replace("_form_", "%2$s")
 					.replace("_link_", "%3$s")
-					.replace("_mod_", "%4$s")
+					.replace("_block_", "%4$s")
 		println(str + ": " + res)
 		return res
 	}
