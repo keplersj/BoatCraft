@@ -15,10 +15,6 @@ task HeisenBugDev(dependsOn: assemble) { task ->
     task.mustRunAfter deobfJar
     task.mustRunAfter docs
 
-    def gitBranch = getBranch()
-    def gitSHA = getSHA()
-    def version = getVersionName()
-
     /*
     // specify inputs and outputs so gradle can see if its upToDate
     task.inputs.with {
@@ -45,7 +41,7 @@ task HeisenBugDev(dependsOn: assemble) { task ->
                 'project_name': project.archivesBaseName,
                 'build_number': System.getenv().BUILD_NUMBER,
                 'minecraft_version': project.minecraft.version,
-                'mod_version': version,
+                'mod_version': gitVersion,
                 'branch': gitBranch,
                 'commit': gitSHA,
                 'artifacts': [

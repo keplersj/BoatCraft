@@ -1,5 +1,7 @@
-// add some stuff to the versio
-ext.rawVersion = getVersionName()
+// add some stuff to the version
+ext.gitVersion = getVersionName()
+ext.gitBranch = getBranch()
+ext.gitSHA = getSHA()
 
 /*
  * Gets the version name from the latest Git tag
