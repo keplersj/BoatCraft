@@ -1,0 +1,74 @@
+// Configure an upload task. this is setup for uploading to files.minecraftforge.net. There are other examples around
+uploadArchives {
+    doLast {
+        repositories {
+            if (project.hasProperty("filesmaven")) {
+                logger.info('Publishing to files server')
+
+                mavenDeployer {
+                    configuration = configurations.deployJars
+
+                    repository(url: project.filesmaven.url) {
+                        authentication(userName: project.filesmaven.username, privateKey: project.filesmaven.key)
+                    }
+
+                    // This is just the pom data for the maven repo
+                    pom {
+                        groupId = project.group
+                        // Force the maven upload to use the <mcversion>-<version> syntax preferred at files
+                        version = "${project.minecraft.version}-${project.version}"
+                        artifactId = project.archivesBaseName
+                        project {
+                            name project.archivesBaseName
+                            packaging 'jar'
+                            description 'Rails had their turn, now out to the Minecraftian seas.'
+                            url 'https://github.com/Open-Code-Developers/BoatCraft.git'
+
+                            scm {
+                                url 'https://github.com/Open-Code-Developers/BoatCraft'
+                                connection 'scm:git:git://github.com/Open-Code-Developers/BoatCraft.git'
+                                developerConnection 'scm:git:git@github.com:Open-Code-Developers/BoatCraft.git'
+                            }
+
+                            issueManagement {
+                                system 'github'
+                                url 'https://github.com/Open-Code-Developers/BoatCraft/issues'
+                            }
+
+                            licenses {
+                                license {
+                                    name 'The MIT License (MIT)'
+                                    url 'https://raw.github.com/Open-Code-Developers/BoatCraft/master/LICENSE'
+                                    distribution 'repo'
+                                }
+                            }
+
+                            developers {
+                                developer {
+                                    id 'k2b6s9j'
+                                    name 'Kepler Sticka-Jones'
+                                    roles {
+                                        role 'developer'
+                                        role 'creator'
+                                    }
+                                }
+                                developer {
+                                    id 'viliml'
+                                    name 'Vilim Lendvaj'
+                                    roles { role 'developer' }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                logger.info('Publishing to repo folder')
+
+                mavenDeployer {
+                    pom.version = "${project.minecraft.version}-${project.version}"
+                    repository(url: 'file://localhost/' + project.file('repo').getAbsolutePath())
+                }
+            }
+        }
+    }
+}

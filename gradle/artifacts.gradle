@@ -1,0 +1,80 @@
+apply from: 'gradle/git.gradle'
+
+// this sets our output jar to have a 'tag' of 'universal' on it
+// It also adds the minecraft version in a custom version name
+// The result is files named <projectname>-<mcversion>-<version>-universal.jar
+jar {
+    classifier = 'universal'
+}
+
+// Add in a source jar for people, should they desire to download such a thing
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'src'
+}
+
+// Add in an mcp named jar, for those who wish to run in a development environment (assuming mcp naming matches)
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+// Add in a jar containing the ScalaDocs.
+task docs(type: Jar) {
+    from scaladoc.destinationDir
+    classifier = 'docs'
+}
+
+def jsonFile = new File(jar.destinationDir, "manifest.json")
+task generateJson() { task ->
+    task.mustRunAfter jar
+    task.mustRunAfter sourceJar
+    task.mustRunAfter deobfJar
+    task.mustRunAfter docs
+
+  def gitBranch = getBranch()
+  def gitSHA = getSHA()
+  def version = getVersionName()
+
+  // specify inputs and outputs so gradle can see if its upToDate
+  task.inputs.with {
+    property 'version', project.version // accounts for MCVersion, and all the other components
+    property 'branch', gitBranch
+    property 'commit', gitSHA
+    property 'obf', jar.archiveName
+    property 'deobf', deobfJar.archiveName
+    property 'source', sourceJar.archiveName
+    property 'scaladoc', docs.archiveName
+    property 'project_name', project.archivesBaseName
+  }
+  task.outputs.file(jsonFile)
+
+  // actual work here
+  task.doLast {
+    def builder = new groovy.json.JsonBuilder()
+    def root = builder {
+      'project_name' project.archivesBaseName
+      'build_number' System.getenv().BUILD_NUMBER
+      'minecraft_version' project.minecraft.version
+      'mod_version' version
+      'branch' gitBranch
+      'commit' gitSHA
+      'artifacts'([
+        ['name' : 'universal', 'file' : jar.archiveName, 'file_data': jar.getArchivePath().getBytes().encodeBase64().toString()],
+        ['name' : 'deobf', 'file' : deobfJar.archiveName, 'file_data': deobfJar.getArchivePath().getBytes().encodeBase64().toString() ],
+        ['name' : 'source', 'file' : sourceJar.archiveName, 'file_data': sourceJar.getArchivePath().getBytes().encodeBase64().toString() ],
+        ['name' : 'scaladoc', 'file' : docs.archiveName, 'file_data': docs.getArchivePath().getBytes().encodeBase64().toString() ]
+      ])
+    }
+
+    jsonFile.write groovy.json.JsonOutput.prettyPrint(builder.toString())
+  }
+}
+
+// Tell the artifact system about our extra jars
+artifacts {
+  archives jar
+  archives sourceJar
+  archives deobfJar
+  archives docs
+}
