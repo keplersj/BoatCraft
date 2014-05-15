@@ -1,0 +1,42 @@
+// add some stuff to the version
+ext.gitVersion = getVersionName()
+ext.gitBranch = getBranch()
+ext.gitSHA = getSHA()
+
+/*
+ * Gets the version name from the latest Git tag
+ */
+def getVersionName()
+{
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--tags', '--abbrev=1'
+        standardOutput = stdout
+        ignoreExitValue = true
+    }
+    def parts = stdout.toString().trim().split('-')
+    return parts[0] + "-" + parts[1]
+}
+
+def getBranch()
+{
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--abbrev-ref', 'HEAD'
+        standardOutput = stdout
+        ignoreExitValue = true
+    }
+    return stdout.toString().trim()
+}
+
+
+def getSHA()
+{
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', 'HEAD'
+        standardOutput = stdout
+        ignoreExitValue = true
+    }
+    return stdout.toString().trim()
+}

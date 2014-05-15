@@ -19,59 +19,24 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-        classpath "org.codehaus.groovy.modules.http-builder:http-builder:0.7.1"
     }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
 }
 
 group = 'open-code-developers' //If you are not Open Code Developers, but are maintaining this project, please change this to your name.
 
 archivesBaseName = 'BoatCraft'
 
-/*
- * Gets the version name from the latest Git tag
- */
-def getVersionName()
-{
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'describe', '--tags', '--abbrev=1'
-        standardOutput = stdout
-        ignoreExitValue = true
-    }
-    def parts = stdout.toString().trim().split('-')
-    return parts[0] + "-" + parts[1]
-}
-
-def getBranch()
-{
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'rev-parse', '--abbrev-ref', 'HEAD'
-        standardOutput = stdout
-        ignoreExitValue = true
-    }
-    return stdout.toString().trim()
-}
-
-
-def getSHA()
-{
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'rev-parse', 'HEAD'
-        standardOutput = stdout
-        ignoreExitValue = true
-    }
-    return stdout.toString().trim()
-}
-
 minecraft {
 	version = '1.7.2-10.12.1.1060'
 }
 
-// add some stuff to the versio
-ext.rawVersion = getVersionName()
-version = "${project.minecraft.version}-$rawVersion"
+apply from: 'gradle/git.gradle'
+
+version = "${project.minecraft.version}-$gitVersion"
 logger.lifecycle "version = $version"
 
 repositories {
@@ -86,216 +51,7 @@ dependencies {
     compile 'IC2:industrialcraft-2:472:dev'
 }
 
-// this sets our output jar to have a 'tag' of 'universal' on it
-// It also adds the minecraft version in a custom version name
-// The result is files named <projectname>-<mcversion>-<version>-universal.jar
-jar {
-    classifier = 'universal'
-}
+apply from: 'gradle/artifacts.gradle'
 
-// Add in a source jar for people, should they desire to download such a thing
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-    classifier = 'src'
-}
-
-// Add in an mcp named jar, for those who wish to run in a development environment (assuming mcp naming matches)
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'deobf'
-}
-
-// Add in a jar containing the ScalaDocs.
-task docs(type: Jar) {
-    from scaladoc.destinationDir
-    classifier = 'docs'
-}
-
-// Configure an upload task. this is setup for uploading to files.minecraftforge.net. There are other examples around
-uploadArchives {
-    doLast {
-        repositories {
-            if (project.hasProperty("filesmaven")) {
-                logger.info('Publishing to files server')
-
-                mavenDeployer {
-                    configuration = configurations.deployJars
-
-                    repository(url: project.filesmaven.url) {
-                        authentication(userName: project.filesmaven.username, privateKey: project.filesmaven.key)
-                    }
-
-                    // This is just the pom data for the maven repo
-                    pom {
-                        groupId = project.group
-                        // Force the maven upload to use the <mcversion>-<version> syntax preferred at files
-                        version = "${project.minecraft.version}-${project.version}"
-                        artifactId = project.archivesBaseName
-                        project {
-                            name project.archivesBaseName
-                            packaging 'jar'
-                            description 'Rails had their turn, now out to the Minecraftian seas.'
-                            url 'https://github.com/Open-Code-Developers/BoatCraft.git'
-
-                            scm {
-                                url 'https://github.com/Open-Code-Developers/BoatCraft'
-                                connection 'scm:git:git://github.com/Open-Code-Developers/BoatCraft.git'
-                                developerConnection 'scm:git:git@github.com:Open-Code-Developers/BoatCraft.git'
-                            }
-
-                            issueManagement {
-                                system 'github'
-                                url 'https://github.com/Open-Code-Developers/BoatCraft/issues'
-                            }
-
-                            licenses {
-                                license {
-                                    name 'The MIT License (MIT)'
-                                    url 'https://raw.github.com/Open-Code-Developers/BoatCraft/master/LICENSE'
-                                    distribution 'repo'
-                                }
-                            }
-
-                            developers {
-                                developer {
-                                    id 'k2b6s9j'
-                                    name 'Kepler Sticka-Jones'
-                                    roles {
-                                        role 'developer'
-                                        role 'creator'
-                                    }
-                                }
-                                developer {
-                                    id 'viliml'
-                                    name 'Vilim Lendvaj'
-                                    roles { role 'developer' }
-                                }
-                            }
-                        }
-                    }
-                }
-            } else {
-                logger.info('Publishing to repo folder')
-
-                mavenDeployer {
-                    pom.version = "${project.minecraft.version}-${project.version}"
-                    repository(url: 'file://localhost/' + project.file('repo').getAbsolutePath())
-                }
-            }
-        }
-    }
-}
-
-def jsonFile = new File(jar.destinationDir, "manifest.json")
-task generateJson() { task ->
-    task.mustRunAfter jar
-    task.mustRunAfter sourceJar
-    task.mustRunAfter deobfJar
-    task.mustRunAfter docs
-
-  def gitBranch = getBranch()
-  def gitSHA = getSHA()
-  def version = getVersionName()
-
-  // specify inputs and outputs so gradle can see if its upToDate
-  task.inputs.with {
-    property 'version', project.version // accounts for MCVersion, and all the other components
-    property 'branch', gitBranch
-    property 'commit', gitSHA
-    property 'obf', jar.archiveName
-    property 'deobf', deobfJar.archiveName
-    property 'source', sourceJar.archiveName
-    property 'scaladoc', docs.archiveName
-    property 'project_name', project.archivesBaseName
-  }
-  task.outputs.file(jsonFile)
-
-  // actual work here
-  task.doLast {
-    def builder = new groovy.json.JsonBuilder()
-    def root = builder {
-      'project_name' project.archivesBaseName
-      'build_number' System.getenv().BUILD_NUMBER
-      'minecraft_version' project.minecraft.version
-      'mod_version' version
-      'branch' gitBranch
-      'commit' gitSHA
-      'artifacts'([
-        ['name' : 'universal', 'file' : jar.archiveName, 'file_data': jar.getArchivePath().getBytes().encodeBase64().toString()],
-        ['name' : 'deobf', 'file' : deobfJar.archiveName, 'file_data': deobfJar.getArchivePath().getBytes().encodeBase64().toString() ],
-        ['name' : 'source', 'file' : sourceJar.archiveName, 'file_data': sourceJar.getArchivePath().getBytes().encodeBase64().toString() ],
-        ['name' : 'scaladoc', 'file' : docs.archiveName, 'file_data': docs.getArchivePath().getBytes().encodeBase64().toString() ]
-      ])
-    }
-
-    jsonFile.write groovy.json.JsonOutput.prettyPrint(builder.toString())
-  }
-}
-
-// Tell the artifact system about our extra jars
-artifacts {
-  archives jar
-  archives sourceJar
-  archives deobfJar
-  archives docs
-}
-
-task HeisenBugDev(dependsOn: assemble) { task ->
-    task.mustRunAfter jar
-    task.mustRunAfter sourceJar
-    task.mustRunAfter deobfJar
-    task.mustRunAfter docs
-    
-    def gitBranch = getBranch()
-    def gitSHA = getSHA()
-    def version = getVersionName()
-    
-    // specify inputs and outputs so gradle can see if its upToDate
-    task.inputs.with {
-      property 'version', project.version // accounts for MCVersion, and all the other components
-      property 'branch', gitBranch
-      property 'commit', gitSHA
-      property 'obf', jar.archiveName
-      property 'deobf', deobfJar.archiveName
-      property 'source', sourceJar.archiveName
-      property 'scaladoc', docs.archiveName
-      property 'project_name', project.archivesBaseName
-    }
-    task.outputs.file(jsonFile)
-    
-    task.doLast {
-        def http = new groovyx.net.http.HTTPBuilder( 'http://heisenbugdev.com' )
-        
-        http.request( groovyx.net.http.Method.POST, groovyx.net.http.ContentType.JSON ) { req ->
-            headers.'X-User-Email' = System.getenv().HBD_EMAIL_PROD
-            headers.'X-User-Token' = System.getenv().HBD_TOKEN_PROD
-            
-            body = [
-                'project_name': project.archivesBaseName,
-                'build_number': System.getenv().BUILD_NUMBER,
-                'minecraft_version': project.minecraft.version,
-                'mod_version': version,
-                'branch': gitBranch,
-                'commit': gitSHA,
-                'artifacts': [
-                    ['name' : 'universal', 'file' : jar.archiveName, 'file_data': jar.getArchivePath().getBytes().encodeBase64().toString()],
-                    ['name' : 'deobf', 'file' : deobfJar.archiveName, 'file_data': deobfJar.getArchivePath().getBytes().encodeBase64().toString() ],
-                    ['name' : 'source', 'file' : sourceJar.archiveName, 'file_data': sourceJar.getArchivePath().getBytes().encodeBase64().toString() ],
-                    ['name' : 'scaladoc', 'file' : docs.archiveName, 'file_data': docs.getArchivePath().getBytes().encodeBase64().toString() ]
-                ]
-            ]       
-        
-            response.'201' = {
-                println 'All is good.'
-            }
-            
-            response.'404' = {
-                println '404\'d!'
-            }
-            
-            response.'400' = {
-                println 'This is fucking rediculous.'
-            }
-        }
-    }
-}
+apply from: 'gradle/deployment/maven.gradle'
+apply from: 'gradle/deployment/HeisenBugDev.gradle'

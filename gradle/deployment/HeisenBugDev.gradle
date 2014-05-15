@@ -1,0 +1,68 @@
+apply from: 'gradle/git.gradle'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.codehaus.groovy.modules.http-builder:http-builder:0.7.1"
+    }
+}
+
+task HeisenBugDev(dependsOn: assemble) { task ->
+    task.mustRunAfter jar
+    task.mustRunAfter sourceJar
+    task.mustRunAfter deobfJar
+    task.mustRunAfter docs
+
+    /*
+    // specify inputs and outputs so gradle can see if its upToDate
+    task.inputs.with {
+      property 'version', project.version // accounts for MCVersion, and all the other components
+      property 'branch', gitBranch
+      property 'commit', gitSHA
+      property 'obf', jar.archiveName
+      property 'deobf', deobfJar.archiveName
+      property 'source', sourceJar.archiveName
+      property 'scaladoc', docs.archiveName
+      property 'project_name', project.archivesBaseName
+    }
+    task.outputs.file(jsonFile)
+    */
+
+    task.doLast {
+        def http = new groovyx.net.http.HTTPBuilder( 'http://heisenbugdev.com' )
+
+        http.request( groovyx.net.http.Method.POST, groovyx.net.http.ContentType.JSON ) { req ->
+            headers.'X-User-Email' = System.getenv().HBD_EMAIL_PROD
+            headers.'X-User-Token' = System.getenv().HBD_TOKEN_PROD
+
+            body = [
+                'project_name': project.archivesBaseName,
+                'build_number': System.getenv().BUILD_NUMBER,
+                'minecraft_version': project.minecraft.version,
+                'mod_version': gitVersion,
+                'branch': gitBranch,
+                'commit': gitSHA,
+                'artifacts': [
+                    ['name' : 'universal', 'file' : jar.archiveName, 'file_data': jar.getArchivePath().getBytes().encodeBase64().toString()],
+                    ['name' : 'deobf', 'file' : deobfJar.archiveName, 'file_data': deobfJar.getArchivePath().getBytes().encodeBase64().toString() ],
+                    ['name' : 'source', 'file' : sourceJar.archiveName, 'file_data': sourceJar.getArchivePath().getBytes().encodeBase64().toString() ],
+                    ['name' : 'scaladoc', 'file' : docs.archiveName, 'file_data': docs.getArchivePath().getBytes().encodeBase64().toString() ]
+                ]
+            ]
+
+            response.'201' = {
+                println 'All is good.'
+            }
+
+            response.'404' = {
+                println '404\'d!'
+            }
+
+            response.'400' = {
+                println 'This is fucking rediculous.'
+            }
+        }
+    }
+}
