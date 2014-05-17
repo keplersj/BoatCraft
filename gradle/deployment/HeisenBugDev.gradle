@@ -34,8 +34,8 @@ task HeisenBugDev(dependsOn: assemble) { task ->
         def http = new groovyx.net.http.HTTPBuilder( 'http://heisenbugdev.com' )
 
         http.request( groovyx.net.http.Method.POST, groovyx.net.http.ContentType.JSON ) { req ->
-            headers.'X-User-Email' = System.getenv().HBD_EMAIL_PROD
-            headers.'X-User-Token' = System.getenv().HBD_TOKEN_PROD
+            X-User-Email = System.getenv().HBD_EMAIL_PROD
+            X-User-Token = System.getenv().HBD_TOKEN_PROD
 
             body = [
                 'project_name': project.archivesBaseName,
