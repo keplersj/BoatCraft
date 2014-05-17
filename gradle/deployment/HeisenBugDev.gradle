@@ -33,11 +33,11 @@ task HeisenBugDev(dependsOn: assemble) { task ->
     task.doLast {
         def http = new groovyx.net.http.HTTPBuilder( 'http://heisenbugdev.com' )
 
-        http.request( groovyx.net.http.Method.POST, groovyx.net.http.ContentType.JSON ) { req ->
-            X-User-Email = System.getenv().HBD_EMAIL_PROD
-            X-User-Token = System.getenv().HBD_TOKEN_PROD
+        http.request( groovyx.net.http.Method.POST, groovyx.net.http.ContentType.JSON ) {
+            req.'X-User-Email' = System.getenv().HBD_EMAIL_PROD
+            req.'X-User-Token' = System.getenv().HBD_TOKEN_PROD
 
-            body = [
+            req.body = [
                 'project_name': project.archivesBaseName,
                 'build_number': System.getenv().BUILD_NUMBER,
                 'minecraft_version': project.minecraft.version,
