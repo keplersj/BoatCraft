@@ -10,60 +10,60 @@ import net.minecraft.item.ItemStack
 
 class TileItemLoader extends TileDockAddon with ISidedInventory {
 	
-	def getInventoryName = getClass.getSimpleName
+	override def getInventoryName = getClass.getSimpleName
 	
-	def getInventoryStackLimit =
+	override def getInventoryStackLimit =
 		chooseInventoryOrElse(
 				(inventory: IInventory) => inventory.getInventoryStackLimit,
 				0)
 	
-	def getSizeInventory =
+	override def getSizeInventory =
 		chooseInventoryOrElse(
 				(inventory: IInventory) => inventory.getSizeInventory,
 				0)
 	
-	def getStackInSlot(slot: Int): ItemStack =
+	override def getStackInSlot(slot: Int): ItemStack =
 		chooseInventoryOrElse(
 				(inventory: IInventory) => inventory.getStackInSlot(slot),
 				null)
 	
-	def getStackInSlotOnClosing(slot: Int): ItemStack =
+	override def getStackInSlotOnClosing(slot: Int): ItemStack =
 		chooseInventoryOrElse(
 				(inventory: IInventory) => inventory.getStackInSlotOnClosing(slot),
 				null)
 	
-	def hasCustomInventoryName = false
+	override def hasCustomInventoryName = false
 	
-	def isItemValidForSlot(slot: Int, stack: ItemStack) =
+	override def isItemValidForSlot(slot: Int, stack: ItemStack) =
 		chooseInventoryOrElse(
 				(inventory: IInventory) => inventory.isItemValidForSlot(slot, stack),
 				false)
 	
-	def isUseableByPlayer(player: EntityPlayer) = false
+	override def isUseableByPlayer(player: EntityPlayer) = false
 	
-	def openInventory = doIfInventory((inventory: IInventory) => inventory.openInventory)
+	override def openInventory = doIfInventory((inventory: IInventory) => inventory.openInventory)
 	
-	def closeInventory = doIfInventory((inventory: IInventory) => inventory.closeInventory)
+	override def closeInventory = doIfInventory((inventory: IInventory) => inventory.closeInventory)
 	
-	def setInventorySlotContents(slot: Int, stack: ItemStack) =
+	override def setInventorySlotContents(slot: Int, stack: ItemStack) =
 		doIfInventory((inventory: IInventory) => inventory.setInventorySlotContents(slot, stack))
 	
-	def decrStackSize(slot: Int, amount: Int): ItemStack =
+	override def decrStackSize(slot: Int, amount: Int): ItemStack =
 		chooseInventoryOrElse(
 				(inventory: IInventory) => inventory.decrStackSize(slot, amount),
 				null)
 	
-	def canExtractItem(slot: Int, stack: ItemStack, side: Int) = ???
+	override def canExtractItem(slot: Int, stack: ItemStack, side: Int) = ???
 	
 	//TODO Check
-	def canInsertItem(slot: Int, stack: ItemStack, side: Int) =
+	override def canInsertItem(slot: Int, stack: ItemStack, side: Int) =
 		chooseRegularOrSided(
 				(inventory: ISidedInventory) => inventory.canInsertItem(slot, stack, side),
 				(inventory: IInventory) => inventory.isItemValidForSlot(slot, stack),
 				false)
 	
 	//TODO Check
-	def getAccessibleSlotsFromSide(side: Int) =
+	override def getAccessibleSlotsFromSide(side: Int) =
 		chooseRegularOrSided(
 				(inventory: ISidedInventory) => inventory.getAccessibleSlotsFromSide(side),
 				(inventory: IInventory) => {

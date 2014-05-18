@@ -1,6 +1,7 @@
 package boatcraft.core.blocks.tileentites
 
 import net.minecraft.tileentity.TileEntity
+import net.minecraftforge.common.util.ForgeDirection
 
 class TileDockAddon extends TileEntity {
 	
@@ -15,7 +16,7 @@ class TileDockAddon extends TileEntity {
 			worldObj.getTileEntity(xCoord + x, yCoord + y, zCoord + z) match
 			{
 				case dock: TileDock =>
-					if (possible == null) possible = dock
+					if (possible == null && check(dock, x, y, z)) possible = dock
 					else if (possible != dock) return //Multiple possibilities, back out
 				case addon: TileDockAddon =>
 					if (possible == null && addon.parent != possible) possible = addon.parent
@@ -23,5 +24,11 @@ class TileDockAddon extends TileEntity {
 			}
 		}
 		parent = possible
+	}
+	
+	private def check(dock: TileDock, x: Int, y: Int, z: Int): Boolean =
+	{
+		val dir = ForgeDirection.getOrientation(dock.getBlockMetadata).getOpposite
+		return x != dir.offsetX && z != dir.offsetZ
 	}
 }

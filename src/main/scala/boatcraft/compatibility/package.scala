@@ -14,7 +14,7 @@ package object compatibility {
 		("Thaumcraft", Thaumcraft),
 		("IC2", IC2))
 
-	def registerModifiers() {
+	def registerModifiers {
 		for (module <- mods) {
 			if (module._1.isEmpty || Loader.isModLoaded(module._1))
 				module._2.registerModifiers()
