@@ -48,7 +48,7 @@ repositories {
 
 dependencies {
     compile 'cpw.mods:ironchest:1.7.2-6.0.4.713:deobf'
-    compile 'net.industrial-craft:industrialcraft-2:2.1.477-experimental:api'
+    compile 'net.industrial-craft:industrialcraft-2:2.1.477-experimental:dev'
 }
 
 apply from: 'gradle/artifacts.gradle'
