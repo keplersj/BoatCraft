@@ -20,5 +20,8 @@ deploy:
             name: Setup JVM args
             code: export JAVA_OPTS="-XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m"
         - script:
-            name: heisenbugdev deploy
+            name: gradle - assemble the deployable artifacts
+            code: ./gradlew -Sq --parallel --project-cache-dir=$WERCKER_CACHE_DIR assemble
+        - script:
+            name: heisenbugdev -  deploy the assembled artifacts
             code: ruby gradle/deployment/HeisenBugDev.rb
