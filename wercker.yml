@@ -6,9 +6,12 @@ build:
     - script:
         name: Setup JVM args
         code: export JAVA_OPTS="-XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m"
+    - script:
+        name: Setup terminal
+        code: export TERM=dumb
     # A step that executes `gradle build` command
     - script:
-        name: run gradle
+        name: Run gradle
         code: |
           ./gradlew -Sq --parallel --project-cache-dir=$WERCKER_CACHE_DIR assemble
     - script:
