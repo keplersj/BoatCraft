@@ -44,16 +44,11 @@ repositories {
         name = 'IndustrialCraft2 Jenkins'
         artifactPattern 'http://ic2api.player.to:8080/job/IC2_experimental/[revision]/artifact/build/libs/[module]-2.1.[revision]-experimental(-[classifier])(.[ext])'
     }
-    ivy {
-        name = 'ThaumCraft 4 API'
-        artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/[module]-1.7.2-[revision](-[classifier])(.[ext])'
-    }
 }
 
 dependencies {
     compile 'cpw.mods:ironchest:1.7.2-6.0.4.713:deobf'
     compile 'IC2:industrialcraft-2:472:dev'
-    compile 'TC4:Thaumcraft:4.1.1.13:api@zip'
 }
 
 apply from: 'gradle/artifacts.gradle'
