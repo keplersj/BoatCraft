@@ -40,15 +40,15 @@ version = "${project.minecraft.version}-$gitVersion"
 logger.lifecycle "version = $version"
 
 repositories {
-    ivy {
-        name = 'IndustrialCraft2 Jenkins'
-        artifactPattern 'http://ic2api.player.to:8080/job/IC2_experimental/[revision]/artifact/build/libs/[module]-2.1.[revision]-experimental(-[classifier])(.[ext])'
+    maven {
+        name = "ic2"
+        url = "http://maven.ic2.player.to/"
     }
 }
 
 dependencies {
     compile 'cpw.mods:ironchest:1.7.2-6.0.4.713:deobf'
-    compile 'IC2:industrialcraft-2:472:dev'
+    compile 'net.industrial-craft:industrialcraft-2:2.1.477-experimental:api'
 }
 
 apply from: 'gradle/artifacts.gradle'
