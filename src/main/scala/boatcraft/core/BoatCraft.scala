@@ -37,33 +37,37 @@ object BoatCraft {
 
 	@Mod.EventHandler
 	def preInit(event: FMLPreInitializationEvent) {
+		
 		log = event.getModLog
 		
 		config = new Configuration(event getSuggestedConfigurationFile)
+		
+		proxy registerBlocks
 		
 		channels = NetworkRegistry.INSTANCE newChannel("boatcraft", ChannelHandler)
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
 		MinecraftForge.EVENT_BUS register EventHandler
 		
-		printModInfo()
+		printModInfo
 		
 		compatibility preInit event
 		
 		Registry register Empty
 		
-		compatibility registerModifiers()
+		compatibility registerModifiers
 		
 		GameRegistry registerItem(ItemCustomBoat, "customBoat")
 	}
 
 	@Mod.EventHandler
 	def init(event: FMLInitializationEvent) {
-		proxy registerEntities()
+		
+		proxy registerEntities
 
-		proxy registerRenders()
+		proxy registerRenders
 
-		Recipes addBoatRecipes()
+		Recipes addBoatRecipes
 
 		compatibility init event
 	}
@@ -73,7 +77,7 @@ object BoatCraft {
 		compatibility postInit event
 	}
 
-	private def printModInfo() {
+	private def printModInfo {
 		log info "BoatCraft"
 		log info "Copyright Kepler Sticka-Jones 2013-2014"
 		log info "http://k2b6s9j.com/projects/minecraft/BoatCraft"

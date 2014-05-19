@@ -73,4 +73,5 @@ artifacts {
   archives sourceJar
   archives deobfJar
   archives docs
+  archives(jsonFile) { builtBy generateJson }
 }

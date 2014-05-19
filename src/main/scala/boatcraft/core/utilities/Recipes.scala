@@ -39,7 +39,7 @@ object Recipes {
 	/**
 	 * Adds recipes and NBT tag compounds for all registered boats.
 	 */
-	def addBoatRecipes() {
+	def addBoatRecipes {
 		val stack = new ItemStack(ItemCustomBoat)
 		stack.stackTagCompound = new NBTTagCompound
 		for ((nameMat, material) <- Registry.materials) {
