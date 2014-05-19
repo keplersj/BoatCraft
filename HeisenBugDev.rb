@@ -2,7 +2,7 @@ require 'base64'
 require 'json'
 require 'net/http'
  
-manifest = JSON.parse(IO.read('../../build/libs/manifest.json'))
+manifest = JSON.parse(IO.read('build/libs/manifest.json'))
  
 req = Net::HTTP::Post.new('/builds.json', 'Content-Type' => 'application/json')
 req['X-User-Email'] = ENV['HBD_EMAIL_PROD']
