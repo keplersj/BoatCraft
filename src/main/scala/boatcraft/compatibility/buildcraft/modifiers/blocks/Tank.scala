@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.fluids.FluidContainerRegistry
+import boatcraft.core.BoatCraft
+import boatcraft.compatibility.buildcraft.packets.TankSyncMessage
 
 object Tank extends Block {
 	
@@ -49,14 +51,34 @@ object Tank extends Block {
 		}
 		else return false
 		
-		player.setCurrentItemOrArmor(0, stack)
+		if (!player.capabilities.isCreativeMode)
+			player.setCurrentItemOrArmor(0, stack)
+		
+		data.hasUpdate = true
 		
 		return true
 	}
 	
 	override def update(boat: EntityCustomBoat)
 	{
+		var logic = boat.getBlockData.asInstanceOf[Logic]
 		//TODO make it glow when the fluid is luminous
+		
+		if (!boat.worldObj.isRemote && logic.hasUpdate)
+		{
+			var fluidID = 0
+			if (logic.tank.getFluidType != null)
+				fluidID = logic.tank.getFluidType.getID
+			
+			/*BoatCraft.log.info(String.format("Sending Tank sync data:\n\t%s %s %s %s",
+				boat.getEntityId.toString,
+				fluidID.toString, logic.tank.getFluidAmount.toString, logic.tank.colorRenderCache.toString))*/
+			
+			BoatCraft.channel.sendToAll(new TankSyncMessage(boat.getEntityId,
+					fluidID, logic.tank.getFluidAmount, logic.tank.colorRenderCache))
+			
+			logic.hasUpdate = false
+		}
 	}
 	
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
@@ -65,8 +87,14 @@ object Tank extends Block {
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
 	  boat.getBlockData.asInstanceOf[Logic].tankManager.writeToNBT(tag)
 	
-	private class Logic(boat: EntityCustomBoat) extends TileTank
+	private[buildcraft] class Logic(boat: EntityCustomBoat) extends TileTank
 	{
 		worldObj = boat.worldObj
+		
+		override def getBottomTank = this
+		
+		override def getTopTank = this
+		
+		override def moveFluidBelow {}
 	}
 }

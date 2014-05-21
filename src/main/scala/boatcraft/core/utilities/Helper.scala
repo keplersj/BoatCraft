@@ -10,6 +10,7 @@ import net.minecraft.util.MathHelper
 import net.minecraft.world.World
 
 object Helper {
+	
 	object NBT {
 		def writeChestToNBT(inv: IInventory, tag: NBTTagCompound) {
 			val list = new NBTTagList
@@ -33,6 +34,7 @@ object Helper {
 			}
 		}
 	}
+	
 	object AABB {
 		def isAABBInFluid(world: World, aabb: AxisAlignedBB): Boolean = {
 			val i = MathHelper.floor_double(aabb.minX)
@@ -70,6 +72,17 @@ object Helper {
 			}
 			
 			return false
+		}
+	}
+	
+	object Packet {
+		
+		var nextID = 0
+		
+		def getNextID: Int =
+		{
+			nextID += 1
+			return nextID
 		}
 	}
 }

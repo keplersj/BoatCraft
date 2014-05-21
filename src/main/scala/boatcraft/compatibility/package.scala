@@ -12,7 +12,8 @@ package object compatibility {
 		("", Vanilla),
 		("IronChest", IronChests),
 		("Thaumcraft", Thaumcraft),
-		("IC2", IC2))
+		("IC2", IC2),
+		("BuildCraft|Factory", BuildCraft))
 
 	def registerModifiers {
 		for (module <- mods) {
