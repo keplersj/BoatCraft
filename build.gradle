@@ -2,28 +2,28 @@ apply plugin: 'scala'
 apply plugin: 'forge'
 
 buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "Sonatype Snapshots"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-        maven {
-            name = "Sonatype Releases"
-            url = "https://oss.sonatype.org/content/repositories/releases/"
-        }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-    }
+	repositories {
+		mavenCentral()
+		maven {
+			name = "forge"
+			url = "http://files.minecraftforge.net/maven"
+		}
+		maven {
+			name = "Sonatype Snapshots"
+			url = "https://oss.sonatype.org/content/repositories/snapshots/"
+		}
+		maven {
+			name = "Sonatype Releases"
+			url = "https://oss.sonatype.org/content/repositories/releases/"
+		}
+	}
+	dependencies {
+		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+	}
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.11'
+	gradleVersion = '1.11'
 }
 
 group = 'open-code-developers' //If you are not Open Code Developers, but are maintaining this project, please change this to your name.
@@ -40,22 +40,22 @@ version = "${project.minecraft.version}-$gitVersion"
 logger.lifecycle "version = $version"
 
 repositories {
-    maven {
-        name = "ic2"
-        url = "http://maven.ic2.player.to/"
-    }
-    ivy {
-        name = 'ThaumCraft 4 API'
-        artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/[module]-1.7.2-[revision](-[classifier])(.[ext])'
-        // artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/Thaumcraft-1.7.2-4.1.1.13-api.zip'
-        // artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/Thaumcraft-1.7.2-4.1.1.13.jar'
-    }
+	maven {
+		name = "ic2"
+		url = "http://maven.ic2.player.to/"
+	}
+	ivy {
+		name = 'ThaumCraft 4 API'
+		artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/[module]-1.7.2-[revision](-[classifier])(.[ext])'
+		// artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/Thaumcraft-1.7.2-4.1.1.13-api.zip'
+		// artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/Thaumcraft-1.7.2-4.1.1.13.jar'
+	}
 }
 
 dependencies {
-    compile 'cpw.mods:ironchest:1.7.2-6.0.4.713:deobf'
-    compile 'net.industrial-craft:industrialcraft-2:2.1.477-experimental:dev'
-    // compile 'Azanor:Thaumcraft:4.1.1.13'
+	compile 'cpw.mods:ironchest:1.7.2-6.0.4.713:deobf'
+	compile 'net.industrial-craft:industrialcraft-2:2.1.477-experimental:dev'
+	// compile 'Azanor:Thaumcraft:4.1.1.13'
 	compile 'com.mod-buildcraft:buildcraft:6.0.15:dev'
 }
 
