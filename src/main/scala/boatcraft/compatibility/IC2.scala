@@ -32,15 +32,15 @@ object IC2 extends CompatModule {
 			case thr: Throwable => thr printStackTrace() //Weird...
 		}
 	}
-
+	
 	@Optional.Method(modid = "IC2")
-	override protected def getMaterials: List[Material] = List[Material](
+	override protected def getMaterials = Array[Material](
 		Rubber,
 		Carbon
 	)
-
+	
 	@Optional.Method(modid = "IC2")
-	override protected def getBlocks: List[Block] = List[Block](
+	override protected def getBlocks = Array[Block](
 		Generator,
 		Nuke
 	)

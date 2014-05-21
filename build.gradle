@@ -31,7 +31,7 @@ group = 'open-code-developers' //If you are not Open Code Developers, but are ma
 archivesBaseName = 'BoatCraft'
 
 minecraft {
-	version = '1.7.2-10.12.1.1060'
+	version = '1.7.2-10.12.1.1079'
 }
 
 apply from: 'gradle/git.gradle'
@@ -56,9 +56,10 @@ dependencies {
     compile 'cpw.mods:ironchest:1.7.2-6.0.4.713:deobf'
     compile 'net.industrial-craft:industrialcraft-2:2.1.477-experimental:dev'
     // compile 'Azanor:Thaumcraft:4.1.1.13'
+	compile 'com.mod-buildcraft:buildcraft:6.0.15:dev'
 }
 
 apply from: 'gradle/artifacts.gradle'
 
-apply from: 'gradle/deployment/maven.gradle'
+//apply from: 'gradle/deployment/maven.gradle'
 apply from: 'gradle/deployment/HeisenBugDev.gradle'

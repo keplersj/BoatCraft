@@ -16,15 +16,15 @@ object Nuke extends Block {
 	TileEntity.addMapping(classOf[NukeFuse], "boatNuke")
 	
 	override def getBlock = IC2Items.getItem("nuke").getItem.asInstanceOf[ItemBlock].field_150939_a
-
+	
 	override def getUnlocalizedName = "Nuke"
-
+	
 	override def getLocalizedName = "industrialcraft2.blocks.nuke.name"
-
-	override def getContent: ItemStack = IC2Items.getItem("nuke")
+	
+	override def getContent = IC2Items.getItem("nuke")
 	
 	override def getBlockData(boat: EntityCustomBoat): AnyRef = new NukeFuse(boat)
-
+	
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) = {
 		if (player.getCurrentEquippedItem != null
 			&& (player.getCurrentEquippedItem.getItem == Items.flint_and_steel

@@ -43,12 +43,12 @@ object Vanilla extends CompatModule {
 
 	private var useOreDictWood = false
 
-	var materials = List[Material]()
+	var materials = Array[Material]()
 
 	override def doPreInit(event: FMLPreInitializationEvent) {
-		readConfig()
+		readConfig
 
-		replaceBoatRecipe()
+		replaceBoatRecipe
 
 		GUIHandler.handlerMap.put(code, VanillaGuiHandler)
 
@@ -79,7 +79,7 @@ object Vanilla extends CompatModule {
 		CraftingManager.getInstance.getRecipeList removeAll toRemove
 	}
 
-	override protected def getMaterials: List[Material] = materials
+	override protected def getMaterials = materials
 
 	private val woodMaterials: List[Material] = List[Material](
 		Oak,
@@ -101,14 +101,14 @@ object Vanilla extends CompatModule {
 		Emerald
 	)
 
-	override protected def getBlocks: List[Block] =
-		List[Block](
+	override protected def getBlocks =
+		Array[Block](
 			Chest,
 			Furnace,
 			Workbench,
 			TNT)
 
-	private def replaceBoatRecipe() {
+	private def replaceBoatRecipe {
 		Recipes removeRecipe new ItemStack(Items.boat)
 
 		val stack = new ItemStack(ItemCustomBoat)
@@ -120,12 +120,12 @@ object Vanilla extends CompatModule {
 		GameRegistry addShapelessRecipe(stack, Items.boat)
 	}
 
-	private def readConfig() {
+	private def readConfig {
 		useOreDictWood = BoatCraft.config get("Vanilla.General", "useOreDictWoods", false,
 			"If set to true, the different wood types will not be generated.\n" +
 				"Instead, there will be only one \"wood\" Boat") getBoolean false
 
 		if (BoatCraft.config.hasChanged)
-			BoatCraft.config save()
+			BoatCraft.config.save
 	}
 }
