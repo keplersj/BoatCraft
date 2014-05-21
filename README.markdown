@@ -50,7 +50,7 @@ Yes you may use BoatCraft in your videos and other creations. Again just follow 
 
 ### Translations
 
-BoatCraft will now localize like any other mod! To add a translation just make a pull request with with your translations [here](https://github.com/Open-Code-Developers/BoatCraft/tree/master/src/main/resources/assets/boatcraft/lang).
+BoatCraft will now localize like any other mod! To add a translation just make a pull request with your translations [here](https://github.com/Open-Code-Developers/BoatCraft/tree/master/src/main/resources/assets/boatcraft/lang).
 
 ### Source Code
 
