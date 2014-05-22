@@ -23,6 +23,7 @@ import net.minecraft.util.DamageSource
 import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.World
+import net.minecraftforge.common.util.Constants
 import boatcraft.core.utilities.Helper
 
 /**
@@ -53,20 +54,26 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		tag setString("material", getMaterialName)
 		tag setString("block", getBlockName)
 		
-		val id = tag getString "id"
+		var materialTag, blockTag = new NBTTagCompound
 		
-		getMaterial writeStateToNBT(this, tag)
-		getBlock writeStateToNBT(this, tag)
+		getMaterial writeStateToNBT(this, materialTag)
+		getBlock writeStateToNBT(this, blockTag)
 		
-		tag setString("id", id)
+		tag.setTag("materialTag", materialTag)
+		tag.setTag("blockTag", blockTag)
 	}
 
 	override protected def readEntityFromNBT(tag: NBTTagCompound) {
 		setMaterial(tag getString "material")
 		setBlock(tag getString "block")
-
-		getMaterial readStateFromNBT(this, tag)
-		getBlock readStateFromNBT(this, tag)
+		
+		//TODO Legacy, remove in v2.2
+		if (!tag.hasKey("materialTag", Constants.NBT.TAG_COMPOUND)) getMaterial readStateFromNBT(this, tag)
+		else getMaterial readStateFromNBT(this, tag.getCompoundTag("materialTag"))
+		
+		//TODO Legacy, remove in v2.2
+		if (!tag.hasKey("blockTag", Constants.NBT.TAG_COMPOUND)) getBlock readStateFromNBT(this, tag)
+		else getBlock readStateFromNBT(this, tag.getCompoundTag("blockTag"))
 	}
 
 	override def attackEntityFrom(source: DamageSource, amount: Float): Boolean =

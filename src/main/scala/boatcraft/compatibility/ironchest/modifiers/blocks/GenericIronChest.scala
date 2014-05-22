@@ -8,6 +8,14 @@ import cpw.mods.ironchest.{IronChest, IronChestType, ItemChestChanger, TileEntit
 import net.minecraft.entity.player.{EntityPlayer, EntityPlayerMP}
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
+import boatcraft.core.BoatCraft
+import boatcraft.compatibility.ironchest.packets.IronChestSyncMessage
+import cpw.mods.fml.relauncher.ReflectionHelper
+import cpw.mods.fml.common.FMLCommonHandler
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler
+import cpw.mods.fml.common.network.simpleimpl.IMessage
+import cpw.mods.fml.common.network.simpleimpl.MessageContext
+import java.util.Arrays
 
 abstract class GenericIronChest(chestType: IronChestType) extends Block {
 	import GenericIronChest.Inventory
@@ -79,11 +87,11 @@ object GenericIronChest {
 		override def applyUpgradeItem(changer: ItemChestChanger): TileEntityIronChest = {
 			if (!(changer.getType canUpgrade getType))
 				return null
-
+			
 			val newEntity = new Inventory(boat,
 				IronChestType.values()(changer getTargetChestOrdinal getType.ordinal))
 			val newSize = newEntity.chestContents.length
-
+			
 			System arraycopy(chestContents, 0,
 				newEntity.chestContents, 0,
 				Math min(newSize, chestContents.length))
@@ -91,11 +99,59 @@ object GenericIronChest {
 			val block = IronChest.ironChestBlock
 			block dropContent(newSize, this, worldObj,
 				boat.posX.floor.toInt, boat.posY.floor.toInt, boat.posZ.floor.toInt)
-
+			
 			newEntity markDirty()
-
+			
 			newEntity
 		}
+		
+		override def sortTopStacks
+		{
+			super.sortTopStacks
+			
+			if (!worldObj.isRemote)
+				BoatCraft.channel.sendToAll(new IronChestSyncMessage(
+					boat.getEntityId,
+					ReflectionHelper.getPrivateValue(classOf[TileEntityIronChest], this, "type")
+						.asInstanceOf[IronChestType].ordinal,
+					getFacing, buildIntDataList))
+		}
+		
+		override def updateFromMetadata(meta: Int): TileEntityIronChest = {
+			if (meta == getType.ordinal) return this
+			
+			var res = chests(meta)
+			
+			boat.setBlock(res toString)
+			
+			return res.getBlockData(boat).asInstanceOf[Inventory]
+		}
+		
+		override def getTopItemStacks: Array[ItemStack] =
+		{
+			for (x <- super.getTopItemStacks) print(x + " ")
+			println()
+			return super.getTopItemStacks
+		}
 	}
-
+	
+	class MessageHandler extends IMessageHandler[IronChestSyncMessage, IMessage] {
+		
+		override def onMessage(message: IronChestSyncMessage, context: MessageContext): IMessage =
+		{
+			println(String.format("Recieved message:\n%s\n%s %s",
+				message.entityID toString, message.facing toString, message.chestType toString))
+			for (x <- message.items) print(" " + x)
+			println()
+			
+			var boat = FMLCommonHandler.instance.getMinecraftServerInstance.getEntityWorld
+						.getEntityByID(message.entityID).asInstanceOf[EntityCustomBoat]
+			var data = boat.getBlockData.asInstanceOf[GenericIronChest.Inventory]
+			
+			data.setFacing(message.facing)
+			data.handlePacketData(message.chestType, message.items)
+			
+			return null
+		}
+	}
 }

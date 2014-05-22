@@ -2,12 +2,12 @@ package boatcraft.compatibility
 
 import boatcraft.api.modifiers.Block
 import boatcraft.compatibility.buildcraft.modifiers.blocks.Tank
+import boatcraft.compatibility.buildcraft.packets.TankSyncMessage
+import boatcraft.core.BoatCraft
+import boatcraft.core.utilities.Helper
+import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
-import boatcraft.core.BoatCraft
-import boatcraft.compatibility.buildcraft.packets.TankSyncMessageHandler
-import boatcraft.compatibility.buildcraft.packets.TankSyncMessage
-import boatcraft.core.utilities.Helper
 import cpw.mods.fml.relauncher.Side
 
 object BuildCraft extends CompatModule {
@@ -15,7 +15,7 @@ object BuildCraft extends CompatModule {
 	@Optional.Method(modid = "BuildCraft|Factory")
 	override protected def doPreInit(event: FMLPreInitializationEvent)
 	{
-		BoatCraft.channel.registerMessage(classOf[TankSyncMessageHandler], classOf[TankSyncMessage],
+		BoatCraft.channel.registerMessage(classOf[Tank.MessageHandler], classOf[TankSyncMessage],
 				Helper.Packet.getNextID, Side.CLIENT)
 	}
 	

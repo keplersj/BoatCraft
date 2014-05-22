@@ -32,17 +32,17 @@ class RenderCustomBoat
 		GL11 glPushMatrix()
 
 		GL11 glTranslated(x, y, z)
-		GL11 glRotatef(180.0F - f0, 0.0F, 1.0F, 0.0F)
+		GL11 glRotatef(180F - f0, 0F, 1F, 0F)
 
-		val f2: Float = boat.getTimeSinceHit - f1
-		var f3: Float = boat.getDamageTaken - f1
+		val f2 = boat.getTimeSinceHit - f1
+		var f3 = boat.getDamageTaken - f1
 
-		if (f3 < 0.0F)
-			f3 = 0.0F
+		if (f3 < 0)
+			f3 = 0
 
-		if (f2 > 0.0F)
-			GL11 glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * boat.getForwardDirection,
-				1.0F, 0.0F, 0.0F)
+		if (f2 > 0)
+			GL11 glRotatef(MathHelper.sin(f2) * f2 * f3 / 10F * boat.getForwardDirection,
+				1F, 0F, 0F)
 
 		val f4 = 0.75F
 
@@ -60,14 +60,14 @@ class RenderCustomBoat
 			GL11 glTranslatef(0, 6F / 16F, 0)
 			
 			GL11 glPushMatrix()
-			
+			//println("Hi!")
 			field_147909_c renderBlockAsItem(block, meta, f5)
 			
 			GL11 glPopMatrix()
 			GL11 glPopMatrix()
 			GL11 glColor4f(1, 1, 1, 1)
 		}
-		
+		else
 		boat.getBlockData match {
 			case entity: TileEntity if TileEntityRendererDispatcher.instance hasSpecialRenderer entity =>
 				GL11 glPushMatrix()
@@ -90,7 +90,7 @@ class RenderCustomBoat
 		GL11 glScalef(1F / f4, 1F / f4, 1F / f4)
 		this bindEntityTexture boat
 		GL11 glScalef(-1, -1, 1)
-		modelBoat render(boat, 0, 0, -0.1F, 0, 0F, 0.0625F)
+		modelBoat render(boat, 0, 0, -0.1F, 0, 0, 0.0625F)
 
 		//Render the name
 		if (boat hasName) {
@@ -105,7 +105,7 @@ class RenderCustomBoat
 		}
 		
 		for (pos <- Mountable.Position.values if boat hasMount pos)
-			boat.getMount(pos).getModel render(boat, 0, 0, -0.1F, 0, 0F, 0.0625F)
+			boat.getMount(pos).getModel render(boat, 0, 0, -0.1F, 0, 0, 0.0625F)
 
 		GL11 glPopMatrix
 	}
@@ -134,13 +134,13 @@ class RenderCustomBoat
 		val f4 = 0.75F
 
 		var block: Block = null
-		var meta: Int = 0
+		var meta = 0
 
 		try {
 			block = (Registry getBlock stack).getBlock
 		} catch {
 			case e: Exception =>
-				e.printStackTrace()
+				e.printStackTrace
 				block = Blocks.air
 		}
 
@@ -148,7 +148,7 @@ class RenderCustomBoat
 			meta = (Registry getBlock stack).getMeta
 		} catch {
 			case e: Exception =>
-				e.printStackTrace()
+				e.printStackTrace
 				meta = 0
 		}
 
@@ -172,7 +172,7 @@ class RenderCustomBoat
 		}
 
 		GL11 glScalef(f4, f4, f4)
-		GL11 glScalef(1F / f4, 1F / f4, 1F / f4)
+		GL11 glScalef(1 / f4, 1 / f4, 1 / f4)
 
 		Minecraft.getMinecraft.getTextureManager bindTexture (
 			try {
@@ -183,7 +183,7 @@ class RenderCustomBoat
 			)
 
 		GL11 glScalef(-1, -1, 1)
-		modelBoat render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F)
+		modelBoat render(null, 0, 0, -0.1F, 0, 0, 0.0625F)
 
 		GL11 glPopMatrix()
 	}
