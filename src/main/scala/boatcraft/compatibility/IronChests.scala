@@ -13,8 +13,8 @@ object IronChests extends CompatModule {
 		MinecraftForge.EVENT_BUS register IronChestsEventHandler
 	}
 
-	override protected def getBlocks: List[Block] =
-		List[Block](
+	override protected def getBlocks =
+		Array[Block](
 			Iron_Chest,
 			Gold_Chest,
 			Diamond_Chest,

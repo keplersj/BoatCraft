@@ -18,9 +18,9 @@ abstract class CompatModule {
 		Registry register getBlocks
 	}
 
-	protected def getMaterials: List[Material] = List[Material]()
+	protected def getMaterials = Array[Material]()
 
-	protected def getBlocks: List[Block] = List[Block]()
+	protected def getBlocks = Array[Block]()
 
 	final def preInit(event: FMLPreInitializationEvent) {
 		log = event.getModLog

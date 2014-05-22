@@ -15,7 +15,7 @@ vanilla.materials.wood.oak.name=Oak Wood
 vanilla.materials.wood.spruce.name=Spruce Wood
 vanilla.materials.wood.birch.name=Birch Wood
 vanilla.materials.wood.jungle.name=Jungle Wood
-vanilla.materials.wood.acacia.name=Acaica Wood
+vanilla.materials.wood.acacia.name=Acacia Wood
 vanilla.materials.wood.darkoak.name=Dark Oak Wood
 
 vanilla.materials.metal.iron.name=Iron
@@ -39,3 +39,5 @@ industrialcraft2.materials.carbon.name=Carbon Fiber
 
 industrialcraft2.blocks.generator.name=Generator
 industrialcraft2.blocks.nuke.name=Nuke
+
+buildcraft.blocks.tank=Tank

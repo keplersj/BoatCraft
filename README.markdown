@@ -4,7 +4,7 @@ BoatCraft
 [![Gitter chat](https://badges.gitter.im/Open-Code-Developers/BoatCraft.png)](https://gitter.im/Open-Code-Developers/BoatCraft)
 [![Stories in Ready](https://badge.waffle.io/Open-Code-Developers/BoatCraft.png?label=in%20progress)](https://waffle.io/Open-Code-Developers/BoatCraft)
 
-[![wercker status](https://app.wercker.com/status/e90f090a6379a5521841634d6aecf145/m/ "wercker status")](https://app.wercker.com/project/bykey/e90f090a6379a5521841634d6aecf145)
+[![wercker status](https://app.wercker.com/status/e90f090a6379a5521841634d6aecf145/m/master "wercker status")](https://app.wercker.com/project/bykey/e90f090a6379a5521841634d6aecf145)
 
 Rails had their turn, now out to the Minecraftian seas. Out there we will interact with our boats in ways that we had only dreamed of and ways that we had never thought of before. This mod will overhaul your oceans and how you will experience them. Will you turn your shoreline into an industrial outlet, or will you take advantage of your nearby Seaport and get all the booty you could ever wish for? So go ahead take your world out to sea and never worry about a creeper destroying your rails and pipes again, but watch out because one day you might turn around and see them, the pirate mobs!
 
@@ -50,7 +50,7 @@ Yes you may use BoatCraft in your videos and other creations. Again just follow 
 
 ### Translations
 
-BoatCraft will now localize like any other mod! To add a translation just make a pull request with with your translations [here](https://github.com/Open-Code-Developers/BoatCraft/tree/master/src/main/resources/assets/boatcraft/lang).
+BoatCraft will now localize like any other mod! To add a translation just make a pull request with your translations [here](https://github.com/Open-Code-Developers/BoatCraft/tree/master/src/main/resources/assets/boatcraft/lang).
 
 ### Source Code
 

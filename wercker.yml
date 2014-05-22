@@ -8,14 +8,16 @@ build:
         code: export JAVA_OPTS="-XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m"
     # A step that executes `gradle build` command
     - script:
-        name: run gradle
-        code: |
-          ./gradlew -Sq --parallel --project-cache-dir=$WERCKER_CACHE_DIR assemble
+        name: Run gradle
+        code: ./gradlew -Sq --parallel --project-cache-dir=$WERCKER_CACHE_DIR assemble
     - script:
-        name: archive artifacts
+        name: Archive artifacts
         code: cp build/libs/* $WERCKER_REPORT_ARTIFACTS_DIR
 deploy:
     steps:
+        - script:
+            name: git stuff
+            code: git checkout $WERCKER_GIT_BRANCH
         - script:
             name: Setup JVM args
             code: export JAVA_OPTS="-XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m"

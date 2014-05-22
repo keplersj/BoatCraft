@@ -4,7 +4,6 @@ import org.apache.logging.log4j.Logger
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.compatibility
-import boatcraft.core.packets.ChannelHandler
 import boatcraft.core.utilities.Recipes
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.SidedProxy
@@ -17,12 +16,13 @@ import boatcraft.core.modifiers.blocks.Empty
 import java.util
 import net.minecraftforge.common.MinecraftForge
 import boatcraft.core.modifiers.blocks.Empty
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
 	version = "2.0",
 	modLanguage = "scala",
-	dependencies = "after:IronChest;after:Thaumcraft;after:IC2")
+	dependencies = "after:IronChest;after:Thaumcraft;after:IC2;after:BuildCraft|Factory")
 object BoatCraft {
 	@SidedProxy(modId = "boatcraft",
 		clientSide = "boatcraft.core.Proxy$ClientProxy",
@@ -31,7 +31,7 @@ object BoatCraft {
 
 	private[boatcraft] var config: Configuration = null
 
-	var channels: util.EnumMap[Side, FMLEmbeddedChannel] = null
+	var channel: SimpleNetworkWrapper = null
 
 	private[boatcraft] var log: Logger = null
 
@@ -42,9 +42,9 @@ object BoatCraft {
 		
 		config = new Configuration(event getSuggestedConfigurationFile)
 		
-		proxy registerBlocks
+		channel = NetworkRegistry.INSTANCE.newSimpleChannel("boatcraft")
 		
-		channels = NetworkRegistry.INSTANCE newChannel("boatcraft", ChannelHandler)
+		proxy registerBlocks
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
 		MinecraftForge.EVENT_BUS register EventHandler

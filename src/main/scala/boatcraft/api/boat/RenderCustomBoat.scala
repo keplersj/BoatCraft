@@ -27,7 +27,8 @@ class RenderCustomBoat
 	override def doRender(entity: Entity, x: Double, y: Double, z: Double, f0: Float, f1: Float) =
 		doRender(entity.asInstanceOf[EntityCustomBoat], x, y, z, f0, f1)
 
-	def doRender(boat: EntityCustomBoat, x: Double, y: Double, z: Double, f0: Float, f1: Float) {
+	private def doRender(boat: EntityCustomBoat, x: Double, y: Double, z: Double, f0: Float, f1: Float) {
+		
 		GL11 glPushMatrix()
 
 		GL11 glTranslated(x, y, z)
@@ -57,31 +58,29 @@ class RenderCustomBoat
 			val f5 = boat getBrightness f1
 
 			GL11 glTranslatef(0, 6F / 16F, 0)
-
+			
 			GL11 glPushMatrix()
-
+			
 			field_147909_c renderBlockAsItem(block, meta, f5)
-
+			
 			GL11 glPopMatrix()
 			GL11 glPopMatrix()
 			GL11 glColor4f(1, 1, 1, 1)
 		}
-		else boat.getBlockData match {
-			case entity: TileEntity if TileEntityRendererDispatcher.instance hasSpecialRenderer
-				entity =>
+		
+		boat.getBlockData match {
+			case entity: TileEntity if TileEntityRendererDispatcher.instance hasSpecialRenderer entity =>
 				GL11 glPushMatrix()
 				GL11 glScalef(f4, f4, f4)
-
+				
 				val f5 = boat getBrightness f1
-
-				GL11 glTranslatef(-0.5F, 6F / 16F - 0.5F, 0)
-				GL11 glPushMatrix()
-
+				
+				GL11 glTranslatef(-x.toFloat - 0.5F, -y.toFloat + 6F / 16F - 0.5F, -z.toFloat - 0.5F)
+				
 				TileEntityRendererDispatcher.instance renderTileEntityAt(
 					entity,
-					0, 0, 0, f5)
-
-				GL11 glPopMatrix()
+					x, y, z, f5)
+				
 				GL11 glPopMatrix()
 				GL11 glColor4f(1, 1, 1, 1)
 			case _ =>
