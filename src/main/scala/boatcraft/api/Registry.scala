@@ -2,9 +2,7 @@ package boatcraft.api
 
 import java.util.HashMap
 import java.util.Map
-
 import scala.collection.JavaConversions.iterableAsScalaIterable
-
 import boatcraft.api.modifiers.Block
 import boatcraft.api.modifiers.Material
 import boatcraft.api.modifiers.Modifier
@@ -12,17 +10,24 @@ import boatcraft.api.modifiers.Mountable
 import boatcraft.core.modifiers.blocks.Empty
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
+import boatcraft.api.boat.ItemCustomBoat
 
 /** Contains the methods needed to register Materials and Modifiers with BoatCraft:Core. */
 object Registry {
 	/** The Map containing all of the registered Materials for BoatCraft:Core to create boats with. */
 	var materials: Map[String, Material] = new HashMap[String, Material]
-
+	
+	var materialItems: Map[StackHashWrapper, Material] = new HashMap[StackHashWrapper, Material]
+	
 	/** The Map containing all of the registered Modifiers for BoatCraft:Core to create boats with. */
 	var blocks: Map[String, Block] = new HashMap[String, Block]
-
+	
+	var blockItems: Map[StackHashWrapper, Block] = new HashMap[StackHashWrapper, Block]
+	
 	/** The Map containing all of the registered Modifiers for BoatCraft:Core to create boats with. */
 	var mountables: Map[String, Mountable] = new HashMap[String, Mountable]
+	
+	var mountableItems: Map[StackHashWrapper, Mountable] = new HashMap[StackHashWrapper, Mountable]
 	
 	/**
 	 * Adds materials or modifiers to the Map used by BoatCraft:Core for boat creation.
@@ -32,10 +37,13 @@ object Registry {
 	def register(registrar: Any): Unit = registrar match {
 		case material: Material =>
 			materials put(material toString, material)
+			materialItems.put(StackHashWrapper(material.getItem), material)
 		case block: Block =>
 			blocks put(block toString, block)
+			blockItems.put(StackHashWrapper(block.getContent), block)
 		case mount: Mountable =>
 			mountables put(mount toString, mount)
+			mountableItems.put(??? /*TODO*/, mount)
 		case x: java.lang.Iterable[_] =>
 			x foreach (obj => register(obj))
 		case x: Traversable[_] =>
@@ -75,10 +83,12 @@ object Registry {
 	 * @return registered object
 	 */
 	def find(name: String): Modifier = name match {
-		case x if materials.containsKey(name) =>
+		case _ if materials containsKey name =>
 			materials get name
-		case x if blocks.containsKey(name) =>
+		case _ if blocks containsKey name =>
 			blocks get name
+		case _ if mountables containsKey name =>
+			mountables get name
 		case _ =>
 			{
 				System.err println "Could not find: " + name
@@ -109,8 +119,12 @@ object Registry {
 	 * @return registered Material
 	 */
 	def getMaterial(stack: ItemStack) =
-		if (stack.stackTagCompound == null) NoMaterial
-		else materials get (stack.stackTagCompound getString "material")
+		if (stack.getItem.isInstanceOf[ItemCustomBoat])
+		{
+			if (stack.stackTagCompound == null) NoMaterial
+			else materials get (stack.stackTagCompound getString "material")
+		}
+		else materialItems get StackHashWrapper(stack)
 
 	private object NoMaterial extends Material {
 		override def getTexture =
@@ -124,8 +138,22 @@ object Registry {
 	 * @return registered Block
 	 */
 	def getBlock(stack: ItemStack) =
-		if (stack.stackTagCompound == null) Empty
-		else if (stack.stackTagCompound hasKey "block") blocks get (stack.stackTagCompound getString "block")
-		else blocks get (stack.stackTagCompound getString "modifier")
-
+		if (stack == null) Empty
+		else if (stack.getItem.isInstanceOf[ItemCustomBoat])
+		{
+			if (stack.stackTagCompound == null) Empty
+			else blocks get (stack.stackTagCompound getString "block")
+		}
+		else blockItems get StackHashWrapper(stack)
+	
+	case class StackHashWrapper(var stack: ItemStack) {
+			override def equals(other: Any): Boolean = 
+				if (!other.isInstanceOf[StackHashWrapper]) false
+				else if (stack == null) other.asInstanceOf[StackHashWrapper].stack == null
+				else stack.isItemEqual(other.asInstanceOf[StackHashWrapper].stack)
+			
+			override def hashCode =
+				if (stack == null) 0
+				else (stack.getItem.getUnlocalizedName.hashCode << 16) ^ stack.getItemDamage
+		}
 }

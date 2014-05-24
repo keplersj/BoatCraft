@@ -1,9 +1,7 @@
 package boatcraft.compatibility
 
 import java.util
-
 import scala.collection.JavaConversions.asScalaBuffer
-
 import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.api.modifiers.Block
 import boatcraft.api.modifiers.Material
@@ -38,6 +36,7 @@ import net.minecraft.item.crafting.CraftingManager
 import net.minecraft.item.crafting.IRecipe
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.oredict.ShapedOreRecipe
+import boatcraft.core.utilities.Helper
 
 object Vanilla extends CompatModule {
 
@@ -107,9 +106,9 @@ object Vanilla extends CompatModule {
 			Furnace,
 			Workbench,
 			TNT)
-
+	
 	private def replaceBoatRecipe {
-		Recipes removeRecipe new ItemStack(Items.boat)
+		Helper.Recipe.removeRecipe(new ItemStack(Items.boat))
 
 		val stack = new ItemStack(ItemCustomBoat)
 
@@ -119,7 +118,7 @@ object Vanilla extends CompatModule {
 
 		GameRegistry addShapelessRecipe(stack, Items.boat)
 	}
-
+	
 	private def readConfig {
 		useOreDictWood = BoatCraft.config get("Vanilla.General", "useOreDictWoods", false,
 			"If set to true, the different wood types will not be generated.\n" +

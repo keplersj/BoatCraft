@@ -67,7 +67,8 @@ object BoatCraft {
 
 		proxy registerRenders
 
-		Recipes addBoatRecipes
+		//Recipes addBoatRecipes
+		GameRegistry.addRecipe(RecipeBoat)
 
 		compatibility init event
 	}

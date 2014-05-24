@@ -15,6 +15,7 @@ import net.minecraft.block.BlockContainer
 class BlockDock extends BlockContainer(Material.iron) {
 	
 	setCreativeTab(CreativeTabs.tabRedstone)
+	setBlockName("dock")
 	
 	override def createNewTileEntity(world: World, meta: Int) = new TileDock
 	

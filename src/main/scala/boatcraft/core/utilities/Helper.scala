@@ -1,13 +1,22 @@
 package boatcraft.core.utilities
 
+import java.util.ArrayList
+
+import scala.collection.JavaConversions.asScalaBuffer
+
+import boatcraft.core.BoatCraft
+import cpw.mods.fml.common.Mod
+import net.minecraft.init.Items
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
+import net.minecraft.item.crafting.CraftingManager
+import net.minecraft.item.crafting.IRecipe
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
-import net.minecraftforge.common.util.Constants
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.MathHelper
 import net.minecraft.world.World
+import net.minecraftforge.common.util.Constants
 
 object Helper {
 	
@@ -83,6 +92,23 @@ object Helper {
 		{
 			nextID += 1
 			return nextID
+		}
+	}
+	
+	object Recipe {
+		def removeRecipe(resultItem: ItemStack) {
+			val toRemove = new ArrayList[IRecipe]
+			
+			for (recipe <- CraftingManager.getInstance.getRecipeList) {
+				recipe match {
+					case recipe: IRecipe if (recipe.getRecipeOutput != null) && (recipe.getRecipeOutput.getItem == Items.boat) =>
+						toRemove add recipe
+						BoatCraft.log info "Removed vanilla Boat recipe: " + recipe
+					case _ =>
+				}
+			}
+			
+			CraftingManager.getInstance.getRecipeList removeAll toRemove
 		}
 	}
 }

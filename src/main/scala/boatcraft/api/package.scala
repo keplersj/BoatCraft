@@ -17,27 +17,27 @@ package object api {
 	 * the specified material and modifier
 	 *
 	 * @param mat the Material
-	 * @param mod the Block inside the Boat
+	 * @param block the Block inside the Boat
 	 *
 	 * @return the custom boat itemstack
 	 */
-	def getCustomBoat(mat: Material, mod: Block): ItemStack =
-		getCustomBoat(mat toString, mod toString)
+	def getCustomBoat(mat: Material, block: Block): ItemStack =
+		getCustomBoat(mat toString, block toString)
 
 	/**
 	 * The function used to retrieve a boat item with
 	 * the specified material and modifier
 	 *
 	 * @param mat the Material
-	 * @param mod the Block inside the Boat
+	 * @param block the Block inside the Boat
 	 *
 	 * @return the custom boat ItemStack
 	 */
-	def getCustomBoat(mat: String, mod: String) = {
+	def getCustomBoat(mat: String, block: String) = {
 		val stack = new ItemStack(ItemCustomBoat)
 		stack.stackTagCompound = new NBTTagCompound
 		stack.stackTagCompound.setString("material", mat)
-		stack.stackTagCompound.setString("modifier", mod)
+		stack.stackTagCompound.setString("block", block)
 
 		stack
 	}
