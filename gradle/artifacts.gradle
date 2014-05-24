@@ -20,13 +20,9 @@ task deobfJar(type: Jar) {
 }
 
 // Add in a jar containing the ScalaDocs.
-task docs(type: Jar) {
+task docs(type: Jar, dependsOn: scaladoc) {
     from scaladoc.destinationDir
     classifier = 'docs'
-}
-
-docs.dependsOn {
-    tasks.findAll { task -> task.name.endsWith('doc') } //Javadoc and scaladoc
 }
 
 def jsonFile = new File(jar.destinationDir, "manifest.json")
