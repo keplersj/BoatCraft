@@ -18,10 +18,11 @@ object IronChests extends CompatModule {
 		
 		MinecraftForge.EVENT_BUS register IronChestsEventHandler
 		
-		BoatCraft.channel.registerMessage(classOf[GenericIronChest.MessageHandler], classOf[IronChestSyncMessage],
+		BoatCraft.channel.registerMessage(classOf[GenericIronChest.MessageHandler],
+				classOf[IronChestSyncMessage],
 				Helper.Packet.getNextID, Side.CLIENT)
 	}
-
+	
 	override protected def getBlocks = Array[Block](
 			Iron_Chest,
 			Gold_Chest,

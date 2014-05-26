@@ -1,7 +1,10 @@
 package boatcraft.compatibility
 
 import java.util
+
+import scala.Array.canBuildFrom
 import scala.collection.JavaConversions.asScalaBuffer
+
 import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.api.modifiers.Block
 import boatcraft.api.modifiers.Material
@@ -25,8 +28,7 @@ import boatcraft.compatibility.vanilla.modifiers.materials.wood.Spruce
 import boatcraft.core.BoatCraft
 import boatcraft.core.GUIHandler
 import boatcraft.core.modifiers.blocks.Empty
-import boatcraft.core.utilities.Recipes
-import cpw.mods.fml.common.Mod
+import boatcraft.core.utilities.Helper
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.registry.GameRegistry
@@ -36,7 +38,6 @@ import net.minecraft.item.crafting.CraftingManager
 import net.minecraft.item.crafting.IRecipe
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.oredict.ShapedOreRecipe
-import boatcraft.core.utilities.Helper
 
 object Vanilla extends CompatModule {
 
@@ -61,14 +62,17 @@ object Vanilla extends CompatModule {
 		materials = materials ++ crystalMaterials
 	}
 
-	override def doPostInit(event: FMLPostInitializationEvent) {
+	//FIXME What's this for? Also, the boat layout has changed
+	/*override def doPostInit(event: FMLPostInitializationEvent) {
 		val toRemove = new util.ArrayList[IRecipe]
 
 		for (recipe <- CraftingManager.getInstance.getRecipeList) {
 			recipe match {
-				case recipe: IRecipe if !recipe.isInstanceOf[ShapedOreRecipe] && recipe.getRecipeOutput != null && recipe.getRecipeOutput.stackTagCompound != null && recipe.getRecipeOutput.stackTagCompound.getString("material")
-					!= null && recipe.getRecipeOutput.stackTagCompound.getString("material")
-					.equals(OreDict_Wood toString) =>
+				case recipe: IRecipe if !recipe.isInstanceOf[ShapedOreRecipe]
+						&& recipe.getRecipeOutput != null
+						&& recipe.getRecipeOutput.stackTagCompound != null
+						&& recipe.getRecipeOutput.stackTagCompound.getString("material") != null
+						&& recipe.getRecipeOutput.stackTagCompound.getString("material").equals(OreDict_Wood toString) =>
 					toRemove add recipe
 					log info "Removed non-oredict ore-dict wood boat recipe: " + recipe
 				case _ =>
@@ -76,7 +80,7 @@ object Vanilla extends CompatModule {
 		}
 
 		CraftingManager.getInstance.getRecipeList removeAll toRemove
-	}
+	}*/
 
 	override protected def getMaterials = materials
 

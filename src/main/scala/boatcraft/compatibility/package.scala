@@ -6,14 +6,14 @@ import boatcraft.core.BoatCraft
 import scala.collection.mutable
 
 package object compatibility {
-	var maxID = 0
 
 	val mods = mutable.HashMap[String, CompatModule](
 		("", Vanilla),
 		("IronChest", IronChests),
 		("Thaumcraft", Thaumcraft),
 		("IC2", IC2),
-		("BuildCraft|Factory", BuildCraft))
+		("BuildCraft|Factory", BuildCraft),
+		("Forestry", Forestry))
 
 	def registerModifiers {
 		for (module <- mods) {
