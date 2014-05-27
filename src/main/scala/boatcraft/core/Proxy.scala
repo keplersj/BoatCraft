@@ -8,14 +8,14 @@ import boatcraft.api.boat.ItemCustomBoat
 import cpw.mods.fml.common.registry.GameRegistry
 import boatcraft.core.blocks.BlockDock
 import boatcraft.core.blocks.BlockDockAddon
+import boatcraft.core.blocks.items.ItemDockAddon
 
 object Proxy {
 
 	class CommonProxy {
-		def registerBlocks
-		{
+		def registerBlocks {
             GameRegistry.registerBlock(BlockDock, "dock")
-            GameRegistry.registerBlock(BlockDockAddon, "dockAddon")
+            GameRegistry.registerBlock(BlockDockAddon, classOf[ItemDockAddon], "dockAddon")
 		}
 
 		def registerEntities {

@@ -20,7 +20,7 @@ task deobfJar(type: Jar) {
 }
 
 // Add in a jar containing the ScalaDocs.
-task docs(type: Jar) {
+task docs(type: Jar, dependsOn: scaladoc) {
     from scaladoc.destinationDir
     classifier = 'docs'
 }

@@ -13,6 +13,7 @@ import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import ic2.api.item.IC2Items
+import boatcraft.core.utilities.Helper
 
 object IC2 extends CompatModule {
 	override protected def doPreInit(e: FMLPreInitializationEvent) {
@@ -21,8 +22,8 @@ object IC2 extends CompatModule {
 	
 	override protected def doPostInit(e: FMLPostInitializationEvent) {
 		try {
-			Recipes.removeRecipe(IC2Items getItem "boatRubber")
-			Recipes.removeRecipe(IC2Items getItem "boatCarbon")
+			Helper.Recipe.removeRecipe(IC2Items getItem "boatRubber")
+			Helper.Recipe.removeRecipe(IC2Items getItem "boatCarbon")
 		}
 		catch {
 			case ex: NoClassDefFoundError => //That's OK

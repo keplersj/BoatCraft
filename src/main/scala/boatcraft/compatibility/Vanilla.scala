@@ -2,6 +2,7 @@ package boatcraft.compatibility
 
 import java.util
 
+import scala.Array.canBuildFrom
 import scala.collection.JavaConversions.asScalaBuffer
 
 import boatcraft.api.boat.ItemCustomBoat
@@ -27,8 +28,7 @@ import boatcraft.compatibility.vanilla.modifiers.materials.wood.Spruce
 import boatcraft.core.BoatCraft
 import boatcraft.core.GUIHandler
 import boatcraft.core.modifiers.blocks.Empty
-import boatcraft.core.utilities.Recipes
-import cpw.mods.fml.common.Mod
+import boatcraft.core.utilities.Helper
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.registry.GameRegistry
@@ -62,14 +62,17 @@ object Vanilla extends CompatModule {
 		materials = materials ++ crystalMaterials
 	}
 
-	override def doPostInit(event: FMLPostInitializationEvent) {
+	//FIXME What's this for? Also, the boat layout has changed
+	/*override def doPostInit(event: FMLPostInitializationEvent) {
 		val toRemove = new util.ArrayList[IRecipe]
 
 		for (recipe <- CraftingManager.getInstance.getRecipeList) {
 			recipe match {
-				case recipe: IRecipe if !recipe.isInstanceOf[ShapedOreRecipe] && recipe.getRecipeOutput != null && recipe.getRecipeOutput.stackTagCompound != null && recipe.getRecipeOutput.stackTagCompound.getString("material")
-					!= null && recipe.getRecipeOutput.stackTagCompound.getString("material")
-					.equals(OreDict_Wood toString) =>
+				case recipe: IRecipe if !recipe.isInstanceOf[ShapedOreRecipe]
+						&& recipe.getRecipeOutput != null
+						&& recipe.getRecipeOutput.stackTagCompound != null
+						&& recipe.getRecipeOutput.stackTagCompound.getString("material") != null
+						&& recipe.getRecipeOutput.stackTagCompound.getString("material").equals(OreDict_Wood toString) =>
 					toRemove add recipe
 					log info "Removed non-oredict ore-dict wood boat recipe: " + recipe
 				case _ =>
@@ -77,7 +80,7 @@ object Vanilla extends CompatModule {
 		}
 
 		CraftingManager.getInstance.getRecipeList removeAll toRemove
-	}
+	}*/
 
 	override protected def getMaterials = materials
 
@@ -107,9 +110,9 @@ object Vanilla extends CompatModule {
 			Furnace,
 			Workbench,
 			TNT)
-
+	
 	private def replaceBoatRecipe {
-		Recipes removeRecipe new ItemStack(Items.boat)
+		Helper.Recipe.removeRecipe(new ItemStack(Items.boat))
 
 		val stack = new ItemStack(ItemCustomBoat)
 
@@ -119,7 +122,7 @@ object Vanilla extends CompatModule {
 
 		GameRegistry addShapelessRecipe(stack, Items.boat)
 	}
-
+	
 	private def readConfig {
 		useOreDictWood = BoatCraft.config get("Vanilla.General", "useOreDictWoods", false,
 			"If set to true, the different wood types will not be generated.\n" +
