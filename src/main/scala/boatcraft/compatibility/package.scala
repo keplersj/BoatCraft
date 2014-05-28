@@ -1,15 +1,26 @@
 package boatcraft
 
-import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLInitializationEvent, FMLPreInitializationEvent}
-import cpw.mods.fml.common.Loader
-import boatcraft.core.BoatCraft
 import scala.collection.mutable
+
+import boatcraft.core.BoatCraft
+import cpw.mods.fml.common.Loader
+import cpw.mods.fml.common.event.FMLInitializationEvent
+import cpw.mods.fml.common.event.FMLPostInitializationEvent
+import cpw.mods.fml.common.event.FMLPreInitializationEvent
 
 package object compatibility {
 	
 	var maxID = 0
 
-	var mods = new mutable.HashMap[String, CompatModule]
+	val mods = mutable.HashMap[String, CompatModule] (
+			("BuildCraft|Factory", BuildCraft),
+			("Forestry", Forestry),
+			("IC2", IC2),
+			("IronChest", IronChests),
+			("NotEnoughItems", NEI),
+			("Thaumcraft", Thaumcraft),
+			("", Vanilla)
+	)
 
 	def registerModifiers {
 		for (module <- mods) {

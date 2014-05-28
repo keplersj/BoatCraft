@@ -1,15 +1,16 @@
 package boatcraft.compatibility
 
+import boatcraft.compatibility.nei.BoatRecipeHandler
+import codechicken.nei.api.API
 import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
-import codechicken.nei.api.API
 
-object NEI extends CompatModule("NEI") {
+object NEI extends CompatModule {
 	
-	@Optional.Method(modid = "NEI")
+	@Optional.Method(modid = "NotEnoughItems")
 	override def doPostInit(event: FMLPostInitializationEvent) {
 		
-		API.registerRecipeHandler(CustomBoatRecipeHandler)
-		API.registerUsageHandler(CustomBoatRecipeHandler)
+		API.registerRecipeHandler(BoatRecipeHandler)
+		API.registerUsageHandler(BoatRecipeHandler)
 	}
 }

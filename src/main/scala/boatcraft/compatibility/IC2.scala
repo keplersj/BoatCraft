@@ -15,7 +15,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import ic2.api.item.IC2Items
 import boatcraft.core.utilities.Helper
 
-object IC2 extends CompatModule("IC2") {
+object IC2 extends CompatModule {
 	
 	@Optional.Method(modid = "IC2")
 	override protected def doPreInit(e: FMLPreInitializationEvent) {

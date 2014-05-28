@@ -6,9 +6,7 @@ import boatcraft.api.Registry
 import boatcraft.api.modifiers.{Block, Material, Modifier}
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
 
-abstract class CompatModule(modid: String) {
-	
-	mods += ((modid, this))
+abstract class CompatModule {
 	
 	private[boatcraft] var log: Logger = null
 

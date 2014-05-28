@@ -10,7 +10,7 @@ import thaumcraft.api.ThaumcraftApiHelper
 import thaumcraft.api.aspects.{Aspect, AspectList}
 import cpw.mods.fml.common.Optional
 
-object Thaumcraft extends CompatModule("Thaumcraft") {
+object Thaumcraft extends CompatModule {
 	
 	var boatAspects: AnyRef = null
 	

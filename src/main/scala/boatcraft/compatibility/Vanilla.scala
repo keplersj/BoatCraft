@@ -38,7 +38,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.oredict.ShapedOreRecipe
 import boatcraft.core.utilities.Helper
 
-object Vanilla extends CompatModule("") {
+object Vanilla extends CompatModule {
 
 	private var useOreDictWood = false
 

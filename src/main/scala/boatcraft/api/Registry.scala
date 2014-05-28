@@ -153,7 +153,7 @@ object Registry {
 				else stack.isItemEqual(other.asInstanceOf[StackHashWrapper].stack)
 			
 			override def hashCode =
-				if (stack == null) 0
+				if (stack == null || stack.getItem == null) 0
 				else (stack.getItem.getUnlocalizedName.hashCode << 16) ^ stack.getItemDamage
 		}
 }

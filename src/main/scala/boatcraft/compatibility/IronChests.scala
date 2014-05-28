@@ -12,7 +12,7 @@ import cpw.mods.fml.relauncher.Side
 import boatcraft.core.utilities.Helper
 import cpw.mods.fml.common.Optional
 
-object IronChests extends CompatModule("IronChest") {
+object IronChests extends CompatModule {
 	
 	@Optional.Method(modid = "IronChest")
 	override protected def doPreInit(e: FMLPreInitializationEvent) {

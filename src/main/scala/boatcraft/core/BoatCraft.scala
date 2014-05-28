@@ -17,6 +17,8 @@ import java.util
 import net.minecraftforge.common.MinecraftForge
 import boatcraft.core.modifiers.blocks.Empty
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
+import cpw.mods.fml.common.event.FMLServerStartingEvent
+import boatcraft.compatibility.nei.BoatRecipeHandler
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
@@ -76,6 +78,15 @@ object BoatCraft {
 	@Mod.EventHandler
 	def postInit(event: FMLPostInitializationEvent) {
 		compatibility postInit event
+	}
+	
+	@Mod.EventHandler
+	def serverStarting(event: FMLServerStartingEvent) {
+		
+		//Testing start:
+		var recipe = new BoatRecipeHandler.CachedBoatRecipe("iron", "furnace")
+		
+		println("\n\n" + recipe.getResult().item.getUnlocalizedName() + "\n\n")
 	}
 
 	private def printModInfo {
