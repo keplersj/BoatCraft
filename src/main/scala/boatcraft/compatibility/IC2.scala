@@ -15,11 +15,14 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import ic2.api.item.IC2Items
 import boatcraft.core.utilities.Helper
 
-object IC2 extends CompatModule {
+object IC2 extends CompatModule("IC2") {
+	
+	@Optional.Method(modid = "IC2")
 	override protected def doPreInit(e: FMLPreInitializationEvent) {
 		GUIHandler.handlerMap.put(code, IC2GuiHandler)
 	}
 	
+	@Optional.Method(modid = "IC2")
 	override protected def doPostInit(e: FMLPostInitializationEvent) {
 		try {
 			Helper.Recipe.removeRecipe(IC2Items getItem "boatRubber")

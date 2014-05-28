@@ -10,19 +10,22 @@ import boatcraft.core.BoatCraft
 import boatcraft.compatibility.ironchest.packets.IronChestSyncMessage
 import cpw.mods.fml.relauncher.Side
 import boatcraft.core.utilities.Helper
+import cpw.mods.fml.common.Optional
 
-object IronChests extends CompatModule {
+object IronChests extends CompatModule("IronChest") {
+	
+	@Optional.Method(modid = "IronChest")
 	override protected def doPreInit(e: FMLPreInitializationEvent) {
 		
 		GUIHandler.handlerMap.put(code, IronChestsGuiHandler)
 		
 		MinecraftForge.EVENT_BUS register IronChestsEventHandler
 		
-		BoatCraft.channel.registerMessage(classOf[GenericIronChest.MessageHandler],
-				classOf[IronChestSyncMessage],
+		BoatCraft.channel.registerMessage(classOf[GenericIronChest.MessageHandler], classOf[IronChestSyncMessage],
 				Helper.Packet.getNextID, Side.CLIENT)
 	}
 	
+	@Optional.Method(modid = "IronChest")
 	override protected def getBlocks = Array[Block](
 			Iron_Chest,
 			Gold_Chest,

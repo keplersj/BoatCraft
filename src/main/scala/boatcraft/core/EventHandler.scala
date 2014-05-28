@@ -1,10 +1,9 @@
 package boatcraft.core
 
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
-import net.minecraft.entity.player.EntityPlayer
-import boatcraft.api.modifiers.ExtendedBoat
 import boatcraft.api.boat.EntityCustomBoat
+import boatcraft.api.modifiers.ExtendedBoat
+import cpw.mods.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing
 
 object EventHandler {
 	

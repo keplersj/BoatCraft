@@ -10,7 +10,7 @@ import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.relauncher.Side
 
-object BuildCraft extends CompatModule {
+object BuildCraft extends CompatModule("BuildCraft|Factory") {
 	
 	@Optional.Method(modid = "BuildCraft|Factory")
 	override protected def doPreInit(event: FMLPreInitializationEvent)

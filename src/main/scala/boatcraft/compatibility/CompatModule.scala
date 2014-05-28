@@ -6,9 +6,9 @@ import boatcraft.api.Registry
 import boatcraft.api.modifiers.{Block, Material, Modifier}
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
 
-abstract class CompatModule {
+abstract class CompatModule(modid: String) {
 	
-	import CompatModule._
+	mods += ((modid, this))
 	
 	private[boatcraft] var log: Logger = null
 
@@ -46,9 +46,4 @@ abstract class CompatModule {
 
 	protected def doPostInit(event: FMLPostInitializationEvent) {
 	}
-}
-
-object CompatModule {
-	
-	var maxID = 0
 }

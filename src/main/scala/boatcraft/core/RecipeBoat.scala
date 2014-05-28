@@ -55,6 +55,8 @@ object RecipeBoat extends IRecipe {
 	
 	def getCraftingResult(inventory: InventoryCrafting): ItemStack = {
 		
+		if (inventory == null) return cacheResult
+		
 		cacheResult = null
 		
 		for (startI <- 0 until inventory.getSizeInventory / 3) for (startJ <- 0 until inventory.getSizeInventory / 2)

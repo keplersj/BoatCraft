@@ -13,13 +13,13 @@ class MaterialWood(meta: Int, name: String, localizedName: String) extends Mater
 		new ResourceLocation("boatcraft",
 			"textures/entity/boat/vanilla/wood/" +
 				name.toLowerCase.replace(' ', '_').replace("_wood", "") + ".png")
-	
+
 	override def getUnlocalizedName = name
-	
+
 	override def getLocalizedName = localizedName
-	
+
 	override def getItem = new ItemStack(Blocks.planks, 1, meta)
-	
+
 	override def getStick = new ItemStack(Items.stick)
 	
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
