@@ -24,7 +24,8 @@ import boatcraft.compatibility.nei.BoatRecipeHandler
 	name = "BoatCraft",
 	version = "2.0",
 	modLanguage = "scala",
-	dependencies = "after:IronChest;after:Thaumcraft;after:IC2;after:BuildCraft|Factory")
+	dependencies = "after:IronChest;after:Thaumcraft;after:IC2;after:BuildCraft|Factory;" +
+					"after:Forestry;after:NotEnoughItems")
 object BoatCraft {
 	@SidedProxy(modId = "boatcraft",
 		clientSide = "boatcraft.core.Proxy$ClientProxy",

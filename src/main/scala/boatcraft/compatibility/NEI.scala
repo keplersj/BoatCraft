@@ -10,7 +10,7 @@ object NEI extends CompatModule {
 	@Optional.Method(modid = "NotEnoughItems")
 	override def doPostInit(event: FMLPostInitializationEvent) {
 		
-		API.registerRecipeHandler(BoatRecipeHandler)
-		API.registerUsageHandler(BoatRecipeHandler)
+		API.registerRecipeHandler(new BoatRecipeHandler)
+		API.registerUsageHandler(new BoatRecipeHandler)
 	}
 }
