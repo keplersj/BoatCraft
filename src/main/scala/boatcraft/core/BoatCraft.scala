@@ -81,14 +81,14 @@ object BoatCraft {
 		compatibility postInit event
 	}
 	
-	@Mod.EventHandler
+	/*@Mod.EventHandler
 	def serverStarting(event: FMLServerStartingEvent) {
 		
 		//Testing start:
 		var recipe = new BoatRecipeHandler.CachedBoatRecipe("iron", "furnace")
 		
 		println("\n\n" + recipe.getResult().item.getUnlocalizedName() + "\n\n")
-	}
+	}*/
 
 	private def printModInfo {
 		log info "BoatCraft"
