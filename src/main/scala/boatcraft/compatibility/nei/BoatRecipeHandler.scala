@@ -14,6 +14,7 @@ import net.minecraft.inventory.InventoryCrafting
 import boatcraft.api.modifiers.Block
 import net.minecraft.init.Blocks
 import boatcraft.core.modifiers.blocks.Empty
+import codechicken.nei.NEIClientUtils
 
 class BoatRecipeHandler extends ShapedRecipeHandler {
 	
@@ -69,6 +70,18 @@ class BoatRecipeHandler extends ShapedRecipeHandler {
                 }
             }
         }
+		
+		def cycle {
+			val ingreds = getIngredients
+			
+            for (i <- 0 until 9)
+            {
+            	inventory.setInventorySlotContents(i, if (i < ingreds.size) ingreds.get(i).item else null)
+            	println(i + " " + (if (i < ingreds.size) ingreds.get(i).item else null))
+            }
+            
+            result = new PositionedStack(RecipeBoat.getCraftingResult(inventory), 119, 24)
+		}
 	}
 	
 	private var inventory: InventoryCrafting = new InventoryCraftingDummy
@@ -103,13 +116,24 @@ class BoatRecipeHandler extends ShapedRecipeHandler {
 	override def loadUsageRecipes(ingredient: ItemStack) {
 		
 		for (recipe <- mRecipes
-				if (Registry.materialItems.get(recipe.material).getItem.isItemEqual(ingredient)
+				if (recipe.material != null
+						&& ingredient.isItemEqual(Registry.findOfType[Material](recipe.material).getItem)
 						&& recipe.block == null)
-				|| (Registry.blockItems.get(recipe.material).getContent.isItemEqual(ingredient)
+				|| (recipe.block != null && recipe.block != Empty.toString
+						&& ingredient.isItemEqual(Registry.findOfType[Block](recipe.block).getContent)
 						&& recipe.material == null)) {
 			arecipes.add(recipe)
 		}
 	}
+	
+	override def onUpdate {
+        if (!NEIClientUtils.shiftKey) {
+            cycleticks += 1
+            if (cycleticks % 20 == 0)
+                for (recipe <- arecipes)
+                	recipe.asInstanceOf[CachedBoatRecipe].cycle;
+        }
+    }
 	
 	/*override def loadUsageRecipes(id: String, results: AnyRef*) {
 		if (id == "crafting" && getClass == BoatRecipeHandler.getClass)
