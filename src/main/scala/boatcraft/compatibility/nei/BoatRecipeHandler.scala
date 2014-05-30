@@ -72,14 +72,18 @@ class BoatRecipeHandler extends ShapedRecipeHandler {
         }
 		
 		def cycle {
+			
+			if (material != null && block != null) return
+			
 			val ingreds = getIngredients
 			
-            for (i <- 0 until 9)
+            for (i <- 0 until 3; j <- 0 until 2)
             {
-            	inventory.setInventorySlotContents(i, if (i < ingreds.size) ingreds.get(i).item else null)
-            	println(i + " " + (if (i < ingreds.size) ingreds.get(i).item else null))
+            	val pos1 = j * 3 + i
+            	val pos2 = i * 2 + j
+            	inventory.setInventorySlotContents(pos1,
+            			if (pos2 < ingreds.size) ingreds.get(pos2).item else null)
             }
-            
             result = new PositionedStack(RecipeBoat.getCraftingResult(inventory), 119, 24)
 		}
 	}
@@ -122,6 +126,7 @@ class BoatRecipeHandler extends ShapedRecipeHandler {
 				|| (recipe.block != null && recipe.block != Empty.toString
 						&& ingredient.isItemEqual(Registry.findOfType[Block](recipe.block).getContent)
 						&& recipe.material == null)) {
+			recipe.cycle
 			arecipes.add(recipe)
 		}
 	}
