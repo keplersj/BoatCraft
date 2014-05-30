@@ -69,8 +69,7 @@ object BoatCraft {
 		proxy registerEntities
 
 		proxy registerRenders
-
-		//Recipes addBoatRecipes
+		
 		GameRegistry.addRecipe(RecipeBoat)
 
 		compatibility init event
@@ -80,15 +79,6 @@ object BoatCraft {
 	def postInit(event: FMLPostInitializationEvent) {
 		compatibility postInit event
 	}
-	
-	/*@Mod.EventHandler
-	def serverStarting(event: FMLServerStartingEvent) {
-		
-		//Testing start:
-		var recipe = new BoatRecipeHandler.CachedBoatRecipe("iron", "furnace")
-		
-		println("\n\n" + recipe.getResult().item.getUnlocalizedName() + "\n\n")
-	}*/
 
 	private def printModInfo {
 		log info "BoatCraft"
