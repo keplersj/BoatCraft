@@ -16,7 +16,7 @@ end
 puts response.body['upload_path']
 puts response.body
 puts response
-/*
+
 response = Net::HTTP.new('hesinebugdev.com' + upload_path).start do |http|
     
-end*/
+end
