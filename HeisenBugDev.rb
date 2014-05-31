@@ -12,6 +12,7 @@ req.body = manifest.to_json
 response = Net::HTTP.new('heisenbugdev.com').start do |http|
   http.request(req)
 end
- 
+
+puts response.body['upload_path']
 puts response.body
 puts response
