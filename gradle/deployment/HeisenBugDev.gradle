@@ -70,18 +70,16 @@ task HeisenBugDev(dependsOn: assemble) { task ->
 		
 		http = new groovyx.net.http.HTTPBuilder( 'http://heisenbugdev.com/' + upload_path )
 		
-		tasks.withType(Jar) {
-			if (name != 'repackMinecraft') {
-				def file_type = classifier
-				def file = archivePath
+		tasks.withType(Jar) { task ->
+			if (task.name != 'repackMinecraft') {
 				
 				http.request( groovyx.net.http.Method.POST, groovyx.net.http.ContentType.JSON ) { req->
 					headers.'X-User-Email' = System.getenv().HBD_EMAIL_PROD
 					headers.'X-User-Token' = System.getenv().HBD_TOKEN_PROD
 		
 					body = [
-						'file_type': file_type
-						'file': file
+						'file_type': task.classifier
+						'file': task.archivePath
 					]
 		
 					response.'201' = {
