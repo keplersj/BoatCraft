@@ -1,4 +1,3 @@
-require 'base64'
 require 'json'
 require 'net/http'
 
@@ -26,21 +25,18 @@ req = Net::HTTP::Post.new(upload_path, 'Content-Type' => 'application/json')
 req['X-User-Email'] = ENV['HBD_EMAIL_PROD']
 req['X-User-Token'] = ENV['HBD_TOKEN_PROD']
 
-req.body = JSON.parse(
-'{
-    "file_type": "universal",
-    "file": "build/libs/BoatCraft-1.7.2-v2.0.1-100-universal.jar"
-}').to_json
+req.body =
+'{"file_type":"universal","file":"build/libs/BoatCraft-1.7.2-v2.0.1-100-universal.jar"}'
 
-p req.body
+puts req.body
 p req
 puts 'heisenbugdev.com' + upload_path
 
-if false then
+#if false then
 response = Net::HTTP.new('heisenbugdev.com').start do |http|
     http.request(req)
 end
 
 p response.body
 p response
-end
+#end
