@@ -78,7 +78,7 @@ task HeisenBugDev(dependsOn: assemble) { task ->
 					headers.'X-User-Token' = System.getenv().HBD_TOKEN_PROD
 		
 					body = [
-						'file_type': task.classifier
+						'file_type': task.classifier,
 						'file': task.archivePath
 					]
 		
