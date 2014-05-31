@@ -8,12 +8,11 @@ import boatcraft.compatibility.industrialcraft2.modifiers.blocks.Nuke
 import boatcraft.compatibility.industrialcraft2.modifiers.materials.Carbon
 import boatcraft.compatibility.industrialcraft2.modifiers.materials.Rubber
 import boatcraft.core.GUIHandler
-import boatcraft.core.utilities.Recipes
+import boatcraft.core.utilities.Helper
 import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import ic2.api.item.IC2Items
-import boatcraft.core.utilities.Helper
 
 object IC2 extends CompatModule {
 	
