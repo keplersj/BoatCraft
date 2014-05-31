@@ -1,3 +1,26 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven {
+			name = "forge"
+			url = "http://files.minecraftforge.net/maven"
+		}
+		maven {
+			name = "Sonatype Snapshots"
+			url = "https://oss.sonatype.org/content/repositories/snapshots/"
+		}
+		maven {
+			name = "Sonatype Releases"
+			url = "https://oss.sonatype.org/content/repositories/releases/"
+		}
+	}
+	dependencies {
+		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+	}
+}
+
+apply plugin: "curseforge"
+
 curse {
     apiKey = System.getenv().CURSEFORGE_API_KEY
     projectId = "62939" // my project url is http://minecraft.curseforge.com/mc-mods/62939-boatcraft/
