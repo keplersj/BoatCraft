@@ -30,7 +30,7 @@ req.body = JSON.parse(
 '{
     "file_type": "universal",
     "file": "build/libs/BoatCraft-1.7.2-v2.0.1-100-universal.jar"
-}')
+}').to_json
 
 p req.body
 p req
