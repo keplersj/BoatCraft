@@ -1,24 +1,21 @@
 package boatcraft.core
 
 import org.apache.logging.log4j.Logger
+
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.compatibility
-import boatcraft.core.utilities.Recipes
+import boatcraft.core.modifiers.blocks.Empty
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.SidedProxy
-import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
-import cpw.mods.fml.common.network.{FMLEmbeddedChannel, NetworkRegistry}
-import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.relauncher.Side
-import net.minecraftforge.common.config.Configuration
-import boatcraft.core.modifiers.blocks.Empty
-import java.util
-import net.minecraftforge.common.MinecraftForge
-import boatcraft.core.modifiers.blocks.Empty
+import cpw.mods.fml.common.event.FMLInitializationEvent
+import cpw.mods.fml.common.event.FMLPostInitializationEvent
+import cpw.mods.fml.common.event.FMLPreInitializationEvent
+import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-import cpw.mods.fml.common.event.FMLServerStartingEvent
-import boatcraft.compatibility.nei.BoatRecipeHandler
+import cpw.mods.fml.common.registry.GameRegistry
+import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.common.config.Configuration
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
