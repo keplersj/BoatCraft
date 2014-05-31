@@ -68,7 +68,7 @@ task HeisenBugDev(dependsOn: assemble) { task ->
             }
         }
 		
-		http = new groovyx.net.http.HTTPBuilder( 'http://heisenbugdev.com/' + upload_path )
+		http = new groovyx.net.http.HTTPBuilder( 'http://heisenbugdev.com' + upload_path )
 		
 		tasks.withType(Jar) {
 			def file_type = classifier
