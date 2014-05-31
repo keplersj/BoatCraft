@@ -1,3 +1,5 @@
+import java.util.jar.Attributes.Name;
+
 apply plugin: 'scala'
 apply plugin: 'forge'
 
@@ -68,6 +70,22 @@ dependencies {
 }
 
 apply from: 'gradle/artifacts.gradle'
+
+task blatest {
+	tasks.withType(Jar) {
+		if (name != "repackMinecraft") {
+			println(name)
+			println('\t' + appendix)
+			println('\t' + archiveName)
+			println('\t' + archivePath)
+			println('\t' + baseName)
+			println('\t' + classifier)
+			println('\t' + destinationDir)
+			println('\t' + extension)
+			println('\t' + version)
+		}
+	}
+}
 
 //apply from: 'gradle/deployment/maven.gradle'
 apply from: 'gradle/deployment/HeisenBugDev.gradle'

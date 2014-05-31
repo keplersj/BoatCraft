@@ -1,5 +1,6 @@
 // add some stuff to the version
 ext.gitVersion = getVersionName()
+ext.gitNumber = getBuildNumber()
 ext.gitBranch = getBranch()
 ext.gitSHA = getSHA()
 
@@ -16,6 +17,12 @@ def getVersionName()
     }
     def parts = stdout.toString().trim().split('-')
     return parts[0] + "-" + parts[1]
+}
+
+def getBuildNumber()
+{
+	def parts = getVersionName().split('-')
+	return parts[1]
 }
 
 def getBranch()
