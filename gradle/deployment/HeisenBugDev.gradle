@@ -70,7 +70,10 @@ task HeisenBugDev(dependsOn: assemble) { task ->
 		
 		http = new groovyx.net.http.HTTPBuilder( 'http://heisenbugdev.com/' + upload_path )
 		
-		tasks.withType(Jar) { task ->
+		tasks.withType(Jar) {
+			def file_type = classifier
+			def file = archivePath
+			
 			if (task.name != 'repackMinecraft') {
 				
 				http.request( groovyx.net.http.Method.POST, groovyx.net.http.ContentType.JSON ) { req->
@@ -78,8 +81,8 @@ task HeisenBugDev(dependsOn: assemble) { task ->
 					headers.'X-User-Token' = System.getenv().HBD_TOKEN_PROD
 		
 					body = [
-						'file_type': task.classifier,
-						'file': task.archivePath
+						'file_type': file_type,
+						'file': file
 					]
 		
 					response.'201' = {
