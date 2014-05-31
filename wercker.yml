@@ -26,4 +26,4 @@ deploy:
             code: ./gradlew -Sq --parallel --project-cache-dir=$WERCKER_CACHE_DIR assemble
         - script:
             name: heisenbugdev -  deploy the assembled artifacts
-            code: ruby HeisenBugDev.rb
+            code: ./gradlew HeisenBugDev
