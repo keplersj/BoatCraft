@@ -13,10 +13,14 @@ response = Net::HTTP.new('heisenbugdev.com').start do |http|
     http.request(req)
 end
 
-puts response.body['upload_path']
+json = JSON.parse(response.body)
+
+p json['upload_path']
 puts response.body
 puts response
 
-response = Net::HTTP.new('hesinebugdev.com' + upload_path).start do |http|
+if false do
+response = Net::HTTP.new('heisnebugdev.com' + upload_path).start do |http|
     
+end
 end
