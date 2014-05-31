@@ -54,7 +54,7 @@ task HeisenBugDev(dependsOn: assemble) { task ->
                 ]*/
             ]
 
-            response.success = { resp, json ->
+            response.'201' = { resp, json ->
                 println 'All is good.'
 				upload_path = json.'upload_path'
             }
