@@ -19,20 +19,6 @@ deploy:
             name: git stuff
             code: git checkout $WERCKER_GIT_BRANCH
         - script:
-            name: Setup JVM args
-            code: export JAVA_OPTS="-XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m"
-        - script:
-            name: gradle - assemble the deployable artifacts
-            code: ./gradlew -Sq --parallel --project-cache-dir=$WERCKER_CACHE_DIR assemble
-        - script:
-            name: heisenbugdev -  deploy the assembled artifacts
-            code: ruby HeisenBugDev.rb
-deploy:
-    steps:
-        - script:
-            name: git stuff
-            code: git checkout $WERCKER_GIT_BRANCH
-        - script:
             name: jvm arguments
             code: export JAVA_OPTS="-XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx1024m"
         - script:
