@@ -1,0 +1,43 @@
+core.module.linkingword=con
+
+core.forms.dinghy.name=Bote
+
+#_mat_ -> the localized material name
+#_form_ -> the localized form name
+#_link_ -> the localized linking word
+#_block_ -> the localized block name
+core.forms.dinghy.format=_mat_ _form_ _link_ _block_
+core.forms.dinghy.empty.format=_mat_ _form_
+
+vanilla.materials.wood.oredict.name=Madera
+
+vanilla.materials.wood.oak.name=Madera de Roble
+vanilla.materials.wood.spruce.name=Madera de Abeto
+vanilla.materials.wood.birch.name=Madera de Abedul
+vanilla.materials.wood.jungle.name=Madera de Selva
+vanilla.materials.wood.acacia.name=Madera de Acacia
+vanilla.materials.wood.darkoak.name=Madera de Roble Oscuro
+
+vanilla.materials.metal.iron.name=Hierro
+vanilla.materials.metal.gold.name=Oro
+
+vanilla.materials.crystal.obsidian.name=Obsidiana
+vanilla.materials.crystal.diamond.name=Diamante
+vanilla.materials.crystal.emerald.name=Esmeralda
+
+vanilla.blocks.chest.name=Cofre
+vanilla.blocks.furnace.name=Horno
+vanilla.blocks.workbench.name=Mesa de Trabajo
+vanilla.blocks.tnt.name=Dinamita
+
+vanilla.blocks.chest.gui.title=Bote con Cofre
+vanilla.blocks.furnace.gui.title=Bote con Horno
+vanilla.blocks.workbench.gui.title=Bote de Crafteo
+
+industrialcraft2.materials.rubber.name=Caucho
+industrialcraft2.materials.carbon.name=Fibra de Carbón
+
+industrialcraft2.blocks.generator.name=Generador
+industrialcraft2.blocks.nuke.name=Nuklear
+
+buildcraft.blocks.tank=Tanque
