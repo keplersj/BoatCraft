@@ -50,18 +50,18 @@ repositories {
 		name = "ChickenBones"
 		url = "http://chickenbones.net/maven/"
 	}
-	ivy {
+	/*ivy {
 		name = 'ThaumCraft 4 API'
 		artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/[module]-1.7.2-[revision](-[classifier])(.[ext])'
 		// artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/Thaumcraft-1.7.2-4.1.1.13-api.zip'
 		// artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/Thaumcraft-1.7.2-4.1.1.13.jar'
-	}
+	}*/
 }
 
 dependencies {
 	compile 'cpw.mods:ironchest:1.7.10-6.0.41.729:deobf'
 	compile 'net.industrial-craft:industrialcraft-2:2.2.500-experimental:dev'
-	compile 'Azanor:Thaumcraft:4.1.1.14:api@zip'
+	//compile 'Azanor:Thaumcraft:4.1.1.14:api@zip'
 	compile 'com.mod-buildcraft:buildcraft:6.0.16:dev'
 	compile 'net.sengir.forestry:forestry_1.7.2:2.4.1.27:dev'
 	compile 'codechicken:CodeChickenLib:1.7.10-1.1.1.93:dev'
