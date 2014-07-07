@@ -171,14 +171,10 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		var d0 = 0.0D
 		for (i <- 0 until b0) {
 			val d1 = boundingBox.minY +
-				(boundingBox.maxY - boundingBox.minY) * (i + 0).toDouble /
-					b0.toDouble -
-				0.125D
+				(boundingBox.maxY - boundingBox.minY) * (i + 0).toDouble / b0.toDouble - 0.125D
 			val d3 = boundingBox.minY +
-				(boundingBox.maxY - boundingBox.minY) * (i + 1).toDouble /
-					b0.toDouble -
-				0.125D
-			val axisalignedbb = AxisAlignedBB.getAABBPool.getAABB(boundingBox.minX, d1, boundingBox.minZ,
+				(boundingBox.maxY - boundingBox.minY) * (i + 1).toDouble / b0.toDouble - 0.125D
+			val axisalignedbb = AxisAlignedBB.getBoundingBox(boundingBox.minX, d1, boundingBox.minZ,
 				boundingBox.maxX, d3, boundingBox.maxZ)
 			if (Helper.AABB.isAABBInFluid(worldObj, axisalignedbb))
 			{
