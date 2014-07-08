@@ -23,7 +23,7 @@ object TNT extends Block {
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
 		if (player.getCurrentEquippedItem != null
 			&& player.getCurrentEquippedItem.getItem == Items.flint_and_steel) {
-			boat.getBlockData.asInstanceOf[TNTFuse].fuse = 80
+			boat.getBlockDataWithType[TNTFuse].fuse = 80
 			player.getCurrentEquippedItem.damageItem(1, player)
 			
 			true
@@ -51,10 +51,10 @@ object TNT extends Block {
 	}
 	
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		tag.setByte("Fuse", boat.getBlockData.asInstanceOf[TNTFuse].fuse.toByte)
+		tag.setByte("Fuse", boat.getBlockDataWithType[TNTFuse].fuse.toByte)
 	
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		boat.getBlockData.asInstanceOf[TNTFuse].fuse = tag.getByte("Fuse")
+		boat.getBlockDataWithType[TNTFuse].fuse = tag.getByte("Fuse")
 	
 	private class TNTFuse {
 		private[TNT] var fuse = -1

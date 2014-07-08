@@ -22,10 +22,10 @@ object Generator extends Block {
 	override def getBlockData(boat: EntityCustomBoat): AnyRef = new Inventory(boat)
 	
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		boat.getBlockData.asInstanceOf[Inventory] readFromNBT tag
+		boat.getBlockDataWithType[Inventory] readFromNBT tag
 	
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		boat.getBlockData.asInstanceOf[Inventory] writeToNBT tag
+		boat.getBlockDataWithType[Inventory] writeToNBT tag
 
 	private[industrialcraft2] class Inventory(boat: EntityCustomBoat) extends TileEntityGenerator {
 		worldObj = boat.worldObj

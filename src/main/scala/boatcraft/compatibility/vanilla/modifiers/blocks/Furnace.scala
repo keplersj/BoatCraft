@@ -30,21 +30,19 @@ object Furnace extends Block {
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
 	{
 		if (player.isInstanceOf[EntityPlayerMP])
-			player func_146101_a boat.asInstanceOf[EntityCustomBoat]
-				.getBlockData.asInstanceOf[Inventory]
+			player func_146101_a boat.asInstanceOf[EntityCustomBoat].getBlockDataWithType[Inventory]
 		
 		true
 	}
 
 	override def update(boat: EntityCustomBoat) =
-		(boat.asInstanceOf[EntityCustomBoat].getBlockData.asInstanceOf[Inventory]
-			updateEntity())
+		boat.asInstanceOf[EntityCustomBoat].getBlockDataWithType[Inventory].updateEntity
 
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		boat.asInstanceOf[EntityCustomBoat].getBlockData.asInstanceOf[Inventory] readFromNBT tag
+		boat.asInstanceOf[EntityCustomBoat].getBlockDataWithType[Inventory] readFromNBT tag
 
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		boat.asInstanceOf[EntityCustomBoat].getBlockData.asInstanceOf[Inventory] writeToNBT tag
+		boat.asInstanceOf[EntityCustomBoat].getBlockDataWithType[Inventory] writeToNBT tag
 
 	private class Inventory(boat: EntityCustomBoat) extends TileEntityFurnace {
 		worldObj = boat.worldObj

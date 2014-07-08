@@ -4,8 +4,8 @@ import boatcraft.api.boat.EntityCustomBoat
 import boatcraft.api.modifiers.Block
 import boatcraft.compatibility.buildcraft.packets.TankSyncMessage
 import boatcraft.core.BoatCraft
-import buildcraft.BuildCraftFactory
-import buildcraft.factory.TileTank
+/*import buildcraft.BuildCraftFactory
+import buildcraft.factory.TileTank*/
 import cpw.mods.fml.common.FMLCommonHandler
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.network.simpleimpl.IMessage
@@ -20,7 +20,7 @@ import net.minecraftforge.fluids.FluidStack
 
 object Tank extends Block {
 	
-	override def getBlock = BuildCraftFactory.tankBlock
+	/*override def getBlock = BuildCraftFactory.tankBlock
 	
 	override def getUnlocalizedName = "Tank"
 	
@@ -88,10 +88,10 @@ object Tank extends Block {
 	}
 	
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-	  boat.getBlockData.asInstanceOf[Logic].tankManager.readFromNBT(tag)
+	  boat.getBlockDataWithType[Logic].tankManager.readFromNBT(tag)
 	
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-	  boat.getBlockData.asInstanceOf[Logic].tankManager.writeToNBT(tag)
+	  boat.getBlockDataWithType[Logic].tankManager.writeToNBT(tag)
 	
 	private class Logic(boat: EntityCustomBoat) extends TileTank
 	{
@@ -102,7 +102,7 @@ object Tank extends Block {
 		override def getTopTank = this
 		
 		override def moveFluidBelow {}
-	}
+	}*/
 	
 	class MessageHandler extends IMessageHandler[TankSyncMessage, IMessage] {
 		
@@ -111,13 +111,13 @@ object Tank extends Block {
 			/*BoatCraft.log.info(String.format("Receiving Tank sync data:\n\t%s %s %s %s",
 					message.entityID.toString,
 					message.fluidID.toString, message.amount.toString, message.color.toString))*/
-			
+			/*
 			var boat = FMLCommonHandler.instance.getMinecraftServerInstance.getEntityWorld.getEntityByID(message.entityID)
 						.asInstanceOf[EntityCustomBoat]
 			var logic = boat.getBlockData.asInstanceOf[Logic]
 			
 			logic.tank.setFluid(new FluidStack(message.fluidID, message.amount))
-			logic.tank.colorRenderCache = message.color
+			logic.tank.colorRenderCache = message.color*/
 			
 			return null
 		}

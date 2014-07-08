@@ -484,10 +484,12 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 
 	private var blockData: AnyRef = null
 
-	def getBlockData = {
+	def getBlockData: AnyRef = {
 		if (blockData == null) blockData = getBlock getBlockData this
-		blockData
+		return blockData
 	}
+	
+	def getBlockDataWithType[T] = getBlockData.asInstanceOf[T]
 	
 	def getSpeedMultiplier = getMaterial.getSpeedMultiplier * getBlock.getSpeedMultiplier
 	
