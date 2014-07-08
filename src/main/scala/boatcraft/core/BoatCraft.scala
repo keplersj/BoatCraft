@@ -1,7 +1,6 @@
 package boatcraft.core
 
 import org.apache.logging.log4j.Logger
-
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.compatibility
@@ -16,6 +15,9 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.config.Configuration
+import net.minecraft.init.Items
+import net.minecraft.item.ItemStack
+import net.minecraftforge.oredict.OreDictionary
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
@@ -68,6 +70,8 @@ object BoatCraft {
 		proxy registerRenders
 		
 		GameRegistry.addRecipe(RecipeBoat)
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.boat),
+				new ItemStack(ItemCustomBoat, 1, OreDictionary.WILDCARD_VALUE))
 
 		compatibility init event
 	}
