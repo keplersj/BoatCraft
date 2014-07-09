@@ -24,7 +24,7 @@ import net.minecraftforge.oredict.OreDictionary
 	version = "2.0",
 	modLanguage = "scala",
 	dependencies = "after:IronChest;after:Thaumcraft;after:IC2;after:BuildCraft|Factory;" +
-					"after:Forestry;after:NotEnoughItems")
+				"after:Forestry;after:NotEnoughItems;after:CoFHAPI|energy")
 object BoatCraft {
 	@SidedProxy(modId = "boatcraft",
 		clientSide = "boatcraft.core.Proxy$ClientProxy",
