@@ -76,7 +76,7 @@ class ItemCustomBoat extends ItemBoat {
 		val d0 = player.prevPosX + (player.posX - player.prevPosX) * f.asInstanceOf[Double]
 		val d1 = player.prevPosY + (player.posY - player.prevPosY) * f + 1.62D - player.yOffset
 		val d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * f.asInstanceOf[Double]
-		val vec3 = world.getWorldVec3Pool.getVecFromPool(d0, d1, d2)
+		val vec3 = Vec3.createVectorHelper(d0, d1, d2)
 		val f3 = MathHelper.cos(-f2 * 0.017453292F - Math.PI.asInstanceOf[Float])
 		val f4 = MathHelper.sin(-f2 * 0.017453292F - Math.PI.asInstanceOf[Float])
 		val f5 = -MathHelper.cos(-f1 * 0.017453292F)

@@ -34,10 +34,10 @@ abstract class GenericIronChest(chestType: IronChestType) extends Block {
 		new Inventory(boat, chestType)
 
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		Helper.NBT writeChestToNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
+		Helper.NBT writeChestToNBT(boat.getBlockDataWithType[Inventory], tag)
 
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		Helper.NBT readChestFromNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
+		Helper.NBT readChestFromNBT(boat.getBlockDataWithType[Inventory], tag)
 
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) = {
 		val stack = player.getCurrentEquippedItem
@@ -53,7 +53,7 @@ abstract class GenericIronChest(chestType: IronChestType) extends Block {
 					.friendlyName replaceAll(" ", "") toLowerCase)
 
 				for (i <- 0 until newTE.getSizeInventory) {
-					boat.asInstanceOf[EntityCustomBoat].getBlockData.asInstanceOf[Inventory] setInventorySlotContents(
+					boat.asInstanceOf[EntityCustomBoat].getBlockDataWithType[Inventory] setInventorySlotContents(
 						i, newTE getStackInSlot i)
 				}
 			}

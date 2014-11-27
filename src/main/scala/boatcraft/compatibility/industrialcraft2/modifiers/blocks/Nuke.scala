@@ -29,7 +29,7 @@ object Nuke extends Block {
 		if (player.getCurrentEquippedItem != null
 			&& (player.getCurrentEquippedItem.getItem == Items.flint_and_steel
 				|| player.getCurrentEquippedItem.getItem == Items.fire_charge)) {
-			boat.getBlockData.asInstanceOf[NukeFuse].fuse = 300
+			boat.getBlockDataWithType[NukeFuse].fuse = 300
 		}
 		else if (player.isInstanceOf[EntityPlayerMP]) {
 			IC2.log info "Sent GUI request for GUI " + ((IC2.code << 6) | 1) + " and entity " + boat.getEntityId
@@ -55,15 +55,15 @@ object Nuke extends Block {
 	}
 	
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		boat.getBlockData.asInstanceOf[NukeFuse].writeToNBT(tag)
+		boat.getBlockDataWithType[NukeFuse].writeToNBT(tag)
 	
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		boat.getBlockData.asInstanceOf[NukeFuse].readFromNBT(tag)
+		boat.getBlockDataWithType[NukeFuse].readFromNBT(tag)
 	
 	private class NukeFuse(boat: EntityCustomBoat) extends TileEntityNuke {
 		worldObj = boat.worldObj
 		var fuse = -1
 		
-		override def getInventoryName() = "Nuked Boat"
+		override def getInventoryName = "Nuked Boat"
 	}
 }

@@ -25,16 +25,16 @@ object Chest extends Block {
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
 	{
 		if (player.isInstanceOf[EntityPlayerMP])
-			player displayGUIChest boat.getBlockData.asInstanceOf[Inventory]
+			player displayGUIChest boat.getBlockDataWithType[Inventory]
 		
 		true
 	}
 
 	override def writeStateToNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		Helper.NBT writeChestToNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
+		Helper.NBT writeChestToNBT(boat.getBlockDataWithType[Inventory], tag)
 
 	override def readStateFromNBT(boat: EntityCustomBoat, tag: NBTTagCompound) =
-		Helper.NBT readChestFromNBT(boat.getBlockData.asInstanceOf[Inventory], tag)
+		Helper.NBT readChestFromNBT(boat.getBlockDataWithType[Inventory], tag)
 
 	private class Inventory(boat: EntityCustomBoat) extends TileEntityChest {
 		worldObj = boat.worldObj

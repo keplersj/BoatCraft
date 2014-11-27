@@ -36,7 +36,7 @@ object IronChestsEventHandler {
 					.friendlyName replaceAll(" ", "") toLowerCase)
 
 				for (i <- 0 until newTE.getSizeInventory) {
-					boat.getBlockData.asInstanceOf[IInventory] setInventorySlotContents(i, newTE getStackInSlot i)
+					boat.getBlockDataWithType[IInventory] setInventorySlotContents(i, newTE getStackInSlot i)
 				}
 			}
 		}

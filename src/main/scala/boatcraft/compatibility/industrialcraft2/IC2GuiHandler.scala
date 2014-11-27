@@ -17,7 +17,8 @@ object IC2GuiHandler extends IGuiHandler {
 		return id match {
 			case 0 => ??? //TODO Generator
 			case 1 =>
-				new GuiNuke(new ContainerNuke(player, world.getEntityByID(x).asInstanceOf[EntityCustomBoat].getBlockData.asInstanceOf[TileEntityNuke]))
+				new GuiNuke(new ContainerNuke(player,
+						world.getEntityByID(x).asInstanceOf[EntityCustomBoat].getBlockDataWithType[TileEntityNuke]))
 			case _ => null
 		}
 	}
@@ -28,7 +29,8 @@ object IC2GuiHandler extends IGuiHandler {
 		return id match {
 			case 0 => ??? //TODO Generator
 			case 1 =>
-				new ContainerNuke(player, world.getEntityByID(x).asInstanceOf[EntityCustomBoat].getBlockData.asInstanceOf[TileEntityNuke])
+				new ContainerNuke(player,
+						world.getEntityByID(x).asInstanceOf[EntityCustomBoat].getBlockDataWithType[TileEntityNuke])
 			case _ => null
 		}
 	}
