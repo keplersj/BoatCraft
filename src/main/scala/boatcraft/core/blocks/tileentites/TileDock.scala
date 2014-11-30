@@ -4,27 +4,29 @@ import boatcraft.api.boat.EntityCustomBoat
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.world.World
-import net.minecraftforge.common.util.ForgeDirection
 import net.minecraft.entity.Entity
+import net.minecraft.util.EnumFacing
+import boatcraft.core.blocks.BlockDock
+import net.minecraft.server.gui.IUpdatePlayerListBox
 
-class TileDock extends TileEntity {
-	
+class TileDock extends TileEntity with IUpdatePlayerListBox
+{
 	var docked: EntityCustomBoat = null
 	
-	override def updateEntity
+	override def update
 	{
-		super.updateEntity
-		
-		val redstone = worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)
+		val redstone = worldObj.isBlockPowered(pos)
 		
 		if (docked == null && redstone)
 		{
-			val dir = ForgeDirection.getOrientation(getBlockMetadata)
+			val dir = worldObj.getBlockState(pos).getValue(BlockDock.FACING).asInstanceOf[EnumFacing]
 			docked =
 				worldObj.getEntitiesWithinAABB(classOf[EntityCustomBoat],
-					AxisAlignedBB.getBoundingBox(
-						xCoord, yCoord, zCoord,
-						xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ))
+					AxisAlignedBB.fromBounds(
+						pos.getX, pos.getY, pos.getZ,
+						pos.getX + dir.getFrontOffsetX,
+						pos.getY + dir.getFrontOffsetY,
+						pos.getZ + dir.getFrontOffsetZ))
 					match {
 				case list if !list.isEmpty => list.get(0).asInstanceOf[EntityCustomBoat]
 				case _ => null
@@ -56,13 +58,13 @@ class TileDock extends TileEntity {
 	
 	def getEffectCenter: (Double, Double, Double) =
 	{
-		import ForgeDirection._
-		ForgeDirection.getOrientation(getBlockMetadata) match
+		import EnumFacing._
+		worldObj.getBlockState(pos).getValue(BlockDock.FACING).asInstanceOf[EnumFacing] match
 		{
-            case NORTH => (xCoord + 0.5, yCoord, zCoord)
-            case SOUTH => (xCoord + 0.5, yCoord, zCoord + 1)
-            case WEST => (xCoord, yCoord, zCoord + 0.5)
-            case EAST => (xCoord + 1, yCoord, zCoord + 0.5)
+            case NORTH => (pos.getX + 0.5, pos.getY, pos.getZ)
+            case SOUTH => (pos.getX + 0.5, pos.getY, pos.getZ + 1)
+            case WEST => (pos.getX, pos.getY, pos.getZ + 0.5)
+            case EAST => (pos.getX + 1, pos.getY, pos.getZ + 0.5)
             case _ => null
 		}
 	}

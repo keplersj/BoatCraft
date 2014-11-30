@@ -5,7 +5,7 @@ import java.util.HashMap
 import scala.collection.JavaConversions.asScalaSet
 
 import boatcraft.core.BoatCraft
-import cpw.mods.fml.common.Mod
+import net.minecraftforge.fml.common.Mod
 import net.minecraft.entity.Entity
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
@@ -13,8 +13,8 @@ import net.minecraft.world.World
 import net.minecraftforge.common.IExtendedEntityProperties
 import net.minecraftforge.common.util.Constants
 
-class ExtendedBoat extends IExtendedEntityProperties {
-	
+class ExtendedBoat extends IExtendedEntityProperties
+{
 	var mountables = new HashMap[Mountable.Position, String]
 	
 	def init(boat: Entity, world: World)
@@ -52,6 +52,7 @@ class ExtendedBoat extends IExtendedEntityProperties {
 	def setMount(pos: Mountable.Position, mount: String) = mountables.put(pos, mount)
 }
 
-object ExtendedBoat {
+object ExtendedBoat
+{
 	val NAME = "BoatCraft-ExtendedBoatProps"
 }

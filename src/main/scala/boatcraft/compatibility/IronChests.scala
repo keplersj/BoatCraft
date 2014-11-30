@@ -2,15 +2,15 @@ package boatcraft.compatibility
 
 import boatcraft.compatibility.ironchest.{IronChestsEventHandler, IronChestsGuiHandler}
 import boatcraft.core.GUIHandler
-import cpw.mods.fml.common.event.FMLPreInitializationEvent
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.common.MinecraftForge
 import boatcraft.compatibility.ironchest.modifiers.blocks._
 import boatcraft.api.modifiers.Block
 import boatcraft.core.BoatCraft
 import boatcraft.compatibility.ironchest.packets.IronChestSyncMessage
-import cpw.mods.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.Side
 import boatcraft.core.utilities.Helper
-import cpw.mods.fml.common.Optional
+import net.minecraftforge.fml.common.Optional
 
 object IronChests extends CompatModule {
 	

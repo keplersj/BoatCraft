@@ -5,7 +5,7 @@ import boatcraft.api.getCustomBoat
 import boatcraft.api.modifiers
 import boatcraft.api.modifiers.ExtendedBoat
 import boatcraft.api.modifiers.Mountable
-import cpw.mods.fml.common.ObfuscationReflectionHelper
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper
 import net.minecraft.block.material.Material
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
@@ -20,11 +20,14 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.DamageSource
+import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.World
 import net.minecraftforge.common.util.Constants
 import boatcraft.core.utilities.Helper
+import net.minecraft.util.BlockPos
+import net.minecraft.util.ChatComponentText
 
 /**
  * The main Boat entity class
@@ -34,12 +37,12 @@ import boatcraft.core.utilities.Helper
  * @param z The Z position of the Boat Entity in the world.
  */
 case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
-	extends EntityBoat(world, x, y, z) {
-	
+	extends EntityBoat(world, x, y, z)
+{
 	import EntityCustomBoat.{MATERIAL, BLOCK, NAME}
 	
 	//TODO var linkedTo: EntityCustomBoat = null
-
+	
 	def this(world: World) = this(world, 0, 0, 0)
 
 	override protected def entityInit {
@@ -63,7 +66,10 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		tag.setTag("blockTag", blockTag)
 	}
 
-	override protected def readEntityFromNBT(tag: NBTTagCompound) {
+	override protected def readEntityFromNBT(tag: NBTTagCompound)
+	{
+		println((tag getString "material") + " " + (tag getString "block"))
+		
 		setMaterial(tag getString "material")
 		setBlock(tag getString "block")
 		
@@ -77,7 +83,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	}
 
 	override def attackEntityFrom(source: DamageSource, amount: Float): Boolean =
-		if (isEntityInvulnerable)
+		if (func_180431_b(source))
 			false
 		else if (!worldObj.isRemote && !isDead) {
 			setForwardDirection(-getForwardDirection)
@@ -94,7 +100,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 				{
 					if (source.isFireDamage && getBlock.getContent != null)
 						entityDropItem(getBlock.getContent, 0)
-					else func_145778_a(Items.boat, 1, 0)
+					else dropItemWithOffset(Items.boat, 1, 0)
 				}
 				
 				setDead
@@ -169,12 +175,15 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		prevPosZ = posZ
 		val b0 = 5
 		var d0 = 0.0D
+		
+		val boundingBox = getBoundingBox
+		
 		for (i <- 0 until b0) {
 			val d1 = boundingBox.minY +
 				(boundingBox.maxY - boundingBox.minY) * (i + 0).toDouble / b0.toDouble - 0.125D
 			val d3 = boundingBox.minY +
 				(boundingBox.maxY - boundingBox.minY) * (i + 1).toDouble / b0.toDouble - 0.125D
-			val axisalignedbb = AxisAlignedBB.getBoundingBox(boundingBox.minX, d1, boundingBox.minZ,
+			val axisalignedbb = AxisAlignedBB.fromBounds(boundingBox.minX, d1, boundingBox.minZ,
 				boundingBox.maxX, d3, boundingBox.maxZ)
 			if (Helper.AABB.isAABBInFluid(worldObj, axisalignedbb))
 			{
@@ -187,6 +196,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		var d2 = 0.0
 		var d4 = 0.0
 		var j = 0
+		
 		if (d10 > 0.26249999999999996D) {
 			d2 = Math cos rotationYaw.toDouble * Math.PI / 180.0D
 			d4 = Math sin rotationYaw.toDouble * Math.PI / 180.0D
@@ -199,13 +209,14 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 				if (rand.nextBoolean) {
 					d8 = posX - d2 * d5 * 0.8D + d4 * d6
 					d9 = posZ - d4 * d5 * 0.8D - d2 * d6
-					worldObj.spawnParticle("splash", d8, posY - 0.125D, d9, motionX, motionY,
+					
+					worldObj.spawnParticle(EnumParticleTypes.WATER_SPLASH, d8, posY - 0.125D, d9, motionX, motionY,
 						motionZ)
 				}
 				else {
 					d8 = posX + d2 + d4 * d5 * 0.7D
 					d9 = posZ + d4 - d2 * d5 * 0.7D
-					worldObj.spawnParticle("splash", d8, posY - 0.125D, d9, motionX, motionY,
+					worldObj.spawnParticle(EnumParticleTypes.WATER_SPLASH, d8, posY - 0.125D, d9, motionX, motionY,
 						motionZ)
 				}
 				j = j + 1
@@ -300,13 +311,13 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 				j = MathHelper.floor_double(posZ + ((l / 2).toDouble - 0.5) * 0.8)
 				for (j1 <- 0 until 2) {
 					val k = MathHelper.floor_double(posY) + j1
-					val block = worldObj.getBlock(i1, k, j)
+					val block = worldObj.getBlockState(new BlockPos(i1, k, j)).getBlock
 					if (block == Blocks.snow_layer) {
-						worldObj.setBlockToAir(i1, k, j)
+						worldObj.setBlockToAir(new BlockPos(i1, k, j))
 						isCollidedHorizontally = false
 					}
 					else if (block == Blocks.waterlily) {
-						worldObj.func_147480_a(i1, k, j, true)
+						worldObj.destroyBlock(new BlockPos(i1, k, j), true)
 						isCollidedHorizontally = false
 					}
 				}
@@ -323,10 +334,10 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 					setDead()
 
 					for (l <- 0 until 3)
-						func_145778_a(Item.getItemFromBlock(Blocks.planks), 1, 0)
+						dropItemWithOffset(Item.getItemFromBlock(Blocks.planks), 1, 0)
 					
 					for (l <- 0 until 2)
-						func_145778_a(Items.stick, 1, 0)
+						dropItemWithOffset(Items.stick, 1, 0)
 				}
 			}
 			else {
@@ -372,7 +383,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	 * @param f How far from death spot should `@link item` be dropped
 	 * @return The entity of the item
 	 */
-	override def func_145778_a(item: Item, count: Int, f: Float): EntityItem = {
+	override def dropItemWithOffset(item: Item, count: Int, f: Float): EntityItem = {
 		var stack: ItemStack = new ItemStack(item, count)
 
 		if (item == Items.boat)
@@ -384,7 +395,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		
 			if (stack == null && rand.nextBoolean) stack = getMaterial.getItem
 		}
-		else return super.func_145778_a(item, count, f)
+		else return super.dropItemWithOffset(item, count, f)
 
 		if (stack != null) entityDropItem(stack, f)
 		else null
@@ -426,7 +437,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	 * A setter for the boat's material
 	 * @param material the new material
 	 */
-	def setMaterial(material: String) {
+	def setMaterial(material: String)
+	{
 		dataWatcher updateObject(MATERIAL, material)
 		isImmuneToFire = Registry.findOfType[modifiers.Material](material) isImmuneToFire
 	}
@@ -435,7 +447,8 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	 * A setter for the boat's modifier
 	 * @param block the new modifier
 	 */
-	def setBlock(block: String) {
+	def setBlock(block: String)
+	{
 		dataWatcher updateObject(BLOCK, block)
 		//Reset it so it gets updated when getBlockData is called again
 		blockData = null
@@ -463,7 +476,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	
 	def getMount(pos: Mountable.Position) = Registry.findOfType[Mountable](getMountName(pos))
 	
-	def hasMount(pos: Mountable.Position) = Registry.isRegisteredMountable(getMountName(pos))
+	def hasMount(pos: Mountable.Position) = false//TODORegistry.isRegisteredMountable(getMountName(pos))
 
 	/**
 	 * A getter for the name of the boat's material
@@ -479,9 +492,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	
 	def getMountName(pos: Mountable.Position) =
 		getExtendedProperties(ExtendedBoat.NAME).asInstanceOf[ExtendedBoat].getMount(pos)
-
-	def getName = dataWatcher getWatchableObjectString NAME
-
+	
 	private var blockData: AnyRef = null
 
 	def getBlockData: AnyRef = {
@@ -496,13 +507,14 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	def getCrashResistance = getMaterial.getCrashResistance * getBlock.getCrashResistance
 }
 
-object EntityCustomBoat {
-	
+object EntityCustomBoat
+{
 	private val MATERIAL = 20
 	private val BLOCK = 21
 	private val NAME = 22
 
-	private[api] object NoInventory extends IInventory {
+	private[api] object NoInventory extends IInventory
+	{
 		override def getSizeInventory = 0
 
 		override def getStackInSlot(slot: Int): ItemStack = null
@@ -513,9 +525,9 @@ object EntityCustomBoat {
 
 		override def setInventorySlotContents(slot: Int, stack: ItemStack) {}
 
-		override def getInventoryName = ""
+		override def getName = ""
 
-		override def hasCustomInventoryName = false
+		override def hasCustomName = false
 
 		override def getInventoryStackLimit = 0
 
@@ -523,11 +535,19 @@ object EntityCustomBoat {
 
 		override def isUseableByPlayer(player: EntityPlayer) = false
 
-		override def openInventory() {}
+		override def openInventory(player: EntityPlayer) {}
 
-		override def closeInventory() {}
+		override def closeInventory(player: EntityPlayer) {}
 
 		override def isItemValidForSlot(slot: Int, stack: ItemStack) = false
+		
+		override def clear() = {}
+		
+		override def getFieldCount = 0
+		override def getField(field: Int) = 0
+		override def setField(field: Int, value: Int) = {}
+		
+		override def getDisplayName = new ChatComponentText("")
 	}
 
 }

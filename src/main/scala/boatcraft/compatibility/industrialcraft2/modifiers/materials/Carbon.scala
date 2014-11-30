@@ -2,18 +2,19 @@ package boatcraft.compatibility.industrialcraft2.modifiers.materials
 
 import boatcraft.api.modifiers.Material
 import net.minecraft.util.ResourceLocation
-import ic2.api.item.IC2Items
+//import ic2.api.item.IC2Items
 
-object Carbon extends Material {
+object Carbon extends Material
+{
 	override def getTexture = new ResourceLocation("ic2", "textures/models/boatCarbon.png")
 
 	override def getUnlocalizedName = "Carbon Fibre"
 
 	override def getLocalizedName = "industrialcraft2.materials.carbon.name"
 
-	override def getItem = IC2Items getItem "carbonFiber"
+	/*override def getItem = IC2Items getItem "carbonFiber"
 
-	override def getStick = IC2Items getItem "coalDust"
+	override def getStick = IC2Items getItem "coalDust"*/
 
 	//TODO Balance! These are completely meaningless numbers, someone PLEASE balance it!
 	override def getCrashResistance = 2

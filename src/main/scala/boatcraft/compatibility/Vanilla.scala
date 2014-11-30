@@ -16,10 +16,10 @@ import boatcraft.core.BoatCraft
 import boatcraft.core.GUIHandler
 import boatcraft.core.modifiers.blocks.Empty
 import boatcraft.core.utilities.Helper
-import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.event.FMLPostInitializationEvent
-import cpw.mods.fml.common.event.FMLPreInitializationEvent
-import cpw.mods.fml.common.registry.GameRegistry
+import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
+import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
@@ -55,9 +55,11 @@ object Vanilla extends CompatModule {
 
 		for (recipe <- CraftingManager.getInstance.getRecipeList) {
 			recipe match {
-				case recipe: IRecipe if !recipe.isInstanceOf[ShapedOreRecipe] && recipe.getRecipeOutput != null && recipe.getRecipeOutput.stackTagCompound != null && recipe.getRecipeOutput.stackTagCompound.getString("material")
-					!= null && recipe.getRecipeOutput.stackTagCompound.getString("material")
-					.equals(OreDict_Wood toString) =>
+				case recipe: IRecipe
+					if !recipe.isInstanceOf[ShapedOreRecipe] && recipe.getRecipeOutput != null
+						&& recipe.getRecipeOutput.getTagCompound != null
+						&& recipe.getRecipeOutput.getTagCompound.getString("material") != null
+						&& recipe.getRecipeOutput.getTagCompound.getString("material").equals(OreDict_Wood toString) =>
 					toRemove add recipe
 					log info "Removed non-oredict ore-dict wood boat recipe: " + recipe
 				case _ =>
@@ -101,9 +103,10 @@ object Vanilla extends CompatModule {
 
 		val stack = new ItemStack(ItemCustomBoat)
 
-		stack.stackTagCompound = new NBTTagCompound
-		stack.stackTagCompound setString("material", Oak.toString)
-		stack.stackTagCompound setString("block", Empty.toString)
+		var stackTagCompound = new NBTTagCompound
+		stackTagCompound setString("material", Oak.toString)
+		stackTagCompound setString("block", Empty.toString)
+		stack.setTagCompound(stackTagCompound)
 
 		GameRegistry addShapelessRecipe(stack, Items.boat)
 	}

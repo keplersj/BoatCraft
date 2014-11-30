@@ -4,7 +4,7 @@ import org.apache.logging.log4j.Logger
 
 import boatcraft.api.Registry
 import boatcraft.api.modifiers.{Block, Material, Modifier}
-import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
+import net.minecraftforge.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
 
 abstract class CompatModule {
 	

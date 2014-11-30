@@ -1,11 +1,9 @@
 package boatcraft.core.utilities
 
 import java.util.ArrayList
-
 import scala.collection.JavaConversions.asScalaBuffer
-
 import boatcraft.core.BoatCraft
-import cpw.mods.fml.common.Mod
+import net.minecraftforge.fml.common.Mod
 import net.minecraft.init.Items
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
@@ -17,6 +15,8 @@ import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.MathHelper
 import net.minecraft.world.World
 import net.minecraftforge.common.util.Constants
+import net.minecraft.util.BlockPos
+import net.minecraft.block.BlockLiquid
 
 object Helper {
 	
@@ -59,11 +59,11 @@ object Helper {
 				{
 					for (i2 <- i1 until j1)
 					{
-						val block = world.getBlock(k1, l1, i2)
+						val blockState = world.getBlockState(new BlockPos(k1, l1, i2))
 	
-						if (block.getMaterial isLiquid)
+						if (blockState.getBlock.getMaterial isLiquid)
 						{
-							val j2 = world.getBlockMetadata(k1, l1, i2)
+							val j2 = (blockState.getValue(BlockLiquid.LEVEL)).asInstanceOf[Integer].intValue
 							var d0 = (l1 + 1).toDouble
 	
 							if (j2 < 8)

@@ -2,13 +2,13 @@ package boatcraft.core
 
 import boatcraft.api.boat.EntityCustomBoat
 import boatcraft.api.modifiers.ExtendedBoat
-import cpw.mods.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing
 import net.minecraftforge.event.entity.living.LivingHurtEvent
 
-object EventHandler {
-	
-	@SubscribeEvent
+object EventHandler
+{
+	/*@SubscribeEvent
 	def constructEntity(event: EntityConstructing)
 	{
 		if (!event.entity.isInstanceOf[EntityCustomBoat]) return
@@ -17,7 +17,7 @@ object EventHandler {
 		
 		if (boat.getExtendedProperties(ExtendedBoat.NAME) == null)
 			boat.registerExtendedProperties(ExtendedBoat.NAME, new ExtendedBoat)
-	}
+	}*/
 	
 	@SubscribeEvent
 	def hurtEntity(event: LivingHurtEvent)

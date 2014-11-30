@@ -13,7 +13,8 @@ import net.minecraft.util.ResourceLocation
 import boatcraft.api.boat.ItemCustomBoat
 
 /** Contains the methods needed to register Materials and Modifiers with BoatCraft:Core. */
-object Registry {
+object Registry
+{
 	/** The Map containing all of the registered Materials for BoatCraft:Core to create boats with. */
 	var materials: Map[String, Material] = new HashMap[String, Material]
 	
@@ -34,7 +35,8 @@ object Registry {
 	 *
 	 * @param registrar the object being registered
 	 */
-	def register(registrar: Any): Unit = registrar match {
+	def register(registrar: Any): Unit = registrar match
+	{
 		case material: Material =>
 			materials put(material toString, material)
 			materialItems.put(StackHashWrapper(material.getItem), material)
@@ -59,7 +61,8 @@ object Registry {
 	 *
 	 * @param unregistrant the object being unregistered
 	 */
-	def unregister(unregistrant: Any): Unit = unregistrant match {
+	def unregister(unregistrant: Any): Unit = unregistrant match
+	{
 		case material: Material =>
 			materials remove material.toString
 		case block: Block =>
@@ -82,7 +85,8 @@ object Registry {
 	 * @param name name of registered object
 	 * @return registered object
 	 */
-	def find(name: String): Modifier = name match {
+	def find(name: String): Modifier = name match
+	{
 		case _ if materials containsKey name =>
 			materials get name
 		case _ if blocks containsKey name =>
@@ -92,6 +96,7 @@ object Registry {
 		case _ =>
 			{
 				System.err println "Could not find: " + name
+				System.err println materials
 				null
 			}
 	}
@@ -121,8 +126,8 @@ object Registry {
 	def getMaterial(stack: ItemStack) =
 		if (stack.getItem.isInstanceOf[ItemCustomBoat])
 		{
-			if (stack.stackTagCompound == null) NoMaterial
-			else materials get (stack.stackTagCompound getString "material")
+			if (stack.getTagCompound == null) NoMaterial
+			else materials get (stack.getTagCompound getString "material")
 		}
 		else materialItems get StackHashWrapper(stack)
 
@@ -141,8 +146,8 @@ object Registry {
 		if (stack == null) Empty
 		else if (stack.getItem.isInstanceOf[ItemCustomBoat])
 		{
-			if (stack.stackTagCompound == null) Empty
-			else blocks get (stack.stackTagCompound getString "block")
+			if (stack.getTagCompound == null) Empty
+			else blocks get (stack.getTagCompound getString "block")
 		}
 		else blockItems get StackHashWrapper(stack)
 	

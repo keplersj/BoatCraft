@@ -1,10 +1,11 @@
 package boatcraft.api.modifiers
 
 import boatcraft.api.boat.EntityCustomBoat
-import net.minecraft.inventory.IInventory
+import net.minecraft.block.state.IBlockState
 import net.minecraft.item.ItemStack
 
-abstract class Block extends Modifier {
+abstract class Block extends Modifier
+{
 	/**
 	 * Boolean representing whether or not the player can mount a Boat, with this Modifier, on action-click
 	 *
@@ -18,15 +19,7 @@ abstract class Block extends Modifier {
 	 * @note NOT what's used to craft it!
 	 * @return block used for rendering
 	 */
-	@inline def getBlock: net.minecraft.block.Block = null
-
-	/**
-	 * The metadata of the Block to be rendered in a Boat
-	 *
-	 * @note NOT what's used to craft it!
-	 * @return the metadata of the block being rendering in the boat
-	 */
-	@inline def getMeta = 0
+	@inline def getBlock: IBlockState = null
 
 	/**
 	 * Should return a new instance of the inventory contained in this Modifier

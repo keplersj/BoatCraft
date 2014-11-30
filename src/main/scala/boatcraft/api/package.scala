@@ -33,12 +33,14 @@ package object api {
 	 *
 	 * @return the custom boat ItemStack
 	 */
-	def getCustomBoat(mat: String, block: String) = {
-		val stack = new ItemStack(ItemCustomBoat)
-		stack.stackTagCompound = new NBTTagCompound
-		stack.stackTagCompound.setString("material", mat)
-		stack.stackTagCompound.setString("block", block)
+	def getCustomBoat(mat: String, block: String): ItemStack = {
+		var stack = new ItemStack(ItemCustomBoat)
+		
+		var stackTagCompound = new NBTTagCompound
+		stackTagCompound.setString("material", mat)
+		stackTagCompound.setString("block", block)
+		stack.setTagCompound(stackTagCompound)
 
-		stack
+		return stack
 	}
 }

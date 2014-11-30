@@ -1,18 +1,18 @@
 package boatcraft.compatibility
 
-import scala.collection.JavaConversions.mapAsScalaMap
+/*import scala.collection.JavaConversions.mapAsScalaMap
 import boatcraft.api.{Registry, getCustomBoat}
-import cpw.mods.fml.common.event.FMLPreInitializationEvent
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraft.nbt.NBTTagString
 import thaumcraft.api.ThaumcraftApi
 import thaumcraft.api.ThaumcraftApi.EntityTagsNBT
 import thaumcraft.api.ThaumcraftApiHelper
 import thaumcraft.api.aspects.{Aspect, AspectList}
-import cpw.mods.fml.common.Optional
+import net.minecraftforge.fml.common.Optional*/
 
 object Thaumcraft extends CompatModule {
 	
-	var boatAspects: AnyRef = null
+	/*var boatAspects: AnyRef = null
 	
 	@Optional.Method(modid = "Thaumcraft")
 	override protected def doPreInit(e: FMLPreInitializationEvent) {
@@ -34,5 +34,5 @@ object Thaumcraft extends CompatModule {
 					new EntityTagsNBT("material", new NBTTagString(matName)),
 					new EntityTagsNBT("block", new NBTTagString(blockName)))
 			}
-	}
+	}*/
 }

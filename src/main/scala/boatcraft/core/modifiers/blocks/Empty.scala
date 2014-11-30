@@ -4,10 +4,11 @@ import boatcraft.api.modifiers.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.init.Blocks
 
-object Empty extends Block {
+object Empty extends Block
+{
 	override def isRideable = true
 
-	override def getBlock = Blocks.air
+	override def getBlock = Blocks.air.getDefaultState
 
 	override def getName = "Empty"
 

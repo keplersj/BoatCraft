@@ -1,6 +1,6 @@
 package boatcraft.compatibility.nei
 
-import codechicken.nei.recipe.ShapedRecipeHandler
+/*import codechicken.nei.recipe.ShapedRecipeHandler
 import java.util.List
 import net.minecraft.item.ItemStack
 import java.util.ArrayList
@@ -14,10 +14,11 @@ import net.minecraft.inventory.InventoryCrafting
 import boatcraft.api.modifiers.Block
 import net.minecraft.init.Blocks
 import boatcraft.core.modifiers.blocks.Empty
-import codechicken.nei.NEIClientUtils
+import codechicken.nei.NEIClientUtils*/
 
-class BoatRecipeHandler extends ShapedRecipeHandler {
-	
+class BoatRecipeHandler// extends ShapedRecipeHandler
+{
+	/*
 	class CachedBoatRecipe(val material: String, val block: String)
 		extends CachedShapedRecipe(0, 0, null, new ItemStack(Blocks.air)) {
 		
@@ -144,5 +145,5 @@ class BoatRecipeHandler extends ShapedRecipeHandler {
 		if (id == "crafting" && getClass == BoatRecipeHandler.getClass)
 			arecipes.addAll(mRecipes)
 		else super.loadUsageRecipes(id, results: _*)
-	}*/
+	}*/*/
 }

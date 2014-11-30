@@ -4,51 +4,55 @@ import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.world.World
 import boatcraft.core.blocks.tileentites.TileDock
-import net.minecraftforge.common.util.ForgeDirection
 import net.minecraft.entity.EntityLivingBase
 import com.ibm.icu.impl.duration.impl.Utils
 import net.minecraft.util.MathHelper
 import net.minecraft.item.ItemStack
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.block.BlockContainer
+import net.minecraft.util.EnumFacing
+import net.minecraft.util.BlockPos
+import net.minecraft.block.properties.PropertyInteger
+import net.minecraft.block.properties.PropertyDirection
+import java.util.Arrays
+import net.minecraft.block.state.IBlockState
 
-class BlockDock extends BlockContainer(Material.iron) {
+class BlockDock extends BlockContainer(Material.iron)
+{
+	import BlockDock._
+	import EnumFacing._
 	
 	setCreativeTab(CreativeTabs.tabRedstone)
-	setBlockName("dock")
+	setUnlocalizedName("dock")
 	
 	override def createNewTileEntity(world: World, meta: Int) = new TileDock
 	
-	override def onBlockPlacedBy(world: World, x: Int, y: Int, z: Int, entity: EntityLivingBase, stack: ItemStack) {
-		super.onBlockPlacedBy(world, x, y, z, entity, stack)
+	override def onBlockPlacedBy(world: World, pos: BlockPos, state: IBlockState, entity: EntityLivingBase, stack: ItemStack)
+	{
+		super.onBlockPlacedBy(world, pos, state, entity, stack)
 		
-		val orientationTable = Array[ForgeDirection](ForgeDirection.SOUTH,
-				ForgeDirection.WEST, ForgeDirection.NORTH, ForgeDirection.EAST)
+		val orientationTable = Array[EnumFacing](
+				EnumFacing.SOUTH, EnumFacing.WEST, EnumFacing.NORTH, EnumFacing.EAST)
 		val orientationIndex = MathHelper.floor_double((entity.rotationYaw + 45) / 90) & 3
 		
 		val orientation = orientationTable(orientationIndex)
-
-		world.setBlockMetadataWithNotify(x, y, z, orientation.getOpposite.ordinal, 1)
+		
+		world.setBlockState(pos, state.withProperty(BlockDock.FACING, orientation.getOpposite), 1)
 	}
 	
-	override def rotateBlock(world: World, x: Int, y: Int, z: Int, axis: ForgeDirection): Boolean = {
-		val meta = world.getBlockMetadata(x, y, z)
-
-		import ForgeDirection._
-		ForgeDirection.getOrientation(meta) match {
-			case WEST =>
-				world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.SOUTH.ordinal, 3)
-			case EAST =>
-				world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.NORTH.ordinal, 3)
-			case NORTH =>
-				world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.WEST.ordinal, 3)
-			case SOUTH =>
-				world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.EAST.ordinal, 3)
-			case _ => //NOOP
-		}
-		world.markBlockForUpdate(x, y, z)
+	override def rotateBlock(world: World, pos: BlockPos, axis: EnumFacing): Boolean =
+	{
+		if (axis != UP && axis != DOWN) return false;
+		
+		world.setBlockState(pos,
+							world.getBlockState(pos).cycleProperty(FACING))
 		return true
 	}
 }
 
 object BlockDock extends BlockDock
+{
+	import EnumFacing._
+	
+	final val FACING = PropertyDirection.create("facing", Arrays.asList(WEST, EAST, NORTH, SOUTH));
+}

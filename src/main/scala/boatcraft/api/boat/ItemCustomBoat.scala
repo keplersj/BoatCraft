@@ -4,8 +4,8 @@ import java.util
 import scala.collection.JavaConversions.mapAsScalaMap
 import boatcraft.api.Registry
 import boatcraft.core.modifiers.blocks.Empty
-import cpw.mods.fml.relauncher.SideOnly
-import cpw.mods.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
+import net.minecraftforge.fml.relauncher.Side
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
@@ -20,27 +20,34 @@ import net.minecraft.util.MovingObjectPosition
 import net.minecraft.util.Vec3
 import net.minecraft.world.World
 import net.minecraft.util.StatCollector
+import net.minecraft.util.BlockPos
 
 /**
  * The Item Class used for all items that can be deployed like a Boat.
  * Extends ItemBoat from Vanilla Minecraft.
  */
-class ItemCustomBoat extends ItemBoat {
+class ItemCustomBoat extends ItemBoat
+{
 	import ItemCustomBoat._
 	
 	hasSubtypes = true
 
 	@SideOnly(Side.CLIENT)
-	override def getSubItems(item: Item, tab: CreativeTabs, list: util.List[_]) {
+	override def getSubItems(item: Item, tab: CreativeTabs, list: util.List[_])
+	{
 		val stack = new ItemStack(item)
-		stack.stackTagCompound = new NBTTagCompound
-		for ((nameMat, material) <- Registry.materials) {
-			stack.stackTagCompound setString("material", nameMat)
-			for ((nameBlock, block) <- Registry.blocks) {
-				stack.stackTagCompound setString("block", nameBlock)
+		var stackTagCompound = new NBTTagCompound
+		
+		for ((nameMat, material) <- Registry.materials)
+		{
+			stackTagCompound setString("material", nameMat)
+			for ((nameBlock, block) <- Registry.blocks)
+			{
+				stackTagCompound setString("block", nameBlock)
 				list.asInstanceOf[util.List[ItemStack]] add stack.copy
 			}
 		}
+		stack.setTagCompound(stackTagCompound)
 	}
 	
 	override def getUnlocalizedName(stack: ItemStack) =
@@ -49,7 +56,8 @@ class ItemCustomBoat extends ItemBoat {
 			"." +
 			Registry.getBlock(stack)
 	
-	override def getItemStackDisplayName(stack: ItemStack): String = stack match {
+	override def getItemStackDisplayName(stack: ItemStack): String = stack match
+	{
 		case x if Registry.getBlock(stack) == Empty =>
 			//StatCollector.translateToLocal(Registry.getMaterial(stack).getLocalizedName) + " " + StatCollector.translateToLocal("core.forms.dinghy.name")
 			StatCollector.translateToLocalFormatted(
@@ -68,15 +76,16 @@ class ItemCustomBoat extends ItemBoat {
 			StatCollector.translateToLocal("core.forms.dinghy.name")
 	}
 	
-	override def onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack = {
+	override def onItemRightClick(stack: ItemStack, world: World, player: EntityPlayer): ItemStack =
+	{
 		val f = 1.0F
 		val f1 = player.prevRotationPitch +
 			(player.rotationPitch - player.prevRotationPitch) * f
 		val f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f
-		val d0 = player.prevPosX + (player.posX - player.prevPosX) * f.asInstanceOf[Double]
-		val d1 = player.prevPosY + (player.posY - player.prevPosY) * f + 1.62D - player.yOffset
-		val d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * f.asInstanceOf[Double]
-		val vec3 = Vec3.createVectorHelper(d0, d1, d2)
+		val d0 = player.prevPosX + (player.posX - player.prevPosX) * f.toDouble
+		val d1 = player.prevPosY + (player.posY - player.prevPosY) * f + 1.62D - player.getYOffset
+		val d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * f.toDouble
+		val vec3 = new Vec3(d0, d1, d2)
 		val f3 = MathHelper.cos(-f2 * 0.017453292F - Math.PI.asInstanceOf[Float])
 		val f4 = MathHelper.sin(-f2 * 0.017453292F - Math.PI.asInstanceOf[Float])
 		val f5 = -MathHelper.cos(-f1 * 0.017453292F)
@@ -91,21 +100,23 @@ class ItemCustomBoat extends ItemBoat {
 			world rayTraceBlocks(vec3, vec31, true)
 		if (movingobjectposition == null)
 			return stack
-		else {
+		else
+		{
 			val vec32: Vec3 = player getLook f
 			var flag: Boolean = false
 			val f9: Float = 1.0F
 			val list: util.List[_] = world.getEntitiesWithinAABBExcludingEntity(player,
-				player.boundingBox addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3)
-					expand(f9.asInstanceOf[Double], f9.asInstanceOf[Double], f9.asInstanceOf[Double]))
+				player.getBoundingBox.addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3)
+					.expand(f9.toDouble, f9.toDouble, f9.toDouble))
 			var i: Int = 0
-			for (i <- 0 until list.size()) {
+			for (i <- 0 until list.size())
+			{
 				val entity: Entity = list.get(i).asInstanceOf[Entity]
 
 				if (entity.canBeCollidedWith) {
 					val f10: Float = entity.getCollisionBorderSize
-					val axisalignedbb: AxisAlignedBB = entity.boundingBox.
-						expand(f10 toDouble, f10 toDouble, f10 toDouble)
+					val axisalignedbb: AxisAlignedBB =
+						entity.getBoundingBox.expand(f10 toDouble, f10 toDouble, f10 toDouble)
 
 					if (axisalignedbb isVecInside vec3)
 						flag = true
@@ -113,13 +124,14 @@ class ItemCustomBoat extends ItemBoat {
 			}
 
 			if (flag) return stack
-			else {
+			else
+			{
 				if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-					i = movingobjectposition.blockX
-					var j = movingobjectposition.blockY
-					val k = movingobjectposition.blockZ
-
-					if (world.getBlock(i, j, k) == Blocks.snow_layer)
+					var i = movingobjectposition.hitVec.xCoord
+					var j = movingobjectposition.hitVec.yCoord
+					var k = movingobjectposition.hitVec.zCoord
+					
+					if (world.getBlockState(new BlockPos(i, j, k)).getBlock == Blocks.snow_layer)
 						j = j - 1
 
 					var boat: EntityCustomBoat = null
@@ -133,10 +145,9 @@ class ItemCustomBoat extends ItemBoat {
 					boat.rotationYaw =
 						((MathHelper.floor_double(player.rotationYaw * 4.0 / 360.0 + 0.5) & 3) - 1) * 90
 
-					if (!world.getCollidingBoundingBoxes(boat,
-						boat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty)
+					if (!world.getCollidingBoundingBoxes(boat, boat.getBoundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty)
 						return stack
-
+					
 					if (!world.isRemote)
 						world spawnEntityInWorld boat
 

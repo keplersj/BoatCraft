@@ -7,10 +7,11 @@ import net.minecraft.entity.player.EntityPlayer
 import boatcraft.api.boat.EntityCustomBoat
 import net.minecraft.init.Items
 import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.util.EnumParticleTypes
 
-object TNT extends Block {
-	
-	override def getBlock = Blocks.tnt
+object TNT extends Block
+{
+	override def getBlock = Blocks.tnt.getDefaultState
 
 	override def getUnlocalizedName: String = "TNT"
 
@@ -30,7 +31,8 @@ object TNT extends Block {
 		}
 		else false
 
-	override def update(boat: EntityCustomBoat) {
+	override def update(boat: EntityCustomBoat)
+	{
 		var data = boat.getBlockData.asInstanceOf[TNTFuse]
 		
 		if (data.fuse == -1)
@@ -40,13 +42,15 @@ object TNT extends Block {
 			else return
 		}
 		
-		if (data.fuse == 0) {
+		if (data.fuse == 0)
+		{
 			boat.setDead()
 			boat.worldObj.createExplosion(boat, boat.posX, boat.posY, boat.posZ, 4, true)
 		}
-		else {
+		else
+		{
 			data.fuse -= 1
-			boat.worldObj.spawnParticle("smoke", boat.posX, boat.posY + 0.5, boat.posZ, 0, 0, 0)
+			boat.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, boat.posX, boat.posY + 0.5, boat.posZ, 0, 0, 0)
 		}
 	}
 	

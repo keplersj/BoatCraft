@@ -6,15 +6,14 @@ import boatcraft.compatibility.buildcraft.packets.TankSyncMessage
 import boatcraft.core.BoatCraft
 /*import buildcraft.BuildCraftFactory
 import buildcraft.factory.TileTank*/
-import cpw.mods.fml.common.FMLCommonHandler
-import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.network.simpleimpl.IMessage
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler
-import cpw.mods.fml.common.network.simpleimpl.MessageContext
+import net.minecraftforge.fml.common.FMLCommonHandler
+import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraftforge.common.util.ForgeDirection
 import net.minecraftforge.fluids.FluidContainerRegistry
 import net.minecraftforge.fluids.FluidStack
 
@@ -35,7 +34,7 @@ object Tank extends Block {
 		if (player.getCurrentEquippedItem == null) return false
 		var stack = player.getCurrentEquippedItem
 		var data = boat.getBlockData.asInstanceOf[Logic]
-		val fluid = data.getTankInfo(ForgeDirection.UNKNOWN)(0).fluid
+		val fluid = data.getTankInfo(EnumFacing.UNKNOWN)(0).fluid
 		if (FluidContainerRegistry.isEmptyContainer(stack))
 		{
 			val result = FluidContainerRegistry.fillFluidContainer(fluid, stack)
@@ -43,17 +42,17 @@ object Tank extends Block {
 			if (result == null) return false
 			
 			stack = result
-			data.drain(ForgeDirection.UNKNOWN, FluidContainerRegistry.getFluidForFilledItem(result), true)
+			data.drain(EnumFacing.UNKNOWN, FluidContainerRegistry.getFluidForFilledItem(result), true)
 		}
 		else if (FluidContainerRegistry.isFilledContainer(stack))
 		{
 		  val fluid = FluidContainerRegistry.getFluidForFilledItem(stack)
-			val result = data.fill(ForgeDirection.UNKNOWN, fluid, false)
+			val result = data.fill(EnumFacing.UNKNOWN, fluid, false)
 			
 			if (result != fluid.amount) return false
 			
 			stack = stack.getItem.getContainerItem(stack)
-			data.fill(ForgeDirection.UNKNOWN, fluid, true)
+			data.fill(EnumFacing.UNKNOWN, fluid, true)
 		}
 		else return false
 		

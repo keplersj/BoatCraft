@@ -1,19 +1,21 @@
 package boatcraft.core.blocks.tileentites
 
+import net.minecraft.server.gui.IUpdatePlayerListBox
 import net.minecraft.tileentity.TileEntity
-import net.minecraftforge.common.util.ForgeDirection
+import boatcraft.core.blocks.BlockDock
+import net.minecraft.util.EnumFacing
 
-class TileDockAddon extends TileEntity {
-	
+class TileDockAddon extends TileEntity with IUpdatePlayerListBox
+{
 	var parent: TileDock = null
 	
-	override def updateEntity
+	override def update
 	{
 		if (parent != null) return
 		var possible: TileDock = null
 		for (x <- -1 to 1) for (y <- -1 to 1 if y.abs != x.abs) for (z <- -1 to 1 if z.abs != x.abs && z.abs != y.abs)
 		{
-			worldObj.getTileEntity(xCoord + x, yCoord + y, zCoord + z) match
+			worldObj.getTileEntity(pos.add(x, y, z)) match
 			{
 				case dock: TileDock =>
 					if (possible == null && check(dock, x, y, z)) possible = dock
@@ -28,7 +30,7 @@ class TileDockAddon extends TileEntity {
 	
 	private def check(dock: TileDock, x: Int, y: Int, z: Int): Boolean =
 	{
-		val dir = ForgeDirection.getOrientation(dock.getBlockMetadata).getOpposite
-		return x != dir.offsetX && z != dir.offsetZ
+		val dir = worldObj.getBlockState(dock.getPos).getValue(BlockDock.FACING).asInstanceOf[EnumFacing].getOpposite
+		return x != dir.getFrontOffsetX && z != dir.getFrontOffsetZ
 	}
 }

@@ -1,19 +1,23 @@
 package boatcraft.core
 
-import net.minecraft.world.World
-import net.minecraft.inventory.InventoryCrafting
-import net.minecraft.item.crafting.IRecipe
-import net.minecraft.item.ItemStack
-import boatcraft.api.getCustomBoat
 import boatcraft.api.Registry
-import boatcraft.api.modifiers.Material
+import boatcraft.api.getCustomBoat
 import boatcraft.api.modifiers.Block
+import boatcraft.api.modifiers.Material
+import net.minecraft.inventory.InventoryCrafting
+import net.minecraft.item.ItemStack
+import net.minecraft.item.crafting.IRecipe
+import net.minecraft.world.World
+import net.minecraftforge.oredict.RecipeSorter
 
-object RecipeBoat extends IRecipe {
+object RecipeBoat extends IRecipe
+{
+	RecipeSorter.register("boatcraft:boat", getClass, RecipeSorter.Category.SHAPED,
+							"after:minecraft:shaped before:forge:shapedore")
 	
 	var cacheResult: ItemStack = null
 	
-	def matches(inventory: InventoryCrafting, world: World) = getCraftingResult(inventory) != null
+	override def matches(inventory: InventoryCrafting, world: World) = getCraftingResult(inventory) != null
 	
 	private def check(inventory: InventoryCrafting, startI: Int, startJ: Int): (Boolean, Material, Block) =
 	{
@@ -53,8 +57,8 @@ object RecipeBoat extends IRecipe {
 		return (true, material, block)
 	}
 	
-	def getCraftingResult(inventory: InventoryCrafting): ItemStack = {
-		
+	override def getCraftingResult(inventory: InventoryCrafting): ItemStack =
+	{
 		if (inventory == null) return cacheResult
 		
 		cacheResult = null
@@ -74,7 +78,20 @@ object RecipeBoat extends IRecipe {
 		return null
 	}
 	
-	def getRecipeSize = 6
+	override def getRecipeSize = 6
 	
-	def getRecipeOutput = cacheResult
+	override def getRecipeOutput = cacheResult
+	
+	override def func_179532_b(inventory: InventoryCrafting): Array[ItemStack] = 
+    {
+        val aitemstack = new Array[ItemStack](inventory.getSizeInventory);
+
+        for (i <- 0 until aitemstack.length)
+        {
+            val itemstack = inventory.getStackInSlot(i);
+            aitemstack(i) = net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack);
+        }
+
+        return aitemstack;
+    }
 }

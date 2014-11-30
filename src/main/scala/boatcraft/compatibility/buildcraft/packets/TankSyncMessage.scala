@@ -1,6 +1,6 @@
 package boatcraft.compatibility.buildcraft.packets
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import io.netty.buffer.ByteBuf
 
 class TankSyncMessage(var entityID: Int, var fluidID: Int, var amount: Int, var color: Int) extends IMessage {

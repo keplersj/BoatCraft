@@ -1,40 +1,39 @@
 package boatcraft.core.blocks.tileentites
 
-import net.minecraft.tileentity.TileEntity
-import net.minecraftforge.common.util.ForgeDirection
-import net.minecraftforge.fluids.IFluidHandler
-import net.minecraftforge.fluids.FluidTankInfo
+import net.minecraft.util.EnumFacing
 import net.minecraftforge.fluids.Fluid
 import net.minecraftforge.fluids.FluidStack
+import net.minecraftforge.fluids.FluidTankInfo
+import net.minecraftforge.fluids.IFluidHandler
 
-class TileFluidLoader extends TileDockAddon with IFluidHandler {
-	
-	override def canDrain(side: ForgeDirection, fluid: Fluid) =
+class TileFluidLoader extends TileDockAddon with IFluidHandler
+{
+	override def canDrain(side: EnumFacing, fluid: Fluid) =
 		chooseFluidHandlerOrElse(
 				(handler: IFluidHandler) => handler.canDrain(side, fluid),
 				false)
 	
-	override def canFill(side: ForgeDirection, fluid: Fluid) =
+	override def canFill(side: EnumFacing, fluid: Fluid) =
 		chooseFluidHandlerOrElse(
 				(handler: IFluidHandler) => handler.canFill(side, fluid),
 				false)
 	
-	override def drain(side: ForgeDirection, amount: Int, doDrain: Boolean) =
+	override def drain(side: EnumFacing, amount: Int, doDrain: Boolean) =
 		chooseFluidHandlerOrElse(
 				(handler: IFluidHandler) => handler.drain(side, amount, doDrain),
 				null)
 	
-	override def drain(side: ForgeDirection, resource: FluidStack, doDrain: Boolean) =
+	override def drain(side: EnumFacing, resource: FluidStack, doDrain: Boolean) =
 		chooseFluidHandlerOrElse(
 				(handler: IFluidHandler) => handler.drain(side, resource, doDrain),
 				null)
 	
-	override def fill(side: ForgeDirection, resource: FluidStack, doFill: Boolean) =
+	override def fill(side: EnumFacing, resource: FluidStack, doFill: Boolean) =
 		chooseFluidHandlerOrElse(
 				(handler: IFluidHandler) => handler.fill(side, resource, doFill),
 				0)
 	
-	override def getTankInfo(side: ForgeDirection) =
+	override def getTankInfo(side: EnumFacing) =
 		chooseFluidHandlerOrElse(
 				(handler: IFluidHandler) => handler.getTankInfo(side),
 				Array[FluidTankInfo]())

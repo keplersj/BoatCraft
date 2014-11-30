@@ -4,8 +4,8 @@ import java.util.List
 import boatcraft.core.blocks.tileentites.TileDockAddon
 import boatcraft.core.blocks.tileentites.TileFluidLoader
 import boatcraft.core.blocks.tileentites.TileItemLoader
-import cpw.mods.fml.relauncher.SideOnly
-import cpw.mods.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
+import net.minecraftforge.fml.relauncher.Side
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
 import net.minecraft.creativetab.CreativeTabs
@@ -16,7 +16,7 @@ import net.minecraft.world.World
 class BlockDockAddon extends BlockContainer(Material.iron) {
 	
 	setCreativeTab(CreativeTabs.tabRedstone)
-	setBlockName("dockAddon")
+	setUnlocalizedName("dockAddon")
     
     override def createNewTileEntity(world: World, meta: Int) = meta match
         {
