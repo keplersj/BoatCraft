@@ -1,17 +1,7 @@
 apply plugin: 'scala'
 
-buildscript {
-	repositories {
-		mavenCentral()
-		maven {
-			name = "Sonatype Snapshots"
-			url = "https://oss.sonatype.org/content/repositories/snapshots/"
-		}
-		maven {
-			name = "Sonatype Releases"
-			url = "https://oss.sonatype.org/content/repositories/releases/"
-		}
-	}
+repositories {
+	mavenCentral()
 }
 
 dependencies {
