@@ -1,6 +1,0 @@
-[submodule "Thaumcraft-API"]
-	path = src/api/java/thaumcraft/api
-	url = https://github.com/Azanor/thaumcraft-api.git
-[submodule "RF-API"]
-	path = src/api/java/cofh/api
-	url = https://github.com/Open-Code-Developers/RedstoneFlux-API.git
