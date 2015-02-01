@@ -2,10 +2,6 @@ package boatcraft.core
 
 import java.util
 
-import cpw.mods.fml.common.network.IGuiHandler
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.world.World
-
 object GUIHandler extends IGuiHandler {
 	var handlerMap = new util.HashMap[Int, IGuiHandler]
 

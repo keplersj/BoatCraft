@@ -1,8 +1,6 @@
 package boatcraft.api.modifiers
 
 import boatcraft.api.boat.EntityCustomBoat
-import net.minecraft.inventory.IInventory
-import net.minecraft.item.ItemStack
 
 abstract class Block extends Modifier {
 	/**

@@ -1,8 +1,5 @@
 package boatcraft.api.modifiers
 
-import net.minecraft.item.ItemStack
-import net.minecraft.util.ResourceLocation
-
 abstract class Material extends Modifier {
 	/**
 	 * The texture path for rendering the Boat in the world

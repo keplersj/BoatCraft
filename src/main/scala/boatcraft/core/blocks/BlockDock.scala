@@ -1,16 +1,6 @@
 package boatcraft.core.blocks
 
-import net.minecraft.block.Block
-import net.minecraft.block.material.Material
-import net.minecraft.world.World
 import boatcraft.core.blocks.tileentites.TileDock
-import net.minecraftforge.common.util.ForgeDirection
-import net.minecraft.entity.EntityLivingBase
-import com.ibm.icu.impl.duration.impl.Utils
-import net.minecraft.util.MathHelper
-import net.minecraft.item.ItemStack
-import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.block.BlockContainer
 
 class BlockDock extends BlockContainer(Material.iron) {
 	
@@ -33,8 +23,6 @@ class BlockDock extends BlockContainer(Material.iron) {
 	
 	override def rotateBlock(world: World, x: Int, y: Int, z: Int, axis: ForgeDirection): Boolean = {
 		val meta = world.getBlockMetadata(x, y, z)
-
-		import ForgeDirection._
 		ForgeDirection.getOrientation(meta) match {
 			case WEST =>
 				world.setBlockMetadataWithNotify(x, y, z, ForgeDirection.SOUTH.ordinal, 3)

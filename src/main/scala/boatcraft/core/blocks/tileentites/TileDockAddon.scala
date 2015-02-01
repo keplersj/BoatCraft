@@ -1,8 +1,5 @@
 package boatcraft.core.blocks.tileentites
 
-import net.minecraft.tileentity.TileEntity
-import net.minecraftforge.common.util.ForgeDirection
-
 class TileDockAddon extends TileEntity {
 	
 	var parent: TileDock = null

@@ -1,16 +1,12 @@
 package boatcraft.api
 
-import java.util.HashMap
-import java.util.Map
-import scala.collection.JavaConversions.iterableAsScalaIterable
-import boatcraft.api.modifiers.Block
-import boatcraft.api.modifiers.Material
-import boatcraft.api.modifiers.Modifier
-import boatcraft.api.modifiers.Mountable
-import boatcraft.core.modifiers.blocks.Empty
-import net.minecraft.item.ItemStack
-import net.minecraft.util.ResourceLocation
+import java.util.{HashMap, Map}
+
 import boatcraft.api.boat.ItemCustomBoat
+import boatcraft.api.modifiers.{Block, Material, Modifier, Mountable}
+import boatcraft.core.modifiers.blocks.Empty
+
+import scala.collection.JavaConversions.iterableAsScalaIterable
 
 /** Contains the methods needed to register Materials and Modifiers with BoatCraft:Core. */
 object Registry {

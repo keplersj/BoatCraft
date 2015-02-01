@@ -2,21 +2,7 @@ package boatcraft.core.utilities
 
 import java.util.ArrayList
 
-import scala.collection.JavaConversions.asScalaBuffer
-
 import boatcraft.core.BoatCraft
-import cpw.mods.fml.common.Mod
-import net.minecraft.init.Items
-import net.minecraft.inventory.IInventory
-import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.CraftingManager
-import net.minecraft.item.crafting.IRecipe
-import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.nbt.NBTTagList
-import net.minecraft.util.AxisAlignedBB
-import net.minecraft.util.MathHelper
-import net.minecraft.world.World
-import net.minecraftforge.common.util.Constants
 
 object Helper {
 	

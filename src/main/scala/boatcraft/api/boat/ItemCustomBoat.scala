@@ -1,32 +1,18 @@
 package boatcraft.api.boat
 
 import java.util
-import scala.collection.JavaConversions.mapAsScalaMap
+
 import boatcraft.api.Registry
 import boatcraft.core.modifiers.blocks.Empty
-import cpw.mods.fml.relauncher.SideOnly
-import cpw.mods.fml.relauncher.Side
-import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.entity.Entity
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Blocks
-import net.minecraft.item.Item
-import net.minecraft.item.ItemBoat
-import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.AxisAlignedBB
-import net.minecraft.util.MathHelper
-import net.minecraft.util.MovingObjectPosition
-import net.minecraft.util.Vec3
-import net.minecraft.world.World
-import net.minecraft.util.StatCollector
+
+import scala.collection.JavaConversions.mapAsScalaMap
 
 /**
  * The Item Class used for all items that can be deployed like a Boat.
  * Extends ItemBoat from Vanilla Minecraft.
  */
 class ItemCustomBoat extends ItemBoat {
-	import ItemCustomBoat._
+	import boatcraft.api.boat.ItemCustomBoat._
 	
 	hasSubtypes = true
 

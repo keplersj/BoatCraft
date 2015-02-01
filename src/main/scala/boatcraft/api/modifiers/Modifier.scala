@@ -1,8 +1,6 @@
 package boatcraft.api.modifiers
 
 import boatcraft.api.boat.EntityCustomBoat
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.nbt.NBTTagCompound
 
 abstract class Modifier {
 	

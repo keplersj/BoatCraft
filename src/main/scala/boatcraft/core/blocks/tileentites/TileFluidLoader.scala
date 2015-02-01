@@ -1,12 +1,5 @@
 package boatcraft.core.blocks.tileentites
 
-import net.minecraft.tileentity.TileEntity
-import net.minecraftforge.common.util.ForgeDirection
-import net.minecraftforge.fluids.IFluidHandler
-import net.minecraftforge.fluids.FluidTankInfo
-import net.minecraftforge.fluids.Fluid
-import net.minecraftforge.fluids.FluidStack
-
 class TileFluidLoader extends TileDockAddon with IFluidHandler {
 	
 	override def canDrain(side: ForgeDirection, fluid: Fluid) =

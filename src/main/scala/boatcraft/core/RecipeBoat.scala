@@ -1,13 +1,7 @@
 package boatcraft.core
 
-import net.minecraft.world.World
-import net.minecraft.inventory.InventoryCrafting
-import net.minecraft.item.crafting.IRecipe
-import net.minecraft.item.ItemStack
-import boatcraft.api.getCustomBoat
-import boatcraft.api.Registry
-import boatcraft.api.modifiers.Material
-import boatcraft.api.modifiers.Block
+import boatcraft.api.{Registry, getCustomBoat}
+import boatcraft.api.modifiers.{Block, Material}
 
 object RecipeBoat extends IRecipe {
 	

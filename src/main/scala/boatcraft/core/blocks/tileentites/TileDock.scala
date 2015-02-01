@@ -1,11 +1,6 @@
 package boatcraft.core.blocks.tileentites
 
 import boatcraft.api.boat.EntityCustomBoat
-import net.minecraft.tileentity.TileEntity
-import net.minecraft.util.AxisAlignedBB
-import net.minecraft.world.World
-import net.minecraftforge.common.util.ForgeDirection
-import net.minecraft.entity.Entity
 
 class TileDock extends TileEntity {
 	
@@ -56,7 +51,6 @@ class TileDock extends TileEntity {
 	
 	def getEffectCenter: (Double, Double, Double) =
 	{
-		import ForgeDirection._
 		ForgeDirection.getOrientation(getBlockMetadata) match
 		{
             case NORTH => (xCoord + 0.5, yCoord, zCoord)

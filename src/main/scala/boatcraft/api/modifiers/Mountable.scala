@@ -1,9 +1,7 @@
 package boatcraft.api.modifiers
 
-import net.minecraft.client.model.ModelBase
-
 abstract class Mountable extends Modifier {
-	import Mountable._
+	import boatcraft.api.modifiers.Mountable._
 	
 	@inline def canMountOn(pos: Position): Boolean
 	

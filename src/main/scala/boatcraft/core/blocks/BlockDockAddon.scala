@@ -1,17 +1,8 @@
 package boatcraft.core.blocks
 
 import java.util.List
-import boatcraft.core.blocks.tileentites.TileDockAddon
-import boatcraft.core.blocks.tileentites.TileFluidLoader
-import boatcraft.core.blocks.tileentites.TileItemLoader
-import cpw.mods.fml.relauncher.SideOnly
-import cpw.mods.fml.relauncher.Side
-import net.minecraft.block.BlockContainer
-import net.minecraft.block.material.Material
-import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.world.World
+
+import boatcraft.core.blocks.tileentites.{TileDockAddon, TileFluidLoader, TileItemLoader}
 
 class BlockDockAddon extends BlockContainer(Material.iron) {
 	

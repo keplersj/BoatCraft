@@ -2,12 +2,6 @@ package boatcraft.core.blocks.tileentites
 
 import java.util.ArrayList
 
-import scala.reflect.ClassTag
-
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.inventory.{IInventory, ISidedInventory}
-import net.minecraft.item.ItemStack
-
 class TileItemLoader extends TileDockAddon with ISidedInventory {
 	
 	override def getInventoryName = getClass.getSimpleName

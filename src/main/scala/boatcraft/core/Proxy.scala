@@ -1,13 +1,7 @@
 package boatcraft.core
 
-import cpw.mods.fml.client.registry.RenderingRegistry
-import cpw.mods.fml.common.registry.EntityRegistry
-import boatcraft.api.boat.{EntityCustomBoat, RenderCustomBoat}
-import net.minecraftforge.client.MinecraftForgeClient
-import boatcraft.api.boat.ItemCustomBoat
-import cpw.mods.fml.common.registry.GameRegistry
-import boatcraft.core.blocks.BlockDock
-import boatcraft.core.blocks.BlockDockAddon
+import boatcraft.api.boat.{EntityCustomBoat, ItemCustomBoat, RenderCustomBoat}
+import boatcraft.core.blocks.{BlockDock, BlockDockAddon}
 import boatcraft.core.blocks.items.ItemDockAddon
 
 object Proxy {

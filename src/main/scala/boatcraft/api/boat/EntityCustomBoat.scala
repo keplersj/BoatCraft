@@ -1,29 +1,7 @@
 package boatcraft.api.boat
 
-import boatcraft.api.Registry
-import boatcraft.api.getCustomBoat
-import boatcraft.api.modifiers
-import boatcraft.api.modifiers.ExtendedBoat
-import boatcraft.api.modifiers.Mountable
-import cpw.mods.fml.common.ObfuscationReflectionHelper
-import net.minecraft.block.material.Material
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityLivingBase
-import net.minecraft.entity.item.EntityBoat
-import net.minecraft.entity.item.EntityItem
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Blocks
-import net.minecraft.init.Items
-import net.minecraft.inventory.IInventory
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.AxisAlignedBB
-import net.minecraft.util.DamageSource
-import net.minecraft.util.MathHelper
-import net.minecraft.util.MovingObjectPosition
-import net.minecraft.world.World
-import net.minecraftforge.common.util.Constants
+import boatcraft.api.{Registry, getCustomBoat, modifiers}
+import boatcraft.api.modifiers.{ExtendedBoat, Mountable}
 import boatcraft.core.utilities.Helper
 
 /**
@@ -36,7 +14,7 @@ import boatcraft.core.utilities.Helper
 case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	extends EntityBoat(world, x, y, z) {
 	
-	import EntityCustomBoat.{MATERIAL, BLOCK, NAME}
+	import boatcraft.api.boat.EntityCustomBoat.{BLOCK, MATERIAL, NAME}
 	
 	//TODO var linkedTo: EntityCustomBoat = null
 
