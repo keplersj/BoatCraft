@@ -1,0 +1,7 @@
+{
+  "unlocalizedName": "Chestnut Wood",
+  "texture": {
+    "mod": "boatcraft",
+    "location": "textures/entity/boat/forestry/wood/chestnut.png"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "unlocalizedName": "Poplar Wood",
+  "texture": {
+    "mod": "boatcraft",
+    "location": "textures/entity/boat/forestry/wood/poplar.png"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "unlocalizedName": "Lime Wood",
+  "texture": {
+    "mod": "boatcraft",
+    "location": "textures/entity/boat/forestry/wood/lime.png"
+  }
+}
