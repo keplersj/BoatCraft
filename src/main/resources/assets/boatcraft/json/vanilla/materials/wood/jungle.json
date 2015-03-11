@@ -1,11 +1,16 @@
 {
   "unlocalizedName": "Jungle Wood",
   "localizedName": "vanilla.materials.wood.jungle.name",
-  "metadata": {
-    "blockDamageValue": 3
-  },
   "texture": {
     "mod": "boatcraft",
     "location": "textures/entity/boat/vanilla/wood/jungle.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "minecraft",
+    "name": "planks:3"
+  },
+  "brokenMaterialStack": {
+    "mod": "minecraft",
+    "name": "stick"
   }
 }

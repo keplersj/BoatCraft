@@ -1,11 +1,16 @@
 {
   "unlocalizedName": "Spruce Wood",
   "localizedName": "vanilla.materials.wood.spruce.name",
-  "metadata": {
-    "blockDamageValue": 1
-  },
   "texture": {
     "mod": "boatcraft",
     "location": "textures/entity/boat/vanilla/wood/spruce.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "minecraft",
+    "name": "planks:1"
+  },
+  "brokenMaterialStack": {
+    "mod": "minecraft",
+    "name": "stick"
   }
 }

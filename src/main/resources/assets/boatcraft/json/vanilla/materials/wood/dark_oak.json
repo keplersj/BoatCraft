@@ -1,11 +1,16 @@
 {
   "unlocalizedName": "Dark Oak Wood",
   "localizedName": "vanilla.materials.wood.oak.name",
-  "metadata": {
-    "blockDamageValue": 5
-  },
   "texture": {
     "mod": "boatcraft",
     "location": "textures/entity/boat/vanilla/wood/dark_oak.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "minecraft",
+    "name": "planks:5"
+  },
+  "brokenMaterialStack": {
+    "mod": "minecraft",
+    "name": "stick"
   }
 }

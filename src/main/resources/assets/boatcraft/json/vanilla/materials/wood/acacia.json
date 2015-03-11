@@ -1,11 +1,16 @@
 {
   "unlocalizedName": "Acacia Wood",
   "localizedName": "vanilla.materials.wood.acacia.name",
-  "metadata": {
-    "blockDamageValue": 4
-  },
   "texture": {
     "mod": "boatcraft",
     "location": "textures/entity/boat/vanilla/wood/acacia.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "minecraft",
+    "name": "planks:4"
+  },
+  "brokenMaterialStack": {
+    "mod": "minecraft",
+    "name": "stick"
   }
 }
