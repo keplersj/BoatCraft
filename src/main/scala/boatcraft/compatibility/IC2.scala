@@ -1,12 +1,9 @@
 package boatcraft.compatibility
 
 import boatcraft.api.modifiers.Block
-import boatcraft.api.modifiers.Material
 import boatcraft.compatibility.industrialcraft2.IC2GuiHandler
 import boatcraft.compatibility.industrialcraft2.modifiers.blocks.Generator
 import boatcraft.compatibility.industrialcraft2.modifiers.blocks.Nuke
-import boatcraft.compatibility.industrialcraft2.modifiers.materials.Carbon
-import boatcraft.compatibility.industrialcraft2.modifiers.materials.Rubber
 import boatcraft.core.GUIHandler
 import boatcraft.core.utilities.Helper
 import cpw.mods.fml.common.Optional

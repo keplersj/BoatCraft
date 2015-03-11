@@ -15,7 +15,6 @@ package object compatibility {
 	val mods = mutable.HashMap[String, CompatModule] (
 			("BuildCraft|Factory", BuildCraft),
 			("CoFHAPI|energy", RedstoneFlux),
-			("Forestry", Forestry),
 			("IC2", IC2),
 			("IronChest", IronChests),
 			("NotEnoughItems", NEI),

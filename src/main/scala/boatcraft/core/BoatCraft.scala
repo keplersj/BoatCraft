@@ -1,14 +1,13 @@
 package boatcraft.core
 
-import org.apache.logging.log4j.Logger
+import java.io.File
+
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.api.modifiers.Block
 import boatcraft.compatibility
-import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.SidedProxy
-import cpw.mods.fml.common.event.FMLInitializationEvent
-import cpw.mods.fml.common.event.FMLPostInitializationEvent
+import cpw.mods.fml.common.{Mod, SidedProxy}
+import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
 import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
 import cpw.mods.fml.common.registry.GameRegistry
@@ -17,11 +16,7 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.config.Configuration
 import net.minecraftforge.oredict.OreDictionary
-import cpw.mods.fml.common.event.FMLPreInitializationEvent
-import java.io.File
-import org.apache.commons.compress.archivers.jar.JarArchiveInputStream
-import java.io.InputStream
-import java.io.FileInputStream
+import org.apache.logging.log4j.Logger
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
