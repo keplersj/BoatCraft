@@ -4,5 +4,12 @@
   "texture": {
     "mod": "boatcraft",
     "texture": "textures/entity/boat/vanilla/crystal/diamond.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "minecraft",
+    "name": "diamond"
+  },
+  "brokenMaterialStack": {
+    "oreDictName": "diamondNugget"
   }
 }

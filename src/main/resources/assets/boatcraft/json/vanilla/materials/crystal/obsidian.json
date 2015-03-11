@@ -4,5 +4,9 @@
   "texture": {
     "mod": "boatcraft",
     "texture": "textures/entity/boat/vanilla/crystal/obsidian.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "minecraft",
+    "name": "obsidian"
   }
 }
