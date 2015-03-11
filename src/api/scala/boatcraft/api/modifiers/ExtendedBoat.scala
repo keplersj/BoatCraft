@@ -4,8 +4,6 @@ import java.util.HashMap
 
 import scala.collection.JavaConversions.asScalaSet
 
-import boatcraft.core.BoatCraft
-import cpw.mods.fml.common.Mod
 import net.minecraft.entity.Entity
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
@@ -23,7 +21,8 @@ class ExtendedBoat extends IExtendedEntityProperties {
 	
 	def loadNBTData(tag: NBTTagCompound)
 	{
-		BoatCraft.log info "Loading Extended Boat data!"
+		println("Loading Extended Boat data!")
+		
 		var list = tag.getTagList("mountables", Constants.NBT.TAG_COMPOUND)
 		for (i <- 0 until list.tagCount)
 		{
@@ -34,7 +33,8 @@ class ExtendedBoat extends IExtendedEntityProperties {
 	
 	def saveNBTData(tag: NBTTagCompound)
 	{
-		BoatCraft.log info "Saving Extended Boat data!"
+		println("Saving Extended Boat data!")
+		
 		var list = new NBTTagList
 		for (entry <- mountables.entrySet)
 		{

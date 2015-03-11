@@ -24,7 +24,6 @@ import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
 import net.minecraft.world.World
 import net.minecraftforge.common.util.Constants
-import boatcraft.core.utilities.Helper
 
 /**
  * The main Boat entity class
@@ -36,7 +35,7 @@ import boatcraft.core.utilities.Helper
 case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	extends EntityBoat(world, x, y, z) {
 	
-	import EntityCustomBoat.{MATERIAL, BLOCK, NAME}
+	import EntityCustomBoat._
 	
 	//TODO var linkedTo: EntityCustomBoat = null
 
@@ -176,7 +175,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 				(boundingBox.maxY - boundingBox.minY) * (i + 1).toDouble / b0.toDouble - 0.125D
 			val axisalignedbb = AxisAlignedBB.getBoundingBox(boundingBox.minX, d1, boundingBox.minZ,
 				boundingBox.maxX, d3, boundingBox.maxZ)
-			if (Helper.AABB.isAABBInFluid(worldObj, axisalignedbb))
+			if (isAABBInFluid(worldObj, axisalignedbb))
 			{
 				d0 += 1.0 / b0.toDouble
 				if (isImmuneToFire && !isBoatEmpty && worldObj.isAABBInMaterial(axisalignedbb, Material.lava))
@@ -530,4 +529,41 @@ object EntityCustomBoat {
 		override def isItemValidForSlot(slot: Int, stack: ItemStack) = false
 	}
 
+	private[EntityCustomBoat] def isAABBInFluid(world: World, aabb: AxisAlignedBB): Boolean = {
+		val i = MathHelper.floor_double(aabb.minX)
+		val j = MathHelper.floor_double(aabb.maxX + 1)
+		val k = MathHelper.floor_double(aabb.minY)
+		val l = MathHelper.floor_double(aabb.maxY + 1)
+		val i1 = MathHelper.floor_double(aabb.minZ)
+		val j1 = MathHelper.floor_double(aabb.maxZ + 1)
+		
+		for (k1 <- i until j)
+		{
+			for (l1 <- k until l)
+			{
+				for (i2 <- i1 until j1)
+				{
+					val block = world.getBlock(k1, l1, i2)
+
+					if (block.getMaterial isLiquid)
+					{
+						val j2 = world.getBlockMetadata(k1, l1, i2)
+						var d0 = (l1 + 1).toDouble
+
+						if (j2 < 8)
+						{
+							d0 = l1 + 1.0 - j2.toDouble / 8.0D
+						}
+
+						if (d0 >= aabb.minY)
+						{
+							return true
+						}
+					}
+				}
+			}
+		}
+		
+		return false
+	}
 }

@@ -114,7 +114,7 @@ object GenericIronChest {
 					boat.getEntityId,
 					ReflectionHelper.getPrivateValue(classOf[TileEntityIronChest], this, "type")
 						.asInstanceOf[IronChestType].ordinal,
-					getFacing, buildIntDataList))
+					getFacing, buildItemStackDataList()))
 		}
 		
 		override def updateFromMetadata(meta: Int): TileEntityIronChest = {

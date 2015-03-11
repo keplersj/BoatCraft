@@ -3,6 +3,7 @@ package boatcraft.api.modifiers
 import boatcraft.api.boat.EntityCustomBoat
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
+import net.minecraft.init.Blocks
 
 abstract class Block extends Modifier {
 	/**
@@ -43,4 +44,17 @@ abstract class Block extends Modifier {
 	 * @return the ItemStack used when crafting
 	 */
 	@inline def getContent: ItemStack = null
+}
+
+object Block {
+	
+	object Empty extends Block {
+		override def isRideable = true
+	
+		override def getBlock = Blocks.air
+	
+		override def getName = "Empty"
+	
+		override def getContent: ItemStack = null
+	}
 }
