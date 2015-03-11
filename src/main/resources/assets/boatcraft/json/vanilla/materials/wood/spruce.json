@@ -1,0 +1,7 @@
+{
+  "name": "Spruce Wood",
+  "localizedName": "vanilla.materials.wood.spruce.name",
+  "metadata": {
+    "blockDamageValue": 1
+  }
+}

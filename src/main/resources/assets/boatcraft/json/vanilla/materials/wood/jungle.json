@@ -1,0 +1,7 @@
+{
+  "name": "Jungle Wood",
+  "localizedName": "vanilla.materials.wood.jungle.name",
+  "metadata": {
+    "blockDamageValue": 3
+  }
+}

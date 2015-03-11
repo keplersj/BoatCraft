@@ -1,0 +1,7 @@
+{
+  "name": "Dark Oak Wood",
+  "localizedName": "vanilla.materials.wood.oak.name",
+  "metadata": {
+    "blockDamageValue": 5
+  }
+}
