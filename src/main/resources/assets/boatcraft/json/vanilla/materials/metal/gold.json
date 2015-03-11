@@ -1,4 +1,8 @@
 {
   "name": "Gold",
-  "localizedName": "vanilla.materials.metal.gold.name"
+  "localizedName": "vanilla.materials.metal.gold.name",
+  "texture": {
+    "mod": "boatcraft",
+    "location": "textures/entity/boat/vanilla/metal/gold.png"
+  }
 }

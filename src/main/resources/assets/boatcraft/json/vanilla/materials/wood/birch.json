@@ -3,5 +3,9 @@
   "localizedName": "vanilla.materials.wood.birch.name",
   "metadata": {
     "blockDamageValue": 2
+  },
+  "texture": {
+    "mod": "boatcraft",
+    "location": "textures/entity/boat/vanilla/wood/birch.png"
   }
 }

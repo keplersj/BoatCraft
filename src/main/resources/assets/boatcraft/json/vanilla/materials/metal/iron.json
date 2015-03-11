@@ -1,4 +1,8 @@
 {
   "name": "Iron",
-  "localizedName": "vanilla.materials.metal.iron.name"
+  "localizedName": "vanilla.materials.metal.iron.name",
+  "texture": {
+    "mod": "boatcraft",
+    "location": "textures/entity/boat/vanilla/metal/iron.png"
+  }
 }
