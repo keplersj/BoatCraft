@@ -73,6 +73,14 @@ object Material {
 			val texture = obj.getAsJsonObject("texture")
 			result.texture = new ResourceLocation(texture.getAsJsonPrimitive("mod").getAsString,
 													texture.getAsJsonPrimitive("location").getAsString)
+
+			val wholeMaterial = obj.get("wholeMaterialStack")
+			if (wholeMaterial.isJsonObject) {
+				val stack = wholeMaterial.getAsJsonObject
+				val modOrigin = stack.getAsJsonPrimitive("mod").getAsString
+				val stackName = stack.getAsJsonPrimitive("name").getAsString
+				result.item = GameRegistry.findItemStack(modOrigin, stackName, 1)
+			}
 			
 			val stick = obj.get("brokenMaterialStack")
 			if (stick isJsonObject) {
