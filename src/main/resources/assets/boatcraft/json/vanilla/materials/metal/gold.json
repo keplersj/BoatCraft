@@ -1,5 +1,5 @@
 {
-  "name": "Gold",
+  "unlocalizedName": "Gold",
   "localizedName": "vanilla.materials.metal.gold.name",
   "texture": {
     "mod": "boatcraft",

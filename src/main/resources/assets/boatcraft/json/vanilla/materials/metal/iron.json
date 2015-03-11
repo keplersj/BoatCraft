@@ -1,5 +1,5 @@
 {
-  "name": "Iron",
+  "unlocalizedName": "Iron",
   "localizedName": "vanilla.materials.metal.iron.name",
   "texture": {
     "mod": "boatcraft",

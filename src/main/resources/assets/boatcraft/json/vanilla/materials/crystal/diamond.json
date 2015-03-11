@@ -1,5 +1,5 @@
 {
-  "name": "Diamond",
+  "unlocalizedName": "Diamond",
   "localizedName": "vanilla.materials.crystal.diamond.name",
   "texture": {
     "mod": "boatcraft",

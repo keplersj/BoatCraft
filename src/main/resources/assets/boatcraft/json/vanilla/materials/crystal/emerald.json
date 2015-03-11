@@ -1,5 +1,5 @@
 {
-  "name": "Emerald",
+  "unlocalizedName": "Emerald",
   "localizedName": "vanilla.materials.crystal.emerald.name",
   "texture": {
     "mod": "boatcraft",

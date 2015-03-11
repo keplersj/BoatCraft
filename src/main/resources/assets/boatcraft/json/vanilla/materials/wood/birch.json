@@ -1,5 +1,5 @@
 {
-  "name": "Birch Wood",
+  "unlocalizedName": "Birch Wood",
   "localizedName": "vanilla.materials.wood.birch.name",
   "metadata": {
     "blockDamageValue": 2
