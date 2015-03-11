@@ -4,5 +4,13 @@
   "texture": {
     "mod": "boatcraft",
     "location": "textures/entity/boat/vanilla/metal/iron.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "minecraft",
+    "name": "iron_ingot"
+  },
+  "brokenMaterialStack": {
+    "oreDict": "gold_nugget",
+    "amount": 4
   }
 }

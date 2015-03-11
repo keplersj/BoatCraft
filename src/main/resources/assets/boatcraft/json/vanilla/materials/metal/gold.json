@@ -4,5 +4,14 @@
   "texture": {
     "mod": "boatcraft",
     "location": "textures/entity/boat/vanilla/metal/gold.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "minecraft",
+    "name": "gold_ingot"
+  },
+  "brokenMaterialStack": {
+    "mod": "minecraft",
+    "name": "gold_nugget",
+    "amount": 4
   }
 }
