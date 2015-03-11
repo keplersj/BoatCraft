@@ -1,6 +1,7 @@
 package boatcraft.core.modifiers.blocks
 
 import boatcraft.api.modifiers.Block
+import nova.core.item.ItemStack
 
 object Empty extends Block {
 	override def isRideable = true

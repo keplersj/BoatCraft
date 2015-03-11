@@ -5,6 +5,7 @@ import java.util.{HashMap, Map}
 import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.api.modifiers.{Block, Material, Modifier, Mountable}
 import boatcraft.core.modifiers.blocks.Empty
+import nova.core.item.ItemStack
 
 import scala.collection.JavaConversions.iterableAsScalaIterable
 
