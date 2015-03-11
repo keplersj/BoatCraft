@@ -20,5 +20,5 @@ object Obsidian extends Material {
 	
 	override def getStick: ItemStack = null
 	
-	override def isImmuneToFire = true
+	override def isFireResist = true
 }
