@@ -1,0 +1,8 @@
+{
+  "unlocalizedName": "Carbon Fibre",
+  "localizedName": "industrialcraft2.materials.carbon.name",
+  "texture": {
+    "mod": "ic2",
+    "location": "textures/models/boatCarbon.png"
+  }
+}

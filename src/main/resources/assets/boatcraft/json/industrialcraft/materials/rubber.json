@@ -1,0 +1,8 @@
+{
+  "unlocalizedName": "Rubber",
+  "localizedName": "industrialcraft2.materials.rubber.name",
+  "texture": {
+    "mod": "ic2",
+    "texture": "textures/models/boatRubber.png"
+  }
+}
