@@ -1,14 +1,13 @@
 package boatcraft.compatibility.industrialcraft2
 
+import boatcraft.api.boat.EntityCustomBoat
+import boatcraft.compatibility.IC2
 import cpw.mods.fml.common.network.IGuiHandler
+import ic2.core.block.machine.container.ContainerNuke
+import ic2.core.block.machine.gui.GuiNuke
+import ic2.core.block.machine.tileentity.TileEntityNuke
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.world.World
-import boatcraft.api.boat.EntityCustomBoat
-import ic2.core.block.machine.tileentity.TileEntityNuke
-import boatcraft.compatibility.IC2
-import com.sun.xml.internal.bind.v2.model.core.ID
-import ic2.core.block.machine.gui.GuiNuke
-import ic2.core.block.machine.ContainerNuke
 
 object IC2GuiHandler extends IGuiHandler {
 	override def getClientGuiElement(id: Int, player: EntityPlayer, world: World, x: Int, y: Int, z: Int): AnyRef =

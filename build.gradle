@@ -1,5 +1,6 @@
 import java.util.jar.Attributes.Name;
 
+apply plugin: 'java'
 apply plugin: 'scala'
 apply plugin: 'forge'
 
@@ -33,7 +34,7 @@ group = 'open-code-developers' //If you are not Open Code Developers, but are ma
 archivesBaseName = 'BoatCraft'
 
 minecraft {
-	version = '1.7.10-10.13.0.1170'
+	version = '1.7.10-10.13.2.1291'
 }
 
 apply from: 'gradle/git.gradle'
@@ -50,23 +51,24 @@ repositories {
 		name = "ChickenBones"
 		url = "http://chickenbones.net/maven/"
 	}
-	/*ivy {
+	ivy {
 		name = 'ThaumCraft 4 API'
-		artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/[module]-1.7.2-[revision](-[classifier])(.[ext])'
-		// artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/Thaumcraft-1.7.2-4.1.1.13-api.zip'
-		// artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/Thaumcraft-1.7.2-4.1.1.13.jar'
-	}*/
+		artifactPattern 'https://dl.dropboxusercontent.com/u/47135879/[module](-[classifier])-1.7.10-[revision](.[ext])'
+	}
 }
 
 dependencies {
-	compile 'cpw.mods:ironchest:1.7.10-6.0.41.729:deobf'
-	compile 'net.industrial-craft:industrialcraft-2:2.2.500-experimental:dev'
-	//compile 'Azanor:Thaumcraft:4.1.1.14:api@zip'
-	//compile 'com.mod-buildcraft:buildcraft:6.0.16:dev'
-	//compile 'net.sengir.forestry:forestry_1.7.2:2.4.1.27:dev'
-	compile 'codechicken:CodeChickenLib:1.7.10-1.1.1.93:dev'
-	compile 'codechicken:CodeChickenCore:1.7.10-1.0.1.8:dev'
-	compile 'codechicken:NotEnoughItems:1.7.10-1.0.2.15:dev'
+	compile 'cpw.mods:ironchest:1.7.10-6.0.62.742:deobf'
+	compile 'net.industrial-craft:industrialcraft-2:2.2.691-experimental:dev'
+	compile 'Azanor:Thaumcraft:4.2.3.5:deobf@jar'
+	compile 'com.mod-buildcraft:buildcraft:6.4.3:dev'
+	compile 'net.sengir.forestry:forestry_1.7.10:3.4.0.7:dev'
+	compile 'codechicken:CodeChickenLib:1.7.10-1.1.3.127:dev'
+	compile 'codechicken:CodeChickenCore:1.7.10-1.0.4.35:dev'
+	compile 'codechicken:NotEnoughItems:1.7.10-1.0.4.90:dev'
+    
+	runtime 'Azanor:Baubles:1.0.1.10:deobf@jar'
+    runtime 'com.googlecode.efficient-java-matrix-library:ejml:0.25'
 }
 
 apply from: 'gradle/artifacts.gradle'
