@@ -427,7 +427,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	 */
 	def setMaterial(material: String) {
 		dataWatcher updateObject(MATERIAL, material)
-		isImmuneToFire = Registry.findOfType[modifiers.Material](material) isImmuneToFire
+		isImmuneToFire = Registry.findOfType[modifiers.Material](material) isFireResist
 	}
 	
 	/**

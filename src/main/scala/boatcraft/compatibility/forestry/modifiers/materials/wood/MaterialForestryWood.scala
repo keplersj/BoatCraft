@@ -1,6 +1,5 @@
 package boatcraft.compatibility.forestry.modifiers.materials.wood
 
-import boatcraft.compatibility.vanilla.modifiers.materials.wood.MaterialWood
 import net.minecraft.util.ResourceLocation
 import net.minecraft.item.ItemStack
 /*import forestry.core.config.ForestryBlock

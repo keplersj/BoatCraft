@@ -37,12 +37,6 @@ object IC2 extends CompatModule {
 	}
 	
 	@Optional.Method(modid = "IC2")
-	override protected def getMaterials = Array[Material](
-		Rubber,
-		Carbon
-	)
-	
-	@Optional.Method(modid = "IC2")
 	override protected def getBlocks = Array[Block](
 		Generator,
 		Nuke

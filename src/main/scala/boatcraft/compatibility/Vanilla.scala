@@ -6,24 +6,12 @@ import scala.collection.JavaConversions.asScalaBuffer
 
 import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.api.modifiers.Block
-import boatcraft.api.modifiers.Material
 import boatcraft.compatibility.vanilla.VanillaGuiHandler
 import boatcraft.compatibility.vanilla.modifiers.blocks.Chest
 import boatcraft.compatibility.vanilla.modifiers.blocks.Furnace
 import boatcraft.compatibility.vanilla.modifiers.blocks.TNT
 import boatcraft.compatibility.vanilla.modifiers.blocks.Workbench
-import boatcraft.compatibility.vanilla.modifiers.materials.crystal.Diamond
-import boatcraft.compatibility.vanilla.modifiers.materials.crystal.Emerald
-import boatcraft.compatibility.vanilla.modifiers.materials.crystal.Obsidian
-import boatcraft.compatibility.vanilla.modifiers.materials.metal.Gold
-import boatcraft.compatibility.vanilla.modifiers.materials.metal.Iron
-import boatcraft.compatibility.vanilla.modifiers.materials.wood.Acacia
-import boatcraft.compatibility.vanilla.modifiers.materials.wood.Birch
-import boatcraft.compatibility.vanilla.modifiers.materials.wood.DarkOak
-import boatcraft.compatibility.vanilla.modifiers.materials.wood.Jungle
-import boatcraft.compatibility.vanilla.modifiers.materials.wood.Oak
 import boatcraft.compatibility.vanilla.modifiers.materials.wood.OreDict_Wood
-import boatcraft.compatibility.vanilla.modifiers.materials.wood.Spruce
 import boatcraft.core.BoatCraft
 import boatcraft.core.GUIHandler
 import boatcraft.core.utilities.Helper
@@ -40,9 +28,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe
 
 object Vanilla extends CompatModule {
 
-	private var useOreDictWood = false
-
-	var materials = Array[Material]()
+	var useOreDictWood = false
 
 	override def doPreInit(event: FMLPreInitializationEvent) {
 		readConfig
@@ -50,15 +36,6 @@ object Vanilla extends CompatModule {
 		replaceBoatRecipe
 
 		GUIHandler.handlerMap.put(code, VanillaGuiHandler)
-
-		if (!useOreDictWood) {
-			materials = materials ++ woodMaterials
-		}
-		else {
-			materials = materials ++ List[Material](OreDict_Wood)
-		}
-		materials = materials ++ metalMaterials
-		materials = materials ++ crystalMaterials
 	}
 
 	override def doPostInit(event: FMLPostInitializationEvent) {
@@ -78,28 +55,6 @@ object Vanilla extends CompatModule {
 		CraftingManager.getInstance.getRecipeList removeAll toRemove
 	}
 
-	override protected def getMaterials = materials
-
-	private val woodMaterials: List[Material] = List[Material](
-		Oak,
-		Spruce,
-		Birch,
-		Jungle,
-		Acacia,
-		DarkOak
-	)
-
-	private val metalMaterials: List[Material] = List[Material](
-		Iron,
-		Gold
-	)
-
-	private val crystalMaterials: List[Material] = List[Material](
-		Obsidian,
-		Diamond,
-		Emerald
-	)
-
 	override protected def getBlocks =
 		Array[Block](
 			Chest,
@@ -113,7 +68,7 @@ object Vanilla extends CompatModule {
 		val stack = new ItemStack(ItemCustomBoat)
 
 		stack.stackTagCompound = new NBTTagCompound
-		stack.stackTagCompound setString("material", Oak.toString)
+		stack.stackTagCompound setString("material", "minecraft:planks@1")
 		stack.stackTagCompound setString("block", Block.Empty.toString)
 
 		GameRegistry addShapelessRecipe(stack, Items.boat)

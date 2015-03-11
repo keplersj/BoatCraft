@@ -1,7 +1,6 @@
 package boatcraft.core
 
 import org.apache.logging.log4j.Logger
-
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.api.modifiers.Block
@@ -10,7 +9,6 @@ import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.SidedProxy
 import cpw.mods.fml.common.event.FMLInitializationEvent
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
-import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
 import cpw.mods.fml.common.registry.GameRegistry
@@ -19,6 +17,11 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.config.Configuration
 import net.minecraftforge.oredict.OreDictionary
+import cpw.mods.fml.common.event.FMLPreInitializationEvent
+import java.io.File
+import org.apache.commons.compress.archivers.jar.JarArchiveInputStream
+import java.io.InputStream
+import java.io.FileInputStream
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
@@ -47,34 +50,43 @@ object BoatCraft {
 		
 		channel = NetworkRegistry.INSTANCE.newSimpleChannel("boatcraft")
 		
+		registerMaterials(event)
+		
 		proxy registerBlocks
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
 		MinecraftForge.EVENT_BUS register EventHandler
 		
-		printModInfo
+		printModInfo()
 		
-		compatibility preInit event
+		compatibility.preInit(event)
 		
 		Registry register Block.Empty
 		
-		compatibility registerModifiers
+		compatibility.registerModifiers()
 		
-		GameRegistry registerItem(ItemCustomBoat, "customBoat")
+		GameRegistry.registerItem(ItemCustomBoat, "customBoat")
+	}
+
+	def registerMaterials(event: FMLPreInitializationEvent)
+	{
+		var dir = new File(event.getModConfigurationDirectory, "BoatCraft")
+		
+		//TODO stuff
 	}
 
 	@Mod.EventHandler
 	def init(event: FMLInitializationEvent) {
 		
-		proxy registerEntities
+		proxy.registerEntities()
 
-		proxy registerRenders
+		proxy.registerRenders()
 		
 		GameRegistry.addRecipe(RecipeBoat)
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.boat),
 				new ItemStack(ItemCustomBoat, 1, OreDictionary.WILDCARD_VALUE))
 
-		compatibility init event
+		compatibility.init(event)
 	}
 
 	@Mod.EventHandler
@@ -82,7 +94,7 @@ object BoatCraft {
 		compatibility postInit event
 	}
 
-	private def printModInfo {
+	private def printModInfo() {
 		log info "BoatCraft"
 		log info "Copyright Kepler Sticka-Jones 2013-2014"
 		log info "http://k2b6s9j.com/projects/minecraft/BoatCraft"
