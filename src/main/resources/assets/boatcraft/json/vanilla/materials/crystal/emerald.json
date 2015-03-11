@@ -1,0 +1,8 @@
+{
+  "name": "Emerald",
+  "localizedName": "vanilla.materials.crystal.emerald.name",
+  "texture": {
+    "mod": "boatcraft",
+    "texture": "textures/entity/boat/vanilla/crystal/emerald.png"
+  }
+}
