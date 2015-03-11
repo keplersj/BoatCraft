@@ -1,17 +1,11 @@
 package boatcraft.api.modifiers
 
-import net.minecraft.item.ItemStack
-import net.minecraft.util.ResourceLocation
-import com.google.gson.JsonSerializer
-import com.google.gson.JsonDeserializer
-import com.google.gson.JsonSerializationContext
-import com.google.gson.JsonElement
 import java.lang.reflect.Type
-import com.google.gson.JsonObject
-import com.google.gson.JsonPrimitive
+
+import com.google.gson.{JsonDeserializationContext, JsonDeserializer, JsonElement}
 import cpw.mods.fml.common.registry.GameRegistry
-import com.google.gson.JsonDeserializationContext
-import net.minecraft.item.Item
+import net.minecraft.item.{Item, ItemStack}
+import net.minecraft.util.ResourceLocation
 
 class Material extends Modifier {
 	
@@ -63,8 +57,8 @@ object Material {
 	class Deserializer extends JsonDeserializer[Material] {
 		
 		def deserialize(json: JsonElement, typeOfSrc: Type, context: JsonDeserializationContext): Material = {
-			
-			var result = new Material()
+
+			val result = new Material()
 			
 			val obj = json.getAsJsonObject
 			
@@ -80,21 +74,20 @@ object Material {
 			result.texture = new ResourceLocation(texture.getAsJsonPrimitive("mod").getAsString,
 													texture.getAsJsonPrimitive("location").getAsString)
 			
-			val stick = obj.get("stick")
+			val stick = obj.get("brokenMaterialStack")
 			if (stick isJsonObject) {
-				
-				val item = stick.getAsJsonObject
-				val name = item.getAsJsonPrimitive("mod").getAsString +
-						":" + item.getAsJsonPrimitive("name").getAsString
-				result.stick = new ItemStack(Item.itemRegistry.getObject(name).asInstanceOf[Item])
-				result.stick.setItemDamage(item.getAsJsonPrimitive("metadata").getAsInt)
+				val stack = stick.getAsJsonObject
+				val modOrigin = stack.getAsJsonPrimitive("mod").getAsString
+				val stackName = stack.getAsJsonPrimitive("name").getAsString
+				val stackSize = stack.getAsJsonPrimitive("amount").getAsInt
+				result.stick = GameRegistry.findItemStack(modOrigin, stackName, stackSize)
 			}
 			
 			val fireResist = obj.get("fireResist")
 			if (fireResist isJsonPrimitive)
 				result.fireResist = fireResist.getAsBoolean
 			
-			return result;
+			result
 		}
 	}
 }
