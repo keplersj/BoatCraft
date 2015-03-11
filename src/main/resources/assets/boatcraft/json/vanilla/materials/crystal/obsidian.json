@@ -9,4 +9,7 @@
     "mod": "minecraft",
     "name": "obsidian"
   }
+  "specialAbilities": [
+    "fireResistance"
+  ]
 }
