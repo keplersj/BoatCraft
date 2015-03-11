@@ -7,15 +7,6 @@ import net.minecraft.nbt.NBTTagCompound
 abstract class Modifier {
 	
 	/**
-		* The human-readable name of this Boat.
-		* The `@link Modifier#toString` will make it computer-readable
-		*
-		* @return the name of the Modifier
-		*/
-	@deprecated("All modifiers must set both localized and unlocalized strings now.", "BoatCraft 2.0.1")
-	def getName: String = getUnlocalizedName
-	
-	/**
 		* The name used by `@link Modifier#toString` for computer-reading
 		*
 		* @return the unlocalized string

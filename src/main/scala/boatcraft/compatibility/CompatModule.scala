@@ -15,11 +15,8 @@ abstract class CompatModule {
 	maxID = maxID + 1
 
 	final def registerModifiers {
-		Registry register getMaterials
 		Registry register getBlocks
 	}
-
-	protected def getMaterials = Array[Material]()
 
 	protected def getBlocks = Array[Block]()
 

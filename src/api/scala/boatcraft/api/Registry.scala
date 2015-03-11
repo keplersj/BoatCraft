@@ -120,15 +120,14 @@ object Registry {
 	def getMaterial(stack: ItemStack) =
 		if (stack.getItem.isInstanceOf[ItemCustomBoat])
 		{
-			if (stack.stackTagCompound == null) NoMaterial
+			if (stack.stackTagCompound == null) noMaterial
 			else materials get (stack.stackTagCompound getString "material")
 		}
 		else materialItems get StackHashWrapper(stack)
 
-	private object NoMaterial extends Material {
-		override def getTexture =
-			new ResourceLocation("minecraft", "textures/entity/boat.png")
-	}
+	//TODO initialize it
+	private var noMaterial: Material = null
+			//new ResourceLocation("minecraft", "textures/entity/boat.png")
 
 	/**
 	 * Returns a registered Block associated with a certain ItemStack.

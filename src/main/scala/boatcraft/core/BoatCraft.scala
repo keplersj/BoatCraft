@@ -47,34 +47,36 @@ object BoatCraft {
 		
 		channel = NetworkRegistry.INSTANCE.newSimpleChannel("boatcraft")
 		
+		registerMaterials()
+		
 		proxy registerBlocks
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
 		MinecraftForge.EVENT_BUS register EventHandler
 		
-		printModInfo
+		printModInfo()
 		
-		compatibility preInit event
+		compatibility.preInit(event)
 		
 		Registry register Block.Empty
 		
-		compatibility registerModifiers
+		compatibility.registerModifiers()
 		
-		GameRegistry registerItem(ItemCustomBoat, "customBoat")
+		GameRegistry.registerItem(ItemCustomBoat, "customBoat")
 	}
 
 	@Mod.EventHandler
 	def init(event: FMLInitializationEvent) {
 		
-		proxy registerEntities
+		proxy.registerEntities()
 
-		proxy registerRenders
+		proxy.registerRenders()
 		
 		GameRegistry.addRecipe(RecipeBoat)
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.boat),
 				new ItemStack(ItemCustomBoat, 1, OreDictionary.WILDCARD_VALUE))
 
-		compatibility init event
+		compatibility.init(event)
 	}
 
 	@Mod.EventHandler
@@ -82,7 +84,7 @@ object BoatCraft {
 		compatibility postInit event
 	}
 
-	private def printModInfo {
+	private def printModInfo() {
 		log info "BoatCraft"
 		log info "Copyright Kepler Sticka-Jones 2013-2014"
 		log info "http://k2b6s9j.com/projects/minecraft/BoatCraft"
