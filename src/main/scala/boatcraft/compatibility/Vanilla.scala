@@ -8,13 +8,24 @@ import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.api.modifiers.Block
 import boatcraft.api.modifiers.Material
 import boatcraft.compatibility.vanilla.VanillaGuiHandler
-import boatcraft.compatibility.vanilla.modifiers.blocks._
-import boatcraft.compatibility.vanilla.modifiers.materials.crystal._
-import boatcraft.compatibility.vanilla.modifiers.materials.metal._
-import boatcraft.compatibility.vanilla.modifiers.materials.wood._
+import boatcraft.compatibility.vanilla.modifiers.blocks.Chest
+import boatcraft.compatibility.vanilla.modifiers.blocks.Furnace
+import boatcraft.compatibility.vanilla.modifiers.blocks.TNT
+import boatcraft.compatibility.vanilla.modifiers.blocks.Workbench
+import boatcraft.compatibility.vanilla.modifiers.materials.crystal.Diamond
+import boatcraft.compatibility.vanilla.modifiers.materials.crystal.Emerald
+import boatcraft.compatibility.vanilla.modifiers.materials.crystal.Obsidian
+import boatcraft.compatibility.vanilla.modifiers.materials.metal.Gold
+import boatcraft.compatibility.vanilla.modifiers.materials.metal.Iron
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Acacia
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Birch
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.DarkOak
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Jungle
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Oak
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.OreDict_Wood
+import boatcraft.compatibility.vanilla.modifiers.materials.wood.Spruce
 import boatcraft.core.BoatCraft
 import boatcraft.core.GUIHandler
-import boatcraft.core.modifiers.blocks.Empty
 import boatcraft.core.utilities.Helper
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.event.FMLPostInitializationEvent
@@ -103,7 +114,7 @@ object Vanilla extends CompatModule {
 
 		stack.stackTagCompound = new NBTTagCompound
 		stack.stackTagCompound setString("material", Oak.toString)
-		stack.stackTagCompound setString("block", Empty.toString)
+		stack.stackTagCompound setString("block", Block.Empty.toString)
 
 		GameRegistry addShapelessRecipe(stack, Items.boat)
 	}

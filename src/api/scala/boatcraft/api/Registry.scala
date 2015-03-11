@@ -7,7 +7,6 @@ import boatcraft.api.modifiers.Block
 import boatcraft.api.modifiers.Material
 import boatcraft.api.modifiers.Modifier
 import boatcraft.api.modifiers.Mountable
-import boatcraft.core.modifiers.blocks.Empty
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import boatcraft.api.boat.ItemCustomBoat
@@ -138,10 +137,10 @@ object Registry {
 	 * @return registered Block
 	 */
 	def getBlock(stack: ItemStack) =
-		if (stack == null) Empty
+		if (stack == null) Block.Empty
 		else if (stack.getItem.isInstanceOf[ItemCustomBoat])
 		{
-			if (stack.stackTagCompound == null) Empty
+			if (stack.stackTagCompound == null) Block.Empty
 			else blocks get (stack.stackTagCompound getString "block")
 		}
 		else blockItems get StackHashWrapper(stack)

@@ -1,20 +1,23 @@
 package boatcraft.compatibility.nei
 
-import codechicken.nei.recipe.ShapedRecipeHandler
-import java.util.List
-import net.minecraft.item.ItemStack
 import java.util.ArrayList
+import java.util.List
+
+import scala.collection.JavaConversions.asScalaBuffer
+import scala.collection.JavaConversions.asScalaSet
+import scala.collection.JavaConversions.mapAsScalaMap
+
 import boatcraft.api.Registry
+import boatcraft.api.modifiers.Block
 import boatcraft.api.modifiers.Material
-import scala.collection.JavaConversions._
-import codechicken.nei.PositionedStack
 import boatcraft.core.RecipeBoat
 import codechicken.nei.InventoryCraftingDummy
-import net.minecraft.inventory.InventoryCrafting
-import boatcraft.api.modifiers.Block
-import net.minecraft.init.Blocks
-import boatcraft.core.modifiers.blocks.Empty
 import codechicken.nei.NEIClientUtils
+import codechicken.nei.PositionedStack
+import codechicken.nei.recipe.ShapedRecipeHandler
+import net.minecraft.init.Blocks
+import net.minecraft.inventory.InventoryCrafting
+import net.minecraft.item.ItemStack
 
 class BoatRecipeHandler extends ShapedRecipeHandler {
 	
@@ -123,7 +126,7 @@ class BoatRecipeHandler extends ShapedRecipeHandler {
 				if (recipe.material != null
 						&& ingredient.isItemEqual(Registry.findOfType[Material](recipe.material).getItem)
 						&& recipe.block == null)
-				|| (recipe.block != null && recipe.block != Empty.toString
+				|| (recipe.block != null && recipe.block != Block.Empty.toString
 						&& ingredient.isItemEqual(Registry.findOfType[Block](recipe.block).getContent)
 						&& recipe.material == null)) {
 			recipe.cycle

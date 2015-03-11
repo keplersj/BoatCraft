@@ -1,11 +1,13 @@
 package boatcraft.api.boat
 
 import java.util
+
 import scala.collection.JavaConversions.mapAsScalaMap
+
 import boatcraft.api.Registry
-import boatcraft.core.modifiers.blocks.Empty
-import cpw.mods.fml.relauncher.SideOnly
+import boatcraft.api.modifiers.Block
 import cpw.mods.fml.relauncher.Side
+import cpw.mods.fml.relauncher.SideOnly
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
@@ -17,9 +19,9 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.MathHelper
 import net.minecraft.util.MovingObjectPosition
+import net.minecraft.util.StatCollector
 import net.minecraft.util.Vec3
 import net.minecraft.world.World
-import net.minecraft.util.StatCollector
 
 /**
  * The Item Class used for all items that can be deployed like a Boat.
@@ -50,7 +52,7 @@ class ItemCustomBoat extends ItemBoat {
 			Registry.getBlock(stack)
 	
 	override def getItemStackDisplayName(stack: ItemStack): String = stack match {
-		case x if Registry.getBlock(stack) == Empty =>
+		case x if Registry.getBlock(stack) == Block.Empty =>
 			//StatCollector.translateToLocal(Registry.getMaterial(stack).getLocalizedName) + " " + StatCollector.translateToLocal("core.forms.dinghy.name")
 			StatCollector.translateToLocalFormatted(
 					transform(StatCollector.translateToLocal("core.forms.dinghy.empty.format")),

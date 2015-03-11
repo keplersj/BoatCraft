@@ -1,9 +1,7 @@
 package boatcraft.core.utilities
 
 import java.util.ArrayList
-
 import scala.collection.JavaConversions.asScalaBuffer
-
 import boatcraft.core.BoatCraft
 import cpw.mods.fml.common.Mod
 import net.minecraft.init.Items
@@ -17,6 +15,8 @@ import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.MathHelper
 import net.minecraft.world.World
 import net.minecraftforge.common.util.Constants
+import io.netty.buffer.ByteBuf
+import net.minecraft.item.Item
 
 object Helper {
 	
@@ -41,46 +41,6 @@ object Helper {
 				val _tag = list getCompoundTagAt i
 				inv setInventorySlotContents(_tag getByte "Slot", ItemStack loadItemStackFromNBT _tag)
 			}
-		}
-	}
-	
-	object AABB {
-		def isAABBInFluid(world: World, aabb: AxisAlignedBB): Boolean = {
-			val i = MathHelper.floor_double(aabb.minX)
-			val j = MathHelper.floor_double(aabb.maxX + 1)
-			val k = MathHelper.floor_double(aabb.minY)
-			val l = MathHelper.floor_double(aabb.maxY + 1)
-			val i1 = MathHelper.floor_double(aabb.minZ)
-			val j1 = MathHelper.floor_double(aabb.maxZ + 1)
-			
-			for (k1 <- i until j)
-			{
-				for (l1 <- k until l)
-				{
-					for (i2 <- i1 until j1)
-					{
-						val block = world.getBlock(k1, l1, i2)
-	
-						if (block.getMaterial isLiquid)
-						{
-							val j2 = world.getBlockMetadata(k1, l1, i2)
-							var d0 = (l1 + 1).toDouble
-	
-							if (j2 < 8)
-							{
-								d0 = l1 + 1.0 - j2.toDouble / 8.0D
-							}
-	
-							if (d0 >= aabb.minY)
-							{
-								return true
-							}
-						}
-					}
-				}
-			}
-			
-			return false
 		}
 	}
 	
@@ -109,6 +69,26 @@ object Helper {
 			}
 			
 			CraftingManager.getInstance.getRecipeList removeAll toRemove
+		}
+	}
+	
+	object Netty {
+		
+		def writeItemStack(buffer: ByteBuf, stack: ItemStack) {
+			
+			buffer.writeInt(Item.getIdFromItem(stack.getItem))
+					.writeShort(stack.stackSize)
+					.writeInt(stack.getItemDamage)
+		}
+		
+		def readItemStack(buffer: ByteBuf): ItemStack = {
+			
+			var stack = new ItemStack(Item.getItemById(buffer.readInt()))
+			
+			stack.stackSize = buffer.readShort()
+			stack.setItemDamage(buffer.readInt())
+			
+			return stack
 		}
 	}
 }
