@@ -1,7 +1,7 @@
 ### Example Material Spec
 ```json
 {
-  "mod": "Minecraft"
+  "mod": "Minecraft",
   "material": {
     "unlocalizedName": "Bedrock",
     "localizedName": "vanilla.materials.crystal.bedrock.name",
