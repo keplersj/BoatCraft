@@ -1,4 +1,21 @@
 ### Example Material Spec
+```json
+{
+  "mod": "Minecraft"
+  "material": {
+    "unlocalizedName": "Bedrock",
+    "localizedName": "vanilla.materials.crystal.bedrock.name",
+    "texture": {
+      "mod": "boatcraft",
+      "texture": "textures/entity/boat/vanilla/nonexistant/bedrock.png"
+    },
+    "wholeMaterialStack": {
+      "mod": "minecraft",
+      "name": "bedrock"
+    }
+  }
+}
+```
 
 ### Example Block Spec
 
