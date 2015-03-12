@@ -12,7 +12,8 @@
     "wholeMaterialStack": {
       "mod": "minecraft",
       "name": "bedrock"
-    }
+    },
+    "implementationClass": "com.keplerstickajones.example.boatcraftaddon.BedrockBoatMaterial"
   }
 }
 ```
