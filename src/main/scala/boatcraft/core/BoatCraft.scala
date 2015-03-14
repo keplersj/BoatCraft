@@ -1,23 +1,29 @@
 package boatcraft.core
 
 import java.io.File
+import java.util.zip.ZipFile
+
+import org.apache.commons.io.FileUtils
+import org.apache.logging.log4j.Logger
 
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.api.modifiers.Block
 import boatcraft.compatibility
-import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
+import cpw.mods.fml.common.FMLCommonHandler
+import cpw.mods.fml.common.Mod
+import cpw.mods.fml.common.SidedProxy
+import cpw.mods.fml.common.event.FMLInitializationEvent
+import cpw.mods.fml.common.event.FMLPostInitializationEvent
+import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
 import cpw.mods.fml.common.registry.GameRegistry
-import cpw.mods.fml.common.{Mod, SidedProxy}
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
-import net.minecraft.util.ResourceLocation
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.config.Configuration
 import net.minecraftforge.oredict.OreDictionary
-import org.apache.logging.log4j.Logger
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
@@ -46,7 +52,7 @@ object BoatCraft {
 		
 		channel = NetworkRegistry.INSTANCE.newSimpleChannel("boatcraft")
 		
-		registerJSONs()
+		registerJSONs(event)
 		
 		proxy registerBlocks
 		
@@ -64,16 +70,41 @@ object BoatCraft {
 		GameRegistry.registerItem(ItemCustomBoat, "customBoat")
 	}
 
-	def registerJSONs()
+	def registerJSONs(event: FMLPreInitializationEvent)
 	{
-		val jarJson = new ResourceLocation("boatcraft", "json")
-		val jsonDir = new File(jarJson.getResourcePath)
-		jsonDir.listFiles().foreach{(file: File) => {registerJSON(file)}}
+		val jsonDir = new File(event.getModConfigurationDirectory, "boatcraft")
+		
+		log.fatal("\n\n\n" + jsonDir.getAbsolutePath + "\n\n\n")
+		
+		if (!jsonDir.isDirectory || jsonDir.listFiles == null && jsonDir.listFiles.isEmpty)
+		{
+			val source = FMLCommonHandler.instance.findContainerFor("boatcraft").getSource
+			
+			if (source isDirectory) {
+				val defaultJsonDir = new File(source, "assets/boatcraft/json")
+				
+				FileUtils.copyDirectory(defaultJsonDir, jsonDir, true)
+			}
+			else {
+				val zip = new ZipFile(source)
+				
+				val entry = zip.entries()
+				
+				while (entry.hasMoreElements) {
+					val x = entry.nextElement
+					log.info(x)
+				}
+				
+				//TODO add defaults from the JAR
+			}
+		}
+		
+		jsonDir.listFiles.foreach(registerJSON(_))
 	}
 
 	def registerJSON(file: File): Unit = {
 		if(file.isDirectory) {
-			file.listFiles().foreach{(realFile: File) => {registerJSON(file)}}
+			file.listFiles().foreach{(realFile: File) => {registerJSON(realFile)}}
 		}
 		else {
 			log.info(s"$file is trying to be registered.")

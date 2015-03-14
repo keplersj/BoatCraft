@@ -1,14 +1,14 @@
 package boatcraft.compatibility
 
+import boatcraft.api.boat.EntityCustomBoat
 import boatcraft.api.modifiers.Block
 import cofh.api.energy.EnergyStorage
 import cofh.api.energy.IEnergyHandler
-import net.minecraftforge.common.util.ForgeDirection
+import cpw.mods.fml.common.Optional
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
-import boatcraft.api.boat.EntityCustomBoat
 import net.minecraft.nbt.NBTTagCompound
-import cpw.mods.fml.common.Optional
+import net.minecraftforge.common.util.ForgeDirection
 
 class EnergyCell(meta: Int) extends Block
 {

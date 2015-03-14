@@ -1,14 +1,17 @@
 package boatcraft.compatibility
 
 import scala.collection.JavaConversions.mapAsScalaMap
-import boatcraft.api.{Registry, getCustomBoat}
+
+import boatcraft.api.Registry
+import boatcraft.api.getCustomBoat
+import cpw.mods.fml.common.Optional
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 import net.minecraft.nbt.NBTTagString
 import thaumcraft.api.ThaumcraftApi
 import thaumcraft.api.ThaumcraftApi.EntityTagsNBT
 import thaumcraft.api.ThaumcraftApiHelper
-import thaumcraft.api.aspects.{Aspect, AspectList}
-import cpw.mods.fml.common.Optional
+import thaumcraft.api.aspects.Aspect
+import thaumcraft.api.aspects.AspectList
 
 object Thaumcraft extends CompatModule {
 	
