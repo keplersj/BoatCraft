@@ -4,19 +4,31 @@ apply from: 'gradle/git.gradle'
 // It also adds the minecraft version in a custom version name
 // The result is files named <projectname>-<mcversion>-<version>-universal.jar
 jar {
+    from sourceSets.api.output
     classifier = 'universal'
 }
 
 // Add in a source jar for people, should they desire to download such a thing
 task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
+    from sourceSets.main.allSource, sourceSets.api.allSource
     classifier = 'src'
 }
 
 // Add in an mcp named jar, for those who wish to run in a development environment (assuming mcp naming matches)
 task deobfJar(type: Jar) {
-    from sourceSets.main.output
+    from sourceSets.main.output, sourceSets.api.output
     classifier = 'deobf'
+}
+
+// Add in an API jar, if someone happens to want it for whatever reason :P
+task apiJar(type: Jar) {
+    from sourceSets.api.allSource
+    classifier = 'api'
+}
+
+//Add the API sources to scaladoc
+scaladoc {
+    source += sourceSets.api.allSource
 }
 
 // Add in a jar containing the ScalaDocs.
@@ -27,10 +39,7 @@ task docs(type: Jar, dependsOn: scaladoc) {
 
 def jsonFile = new File(jar.destinationDir, "manifest.json")
 task generateJson() { task ->
-    task.mustRunAfter jar
-    task.mustRunAfter sourceJar
-    task.mustRunAfter deobfJar
-    task.mustRunAfter docs
+    task.mustRunAfter jar, sourceJar, deobfJar, apiJar, docs
 
   // specify inputs and outputs so gradle can see if its upToDate
   task.inputs.with {
@@ -63,9 +72,6 @@ task generateJson() { task ->
 
 // Tell the artifact system about our extra jars
 artifacts {
-  archives jar
-  archives sourceJar
-  archives deobfJar
-  archives docs
+  archives jar, sourceJar, deobfJar, apiJar, docs
   archives(jsonFile) { builtBy generateJson }
 }
