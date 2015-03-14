@@ -1,6 +1,7 @@
 package boatcraft.core
 
 import java.io.File
+import java.io.FileOutputStream
 import java.util.zip.ZipFile
 
 import org.apache.commons.io.FileUtils
@@ -73,8 +74,9 @@ object BoatCraft {
 	def registerJSONs(event: FMLPreInitializationEvent)
 	{
 		val jsonDir = new File(event.getModConfigurationDirectory, "boatcraft")
+		jsonDir.mkdirs()
 		
-		log.fatal("\n\n\n" + jsonDir.getAbsolutePath + "\n\n\n")
+		log.info(jsonDir.getAbsolutePath)
 		
 		if (!jsonDir.isDirectory || jsonDir.listFiles == null && jsonDir.listFiles.isEmpty)
 		{
@@ -88,11 +90,30 @@ object BoatCraft {
 			else {
 				val zip = new ZipFile(source)
 				
-				val entry = zip.entries()
+				val entries = zip.entries()
 				
-				while (entry.hasMoreElements) {
-					val x = entry.nextElement
-					log.info(x)
+				while (entries hasMoreElements) {
+					val entry = entries.nextElement
+					if (entry.getName startsWith "assets/boatcraft/json/") {
+						val newFile = new File(jsonDir, entry.getName.substring(22))
+						
+						log.info(newFile.getAbsolutePath)
+						
+						if (entry.getName endsWith ".json") {
+							newFile.createNewFile()
+							
+							val zin = zip.getInputStream(entry)
+							val fout = new FileOutputStream(newFile)
+							
+							log.info("Copying " + entry.getName.substring(22))
+							
+							val content = new Array[Byte](FileUtils.ONE_MB toInt)
+							val size = zin.read(content)
+							fout.write(content, 0, size)
+							fout.flush()
+						}
+						else newFile.mkdirs()
+					}
 				}
 				
 				//TODO add defaults from the JAR
