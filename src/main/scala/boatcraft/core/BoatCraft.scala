@@ -55,7 +55,7 @@ object BoatCraft {
 		
 		registerJSONs(event)
 		
-		proxy registerBlocks
+//		proxy registerBlocks
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler("boatcraft", GUIHandler)
 		MinecraftForge.EVENT_BUS register EventHandler
@@ -73,13 +73,14 @@ object BoatCraft {
 
 	def registerJSONs(event: FMLPreInitializationEvent)
 	{
-		val jsonDir = new File(event.getModConfigurationDirectory, "boatcraft")
-		jsonDir.mkdirs()
+		val jsonDir = new File(event.getModConfigurationDirectory, "boatcraft/json")
 		
 		log.info(jsonDir.getAbsolutePath)
 		
 		if (!jsonDir.isDirectory || jsonDir.listFiles == null && jsonDir.listFiles.isEmpty)
 		{
+			jsonDir.mkdirs()
+			
 			val source = FMLCommonHandler.instance.findContainerFor("boatcraft").getSource
 			
 			if (source isDirectory) {
@@ -119,6 +120,8 @@ object BoatCraft {
 				//TODO add defaults from the JAR
 			}
 		}
+		
+		log.info(jsonDir.listFiles)
 		
 		jsonDir.listFiles.foreach(registerJSON(_))
 	}
