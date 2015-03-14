@@ -46,7 +46,7 @@ object BoatCraft {
 		
 		channel = NetworkRegistry.INSTANCE.newSimpleChannel("boatcraft")
 		
-		registerMaterials(event)
+		registerJSONs()
 		
 		proxy registerBlocks
 		
@@ -64,11 +64,20 @@ object BoatCraft {
 		GameRegistry.registerItem(ItemCustomBoat, "customBoat")
 	}
 
-	def registerMaterials(event: FMLPreInitializationEvent)
+	def registerJSONs()
 	{
 		val jarJson = new ResourceLocation("boatcraft", "json")
 		val jsonDir = new File(jarJson.getResourcePath)
-		jsonDir.listFiles()
+		jsonDir.listFiles().foreach{(file: File) => {registerJSON(file)}}
+	}
+
+	def registerJSON(file: File): Unit = {
+		if(file.isDirectory) {
+			file.listFiles().foreach{(realFile: File) => {registerJSON(file)}}
+		}
+		else {
+			log.info(s"$file is trying to be registered.")
+		}
 	}
 
 	@Mod.EventHandler
