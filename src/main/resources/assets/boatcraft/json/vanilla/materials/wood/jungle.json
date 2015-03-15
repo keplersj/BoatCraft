@@ -7,7 +7,8 @@
   },
   "wholeMaterialStack": {
     "mod": "minecraft",
-    "name": "planks:3"
+    "name": "planks",
+    "metadata": 3
   },
   "brokenMaterialStack": {
     "mod": "minecraft",

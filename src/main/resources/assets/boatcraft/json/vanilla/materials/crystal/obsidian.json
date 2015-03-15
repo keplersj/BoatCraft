@@ -3,7 +3,7 @@
   "localizedName": "vanilla.materials.crystal.obsidian.name",
   "texture": {
     "mod": "boatcraft",
-    "texture": "textures/entity/boat/vanilla/crystal/obsidian.png"
+    "location": "textures/entity/boat/vanilla/crystal/obsidian.png"
   },
   "wholeMaterialStack": {
     "mod": "minecraft",

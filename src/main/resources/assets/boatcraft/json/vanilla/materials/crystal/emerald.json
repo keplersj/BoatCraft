@@ -3,7 +3,7 @@
   "localizedName": "vanilla.materials.crystal.emerald.name",
   "texture": {
     "mod": "boatcraft",
-    "texture": "textures/entity/boat/vanilla/crystal/emerald.png"
+    "location": "textures/entity/boat/vanilla/crystal/emerald.png"
   },
   "wholeMaterialStack": {
     "mod": "minecraft",

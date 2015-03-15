@@ -3,7 +3,7 @@
   "localizedName": "vanilla.materials.crystal.diamond.name",
   "texture": {
     "mod": "boatcraft",
-    "texture": "textures/entity/boat/vanilla/crystal/diamond.png"
+    "location": "textures/entity/boat/vanilla/crystal/diamond.png"
   },
   "wholeMaterialStack": {
     "mod": "minecraft",

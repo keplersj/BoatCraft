@@ -3,10 +3,8 @@ package boatcraft.core
 import java.io.File
 import java.io.FileOutputStream
 import java.util.zip.ZipFile
-
 import org.apache.commons.io.FileUtils
 import org.apache.logging.log4j.Logger
-
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
 import boatcraft.api.modifiers.Block
@@ -25,6 +23,10 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.config.Configuration
 import net.minecraftforge.oredict.OreDictionary
+import com.google.gson.GsonBuilder
+import boatcraft.api.modifiers.Material
+import com.google.gson.Gson
+import java.io.FileReader
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
@@ -123,15 +125,24 @@ object BoatCraft {
 		
 		log.info(jsonDir.listFiles)
 		
-		jsonDir.listFiles.foreach(registerJSON(_))
+		
+		val builder = new GsonBuilder()
+		builder.registerTypeAdapter(classOf[Material], Material.Deserializer)
+		val gson = builder.create()
+		
+		jsonDir.listFiles.foreach(registerJSON(_, gson))
 	}
 
-	def registerJSON(file: File): Unit = {
-		if(file.isDirectory) {
-			file.listFiles().foreach{(realFile: File) => {registerJSON(realFile)}}
-		}
+	def registerJSON(file: File, gson: Gson) {
+		if(file isDirectory)
+			file.listFiles.foreach(registerJSON(_, gson))
 		else {
+			if (!file.getAbsolutePath.contains("vanilla")) return //FIXME NOPE I AIN'T FIXIN' DAT HAVE FUN @K1B2S3J
+			if (!file.getAbsolutePath.contains("wood")) return //FIXME NOPE I AIN'T FIXIN' DAT HAVE FUN @K1B2S3J
 			log.info(s"$file is trying to be registered.")
+			
+			val material = gson.fromJson(new FileReader(file), classOf[Material])
+			Registry.register(material)
 		}
 	}
 

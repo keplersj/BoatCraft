@@ -4,5 +4,9 @@
   "texture": {
     "mod": "ic2",
     "location": "textures/models/boatCarbon.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "ic2",
+    "name": "carbonPlate"
   }
 }

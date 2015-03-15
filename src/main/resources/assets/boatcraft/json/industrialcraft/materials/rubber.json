@@ -3,6 +3,10 @@
   "localizedName": "industrialcraft2.materials.rubber.name",
   "texture": {
     "mod": "ic2",
-    "texture": "textures/models/boatRubber.png"
+    "location": "textures/models/boatRubber.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "ic2",
+    "name": "rubber"
   }
 }

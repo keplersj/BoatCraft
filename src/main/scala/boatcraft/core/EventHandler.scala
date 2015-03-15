@@ -25,7 +25,7 @@ object EventHandler {
 		if (event.source.isFireDamage && event.entityLiving.ridingEntity != null)
 			event.entityLiving.ridingEntity match
 		{
-			case boat: EntityCustomBoat if boat.getMaterial isFireResist =>
+			case boat: EntityCustomBoat if boat.getMaterial hasAbility "fireResistance" =>
 				event.ammount = 0
 		}
 	}
