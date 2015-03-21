@@ -3,10 +3,13 @@ package boatcraft.api.modifiers
 import java.lang.reflect.Type
 import java.util.HashSet
 import java.util.Set
-import java.util.function.Consumer
+
+import scala.collection.JavaConverters.iterableAsScalaIterableConverter
+
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
+
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
@@ -74,44 +77,41 @@ object Material {
 			val texture = obj.getAsJsonObject("texture")
 			result.texture = new ResourceLocation(texture.getAsJsonPrimitive("mod").getAsString,
 													texture.getAsJsonPrimitive("location").getAsString)
-
-			val wholeMaterial = obj.get("wholeMaterialStack")
-			val stack = wholeMaterial.getAsJsonObject
-			val modOrigin = stack.getAsJsonPrimitive("mod").getAsString
-			val stackName = stack.getAsJsonPrimitive("name").getAsString
+			
+			val wholeMaterialStack = obj.getAsJsonObject("wholeMaterialStack")
+			val modOrigin = wholeMaterialStack.getAsJsonPrimitive("mod").getAsString
+			val stackName = wholeMaterialStack.getAsJsonPrimitive("name").getAsString
 			val metadata =
-				if (stack.getAsJsonPrimitive("metadata") != null && stack.getAsJsonPrimitive("metadata").isNumber)
-					stack.getAsJsonPrimitive("metadata").getAsInt
+				if (wholeMaterialStack.getAsJsonPrimitive("metadata") != null && wholeMaterialStack.getAsJsonPrimitive("metadata").isNumber)
+					wholeMaterialStack.getAsJsonPrimitive("metadata").getAsInt
 				else 0
+			
 			result.item = GameRegistry.findItemStack(modOrigin, stackName, 1)
 			result.item.setItemDamage(metadata)
 			
-			val brokenMaterialStack = obj.get("brokenMaterialStack")
-			if (brokenMaterialStack != null && brokenMaterialStack.isJsonObject) {
-				val stack = brokenMaterialStack.getAsJsonObject
-				val oreDictName = stack.get("oreDictName")
+			
+			val brokenMaterialStack = obj.getAsJsonObject("brokenMaterialStack")
+			if (brokenMaterialStack != null) {
+				val oreDictName = brokenMaterialStack.get("oreDictName")
+				
 				if (oreDictName != null && oreDictName.isJsonPrimitive)
 					result.brokenMaterialStack = OreDictionary.getOres(oreDictName.getAsString).get(0)
 				else {
-					val modOrigin = stack.getAsJsonPrimitive("mod").getAsString
-					val stackName = stack.getAsJsonPrimitive("name").getAsString
+					val modOrigin = brokenMaterialStack.getAsJsonPrimitive("mod").getAsString
+					val stackName = brokenMaterialStack.getAsJsonPrimitive("name").getAsString
 					val stackSize =
-						if (stack.getAsJsonPrimitive("amount") != null && stack.getAsJsonPrimitive("amount").isNumber)
-							stack.getAsJsonPrimitive("amount").getAsInt
+						if (brokenMaterialStack.getAsJsonPrimitive("amount") != null && wholeMaterialStack.getAsJsonPrimitive("amount").isNumber)
+							brokenMaterialStack.getAsJsonPrimitive("amount").getAsInt
 						else 1
+					
 					result.brokenMaterialStack = GameRegistry.findItemStack(modOrigin, stackName, stackSize)
 				}
 			}
 			
-			val specialAbilities = obj.get("specialAbilities")
-			if (specialAbilities != null && specialAbilities.isJsonArray)
-				specialAbilities.getAsJsonArray.forEach(new Consumer[JsonElement]()
-					{
-						def accept(elem: JsonElement) {
-							result.specialAbilities add elem.getAsString
-						}
-					})
-				
+			val specialAbilities = obj.getAsJsonArray("specialAbilities")
+			
+			if (specialAbilities != null)
+				specialAbilities.asScala.foreach(elem => result.specialAbilities.add(elem.getAsString))
 			
 			return result
 		}
