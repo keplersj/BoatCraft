@@ -28,7 +28,7 @@ task apiJar(type: Jar) {
 
 //Add the API sources to scaladoc
 scaladoc {
-    source += sourceSets.api.allSource
+    source = sourceSets.api.allSource
 }
 
 // Add in a jar containing the ScalaDocs.

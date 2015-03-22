@@ -27,6 +27,7 @@ import com.google.gson.GsonBuilder
 import boatcraft.api.modifiers.Material
 import com.google.gson.Gson
 import java.io.FileReader
+import cpw.mods.fml.common.Loader
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
@@ -146,7 +147,8 @@ object BoatCraft {
 			log.info(s"$file is trying to be registered.")
 			
 			val material = gson.fromJson(new FileReader(file), classOf[Material])
-			Registry.register(material)
+			if (Loader.isModLoaded(material.getParentMod))
+				Registry.register(material)
 		}
 	}
 

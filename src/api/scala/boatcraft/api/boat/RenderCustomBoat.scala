@@ -46,7 +46,13 @@ class RenderCustomBoat
 
 		val f4 = 0.75F
 
-		val block = boat.getBlock.getBlock
+		val block =
+			if (boat.getBlock.getBlock == null)
+			{
+				println(boat.getBlock)
+				Blocks.air
+			}
+			else boat.getBlock.getBlock
 		val meta = boat.getBlock.getMeta
 
 		if (block.getRenderType != -1) {
@@ -151,7 +157,12 @@ class RenderCustomBoat
 				e.printStackTrace
 				meta = 0
 		}
-
+		
+		if (block == null) {
+			println(stack.stackTagCompound getString "block")
+			block = Blocks.air
+		}
+		
 		if (block.getRenderType != -1) {
 			GL11 glPushMatrix()
 

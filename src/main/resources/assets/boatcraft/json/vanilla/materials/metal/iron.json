@@ -10,7 +10,7 @@
     "name": "iron_ingot"
   },
   "brokenMaterialStack": {
-    "oreDict": "iron_nugget",
+    "oreDict": "nuggetIron",
     "amount": 4
   }
 }
