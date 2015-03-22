@@ -90,5 +90,4 @@ task blatest {
 }
 
 //apply from: 'gradle/deployment/maven.gradle'
-apply from: 'gradle/deployment/HeisenBugDev.gradle'
 apply from: 'gradle/deployment/CurseForge.gradle'
