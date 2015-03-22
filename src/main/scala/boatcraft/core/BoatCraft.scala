@@ -139,12 +139,10 @@ object BoatCraft {
 		jsonDir.listFiles.foreach(registerJSON(_, gson))
 	}
 
-	def registerJSON(file: File, gson: Gson) {
+	def registerJSON(file: File, gson: Gson): Unit = {
 		if(file isDirectory)
 			file.listFiles.foreach(registerJSON(_, gson))
 		else {
-			if (!file.getAbsolutePath.contains("vanilla")) return //FIXME NOPE I AIN'T FIXIN' DAT HAVE FUN @K1B2S3J
-			if (!file.getAbsolutePath.contains("wood")) return //FIXME NOPE I AIN'T FIXIN' DAT HAVE FUN @K1B2S3J
 			log.info(s"$file is trying to be registered.")
 			
 			val material = gson.fromJson(new FileReader(file), classOf[Material])
