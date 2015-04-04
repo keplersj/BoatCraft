@@ -2,15 +2,13 @@ package boatcraft.api.modifiers
 
 import java.lang.reflect.Type
 import java.util.{HashSet, Set}
-
 import scala.collection.JavaConverters.iterableAsScalaIterableConverter
-
 import com.google.gson.{JsonDeserializationContext, JsonDeserializer, JsonElement}
-
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.oredict.OreDictionary
+import com.google.gson.stream.MalformedJsonException
 
 class Material extends Modifier {
 	
@@ -73,48 +71,47 @@ object Material {
 	
 	object Deserializer extends JsonDeserializer[Material] {
 		
+		@throws[MalformedJsonException]
 		def deserialize(json: JsonElement, typeOfSrc: Type, context: JsonDeserializationContext): Material = {
-
+			
+			try
+			{
 			val result = new Material()
 			
 			val obj = json.getAsJsonObject
 			
-			if (obj.getAsJsonPrimitive("parentMod") != null) {
-				result.parentMod = obj.getAsJsonPrimitive("parentMod").getAsString
-			}
-
-			if (obj.getAsJsonPrimitive("unlocalizedName") != null) {
-				result.unlocalizedName = obj.getAsJsonPrimitive("unlocalizedName").getAsString
-			}
-			if (obj.getAsJsonPrimitive("localizedName") != null) {
-				result.localizedName = obj.getAsJsonPrimitive("localizedName").getAsString
-			}
+			result.parentMod =
+				if (obj.getAsJsonPrimitive("parentMod") != null)
+					obj.getAsJsonPrimitive("parentMod").getAsString
+				else "FML"
 			
-			if (obj.getAsJsonObject("texture") != null) {
-				val texture = obj.getAsJsonObject("texture")
-				result.texture = new ResourceLocation(texture.getAsJsonPrimitive("mod").getAsString,
-					texture.getAsJsonPrimitive("location").getAsString)
-			}
+			result.unlocalizedName = obj.getAsJsonPrimitive("unlocalizedName").getAsString
+			
+			result.localizedName = obj.getAsJsonPrimitive("localizedName").getAsString
+			
+			val texture = obj.getAsJsonObject("texture")
+			result.texture = new ResourceLocation(texture.getAsJsonPrimitive("mod").getAsString,
+				texture.getAsJsonPrimitive("location").getAsString)
 
-			if (obj.getAsJsonObject("wholeMaterialStack") != null) {
-				val wholeMaterialStack = obj.getAsJsonObject("wholeMaterialStack")
-				val modOrigin = wholeMaterialStack.getAsJsonPrimitive("mod").getAsString
-				val stackName = wholeMaterialStack.getAsJsonPrimitive("name").getAsString
-				val metadata =
-					if (wholeMaterialStack.getAsJsonPrimitive("metadata") != null && wholeMaterialStack.getAsJsonPrimitive("metadata").isNumber)
-						wholeMaterialStack.getAsJsonPrimitive("metadata").getAsInt
-					else 0
+			val wholeMaterialStack = obj.getAsJsonObject("wholeMaterialStack")
+			val modOrigin = if (wholeMaterialStack.getAsJsonPrimitive("mod") != null)
+								wholeMaterialStack.getAsJsonPrimitive("mod").getAsString
+							else "minecraft"
+			val stackName = wholeMaterialStack.getAsJsonPrimitive("name").getAsString
+			val metadata =
+				if (wholeMaterialStack.getAsJsonPrimitive("metadata") != null && wholeMaterialStack.getAsJsonPrimitive("metadata").isNumber)
+					wholeMaterialStack.getAsJsonPrimitive("metadata").getAsInt
+				else 0
 
-				result.item = GameRegistry.findItemStack(modOrigin, stackName, 1)
-				if (result.item != null) result.item.setItemDamage(metadata)
-			}
+			result.item = GameRegistry.findItemStack(modOrigin, stackName, 1)
+			if (result.item != null) result.item.setItemDamage(metadata)
 			
 			if (obj.getAsJsonObject("brokenMaterialStack") != null) {
 				val brokenMaterialStack = obj.getAsJsonObject("brokenMaterialStack")
 				if (brokenMaterialStack != null) {
-					val oreDictName = brokenMaterialStack.getAsJsonPrimitive("oreDictName")
-
-					if (oreDictName != null) {
+					
+					if (brokenMaterialStack.getAsJsonPrimitive("oreDictName") != null) {
+						val oreDictName = brokenMaterialStack.getAsJsonPrimitive("oreDictName")
 						if (OreDictionary.getOres(oreDictName.getAsString) isEmpty)
 							result.brokenMaterialStack = null
 						else
@@ -142,6 +139,13 @@ object Material {
 			}
 			
 			return result
+			}
+			catch {
+				case e: NullPointerException => {
+					println(e)
+					throw new MalformedJsonException("Missing required field", e)
+				}
+			}
 		}
 	}
 }

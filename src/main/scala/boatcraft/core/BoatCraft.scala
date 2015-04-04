@@ -28,19 +28,16 @@ import boatcraft.api.modifiers.Material
 import com.google.gson.Gson
 import java.io.FileReader
 import cpw.mods.fml.common.Loader
+import com.google.gson.stream.MalformedJsonException
+import com.google.gson.JsonSyntaxException
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
 	version = "2.0",
 	modLanguage = "scala",
 	dependencies =
-		"after:IronChest;" +
-			"after:Thaumcraft;" +
-			"after:IC2;" +
-			"after:BuildCraft|Factory;" +
-			"after:Forestry;" +
-			"after:NotEnoughItems;" +
-			"after:CoFHAPI|energy")
+		"after:IronChest;after:Thaumcraft;after:IC2;after:BuildCraft|Factory;" +
+		"after:Forestry;after:NotEnoughItems;after:CoFHAPI|energy")
 object BoatCraft {
 	@SidedProxy(modId = "boatcraft",
 		clientSide = "boatcraft.core.Proxy$ClientProxy",
@@ -125,13 +122,10 @@ object BoatCraft {
 						else newFile.mkdirs()
 					}
 				}
-				
-				//TODO add defaults from the JAR
 			}
 		}
 		
 		log.info(jsonDir.listFiles)
-		
 		
 		val builder = new GsonBuilder()
 		builder.registerTypeAdapter(classOf[Material], Material.Deserializer)
@@ -146,8 +140,21 @@ object BoatCraft {
 		else {
 			log.info(s"$file is trying to be registered.")
 			
-			val material = gson.fromJson(new FileReader(file), classOf[Material])
-			if (Loader.isModLoaded(material.getParentMod))
+			val material: Material =
+				try {
+					gson.fromJson(new FileReader(file), classOf[Material])
+				}
+				catch {
+					case e: JsonSyntaxException => {
+						e.printStackTrace()
+						null
+					}
+				}
+			
+			log.info(material)
+			if (material != null) log.info(material.getUnlocalizedName + " " + material.getParentMod)
+			
+			if (material != null && Loader.isModLoaded(material.getParentMod))
 				Registry.register(material)
 		}
 	}
