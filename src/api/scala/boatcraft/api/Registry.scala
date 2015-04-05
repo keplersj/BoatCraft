@@ -1,15 +1,12 @@
 package boatcraft.api
 
-import java.util.HashMap
-import java.util.Map
-import scala.collection.JavaConversions.iterableAsScalaIterable
-import boatcraft.api.modifiers.Block
-import boatcraft.api.modifiers.Material
-import boatcraft.api.modifiers.Modifier
-import boatcraft.api.modifiers.Mountable
-import net.minecraft.item.ItemStack
-import net.minecraft.util.ResourceLocation
+import java.util.{HashMap, Map}
+
 import boatcraft.api.boat.ItemCustomBoat
+import boatcraft.api.modifiers.{Block, Material, Modifier, Mountable}
+import net.minecraft.item.ItemStack
+
+import scala.collection.JavaConversions.iterableAsScalaIterable
 
 /** Contains the methods needed to register Materials and Modifiers with BoatCraft:Core. */
 object Registry {
@@ -36,7 +33,8 @@ object Registry {
 	def register(registrar: Any): Unit = registrar match {
 		case material: Material =>
 			materials put(material toString, material)
-			materialItems.put(StackHashWrapper(material.getItem), material)
+			if (material.getItem != null)
+				materialItems.put(StackHashWrapper(material.getItem), material)
 		case block: Block =>
 			blocks put(block toString, block)
 			blockItems.put(StackHashWrapper(block.getContent), block)
@@ -120,15 +118,14 @@ object Registry {
 	def getMaterial(stack: ItemStack) =
 		if (stack.getItem.isInstanceOf[ItemCustomBoat])
 		{
-			if (stack.stackTagCompound == null) NoMaterial
+			if (stack.stackTagCompound == null) noMaterial
 			else materials get (stack.stackTagCompound getString "material")
 		}
 		else materialItems get StackHashWrapper(stack)
 
-	private object NoMaterial extends Material {
-		override def getTexture =
-			new ResourceLocation("minecraft", "textures/entity/boat.png")
-	}
+	//TODO initialize it
+	private var noMaterial: Material = null
+			//new ResourceLocation("minecraft", "textures/entity/boat.png")
 
 	/**
 	 * Returns a registered Block associated with a certain ItemStack.

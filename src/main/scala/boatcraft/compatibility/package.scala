@@ -13,17 +13,16 @@ package object compatibility {
 	var maxID = 0
 
 	val mods = mutable.HashMap[String, CompatModule] (
-			//("BuildCraft|Factory", BuildCraft),
+			("BuildCraft|Factory", BuildCraft),
 			("CoFHAPI|energy", RedstoneFlux),
-			//("Forestry", Forestry),
 			("IC2", IC2),
 			("IronChest", IronChests),
 			("NotEnoughItems", NEI),
-			//("Thaumcraft", Thaumcraft),
+			("Thaumcraft", Thaumcraft),
 			("", Vanilla)
 	)
 
-	def registerModifiers {
+	def registerModifiers() {
 		for (module <- mods) {
 			if (module._1.isEmpty || Loader.isModLoaded(module._1))
 				module._2.registerModifiers

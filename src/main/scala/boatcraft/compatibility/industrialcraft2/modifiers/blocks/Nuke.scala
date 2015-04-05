@@ -1,21 +1,21 @@
 package boatcraft.compatibility.industrialcraft2.modifiers.blocks
-import ic2.api.item.IC2Items
+
 import boatcraft.api.boat.EntityCustomBoat
-import net.minecraft.item.ItemBlock
-import net.minecraft.item.ItemStack
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Items
 import boatcraft.api.modifiers.Block
-import ic2.core.block.machine.tileentity.TileEntityNuke
-import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.entity.player.EntityPlayerMP
-import net.minecraft.tileentity.TileEntity
 import boatcraft.compatibility.IC2
+import ic2.api.item.IC2Items
+import ic2.core.Ic2Items
+import ic2.core.block.machine.tileentity.TileEntityNuke
+import net.minecraft.entity.player.{EntityPlayer, EntityPlayerMP}
+import net.minecraft.init.Items
+import net.minecraft.item.ItemBlock
+import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.tileentity.TileEntity
 
 object Nuke extends Block {
 	TileEntity.addMapping(classOf[NukeFuse], "boatNuke")
 	
-	override def getBlock = IC2Items.getItem("nuke").getItem.asInstanceOf[ItemBlock].field_150939_a
+	override def getBlock = Ic2Items.nuke.getItem.asInstanceOf[ItemBlock].field_150939_a
 	
 	override def getUnlocalizedName = "Nuke"
 	

@@ -1,6 +1,7 @@
 package boatcraft.compatibility
 
 import java.util.Arrays
+
 import boatcraft.api.modifiers.Block
 import cpw.mods.fml.common.Optional
 

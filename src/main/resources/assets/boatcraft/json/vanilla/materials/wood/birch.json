@@ -1,0 +1,17 @@
+{
+  "unlocalizedName": "Birch Wood",
+  "localizedName": "vanilla.materials.wood.birch.name",
+  "texture": {
+    "mod": "boatcraft",
+    "location": "textures/entity/boat/vanilla/wood/birch.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "minecraft",
+    "name": "planks",
+    "metadata": 2
+  },
+  "brokenMaterialStack": {
+    "mod": "minecraft",
+    "name": "stick"
+  }
+}

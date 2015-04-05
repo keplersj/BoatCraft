@@ -1,0 +1,15 @@
+{
+  "unlocalizedName": "Diamond",
+  "localizedName": "vanilla.materials.crystal.diamond.name",
+  "texture": {
+    "mod": "boatcraft",
+    "location": "textures/entity/boat/vanilla/crystal/diamond.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "minecraft",
+    "name": "diamond"
+  },
+  "brokenMaterialStack": {
+    "oreDictName": "diamondNugget"
+  }
+}

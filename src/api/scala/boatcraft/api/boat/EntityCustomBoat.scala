@@ -379,7 +379,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 		else if (item == Item.getItemFromBlock(Blocks.planks))
 			stack = getMaterial.getItem
 		else if (item == Items.stick) {
-			stack = getMaterial.getStick
+			stack = getMaterial.getBrokenMaterialStack
 		
 			if (stack == null && rand.nextBoolean) stack = getMaterial.getItem
 		}
@@ -427,7 +427,7 @@ case class EntityCustomBoat(world: World, x: Double, y: Double, z: Double)
 	 */
 	def setMaterial(material: String) {
 		dataWatcher updateObject(MATERIAL, material)
-		isImmuneToFire = Registry.findOfType[modifiers.Material](material) isImmuneToFire
+		isImmuneToFire = Registry.findOfType[modifiers.Material](material) hasAbility "fireResistance"
 	}
 	
 	/**

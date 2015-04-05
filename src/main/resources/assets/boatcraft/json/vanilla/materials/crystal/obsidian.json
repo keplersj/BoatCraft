@@ -1,0 +1,15 @@
+{
+  "unlocalizedName": "Obsidian",
+  "localizedName": "vanilla.materials.crystal.obsidian.name",
+  "texture": {
+    "mod": "boatcraft",
+    "location": "textures/entity/boat/vanilla/crystal/obsidian.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "minecraft",
+    "name": "obsidian"
+  },
+  "specialAbilities": [
+    "fireResistance"
+  ]
+}

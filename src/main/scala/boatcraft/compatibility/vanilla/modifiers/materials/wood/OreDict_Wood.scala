@@ -19,7 +19,7 @@ object OreDict_Wood extends Material {
 
 	override def getItem = new ItemStack(Blocks.planks)
 
-	override def getStick = new ItemStack(Items.stick)
+	override def getBrokenMaterialStack = new ItemStack(Items.stick)
 	
 	override def interact(player: EntityPlayer, boat: EntityCustomBoat) =
 		if (player.getCurrentEquippedItem != null &&

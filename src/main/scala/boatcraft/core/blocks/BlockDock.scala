@@ -1,16 +1,14 @@
 package boatcraft.core.blocks
 
-import net.minecraft.block.Block
-import net.minecraft.block.material.Material
-import net.minecraft.world.World
 import boatcraft.core.blocks.tileentites.TileDock
-import net.minecraftforge.common.util.ForgeDirection
-import net.minecraft.entity.EntityLivingBase
-import com.ibm.icu.impl.duration.impl.Utils
-import net.minecraft.util.MathHelper
-import net.minecraft.item.ItemStack
-import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.block.BlockContainer
+import net.minecraft.block.material.Material
+import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.entity.EntityLivingBase
+import net.minecraft.item.ItemStack
+import net.minecraft.util.MathHelper
+import net.minecraft.world.World
+import net.minecraftforge.common.util.ForgeDirection
 
 class BlockDock extends BlockContainer(Material.iron) {
 	

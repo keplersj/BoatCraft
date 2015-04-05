@@ -1,0 +1,7 @@
+{
+  "unlocalizedName": "Sequoia Wood",
+  "texture": {
+    "mod": "boatcraft",
+    "location": "textures/entity/boat/forestry/wood/sequoia.png"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "unlocalizedName": "Wenge Wood",
+  "texture": {
+    "mod": "boatcraft",
+    "location": "textures/entity/boat/forestry/wood/wenge.png"
+  }
+}

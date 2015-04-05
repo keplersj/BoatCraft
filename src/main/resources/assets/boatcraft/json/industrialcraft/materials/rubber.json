@@ -1,0 +1,13 @@
+{
+  "unlocalizedName": "Rubber",
+  "localizedName": "industrialcraft2.materials.rubber.name",
+  "parentMod": "IC2",
+  "texture": {
+    "mod": "ic2",
+    "location": "textures/models/boatRubber.png"
+  },
+  "wholeMaterialStack": {
+    "mod": "ic2",
+    "name": "rubber"
+  }
+}

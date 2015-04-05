@@ -53,7 +53,7 @@ object Block {
 	
 		override def getBlock = Blocks.air
 	
-		override def getName = "Empty"
+		override def getUnlocalizedName = "Empty"
 	
 		override def getContent: ItemStack = null
 	}
