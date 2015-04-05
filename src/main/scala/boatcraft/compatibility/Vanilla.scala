@@ -31,9 +31,9 @@ object Vanilla extends CompatModule {
 	var useOreDictWood = false
 
 	override def doPreInit(event: FMLPreInitializationEvent) {
-		readConfig
+		readConfig()
 
-		replaceBoatRecipe
+		replaceBoatRecipe()
 
 		GUIHandler.handlerMap.put(code, VanillaGuiHandler)
 	}
@@ -62,19 +62,19 @@ object Vanilla extends CompatModule {
 			Workbench,
 			TNT)
 	
-	private def replaceBoatRecipe {
+	private def replaceBoatRecipe() {
 		Helper.Recipe.removeRecipe(new ItemStack(Items.boat))
 
 		val stack = new ItemStack(ItemCustomBoat)
 
 		stack.stackTagCompound = new NBTTagCompound
-		stack.stackTagCompound setString("material", "minecraft:planks@1")
+		stack.stackTagCompound setString("material", "oakwood")
 		stack.stackTagCompound setString("block", Block.Empty.toString)
 
 		GameRegistry addShapelessRecipe(stack, Items.boat)
 	}
 	
-	private def readConfig {
+	private def readConfig() {
 		useOreDictWood = BoatCraft.config get("Vanilla.General", "useOreDictWoods", false,
 			"If set to true, the different wood types will not be generated.\n" +
 				"Instead, there will be only one \"wood\" Boat") getBoolean false

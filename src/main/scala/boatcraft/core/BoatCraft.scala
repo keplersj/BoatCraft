@@ -1,20 +1,19 @@
 package boatcraft.core
 
-import java.io.File
-import java.io.FileOutputStream
+import java.io.{File, FileOutputStream, FileReader}
 import java.util.zip.ZipFile
+
 import org.apache.commons.io.FileUtils
 import org.apache.logging.log4j.Logger
+
+import com.google.gson.{Gson, GsonBuilder, JsonSyntaxException}
+
 import boatcraft.api.Registry
 import boatcraft.api.boat.ItemCustomBoat
-import boatcraft.api.modifiers.Block
+import boatcraft.api.modifiers.{Block, Material}
 import boatcraft.compatibility
-import cpw.mods.fml.common.FMLCommonHandler
-import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.SidedProxy
-import cpw.mods.fml.common.event.FMLInitializationEvent
-import cpw.mods.fml.common.event.FMLPostInitializationEvent
-import cpw.mods.fml.common.event.FMLPreInitializationEvent
+import cpw.mods.fml.common.{FMLCommonHandler, Mod, SidedProxy}
+import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
 import cpw.mods.fml.common.network.NetworkRegistry
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
 import cpw.mods.fml.common.registry.GameRegistry
@@ -23,13 +22,6 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.config.Configuration
 import net.minecraftforge.oredict.OreDictionary
-import com.google.gson.GsonBuilder
-import boatcraft.api.modifiers.Material
-import com.google.gson.Gson
-import java.io.FileReader
-import cpw.mods.fml.common.Loader
-import com.google.gson.stream.MalformedJsonException
-import com.google.gson.JsonSyntaxException
 
 @Mod(modid = "boatcraft",
 	name = "BoatCraft",
@@ -154,7 +146,7 @@ object BoatCraft {
 			log.info(material)
 			if (material != null) log.info(material.getUnlocalizedName + " " + material.getParentMod)
 			
-			if (material != null && Loader.isModLoaded(material.getParentMod))
+			if (material != null)
 				Registry.register(material)
 		}
 	}

@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.oredict.OreDictionary
 import com.google.gson.stream.MalformedJsonException
+import cpw.mods.fml.common.Loader
 
 class Material extends Modifier {
 	
@@ -84,6 +85,9 @@ object Material {
 				if (obj.getAsJsonPrimitive("parentMod") != null)
 					obj.getAsJsonPrimitive("parentMod").getAsString
 				else "FML"
+			
+			if (!Loader.isModLoaded(result.getParentMod))
+				return null
 			
 			result.unlocalizedName = obj.getAsJsonPrimitive("unlocalizedName").getAsString
 			
