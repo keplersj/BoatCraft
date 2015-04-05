@@ -4,27 +4,23 @@ import boatcraft.api.boat.EntityCustomBoat
 import boatcraft.api.modifiers.Block
 import boatcraft.compatibility.buildcraft.packets.TankSyncMessage
 import boatcraft.core.BoatCraft
-/*import buildcraft.BuildCraftFactory
-import buildcraft.factory.TileTank*/
-import cpw.mods.fml.common.FMLCommonHandler
-import cpw.mods.fml.common.Mod
-import cpw.mods.fml.common.network.simpleimpl.IMessage
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler
-import cpw.mods.fml.common.network.simpleimpl.MessageContext
+import buildcraft.BuildCraftFactory
+import buildcraft.factory.TileTank
+import cpw.mods.fml.common.{FMLCommonHandler, Mod}
+import cpw.mods.fml.common.network.simpleimpl.{IMessage, IMessageHandler, MessageContext}
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.common.util.ForgeDirection
-import net.minecraftforge.fluids.FluidContainerRegistry
-import net.minecraftforge.fluids.FluidStack
+import net.minecraftforge.fluids.{FluidContainerRegistry, FluidStack}
 
 object Tank extends Block {
 	
-	/*override def getBlock = BuildCraftFactory.tankBlock
+	override def getBlock = BuildCraftFactory.tankBlock
 	
 	override def getUnlocalizedName = "Tank"
 	
-	override def getLocalizedName = "buidcraft.blocks.tank.name"
+	override def getLocalizedName = "tile.tankBlock.name"
 	
 	override def getContent = new ItemStack(getBlock)
 	
@@ -76,9 +72,9 @@ object Tank extends Block {
 			if (logic.tank.getFluidType != null)
 				fluidID = logic.tank.getFluidType.getID
 			
-			/*BoatCraft.log.info(String.format("Sending Tank sync data:\n\t%s %s %s %s",
+			BoatCraft.log.info(String.format("Sending Tank sync data:\n\t%s %s %s %s",
 				boat.getEntityId.toString,
-				fluidID.toString, logic.tank.getFluidAmount.toString, logic.tank.colorRenderCache.toString))*/
+				fluidID.toString, logic.tank.getFluidAmount.toString, logic.tank.colorRenderCache.toString))
 			
 			BoatCraft.channel.sendToAll(new TankSyncMessage(boat.getEntityId,
 					fluidID, logic.tank.getFluidAmount, logic.tank.colorRenderCache))
@@ -102,22 +98,22 @@ object Tank extends Block {
 		override def getTopTank = this
 		
 		override def moveFluidBelow {}
-	}*/
+	}
 	
 	class MessageHandler extends IMessageHandler[TankSyncMessage, IMessage] {
 		
 		override def onMessage(message: TankSyncMessage, context: MessageContext): IMessage =
 		{
-			/*BoatCraft.log.info(String.format("Receiving Tank sync data:\n\t%s %s %s %s",
+			BoatCraft.log.info(String.format("Receiving Tank sync data:\n\t%s %s %s %s",
 					message.entityID.toString,
-					message.fluidID.toString, message.amount.toString, message.color.toString))*/
-			/*
+					message.fluidID.toString, message.amount.toString, message.color.toString))
+			
 			var boat = FMLCommonHandler.instance.getMinecraftServerInstance.getEntityWorld.getEntityByID(message.entityID)
 						.asInstanceOf[EntityCustomBoat]
 			var logic = boat.getBlockData.asInstanceOf[Logic]
 			
 			logic.tank.setFluid(new FluidStack(message.fluidID, message.amount))
-			logic.tank.colorRenderCache = message.color*/
+			logic.tank.colorRenderCache = message.color
 			
 			return null
 		}
